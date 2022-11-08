@@ -1,11 +1,13 @@
-import { atomQueryTodoIdsCompleted } from '@states/atoms/atomQuery';
+import { atomQueryTodoIds, atomQueryTodoIdsCompleted } from '@states/atoms/atomQuery';
 import { atomSelectorTodoIdsCompleted } from '@states/atoms/atomTodos';
 import { useEffect } from 'react';
-import { useRecoilCallback } from 'recoil';
+import { useRecoilCallback, waitForAll } from 'recoil';
 
 export const PrefetchQueryEffect = () => {
   const prefetchQuery = useRecoilCallback(({ snapshot, set }) => async () => {
-    const todoIdsCompleted = await snapshot.getPromise(atomQueryTodoIdsCompleted);
+    const [todoIdsCompleted] = await snapshot.getPromise(
+      waitForAll([atomQueryTodoIdsCompleted, atomQueryTodoIds]),
+    );
     set(atomSelectorTodoIdsCompleted, todoIdsCompleted);
   });
 

@@ -1,3 +1,4 @@
+import { getDataTodoIds } from '@lib/queries/queryTodos';
 import { TypesIDB, TypesNotification } from 'lib/types';
 import {
   ICON_DELETE,
@@ -7,7 +8,7 @@ import {
   ICON_INFO,
   ICON_TASK_ALT,
 } from './materialSymbols';
-import { IDB, NOTIFICATION, IDB_STORE } from './stateObjects';
+import { CACHED_DATA, IDB, IDB_STORE, NOTIFICATION, SCHEMA_TODO } from './stateObjects';
 
 export const DATA_NOTIFICATION: TypesNotification[] = [
   {
@@ -81,3 +82,13 @@ export const DATA_IDB: TypesIDB[] = [
     store: IDB_STORE['settings'],
   },
 ];
+
+export const cachedData = () => {
+  return [
+    {
+      key: CACHED_DATA['getDataTodoIds'],
+      cachedTimer: new Date().getTime(),
+      data: getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
+    },
+  ];
+};

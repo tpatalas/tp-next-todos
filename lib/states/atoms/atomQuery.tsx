@@ -1,21 +1,24 @@
-import { IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
+import { getCachedData } from '@data/cachedApiRequest';
+import { CACHED_DATA, IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { getDataUserId } from '@lib/queries/queryUsers';
 import { getDataSetting } from '@lib/queries/queryUsers/querySettings';
 import { Settings, Todos, TodosIds, Users } from '@lib/types';
-import { queryEffect } from '@states/Effects/atomEffects';
+import { queryEffect } from '@states/Effects/atomEffects/queryEffect';
 import { atom, atomFamily } from 'recoil';
 
 /**
- * Query Todos
+ * * Query Todos
  * Defining `storeName` will automatically apply the predefined IndexedDB name.
  */
+
 export const atomQueryTodoIds = atom<TodosIds[]>({
   key: 'atomQueryTodoIds',
   effects: [
     queryEffect({
       storeName: IDB_STORE['todos'],
       queryKey: 'todoIds',
+      cachedQueryFunction: () => getCachedData(CACHED_DATA['getDataTodoIds']),
       queryFunction: () => getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
       refetchOnMutation: true,
     }),
@@ -32,7 +35,7 @@ export const atomQueryTodoIdsCompleted = atom<TodosIds[]>({
         getDataTodoIds({
           model: SCHEMA_TODO['todoItem'],
           completed: true,
-          completedDaysFromToday: 3,
+          completedFromToday: 3,
         }),
       refetchOnMutation: true,
     }),
@@ -54,7 +57,7 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
 });
 
 /**
- * Query User Id
+ * * Query User Id
  */
 export const atomQueryUserId = atom<Users[]>({
   key: 'atomQueryUserId',
@@ -69,7 +72,7 @@ export const atomQueryUserId = atom<Users[]>({
 });
 
 /**
- * Query User Setting
+ * * Query User Setting
  */
 export const atomQueryUserSettings = atomFamily<Settings[], Settings['userId']>({
   key: 'atomQueryUserSettings',

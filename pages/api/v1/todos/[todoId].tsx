@@ -1,7 +1,7 @@
 import { SCHEMA_TODO } from '@data/stateObjects';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
-import TodoItem from '@lib/models/todo/TodoItems';
-import TodoNote from '@lib/models/todo/TodoNotes';
+import TodoItem from '@lib/models/Todo/TodoItems';
+import TodoNote from '@lib/models/Todo/TodoNotes';
 import { TypesQuery } from '@lib/types';
 import { databaseConnect } from 'lib/dataConnections/dataConnection';
 import mongoose from 'mongoose';

@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CONDITION,
   IDB,
+  IDB_STORE,
   NOTIFICATION,
   OBJECT_ID,
   POSITION_X,
   POSITION_Y,
   PRIORITY_LEVEL,
-  IDB_STORE,
   SCHEMA_TODO,
 } from '@lib/data/stateObjects';
 import { Placement } from '@popperjs/core';
@@ -26,10 +27,7 @@ import { ReactEditor } from 'slate-react';
 /**
  * Global Collection Types
  */
-export type Types = CollectTypesEditor &
-  CollectTypesArrayObject &
-  CollectTypesMISC &
-  CollectTypesDataQuery;
+export type Types = CollectTypesEditor & CollectTypesArrayObject & CollectTypesMISC;
 
 /**
  * Recoil Observer
@@ -103,14 +101,15 @@ export interface SettingsIds {
 
 /**
  * Data Query Types
+ * Non-Collectable Types
  */
-type CollectTypesDataQuery = TypesQuery;
 
 //* Query
 export interface TypesQuery {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
+
 /**
  * Types Data
  * Non-Collectable Types
@@ -250,9 +249,8 @@ export interface TypesElement {
 }
 export interface TypesEffects {
   queryKey: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queryFunction(): Promise<any>;
-  // queryFunction<T>(): Promise<T>;
+  cachedQueryFunction(): Promise<any>;
   storeName: IDB_STORE;
   enableIndexedDb: boolean;
   queryWithoutSuspense: boolean;
@@ -277,6 +275,7 @@ export type TypesRefetchEffect = <T>({
   refetchOnFocus,
   refetchOnBlur,
   refetchInterval,
+  cachedQueryFunction,
 }: Partial<
   Pick<
     Types,
@@ -286,6 +285,7 @@ export type TypesRefetchEffect = <T>({
     | 'refetchOnFocus'
     | 'refetchOnBlur'
     | 'refetchInterval'
+    | 'cachedQueryFunction'
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
