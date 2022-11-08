@@ -1,23 +1,18 @@
 import mongoose from 'mongoose';
 
-interface OptionsTypes {
-  [key: string]: boolean;
-}
-
-const connection: { isConnected: boolean | number } = { isConnected: false };
+let cachedConnection: typeof mongoose;
 
 export const databaseConnect = async () => {
-  if (connection.isConnected) {
-    return;
+  if (!cachedConnection) {
+    const uri = process.env.MONGODB_URI;
+    const options: { [key: string]: boolean | number } = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      keepAlive: true,
+      keepAliveInitialDelay: 300000, // in ms: 5 min total,
+    };
+    cachedConnection = await mongoose.connect(uri, options);
   }
 
-  const uri = process.env.MONGODB_URI;
-  const options: OptionsTypes = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
-  const db = await mongoose.connect(uri, options);
-
-  connection.isConnected = db.connections[0].readyState;
-  console.log(connection.isConnected);
+  return cachedConnection;
 };
