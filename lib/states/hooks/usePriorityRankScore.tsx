@@ -1,5 +1,5 @@
 import { Todos } from '@lib/types';
-import { selectorPriorityRankScore } from '@states/atoms/atomPrs';
+import { selectorPriorityRankScore } from '@states/atoms/atomPriorityRankScore';
 import { atomSelectorTodoItem, atomTodoNew } from '@states/atoms/atomTodos';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 

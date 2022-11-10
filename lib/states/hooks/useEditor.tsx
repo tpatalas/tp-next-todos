@@ -1,6 +1,6 @@
-import { ObjectId } from '@data/stateObjects';
 import { atomEditorDeserialize, atomEditorSerialize } from '@states/atoms';
 import { atomSelectorTodoItem, atomTodoNew } from '@states/atoms/atomTodos';
+import ObjectID from 'bson-objectid';
 import { Todos, TodosEditors, Types } from 'lib/types';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { Descendant } from 'slate';
@@ -17,7 +17,7 @@ export const useEditorTodoUpdate = (_id: Todos['_id'], titleName: Types['titleNa
       : set(atomTodoNew, {
           ...get(atomTodoNew),
           [titleName]: content,
-          _id: ObjectId(),
+          _id: ObjectID().toHexString(),
         }); // Creator
   });
 };

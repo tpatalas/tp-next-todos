@@ -44,6 +44,7 @@ export const queryEffect: TypesRefetchEffect =
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
       const { data }: any = await queryFunction();
+      if (data == null) return;
       if (onIndexedDB) {
         const indexedDb = await get(storeName, queryKey).then((value) => value);
         if (equal(data, indexedDb)) return;
@@ -69,11 +70,12 @@ export const queryEffect: TypesRefetchEffect =
       // refetch and re-sync indexedDb with database if they are not matching.
       if (refetchOnMutation && typeof refetchOnMutation !== 'undefined' && !isReset) {
         const timeoutID = setTimeout(
-          () => {
-            querySyncData();
-          },
+          () => querySyncData(),
           refetchDelayOnMutation ? refetchDelayOnMutation : 100,
         );
+        if (timeoutID == null) {
+          return timeoutID;
+        }
         return () => clearTimeout(timeoutID);
       }
     });

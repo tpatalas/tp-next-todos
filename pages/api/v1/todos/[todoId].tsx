@@ -3,7 +3,7 @@ import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
 import { TypesQuery } from '@lib/types';
-import { databaseConnect } from 'lib/dataConnections/dataConnection';
+import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
@@ -18,7 +18,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
     query: { todoId },
   } = req;
 
-  const queries = (type: SCHEMA_TODO) => {
+  const filter = (type: SCHEMA_TODO) => {
     const query: TypesQuery = {};
     query.user_id = userInfo._id;
     type === SCHEMA_TODO['todoItem'] && (query._id = todoId);
@@ -72,7 +72,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       };
 
       const updatedTodoItem = await TodoItem.findOneAndUpdate(
-        queries(SCHEMA_TODO['todoItem']),
+        filter(SCHEMA_TODO['todoItem']),
         todoItem,
         {
           session: session,
@@ -81,7 +81,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       );
       const updatedTodoNote = await TodoNote.findOneAndUpdate(
-        queries(SCHEMA_TODO['todoNote']),
+        filter(SCHEMA_TODO['todoNote']),
         todoNote,
         {
           session: session,
@@ -107,7 +107,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'PATCH':
       try {
-        const updateItem = await TodoItem.findOneAndUpdate(queries(SCHEMA_TODO['todoItem']), body, {
+        const updateItem = await TodoItem.findOneAndUpdate(filter(SCHEMA_TODO['todoItem']), body, {
           new: true,
           runValidators: true,
         });
@@ -121,10 +121,10 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'DELETE':
       session.startTransaction();
-      const deleteItem = await TodoItem.findOneAndDelete(queries(SCHEMA_TODO['todoItem']), {
+      const deleteItem = await TodoItem.findOneAndDelete(filter(SCHEMA_TODO['todoItem']), {
         session,
       });
-      const deleteNote = await TodoNote.findOneAndDelete(queries(SCHEMA_TODO['todoNote']), {
+      const deleteNote = await TodoNote.findOneAndDelete(filter(SCHEMA_TODO['todoNote']), {
         session,
       });
 
