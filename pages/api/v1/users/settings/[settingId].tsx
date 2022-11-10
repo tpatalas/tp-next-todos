@@ -1,5 +1,5 @@
 import { databaseConnect } from '@lib/dataConnections/dataConnection';
-import Setting from '@lib/models/user/setting';
+import Setting from '@lib/models/User/setting';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const UserSettingById = async (req: NextApiRequest, res: NextApiResponse) => {

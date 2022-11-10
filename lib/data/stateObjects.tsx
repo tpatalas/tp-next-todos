@@ -74,6 +74,7 @@ export type IDB = typeof IDB[keyof typeof IDB];
 export const IDB = {
   Todos: 'Todos',
   Users: 'Users',
+  Cache: 'Cache',
 } as const;
 
 export type IDB_STORE = typeof IDB_STORE[keyof typeof IDB_STORE];
@@ -81,6 +82,7 @@ export const IDB_STORE = {
   todos: 'todos',
   users: 'users',
   settings: 'settings',
+  cache: 'cache',
 } as const;
 
 export type BREAKPOINT = typeof BREAKPOINT[keyof typeof BREAKPOINT];
@@ -99,4 +101,9 @@ export type SCHEMA_TODO = typeof SCHEMA_TODO[keyof typeof SCHEMA_TODO];
 export const SCHEMA_TODO = {
   todoItem: 'todoItem',
   todoNote: 'todoNote',
+} as const;
+
+export type CACHED_DATA = typeof CACHED_DATA[keyof typeof CACHED_DATA];
+export const CACHED_DATA = {
+  getDataTodoIds: 'getDataTodoIds',
 } as const;

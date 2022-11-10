@@ -4,15 +4,15 @@ import { queries } from '@lib/utils';
 export const getDataTodoIds = async ({
   model,
   completed,
-  completedDaysFromToday,
-}: Partial<Pick<Types, 'completed' | 'completedDaysFromToday'>> & Pick<Types, 'model'>) => {
+  completedFromToday,
+}: Partial<Pick<Types, 'completed' | 'completedFromToday'>> & Pick<Types, 'model'>) => {
   const response = await fetch(
     '/api/v1/todos?' +
       queries(
         'model=' + model,
         typeof completed !== 'undefined' && 'completed=' + completed,
-        typeof completedDaysFromToday !== 'undefined' &&
-          'completedDaysFromToday=' + completedDaysFromToday,
+        typeof completedFromToday !== 'undefined' &&
+          'completedFromToday=' + completedFromToday,
       ),
   );
   return await response.json();

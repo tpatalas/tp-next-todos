@@ -1,6 +1,6 @@
 import { SCHEMA_TODO } from '@data/stateObjects';
-import TodoItem from '@lib/models/todo/TodoItems';
-import TodoNote from '@lib/models/todo/TodoNotes';
+import TodoItem from '@lib/models/Todo/TodoItems';
+import TodoNote from '@lib/models/Todo/TodoNotes';
 import { TypesQuery } from '@lib/types';
 import { subDays } from 'date-fns';
 import { databaseConnect } from 'lib/dataConnections/dataConnection';

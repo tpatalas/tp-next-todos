@@ -1,5 +1,5 @@
 import { databaseConnect } from '@lib/dataConnections/dataConnection';
-import User from '@lib/models/user';
+import User from '@lib/models/User';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const Users = async (req: NextApiRequest, res: NextApiResponse) => {
