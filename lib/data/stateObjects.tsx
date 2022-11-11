@@ -1,3 +1,5 @@
+import ObjectID from 'bson-objectid';
+
 export type CATCH_MODAL = typeof CATCH_MODAL[keyof typeof CATCH_MODAL];
 export const CATCH_MODAL = {
   todoModal: 'todoModal',
@@ -26,13 +28,9 @@ export const NOTIFICATION = {
   actionUndone: 'actionUndone',
 } as const;
 
-export const ObjectId = (m = Math, d = Date, h = 16, s = (s: number) => m.floor(s).toString(h)) =>
-  s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h));
-export const ObjectIdByDate = (new Date(new Date().toDateString()).getTime() * 32 * 32) / 10000;
 export type OBJECT_ID = typeof OBJECT_ID[keyof typeof OBJECT_ID];
 export const OBJECT_ID = {
-  objectID: ObjectId(),
-  objectIdByDate: ObjectIdByDate,
+  objectID: ObjectID().toHexString(),
 } as const;
 
 export type POSITION_X = typeof POSITION_X[keyof typeof POSITION_X];

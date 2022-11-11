@@ -1,4 +1,4 @@
-import { databaseConnect } from '@lib/dataConnections/dataConnection';
+import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import User from '@lib/models/User';
 import { NextApiRequest, NextApiResponse } from 'next';
 
