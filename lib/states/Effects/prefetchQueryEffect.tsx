@@ -13,7 +13,7 @@ export const PrefetchQueryEffect = () => {
 
   useEffect(() => {
     prefetchQuery();
-  });
+  }, [prefetchQuery]);
 
   return null;
 };

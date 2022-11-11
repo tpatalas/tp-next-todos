@@ -10,7 +10,7 @@ export const ActiveDropdownMenuItemEffect = ({
 
   useEffect(() => {
     typeof menuItemId !== 'undefined' && setMenuitemId(menuItemId);
-  });
+  }, [menuItemId, setMenuitemId]);
 
   return null;
 };

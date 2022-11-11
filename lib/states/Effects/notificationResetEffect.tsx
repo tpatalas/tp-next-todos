@@ -20,7 +20,7 @@ export const NotificationResetEffect = () => {
     return () => {
       clearTimeout(timeoutID);
     };
-  });
+  }, [counter, resetCount, resetNotification]);
 
   return null;
 };
