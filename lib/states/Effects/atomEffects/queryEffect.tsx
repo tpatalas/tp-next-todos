@@ -44,7 +44,7 @@ export const queryEffect: TypesRefetchEffect =
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
       const { data }: any = await queryFunction();
-      if (data == null) return;
+      if (!data) return;
       if (onIndexedDB) {
         const indexedDb = await get(storeName, queryKey).then((value) => value);
         if (equal(data, indexedDb)) return;
