@@ -4,7 +4,7 @@ module.exports = {
   jsxSingleQuote: true,
   tabWidth: 2,
   semi: true,
-  printWidth: 100,
+  printWidth: 80,
   tailwindConfig: './tailwind.config.js',
   singleAttributePerLine: true,
   trailingComma: 'all',
