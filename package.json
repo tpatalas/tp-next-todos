@@ -19,7 +19,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "autoprefixer": "10.4.13",
-    "bson-objectid": "^2.0.3",
+    "bson-objectid": "^2.0.4",
     "date-fns": "^2.29.3",
     "eslint-plugin-jest": "^27.1.5",
     "fast-deep-equal": "^3.1.3",
