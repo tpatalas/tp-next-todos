@@ -1,5 +1,5 @@
-import { useKeyWithTodoModal } from '@hooks/useKeys';
 import { TypesTodo } from '@lib/types';
+import { useKeyWithTodoModal } from '@states/keybindStates';
 import { useEffect } from 'react';
 
 type Props = Partial<Pick<TypesTodo, 'todo'>>;

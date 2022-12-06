@@ -1,9 +1,6 @@
 import { CALENDAR, NOTIFICATION } from '@data/stateObjects';
 import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import { atomCurrentMonth, atomDayPicker, atomDayPickerUpdater } from '@states/atoms';
-import { atomQueryTodoItem } from '@states/atoms/atomQuery';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/atoms/atomTodos';
 import {
   add,
   eachDayOfInterval,
@@ -17,10 +14,44 @@ import {
   sub,
 } from 'date-fns';
 import equal from 'fast-deep-equal/react';
-import { RecoilValue, useRecoilCallback } from 'recoil';
-import { useNotificationState } from './useNotification';
-import { usePriorityRankScore } from './usePriorityRankScore';
-import { useGetWithRecoilCallback } from './useUtils';
+import { atomFamily, RecoilValue, selectorFamily, useRecoilCallback } from 'recoil';
+import { atomQueryTodoItem } from './atomQuries';
+import { useNotificationState } from './notificationStates';
+import { usePriorityRankScore } from './priorityStates';
+import { atomSelectorTodoItem, atomTodoNew } from './todoStates';
+import { useGetWithRecoilCallback } from './utilsStates';
+
+/**
+ * atoms
+ */
+export const atomDayPicker = atomFamily<Todos['dueDate'], Todos['_id']>({
+  key: 'atomDayPicker',
+  default: null,
+});
+
+export const atomDayPickerUpdater = atomFamily<Todos['dueDate'], Todos['_id']>({
+  key: 'atomDayPickerUpdater',
+  default: selectorFamily({
+    key: 'selectorAtomDayPickerUpdater',
+    get:
+      (_id) =>
+      ({ get }) => {
+        return get(atomDayPicker(_id));
+      },
+    cachePolicy_UNSTABLE: {
+      eviction: 'most-recent',
+    },
+  }),
+});
+
+export const atomCurrentMonth = atomFamily<string, Todos['_id']>({
+  key: 'atomCurrentMonth',
+  default: format(startOfToday(), 'MMM-yyyy'),
+});
+
+/**
+ * Hooks
+ * */
 
 export const useCalState = (todoId: Todos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => (state: CALENDAR) => {

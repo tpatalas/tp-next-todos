@@ -69,6 +69,12 @@ module.exports = withBundleAnalyzer({
   eslint: {
     ignoreDuringBuilds: false,
   },
+  images: {
+    domains:
+      process.env.Node_EVN !== 'production'
+        ? ['images.unsplash.com', 'tailwindui.com']
+        : [''],
+  },
   output: 'standalone',
   swcMinify: true,
   compiler: {

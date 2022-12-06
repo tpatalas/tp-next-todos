@@ -1,10 +1,30 @@
-import { FOCUS } from '@lib/data/stateObjects';
-import { atomCurrentFocus, atomOnFocus, atomTodoModalMini } from '@states/atoms';
-import { atomQueryTodoItem } from '@states/atoms/atomQuery';
-import { Todos, Types } from 'lib/types';
-import { RecoilValue, useRecoilCallback } from 'recoil';
-import { useModalStateOpen } from './useModals';
+import { FOCUS } from '@data/stateObjects';
+import { Todos, Types } from '@lib/types';
+import { atom, RecoilValue, useRecoilCallback } from 'recoil';
+import { atomQueryTodoItem } from './atomQuries';
+import { useModalStateOpen, atomTodoModalMini } from './modalStates';
 
+/**
+ * Atoms
+ */
+export const atomOnBlur = atom({
+  key: 'atomOnBlur',
+  default: false,
+});
+
+export const atomOnFocus = atom({
+  key: 'atomOnFocus',
+  default: false,
+});
+
+export const atomCurrentFocus = atom({
+  key: 'atomCurrentFocus',
+  default: -1,
+});
+
+/*
+ * Hooks
+ **/
 export const useFocusState = (_id: Todos['_id']) => {
   const openModal = useModalStateOpen(_id);
   const focusState = useRecoilCallback(({ reset, snapshot }) => (state: FOCUS) => {

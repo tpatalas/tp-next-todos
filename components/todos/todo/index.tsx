@@ -1,7 +1,7 @@
 import { Div as DivDivide, Div as DivTodoItem, Div as DivTodos } from '@containers/div';
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/dropdown/dropdownMenuItem';
-import { useModalStateOpen } from '@hooks/useModals';
+import { useModalStateOpen } from '@states/modalStates';
 import { TypesTodo } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';

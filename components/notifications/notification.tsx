@@ -7,9 +7,9 @@ import {
 } from '@containers/div';
 import { Para as ParaMessageDescription, Para as ParaMessageTitle } from '@containers/para';
 import { dataButtonGlobalClose, dataNotification } from '@data/dataObjects';
+import { NotificationResetEffect } from '@effect/notificationResetEffect';
 import { MinimizeModalTransition } from '@modals/modal/modalTransition/minimizeModalTransition';
-import { atomNotificationOpen, selectorNotificationState } from '@states/atoms';
-import { NotificationResetEffect } from '@states/Effects/notificationResetEffect';
+import { selectorNotificationState, atomNotificationOpen } from '@states/notificationStates';
 import { TypesNotification } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as NotificationFragment } from 'react';

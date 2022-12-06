@@ -1,10 +1,10 @@
 import { getCachedData } from '@data/cachedApiRequest';
 import { CACHED_DATA, IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
+import { queryEffect } from '@effect/atomEffects/queryEffect';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { getDataUserId } from '@lib/queries/queryUsers';
 import { getDataSetting } from '@lib/queries/queryUsers/querySettings';
 import { Settings, Todos, TodosIds, Users } from '@lib/types';
-import { queryEffect } from '@states/Effects/atomEffects/queryEffect';
 import { atom, atomFamily } from 'recoil';
 
 /**

@@ -19,7 +19,7 @@ export const getCachedData = (key: TypesCachedData['key']) => {
       Object.keys(cache).forEach((key) => {
         const seconds = currentTime - cache[key].cachedTimer;
 
-        seconds > 300 && delete cache[key];
+        seconds > 300 && delete cache[key]; // Expire after 300 seconds (5 min)
       });
     }, 5000);
   }

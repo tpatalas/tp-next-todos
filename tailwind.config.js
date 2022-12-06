@@ -60,15 +60,19 @@ module.exports = {
         '9/10': '90%',
       },
       maxWidth: {
+        '5xs': '12rem',
+        '4xs': '14rem',
+        '3xs': '16rem',
+        '2xs': '18rem',
         '2lg': '34rem',
       },
       width: {
         4.5: '1.125rem',
       },
       backdropBlur: {
-        '2xs': '2px',
-        '3xs': '1px',
         '4xs': '0.04em',
+        '3xs': '1px',
+        '2xs': '2px',
       },
     },
   },

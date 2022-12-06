@@ -1,10 +1,35 @@
-import { atomEditorDeserialize, atomEditorSerialize } from '@states/atoms';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/atoms/atomTodos';
+import { atomSelectorTodoItem, atomTodoNew } from '@states/todoStates';
 import ObjectID from 'bson-objectid';
 import { Todos, TodosEditors, Types } from 'lib/types';
-import { RecoilValue, useRecoilCallback } from 'recoil';
-import { Descendant } from 'slate';
+import { atom, RecoilValue, useRecoilCallback } from 'recoil';
+import { Descendant, Node } from 'slate';
 
+/**
+ * Atoms
+ * */
+export const atomEditorSerialize = atom({
+  key: 'atomEditorSerialize',
+  default: (nodes: Descendant[]) => {
+    return nodes.map((n) => Node.string(n)).join('\n');
+  },
+});
+
+export const atomEditorDeserialize = atom({
+  key: 'atomEditorDeserialize',
+  default: (string: string) => {
+    if (typeof string !== 'undefined') {
+      return string.split('\n').map((line) => {
+        return {
+          children: [{ text: line }],
+        };
+      });
+    }
+  },
+});
+
+/*
+ * Hooks
+ * */
 export const useEditorTodoUpdate = (_id: Todos['_id'], titleName: Types['titleName']) => {
   return useRecoilCallback(({ set, snapshot }) => (content: string) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();

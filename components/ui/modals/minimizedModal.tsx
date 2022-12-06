@@ -16,14 +16,9 @@ import {
   dataButtonMiniModalOpenFull,
   dataMinimizedModal,
 } from '@data/dataObjects';
-import { ModalStateOnBreakpointEffect } from '@states/Effects/modalStateOnBreakpointEffect';
-import { atomTodoModalMini } from 'lib/states/atoms';
-import { atomTodoNew } from 'lib/states/atoms/atomTodos';
-import {
-  useModalStateClose,
-  useModalStateExitMinimize,
-  useModalStateMaximize,
-} from 'lib/states/hooks/useModals';
+import { ModalStateOnBreakpointEffect } from '@effect/modalStateOnBreakpointEffect';
+import { atomTodoModalMini, useModalStateClose, useModalStateMaximize, useModalStateExitMinimize } from '@states/modalStates';
+import { atomTodoNew } from '@states/todoStates';
 import { TypesTodo } from 'lib/types';
 import { useRecoilValue } from 'recoil';
 import { MinimizeModalTransition } from './modal/modalTransition/minimizeModalTransition';

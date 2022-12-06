@@ -1,29 +1,72 @@
-import { CATCH_MODAL, NOTIFICATION } from '@lib/data/stateObjects';
-import {
-  completeDataTodo,
-  createDataNewTodo,
-  deleteDataTodo,
-  updateDataTodo,
-} from '@lib/queries/queryTodos';
-import { Todos } from '@lib/types';
-import { atomCatch, atomConfirmModalDelete, atomNetworkStatusEffect } from '@states/atoms';
-import {
-  atomQueryTodoIds,
-  atomQueryTodoIdsCompleted,
-  atomQueryTodoItem,
-} from '@states/atoms/atomQuery';
-import {
-  atomSelectorTodoIdsCompleted,
-  atomSelectorTodoItem,
-  atomTodoNew,
-} from '@states/atoms/atomTodos';
-import { RecoilValue, useRecoilCallback } from 'recoil';
-import { useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual } from './useCondition';
-import { useModalStateReset } from './useModals';
-import { useNotificationState } from './useNotification';
-import { usePriorityRankScore } from './usePriorityRankScore';
-import { useGetWithRecoilCallback } from './useUtils';
+import { NOTIFICATION, CATCH_MODAL } from '@data/stateObjects';
+import { createDataNewTodo, updateDataTodo, deleteDataTodo, completeDataTodo } from '@lib/queries/queryTodos';
+import { Todos, TodosIds } from '@lib/types';
+import { atom, atomFamily, selectorFamily, selector, useRecoilCallback, RecoilValue } from 'recoil';
+import { atomQueryTodoItem, atomQueryTodoIdsCompleted, atomQueryTodoIds } from './atomQuries';
+import { atomNetworkStatusEffect } from './miscStates';
+import { useModalStateReset, atomConfirmModalDelete } from './modalStates';
+import { useNotificationState } from './notificationStates';
+import { usePriorityRankScore } from './priorityStates';
+import { atomCatch, useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual, useGetWithRecoilCallback } from './utilsStates';
 
+/**
+ * atoms
+ * */
+export const atomTodoNew = atom<Todos>({
+  key: 'atomTodoNew',
+  default: {
+    _id: undefined,
+    title: '',
+    note: '',
+    completed: false,
+    createdDate: new Date(),
+  } as Todos,
+});
+
+export const atomSelectorTodoItem = atomFamily<Todos, Todos['_id']>({
+  key: 'atomSelectorTodoItem',
+  default: selectorFamily({
+    key: 'selectorAtomTodoItem',
+    get:
+      (todoId) =>
+      ({ get }) =>
+        get(atomQueryTodoItem(todoId))!,
+  }),
+}); // Overwrite atomQueryTodoItem to prevent unnecessary re-rendering.
+
+export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
+  key: 'selectorDynamicTodoItem',
+  get:
+    (todoId) =>
+    ({ get }) =>
+      typeof todoId === 'undefined' ? get(atomTodoNew) : get(atomSelectorTodoItem(todoId)),
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
+export const selectorTaskCompleteCapacity = selector({
+  key: 'selectorTaskCompleteCapacity',
+  get: ({ get }) => {
+    const taskCapacity = get(atomSelectorTodoIdsCompleted).length / 3;
+    return taskCapacity < 5 ? 5 : taskCapacity;
+  },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
+export const atomSelectorTodoIdsCompleted = atom<TodosIds[]>({
+  key: 'atomSelectorTodoIdsCompleted',
+  default: selector({
+    key: 'selectorTodoIdsCompleted',
+    get: ({ get }) => get(atomQueryTodoIdsCompleted),
+  }),
+});
+
+/**
+ * Hooks
+ * */
 export const useTodoStateAdd = () => {
   const setNotification = useNotificationState();
   const resetModal = useModalStateReset(undefined);

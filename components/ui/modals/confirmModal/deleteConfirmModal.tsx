@@ -1,12 +1,11 @@
 import { Button as ConfirmButton } from '@buttons/button';
 import { Span as SpanTodoItemTitle } from '@containers/span';
 import { dataButtonConfirmModalDelete, dataSvgConfirmModalDelete } from '@data/dataObjects';
-import { useModalConfirmStateDelete } from '@hooks/useModals';
-import { useAsyncTodoItem } from '@hooks/useTodos';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
-import { atomConfirmModalDelete } from '@states/atoms';
+import { useModalConfirmStateDelete, atomConfirmModalDelete } from '@states/modalStates';
+import { useAsyncTodoItem } from '@states/todoStates';
 import dynamic from 'next/dynamic';
 import { Fragment as DeleteHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';

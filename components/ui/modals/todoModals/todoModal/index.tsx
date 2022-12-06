@@ -11,13 +11,12 @@ import {
 } from '@containers/div';
 import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
-import { useCalUpdateItem } from '@hooks/useCalendar';
-import { useTodoStateAdd } from '@hooks/useTodos';
+import { AnyModalWithKeyEffect } from '@effect/anyModalWithKeyEffect';
 import { classNames } from '@lib/utils';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
-import { atomTodoModalMax, atomTodoModalOpen } from '@states/atoms';
-import { AnyModalWithKeyEffect } from '@states/Effects/anyModalWithKeyEffect';
-import { useModalStateClose } from 'lib/states/hooks/useModals';
+import { useCalUpdateItem } from '@states/calendarStates';
+import { atomTodoModalOpen, atomTodoModalMax, useModalStateClose } from '@states/modalStates';
+import { useTodoStateAdd } from '@states/todoStates';
 import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';

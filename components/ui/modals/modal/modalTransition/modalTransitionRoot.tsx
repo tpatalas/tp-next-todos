@@ -13,7 +13,7 @@ export const ModalTransitionRoot = ({ children, show, onClose, initialFocus }: P
         as='div'
         onClose={onClose}
         initialFocus={initialFocus}
-        className='relative inset-0 z-10 overflow-y-visible'>
+        className='relative inset-0 z-50 overflow-y-visible'>
         {children}
       </Dialog>
     </Transition.Root>

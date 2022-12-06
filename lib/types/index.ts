@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  BREAKPOINT,
   CONDITION,
   IDB,
   IDB_STORE,
@@ -27,11 +28,9 @@ import { ReactEditor } from 'slate-react';
 /**
  * Global Collection Types
  */
-export type Types = CollectTypesEditor & CollectTypesArrayObject & CollectTypesMISC;
-
-/**
- * Recoil Observer
- */
+export type Types = CollectTypesEditor &
+  CollectTypesArrayObject &
+  CollectTypesMISC;
 
 /**
  * Types Editor
@@ -199,6 +198,7 @@ export interface TypesStyleAttributes {
   display: string;
   width: string;
   containerWidth: string;
+  hoverBg: string;
 }
 
 export interface TypesTooltipAttributes {
@@ -248,6 +248,7 @@ export interface TypesElement {
   disableCloseOnClick: boolean;
 }
 export interface TypesEffects {
+  // Refetch Effect
   queryKey: string;
   queryFunction(): Promise<any>;
   cachedQueryFunction(): Promise<any>;
@@ -259,6 +260,10 @@ export interface TypesEffects {
   refetchOnBlur: boolean;
   refetchDelayOnMutation: number;
   refetchInterval: number;
+  // MediaQuery Effect
+  breakpoint: BREAKPOINT;
+  stateUnderBreakpoint: boolean;
+  stateOverBreakpoint: boolean;
 }
 /**
  * Types Atom Effects - Recoil
@@ -289,6 +294,15 @@ export type TypesRefetchEffect = <T>({
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
+
+export type TypesMediaQueryEffect = <T>({
+  breakpoint,
+  stateUnderBreakpoint,
+  stateOverBreakpoint,
+}: Pick<Types, 'breakpoint'> &
+  Partial<
+    Pick<Types, 'stateUnderBreakpoint' | 'stateOverBreakpoint'>
+  >) => AtomEffect<T | boolean>;
 
 export type TypesAtomEffect<T> = AtomEffect<T>;
 export type TypesAtomEffectWithParam<T, P> = (key: P) => AtomEffect<T>;

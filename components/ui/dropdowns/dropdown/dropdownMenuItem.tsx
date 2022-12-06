@@ -4,7 +4,7 @@ import { Span as SpanDropdownItem } from '@containers/span';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';
-import { selectorActiveMenuItem } from '@states/atoms';
+import { selectorActiveMenuItem } from '@states/miscStates';
 import { Tooltip } from '@tooltips/tooltips';
 import { useRecoilValue } from 'recoil';
 

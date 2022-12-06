@@ -7,11 +7,11 @@ import {
 } from '@data/dataObjects';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
-import { useCalUpdateDataItem } from '@hooks/useCalendar';
-import { usePriorityUpdate, usePriorityUpdateData } from '@hooks/usePriority';
+import { ActiveDropdownMenuItemEffect } from '@effect/activeDropdownMenuItemEffect';
 import { TypesDataDropdown } from '@lib/types/typesData';
-import { ActiveDropdownMenuItemEffect } from '@states/Effects/activeDropdownMenuItemEffect';
-import { useTodoStateRemove } from 'lib/states/hooks/useTodos';
+import { useCalUpdateDataItem } from '@states/calendarStates';
+import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorityStates';
+import { useTodoStateRemove } from '@states/todoStates';
 import { Types } from 'lib/types';
 import { CalendarDropdown } from './calendarDropdown';
 import { Dropdown } from './dropdown';
