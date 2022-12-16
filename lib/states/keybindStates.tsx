@@ -1,58 +1,51 @@
-import { BREAKPOINT, CATCH_MODAL } from '@lib/data/stateObjects';
+import { CATCH_MODAL, BREAKPOINT } from '@data/stateObjects';
+import { Todos, Types } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
-import { Todos, Types } from 'lib/types';
 import { isMacOs } from 'react-device-detect';
-import { RecoilValue, useRecoilCallback } from 'recoil';
+import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';
+import { atomQueryTodoItem, atomQueryTodoIds } from './atomQuries';
+import { atomOnFocus, atomCurrentFocus, atomOnBlur } from './focusStates';
+import { atomMediaQuery } from './miscStates';
 import {
-  atomCatch,
-  atomConfirmModalDiscard,
-  atomCurrentFocus,
-  atomMediaQuery,
-  atomOnBlur,
-  atomOnFocus,
-  atomTodoModalMini,
   atomTodoModalOpen,
-} from '../atoms';
-import { atomQueryTodoIds, atomQueryTodoItem } from '../atoms/atomQuery';
-import {
-  useModalStateExitMinimize,
-  useModalStateExpand,
-  useModalStateMaximize,
-  useModalStateMinimize,
   useModalStateOpen,
-} from './useModals';
+  atomTodoModalMini,
+  useModalStateExpand,
+  useModalStateExitMinimize,
+  useModalStateMinimize,
+  useModalStateMaximize,
+  atomConfirmModalDiscard,
+} from './modalStates';
 import {
-  useTodoStateAdd,
   useTodoStateComplete,
   useTodoStateRemove,
+  useTodoStateAdd,
   useTodoStateUpdate,
-} from './useTodos';
+} from './todoStates';
+import { atomCatch } from './utilsStates';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
   const completeTodo = useTodoStateComplete(_id);
   const removeTodo = useTodoStateRemove(_id);
 
-  const itemModalKeyHandler = useRecoilCallback(
-    ({ snapshot }) =>
-      (event: KeyboardEvent) => {
-        const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
-        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+  const itemModalKeyHandler = useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
+    const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-        if (typeof _id === 'undefined' || !get(atomTodoModalOpen(_id))) return;
+    if (typeof _id === 'undefined' || !get(atomTodoModalOpen(_id))) return;
 
-        switch (true) {
-          case metaCtrlKey && event.key === 'Enter':
-            event.preventDefault();
-            completeTodo();
-            break;
-          case metaCtrlKey && event.key === 'Backspace':
-            event.preventDefault();
-            removeTodo();
-            break;
-        }
-      },
-  );
+    switch (true) {
+      case metaCtrlKey && event.key === 'Enter':
+        event.preventDefault();
+        completeTodo();
+        break;
+      case metaCtrlKey && event.key === 'Backspace':
+        event.preventDefault();
+        removeTodo();
+        break;
+    }
+  });
   return itemModalKeyHandler;
 };
 
@@ -83,8 +76,7 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
             break;
           case event.key === 'Escape':
             event.preventDefault();
-            if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id)))
-              return;
+            if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
             !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
             reset(atomCurrentFocus);
             set(atomOnBlur, true);
@@ -128,43 +120,36 @@ export const useKeyWithEditor = (
 };
 
 export const useKeyWithNavigate = () => {
-  const keyDownNavigate = useRecoilCallback(
-    ({ set, snapshot }) =>
-      (event: KeyboardEvent) => {
-        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+  const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-        if (
-          get(atomCatch(CATCH_MODAL.todoModal)) ||
-          get(atomCatch(CATCH_MODAL.confirmModal))
-        )
-          return;
+    if (get(atomCatch(CATCH_MODAL.todoModal)) || get(atomCatch(CATCH_MODAL.confirmModal))) return;
 
-        switch (event.key) {
-          case 'ArrowDown':
-            event.preventDefault();
-            set(
-              atomCurrentFocus,
-              get(atomCurrentFocus) === get(atomQueryTodoIds).length - 1
-                ? get(atomQueryTodoIds).length - 1
-                : get(atomCurrentFocus) + 1,
-            );
-            !get(atomOnFocus) && set(atomOnFocus, true);
-            break;
-          case 'ArrowUp':
-            event.preventDefault();
-            set(
-              atomCurrentFocus,
-              get(atomCurrentFocus) === 0
-                ? 0
-                : get(atomCurrentFocus) === -1
-                ? get(atomQueryTodoIds).length - 1
-                : get(atomCurrentFocus) - 1,
-            );
-            !get(atomOnFocus) && set(atomOnFocus, true);
-            break;
-        }
-      },
-  );
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        set(
+          atomCurrentFocus,
+          get(atomCurrentFocus) === get(atomQueryTodoIds).length - 1
+            ? get(atomQueryTodoIds).length - 1
+            : get(atomCurrentFocus) + 1,
+        );
+        !get(atomOnFocus) && set(atomOnFocus, true);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        set(
+          atomCurrentFocus,
+          get(atomCurrentFocus) === 0
+            ? 0
+            : get(atomCurrentFocus) === -1
+            ? get(atomQueryTodoIds).length - 1
+            : get(atomCurrentFocus) - 1,
+        );
+        !get(atomOnFocus) && set(atomOnFocus, true);
+        break;
+    }
+  });
   return keyDownNavigate;
 };
 

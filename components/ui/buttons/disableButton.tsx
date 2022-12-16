@@ -1,5 +1,5 @@
-import { useConditionalCheckState } from '@hooks/useCondition';
 import { TypesDataButton } from '@lib/types/typesData';
+import { useConditionalCheckState } from '@states/utilsStates';
 import { Types } from 'lib/types';
 import { Button } from './button';
 

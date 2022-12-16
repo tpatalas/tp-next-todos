@@ -24,9 +24,11 @@ export const queryEffect: TypesRefetchEffect =
     cachedQueryFunction,
   }) =>
   ({ setSelf, onSet, trigger }) => {
-    if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
+    if (typeof window === 'undefined' || typeof queryFunction === 'undefined')
+      return;
 
-    const onIndexedDB = enableIndexedDb || typeof enableIndexedDb === 'undefined';
+    const onIndexedDB =
+      enableIndexedDb || typeof enableIndexedDb === 'undefined';
 
     // initial fetch.
     // Multiple fetches will be cached and will fetch only once. ex) using `atomQueryTodoIds` more than one location will fetch multiple time at the initial page load then saved to indexedDB
@@ -57,7 +59,9 @@ export const queryEffect: TypesRefetchEffect =
     if (trigger === 'get') {
       onIndexedDB
         ? setSelf(
-            get(storeName, queryKey).then((value) => (value != null ? value : queryInitial())),
+            get(storeName, queryKey).then((value) =>
+              value != null ? value : queryInitial(),
+            ),
           )
         : setSelf(queryInitial());
     }
@@ -68,7 +72,11 @@ export const queryEffect: TypesRefetchEffect =
       isReset ? del(storeName, queryKey) : set(storeName, queryKey, newValue);
 
       // refetch and re-sync indexedDb with database if they are not matching.
-      if (refetchOnMutation && typeof refetchOnMutation !== 'undefined' && !isReset) {
+      if (
+        refetchOnMutation &&
+        typeof refetchOnMutation !== 'undefined' &&
+        !isReset
+      ) {
         const timeoutID = setTimeout(
           () => querySyncData(),
           refetchDelayOnMutation ? refetchDelayOnMutation : 100,

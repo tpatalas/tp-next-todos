@@ -1,10 +1,10 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import { dataPriorityTodoModalImportant, dataPriorityTodoModalUrgent } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
-import { usePriorityUpdate } from '@hooks/usePriority';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { Div as Header, Div as HeaderContents } from '@containers/div';
+import { usePriorityUpdate } from '@states/priorityStates';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
 

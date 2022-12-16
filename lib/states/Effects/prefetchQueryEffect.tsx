@@ -1,5 +1,5 @@
-import { atomQueryTodoIds, atomQueryTodoIdsCompleted } from '@states/atoms/atomQuery';
-import { atomSelectorTodoIdsCompleted } from '@states/atoms/atomTodos';
+import { atomQueryTodoIdsCompleted, atomQueryTodoIds } from '@states/atomQuries';
+import { atomSelectorTodoIdsCompleted } from '@states/todoStates';
 import { useEffect } from 'react';
 import { useRecoilCallback, waitForAll } from 'recoil';
 

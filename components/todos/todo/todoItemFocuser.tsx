@@ -1,8 +1,8 @@
 import { Div as DivTodoItemFocuser } from '@containers/div';
 import { dataDivContainerFocuser } from '@data/dataObjects';
-import { useFocusOnClick } from '@hooks/useFocus';
-import { NavigateWithKeyEffect } from '@states/Effects/navigateWithKeyEffect';
-import { useKeyWithFocus } from 'lib/states/hooks/useKeys';
+import { NavigateWithKeyEffect } from '@effect/navigateWithKeyEffect';
+import { useFocusOnClick } from '@states/focusStates';
+import { useKeyWithFocus } from '@states/keybindStates';
 import { Types, TypesTodo } from 'lib/types';
 import { useRef } from 'react';
 

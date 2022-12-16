@@ -8,14 +8,10 @@ import {
 } from '@data/dataObjects';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
-import {
-  useCalResetDateAll,
-  useCalResetDateItemOnly,
-  useCalResetDayUpdater,
-} from '@hooks/useCalendar';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import { classNames } from '@lib/utils';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/atoms/atomTodos';
+import { useCalResetDayUpdater, useCalResetDateItemOnly, useCalResetDateAll } from '@states/calendarStates';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todoStates';
 import { Calendar } from '@ui/calendars/calendar';
 import { format } from 'date-fns';
 import { Types } from 'lib/types';

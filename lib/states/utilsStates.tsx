@@ -1,18 +1,47 @@
-import { CONDITION } from '@data/stateObjects';
+import { CATCH_MODAL, CONDITION } from '@data/stateObjects';
 import { Todos } from '@lib/types';
-import { atomTodoModalMini, atomTodoModalOpen } from '@states/atoms';
-import { atomQueryTodoItem } from '@states/atoms/atomQuery';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/atoms/atomTodos';
 import equal from 'fast-deep-equal/react';
-import { RecoilValue, useRecoilSnapshot } from 'recoil';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { atomFamily, RecoilValue, useRecoilCallback, useRecoilSnapshot } from 'recoil';
+import { atomQueryTodoItem } from './atomQuries';
+import { atomTodoModalOpen, atomTodoModalMini } from './modalStates';
+import { atomTodoNew, atomSelectorTodoItem } from './todoStates';
 
 /**
- * Conditional Check
- *
- * Description: These hooks are using `useRecoilSnapshot` intentionally to trigger re-render
- * the component. As useRecoilCallback or useRecoilTransaction does not trigger any re-rendering
- * useRecoilSnap is the right hook to check the state of atom.
+ * Atoms
  */
+export const atomCatch = atomFamily<boolean, CATCH_MODAL>({
+  key: 'atomCatch',
+  default: false,
+});
+
+/**
+ * Hooks
+ * */
+
+export const useGetWithRecoilCallback = () => {
+  return useRecoilCallback(({ snapshot }) => <T,>(p: RecoilValue<T>) => {
+    return snapshot.getLoadable(p).getValue();
+  });
+};
+
+export const usePrefetchRouter = (pathName: string) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch(pathName);
+  }, [pathName, router]);
+
+  return () => {
+    router.push(pathName);
+  };
+};
+
+// Conditional Check
+// Description: These hooks are using `useRecoilSnapshot` intentionally to trigger re-render
+// the component. As useRecoilCallback or useRecoilTransaction does not trigger any re-rendering
+// useRecoilSnap is the right hook to check the state of atom.
 
 export const useConditionCheckCreateModalOpen = () => {
   const snapshot = useRecoilSnapshot();

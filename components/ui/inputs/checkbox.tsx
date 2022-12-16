@@ -1,5 +1,5 @@
-import { useConditionCompareTodoItemsEqual } from '@hooks/useCondition';
 import { classNames } from '@lib/utils';
+import { useConditionCompareTodoItemsEqual } from '@states/utilsStates';
 import { Types, TypesTodo } from 'lib/types';
 import { Input } from './input';
 

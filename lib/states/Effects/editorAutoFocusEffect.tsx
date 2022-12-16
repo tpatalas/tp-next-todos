@@ -1,6 +1,6 @@
 import { CATCH_MODAL } from '@data/stateObjects';
 import { CustomEditor } from '@lib/types/typesSlate';
-import { atomCatch } from '@states/atoms';
+import { atomCatch } from '@states/utilsStates';
 import { Types } from 'lib/types';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';

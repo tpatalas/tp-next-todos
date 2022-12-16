@@ -22,8 +22,17 @@ import {
   ICON_REPORT,
   ICON_WARNING,
 } from './materialSymbols';
-import { CONDITION, POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './stateObjects';
-import { STYLE_BUTTON_BLUE, STYLE_BUTTON_RED, STYLE_BUTTON_WHITE } from './stylePreset';
+import {
+  CONDITION,
+  POSITION_X,
+  POSITION_Y,
+  PRIORITY_LEVEL,
+} from './stateObjects';
+import {
+  STYLE_BUTTON_BLUE,
+  STYLE_BUTTON_RED,
+  STYLE_BUTTON_WHITE,
+} from './stylePreset';
 
 /**
  * * TypesDataDivContainer
@@ -102,7 +111,7 @@ export const dataButtonNetworkStatus: TypesDataButton = {
 export const dataButtonCreateTodo: TypesDataButton = {
   tooltip: 'Create Todo',
   kbd: 'T',
-  className: STYLE_BUTTON_BLUE,
+  className: classNames(STYLE_BUTTON_BLUE),
   condition: CONDITION['checkCreateModalOpen'],
 };
 

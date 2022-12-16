@@ -1,5 +1,5 @@
 import { Types } from '@lib/types';
-import { atomActiveMenuItemId } from '@states/atoms';
+import { atomActiveMenuItemId } from '@states/miscStates';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 

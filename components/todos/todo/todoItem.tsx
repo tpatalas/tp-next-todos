@@ -14,12 +14,12 @@ import {
   dataSvgPriorityUrgent,
 } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
-import { useModalStateOpen } from '@hooks/useModals';
-import { useTodoStateComplete } from '@hooks/useTodos';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { classNames } from '@lib/utils';
-import { atomQueryTodoItem } from '@states/atoms/atomQuery';
+import { atomQueryTodoItem } from '@states/atomQuries';
+import { useModalStateOpen } from '@states/modalStates';
+import { useTodoStateComplete } from '@states/todoStates';
 import { format } from 'date-fns';
 import { Fragment as TodoItemFragment } from 'react';
 import { useRecoilValue } from 'recoil';

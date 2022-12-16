@@ -1,17 +1,25 @@
-import { BREAKPOINT } from '@data/stateObjects';
-import { TypesAtomEffect, TypesAtomEffectWithParam } from '@lib/types';
+import { TypesAtomEffect, TypesMediaQueryEffect } from '@lib/types';
 
 /**
  * Media Queries
  */
-export const mediaQueryEffect: TypesAtomEffectWithParam<boolean, BREAKPOINT> =
-  (breakpoint) =>
-  ({ setSelf, resetSelf }) => {
+export const mediaQueryEffect: TypesMediaQueryEffect =
+  ({ breakpoint, stateOverBreakpoint, stateUnderBreakpoint }) =>
+  ({ setSelf }) => {
     if (typeof window === 'undefined') return;
     const windowMediaQueries = () => {
-      if (window.innerWidth >= breakpoint) return setSelf(true);
-      resetSelf();
+      if (
+        window.innerWidth >= breakpoint &&
+        typeof stateOverBreakpoint !== 'undefined'
+      )
+        return setSelf(stateOverBreakpoint);
+      if (
+        window.innerWidth <= breakpoint &&
+        typeof stateUnderBreakpoint !== 'undefined'
+      )
+        return setSelf(stateUnderBreakpoint);
     };
+
     windowMediaQueries();
     window.addEventListener('resize', windowMediaQueries);
     return () => {
@@ -22,7 +30,6 @@ export const mediaQueryEffect: TypesAtomEffectWithParam<boolean, BREAKPOINT> =
 /**
  * Network
  */
-
 export const networkStatusEffect: TypesAtomEffect<boolean> = ({ setSelf }) => {
   if (typeof window === 'undefined') return;
   const netWorkOnChange = () => {

@@ -1,7 +1,6 @@
 import { Button as CancelButton } from '@buttons/button';
 import { IconButton as CloseIconButton } from '@buttons/iconButton';
 import { dataButtonConfirmModalCancel, dataButtonConfirmModalCancelIcon } from '@data/dataObjects';
-import { useModalConfirmStateCancel } from '@hooks/useModals';
 import { Types } from 'lib/types';
 import { Fragment as ConfirmModalFragment, useRef } from 'react';
 import {
@@ -14,6 +13,7 @@ import {
 } from '@containers/div';
 import { ModalTransitionChild } from '../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../modal/modalTransition/modalTransitionRoot';
+import { useModalConfirmStateCancel } from '@states/modalStates';
 
 type Props = Pick<Types, 'show' | 'headerContents' | 'headerIcons' | 'footerButtons'> &
   Partial<Pick<Types, 'children' | 'todo' | 'show' | 'initialFocus' | 'iconBgColor' | 'children'>>;

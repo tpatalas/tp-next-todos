@@ -1,4 +1,4 @@
-import { atomNotificationCounter, atomNotificationOpen } from '@states/atoms';
+import { atomNotificationOpen, atomNotificationCounter } from '@states/notificationStates';
 import { useEffect } from 'react';
 import { useRecoilCallback, useResetRecoilState } from 'recoil';
 

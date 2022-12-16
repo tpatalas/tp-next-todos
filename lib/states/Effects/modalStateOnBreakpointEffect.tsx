@@ -1,6 +1,7 @@
 import { BREAKPOINT } from '@data/stateObjects';
-import { useGetWithRecoilCallback } from '@hooks/useUtils';
-import { atomMediaQuery, atomTodoModalMini, atomTodoModalOpen } from '@states/atoms';
+import { atomMediaQuery } from '@states/miscStates';
+import { atomTodoModalOpen, atomTodoModalMini } from '@states/modalStates';
+import { useGetWithRecoilCallback } from '@states/utilsStates';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 

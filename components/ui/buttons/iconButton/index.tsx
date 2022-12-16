@@ -20,10 +20,11 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
         data={{
           className: classNames(
             data.className,
-            'group-button border-gray-300 bg-transparent text-gray-500 hover:bg-white focus-visible:ring-blue-500 hover:enabled:bg-gray-100 hover:enabled:text-gray-700 hover:disabled:cursor-not-allowed',
+            'group-button border-gray-300 bg-transparent text-gray-500 hover:bg-white focus-visible:ring-blue-500 hover:enabled:text-gray-700 hover:disabled:cursor-not-allowed',
             headerContents ? 'rounded-lg' : 'rounded-full',
             data.padding || 'p-2',
             data.margin || 'ml-px',
+            data.hoverBg || 'hover:enabled:bg-gray-100',
             data.display,
             data.width,
           ),
