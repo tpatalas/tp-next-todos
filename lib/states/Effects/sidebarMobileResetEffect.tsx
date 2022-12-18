@@ -1,6 +1,6 @@
 import { BREAKPOINT, CATCH_MODAL } from '@data/stateObjects';
 import { atomMediaQuery } from '@states/miscStates';
-import { atomSidebarOpenMobile } from '@states/sidebarStates';
+import { atomSidebarOpenMobile } from '@states/layoutStates';
 import { atomCatch } from '@states/utilsStates';
 import { useEffect } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
