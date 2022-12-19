@@ -1,19 +1,22 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { ICON_MENU, ICON_SEARCH } from '@data/materialSymbols';
+import { ICON_CLOSE, ICON_MENU, ICON_SEARCH } from '@data/materialSymbols';
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { classNames } from '@lib/utils';
-import { useSidebarOpen } from '@states/sidebarStates';
+import { atomSearchInput, useSidebarOpen } from '@states/layoutStates';
 import Image from 'next/image';
 import {
   Fragment,
   Fragment as LayoutHeaderFragment,
   Fragment as LeftSideFragment,
   Fragment as LogoFragment,
+  Fragment as ResetSearchFragment,
   Fragment as RightSidebarFragment,
+  Fragment as SearchInputFragment,
   Fragment as SidebarButtonFragment,
 } from 'react';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { LayoutLogo } from '../../layoutLogo';
 
 const userNavigation = [
@@ -23,6 +26,9 @@ const userNavigation = [
 
 export const LayoutHeader = () => {
   const setSidebarOpen = useSidebarOpen();
+  const setSearchInput = useSetRecoilState(atomSearchInput);
+  const searchInputValue = useRecoilValue(atomSearchInput);
+  const resetSearchInput = useResetRecoilState(atomSearchInput);
 
   return (
     <LayoutHeaderFragment>
@@ -34,8 +40,7 @@ export const LayoutHeader = () => {
                 data={{
                   path: ICON_MENU,
                   size: 'h-6 w-6',
-                  hoverBg:
-                    'hover:enabled:bg-gray-200 hover:enabled:bg-opacity-70',
+                  hoverBg: 'hover:enabled:bg-gray-200 hover:enabled:bg-opacity-70',
                 }}
                 onClick={() => setSidebarOpen()}
               />
@@ -50,17 +55,19 @@ export const LayoutHeader = () => {
         </LeftSideFragment>
         <RightSidebarFragment>
           <div className='flex flex-1 px-3'>
-            <div className='flex flex-1 '>
-              <form
-                className='flex w-full md:ml-0'
-                action='#'
-                method='GET'>
-                <label
-                  htmlFor='search-field'
-                  className='sr-only'>
-                  Search
-                </label>
-                <div className='relative w-full max-w-2xl rounded-md bg-blue-100 bg-opacity-80 text-gray-400  drop-shadow-sm focus-within:text-gray-600'>
+            <SearchInputFragment>
+              <div className='relative flex flex-1 flex-row items-center justify-between'>
+                <form
+                  className={classNames(
+                    'md:mr-15 sm:mr-10 relative flex w-full max-w-xl items-center rounded-md border border-transparent text-gray-400 drop-shadow-sm focus-within:border-slate-200 focus-within:border-opacity-50 focus-within:text-gray-600 focus-within:shadow-lg focus-within:shadow-slate-300/60 lg:mr-10 xl:max-w-2xl',
+                  )}
+                  action='#'
+                  method='GET'>
+                  <label
+                    htmlFor='search-field'
+                    className='sr-only'>
+                    Search
+                  </label>
                   <div className='pointer-events-none absolute inset-y-0 left-4 flex items-center'>
                     <SvgIcon
                       data={{
@@ -71,14 +78,28 @@ export const LayoutHeader = () => {
                   </div>
                   <input
                     id='search-field'
-                    className='block h-12 w-full max-w-lg border-transparent bg-transparent pl-12 pr-3 text-base text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0'
+                    className='block h-12 w-full rounded-md border-transparent bg-blue-100 bg-opacity-80 pl-12 pr-12 text-base text-gray-900 placeholder-gray-500 focus-within:bg-transparent focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0'
                     placeholder='Search'
                     type='search'
                     name='search'
+                    value={searchInputValue}
+                    onChange={(event) => setSearchInput(event.target.value)}
                   />
-                </div>
-              </form>
-            </div>
+                  <ResetSearchFragment>
+                    {searchInputValue && (
+                      <div className='absolute right-2 bg-transparent'>
+                        <IconButton
+                          data={{
+                            path: ICON_CLOSE,
+                          }}
+                          onClick={() => resetSearchInput()}
+                        />
+                      </div>
+                    )}
+                  </ResetSearchFragment>
+                </form>
+              </div>
+            </SearchInputFragment>
             <div className='ml-4 flex items-center md:ml-6'>
               {/* Profile dropdown */}
               <Menu

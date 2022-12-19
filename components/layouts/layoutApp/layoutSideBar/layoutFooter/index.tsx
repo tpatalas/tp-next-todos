@@ -2,10 +2,10 @@ import { SidebarMobileResetEffect } from '@effect/sidebarMobileResetEffect';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';
-import { selectorSidebarOpen } from '@states/sidebarStates';
+import { selectorSidebarOpen } from '@states/layoutStates';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
-import { FooterSidebar } from './FooterSidebar';
+import { FooterSidebar } from './footerSidebar';
 
 export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
   const isSidebarOpen = useRecoilValue(selectorSidebarOpen);

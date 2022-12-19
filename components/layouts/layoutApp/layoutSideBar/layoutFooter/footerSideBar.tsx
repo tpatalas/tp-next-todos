@@ -13,7 +13,7 @@ import {
 import { Transition } from '@headlessui/react';
 import { classNames } from '@lib/utils';
 import { useModalStateOpen } from '@states/modalStates';
-import { atomSidebarOpenMobile, useSidebarOpen } from '@states/sidebarStates';
+import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
 import {
   forwardRef,
   Fragment,

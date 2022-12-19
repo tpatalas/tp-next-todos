@@ -28,6 +28,11 @@ export const atomSidebarOpenSetting = atom({
   default: false,
 });
 
+export const atomSearchInput = atom({
+  key: 'atomSearchInput',
+  default: '',
+});
+
 /**
  * Selector
  **/
