@@ -7,7 +7,7 @@ import {
 } from '@containers/div';
 import { Para as ParaMessageDescription, Para as ParaMessageTitle } from '@containers/para';
 import { dataButtonGlobalClose, dataNotification } from '@data/dataObjects';
-import { NotificationResetEffect } from '@effect/notificationResetEffect';
+import { NotificationResetEffect } from '@effects/notificationResetEffect';
 import { MinimizeModalTransition } from '@modals/modal/modalTransition/minimizeModalTransition';
 import { selectorNotificationState, atomNotificationOpen } from '@states/notificationStates';
 import { TypesNotification } from 'lib/types';

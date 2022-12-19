@@ -11,7 +11,7 @@ import {
 } from '@containers/div';
 import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
-import { AnyModalWithKeyEffect } from '@effect/anyModalWithKeyEffect';
+import { AnyModalWithKeyEffect } from '@effects/anyModalWithKeyEffect';
 import { classNames } from '@lib/utils';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendarStates';

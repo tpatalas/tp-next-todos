@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@hooks/*": ["lib/states/hooks/*"],
-      "@effect/*": ["lib/states/effects/*"],
+      "@effects/*": ["lib/states/effects/*"],
+      "@atomQuries/*": ["lib/states/atomQueries/*"],
       "@states/*": ["lib/states/*"],
       "@data/*": ["lib/data/*"],
       "@lib/*": ["lib/*"],

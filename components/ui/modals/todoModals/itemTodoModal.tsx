@@ -2,7 +2,7 @@ import { DisableButton } from '@buttons/disableButton';
 import { Div as DivCheckbox } from '@containers/div';
 import { dataButtonItemModalUpdate } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
-import { ItemModalWithKeyEffect } from '@effect/itemModalWithKeyEffect';
+import { ItemModalWithKeyEffect } from '@effects/itemModalWithKeyEffect';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';

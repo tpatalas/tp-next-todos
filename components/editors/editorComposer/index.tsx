@@ -1,13 +1,19 @@
-import { EditorAutoFocusEffect } from "@effect/editorAutoFocusEffect";
-import { renderPlaceholder, renderCustomElement } from "@lib/editors";
-import { Types } from "@lib/types";
-import { useEditorInitialValue, useEditorChangeHandler } from "@states/editorStates";
-import { useKeyWithEditor } from "@states/keybindStates";
-import { useAsyncTodoItem } from "@states/todoStates";
-import { useMemo } from "react";
-import { createEditor } from "slate";
-import { withHistory } from "slate-history";
-import { withReact, RenderPlaceholderProps, RenderElementProps, Slate, Editable } from "slate-react";
+import { EditorAutoFocusEffect } from '@effects/editorAutoFocusEffect';
+import { renderPlaceholder, renderCustomElement } from '@lib/editors';
+import { Types } from '@lib/types';
+import { useEditorInitialValue, useEditorChangeHandler } from '@states/editorStates';
+import { useKeyWithEditor } from '@states/keybindStates';
+import { useAsyncTodoItem } from '@states/todoStates';
+import { useMemo } from 'react';
+import { createEditor } from 'slate';
+import { withHistory } from 'slate-history';
+import {
+  withReact,
+  RenderPlaceholderProps,
+  RenderElementProps,
+  Slate,
+  Editable,
+} from 'slate-react';
 
 type Props = Pick<Types, 'titleName' | 'placeholder'> & Partial<Pick<Types, 'autoFocus' | 'todo'>>;
 

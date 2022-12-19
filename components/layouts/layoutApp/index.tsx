@@ -1,5 +1,5 @@
+import { WindowBeforeunloadEffect } from '@effects/windowBeforeunloadEffect';
 import { Types } from '@lib/types';
-import { WindowBeforeunloadEffect } from '@states/Effects/windowBeforeunloadEffect';
 import dynamic from 'next/dynamic';
 import {
     Fragment as FooterFragment,

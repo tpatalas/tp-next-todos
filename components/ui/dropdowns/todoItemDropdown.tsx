@@ -7,7 +7,7 @@ import {
 } from '@data/dataObjects';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
-import { ActiveDropdownMenuItemEffect } from '@effect/activeDropdownMenuItemEffect';
+import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import { useCalUpdateDataItem } from '@states/calendarStates';
 import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorityStates';

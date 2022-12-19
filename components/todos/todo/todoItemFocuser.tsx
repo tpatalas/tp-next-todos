@@ -1,6 +1,6 @@
 import { Div as DivTodoItemFocuser } from '@containers/div';
 import { dataDivContainerFocuser } from '@data/dataObjects';
-import { NavigateWithKeyEffect } from '@effect/navigateWithKeyEffect';
+import { NavigateWithKeyEffect } from '@effects/navigateWithKeyEffect';
 import { useFocusOnClick } from '@states/focusStates';
 import { useKeyWithFocus } from '@states/keybindStates';
 import { Types, TypesTodo } from 'lib/types';

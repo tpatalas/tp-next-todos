@@ -1,10 +1,10 @@
+import { BREAKPOINT } from '@data/stateObjects';
+import { atom, atomFamily, selector } from 'recoil';
+import { mediaQueryEffect, networkStatusEffect } from './effects/atomEffects';
+ 
 /*
  * Atoms
  * */
-
-import { BREAKPOINT } from '@data/stateObjects';
-import { mediaQueryEffect, networkStatusEffect } from '@effect/atomEffects';
-import { atom, atomFamily, selector } from 'recoil';
 
 // Media Queries
 export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({

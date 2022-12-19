@@ -1,5 +1,5 @@
 import { renderWithRecoilRoot } from '@lib/utils';
-import { atomNetworkStatusEffect } from '@states/atoms';
+import { atomNetworkStatusEffect } from '@states/miscStates';
 import { screen } from '@testing-library/react';
 import { snapshot_UNSTABLE } from 'recoil';
 import { NetworkStatus } from '../networkStatus';
@@ -12,7 +12,5 @@ describe('NetworkStatus', () => {
     const offlineComponent = screen.queryByText(/You are offline!/i);
     expect(online).toBe(true);
     expect(offlineComponent).not.toBeInTheDocument();
-
-    //offline test is done on `navigation.test.tsx`
   });
 });
