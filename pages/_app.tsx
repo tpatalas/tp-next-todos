@@ -1,5 +1,5 @@
 import { LayoutHome } from '@components/layouts/layoutHome';
-import { PrefetchQueryEffect } from '@effect/prefetchQueryEffect';
+import { PrefetchQueryEffect } from '@effects/prefetchQueryEffect';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';

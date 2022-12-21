@@ -1,4 +1,4 @@
-import { SidebarMobileResetEffect } from '@effect/sidebarMobileResetEffect';
+import { SidebarMobileResetEffect } from '@effects/sidebarMobileResetEffect';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';

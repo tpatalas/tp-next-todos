@@ -1,6 +1,6 @@
 import { getCachedData } from '@data/cachedApiRequest';
 import { CACHED_DATA, IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
-import { queryEffect } from '@effect/atomEffects/queryEffect';
+import { queryEffect } from '@effects/atomEffects/queryEffect';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { getDataUserId } from '@lib/queries/queryUsers';
 import { getDataSetting } from '@lib/queries/queryUsers/querySettings';

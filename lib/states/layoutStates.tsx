@@ -1,6 +1,6 @@
 import { BREAKPOINT } from '@data/stateObjects';
-import { mediaQueryEffect } from '@effect/atomEffects';
 import { atom, RecoilValue, selector, useRecoilCallback } from 'recoil';
+import { mediaQueryEffect } from './effects/atomEffects';
 import { atomMediaQuery } from './miscStates';
 
 /**

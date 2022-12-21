@@ -20,7 +20,7 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
-    '^@hooks/(.*)$': ['<rootDir>/lib/states/hooks/$1'],
+    '^@atomQueries/(.*)$': ['<rootDir>/lib/states/atomQuries/$1'],
     '^@effects/(.*)$': ['<rootDir>/lib/states/effects/$1'],
     '^@states/(.*)$': ['<rootDir>/lib/states/$1'],
     '^@data/(.*)$': ['<rootDir>/lib/data/$1'],
