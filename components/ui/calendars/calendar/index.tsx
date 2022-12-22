@@ -1,13 +1,6 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import {
-  Div as DivCalendar,
-  Div as DivDayGrid,
-  Div as DivHeader,
-  Div as DivHeaderButtons,
-  Div as DivWeekday,
-} from '@containers/div';
-import {
   dataButtonCalendarNextMonth,
   dataButtonCalendarPrevMonth,
 } from '@data/dataObjects';
@@ -46,12 +39,12 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
   const selectDay = useCalSelectDay(todo?._id);
 
   return (
-    <DivCalendar className='w-full p-1 font-sans'>
-      <DivHeader className='mt-2 flex flex-row items-center justify-between pl-3'>
+    <div className='w-full p-1 font-sans'>
+      <div className='mt-2 flex flex-row items-center justify-between pl-3'>
         <h2 className='text-sm font-semibold text-gray-900'>
           {format(firstDayCurrentMonth, 'MMMM yyyy')}
         </h2>
-        <DivHeaderButtons className='flex flex-row items-center justify-center space-x-1'>
+        <div className='flex flex-row items-center justify-center space-x-1'>
           <IconButton
             data={dataButtonCalendarPrevMonth}
             onClick={() => setCalendar(CALENDAR['previousMonth'])}>
@@ -76,10 +69,10 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
             onClick={() => setCalendar(CALENDAR['nextMonth'])}>
             <span className='sr-only'>Next month</span>
           </IconButton>
-        </DivHeaderButtons>
-      </DivHeader>
+        </div>
+      </div>
       {headerButtons}
-      <DivWeekday className='mt-7 grid grid-cols-7 text-center text-xs leading-6 text-gray-500'>
+      <div className='mt-7 grid grid-cols-7 text-center text-xs leading-6 text-gray-500'>
         <div>S</div>
         <div>M</div>
         <div>T</div>
@@ -87,8 +80,8 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
         <div>T</div>
         <div>F</div>
         <div>S</div>
-      </DivWeekday>
-      <DivDayGrid className='mt-2 grid grid-cols-7 text-sm'>
+      </div>
+      <div className='mt-2 grid grid-cols-7 text-sm'>
         {days!.map((day, dayIdx) => (
           <div
             key={day.toString()}
@@ -130,7 +123,7 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
             </Button>
           </div>
         ))}
-      </DivDayGrid>
-    </DivCalendar>
+      </div>
+    </div>
   );
 };

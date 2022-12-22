@@ -1,5 +1,3 @@
-import { Div as DivTodoItemFocuser } from '@containers/div';
-import { dataDivContainerFocuser } from '@data/dataObjects';
 import { NavigateWithKeyEffect } from '@effects/navigateWithKeyEffect';
 import { useFocusOnClick } from '@states/focusStates';
 import { useKeyWithFocus } from '@states/keybindStates';
@@ -14,8 +12,9 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
   const focusOnClick = useFocusOnClick(index);
 
   return (
-    <DivTodoItemFocuser
-      data={dataDivContainerFocuser}
+    <div
+      tabIndex={0}
+      className='mr-2 ml-5 flex w-full max-w-2xl flex-row rounded-lg p-3 outline-none transition-all hover:bg-slate-100 focus:bg-blue-100 focus:bg-opacity-80 sm:ml-4'
       ref={divFocus}
       onKeyDown={focusKeyHandler}
       onClick={() => focusOnClick()}>
@@ -25,6 +24,6 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
         todo={todo}
       />
       {children}
-    </DivTodoItemFocuser>
+    </div>
   );
 };

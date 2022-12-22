@@ -1,5 +1,4 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
-import { Div as DivCalendar, Div as DivDivide } from '@containers/div';
 import {
   dataDropdownCalendar,
   dataPriorityDropdownImportant,
@@ -35,20 +34,20 @@ export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: P
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       {children}
-      <DivDivide className='py-1'>
+      <div className='py-1'>
         <DropdownMenuItem
           disableCloseOnClick={true}
           padding='p-0'>
-          <DivCalendar className='w-full'>
+          <div className='w-full'>
             <CalendarDropdown
               data={dataDropdownCalendar}
               todo={todo}
               onClickConfirm={() => updateCalendarDataItem()}
             />
-          </DivCalendar>
+          </div>
         </DropdownMenuItem>
-      </DivDivide>
-      <DivDivide className='py-1'>
+      </div>
+      <div className='py-1'>
         <DropdownMenuItem
           disableCloseOnClick={true}
           padding='p-0'>
@@ -67,8 +66,8 @@ export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: P
             onClick={() => setPriority(PRIORITY_LEVEL['important'])}
           />
         </DropdownMenuItem>
-      </DivDivide>
-      <DivDivide className='py-1'>
+      </div>
+      <div className='py-1'>
         <DropdownMenuItem
           onClick={() => removeTodo()}
           path={ICON_DELETE}
@@ -76,7 +75,7 @@ export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: P
           kbd='⌘ + Delete'>
           Delete
         </DropdownMenuItem>
-      </DivDivide>
+      </div>
     </Dropdown>
   );
 };

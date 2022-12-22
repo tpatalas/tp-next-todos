@@ -3,7 +3,6 @@ import { dataPriorityTodoModalImportant, dataPriorityTodoModalUrgent } from '@da
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
-import { Div as Header, Div as HeaderContents } from '@containers/div';
 import { usePriorityUpdate } from '@states/priorityStates';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
@@ -12,8 +11,8 @@ export const TodoModalHeaderContents = ({ todo, children }: Props) => {
   const setPriority = usePriorityUpdate(todo?._id);
 
   return (
-    <Header className='sm:flex sm:items-center'>
-      <HeaderContents className='flex flex-row items-center text-center sm:ml-3 sm:mt-0 sm:pt-0 sm:text-left'>
+    <div className='sm:flex sm:items-center'>
+      <div className='flex flex-row items-center text-center sm:ml-3 sm:mt-0 sm:pt-0 sm:text-left'>
         {children}
         <PriorityButton
           todo={todo}
@@ -28,7 +27,7 @@ export const TodoModalHeaderContents = ({ todo, children }: Props) => {
         <HeaderDescription>
           <span className='font-semibold'>{typeof todo === 'undefined' ? 'Create todo' : 'Update todo'}</span>
         </HeaderDescription>
-      </HeaderContents>
-    </Header>
+      </div>
+    </div>
   );
 };

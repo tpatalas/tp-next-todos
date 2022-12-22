@@ -1,4 +1,3 @@
-import { Para } from '@containers/para';
 import { Dialog } from '@headlessui/react';
 import { Types } from 'lib/types';
 
@@ -10,7 +9,7 @@ export const HeaderDescription = ({
     <Dialog.Description
       as='div'
       className={className || 'text-sm text-gray-600'}>
-      <Para>{children}</Para>
+      <p>{children}</p>
     </Dialog.Description>
   );
 };

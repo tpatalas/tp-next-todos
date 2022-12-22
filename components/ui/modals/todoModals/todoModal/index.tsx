@@ -1,14 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
-import {
-  Div as DivButton,
-  Div as DivDivider,
-  Div as DivEditor,
-  Div as DivHeader,
-  Div as DivHeaders,
-  Div as DivOption,
-  Div as HeaderButtonContainer,
-} from '@containers/div';
 import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
 import { AnyModalWithKeyEffect } from '@effects/anyModalWithKeyEffect';
@@ -57,31 +48,31 @@ export const TodoModal = ({
               ? 'sm:bottom-0 sm:h-full sm:max-h-[44rem] sm:max-w-3xl md:max-h-[54rem] md:max-w-5xl lg:max-w-6xl'
               : 'sm:bottom-20 sm:h-[28rem] sm:max-w-2xl',
           )}>
-          <DivHeaders className='flex flex-row items-center justify-between sm:inline-block'>
-            <DivHeader
+          <div className='flex flex-row items-center justify-between sm:inline-block'>
+            <div
               ref={initialFocusDiv}
               className='flex flex-row justify-between sm:mb-1'>
               <TodoModalHeaderContents todo={todo}>{headerContents}</TodoModalHeaderContents>
-              <HeaderButtonContainer>
+              <div>
                 {headerButtons}
                 <TodoModalHeaderButtons todo={todo} />
-              </HeaderButtonContainer>
-            </DivHeader>
-            <DivDivider className='hidden sm:mb-2 sm:block'>
+              </div>
+            </div>
+            <div className='hidden sm:mb-2 sm:block'>
               <PlainLineDivider />
-            </DivDivider>
-            <DivOption className='m-1 sm:flex'>
+            </div>
+            <div className='m-1 sm:flex'>
               <CalendarDropdown
                 data={{ tooltip: 'Due Date' }}
                 todo={todo}
                 onClickConfirm={() => updateCalendarItem()}
               />
-            </DivOption>
-          </DivHeaders>
-          <DivEditor className='h-full w-full overflow-scroll '>
+            </div>
+          </div>
+          <div className='h-full w-full overflow-scroll '>
             <TodoEditors todo={todo} />
-          </DivEditor>
-          <DivButton className='flex flex-row justify-end pt-4'>
+          </div>
+          <div className='flex flex-row justify-end pt-4'>
             <CancelButton
               data={dataButtonTodoModalCancel}
               onClick={() => closeModal()}>
@@ -95,7 +86,7 @@ export const TodoModal = ({
                   Add Todo
                 </DisableButton>
               ))}
-          </DivButton>
+          </div>
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}

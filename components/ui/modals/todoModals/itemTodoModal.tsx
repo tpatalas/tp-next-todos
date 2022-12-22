@@ -1,5 +1,4 @@
 import { DisableButton } from '@buttons/disableButton';
-import { Div as DivCheckbox } from '@containers/div';
 import { dataButtonItemModalUpdate } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { ItemModalWithKeyEffect } from '@effects/itemModalWithKeyEffect';
@@ -27,7 +26,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
       todo={todo}
       headerContents={
         <HeaderContentFragment>
-          <DivCheckbox className='mr-3 mb-[0.045em]'>
+          <div className='mr-3 mb-[0.045em]'>
             <CompleteTodoCheckBox
               todoItem={todoItem}
               checked={todoItem.completed}
@@ -38,7 +37,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
               className='text-red-600 '
               onChange={() => completeTodo()}
             />
-          </DivCheckbox>
+          </div>
         </HeaderContentFragment>
       }
       footerButtons={

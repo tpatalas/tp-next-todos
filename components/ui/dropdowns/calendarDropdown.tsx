@@ -1,6 +1,5 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
-import { Div as DivButton, Div as DivContent, Div } from '@containers/div';
 import {
   dataButtonCalendarCancel,
   dataButtonCalendarConfirm,
@@ -58,14 +57,14 @@ export const CalendarDropdown = ({
             : format(new Date(todoItem.dueDate as Date), 'MMM dd, yy')}
         </HeaderContentsFragment>
       }>
-      <DivContent className='p-2'>
+      <div className='p-2'>
         <Calendar todo={todo} />
-        <Div className='flex flex-row items-center justify-between px-4 pb-4 pt-5'>
+        <div className='flex flex-row items-center justify-between px-4 pb-4 pt-5'>
           <IconButton
             data={dataButtonCalendarResetDate}
             onClick={() => resetDateAll()}
           />
-          <DivButton className='flex flex-row justify-end'>
+          <div className='flex flex-row justify-end'>
             <Menu.Item>
               <Button
                 data={dataButtonCalendarCancel}
@@ -83,9 +82,9 @@ export const CalendarDropdown = ({
                 Ok
               </Button>
             </Menu.Item>
-          </DivButton>
-        </Div>
-      </DivContent>
+          </div>
+        </div>
+      </div>
     </Dropdown>
   );
 };

@@ -1,6 +1,4 @@
 import { SvgIcon } from '@components/icons/svgIcon';
-import { Div as DivButton, Div as DivButtonContents } from '@containers/div';
-import { Span as SpanDropdownItem } from '@containers/span';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';
@@ -29,13 +27,13 @@ export const DropdownMenuItem = ({
   const isActive = useRecoilValue(selectorActiveMenuItem);
 
   return (
-    <SpanDropdownItem>
+    <span>
       <Tooltip
         tooltip={tooltip}
         kbd={kbd}>
         <Menu.Item>
           {({ active }) => (
-            <DivButton
+            <div
               onClick={(event) => {
                 onClick && onClick(event);
                 disableCloseOnClick && event.preventDefault();
@@ -45,7 +43,7 @@ export const DropdownMenuItem = ({
                 padding || 'px-4 py-2',
                 active && isActive && 'bg-gray-100',
               )}>
-              <DivButtonContents className='flex flex-row'>
+              <div className='flex flex-row'>
                 {typeof path !== 'undefined' && (
                   <SvgIcon
                     data={{
@@ -59,11 +57,11 @@ export const DropdownMenuItem = ({
                   />
                 )}
                 {typeof children !== 'undefined' && children}
-              </DivButtonContents>
-            </DivButton>
+              </div>
+            </div>
           )}
         </Menu.Item>
       </Tooltip>
-    </SpanDropdownItem>
+    </span>
   );
 };

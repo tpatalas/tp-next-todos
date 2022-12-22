@@ -1,4 +1,3 @@
-import { Div as DivDivide, Div as DivTodoItem, Div as DivTodos } from '@containers/div';
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/dropdown/dropdownMenuItem';
 import { useModalStateOpen } from '@states/modalStates';
@@ -30,8 +29,8 @@ export const Todo = ({ todo, index }: Props) => {
 
   return (
     <>
-      <DivTodos className='my-2 flex flex-row items-center justify-center'>
-        <DivTodoItem className='group relative mr-4 flex w-screen cursor-pointer flex-row justify-between sm:max-w-[46rem]'>
+      <div className='my-2 flex flex-row items-center justify-center'>
+        <div className='group relative mr-4 flex w-screen cursor-pointer flex-row justify-between sm:max-w-[46rem]'>
           <TodoItemFocuser
             todo={todo}
             index={index!}>
@@ -40,7 +39,7 @@ export const Todo = ({ todo, index }: Props) => {
           <TodoItemDropdown
             data={{ initialVisible: false }}
             todo={todo}>
-            <DivDivide className='py-1'>
+            <div className='py-1'>
               <DropdownMenuItem
                 onClick={() => openModal()}
                 path={ICON_EDIT_NOTE}
@@ -48,10 +47,10 @@ export const Todo = ({ todo, index }: Props) => {
                 kbd='Enter'>
                 Edit todo
               </DropdownMenuItem>
-            </DivDivide>
+            </div>
           </TodoItemDropdown>
-        </DivTodoItem>
-      </DivTodos>
+        </div>
+      </div>
       <ModalActionsFragment>
         <ItemTodoModal todo={todo} />
         <DiscardConfirmModal todo={todo} />
