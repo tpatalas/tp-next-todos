@@ -1,5 +1,4 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Div as DivBackdrop, Div as DivTransition, Div as DivDialog } from '@containers/div';
 import { Types } from 'lib/types';
 import { Fragment } from 'react';
 import { classNames } from '@lib/utils';
@@ -17,10 +16,10 @@ export const ModalTransitionChild = ({ children, className = 'p-5 sm:relative  s
         leave='transition ease-in duration-75'
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'>
-        <DivBackdrop className='fixed inset-0 bg-gray-500 bg-opacity-20' />
+        <div className='fixed inset-0 bg-gray-500 bg-opacity-20' />
       </Transition.Child>
-      <DivTransition className='fixed inset-0 overflow-y-auto'>
-        <DivDialog className='p-4 text-center sm:flex sm:h-full sm:flex-row sm:items-center sm:justify-center sm:p-14'>
+      <div className='fixed inset-0 overflow-y-auto'>
+        <div className='p-4 text-center sm:flex sm:h-full sm:flex-row sm:items-center sm:justify-center sm:p-14'>
           <Transition.Child
             as={Fragment}
             enter='transition ease-out duration-150'
@@ -37,8 +36,8 @@ export const ModalTransitionChild = ({ children, className = 'p-5 sm:relative  s
               {children}
             </Dialog.Panel>
           </Transition.Child>
-        </DivDialog>
-      </DivTransition>
+        </div>
+      </div>
     </Fragment>
   );
 };

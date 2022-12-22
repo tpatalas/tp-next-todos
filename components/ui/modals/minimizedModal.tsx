@@ -4,13 +4,6 @@ import {
   IconButton as OpenFullIconButton,
 } from '@buttons/iconButton';
 import {
-  Div as DivDescription,
-  Div as DivHeader,
-  Div as DivHeaderIcon,
-  Div as DivTitle,
-} from '@containers/div';
-import { Para as ParaDescription, Para as ParaTitle } from '@containers/para';
-import {
   dataButtonGlobalClose,
   dataButtonMiniModalMaximize,
   dataButtonMiniModalOpenFull,
@@ -41,13 +34,13 @@ export const MinimizedModal = ({ todo }: Props) => {
     <MinimizeModalTransition
       show={isTodoModalMiniOpen}
       data={dataMinimizedModal}>
-      <DivHeader className=' flex flex-shrink-0 flex-row items-center justify-between'>
-        <DivTitle className='flex flex-1 flex-col justify-center'>
-          <ParaTitle className='w-44 break-words text-sm font-medium text-gray-500 line-clamp-1'>
+      <div className=' flex flex-shrink-0 flex-row items-center justify-between'>
+        <div className='flex flex-1 flex-col justify-center'>
+          <p className='w-44 break-words text-sm font-medium text-gray-500 line-clamp-1'>
             {newTodo.title}
-          </ParaTitle>
-        </DivTitle>
-        <DivHeaderIcon className='flex h-fit flex-row'>
+          </p>
+        </div>
+        <div className='flex h-fit flex-row'>
           <MaxIconButton
             data={dataButtonMiniModalMaximize}
             onClick={() => exitMinimizeModal()}
@@ -60,13 +53,11 @@ export const MinimizedModal = ({ todo }: Props) => {
             data={dataButtonGlobalClose}
             onClick={() => closeModal()}
           />
-        </DivHeaderIcon>
-      </DivHeader>
-      <DivDescription>
-        <ParaDescription className='w-64 break-words text-sm text-gray-400 line-clamp-3'>
-          {newTodo.note}
-        </ParaDescription>
-      </DivDescription>
+        </div>
+      </div>
+      <div>
+        <p className='w-64 break-words text-sm text-gray-400 line-clamp-3'>{newTodo.note}</p>
+      </div>
       <ModalStateOnBreakpointEffect />
     </MinimizeModalTransition>
   );

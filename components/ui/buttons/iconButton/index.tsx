@@ -1,5 +1,3 @@
-import { Div as DivButtonContent } from '@containers/div';
-import { Span as SpanHeaderContents, Span } from '@containers/span';
 import { Types } from '@lib/types';
 import { TypesDataButton } from '@lib/types/typesData';
 import { classNames } from '@lib/utils';
@@ -15,7 +13,7 @@ type Props = { data: TypesDataButton } & Partial<
 
 export const IconButton = ({ data, headerContents, onClick, children = data.name }: Props) => {
   return (
-    <Span className={data.containerWidth}>
+    <span className={data.containerWidth}>
       <Button
         data={{
           className: classNames(
@@ -34,7 +32,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
           disabled: data.disabled,
         }}
         onClick={onClick}>
-        <DivButtonContent className='flex flex-row items-center justify-center'>
+        <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
             data={{
@@ -48,17 +46,17 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
           />
           <HeaderContentsFragment>
             {headerContents && (
-              <SpanHeaderContents
+              <span
                 className={classNames(
                   'px-3 text-sm font-normal text-gray-500',
                   !data.disabled && '[.group-button:hover_&]:text-gray-700',
                 )}>
                 {headerContents}
-              </SpanHeaderContents>
+              </span>
             )}
           </HeaderContentsFragment>
-        </DivButtonContent>
+        </div>
       </Button>
-    </Span>
+    </span>
   );
 };

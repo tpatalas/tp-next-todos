@@ -1,11 +1,4 @@
 import { IconButton } from '@buttons/iconButton';
-import {
-  Div as DivButton,
-  Div as DivNotification,
-  Div as DivHeader,
-  Div as DivHeaders,
-} from '@containers/div';
-import { Para as ParaMessageDescription, Para as ParaMessageTitle } from '@containers/para';
 import { dataButtonGlobalClose, dataNotification } from '@data/dataObjects';
 import { NotificationResetEffect } from '@effects/notificationResetEffect';
 import { MinimizeModalTransition } from '@modals/modal/modalTransition/minimizeModalTransition';
@@ -27,34 +20,30 @@ export const Notification = () => {
       <MinimizeModalTransition
         show={isNotificationOpen}
         data={dataNotification}>
-        <DivNotification className='flex flex-col'>
-          <DivHeaders className='flex flex-row justify-between'>
-            <DivHeader className='flex flex-row items-center '>
-              <DivButton className='flex flex-shrink-0'>
+        <div className='flex flex-col'>
+          <div className='flex flex-row justify-between'>
+            <div className='flex flex-row items-center '>
+              <div className='flex flex-shrink-0'>
                 <SvgIcon
                   data={{
                     path: notification.iconPath,
                     className: notification.iconPresetStyle,
                   }}
                 />
-              </DivButton>
-              <ParaMessageTitle className='ml-3 text-sm font-medium text-gray-900'>
-                {notification.message}
-              </ParaMessageTitle>
-            </DivHeader>
-            <DivButton className='ml-4 flex flex-shrink-0'>
+              </div>
+              <p className='ml-3 text-sm font-medium text-gray-900'>{notification.message}</p>
+            </div>
+            <div className='ml-4 flex flex-shrink-0'>
               <IconButton
                 data={dataButtonGlobalClose}
                 onClick={() => setNotificationOpen(false)}
               />
-            </DivButton>
-          </DivHeaders>
+            </div>
+          </div>
           {notification.description && (
-            <ParaMessageDescription className='ml-8 mr-3 break-all text-sm text-gray-500'>
-              {notification.description}
-            </ParaMessageDescription>
+            <p className='ml-8 mr-3 break-all text-sm text-gray-500'>{notification.description}</p>
           )}
-        </DivNotification>
+        </div>
       </MinimizeModalTransition>
       <NotificationResetEffect />
     </NotificationFragment>

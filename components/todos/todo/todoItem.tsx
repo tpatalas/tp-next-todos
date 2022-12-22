@@ -1,14 +1,5 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import {
-  Div as DivCheckBox,
-  Div as DivDueDate,
-  Div as DivInfo,
-  Div as DivItem,
-  Div as DivTodoItem,
-  Div as DivTodoItemTitle,
-} from '@containers/div';
-import { Para as ParaTodoItemDescription } from '@containers/para';
-import {
   dataSvgCalendarDueDate,
   dataSvgPriorityImportant,
   dataSvgPriorityUrgent,
@@ -33,7 +24,7 @@ export const TodoItem = ({ todo }: Props) => {
 
   return (
     <TodoItemFragment>
-      <DivCheckBox className='relative bottom-px ml-1 flex items-start '>
+      <div className='relative bottom-px ml-1 flex items-start '>
         <CompleteTodoCheckBox
           todoItem={todoItem}
           checked={todoItem.completed}
@@ -43,47 +34,45 @@ export const TodoItem = ({ todo }: Props) => {
           )}
           onChange={() => completeTodo()}
         />
-      </DivCheckBox>
-      <DivTodoItem
+      </div>
+      <div
         className='ml-4 w-full max-w-sm select-none text-base sm:max-w-2xl'
         onDoubleClick={() => openModal()}>
-        <DivItem
+        <div
           className={classNames(
             'break-words pr-1 ',
             todoItem.completed ? 'italic opacity-60' : '',
           )}>
-          <DivTodoItemTitle
+          <div
             className={classNames(
               'font-medium decoration-red-600 decoration-2 line-clamp-1',
               todoItem.completed ? ' text-gray-500 line-through' : '',
             )}>
             {todoItem.title}
-          </DivTodoItemTitle>
-          <ParaTodoItemDescription className='text-sm text-gray-500 line-clamp-2'>
-            {todoItem.note}
-          </ParaTodoItemDescription>
-        </DivItem>
-        <DivInfo className='flex flex-row items-center'>
+          </div>
+          <p className='text-sm text-gray-500 line-clamp-2'>{todoItem.note}</p>
+        </div>
+        <div className='flex flex-row items-center'>
           {todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && (
-            <DivDueDate className='mt-2 mr-3 flex flex-row items-center text-gray-500'>
+            <div className='mt-2 mr-3 flex flex-row items-center text-gray-500'>
               <SvgIcon data={dataSvgPriorityUrgent} />
               <div className='ml-1 text-sm'>Urgent</div>
-            </DivDueDate>
+            </div>
           )}
           {todoItem.priorityLevel === PRIORITY_LEVEL['important'] && (
-            <DivDueDate className='mt-2 mr-3 flex flex-row items-center text-gray-500'>
+            <div className='mt-2 mr-3 flex flex-row items-center text-gray-500'>
               <SvgIcon data={dataSvgPriorityImportant} />
               <div className='ml-1 text-sm'>Important</div>
-            </DivDueDate>
+            </div>
           )}
           {todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined' && (
-            <DivDueDate className='mt-2 flex flex-row items-center text-gray-500'>
+            <div className='mt-2 flex flex-row items-center text-gray-500'>
               <SvgIcon data={dataSvgCalendarDueDate} />
               <div className='ml-1 text-sm'>{format(new Date(todoItem.dueDate), 'MMM dd, yy')}</div>
-            </DivDueDate>
+            </div>
           )}
-        </DivInfo>
-      </DivTodoItem>
+        </div>
+      </div>
     </TodoItemFragment>
   );
 };

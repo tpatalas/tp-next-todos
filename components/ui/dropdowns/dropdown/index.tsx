@@ -1,5 +1,3 @@
-import { Div as DivMenuItem } from '@containers/div';
-import { Span as SpanDropdown } from '@containers/span';
 import { Menu, Transition } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import { classNames } from '@lib/utils';
@@ -41,7 +39,7 @@ export const Dropdown = ({
   });
 
   return (
-    <SpanDropdown>
+    <span>
       <Tooltip
         tooltip={isClicked ? undefined : tooltip}
         kbd={isClicked ? undefined : kbd}>
@@ -95,13 +93,13 @@ export const Dropdown = ({
               ref={setPopperElement}
               style={styles.popper}
               {...attributes.popper}>
-              <DivMenuItem className={classNames(divider && 'divide-y divide-gray-100')}>
+              <div className={classNames(divider && 'divide-y divide-gray-100')}>
                 {children}
-              </DivMenuItem>
+              </div>
             </Menu.Items>
           </Transition>
         </Menu>
       </Tooltip>
-    </SpanDropdown>
+    </span>
   );
 };

@@ -1,6 +1,5 @@
 import {
   TypesDataButton,
-  TypesDataDivContainer,
   TypesDataDropdown,
   TypesDataMinimizedModalTransition,
   TypesDataPriority,
@@ -22,27 +21,8 @@ import {
   ICON_REPORT,
   ICON_WARNING,
 } from './materialSymbols';
-import {
-  CONDITION,
-  POSITION_X,
-  POSITION_Y,
-  PRIORITY_LEVEL,
-} from './stateObjects';
-import {
-  STYLE_BUTTON_BLUE,
-  STYLE_BUTTON_RED,
-  STYLE_BUTTON_WHITE,
-} from './stylePreset';
-
-/**
- * * TypesDataDivContainer
- */
-
-export const dataDivContainerFocuser: TypesDataDivContainer = {
-  tabIndex: 0,
-  className:
-    'mr-2 sm:ml-4 ml-5 flex w-full max-w-2xl flex-row rounded-lg p-3 outline-none transition-all hover:bg-slate-100 focus:bg-blue-100 focus:bg-opacity-80',
-};
+import { CONDITION, POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './stateObjects';
+import { STYLE_BUTTON_BLUE, STYLE_BUTTON_RED, STYLE_BUTTON_WHITE } from './stylePreset';
 
 /**
  * * TypesDataSvg
