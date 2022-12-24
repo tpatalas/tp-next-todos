@@ -28,9 +28,7 @@ import { ReactEditor } from 'slate-react';
 /**
  * Global Collection Types
  */
-export type Types = CollectTypesEditor &
-  CollectTypesArrayObject &
-  CollectTypesMISC;
+export type Types = CollectTypesEditor & CollectTypesArrayObject & CollectTypesMISC;
 
 /**
  * Types Editor
@@ -254,7 +252,6 @@ export interface TypesEffects {
   cachedQueryFunction(): Promise<any>;
   storeName: IDB_STORE;
   enableIndexedDb: boolean;
-  queryWithoutSuspense: boolean;
   refetchOnMutation: boolean;
   refetchOnFocus: boolean;
   refetchOnBlur: boolean;
@@ -300,9 +297,7 @@ export type TypesMediaQueryEffect = <T>({
   stateUnderBreakpoint,
   stateOverBreakpoint,
 }: Pick<Types, 'breakpoint'> &
-  Partial<
-    Pick<Types, 'stateUnderBreakpoint' | 'stateOverBreakpoint'>
-  >) => AtomEffect<T | boolean>;
+  Partial<Pick<Types, 'stateUnderBreakpoint' | 'stateOverBreakpoint'>>) => AtomEffect<T | boolean>;
 
 export type TypesAtomEffect<T> = AtomEffect<T>;
 export type TypesAtomEffectWithParam<T, P> = (key: P) => AtomEffect<T>;
