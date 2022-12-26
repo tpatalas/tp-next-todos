@@ -9,11 +9,11 @@ const TodoNoteSchema = new mongoose.Schema({
   },
   title_id: {
     type: mongoose.Types.ObjectId,
-    require: true,
+    required: true,
   },
   user_id: {
     type: mongoose.Types.ObjectId,
-    require: true,
+    required: true,
   },
 });
 
