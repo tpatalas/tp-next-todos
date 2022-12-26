@@ -40,7 +40,7 @@ const TodoItemSchema = new mongoose.Schema({
   },
   user_id: {
     type: mongoose.Types.ObjectId,
-    require: true,
+    required: true,
   },
 });
 TodoItemSchema.index({ _id: 1, user_id: -1 }, { unique: true });
