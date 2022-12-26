@@ -12,22 +12,21 @@ jest.mock('@buttons/iconButton', () => ({
 
 describe('FooterSidebar', () => {
   renderWithRecoilRoot(<FooterSidebar />);
-});
 
+  it('should show layoutLogo and iconButton components when sidebar is open', () => {
+    const logoComponent = screen.getByTestId('layoutLogo');
+    const iconButtonComponent = screen.getByTestId('iconButton');
+    expect(logoComponent).toBeInTheDocument();
+    expect(iconButtonComponent).toBeInTheDocument();
+  });
 
-it('should show layoutLogo and iconButton components when sidebar is open', () => {
-  const logoComponent = screen.getByTestId('layoutLogo');
-  const iconButtonComponent = screen.getByTestId('iconButton');
-  expect(logoComponent).toBeInTheDocument();
-  expect(iconButtonComponent).toBeInTheDocument();
-});
+  it('should hide layoutLogo components when iconButton is clicked', () => {
+    const logoComponent = screen.queryByTestId('layoutLogo');
+    const iconButtonComponent = screen.queryByTestId('iconButton');
 
-it('should hide layoutLogo components when iconButton is clicked', () => {
-  const logoComponent = screen.queryByTestId('layoutLogo');
-  const iconButtonComponent = screen.queryByTestId('iconButton');
-
-  if (iconButtonComponent) {
-    fireEvent.click(iconButtonComponent);
-  }
-  expect(logoComponent).not.toBeInTheDocument();
+    if (iconButtonComponent) {
+      fireEvent.click(iconButtonComponent);
+    }
+    expect(logoComponent).not.toBeInTheDocument();
+  });
 });

@@ -8,7 +8,6 @@
       "@data/*": ["lib/data/*"],
       "@lib/*": ["lib/*"],
       "@buttons/*": ["components/ui/buttons/*"],
-      "@containers/*": ["components/ui/containers/*"],
       "@dropdowns/*": ["components/ui/dropdowns/*"],
       "@inputs/*": ["components/ui/inputs/*"],
       "@modals/*": ["components/ui/modals/*"],
