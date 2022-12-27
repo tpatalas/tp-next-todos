@@ -2,6 +2,7 @@ import { Settings, Users } from '@lib/types';
 
 export const getDataSetting = async (_id: Users['_id']) => {
   const response = await fetch(`/api/v1/users/settings?userId=${_id}`);
+  if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
