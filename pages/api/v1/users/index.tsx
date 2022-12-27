@@ -16,7 +16,7 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const getUser = await User.find({ _id: userId }, '_id');
         // res.setHeader('Cache-Control', `private, max-age=${dayInSecond * 30}`);
-        res.status(200).json({ success: true, data: getUser });
+        if (!getUser) return res.status(400).json({ success: false });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -24,6 +24,7 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       try {
         const createUser = await User.create(body);
+        if (!createUser) return res.status(400).json({ success: false });
         res.status(201).json({ success: true, data: createUser });
       } catch (error) {
         res.status(400).json({ success: false });

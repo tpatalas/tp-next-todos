@@ -40,6 +40,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
       try {
         const getTodo = await SCHEMA[model as SCHEMA_TODO].find(filter()).select({ _id: 1 }).lean();
+        if (!getTodo) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: getTodo });
       } catch (error) {
         res.status(400).json({ success: false });
