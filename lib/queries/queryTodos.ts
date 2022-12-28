@@ -11,15 +11,16 @@ export const getDataTodoIds = async ({
       queries(
         'model=' + model,
         typeof completed !== 'undefined' && 'completed=' + completed,
-        typeof completedFromToday !== 'undefined' &&
-          'completedFromToday=' + completedFromToday,
+        typeof completedFromToday !== 'undefined' && 'completedFromToday=' + completedFromToday,
       ),
   );
+  if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
 export const getDataTodoItem = async ({ _id }: Pick<Types, '_id'>) => {
   const response = await fetch(`/api/v1/todos/${_id}`);
+  if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 

@@ -49,7 +49,7 @@ export interface TypesEditor {
  */
 type CollectTypesArrayObject = Todos & TypesTodo & Settings;
 
-//* Todos
+// Todos
 export interface Todos extends TodosEditors, TodosIds {
   createdDate: Date;
   dueDate: Date | null;
@@ -76,7 +76,18 @@ export interface TypesTodo {
   model: SCHEMA_TODO;
 }
 
-//* Users
+// Tags
+export interface Tags extends TagsIds {
+  parent_id?: OBJECT_ID;
+  title_id?: OBJECT_ID;
+  tag: string;
+}
+
+export interface TagsIds {
+  _id?: OBJECT_ID;
+}
+
+// Users
 export interface Users extends UsersIds {
   email: 'string';
 }
