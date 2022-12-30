@@ -1,6 +1,6 @@
 import { renderWithRecoilRoot } from '@lib/utils';
 import { fireEvent, screen } from '@testing-library/react';
-import { FooterSidebar } from '../footerSidebar';
+import { FooterSidebar } from '../footerSideBar';
 
 jest.mock('@components/layouts/layoutApp/layoutLogo', () => ({
   LayoutLogo: () => <div data-testid='layoutLogo' />,
