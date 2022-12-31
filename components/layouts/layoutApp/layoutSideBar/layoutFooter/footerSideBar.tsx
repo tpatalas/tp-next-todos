@@ -1,6 +1,7 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
+import { TagList } from '@components/tags/taglist';
 import { dataButtonCreateTodo } from '@data/dataObjects';
 import {
   ICON_ADD_TASK,
@@ -12,14 +13,14 @@ import {
 } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { classNames } from '@lib/utils';
-import { useModalStateOpen } from '@states/modalStates';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
+import { useModalStateOpen } from '@states/modalStates';
 import {
   forwardRef,
-  Fragment,
+  Fragment as BackdropFragment,
   Fragment as CreateTodoFragment,
   Fragment as FooterSidebarFragment,
-  Fragment as BackdropFragment,
+  Fragment,
   Fragment as LayoutLogoFragment,
 } from 'react';
 import { useRecoilCallback } from 'recoil';
@@ -32,7 +33,7 @@ const navigation = [
   { name: 'Reports', href: '#', icon: ICON_EVENT_AVAILABLE, current: false },
 ];
 
-export const FooterSidebar = forwardRef<HTMLDivElement>((Props, ref) => {
+export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const openModal = useModalStateOpen(undefined);
   const setSidebarOpen = useSidebarOpen();
   const isSidebarMobileOpen = useRecoilCallback(({ snapshot }) => () => {
@@ -119,6 +120,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((Props, ref) => {
                   {item.name}
                 </a>
               ))}
+              <TagList />
             </nav>
           </div>
         </div>

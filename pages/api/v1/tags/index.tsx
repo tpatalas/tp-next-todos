@@ -20,7 +20,7 @@ const Tags = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       try {
         const getTags = await Tag.find(filter())
-          .select({ _id: 1, tag: 1, parent_id: 1, title_id: 1 })
+          .select({ _id: 1, name: 1, parent_id: 1, title_id: 1 })
           .lean();
         res.status(200).json({ success: true, data: getTags });
       } catch (error) {

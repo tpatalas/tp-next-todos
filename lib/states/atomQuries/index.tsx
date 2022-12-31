@@ -1,14 +1,15 @@
 import { getCachedData } from '@data/cachedApiRequest';
 import { CACHED_DATA, IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
 import { queryEffect } from '@effects/atomEffects/queryEffect';
+import { getDataTags } from '@lib/queries/queryTags';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { getDataUserId } from '@lib/queries/queryUsers';
 import { getDataSetting } from '@lib/queries/queryUsers/querySettings';
-import { Settings, Todos, TodosIds, Users } from '@lib/types';
+import { Settings, Tags, Todos, TodosIds, Users } from '@lib/types';
 import { atom, atomFamily } from 'recoil';
 
 /**
- * * Query Todos
+ * Query Todos
  * Defining `storeName` will automatically apply the predefined IndexedDB name.
  */
 
@@ -52,6 +53,22 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
       refetchOnMutation: true,
+    }),
+  ],
+});
+
+/**
+ * Query Tags
+ */
+export const atomQueryTags = atom<Tags[]>({
+  key: 'atomQueryTags',
+  effects: [
+    queryEffect({
+      storeName: IDB_STORE['tags'],
+      queryKey: 'tags',
+      queryFunction: () => getDataTags(),
+      cachedQueryFunction: () => getCachedData(CACHED_DATA['getDataTags']),
+      refetchOnMutation: false, // fetching the list of tags is too expensive.
     }),
   ],
 });

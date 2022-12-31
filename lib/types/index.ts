@@ -80,7 +80,7 @@ export interface TypesTodo {
 export interface Tags extends TagsIds {
   parent_id?: OBJECT_ID;
   title_id?: OBJECT_ID;
-  tag: string;
+  name: string;
 }
 
 export interface TagsIds {

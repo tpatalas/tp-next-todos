@@ -1,3 +1,4 @@
+import { getDataTags } from '@lib/queries/queryTags';
 import { getDataTodoIds } from '@lib/queries/queryTodos';
 import { TypesIDB, TypesNotification } from 'lib/types';
 import {
@@ -74,6 +75,10 @@ export const DATA_IDB: TypesIDB[] = [
     store: IDB_STORE['todos'],
   },
   {
+    name: IDB['Tags'],
+    store: IDB_STORE['tags'],
+  },
+  {
     name: IDB['Users'],
     store: IDB_STORE['users'],
   },
@@ -89,6 +94,11 @@ export const cachedData = () => {
       key: CACHED_DATA['getDataTodoIds'],
       cachedTimer: new Date().getTime(),
       data: getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
+    },
+    {
+      key: CACHED_DATA['getDataTags'],
+      cachedTimer: new Date().getTime(),
+      data: getDataTags(),
     },
   ];
 };

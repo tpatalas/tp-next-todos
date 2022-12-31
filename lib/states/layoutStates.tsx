@@ -2,7 +2,6 @@ import { BREAKPOINT } from '@data/stateObjects';
 import { atom, RecoilValue, selector, useRecoilCallback } from 'recoil';
 import { mediaQueryEffect } from './effects/atomEffects';
 import { atomMediaQuery } from './miscStates';
-
 /**
  * Atoms
  **/
@@ -56,7 +55,7 @@ export const selectorSidebarOpen = selector({
 export const useSidebarOpen = () => {
   return useRecoilCallback(({ snapshot, set }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    // Under the mediaQuery meidum ('md') will return false and will return true over mediaQuery
+    // Under the mediaQuery medium ('md') will return false and will return true over mediaQuery
     if (!get(atomMediaQuery(BREAKPOINT['md'])))
       return set(atomSidebarOpenMobile, (event) => !event);
     set(atomSidebarOpenSetting, (event) => !event);
