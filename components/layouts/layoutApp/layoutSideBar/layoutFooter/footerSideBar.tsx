@@ -1,7 +1,7 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { TagList } from '@components/tags/taglist';
+import { TagList } from '@components/tags/tagList';
 import { dataButtonCreateTodo } from '@data/dataObjects';
 import {
   ICON_ADD_TASK,

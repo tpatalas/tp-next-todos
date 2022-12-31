@@ -5,7 +5,7 @@ import { classNames } from '@lib/utils';
 import { selectorSidebarOpen } from '@states/layoutStates';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
-import { FooterSidebar } from './footerSideBar';
+import { FooterSidebar } from './footerSidebar';
 
 export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
   const isSidebarOpen = useRecoilValue(selectorSidebarOpen);
