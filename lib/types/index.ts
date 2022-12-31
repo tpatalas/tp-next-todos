@@ -143,6 +143,7 @@ type CollectTypesMISC = TypesIndexedDB &
   TypesWindow &
   TypesReactChildren &
   TypesUi &
+  TypesLoadings &
   TypesTooltipAttributes &
   TypesSvgIconAttributes &
   TypesInputAttributes &
@@ -191,6 +192,11 @@ export interface TypesUi {
   condition: CONDITION;
 }
 
+export interface TypesLoadings {
+  loadingSkeleton: Types['children'];
+  repeatingCount: number;
+}
+
 export interface TypesStyleAttributes {
   group: string;
   className: string;
@@ -202,6 +208,7 @@ export interface TypesStyleAttributes {
   checkBoxColor: string;
   borderRadius: string;
   margin: string;
+  space: string;
   text: string;
   menuWidth: string;
   display: string;
