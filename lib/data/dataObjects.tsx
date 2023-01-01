@@ -1,6 +1,9 @@
+import { LoadingSkeletonTags } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTags';
+import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
 import {
   TypesDataButton,
   TypesDataDropdown,
+  TypesDataLoadingState,
   TypesDataMinimizedModalTransition,
   TypesDataPriority,
   TypesDataSvg,
@@ -259,4 +262,22 @@ export const dataNotification: TypesDataMinimizedModalTransition = {
 export const dataMinimizedModal: TypesDataMinimizedModalTransition = {
   positionX: POSITION_X['right'],
   positionY: POSITION_Y['bottom'],
+};
+
+/*
+ * TypesDataLoadingState
+ **/
+// LoadingState
+export const dataLoadingTodos: TypesDataLoadingState = {
+  loadingSkeleton: <LoadingSkeletonTodos />,
+  repeatingCount: 10,
+  margin: 'ml-8 mt-5',
+  space: 'space-y-10',
+};
+
+export const dataLoadingTags: TypesDataLoadingState = {
+  loadingSkeleton: <LoadingSkeletonTags />,
+  repeatingCount: 10,
+  margin: 'ml-4',
+  space: 'space-y-4',
 };

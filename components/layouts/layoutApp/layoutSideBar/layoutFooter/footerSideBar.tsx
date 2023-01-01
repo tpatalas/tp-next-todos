@@ -1,8 +1,8 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { TagList } from '@components/tags/tagList';
-import { dataButtonCreateTodo } from '@data/dataObjects';
+import { LoadingState } from '@components/loadable/loadingStates';
+import { dataButtonCreateTodo, dataLoadingTags } from '@data/dataObjects';
 import {
   ICON_ADD_TASK,
   ICON_EVENT_AVAILABLE,
@@ -15,6 +15,7 @@ import { Transition } from '@headlessui/react';
 import { classNames } from '@lib/utils';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
 import { useModalStateOpen } from '@states/modalStates';
+import dynamic from 'next/dynamic';
 import {
   forwardRef,
   Fragment as BackdropFragment,
@@ -25,6 +26,10 @@ import {
 } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { LayoutLogo } from '../../layoutLogo';
+
+const TagList = dynamic(() => import('@components/tags/tagList').then((mod) => mod.TagList), {
+  loading: () => <LoadingState data={dataLoadingTags} />,
+});
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: ICON_HOME, current: true },
