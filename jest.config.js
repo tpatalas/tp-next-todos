@@ -26,6 +26,7 @@ const customJestConfig = {
     '^@data/(.*)$': ['<rootDir>/lib/data/$1'],
     '^@types/(.*)$': ['<rootDir>/lib/types/$1'],
     '^@lib/(.*)$': ['<rootDir>/lib/$1'],
+    '^@layouts/(.*)$': ['<rootDir>/components/layouts/$1'],
     '^@buttons/(.*)$': ['<rootDir>/components/ui/buttons/$1'],
     '^@dropdowns/(.*)$': ['<rootDir>/components/ui/dropdowns/$1'],
     '^@inputs/(.*)$': ['<rootDir>/components/ui/inputs/$1'],

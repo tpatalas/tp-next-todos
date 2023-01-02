@@ -7,6 +7,7 @@
       "@states/*": ["lib/states/*"],
       "@data/*": ["lib/data/*"],
       "@lib/*": ["lib/*"],
+      "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],
       "@dropdowns/*": ["components/ui/dropdowns/*"],
       "@inputs/*": ["components/ui/inputs/*"],
