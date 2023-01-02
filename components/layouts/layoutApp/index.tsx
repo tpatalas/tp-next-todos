@@ -7,7 +7,7 @@ import {
     Fragment as LayoutAppFragment,
     Fragment as ModalActionsFragment
 } from 'react';
-import { LayoutSidebar } from './layoutSidebar';
+import { Layout } from './layout';
 const CreateTodoModal = dynamic(() =>
   import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
 );
@@ -32,9 +32,9 @@ export const LayoutApp = ({ children }: Props) => {
   return (
     <LayoutAppFragment>
       <HeaderFragment>
-        <LayoutSidebar>
+        <Layout>
           {children}
-        </LayoutSidebar>
+        </Layout>
       </HeaderFragment>
       <FooterFragment>
         <Notification />
