@@ -3,17 +3,9 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LoadingState } from '@components/loadable/loadingStates';
 import { dataButtonCreateTodo, dataLoadingTags } from '@data/dataObjects';
-import {
-  ICON_ADD_TASK,
-  ICON_EVENT_AVAILABLE,
-  ICON_HOME,
-  ICON_INFO,
-  ICON_MENU,
-  ICON_UPCOMING,
-} from '@data/materialSymbols';
+import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
-import { classNames } from '@lib/utils';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
 import { useModalStateOpen } from '@states/modalStates';
 import dynamic from 'next/dynamic';
@@ -26,17 +18,11 @@ import {
   Fragment as LayoutLogoFragment,
 } from 'react';
 import { useRecoilCallback } from 'recoil';
+import { FooterSidebarMenu } from './footerSidebarMenu';
 
 const TagList = dynamic(() => import('@components/tags/tagList').then((mod) => mod.TagList), {
   loading: () => <LoadingState data={dataLoadingTags} />,
 });
-
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: ICON_HOME, current: true },
-  { name: 'Calendar', href: '#', icon: ICON_UPCOMING, current: false },
-  { name: 'Documents', href: '#', icon: ICON_INFO, current: false },
-  { name: 'Reports', href: '#', icon: ICON_EVENT_AVAILABLE, current: false },
-];
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const openModal = useModalStateOpen(undefined);
@@ -103,28 +89,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
         <div className='flex h-full flex-grow flex-col bg-transparent'>
           <div className='flex flex-grow flex-col'>
             <nav className='flex-1 space-y-1 pb-4'>
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-blue-100 text-gray-900'
-                      : 'text-gray-600 hover:bg-gray-200 hover:bg-opacity-60 hover:text-gray-900',
-                    'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
-                  )}>
-                  <SvgIcon
-                    data={{
-                      path: item.icon,
-                      className: classNames(
-                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                        'mr-3 h-6 w-6 flex-shrink-0',
-                      ),
-                    }}
-                  />
-                  {item.name}
-                </a>
-              ))}
+              <FooterSidebarMenu />
               <TagList />
             </nav>
           </div>

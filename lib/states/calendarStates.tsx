@@ -15,7 +15,7 @@ import {
 } from 'date-fns';
 import equal from 'fast-deep-equal/react';
 import { atomFamily, RecoilValue, selectorFamily, useRecoilCallback } from 'recoil';
-import { atomQueryTodoItem } from './atomQuries';
+import { atomQueryTodoItem } from './atomQueries';
 import { useNotificationState } from './notificationStates';
 import { usePriorityRankScore } from './priorityStates';
 import { atomSelectorTodoItem, atomTodoNew } from './todoStates';

@@ -1,4 +1,4 @@
-import { atomQueryTags } from '@states/atomQuries';
+import { atomQueryTags } from '@atomQueries/index';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 

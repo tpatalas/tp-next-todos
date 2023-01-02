@@ -1,3 +1,4 @@
+import { atomQueryTodoItem } from '@atomQueries/index';
 import { DisableButton } from '@buttons/disableButton';
 import { dataButtonItemModalUpdate } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
@@ -5,7 +6,6 @@ import { ItemModalWithKeyEffect } from '@effects/itemModalWithKeyEffect';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';
-import { atomQueryTodoItem } from '@states/atomQuries';
 import { atomPriority } from '@states/priorityStates';
 import { useTodoStateUpdate, useTodoStateComplete } from '@states/todoStates';
 import dynamic from 'next/dynamic';

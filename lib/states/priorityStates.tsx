@@ -9,7 +9,7 @@ import {
 } from '@states/todoStates';
 import { differenceInDays } from 'date-fns';
 import { atomFamily, RecoilValue, selectorFamily, useRecoilCallback } from 'recoil';
-import { atomQueryTodoIds, atomQueryTodoItem } from './atomQuries';
+import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 
 /**
  * atoms

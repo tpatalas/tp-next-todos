@@ -1,6 +1,6 @@
+import { atomQueryTodoItem } from '@atomQueries/index';
 import { CATCH_MODAL, FOCUS } from '@lib/data/stateObjects';
 import { Types } from '@lib/types';
-import { atomQueryTodoItem } from '@states/atomQuries';
 import { atomCurrentFocus, atomOnBlur, useFocusState } from '@states/focusStates';
 import { useKeyWithNavigate } from '@states/keybindStates';
 import { atomTodoModalOpen } from '@states/modalStates';

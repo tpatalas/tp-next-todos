@@ -1,39 +1,46 @@
 import { Types } from '@lib/types';
 import { useRouter } from 'next/router';
-import { Fragment, useCallback, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
+import { Button } from '.';
 
 export const PrefetchRouterButton = ({
   pathName,
   children,
   className,
   prefetchOnHover,
+  onClick,
+  tooltip,
+  kbd,
+  offset,
+  placement
 }: Pick<Types, 'pathName' | 'children'> &
-  Partial<Pick<Types, 'className' | 'prefetchOnHover'>>) => {
+  Partial<Pick<Types, 'className' | 'prefetchOnHover' | 'onClick' | 'tooltip' | 'kbd' | 'offset' | 'placement'>>) => {
   const router = useRouter();
-
-  const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    router.push(pathName);
-  };
-
-  const prefetchRouter = useCallback(() => {
-    router.prefetch(pathName);
-  }, [pathName, router]);
 
   useEffect(() => {
     if (!prefetchOnHover || typeof prefetchOnHover === 'undefined') {
-      prefetchRouter();
+      router.prefetch(pathName);
     }
-  }, [prefetchOnHover, prefetchRouter]);
+  }, [pathName, prefetchOnHover, router]);
 
   return (
     <Fragment>
-      <button
-        className={className}
-        onMouseEnter={() => prefetchRouter()}
-        onClick={clickHandler}>
+      <Button
+        data={{
+          className: className,
+          tooltip: tooltip,
+          kbd: kbd,
+          placement: placement,
+          offset: offset
+        }}
+        onMouseOver={() => prefetchOnHover && router.prefetch(pathName)}
+        onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+          event.preventDefault();
+          router.push(pathName);
+          onClick;
+        }}>
         {children}
-      </button>
+      </Button>
     </Fragment>
   );
 };

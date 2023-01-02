@@ -1,4 +1,4 @@
-import { atomQueryTodoIds } from '@states/atomQuries';
+import { atomQueryTodoIds } from '@atomQueries/index';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
