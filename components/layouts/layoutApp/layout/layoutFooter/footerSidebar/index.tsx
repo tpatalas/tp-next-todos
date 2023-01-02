@@ -12,6 +12,7 @@ import {
   ICON_UPCOMING,
 } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
+import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { classNames } from '@lib/utils';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
 import { useModalStateOpen } from '@states/modalStates';
@@ -25,7 +26,6 @@ import {
   Fragment as LayoutLogoFragment,
 } from 'react';
 import { useRecoilCallback } from 'recoil';
-import { LayoutLogo } from '../../layoutLogo';
 
 const TagList = dynamic(() => import('@components/tags/tagList').then((mod) => mod.TagList), {
   loading: () => <LoadingState data={dataLoadingTags} />,
