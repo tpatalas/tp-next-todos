@@ -1,18 +1,14 @@
-import { Button } from '@buttons/button';
+import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { STYLE_BUTTON_BLUE } from '@data/stylePreset';
-import { classNames } from '@lib/utils';
-import { usePrefetchRouter } from '@states/utilsStates';
 
 const Home = () => {
-  const routerPushPrefetch = usePrefetchRouter('/app');
-
   return (
     <div className='flex w-full flex-row justify-center'>
-      <Button
-        data={{ className: classNames(STYLE_BUTTON_BLUE) }}
-        onClick={() => routerPushPrefetch()}>
+      <PrefetchRouterButton
+        className={STYLE_BUTTON_BLUE}
+        pathName='/app'>
         Go to App
-      </Button>
+      </PrefetchRouterButton>
     </div>
   );
 };

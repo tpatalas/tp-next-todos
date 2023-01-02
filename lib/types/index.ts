@@ -141,6 +141,7 @@ export interface TypesIDB {
  */
 type CollectTypesMISC = TypesIndexedDB &
   TypesWindow &
+  TypesRouter &
   TypesReactChildren &
   TypesUi &
   TypesLoadings &
@@ -151,6 +152,11 @@ type CollectTypesMISC = TypesIndexedDB &
   TypesElement &
   TypesEffects &
   TypesStyleAttributes;
+
+export interface TypesRouter {
+  pathName: string;
+  prefetchOnHover: boolean;
+}
 
 export interface TypesIndexedDB {
   storeName: TypesIDB['store'];
