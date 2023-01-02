@@ -1,12 +1,10 @@
 import { CATCH_MODAL, CONDITION } from '@data/stateObjects';
 import { Todos } from '@lib/types';
 import equal from 'fast-deep-equal/react';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { atomFamily, RecoilValue, useRecoilCallback, useRecoilSnapshot } from 'recoil';
 import { atomQueryTodoItem } from './atomQuries';
-import { atomTodoModalOpen, atomTodoModalMini } from './modalStates';
-import { atomTodoNew, atomSelectorTodoItem } from './todoStates';
+import { atomTodoModalMini, atomTodoModalOpen } from './modalStates';
+import { atomSelectorTodoItem, atomTodoNew } from './todoStates';
 
 /**
  * Atoms
@@ -24,18 +22,6 @@ export const useGetWithRecoilCallback = () => {
   return useRecoilCallback(({ snapshot }) => <T,>(p: RecoilValue<T>) => {
     return snapshot.getLoadable(p).getValue();
   });
-};
-
-export const usePrefetchRouter = (pathName: string) => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.prefetch(pathName);
-  }, [pathName, router]);
-
-  return () => {
-    router.push(pathName);
-  };
 };
 
 // Conditional Check
