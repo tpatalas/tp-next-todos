@@ -4,7 +4,7 @@ import { CustomEditor } from '@lib/types/typesSlate';
 import { isMacOs } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';
-import { atomQueryTodoItem, atomQueryTodoIds } from './atomQuries';
+import { atomQueryTodoItem, atomQueryTodoIds } from './atomQueries';
 import { atomOnFocus, atomCurrentFocus, atomOnBlur } from './focusStates';
 import { atomMediaQuery } from './miscStates';
 import {

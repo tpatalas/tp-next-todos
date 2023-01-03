@@ -1,3 +1,4 @@
+import { atomQueryTodoItem } from '@atomQueries/index';
 import { SvgIcon } from '@components/icons/svgIcon';
 import {
   dataSvgCalendarDueDate,
@@ -8,7 +9,6 @@ import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { classNames } from '@lib/utils';
-import { atomQueryTodoItem } from '@states/atomQuries';
 import { useModalStateOpen } from '@states/modalStates';
 import { useTodoStateComplete } from '@states/todoStates';
 import { format } from 'date-fns';

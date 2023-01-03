@@ -9,15 +9,13 @@ const TodoList = dynamic(() => import('components/todos/todoList').then((mod) =>
   loading: () => <LoadingState data={dataLoadingTodos} />,
 });
 
-const App = () => {
+const AppById = () => {
   return (
     <LayoutApp>
-      <div className='flex flex-col items-center'>
-        <ErrorBoundary fallback={<ErrorState />}>
-          <TodoList />
-        </ErrorBoundary>
-      </div>
+      <ErrorBoundary fallback={<ErrorState />}>
+        <TodoList />
+      </ErrorBoundary>
     </LayoutApp>
   );
 };
-export default App;
+export default AppById;

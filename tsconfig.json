@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@effects/*": ["lib/states/effects/*"],
-      "@atomQuries/*": ["lib/states/atomQueries/*"],
+      "@atomQueries/*": ["lib/states/atomQueries/*"],
       "@states/*": ["lib/states/*"],
       "@data/*": ["lib/data/*"],
       "@lib/*": ["lib/*"],

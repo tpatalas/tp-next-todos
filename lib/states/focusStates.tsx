@@ -1,7 +1,7 @@
 import { FOCUS } from '@data/stateObjects';
 import { Todos, Types } from '@lib/types';
 import { atom, RecoilValue, useRecoilCallback } from 'recoil';
-import { atomQueryTodoItem } from './atomQuries';
+import { atomQueryTodoItem } from './atomQueries';
 import { useModalStateOpen, atomTodoModalMini } from './modalStates';
 
 /**

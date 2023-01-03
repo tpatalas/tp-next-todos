@@ -2,7 +2,7 @@ import { CATCH_MODAL, CONDITION } from '@data/stateObjects';
 import { Todos } from '@lib/types';
 import equal from 'fast-deep-equal/react';
 import { atomFamily, RecoilValue, useRecoilCallback, useRecoilSnapshot } from 'recoil';
-import { atomQueryTodoItem } from './atomQuries';
+import { atomQueryTodoItem } from './atomQueries';
 import { atomTodoModalMini, atomTodoModalOpen } from './modalStates';
 import { atomSelectorTodoItem, atomTodoNew } from './todoStates';
 

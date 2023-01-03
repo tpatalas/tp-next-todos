@@ -256,6 +256,7 @@ export interface TypesElement {
   name: string;
   type: 'button' | 'submit' | 'reset' | 'checkbox';
   onClick: MouseEventHandler<HTMLElement>;
+  onMouseOver: MouseEventHandler<HTMLElement>;
   onMouseEnter: MouseEventHandler<HTMLElement>;
   onMouseLeave: MouseEventHandler<HTMLElement>;
   onDoubleClick: MouseEventHandler<HTMLElement>;
