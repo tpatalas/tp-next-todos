@@ -20,7 +20,7 @@ import {
 import { useRecoilCallback } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
 
-const TagList = dynamic(() => import('@components/tags/tagList').then((mod) => mod.TagList), {
+const TagList = dynamic(() => import('@components/tags/tagsList').then((mod) => mod.TagList), {
   loading: () => <LoadingState data={dataLoadingTags} />,
 });
 
