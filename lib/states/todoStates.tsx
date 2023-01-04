@@ -1,13 +1,28 @@
-import { NOTIFICATION, CATCH_MODAL } from '@data/stateObjects';
-import { createDataNewTodo, updateDataTodo, deleteDataTodo, completeDataTodo } from '@lib/queries/queryTodos';
+import { NOTIFICATION, CATCH_MODAL, PRIORITY_LEVEL } from '@data/stateObjects';
+import {
+  createDataNewTodo,
+  updateDataTodo,
+  deleteDataTodo,
+  completeDataTodo,
+} from '@lib/queries/queryTodos';
 import { Todos, TodoIds } from '@lib/types';
 import { atom, atomFamily, selectorFamily, selector, useRecoilCallback, RecoilValue } from 'recoil';
-import { atomQueryTodoItem, atomQueryTodoIdsCompleted, atomQueryTodoIds } from './atomQueries';
+import {
+  atomQueryTodoItem,
+  atomQueryTodoIdsCompleted,
+  atomQueryTodoIds,
+  atomQueryTodoIdsPriorityLevel,
+} from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
 import { useModalStateReset, atomConfirmModalDelete } from './modalStates';
 import { useNotificationState } from './notificationStates';
 import { usePriorityRankScore } from './priorityStates';
-import { atomCatch, useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual, useGetWithRecoilCallback } from './utilsStates';
+import {
+  atomCatch,
+  useConditionCheckTodoTitleEmpty,
+  useConditionCompareTodoItemsEqual,
+  useGetWithRecoilCallback,
+} from './utilsStates';
 
 /**
  * atoms
@@ -62,6 +77,36 @@ export const atomSelectorTodoIdsCompleted = atom<TodoIds[]>({
     key: 'selectorTodoIdsCompleted',
     get: ({ get }) => get(atomQueryTodoIdsCompleted),
   }),
+});
+
+export const atomFilterTodoIds = atom({
+  key: 'atomFilterTodoIds',
+  default: 'showAll',
+});
+
+/**
+ * selectors
+ */
+export const SelectorFilterTodoIds = selector({
+  key: 'SelectorFilterTodoIds',
+  get: ({ get }) => {
+    const filter = get(atomFilterTodoIds);
+    switch (filter) {
+      case 'showAll':
+        return get(atomQueryTodoIds);
+      case 'urgent':
+        return get(atomQueryTodoIdsPriorityLevel(PRIORITY_LEVEL['urgent']));
+      case 'important':
+        return get(atomQueryTodoIdsPriorityLevel(PRIORITY_LEVEL['important']));
+      case 'completed':
+        return get(atomQueryTodoIdsCompleted);
+      default:
+        return get(atomQueryTodoIds);
+    }
+  },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
 });
 
 /**

@@ -108,3 +108,12 @@ export const CACHED_DATA = {
   getDataTodoIds: 'getDataTodoIds',
   getDataTags: 'getDataTags',
 } as const;
+
+export type FITLER_TODOIDS = typeof FILTER_TODOIDS[keyof typeof FILTER_TODOIDS];
+export const FILTER_TODOIDS = {
+  focus: 'focus',
+  showAll: 'showAll',
+  urgent: 'urgent',
+  important: 'important',
+  completed: 'completed',
+} as const;

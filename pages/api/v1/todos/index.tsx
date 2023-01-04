@@ -14,12 +14,20 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     method,
     body,
-    query: { model: model, completed: isCompleted = false, completedFromToday: completedFromToday },
+    query: {
+      model: model,
+      completed: isCompleted = false,
+      completedFromToday: completedFromToday,
+      priorityLevel: priorityLevel,
+    },
   } = req;
 
   const filter = () => {
     const query: TypesQuery = {};
     query.user_id = userInfo._id;
+    if (typeof priorityLevel !== 'undefined') {
+      query.priorityLevel = priorityLevel;
+    }
     if (typeof isCompleted !== 'undefined') {
       query.completed = isCompleted;
       typeof completedFromToday !== 'undefined' &&
