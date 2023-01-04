@@ -4,7 +4,7 @@ import { Fragment as LogoContainerFragment, Fragment as LogoFragment } from 'rea
 
 export const LayoutLogo = () => {
   return (
-    <nav className='flex h-0 flex-row items-center space-x-3'>
+    <nav className='flex h-0 flex-row items-center'>
       <LogoContainerFragment>
         <PrefetchRouterButton
           pathName='/'
