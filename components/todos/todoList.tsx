@@ -1,11 +1,11 @@
-import { atomQueryTodoIds } from '@atomQueries/index';
+import { SelectorFilterTodoIds } from '@states/todoStates';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
 
 export const TodoList = () => {
-  const todosIds = useRecoilValue(atomQueryTodoIds);
-  const todoIdsReversed = [...todosIds].reverse();
+  const todoIds = useRecoilValue(SelectorFilterTodoIds);
+  const todoIdsReversed = [...todoIds].reverse();
 
   return (
     <TodosFragment>
