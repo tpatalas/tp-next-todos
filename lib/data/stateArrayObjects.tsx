@@ -1,5 +1,3 @@
-import { getDataTags } from '@lib/queries/queryTags';
-import { getDataTodoIds } from '@lib/queries/queryTodos';
 import { TypesIDB, TypesNotification } from 'lib/types';
 import {
   ICON_DELETE,
@@ -16,7 +14,7 @@ import {
   ICON_LABEL_IMPORTANT_FILL,
   ICON_TASK_ALT,
 } from './materialSymbols';
-import { CACHED_DATA, IDB, IDB_STORE, NOTIFICATION, SCHEMA_TODO } from './stateObjects';
+import { IDB, IDB_STORE, NOTIFICATION } from './stateObjects';
 
 export const DATA_NOTIFICATION: TypesNotification[] = [
   {
@@ -129,18 +127,3 @@ export const DATA_SIDEBAR_MENU = [
     path: '/app/completed',
   },
 ];
-
-export const cachedData = () => {
-  return [
-    {
-      key: CACHED_DATA['getDataTodoIds'],
-      cachedTimer: new Date().getTime(),
-      data: getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
-    },
-    {
-      key: CACHED_DATA['getDataTags'],
-      cachedTimer: new Date().getTime(),
-      data: getDataTags(),
-    },
-  ];
-};
