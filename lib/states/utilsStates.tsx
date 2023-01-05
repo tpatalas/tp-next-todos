@@ -4,7 +4,7 @@ import equal from 'fast-deep-equal/react';
 import { atomFamily, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { atomQueryTodoItem } from './atomQueries';
 import { atomTodoModalMini, atomTodoModalOpen } from './modalStates';
-import { atomTodoNew } from './todoStates';
+import { atomSelectorTodoItem, atomTodoNew } from './todoStates';
 
 /**
  * Atoms
@@ -43,7 +43,7 @@ export const useConditionCheckTodoTitleEmpty = () => {
 export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
   if (typeof _id === 'undefined') return;
   const todoItem = useRecoilValue(atomQueryTodoItem(_id));
-  const selectorTodoItem = useRecoilValue(atomQueryTodoItem(_id));
+  const selectorTodoItem = useRecoilValue(atomSelectorTodoItem(_id));
   return equal(todoItem, selectorTodoItem);
 };
 

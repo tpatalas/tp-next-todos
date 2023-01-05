@@ -1,6 +1,6 @@
 import { NOTIFICATION, CATCH_MODAL } from '@data/stateObjects';
 import { createDataNewTodo, updateDataTodo, deleteDataTodo, completeDataTodo } from '@lib/queries/queryTodos';
-import { Todos, TodosIds } from '@lib/types';
+import { Todos, TodoIds } from '@lib/types';
 import { atom, atomFamily, selectorFamily, selector, useRecoilCallback, RecoilValue } from 'recoil';
 import { atomQueryTodoItem, atomQueryTodoIdsCompleted, atomQueryTodoIds } from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
@@ -56,7 +56,7 @@ export const selectorTaskCompleteCapacity = selector({
   },
 });
 
-export const atomSelectorTodoIdsCompleted = atom<TodosIds[]>({
+export const atomSelectorTodoIdsCompleted = atom<TodoIds[]>({
   key: 'atomSelectorTodoIdsCompleted',
   default: selector({
     key: 'selectorTodoIdsCompleted',

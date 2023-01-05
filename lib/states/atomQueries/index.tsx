@@ -5,7 +5,7 @@ import { getDataTags } from '@lib/queries/queryTags';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { getDataUserId } from '@lib/queries/queryUsers';
 import { getDataSetting } from '@lib/queries/queryUsers/querySettings';
-import { Settings, Tags, Todos, TodosIds, Users } from '@lib/types';
+import { Settings, Tags, Todos, TodoIds, Users } from '@lib/types';
 import { atom, atomFamily } from 'recoil';
 
 /**
@@ -13,7 +13,7 @@ import { atom, atomFamily } from 'recoil';
  * Defining `storeName` will automatically apply the predefined IndexedDB name.
  */
 
-export const atomQueryTodoIds = atom<TodosIds[]>({
+export const atomQueryTodoIds = atom<TodoIds[]>({
   key: 'atomQueryTodoIds',
   effects: [
     queryEffect({
@@ -26,7 +26,7 @@ export const atomQueryTodoIds = atom<TodosIds[]>({
   ],
 });
 
-export const atomQueryTodoIdsCompleted = atom<TodosIds[]>({
+export const atomQueryTodoIdsCompleted = atom<TodoIds[]>({
   key: 'atomQueryTodoIdsCompleted',
   effects: [
     queryEffect({
