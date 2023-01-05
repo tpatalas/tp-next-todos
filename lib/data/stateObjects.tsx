@@ -103,12 +103,6 @@ export const SCHEMA_TODO = {
   todoNote: 'todoNote',
 } as const;
 
-export type CACHED_DATA = typeof CACHED_DATA[keyof typeof CACHED_DATA];
-export const CACHED_DATA = {
-  getDataTodoIds: 'getDataTodoIds',
-  getDataTags: 'getDataTags',
-} as const;
-
 export type FITLER_TODOIDS = typeof FILTER_TODOIDS[keyof typeof FILTER_TODOIDS];
 export const FILTER_TODOIDS = {
   focus: 'focus',

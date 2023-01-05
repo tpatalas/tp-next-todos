@@ -16,7 +16,6 @@ export const FooterSidebarMenu = () => {
             key={item.name}
             className='pb-1'>
             <PrefetchRouterButton
-              prefetchOnHover={true}
               tooltip={item.tooltip}
               offset={[0, 5]}
               pathName={item.path}
