@@ -50,7 +50,7 @@ export interface TypesEditor {
 type CollectTypesArrayObject = Todos & TypesTodo & Settings;
 
 // Todos
-export interface Todos extends TodosEditors, TodosIds {
+export interface Todos extends TodosEditors, TodoIds {
   createdDate: Date;
   dueDate: Date | null;
   completedDate: Date | null;
@@ -59,7 +59,7 @@ export interface Todos extends TodosEditors, TodosIds {
   priorityRankScore: number;
 }
 
-export interface TodosIds {
+export interface TodoIds {
   _id?: OBJECT_ID;
 }
 
@@ -70,7 +70,7 @@ export interface TodosEditors {
 
 export interface TypesTodo {
   todoItem: Todos;
-  todo: TodosIds;
+  todo: TodoIds;
   index: number;
   completedFromToday: number;
   model: SCHEMA_TODO;
