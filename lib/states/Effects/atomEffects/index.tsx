@@ -8,15 +8,9 @@ export const mediaQueryEffect: TypesMediaQueryEffect =
   ({ setSelf }) => {
     if (typeof window === 'undefined') return;
     const windowMediaQueries = () => {
-      if (
-        window.innerWidth >= breakpoint &&
-        typeof stateOverBreakpoint !== 'undefined'
-      )
+      if (window.innerWidth >= breakpoint && typeof stateOverBreakpoint !== 'undefined')
         return setSelf(stateOverBreakpoint);
-      if (
-        window.innerWidth <= breakpoint &&
-        typeof stateUnderBreakpoint !== 'undefined'
-      )
+      if (window.innerWidth <= breakpoint && typeof stateUnderBreakpoint !== 'undefined')
         return setSelf(stateUnderBreakpoint);
     };
 

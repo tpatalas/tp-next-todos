@@ -275,7 +275,6 @@ export interface TypesEffects {
   // Refetch Effect
   queryKey: string;
   queryFunction(): Promise<any>;
-  cachedQueryFunction(): Promise<any>;
   storeName: IDB_STORE;
   enableIndexedDb: boolean;
   refetchOnMutation: boolean;
@@ -303,7 +302,6 @@ export type TypesRefetchEffect = <T>({
   refetchOnFocus,
   refetchOnBlur,
   refetchInterval,
-  cachedQueryFunction,
 }: Partial<
   Pick<
     Types,
@@ -313,7 +311,6 @@ export type TypesRefetchEffect = <T>({
     | 'refetchOnFocus'
     | 'refetchOnBlur'
     | 'refetchInterval'
-    | 'cachedQueryFunction'
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
