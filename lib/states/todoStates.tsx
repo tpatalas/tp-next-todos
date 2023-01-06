@@ -1,20 +1,25 @@
-import { NOTIFICATION, CATCH_MODAL, PRIORITY_LEVEL } from '@data/stateObjects';
+import { CATCH_MODAL, NOTIFICATION, PATHNAME } from '@data/stateObjects';
 import {
-  createDataNewTodo,
-  updateDataTodo,
-  deleteDataTodo,
   completeDataTodo,
+  createDataNewTodo,
+  deleteDataTodo,
+  updateDataTodo,
 } from '@lib/queries/queryTodos';
-import { Todos, TodoIds } from '@lib/types';
-import { atom, atomFamily, selectorFamily, selector, useRecoilCallback, RecoilValue } from 'recoil';
+import { TodoIds, Todos } from '@lib/types';
+import subDays from 'date-fns/subDays/index';
+import { useRouter } from 'next/router';
 import {
-  atomQueryTodoItem,
-  atomQueryTodoIdsCompleted,
-  atomQueryTodoIds,
-  atomQueryTodoIdsPriorityLevel,
-} from './atomQueries';
+  atom,
+  atomFamily,
+  RecoilValue,
+  selector,
+  selectorFamily,
+  useRecoilCallback,
+  useRecoilValue,
+} from 'recoil';
+import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
-import { useModalStateReset, atomConfirmModalDelete } from './modalStates';
+import { atomConfirmModalDelete, useModalStateReset } from './modalStates';
 import { useNotificationState } from './notificationStates';
 import { usePriorityRankScore } from './priorityStates';
 import {
@@ -63,20 +68,17 @@ export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
 export const selectorTaskCompleteCapacity = selector({
   key: 'selectorTaskCompleteCapacity',
   get: ({ get }) => {
-    const taskCapacity = get(atomSelectorTodoIdsCompleted).length / 3;
+    const fiveDaysFromToday = subDays(new Date(), 5);
+    const todoIdsCompletedLastFiveDays = get(atomQueryTodoIds).filter((todo) => {
+      if (!todo.completedDate) return;
+      todo.completed && todo.completedDate > fiveDaysFromToday;
+    });
+    const taskCapacity = todoIdsCompletedLastFiveDays.length / 5;
     return taskCapacity < 5 ? 5 : taskCapacity;
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
   },
-});
-
-export const atomSelectorTodoIdsCompleted = atom<TodoIds[]>({
-  key: 'atomSelectorTodoIdsCompleted',
-  default: selector({
-    key: 'selectorTodoIdsCompleted',
-    get: ({ get }) => get(atomQueryTodoIdsCompleted),
-  }),
 });
 
 export const atomFilterTodoIds = atom({
@@ -87,21 +89,21 @@ export const atomFilterTodoIds = atom({
 /**
  * selectors
  */
-export const SelectorFilterTodoIds = selector({
+export const selectorFilterTodoIds = selector({
   key: 'SelectorFilterTodoIds',
   get: ({ get }) => {
     const filter = get(atomFilterTodoIds);
     switch (filter) {
       case 'showAll':
-        return get(atomQueryTodoIds);
+        return get(selectorFilterTodoIdsByPathname(PATHNAME['app']));
       case 'urgent':
-        return get(atomQueryTodoIdsPriorityLevel(PRIORITY_LEVEL['urgent']));
+        return get(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
       case 'important':
-        return get(atomQueryTodoIdsPriorityLevel(PRIORITY_LEVEL['important']));
+        return get(selectorFilterTodoIdsByPathname(PATHNAME['important']));
       case 'completed':
-        return get(atomQueryTodoIdsCompleted);
+        return get(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
       default:
-        return get(atomQueryTodoIds);
+        return get(atomQueryTodoIds).filter((todo) => !todo.completed);
     }
   },
   cachePolicy_UNSTABLE: {
@@ -109,9 +111,34 @@ export const SelectorFilterTodoIds = selector({
   },
 });
 
+export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAME>({
+  key: 'selectorFilterTodoIdsByPathname',
+  get:
+    (pathname) =>
+    ({ get }) => {
+      switch (pathname) {
+        case PATHNAME['app']:
+          return get(atomQueryTodoIds).filter((todo) => !todo.completed);
+        case PATHNAME['urgent']:
+          return get(atomQueryTodoIds).filter(
+            (todo) => !todo.completed && todo.priorityLevel === 1,
+          );
+        case PATHNAME['important']:
+          return get(atomQueryTodoIds).filter(
+            (todo) => !todo.completed && todo.priorityLevel === 2,
+          );
+        case PATHNAME['completed']:
+          return get(atomQueryTodoIds).filter((todo) => todo.completed);
+      }
+    },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
 /**
  * Hooks
  * */
+
 export const useTodoStateAdd = () => {
   const setNotification = useNotificationState();
   const resetModal = useModalStateReset(undefined);
@@ -214,6 +241,7 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
   const setNotification = useNotificationState();
   const get = useGetWithRecoilCallback();
   const updateQueryTodoItem = useRecoilCallback(({ set, snapshot }) => () => {
+    const release = snapshot.retain();
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     set(atomQueryTodoItem(todoId), {
@@ -221,24 +249,13 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
       completed: !get(atomQueryTodoItem(todoId)).completed,
     });
 
-    // Optimistically Update todoIds
-    !get(atomSelectorTodoItem(todoId)).completed
-      ? set(atomSelectorTodoIdsCompleted, [
-          ...get(atomSelectorTodoIdsCompleted),
-          {
-            ...get(atomSelectorTodoItem(todoId)),
-            _id: get(atomSelectorTodoItem(todoId))._id,
-          },
-        ])
-      : set(
-          atomSelectorTodoIdsCompleted,
-          get(atomSelectorTodoIdsCompleted).filter((todo) => todo._id !== todoId),
-        );
-    // Background Refetch atomQueryTodoIdsCompleted
-    set(atomQueryTodoIdsCompleted, get(atomSelectorTodoIdsCompleted));
-
-    // refetch TodoIds
-    // set(atomQueryTodoIds, [...get(atomQueryTodoIds)]);
+    setTimeout(() => {
+      set(
+        atomQueryTodoIds,
+        get(atomQueryTodoIds).filter((todo) => todo._id !== todoId),
+      );
+      release();
+    }, 200);
   });
   return () => {
     if (!get(atomNetworkStatusEffect)) {
@@ -259,9 +276,50 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
       : setNotification(NOTIFICATION['unCompleteTodo']);
   };
 };
+export const useTodoIdsWithPathname = () => {
+  const router = useRouter();
+  const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['app']));
+  const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
+  const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['important']));
+  const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
+
+  switch (router.asPath) {
+    case PATHNAME['app']:
+      return app;
+    case PATHNAME['urgent']:
+      return urgent;
+    case PATHNAME['important']:
+      return important;
+    case PATHNAME['completed']:
+      return completed;
+    default:
+      return app;
+  }
+};
 
 export const useAsyncTodoItem = (todoId: Todos['_id']) => {
   return useRecoilCallback(({ snapshot }) => () => {
     return snapshot.getLoadable(atomQueryTodoItem(todoId)).getValue();
   });
+};
+
+export const useFilterTodoIdsWithPathname = () => {
+  const router = useRouter();
+  const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['app']));
+  const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
+  const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['important']));
+  const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
+
+  switch (router.asPath) {
+    case PATHNAME['app']:
+      return app;
+    case PATHNAME['urgent']:
+      return urgent;
+    case PATHNAME['important']:
+      return important;
+    case PATHNAME['completed']:
+      return completed;
+    default:
+      return app;
+  }
 };

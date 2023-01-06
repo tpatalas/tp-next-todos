@@ -1,3 +1,4 @@
+import { PATHNAME } from '@data/stateObjects';
 import { atomFilterTodoIds } from '@states/todoStates';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -7,16 +8,16 @@ export const FilterTodoIdsEffect = () => {
   const router = useRouter();
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
     switch (router.asPath) {
-      case '/app':
+      case PATHNAME['app']:
         set(atomFilterTodoIds, 'showAll');
         break;
-      case '/app/urgent':
+      case PATHNAME['urgent']:
         set(atomFilterTodoIds, 'urgent');
         break;
-      case '/app/important':
+      case PATHNAME['important']:
         set(atomFilterTodoIds, 'important');
         break;
-      case '/app/completed':
+      case PATHNAME['completed']:
         set(atomFilterTodoIds, 'completed');
         break;
       default:

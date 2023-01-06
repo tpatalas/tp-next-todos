@@ -1,9 +1,8 @@
 import { SCHEMA_TODO } from '@data/stateObjects';
+import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
 import { TypesQuery } from '@lib/types';
-import { subDays } from 'date-fns';
-import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import mongoose from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
@@ -14,28 +13,12 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     method,
     body,
-    query: {
-      model: model,
-      completed: isCompleted = false,
-      completedFromToday: completedFromToday,
-      priorityLevel: priorityLevel,
-    },
+    query: { model: model },
   } = req;
 
   const filter = () => {
     const query: TypesQuery = {};
     query.user_id = userInfo._id;
-    if (typeof priorityLevel !== 'undefined') {
-      query.priorityLevel = priorityLevel;
-    }
-    if (typeof isCompleted !== 'undefined') {
-      query.completed = isCompleted;
-      typeof completedFromToday !== 'undefined' &&
-        (query.completedDate = {
-          $gt: subDays(new Date(), parseInt(`${completedFromToday}`)),
-          $lt: new Date(),
-        });
-    }
     return query;
   };
 
@@ -47,7 +30,16 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
       };
 
       try {
-        const getTodo = await SCHEMA[model as SCHEMA_TODO].find(filter()).select({ _id: 1 }).lean();
+        const getTodo = await SCHEMA[model as SCHEMA_TODO]
+          .find(filter())
+          .select({
+            _id: 1,
+            priorityLevel: 1,
+            priorityRankScore: 1,
+            completed: 1,
+            completedDate: 1,
+          })
+          .lean();
         if (!getTodo) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: getTodo });
       } catch (error) {

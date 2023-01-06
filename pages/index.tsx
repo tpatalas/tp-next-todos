@@ -1,4 +1,5 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
+import { PATHNAME } from '@data/stateObjects';
 import { STYLE_BUTTON_BLUE } from '@data/stylePreset';
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
     <div className='flex w-full flex-row justify-center'>
       <PrefetchRouterButton
         className={STYLE_BUTTON_BLUE}
-        pathName='/app'>
+        pathName={PATHNAME['app']}>
         Go to App
       </PrefetchRouterButton>
     </div>

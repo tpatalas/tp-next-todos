@@ -30,7 +30,7 @@ export const selectorDynamicPriority = selectorFamily<Todos['priorityLevel'], To
   get:
     (todoId) =>
     ({ get }) =>
-      get(selectorDynamicTodoItem(todoId)).priorityLevel == null
+      !get(selectorDynamicTodoItem(todoId)).priorityLevel
         ? PRIORITY_LEVEL['normal']
         : get(selectorDynamicTodoItem(todoId)).priorityLevel,
   cachePolicy_UNSTABLE: {
@@ -46,7 +46,7 @@ export const selectorPrsDueDate = selectorFamily<number, Todos['_id']>({
       const taskCapacityPerDay = get(selectorTaskCompleteCapacity);
       const todoItem = get(selectorDynamicTodoItem(todoId));
       const priority = get(selectorDynamicPriority(todoId)) as PRIORITY_LEVEL;
-      const totalUncompletedTodos = get(atomQueryTodoIds).length;
+      const totalUncompletedTodos = get(atomQueryTodoIds).filter((todo) => !todo.completed).length;
       const dueDate = todoItem.dueDate != null && todoItem.dueDate;
       const daysToDueDate = differenceInDays(new Date(dueDate as Date), new Date()) + 1;
       const overDueFactor = Math.abs(daysToDueDate) * 200;

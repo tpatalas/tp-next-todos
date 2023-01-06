@@ -1,10 +1,10 @@
-import { SelectorFilterTodoIds } from '@states/todoStates';
+import { selectorFilterTodoIds } from '@states/todoStates';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
 
 export const TodoList = () => {
-  const todoIds = useRecoilValue(SelectorFilterTodoIds);
+  const todoIds = useRecoilValue(selectorFilterTodoIds);
   const todoIdsReversed = [...todoIds].reverse();
 
   return (

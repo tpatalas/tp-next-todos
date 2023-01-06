@@ -14,7 +14,7 @@ import {
   ICON_LABEL_IMPORTANT_FILL,
   ICON_TASK_ALT,
 } from './materialSymbols';
-import { IDB, IDB_STORE, NOTIFICATION } from './stateObjects';
+import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './stateObjects';
 
 export const DATA_NOTIFICATION: TypesNotification[] = [
   {
@@ -100,7 +100,7 @@ export const DATA_SIDEBAR_MENU = [
     icon: ICON_HOME,
     iconActive: ICON_HOME_FILL,
     iconColor: 'fill-blue-600',
-    path: '/app',
+    path: PATHNAME['app'],
   },
   {
     name: 'Urgent',
@@ -108,7 +108,7 @@ export const DATA_SIDEBAR_MENU = [
     icon: ICON_FLAG,
     iconActive: ICON_FLAG_FILL,
     iconColor: 'fill-red-600',
-    path: '/app/urgent',
+    path: PATHNAME['urgent'],
   },
   {
     name: 'Important',
@@ -116,7 +116,7 @@ export const DATA_SIDEBAR_MENU = [
     icon: ICON_LABEL_IMPORTANT,
     iconActive: ICON_LABEL_IMPORTANT_FILL,
     iconColor: 'fill-yellow-500',
-    path: '/app/important',
+    path: PATHNAME['important'],
   },
   {
     name: 'Completed',
@@ -124,6 +124,6 @@ export const DATA_SIDEBAR_MENU = [
     icon: ICON_DONE_ALL,
     iconActive: ICON_DONE_ALL,
     iconColor: 'fill-green-600',
-    path: '/app/completed',
+    path: PATHNAME['completed'],
   },
 ];
