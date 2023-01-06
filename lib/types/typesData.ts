@@ -52,7 +52,5 @@ export type TypesDataMinimizedModalTransition = Partial<
   Pick<Types, 'positionX' | 'positionY' | 'minimizedModalPadding'>
 >;
 
-export type TypesDataLoadingState = Pick<
-  Types,
-  'loadingSkeleton' | 'repeatingCount' | 'margin' | 'space'
->;
+export type TypesDataLoadingState = Partial<Pick<Types, 'delay'>> &
+  Pick<Types, 'loadingSkeleton' | 'repeatingCount' | 'margin' | 'space'>;

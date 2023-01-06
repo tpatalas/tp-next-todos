@@ -115,7 +115,7 @@ export const DATA_SIDEBAR_MENU = [
     tooltip: 'Important todos',
     icon: ICON_LABEL_IMPORTANT,
     iconActive: ICON_LABEL_IMPORTANT_FILL,
-    iconColor: 'fill-yellow-600',
+    iconColor: 'fill-yellow-500',
     path: '/app/important',
   },
   {
