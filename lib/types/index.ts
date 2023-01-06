@@ -201,6 +201,7 @@ export interface TypesUi {
 export interface TypesLoadings {
   loadingSkeleton: Types['children'];
   repeatingCount: number;
+  delay: number;
 }
 
 export interface TypesStyleAttributes {
