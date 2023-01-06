@@ -30,6 +30,7 @@ export const atomQueryTodoIdsCompleted = atom<TodoIds[]>({
     queryEffect({
       storeName: IDB_STORE['todos'],
       queryKey: 'todoIdsCompleted',
+      // cachedQueryFunction: () => getCachedData(CACHED_DATA['getDataTodoIdsCompleted']),
       queryFunction: () =>
         getDataTodoIds({
           model: SCHEMA_TODO['todoItem'],

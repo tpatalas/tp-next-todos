@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { del, get, set } from '@lib/dataConnections/indexedDB';
-import { TypesRefetchEffect } from '@lib/types';
+import { TypesQuery, TypesRefetchEffect } from '@lib/types';
 import equal from 'fast-deep-equal/react';
 
 /**
@@ -31,7 +30,7 @@ export const queryEffect: TypesRefetchEffect =
     // Multiple fetches will be cached and will fetch only once. ex) using `atomQueryTodoIds` more than one location will fetch multiple time at the initial page load then saved to indexedDB
     // Every fetch will be saved to IndexedDB
     const queryInitial = async () => {
-      const { data }: any = await queryFunction();
+      const { data }: TypesQuery = await queryFunction();
       if (onIndexedDB) {
         set(storeName, queryKey, data);
       }
@@ -40,7 +39,7 @@ export const queryEffect: TypesRefetchEffect =
 
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
-      const { data }: any = await queryFunction();
+      const { data }: TypesQuery = await queryFunction();
       if (!data) return;
       if (onIndexedDB) {
         const indexedDb = await get(storeName, queryKey).then((value) => value);

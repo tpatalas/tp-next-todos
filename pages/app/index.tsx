@@ -2,6 +2,7 @@ import { ErrorState } from '@components/loadable/errorState';
 import { LoadingState } from '@components/loadable/loadingStates';
 import { dataLoadingTodos } from '@data/dataObjects';
 import { FilterTodoIdsEffect } from '@effects/filterTodoIdsEffect';
+import { PrefetchQueryEffect } from '@effects/prefetchQueryEffect';
 import { LayoutApp } from '@layouts/layoutApp';
 import dynamic from 'next/dynamic';
 import { Fragment as AppFragment } from 'react';
@@ -14,6 +15,7 @@ const TodoList = dynamic(() => import('components/todos/todoList').then((mod) =>
 const App = () => {
   return (
     <AppFragment>
+      <PrefetchQueryEffect />
       <FilterTodoIdsEffect />
       <LayoutApp>
         <ErrorBoundary fallback={<ErrorState />}>
