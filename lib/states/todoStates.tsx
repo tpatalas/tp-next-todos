@@ -1,21 +1,20 @@
 import { CATCH_MODAL, NOTIFICATION, PATHNAME } from '@data/stateObjects';
 import {
-  completeDataTodo,
-  createDataNewTodo,
-  deleteDataTodo,
-  updateDataTodo,
+    completeDataTodo,
+    createDataNewTodo,
+    deleteDataTodo,
+    updateDataTodo
 } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
-import subDays from 'date-fns/subDays/index';
 import { useRouter } from 'next/router';
 import {
-  atom,
-  atomFamily,
-  RecoilValue,
-  selector,
-  selectorFamily,
-  useRecoilCallback,
-  useRecoilValue,
+    atom,
+    atomFamily,
+    RecoilValue,
+    selector,
+    selectorFamily,
+    useRecoilCallback,
+    useRecoilValue
 } from 'recoil';
 import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
@@ -23,10 +22,10 @@ import { atomConfirmModalDelete, useModalStateReset } from './modalStates';
 import { useNotificationState } from './notificationStates';
 import { usePriorityRankScore } from './priorityStates';
 import {
-  atomCatch,
-  useConditionCheckTodoTitleEmpty,
-  useConditionCompareTodoItemsEqual,
-  useGetWithRecoilCallback,
+    atomCatch,
+    useConditionCheckTodoTitleEmpty,
+    useConditionCompareTodoItemsEqual,
+    useGetWithRecoilCallback
 } from './utilsStates';
 
 /**
@@ -60,22 +59,6 @@ export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
     (todoId) =>
     ({ get }) =>
       typeof todoId === 'undefined' ? get(atomTodoNew) : get(atomSelectorTodoItem(todoId)),
-  cachePolicy_UNSTABLE: {
-    eviction: 'most-recent',
-  },
-});
-
-export const selectorTaskCompleteCapacity = selector({
-  key: 'selectorTaskCompleteCapacity',
-  get: ({ get }) => {
-    const fiveDaysFromToday = subDays(new Date(), 5);
-    const todoIdsCompletedLastFiveDays = get(atomQueryTodoIds).filter((todo) => {
-      if (!todo.completedDate) return;
-      todo.completed && todo.completedDate > fiveDaysFromToday;
-    });
-    const taskCapacity = todoIdsCompletedLastFiveDays.length / 5;
-    return taskCapacity < 5 ? 5 : taskCapacity;
-  },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
   },

@@ -1,14 +1,9 @@
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import {
-  atomTodoNew,
-  atomSelectorTodoItem,
-  selectorDynamicTodoItem,
-  selectorTaskCompleteCapacity,
-} from '@states/todoStates';
-import { differenceInDays } from 'date-fns';
-import { atomFamily, RecoilValue, selectorFamily, useRecoilCallback } from 'recoil';
+import { atomSelectorTodoItem, atomTodoNew, selectorDynamicTodoItem } from '@states/todoStates';
+import { differenceInDays, subDays } from 'date-fns';
+import { atomFamily, RecoilValue, selector, selectorFamily, useRecoilCallback } from 'recoil';
 import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 
 /**
@@ -33,6 +28,22 @@ export const selectorDynamicPriority = selectorFamily<Todos['priorityLevel'], To
       !get(selectorDynamicTodoItem(todoId)).priorityLevel
         ? PRIORITY_LEVEL['normal']
         : get(selectorDynamicTodoItem(todoId)).priorityLevel,
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
+export const selectorTaskCompleteCapacity = selector({
+  key: 'selectorTaskCompleteCapacity',
+  get: ({ get }) => {
+    const fiveDaysFromToday = subDays(new Date(), 5);
+    const todoIdsCompletedLastFiveDays = get(atomQueryTodoIds).filter((todo) => {
+      const fiveDaysFromTodayCompleted = new Date(todo.completedDate!) > fiveDaysFromToday;
+      return todo.completed && fiveDaysFromTodayCompleted;
+    });
+    const taskCapacity = todoIdsCompletedLastFiveDays.length / 5;
+    return taskCapacity < 2 ? 2 : taskCapacity;
+  },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
   },
@@ -73,11 +84,12 @@ export const selectorPrsCreateDate = selectorFamily<number, Todos['_id']>({
   get:
     (todoId) =>
     ({ get }) => {
+      const taskCapacityPerDay = get(selectorTaskCompleteCapacity);
       const todoItem = get(selectorDynamicTodoItem(todoId));
       const createdDate = todoItem.createdDate != null && todoItem.createdDate;
       const daysFromCreated = differenceInDays(new Date(), new Date(createdDate as Date)) + 1;
 
-      return daysFromCreated < 5 ? 1 / 100 : 1 / daysFromCreated;
+      return (daysFromCreated < 5 ? 1 / 100 : 1 / daysFromCreated) / taskCapacityPerDay;
     },
   cachePolicy_UNSTABLE: {
     eviction: 'lru',
