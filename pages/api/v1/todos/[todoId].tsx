@@ -76,6 +76,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         todoItem,
         {
           session: session,
+          upsert: true,
           new: true,
           runValidators: true,
         },
@@ -85,6 +86,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         todoNote,
         {
           session: session,
+          upsert: true,
           new: true,
           runValidators: true,
         },
