@@ -24,7 +24,8 @@ export const FooterSidebarMenu = () => {
                   ? 'cursor-default bg-blue-100 text-gray-900'
                   : 'text-gray-600 hover:bg-gray-200 hover:bg-opacity-60 hover:text-gray-900',
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm font-medium',
-              )}>
+              )}
+            >
               <span className='pr-3'>
                 <SvgIcon
                   data={{

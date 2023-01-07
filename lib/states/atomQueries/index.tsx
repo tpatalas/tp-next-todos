@@ -1,4 +1,4 @@
-import { IDB_STORE, PRIORITY_LEVEL, SCHEMA_TODO } from '@data/stateObjects';
+import { IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
 import { queryEffect } from '@effects/atomEffects/queryEffect';
 import { getDataTags } from '@lib/queries/queryTags';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
@@ -19,37 +19,6 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
       storeName: IDB_STORE['todos'],
       queryKey: 'todoIds',
       queryFunction: () => getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
-      refetchOnMutation: true,
-    }),
-  ],
-});
-
-export const atomQueryTodoIdsCompleted = atom<TodoIds[]>({
-  key: 'atomQueryTodoIdsCompleted',
-  effects: [
-    queryEffect({
-      storeName: IDB_STORE['todos'],
-      queryKey: 'todoIdsCompleted',
-      // cachedQueryFunction: () => getCachedData(CACHED_DATA['getDataTodoIdsCompleted']),
-      queryFunction: () =>
-        getDataTodoIds({
-          model: SCHEMA_TODO['todoItem'],
-          completed: true,
-          completedFromToday: 3,
-        }),
-      refetchOnMutation: true,
-    }),
-  ],
-});
-
-export const atomQueryTodoIdsPriorityLevel = atomFamily<TodoIds[], Todos['priorityLevel']>({
-  key: 'atomQueryTodoIdsPriorityLevel',
-  effects: (priorityLevel) => [
-    queryEffect({
-      storeName: IDB_STORE['todos'],
-      queryKey: !priorityLevel ? PRIORITY_LEVEL['normal'].toString() : priorityLevel.toString(),
-      queryFunction: () =>
-        getDataTodoIds({ model: SCHEMA_TODO['todoItem'], priorityLevel: priorityLevel }),
       refetchOnMutation: true,
     }),
   ],

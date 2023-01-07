@@ -54,13 +54,14 @@ export interface Todos extends TodosEditors, TodoIds {
   createdDate: Date;
   dueDate: Date | null;
   completedDate: Date | null;
-  completed: boolean;
-  priorityLevel: PRIORITY_LEVEL | null;
-  priorityRankScore: number;
 }
 
 export interface TodoIds {
   _id?: OBJECT_ID;
+  completed?: boolean;
+  priorityLevel?: PRIORITY_LEVEL | null;
+  priorityRankScore?: number;
+  completedDate?: Date | null;
 }
 
 export interface TodosEditors {

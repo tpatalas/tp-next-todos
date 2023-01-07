@@ -3,20 +3,9 @@ import { queries } from '@lib/utils';
 
 export const getDataTodoIds = async ({
   model,
-  completed,
-  completedFromToday,
-  priorityLevel,
 }: Partial<Pick<Types, 'completed' | 'completedFromToday' | 'priorityLevel'>> &
   Pick<Types, 'model'>) => {
-  const response = await fetch(
-    '/api/v1/todos?' +
-      queries(
-        'model=' + model,
-        typeof completed !== 'undefined' && 'completed=' + completed,
-        typeof completedFromToday !== 'undefined' && 'completedFromToday=' + completedFromToday,
-        typeof priorityLevel !== 'undefined' && 'priorityLevel=' + priorityLevel,
-      ),
-  );
+  const response = await fetch('/api/v1/todos?' + queries('model=' + model));
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };

@@ -111,3 +111,11 @@ export const FILTER_TODOIDS = {
   important: 'important',
   completed: 'completed',
 } as const;
+
+export type PATHNAME = typeof PATHNAME[keyof typeof PATHNAME];
+export const PATHNAME = {
+  app: '/app',
+  urgent: '/app/urgent',
+  important: '/app/important',
+  completed: '/app/completed',
+} as const;

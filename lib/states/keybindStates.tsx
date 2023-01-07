@@ -1,26 +1,27 @@
-import { CATCH_MODAL, BREAKPOINT } from '@data/stateObjects';
+import { BREAKPOINT, CATCH_MODAL } from '@data/stateObjects';
 import { Todos, Types } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { isMacOs } from 'react-device-detect';
-import { useRecoilCallback, RecoilValue } from 'recoil';
+import { RecoilValue, useRecoilCallback } from 'recoil';
 import { Transforms } from 'slate';
-import { atomQueryTodoItem, atomQueryTodoIds } from './atomQueries';
-import { atomOnFocus, atomCurrentFocus, atomOnBlur } from './focusStates';
+import { atomQueryTodoItem } from './atomQueries';
+import { atomCurrentFocus, atomOnBlur, atomOnFocus } from './focusStates';
 import { atomMediaQuery } from './miscStates';
 import {
-  atomTodoModalOpen,
-  useModalStateOpen,
-  atomTodoModalMini,
-  useModalStateExpand,
-  useModalStateExitMinimize,
-  useModalStateMinimize,
-  useModalStateMaximize,
   atomConfirmModalDiscard,
+  atomTodoModalMini,
+  atomTodoModalOpen,
+  useModalStateExitMinimize,
+  useModalStateExpand,
+  useModalStateMaximize,
+  useModalStateMinimize,
+  useModalStateOpen,
 } from './modalStates';
 import {
+  useFilterTodoIdsWithPathname,
+  useTodoStateAdd,
   useTodoStateComplete,
   useTodoStateRemove,
-  useTodoStateAdd,
   useTodoStateUpdate,
 } from './todoStates';
 import { atomCatch } from './utilsStates';
@@ -120,6 +121,7 @@ export const useKeyWithEditor = (
 };
 
 export const useKeyWithNavigate = () => {
+  const filteredTodoIds = useFilterTodoIdsWithPathname();
   const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -130,8 +132,8 @@ export const useKeyWithNavigate = () => {
         event.preventDefault();
         set(
           atomCurrentFocus,
-          get(atomCurrentFocus) === get(atomQueryTodoIds).length - 1
-            ? get(atomQueryTodoIds).length - 1
+          get(atomCurrentFocus) === filteredTodoIds.length - 1
+            ? filteredTodoIds.length - 1
             : get(atomCurrentFocus) + 1,
         );
         !get(atomOnFocus) && set(atomOnFocus, true);
@@ -143,7 +145,7 @@ export const useKeyWithNavigate = () => {
           get(atomCurrentFocus) === 0
             ? 0
             : get(atomCurrentFocus) === -1
-            ? get(atomQueryTodoIds).length - 1
+            ? filteredTodoIds.length - 1
             : get(atomCurrentFocus) - 1,
         );
         !get(atomOnFocus) && set(atomOnFocus, true);
