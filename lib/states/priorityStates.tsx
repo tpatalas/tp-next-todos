@@ -36,29 +36,46 @@ export const selectorDynamicPriority = selectorFamily<Todos['priorityLevel'], To
 export const selectorFilterPioirtyRankScore = selector({
   key: 'selectorFilterPioirtyRankScore',
   get: ({ get }) => {
-    const taskCapcaity = get(selectorTaskCompleteCapacity);
-    // NOTE: The ratio can be configurable in the user setting in the future implementation.
-    const taskCapacityUrgent = Math.round(taskCapcaity * 0.5);
-    const taskCapacityImportant = Math.round(taskCapcaity * 0.3);
-    const taskCapacityNormal = Math.round(taskCapcaity * 0.2);
+    const taskCapacity = get(selectorTaskCompleteCapacity);
+    const prsUrgentFiltered = get(atomQueryTodoIds).filter(
+      (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'],
+    );
+    const prsImportantFiltered = get(atomQueryTodoIds).filter(
+      (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'],
+    );
+    const prsNormalFiltered = get(atomQueryTodoIds).filter(
+      (todo) =>
+        !todo.completed &&
+        todo.priorityLevel !== PRIORITY_LEVEL['urgent'] &&
+        todo.priorityLevel !== PRIORITY_LEVEL['important'],
+    );
 
-    const prsUrgent = get(atomQueryTodoIds)
-      .filter((todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'])
+    // NOTE: The ratio can be configurable in the user setting in the future implementation.
+    // Base ratio
+    const taskCapacityUrgent = Math.round(taskCapacity * 0.5);
+    const taskCapacityImportant = Math.round(taskCapacity * 0.3);
+    const taskCapacityNormal = Math.round(taskCapacity * 0.2);
+
+    const conditionalTaskCapacityUrgent =
+      prsUrgentFiltered.length > taskCapacityUrgent ? taskCapacityUrgent : prsUrgentFiltered.length;
+    const conditionalTaskCapacityImportant =
+      prsUrgentFiltered.length > taskCapacityUrgent
+        ? taskCapacityImportant
+        : (taskCapacity - conditionalTaskCapacityUrgent) * 0.7;
+    const conditionalTaskCapacityNormal =
+      prsNormalFiltered.length > taskCapacityUrgent
+        ? taskCapacityNormal
+        : taskCapacity - prsUrgentFiltered.length - prsImportantFiltered.length;
+
+    const prsUrgent = prsUrgentFiltered
       .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
-      .slice(0, taskCapacityUrgent);
-    const prsImportant = get(atomQueryTodoIds)
-      .filter((todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'])
+      .slice(0, conditionalTaskCapacityUrgent);
+    const prsImportant = prsImportantFiltered
       .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
-      .slice(0, taskCapacityImportant);
-    const prsNormal = get(atomQueryTodoIds)
-      .filter(
-        (todo) =>
-          !todo.completed &&
-          todo.priorityLevel !== PRIORITY_LEVEL['urgent'] &&
-          todo.priorityLevel !== PRIORITY_LEVEL['important'],
-      )
+      .slice(0, conditionalTaskCapacityImportant);
+    const prsNormal = prsNormalFiltered
       .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
-      .slice(0, taskCapacityNormal);
+      .slice(0, conditionalTaskCapacityNormal);
     return prsUrgent.concat(prsImportant, prsNormal).reverse();
   },
   cachePolicy_UNSTABLE: {
