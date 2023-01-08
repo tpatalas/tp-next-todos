@@ -6,7 +6,7 @@ import { AnyModalWithKeyEffect } from '@effects/anyModalWithKeyEffect';
 import { classNames } from '@lib/utils';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendarStates';
-import { atomTodoModalOpen, atomTodoModalMax, useModalStateClose } from '@states/modalStates';
+import { atomTodoModalOpen, atomTodoModalMax, useTodoModalStateClose } from '@states/modalStates';
 import { useTodoStateAdd } from '@states/todoStates';
 import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
@@ -30,7 +30,7 @@ export const TodoModal = ({
 }: Props) => {
   const isTodoModalOpen = useRecoilValue(atomTodoModalOpen(todo?._id));
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
-  const closeModal = useModalStateClose(todo?._id);
+  const closeModal = useTodoModalStateClose(todo?._id);
   const initialFocusDiv = useRef<HTMLDivElement>(null);
   const updateCalendarItem = useCalUpdateItem(todo?._id);
   const addTodo = useTodoStateAdd();

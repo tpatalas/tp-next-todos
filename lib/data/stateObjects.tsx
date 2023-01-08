@@ -3,6 +3,7 @@ import ObjectID from 'bson-objectid';
 export type CATCH_MODAL = typeof CATCH_MODAL[keyof typeof CATCH_MODAL];
 export const CATCH_MODAL = {
   todoModal: 'todoModal',
+  labelModal: 'labelModal',
   confirmModal: 'confirmModal',
   minimizedModal: 'minimizedModal',
 } as const;
@@ -71,7 +72,7 @@ export const CONDITION = {
 export type IDB = typeof IDB[keyof typeof IDB];
 export const IDB = {
   Todos: 'Todos',
-  Tags: 'Tags',
+  Labels: 'Labels',
   Users: 'Users',
   Cache: 'Cache',
 } as const;
@@ -79,7 +80,7 @@ export const IDB = {
 export type IDB_STORE = typeof IDB_STORE[keyof typeof IDB_STORE];
 export const IDB_STORE = {
   todos: 'todos',
-  tags: 'tags',
+  labels: 'labels',
   users: 'users',
   settings: 'settings',
   cache: 'cache',

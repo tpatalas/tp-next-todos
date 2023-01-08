@@ -81,8 +81,8 @@ export const DATA_IDB: TypesIDB[] = [
     store: IDB_STORE['todos'],
   },
   {
-    name: IDB['Tags'],
-    store: IDB_STORE['tags'],
+    name: IDB['Labels'],
+    store: IDB_STORE['labels'],
   },
   {
     name: IDB['Users'],

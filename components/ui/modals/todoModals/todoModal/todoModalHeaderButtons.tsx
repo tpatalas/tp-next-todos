@@ -9,7 +9,7 @@ import { BREAKPOINT } from '@data/stateObjects';
 import { TodoItemDropdown } from '@dropdowns/todoItemDropdown';
 import { Types } from '@lib/types';
 import { atomMediaQuery } from '@states/miscStates';
-import { useModalStateMinimize, useModalStateExpand, atomTodoModalMax, useModalStateClose } from '@states/modalStates';
+import { useTodoModalStateMinimize, useTodoModalStateExpand, atomTodoModalMax, useTodoModalStateClose } from '@states/modalStates';
 import {
   Fragment as ContainerFragment,
   Fragment as HeaderFragment,
@@ -21,11 +21,11 @@ import { useRecoilValue } from 'recoil';
 type Props = Partial<Pick<Types, 'todo'>>;
 
 export const TodoModalHeaderButtons = ({ todo }: Props) => {
-  const minimizeModal = useModalStateMinimize(todo?._id);
-  const expandModal = useModalStateExpand(todo?._id);
+  const minimizeModal = useTodoModalStateMinimize(todo?._id);
+  const expandModal = useTodoModalStateExpand(todo?._id);
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
   const onBreakpointSm = useRecoilValue(atomMediaQuery(BREAKPOINT['sm']));
-  const closeModal = useModalStateClose(todo?._id);
+  const closeModal = useTodoModalStateClose(todo?._id);
 
   return (
     <ContainerFragment>

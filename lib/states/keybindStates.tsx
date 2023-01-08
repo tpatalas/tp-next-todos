@@ -11,11 +11,11 @@ import {
   atomConfirmModalDiscard,
   atomTodoModalMini,
   atomTodoModalOpen,
-  useModalStateExitMinimize,
-  useModalStateExpand,
-  useModalStateMaximize,
-  useModalStateMinimize,
-  useModalStateOpen,
+  useTodoModalStateExitMinimize,
+  useTodoModalStateExpand,
+  useTodoModalStateMaximize,
+  useTodoModalStateMinimize,
+  useTodoModalStateOpen,
 } from './modalStates';
 import {
   useFilterTodoIdsWithPathname,
@@ -52,7 +52,7 @@ export const useItemModalWithKey = (_id: Todos['_id']) => {
 
 export const useKeyWithFocus = (_id: Todos['_id']) => {
   const completeTodo = useTodoStateComplete(_id);
-  const openModal = useModalStateOpen(_id);
+  const openModal = useTodoModalStateOpen(_id);
   const removeTodo = useTodoStateRemove(_id);
   const focusKeyHandler = useRecoilCallback(
     ({ set, reset, snapshot }) =>
@@ -156,11 +156,11 @@ export const useKeyWithNavigate = () => {
 };
 
 export const useKeyWithTodoModal = (_id: Todos['_id']) => {
-  const openModal = useModalStateOpen(_id);
-  const expandModal = useModalStateExpand(_id);
-  const exitMinimizeModal = useModalStateExitMinimize(_id);
-  const minimizeModal = useModalStateMinimize(_id);
-  const maximizeModal = useModalStateMaximize(_id);
+  const openModal = useTodoModalStateOpen(_id);
+  const expandModal = useTodoModalStateExpand(_id);
+  const exitMinimizeModal = useTodoModalStateExitMinimize(_id);
+  const minimizeModal = useTodoModalStateMinimize(_id);
+  const maximizeModal = useTodoModalStateMaximize(_id);
   const keyDownTodoModal = useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;

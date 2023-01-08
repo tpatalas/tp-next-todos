@@ -1,9 +1,13 @@
 import { CATCH_MODAL } from '@data/stateObjects';
-import { Todos } from '@lib/types';
+import { Labels, Todos } from '@lib/types';
 import { atomFamily, RecoilValue, useRecoilCallback } from 'recoil';
 import { useCalResetDateItemOnly } from './calendarStates';
 import { atomSelectorTodoItem, atomTodoNew, useTodoStateRemove } from './todoStates';
-import { atomCatch, useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual } from './utilsStates';
+import {
+  atomCatch,
+  useConditionCheckTodoTitleEmpty,
+  useConditionCompareTodoItemsEqual,
+} from './utilsStates';
 
 /**
  * atom
@@ -25,6 +29,12 @@ export const atomTodoModalMax = atomFamily({
   default: false,
 });
 
+// Label Modal
+export const atomLabelModalOpen = atomFamily({
+  key: 'atomLabelModalOpen',
+  default: false,
+});
+
 // Confirm Modal
 export const atomConfirmModalDiscard = atomFamily({
   key: 'atomConfirmModalDiscard',
@@ -39,7 +49,7 @@ export const atomConfirmModalDelete = atomFamily({
 /**
  * Hooks
  * */
-
+// Confirm Modal
 export const useModalConfirmStateCancel = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -90,7 +100,8 @@ export const useModalConfirmStateReset = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalCloseState = (_id: Todos['_id']) => {
+//Todo Modal
+export const useTodoModalCloseState = (_id: Todos['_id']) => {
   const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(_id);
   const checkTodoTitleEmpty = useConditionCheckTodoTitleEmpty();
   const modalCloseState = useRecoilCallback(({ set, reset, snapshot }) => () => {
@@ -124,7 +135,7 @@ export const useModalCloseState = (_id: Todos['_id']) => {
   return modalCloseState;
 };
 
-export const useModalStateExpand = (_id: Todos['_id']) => {
+export const useTodoModalStateExpand = (_id: Todos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -132,7 +143,7 @@ export const useModalStateExpand = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalStateMaximize = (_id: Todos['_id']) => {
+export const useTodoModalStateMaximize = (_id: Todos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -144,7 +155,7 @@ export const useModalStateMaximize = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalStateMinimize = (_id: Todos['_id']) => {
+export const useTodoModalStateMinimize = (_id: Todos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -155,7 +166,7 @@ export const useModalStateMinimize = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalStateExitMinimize = (_id: Todos['_id']) => {
+export const useTodoModalStateExitMinimize = (_id: Todos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -167,7 +178,7 @@ export const useModalStateExitMinimize = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalStateOpen = (_id: Todos['_id']) => {
+export const useTodoModalStateOpen = (_id: Todos['_id']) => {
   const resetDateItemOnly = useCalResetDateItemOnly(_id);
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -179,8 +190,8 @@ export const useModalStateOpen = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalStateClose = (_id: Todos['_id']) => {
-  const setModalClose = useModalCloseState(_id);
+export const useTodoModalStateClose = (_id: Todos['_id']) => {
+  const setModalClose = useTodoModalCloseState(_id);
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -189,9 +200,28 @@ export const useModalStateClose = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalStateReset = (_id: Todos['_id']) => {
+export const useTodoModalStateReset = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset }) => () => {
     reset(atomTodoModalOpen(_id));
     reset(atomCatch(CATCH_MODAL.todoModal));
+  });
+};
+
+// Label Modal
+export const useLabelModalStateOpen = (_id: Labels['_id']) => {
+  return useRecoilCallback(({ set, snapshot }) => () => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+
+    set(atomLabelModalOpen(_id), true);
+    !get(atomCatch(CATCH_MODAL.labelModal)) && set(atomCatch(CATCH_MODAL.labelModal), true);
+  });
+};
+
+export const useLabelModalStateClose = (_id: Labels['_id']) => {
+  return useRecoilCallback(({ snapshot, reset }) => () => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+
+    reset(atomLabelModalOpen(_id));
+    get(atomCatch(CATCH_MODAL.labelModal)) && reset(atomCatch(CATCH_MODAL.labelModal));
   });
 };

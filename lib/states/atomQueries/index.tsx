@@ -1,10 +1,10 @@
 import { IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
 import { queryEffect } from '@effects/atomEffects/queryEffect';
-import { getDataTags } from '@lib/queries/queryTags';
+import { getDataLabels } from '@lib/queries/queryLabels';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { getDataUserId } from '@lib/queries/queryUsers';
 import { getDataSetting } from '@lib/queries/queryUsers/querySettings';
-import { Settings, Tags, TodoIds, Todos, Users } from '@lib/types';
+import { Settings, Labels, TodoIds, Todos, Users } from '@lib/types';
 import { atom, atomFamily } from 'recoil';
 
 /**
@@ -39,16 +39,16 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
 });
 
 /**
- * Query Tags
+ * Query Labels
  */
-export const atomQueryTags = atom<Tags[]>({
-  key: 'atomQueryTags',
+export const atomQueryLabels = atom<Labels[]>({
+  key: 'atomQueryLabels',
   effects: [
     queryEffect({
-      storeName: IDB_STORE['tags'],
-      queryKey: 'tags',
-      queryFunction: () => getDataTags(),
-      refetchOnMutation: false, // fetching the list of tags is too expensive.
+      storeName: IDB_STORE['labels'],
+      queryKey: 'labels',
+      queryFunction: () => getDataLabels(),
+      refetchOnMutation: false, // fetching the list of labels is too expensive.
     }),
   ],
 });

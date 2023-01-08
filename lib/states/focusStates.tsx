@@ -2,7 +2,7 @@ import { FOCUS } from '@data/stateObjects';
 import { Todos, Types } from '@lib/types';
 import { atom, RecoilValue, useRecoilCallback } from 'recoil';
 import { atomQueryTodoItem } from './atomQueries';
-import { useModalStateOpen, atomTodoModalMini } from './modalStates';
+import { useTodoModalStateOpen, atomTodoModalMini } from './modalStates';
 
 /**
  * Atoms
@@ -26,7 +26,7 @@ export const atomCurrentFocus = atom({
  * Hooks
  **/
 export const useFocusState = (_id: Todos['_id']) => {
-  const openModal = useModalStateOpen(_id);
+  const openModal = useTodoModalStateOpen(_id);
   const focusState = useRecoilCallback(({ reset, snapshot }) => (state: FOCUS) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 

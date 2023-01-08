@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const TagSchema = new mongoose.Schema({
+const LabelSchema = new mongoose.Schema({
   parent_id: {
     type: mongoose.Types.ObjectId,
     required: false,
@@ -18,6 +18,6 @@ const TagSchema = new mongoose.Schema({
     required: true,
   },
 });
-TagSchema.index({ parent_id: 1, title_id: 1, user_id: -1 }, { unique: true });
+LabelSchema.index({ parent_id: 1, title_id: 1, user_id: -1 }, { unique: true });
 
-export default mongoose.models['Tags'] || mongoose.model('Tags', TagSchema);
+export default mongoose.models['Labels'] || mongoose.model('Labels', LabelSchema);

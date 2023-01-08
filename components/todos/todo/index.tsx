@@ -1,6 +1,6 @@
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/dropdown/dropdownMenuItem';
-import { useModalStateOpen } from '@states/modalStates';
+import { useTodoModalStateOpen } from '@states/modalStates';
 import { TypesTodo } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';
@@ -25,7 +25,7 @@ const MinimizedModal = dynamic(() =>
 type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
 
 export const Todo = ({ todo, index }: Props) => {
-  const openModal = useModalStateOpen(todo?._id);
+  const openModal = useTodoModalStateOpen(todo?._id);
 
   return (
     <>

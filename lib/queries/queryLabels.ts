@@ -1,19 +1,19 @@
-import { Tags } from '@lib/types';
+import { Labels } from '@lib/types';
 
-export const getDataTags = async () => {
-  const response = await fetch(`/api/v1/tags`);
+export const getDataLabels = async () => {
+  const response = await fetch(`/api/v1/labels`);
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
-export const getDataTagItem = async (_id: Tags['_id']) => {
-  const response = await fetch(`/api/v1/tags/${_id}`);
+export const getDataLabelItem = async (_id: Labels['_id']) => {
+  const response = await fetch(`/api/v1/labels/${_id}`);
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
-export const createDataTagItem = async (inputValue: Tags) => {
-  const response = await fetch(`/api/v1/tags`, {
+export const createDataLabelItem = async (inputValue: Labels) => {
+  const response = await fetch(`/api/v1/labels`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(inputValue),
@@ -22,8 +22,8 @@ export const createDataTagItem = async (inputValue: Tags) => {
   return await response.json();
 };
 
-export const updateDataTagItem = async (_id: Tags['_id'], inputValue: Tags) => {
-  const response = await fetch(`/api/v1/tags/${_id}`, {
+export const updateDataLabelItem = async (_id: Labels['_id'], inputValue: Labels) => {
+  const response = await fetch(`/api/v1/labels/${_id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(inputValue),
@@ -32,8 +32,8 @@ export const updateDataTagItem = async (_id: Tags['_id'], inputValue: Tags) => {
   return await response.json();
 };
 
-export const deleteDataTagItem = async (_id: Tags['_id']) => {
-  const response = await fetch(`/api/v1/tags/${_id}`, {
+export const deleteDataLabelItem = async (_id: Labels['_id']) => {
+  const response = await fetch(`/api/v1/labels/${_id}`, {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error(response.statusText);
