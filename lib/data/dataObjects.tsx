@@ -1,4 +1,4 @@
-import { LoadingSkeletonTags } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTags';
+import { LoadingSkeletonLabels } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels';
 import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
 import {
   TypesDataButton,
@@ -174,7 +174,7 @@ export const dataButtonMiniModalOpenFull: TypesDataButton = {
 export const dataButtonTodoModalAddTodo: TypesDataButton = {
   tooltip: 'Add Todo',
   kbd: 'Enter',
-  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-3'),
+  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
   condition: CONDITION['checkTodoTitleEmpty'],
 };
 
@@ -280,8 +280,8 @@ export const dataLoadingTodos: TypesDataLoadingState = {
   space: 'space-y-10',
 };
 
-export const dataLoadingTags: TypesDataLoadingState = {
-  loadingSkeleton: <LoadingSkeletonTags />,
+export const dataLoadingLabels: TypesDataLoadingState = {
+  loadingSkeleton: <LoadingSkeletonLabels />,
   repeatingCount: 10,
   margin: 'ml-4',
   space: 'space-y-4',

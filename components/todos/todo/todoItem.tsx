@@ -9,7 +9,7 @@ import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { classNames } from '@lib/utils';
-import { useModalStateOpen } from '@states/modalStates';
+import { useTodoModalStateOpen } from '@states/modalStates';
 import { useTodoStateComplete } from '@states/todoStates';
 import { format } from 'date-fns';
 import { Fragment as TodoItemFragment } from 'react';
@@ -18,7 +18,7 @@ import { useRecoilValue } from 'recoil';
 type Props = Pick<TypesTodo, 'todo'>;
 
 export const TodoItem = ({ todo }: Props) => {
-  const openModal = useModalStateOpen(todo._id);
+  const openModal = useTodoModalStateOpen(todo._id);
   const completeTodo = useTodoStateComplete(todo._id);
   const todoItem = useRecoilValue(atomQueryTodoItem(todo._id));
 

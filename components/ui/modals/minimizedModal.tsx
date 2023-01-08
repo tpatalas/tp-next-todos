@@ -12,9 +12,9 @@ import {
 import { ModalStateOnBreakpointEffect } from '@effects/modalStateOnBreakpointEffect';
 import {
   atomTodoModalMini,
-  useModalStateClose,
-  useModalStateMaximize,
-  useModalStateExitMinimize,
+  useTodoModalStateClose,
+  useTodoModalStateMaximize,
+  useTodoModalStateExitMinimize,
 } from '@states/modalStates';
 import { atomTodoNew } from '@states/todoStates';
 import { TypesTodo } from 'lib/types';
@@ -25,9 +25,9 @@ type Props = Partial<Pick<TypesTodo, 'todo'>>;
 
 export const MinimizedModal = ({ todo }: Props) => {
   const isTodoModalMiniOpen = useRecoilValue(atomTodoModalMini(todo?._id));
-  const closeModal = useModalStateClose(todo?._id);
-  const maximizeModal = useModalStateMaximize(todo?._id);
-  const exitMinimizeModal = useModalStateExitMinimize(todo?._id);
+  const closeModal = useTodoModalStateClose(todo?._id);
+  const maximizeModal = useTodoModalStateMaximize(todo?._id);
+  const exitMinimizeModal = useTodoModalStateExitMinimize(todo?._id);
   const newTodo = useRecoilValue(atomTodoNew);
 
   return (

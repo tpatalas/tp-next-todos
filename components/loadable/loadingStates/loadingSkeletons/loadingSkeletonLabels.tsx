@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-export function LoadingSkeletonTags() {
+export function LoadingSkeletonLabels() {
   return (
     <Fragment>
       <div className='flex max-w-lg animate-pulse flex-col justify-start space-y-4'>

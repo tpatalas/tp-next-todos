@@ -1,5 +1,6 @@
 import { WindowBeforeunloadEffect } from '@effects/windowBeforeunloadEffect';
 import { Types } from '@lib/types';
+import { LabelModal } from '@modals/labelModals/labelModal';
 import dynamic from 'next/dynamic';
 import {
   Fragment as FooterFragment,
@@ -36,6 +37,7 @@ export const LayoutApp = ({ children }: Props) => {
           <CreateTodoModal />
           <DiscardConfirmModal />
           <MinimizedModal />
+          <LabelModal />
         </ModalActionsFragment>
       </FooterFragment>
     </LayoutAppFragment>

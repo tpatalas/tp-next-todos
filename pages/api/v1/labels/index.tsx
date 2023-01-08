@@ -1,10 +1,10 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
-import Tag from '@lib/models/Tag';
+import Label from '@lib/models/Label';
 import { TypesQuery } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
 
-const Tags = async (req: NextApiRequest, res: NextApiResponse) => {
+const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
 
   const { method, body } = req;
@@ -19,18 +19,18 @@ const Tags = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        const getTags = await Tag.find(filter())
+        const getLabels = await Label.find(filter())
           .select({ _id: 1, name: 1, parent_id: 1, title_id: 1 })
           .lean();
-        res.status(200).json({ success: true, data: getTags });
+        res.status(200).json({ success: true, data: getLabels });
       } catch (error) {
         res.status(400).json({ success: false });
       }
       break;
     case 'POST':
       try {
-        const createTag = await Tag.create(body);
-        res.status(201).json({ success: true, data: createTag });
+        const createLabel = await Label.create(body);
+        res.status(201).json({ success: true, data: createLabel });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -39,4 +39,4 @@ const Tags = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ success: false });
   }
 };
-export default Tags;
+export default Labels;

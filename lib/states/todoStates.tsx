@@ -18,7 +18,7 @@ import {
 } from 'recoil';
 import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
-import { atomConfirmModalDelete, useModalStateReset } from './modalStates';
+import { atomConfirmModalDelete, useTodoModalStateReset } from './modalStates';
 import { useNotificationState } from './notificationStates';
 import { selectorFilterPioirtyRankScore, usePriorityRankScore } from './priorityStates';
 import {
@@ -128,7 +128,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
 
 export const useTodoStateAdd = () => {
   const setNotification = useNotificationState();
-  const resetModal = useModalStateReset(undefined);
+  const resetModal = useTodoModalStateReset(undefined);
   const checkTodoTitleEmpty = useConditionCheckTodoTitleEmpty();
   const updatePriorityRankScore = usePriorityRankScore(undefined);
   const get = useGetWithRecoilCallback();
@@ -156,7 +156,7 @@ export const useTodoStateAdd = () => {
 
 export const useTodoStateUpdate = (todoId: Todos['_id']) => {
   const setNotification = useNotificationState();
-  const resetModal = useModalStateReset(todoId);
+  const resetModal = useTodoModalStateReset(todoId);
   const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(todoId);
   const get = useGetWithRecoilCallback();
   const updatePriorityRankScore = usePriorityRankScore(todoId);

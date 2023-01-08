@@ -2,12 +2,12 @@ import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LoadingState } from '@components/loadable/loadingStates';
-import { dataButtonCreateTodo, dataLoadingTags } from '@data/dataObjects';
+import { dataButtonCreateTodo, dataLoadingLabels } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
-import { useModalStateOpen } from '@states/modalStates';
+import { useTodoModalStateOpen } from '@states/modalStates';
 import dynamic from 'next/dynamic';
 import {
   forwardRef,
@@ -20,12 +20,15 @@ import {
 import { useRecoilCallback } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
 
-const TagList = dynamic(() => import('@components/tags/tagsList').then((mod) => mod.TagList), {
-  loading: () => <LoadingState data={dataLoadingTags} />,
-});
+const LabelList = dynamic(
+  () => import('@components/labels/labelList').then((mod) => mod.LabelList),
+  {
+    loading: () => <LoadingState data={dataLoadingLabels} />,
+  },
+);
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
-  const openModal = useModalStateOpen(undefined);
+  const openModal = useTodoModalStateOpen(undefined);
   const setSidebarOpen = useSidebarOpen();
   const isSidebarMobileOpen = useRecoilCallback(({ snapshot }) => () => {
     return snapshot.getLoadable(atomSidebarOpenMobile).getValue();
@@ -90,7 +93,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
           <div className='flex flex-grow flex-col'>
             <nav className='flex-1 space-y-1 pb-4'>
               <FooterSidebarMenu />
-              <TagList />
+              <LabelList />
             </nav>
           </div>
         </div>

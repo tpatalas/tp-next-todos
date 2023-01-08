@@ -77,14 +77,14 @@ export interface TypesTodo {
   model: SCHEMA_TODO;
 }
 
-// Tags
-export interface Tags extends TagsIds {
+// Labels
+export interface Labels extends LabelIds {
   parent_id?: OBJECT_ID;
   title_id?: OBJECT_ID;
   name: string;
 }
 
-export interface TagsIds {
+export interface LabelIds {
   _id?: OBJECT_ID;
 }
 
