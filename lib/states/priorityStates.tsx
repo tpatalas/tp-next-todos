@@ -33,6 +33,39 @@ export const selectorDynamicPriority = selectorFamily<Todos['priorityLevel'], To
   },
 });
 
+export const selectorFilterPioirtyRankScore = selector({
+  key: 'selectorFilterPioirtyRankScore',
+  get: ({ get }) => {
+    const taskCapcaity = get(selectorTaskCompleteCapacity);
+    // NOTE: The ratio can be configurable in the user setting in the future implementation.
+    const taskCapacityUrgent = Math.round(taskCapcaity * 0.5);
+    const taskCapacityImportant = Math.round(taskCapcaity * 0.3);
+    const taskCapacityNormal = Math.round(taskCapcaity * 0.2);
+
+    const prsUrgent = get(atomQueryTodoIds)
+      .filter((todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'])
+      .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
+      .slice(0, taskCapacityUrgent);
+    const prsImportant = get(atomQueryTodoIds)
+      .filter((todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'])
+      .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
+      .slice(0, taskCapacityImportant);
+    const prsNormal = get(atomQueryTodoIds)
+      .filter(
+        (todo) =>
+          !todo.completed &&
+          todo.priorityLevel !== PRIORITY_LEVEL['urgent'] &&
+          todo.priorityLevel !== PRIORITY_LEVEL['important'],
+      )
+      .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
+      .slice(0, taskCapacityNormal);
+    return prsUrgent.concat(prsImportant, prsNormal).reverse();
+  },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
 export const selectorTaskCompleteCapacity = selector({
   key: 'selectorTaskCompleteCapacity',
   get: ({ get }) => {
@@ -42,7 +75,7 @@ export const selectorTaskCompleteCapacity = selector({
       return todo.completed && fiveDaysFromTodayCompleted;
     });
     const taskCapacity = todoIdsCompletedLastFiveDays.length / 5;
-    return taskCapacity < 2 ? 2 : taskCapacity;
+    return taskCapacity < 5 ? 7 : taskCapacity;
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
