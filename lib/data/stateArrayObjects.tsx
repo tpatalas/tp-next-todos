@@ -12,6 +12,7 @@ import {
   ICON_INFO,
   ICON_LABEL_IMPORTANT,
   ICON_LABEL_IMPORTANT_FILL,
+  ICON_LIST,
   ICON_TASK_ALT,
 } from './materialSymbols';
 import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './stateObjects';
@@ -117,6 +118,14 @@ export const DATA_SIDEBAR_MENU = [
     iconActive: ICON_LABEL_IMPORTANT_FILL,
     iconColor: 'fill-yellow-500',
     path: PATHNAME['important'],
+  },
+  {
+    name: 'Show All',
+    tooltip: 'Show all incompleted todos',
+    icon: ICON_LIST,
+    iconActive: ICON_LIST,
+    iconColor: 'fill-purple-600',
+    path: PATHNAME['showAll'],
   },
   {
     name: 'Completed',

@@ -66,7 +66,7 @@ export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
 
 export const atomFilterTodoIds = atom({
   key: 'atomFilterTodoIds',
-  default: 'showAll',
+  default: 'focus',
 });
 
 /**
@@ -77,12 +77,14 @@ export const selectorFilterTodoIds = selector({
   get: ({ get }) => {
     const filter = get(atomFilterTodoIds);
     switch (filter) {
-      case 'showAll':
+      case 'focus':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['app']));
       case 'urgent':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
       case 'important':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['important']));
+      case 'showAll':
+        return get(selectorFilterTodoIdsByPathname(PATHNAME['showAll']));
       case 'completed':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
       default:
@@ -90,7 +92,7 @@ export const selectorFilterTodoIds = selector({
     }
   },
   cachePolicy_UNSTABLE: {
-    eviction: 'most-recent',
+    eviction: 'keep-all',
   },
 });
 
@@ -110,12 +112,14 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
           return get(atomQueryTodoIds).filter(
             (todo) => !todo.completed && todo.priorityLevel === 2,
           );
+        case PATHNAME['showAll']:
+          return get(atomQueryTodoIds).filter((todo) => !todo.completed);
         case PATHNAME['completed']:
           return get(atomQueryTodoIds).filter((todo) => todo.completed);
       }
     },
   cachePolicy_UNSTABLE: {
-    eviction: 'most-recent',
+    eviction: 'keep-all',
   },
 });
 /**

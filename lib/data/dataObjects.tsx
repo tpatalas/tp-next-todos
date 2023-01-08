@@ -25,7 +25,12 @@ import {
   ICON_WARNING,
 } from './materialSymbols';
 import { CONDITION, POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './stateObjects';
-import { STYLE_BUTTON_BLUE, STYLE_BUTTON_RED, STYLE_BUTTON_WHITE } from './stylePreset';
+import {
+  STYLE_BUTTON_NORMAL_BLUE,
+  STYLE_BUTTON_NORMAL_RED,
+  STYLE_BUTTON_NORMAL_WHITE,
+  STYLE_BUTTON_WIDE_BLUE,
+} from './stylePreset';
 
 /**
  * * TypesDataSvg
@@ -94,7 +99,7 @@ export const dataButtonNetworkStatus: TypesDataButton = {
 export const dataButtonCreateTodo: TypesDataButton = {
   tooltip: 'Create Todo',
   kbd: 'T',
-  className: classNames(STYLE_BUTTON_BLUE),
+  className: classNames(STYLE_BUTTON_WIDE_BLUE),
   condition: CONDITION['checkCreateModalOpen'],
 };
 
@@ -116,24 +121,24 @@ export const dataButtonCalendarResetDate: TypesDataButton = {
 };
 
 export const dataButtonCalendarCancel: TypesDataButton = {
-  className: classNames(STYLE_BUTTON_WHITE, 'mr-3'),
+  className: classNames(STYLE_BUTTON_NORMAL_WHITE, 'mr-3'),
   tooltip: 'Cancel',
 };
 
 export const dataButtonCalendarConfirm: TypesDataButton = {
-  className: classNames(STYLE_BUTTON_BLUE),
+  className: classNames(STYLE_BUTTON_NORMAL_BLUE),
   tooltip: 'Confirm',
 };
 
 // Confirm Modal
 export const dataButtonConfirmModalDelete: TypesDataButton = {
-  className: STYLE_BUTTON_RED,
+  className: STYLE_BUTTON_NORMAL_RED,
   tooltip: 'Delete',
   kbd: 'Enter',
 };
 
 export const dataButtonConfirmModalDiscard: TypesDataButton = {
-  className: STYLE_BUTTON_RED,
+  className: STYLE_BUTTON_NORMAL_RED,
   tooltip: 'Discard',
   kbd: 'Enter',
 };
@@ -145,7 +150,7 @@ export const dataButtonConfirmModalCancelIcon: TypesDataButton = {
 };
 
 export const dataButtonConfirmModalCancel: TypesDataButton = {
-  className: classNames(STYLE_BUTTON_WHITE, 'mr-3'),
+  className: classNames(STYLE_BUTTON_NORMAL_WHITE, 'mr-3'),
   tooltip: 'Cancel',
   kbd: 'Escape',
 };
@@ -169,7 +174,7 @@ export const dataButtonMiniModalOpenFull: TypesDataButton = {
 export const dataButtonTodoModalAddTodo: TypesDataButton = {
   tooltip: 'Add Todo',
   kbd: 'Enter',
-  className: classNames(STYLE_BUTTON_BLUE, 'mx-3'),
+  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-3'),
   condition: CONDITION['checkTodoTitleEmpty'],
 };
 
@@ -186,7 +191,7 @@ export const dataButtonTodoModalClose: TypesDataButton = {
 };
 
 export const dataButtonTodoModalCancel: TypesDataButton = {
-  className: STYLE_BUTTON_WHITE,
+  className: STYLE_BUTTON_NORMAL_WHITE,
   tooltip: 'Cancel',
   kbd: 'Escape',
 };
@@ -195,7 +200,7 @@ export const dataButtonTodoModalCancel: TypesDataButton = {
 export const dataButtonItemModalUpdate: TypesDataButton = {
   tooltip: 'Update',
   kbd: 'Enter',
-  className: classNames(STYLE_BUTTON_BLUE, 'mx-3'),
+  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-3'),
   condition: CONDITION['compareTodoItemsEqual'],
 };
 

@@ -117,5 +117,6 @@ export const PATHNAME = {
   app: '/app',
   urgent: '/app/urgent',
   important: '/app/important',
+  showAll: '/app/showall',
   completed: '/app/completed',
 } as const;
