@@ -1,31 +1,31 @@
 import { CATCH_MODAL, NOTIFICATION, PATHNAME } from '@data/stateObjects';
 import {
-    completeDataTodo,
-    createDataNewTodo,
-    deleteDataTodo,
-    updateDataTodo
+  completeDataTodo,
+  createDataNewTodo,
+  deleteDataTodo,
+  updateDataTodo,
 } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
 import { useRouter } from 'next/router';
 import {
-    atom,
-    atomFamily,
-    RecoilValue,
-    selector,
-    selectorFamily,
-    useRecoilCallback,
-    useRecoilValue
+  atom,
+  atomFamily,
+  RecoilValue,
+  selector,
+  selectorFamily,
+  useRecoilCallback,
+  useRecoilValue,
 } from 'recoil';
 import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
 import { atomConfirmModalDelete, useModalStateReset } from './modalStates';
 import { useNotificationState } from './notificationStates';
-import { usePriorityRankScore } from './priorityStates';
+import { selectorFilterPioirtyRankScore, usePriorityRankScore } from './priorityStates';
 import {
-    atomCatch,
-    useConditionCheckTodoTitleEmpty,
-    useConditionCompareTodoItemsEqual,
-    useGetWithRecoilCallback
+  atomCatch,
+  useConditionCheckTodoTitleEmpty,
+  useConditionCompareTodoItemsEqual,
+  useGetWithRecoilCallback,
 } from './utilsStates';
 
 /**
@@ -101,7 +101,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
     ({ get }) => {
       switch (pathname) {
         case PATHNAME['app']:
-          return get(atomQueryTodoIds).filter((todo) => !todo.completed);
+          return get(selectorFilterPioirtyRankScore);
         case PATHNAME['urgent']:
           return get(atomQueryTodoIds).filter(
             (todo) => !todo.completed && todo.priorityLevel === 1,
