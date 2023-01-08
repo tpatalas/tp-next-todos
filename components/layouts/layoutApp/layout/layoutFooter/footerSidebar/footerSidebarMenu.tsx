@@ -3,18 +3,19 @@ import { SvgIcon } from '@components/icons/svgIcon';
 import { DATA_SIDEBAR_MENU } from '@data/stateArrayObjects';
 import { classNames } from '@lib/utils';
 import { useRouter } from 'next/router';
-import { Fragment } from 'react';
+import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
+import { TodosCount } from './todosCount';
 
 export const FooterSidebarMenu = () => {
   const router = useRouter();
 
   return (
-    <Fragment>
+    <FooterSidebarMenuFragment>
       <nav className='pb-4'>
         {DATA_SIDEBAR_MENU.map((item) => (
           <ul
             key={item.name}
-            className='pb-1'>
+            className='relative pb-1'>
             <PrefetchRouterButton
               tooltip={item.tooltip}
               offset={[0, 5]}
@@ -24,8 +25,7 @@ export const FooterSidebarMenu = () => {
                   ? 'cursor-default bg-blue-100 text-gray-900'
                   : 'text-gray-600 hover:bg-gray-200 hover:bg-opacity-60 hover:text-gray-900',
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm font-medium',
-              )}
-            >
+              )}>
               <span className='pr-3'>
                 <SvgIcon
                   data={{
@@ -35,10 +35,15 @@ export const FooterSidebarMenu = () => {
                 />
               </span>
               {item.name}
+              <TotalNumberTodos>
+                <span className='absolute right-3 top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400'>
+                  <TodosCount pathname={item.path} />
+                </span>
+              </TotalNumberTodos>
             </PrefetchRouterButton>
           </ul>
         ))}
       </nav>
-    </Fragment>
+    </FooterSidebarMenuFragment>
   );
 };
