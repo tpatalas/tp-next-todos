@@ -70,7 +70,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
           </div>
         </LayoutLogoFragment>
         <CreateTodoFragment>
-          <div className='mb-5 flex w-full flex-row justify-center bg-transparent'>
+          <div className='mb-4 flex w-full flex-row justify-center bg-transparent'>
             <DisableButton
               data={dataButtonCreateTodo}
               onClick={() => openModal()}>

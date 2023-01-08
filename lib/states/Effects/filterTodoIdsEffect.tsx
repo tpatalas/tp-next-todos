@@ -9,13 +9,16 @@ export const FilterTodoIdsEffect = () => {
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
     switch (router.asPath) {
       case PATHNAME['app']:
-        set(atomFilterTodoIds, 'showAll');
+        set(atomFilterTodoIds, 'focus');
         break;
       case PATHNAME['urgent']:
         set(atomFilterTodoIds, 'urgent');
         break;
       case PATHNAME['important']:
         set(atomFilterTodoIds, 'important');
+        break;
+      case PATHNAME['showAll']:
+        set(atomFilterTodoIds, 'showAll');
         break;
       case PATHNAME['completed']:
         set(atomFilterTodoIds, 'completed');
