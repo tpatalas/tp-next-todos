@@ -295,6 +295,7 @@ export const useFilterTodoIdsWithPathname = () => {
   const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['app']));
   const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
   const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['important']));
+  const showAll = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['showAll']));
   const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
 
   switch (router.asPath) {
@@ -304,6 +305,8 @@ export const useFilterTodoIdsWithPathname = () => {
       return urgent;
     case PATHNAME['important']:
       return important;
+    case PATHNAME['showAll']:
+      return showAll;
     case PATHNAME['completed']:
       return completed;
     default:

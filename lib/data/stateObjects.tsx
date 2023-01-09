@@ -27,6 +27,7 @@ export const NOTIFICATION = {
   updatedDueDate: `updatedDueDate`,
   removedDueDate: `removedDueDate`,
   actionUndone: 'actionUndone',
+  createdLabel: 'createdLabel',
 } as const;
 
 export type OBJECT_ID = typeof OBJECT_ID[keyof typeof OBJECT_ID];
@@ -66,6 +67,7 @@ export type CONDITION = typeof CONDITION[keyof typeof CONDITION];
 export const CONDITION = {
   compareTodoItemsEqual: 'compareTodoItemsEqual',
   checkTodoTitleEmpty: 'checkTodoTitleEmpty',
+  checkLabelTitleEmpty: 'checkLabelTitleEmpty',
   checkCreateModalOpen: 'checkCreateModalOpen',
 } as const;
 

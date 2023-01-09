@@ -73,6 +73,12 @@ export const DATA_NOTIFICATION: TypesNotification[] = [
     iconPath: ICON_ERROR,
     iconPresetStyle: 'h-6 w-6 fill-red-500',
   },
+  {
+    _id: NOTIFICATION['createdLabel'],
+    message: 'Successfully created label',
+    iconPath: ICON_TASK_ALT,
+    iconPresetStyle: 'h-6 w-6 fill-green-500',
+  },
 ];
 
 export const DATA_IDB: TypesIDB[] = [

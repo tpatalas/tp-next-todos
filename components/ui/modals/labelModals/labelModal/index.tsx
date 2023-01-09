@@ -1,14 +1,17 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import {
-  dataButtonTodoModalAddTodo,
+  dataButtonLabelModalAddLabel,
   dataButtonTodoModalCancel,
   dataButtonTodoModalClose,
 } from '@data/dataObjects';
+import { classNames } from '@lib/utils';
+import { atomLabelNew, useLabelStateAdd } from '@states/labelStates';
 import { atomLabelModalOpen, useLabelModalStateClose } from '@states/modalStates';
+import ObjectID from 'bson-objectid';
 import { Types } from 'lib/types';
 import { Fragment as LabelModalFragment, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Button as CancelButton } from '../../../buttons/button';
 import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
@@ -25,7 +28,10 @@ export const LabelModal = ({
 }: Props) => {
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(undefined));
   const closeModal = useLabelModalStateClose(undefined);
-  const initialFocusDiv = useRef<HTMLDivElement>(null);
+  const initialFocusDiv = useRef<HTMLInputElement>(null);
+  const labelItem = useRecoilValue(atomLabelNew);
+  const setLabelItem = useSetRecoilState(atomLabelNew);
+  const addLabel = useLabelStateAdd();
 
   return (
     <LabelModalFragment>
@@ -35,9 +41,7 @@ export const LabelModal = ({
         onClose={() => closeModal()}>
         <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
-            <div
-              ref={initialFocusDiv}
-              className='flex flex-row items-center justify-between pl-2 text-base font-semibold text-gray-600 sm:mb-1 '>
+            <div className='flex flex-row items-center justify-between pl-2 text-base font-semibold text-gray-600 sm:mb-1 '>
               {headerContents}
               <IconButton
                 data={dataButtonTodoModalClose}
@@ -50,8 +54,19 @@ export const LabelModal = ({
           </div>
           <div className='h-full w-full overflow-scroll pl-2'>
             <input
-              placeholder='Enter Label'
-              value=''
+              className={classNames('border-0 pl-2 outline-none focus:ring-0 focus:ring-offset-0')}
+              placeholder='Enter new label'
+              type='text'
+              name='label'
+              value={labelItem.name}
+              onChange={(event) =>
+                setLabelItem({
+                  ...labelItem,
+                  name: event.target.value,
+                  _id: ObjectID().toHexString(),
+                })
+              }
+              ref={initialFocusDiv}
             />
           </div>
           <div className='flex flex-row justify-end pt-4'>
@@ -62,9 +77,8 @@ export const LabelModal = ({
             </CancelButton>
             {footerButtons || (
               <DisableButton
-                data={dataButtonTodoModalAddTodo}
-                // onClick={() => addTodo()}
-              >
+                data={dataButtonLabelModalAddLabel}
+                onClick={() => addLabel()}>
                 Add Label
               </DisableButton>
             )}

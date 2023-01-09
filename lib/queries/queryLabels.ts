@@ -12,7 +12,7 @@ export const getDataLabelItem = async (_id: Labels['_id']) => {
   return await response.json();
 };
 
-export const createDataLabelItem = async (inputValue: Labels) => {
+export const createDataNewLabel = async (inputValue: Labels) => {
   const response = await fetch(`/api/v1/labels`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
