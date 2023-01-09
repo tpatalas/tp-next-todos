@@ -1,6 +1,5 @@
 import { WindowBeforeunloadEffect } from '@effects/windowBeforeunloadEffect';
 import { Types } from '@lib/types';
-import { LabelModal } from '@modals/labelModals/labelModal';
 import dynamic from 'next/dynamic';
 import {
   Fragment as FooterFragment,
@@ -20,6 +19,9 @@ const DiscardConfirmModal = dynamic(() =>
 );
 const Notification = dynamic(() =>
   import('components/notifications/notification').then((mod) => mod.Notification),
+);
+const LabelModal = dynamic(() =>
+  import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
 );
 
 type Props = Pick<Types, 'children'>;

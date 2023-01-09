@@ -1,6 +1,10 @@
-import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { PATHNAME } from '@data/stateObjects';
 import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
+import dynamic from 'next/dynamic';
+
+const PrefetchRouterButton = dynamic(() =>
+  import('@buttons/button/prefetchRouterButton').then((mod) => mod.PrefetchRouterButton),
+);
 
 const Home = () => {
   return (
