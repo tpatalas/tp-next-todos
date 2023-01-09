@@ -213,6 +213,11 @@ export const dataButtonLabelModalAddLabel: TypesDataButton = {
   condition: CONDITION['checkLabelTitleEmpty'],
 };
 
+export const dataButtonLabelModalUpdateLabel: TypesDataButton = {
+  tooltip: 'Update Label',
+  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
+  condition: CONDITION['compareLabelItemsEqual'],
+};
 /**
  * * TypesDataPriority
  */

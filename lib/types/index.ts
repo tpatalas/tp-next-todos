@@ -47,7 +47,7 @@ export interface TypesEditor {
 /**
  * Types Array Object
  */
-type CollectTypesArrayObject = Todos & TypesTodo & Settings;
+type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Settings;
 
 // Todos
 export interface Todos extends TodosEditors, TodoIds {
@@ -88,6 +88,9 @@ export interface LabelIds {
   _id?: OBJECT_ID;
 }
 
+export interface TypesLabel {
+  label: Labels;
+}
 // Users
 export interface Users extends UsersIds {
   email: 'string';
