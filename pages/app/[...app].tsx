@@ -1,5 +1,7 @@
-import { LayoutApp } from '@layouts/layoutApp';
+import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
+
+const LayoutApp = dynamic(() => import('@layouts/layoutApp').then((mod) => mod.LayoutApp));
 
 const CatchAllApp = () => {
   return (
