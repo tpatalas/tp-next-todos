@@ -28,8 +28,10 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'POST':
+      const { _id, parent_id, title_id, name } = body;
+      const labelItem = { _id, parent_id, title_id, name, user_id: userInfo._id };
       try {
-        const createLabel = await Label.create(body);
+        const createLabel = await Label.create(labelItem);
         res.status(201).json({ success: true, data: createLabel });
       } catch (error) {
         res.status(400).json({ success: false });

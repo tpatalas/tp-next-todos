@@ -205,6 +205,15 @@ export const dataButtonItemModalUpdate: TypesDataButton = {
 };
 
 /**
+ * Label
+ **/
+export const dataButtonLabelModalAddLabel: TypesDataButton = {
+  tooltip: 'Add Label',
+  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
+  condition: CONDITION['checkLabelTitleEmpty'],
+};
+
+/**
  * * TypesDataPriority
  */
 

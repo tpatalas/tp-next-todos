@@ -1,8 +1,9 @@
 import { CATCH_MODAL, CONDITION } from '@data/stateObjects';
-import { Todos } from '@lib/types';
+import { Labels, Todos } from '@lib/types';
 import equal from 'fast-deep-equal/react';
 import { atomFamily, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { atomQueryTodoItem } from './atomQueries';
+import { atomLabelNew } from './labelStates';
 import { atomTodoModalMini, atomTodoModalOpen } from './modalStates';
 import { atomSelectorTodoItem, atomTodoNew } from './todoStates';
 
@@ -40,6 +41,11 @@ export const useConditionCheckTodoTitleEmpty = () => {
   return typeof newTodo.title === 'undefined' || newTodo.title.trim() === '';
 };
 
+export const useConditionCheckLabelTitleEmpty = () => {
+  const newTodo = useRecoilValue(atomLabelNew);
+  return typeof newTodo.name === 'undefined' || newTodo.name.trim() === '';
+};
+
 export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
   if (typeof _id === 'undefined') return;
   const todoItem = useRecoilValue(atomQueryTodoItem(_id));
@@ -49,9 +55,10 @@ export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
   return !todoItemCompletedEqual ? true : equal(todoItem, selectorTodoItem);
 };
 
-export const useConditionalCheckState = (_id: Todos['_id']) => {
+export const useConditionalCheckState = (_id: Todos['_id'] | Labels['_id']) => {
   const checkCreateModalOpen = useConditionCheckCreateModalOpen();
   const checkTodoTitleEmpty = useConditionCheckTodoTitleEmpty();
+  const checkLabelTitleEmpty = useConditionCheckLabelTitleEmpty();
   const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(_id);
   return (state: CONDITION) => {
     switch (state) {
@@ -59,6 +66,8 @@ export const useConditionalCheckState = (_id: Todos['_id']) => {
         return checkCreateModalOpen;
       case CONDITION['checkTodoTitleEmpty']:
         return checkTodoTitleEmpty;
+      case CONDITION['checkLabelTitleEmpty']:
+        return checkLabelTitleEmpty;
       case CONDITION['compareTodoItemsEqual']:
         return compareTodoItemsEqual;
     }

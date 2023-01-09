@@ -170,7 +170,8 @@ export const useKeyWithTodoModal = (_id: Todos['_id']) => {
         if (
           get(atomCatch(CATCH_MODAL.todoModal)) ||
           get(atomCatch(CATCH_MODAL.minimizedModal)) ||
-          get(atomCatch(CATCH_MODAL.confirmModal))
+          get(atomCatch(CATCH_MODAL.confirmModal)) ||
+          get(atomCatch(CATCH_MODAL.labelModal))
         )
           return;
         typeof _id === 'undefined' && openModal();
