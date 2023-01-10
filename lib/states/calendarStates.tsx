@@ -62,7 +62,7 @@ export const useCalState = (todoId: Todos['_id']) => {
       start: startOfWeek(firstDayCurrentMonth),
       end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
     });
-    const day = days.find((day) => day)!;
+    const day = days.find((day) => day) || ({} as Date);
 
     switch (state) {
       case CALENDAR['today']:

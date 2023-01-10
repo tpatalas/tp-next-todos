@@ -10,6 +10,11 @@ const LabelItemDropdown = dynamic(() =>
 const ItemLabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal/itemLabelModal').then((mod) => mod.ItemLabelModal),
 );
+const DeleteLabelConfirmModal = dynamic(() =>
+  import('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal').then(
+    (mod) => mod.DeleteLabelConfirmModal,
+  ),
+);
 
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
   return (
@@ -31,6 +36,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
       </div>
       <LabelModalFragment>
         <ItemLabelModal label={label} />
+        <DeleteLabelConfirmModal label={label} />
       </LabelModalFragment>
     </Fragment>
   );

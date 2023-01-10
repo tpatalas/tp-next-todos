@@ -3,28 +3,25 @@ import { dataButtonConfirmModalDelete, dataSvgConfirmModalDelete } from '@data/d
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
-import { useTodoModalConfirmStateDelete, atomConfirmModalDelete } from '@states/modalStates';
-import { useAsyncTodoItem } from '@states/todoStates';
 import dynamic from 'next/dynamic';
 import {
   Fragment as DeleteHeaderContentFragment,
   Fragment as HeaderContentFragment,
   useRef,
 } from 'react';
-import { useRecoilValue } from 'recoil';
-const ConfirmModal = dynamic(() => import('.').then((mod) => mod.ConfirmModal));
+const ConfirmModal = dynamic(() => import('..').then((mod) => mod.ConfirmModal));
 const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
 
-export const DeleteConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
-  const deleteConfirmModal = useTodoModalConfirmStateDelete(todo?._id);
-  const isConfirmModalOpen = useRecoilValue(atomConfirmModalDelete(todo?._id));
+type Props = Pick<Types, 'onClickConfirm' | 'show' | 'deletingItem'> &
+  Partial<Pick<Types, 'itemIds'>>;
+
+export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem }: Props) => {
   const initialFocusButton = useRef<HTMLButtonElement>(null);
-  const todoItem = useAsyncTodoItem(todo?._id);
 
   return (
     <ConfirmModal
-      todo={todo}
-      show={isConfirmModalOpen}
+      itemIds={itemIds}
+      show={show}
       initialFocus={initialFocusButton}
       headerIcons={<SvgIcon data={dataSvgConfirmModalDelete} />}
       headerContents={
@@ -34,7 +31,7 @@ export const DeleteConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
             <DeleteHeaderContentFragment>
               Are you Sure you want to delete the following item?
               <span className='mt-2 break-words text-center line-clamp-2 sm:max-w-sm sm:text-left'>
-                <strong>{todoItem().title}</strong>
+                <strong>{deletingItem}</strong>
               </span>
             </DeleteHeaderContentFragment>
           </HeaderDescription>
@@ -43,7 +40,7 @@ export const DeleteConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
       footerButtons={
         <ConfirmButton
           data={dataButtonConfirmModalDelete}
-          onClick={() => deleteConfirmModal()}
+          onClick={onClickConfirm}
           ref={initialFocusButton}>
           Delete
         </ConfirmButton>

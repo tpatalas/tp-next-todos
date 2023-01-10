@@ -5,13 +5,15 @@ import { Types } from 'lib/types';
 import { Fragment as ConfirmModalFragment, useRef } from 'react';
 import { ModalTransitionChild } from '../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../modal/modalTransition/modalTransitionRoot';
-import { useTodoModalConfirmStateCancel } from '@states/modalStates';
+import { useModalConfirmStateCancel } from '@states/modalStates';
 
 type Props = Pick<Types, 'show' | 'headerContents' | 'headerIcons' | 'footerButtons'> &
-  Partial<Pick<Types, 'children' | 'todo' | 'show' | 'initialFocus' | 'iconBgColor' | 'children'>>;
+  Partial<
+    Pick<Types, 'children' | 'itemIds' | 'show' | 'initialFocus' | 'iconBgColor' | 'children'>
+  >;
 
-export const ConfirmModal = ({ todo, ...props }: Props) => {
-  const cancelConfirmModal = useTodoModalConfirmStateCancel(todo?._id);
+export const ConfirmModal = ({ itemIds, ...props }: Props) => {
+  const cancelConfirmModal = useModalConfirmStateCancel(itemIds?._id);
   const initialFocusButton = props.initialFocus && useRef<HTMLButtonElement>(null);
 
   return (

@@ -1,10 +1,11 @@
+import { atomQueryTodoItem } from '@atomQueries/index';
 import { EditorAutoFocusEffect } from '@effects/editorAutoFocusEffect';
 import { renderPlaceholder, renderCustomElement } from '@lib/editors';
 import { Types } from '@lib/types';
 import { useEditorInitialValue, useEditorChangeHandler } from '@states/editorStates';
 import { useKeyWithEditor } from '@states/keybindStates';
-import { useAsyncTodoItem } from '@states/todoStates';
 import { useMemo } from 'react';
+import { useRecoilValue } from 'recoil';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import {
@@ -24,7 +25,8 @@ export const EditorComposer = ({ autoFocus, todo, titleName, ...props }: Props) 
   const changeHandler = useEditorChangeHandler(todo?._id, titleName);
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
-  const completed = typeof todo !== 'undefined' && useAsyncTodoItem(todo?._id)().completed;
+  const completed =
+    typeof todo !== 'undefined' && useRecoilValue(atomQueryTodoItem(todo?._id)).completed;
   const renderCustomElementWithProps = (props: RenderElementProps) =>
     renderCustomElement({
       titleName: titleName,

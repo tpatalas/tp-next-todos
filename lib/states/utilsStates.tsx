@@ -1,4 +1,4 @@
-import { CATCH_MODAL, CONDITION } from '@data/stateObjects';
+import { CATCH_MODAL } from '@data/stateObjects';
 import { Labels, Todos } from '@lib/types';
 import equal from 'fast-deep-equal/react';
 import { atomFamily, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
@@ -58,36 +58,9 @@ export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
 export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
   if (typeof _id === 'undefined') return;
   const labels = useRecoilValue(atomQueryLabels);
-  const labelItem = labels.find((label) => label._id === _id);
+  const labelItem = labels.find((label) => label._id === _id) || ({} as Labels);
   const labelItemCompare = useRecoilValue(atomSelectorLabelItem(_id));
   return equal(labelItem, labelItemCompare);
 };
 
-export const useLabelConditionalCheckState = (_id: Labels['_id']) => {
-  const checkLabelTitleEmpty = useConditionCheckLabelTitleEmpty();
-  const compareLabelItemsEqual = useConditionCompareLabelItemsEqual(_id);
-  return (state: CONDITION) => {
-    switch (state) {
-      case CONDITION['checkLabelTitleEmpty']:
-        return checkLabelTitleEmpty;
-      case CONDITION['compareLabelItemsEqual']:
-        return compareLabelItemsEqual;
-    }
-  };
-};
 
-export const useTodoConditionalCheckState = (_id: Todos['_id']) => {
-  const checkCreateModalOpen = useConditionCheckCreateModalOpen();
-  const checkTodoTitleEmpty = useConditionCheckTodoTitleEmpty();
-  const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(_id);
-  return (state: CONDITION) => {
-    switch (state) {
-      case CONDITION['checkCreateModalOpen']:
-        return checkCreateModalOpen;
-      case CONDITION['checkTodoTitleEmpty']:
-        return checkTodoTitleEmpty;
-      case CONDITION['compareTodoItemsEqual']:
-        return compareTodoItemsEqual;
-    }
-  };
-};

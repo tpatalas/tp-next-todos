@@ -50,8 +50,8 @@ export const atomConfirmModalDelete = atomFamily({
 /**
  * Hooks
  * */
-// Todo Confirm Modal
-export const useTodoModalConfirmStateCancel = (_id: Todos['_id']) => {
+// Confirm Modal
+export const useModalConfirmStateCancel = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -61,6 +61,7 @@ export const useTodoModalConfirmStateCancel = (_id: Todos['_id']) => {
   });
 };
 
+// Todo Confirm Modal
 export const useTodoModalConfirmStateDiscard = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -90,17 +91,6 @@ export const useTodoModalConfirmStateDelete = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalConfirmStateReset = (_id: Todos['_id']) => {
-  return useRecoilCallback(({ reset, snapshot }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-
-    get(atomConfirmModalDelete(_id)) && reset(atomConfirmModalDelete(_id));
-    get(atomConfirmModalDiscard(_id)) && reset(atomConfirmModalDiscard(_id));
-    if (!get(atomConfirmModalDelete(_id)) && !get(atomConfirmModalDiscard(_id)))
-      reset(atomCatch(CATCH_MODAL.confirmModal));
-  });
-};
-
 // Label Confirm Modal
 export const useLabelModalConfirmStateDelete = (_id: Labels['_id']) => {
   const removeLabel = useLabelStateRemove(_id);
@@ -111,15 +101,6 @@ export const useLabelModalConfirmStateDelete = (_id: Labels['_id']) => {
     if (typeof _id === 'undefined') return;
     get(atomConfirmModalDelete(_id)) && reset(atomConfirmModalDelete(_id));
     get(atomConfirmModalDelete(_id)) && removeLabel();
-    get(atomCatch(CATCH_MODAL.confirmModal)) && reset(atomCatch(CATCH_MODAL.confirmModal));
-  });
-};
-
-export const useLabelModalConfirmStateCancel = (_id: Labels['_id']) => {
-  return useRecoilCallback(({ reset, snapshot }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-
-    get(atomConfirmModalDelete(_id)) && reset(atomConfirmModalDelete(_id));
     get(atomCatch(CATCH_MODAL.confirmModal)) && reset(atomCatch(CATCH_MODAL.confirmModal));
   });
 };

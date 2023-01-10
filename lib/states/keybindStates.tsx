@@ -1,14 +1,16 @@
 import { BREAKPOINT, CATCH_MODAL } from '@data/stateObjects';
-import { Todos, Types } from '@lib/types';
+import { Labels, Todos, Types } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { isMacOs } from 'react-device-detect';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { Transforms } from 'slate';
 import { atomQueryTodoItem } from './atomQueries';
 import { atomCurrentFocus, atomOnBlur, atomOnFocus } from './focusStates';
+import { useLabelStateAdd, useLabelStateUpdate } from './labelStates';
 import { atomMediaQuery } from './miscStates';
 import {
   atomConfirmModalDiscard,
+  atomLabelModalOpen,
   atomTodoModalMini,
   atomTodoModalOpen,
   useTodoModalStateExitMinimize,
@@ -118,6 +120,27 @@ export const useKeyWithEditor = (
     }
   });
   return editorKeyHandler;
+};
+
+export const useKeyWithLabelModal = (_id: Labels['_id']) => {
+  const addLabel = useLabelStateAdd();
+  const updateLabel = useLabelStateUpdate(_id);
+  return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+
+    if (get(atomCatch(CATCH_MODAL.todoModal)) || get(atomCatch(CATCH_MODAL.confirmModal))) return;
+
+    if (!event) return;
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        if (typeof _id !== 'undefined') return updateLabel();
+        get(atomLabelModalOpen(undefined)) && addLabel();
+        return;
+      default:
+        return;
+    }
+  });
 };
 
 export const useKeyWithNavigate = () => {

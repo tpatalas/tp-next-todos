@@ -1,6 +1,7 @@
 import { ErrorState } from '@components/loadable/errorState';
 import { LoadingState } from '@components/loadable/loadingStates';
 import { dataLoadingTodos } from '@data/dataObjects';
+import { LayoutApp } from '@layouts/layoutApp';
 import dynamic from 'next/dynamic';
 import { Fragment as AppFragment } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -11,7 +12,6 @@ const TodoList = dynamic(() => import('components/todos/todoList').then((mod) =>
 const FilterTodoIdsEffect = dynamic(() =>
   import('@effects/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
 );
-const LayoutApp = dynamic(() => import('@layouts/layoutApp').then((mod) => mod.LayoutApp));
 
 const App = () => {
   return (

@@ -17,7 +17,6 @@ export type TypesDataButton = Partial<
     | 'tooltip'
     | 'offset'
     | 'kbd'
-    | 'condition'
     | 'placement'
   > & {
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;

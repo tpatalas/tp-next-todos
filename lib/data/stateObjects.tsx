@@ -67,15 +67,6 @@ export const CALENDAR = {
   days: 'days',
 } as const;
 
-export type CONDITION = typeof CONDITION[keyof typeof CONDITION];
-export const CONDITION = {
-  compareTodoItemsEqual: 'compareTodoItemsEqual',
-  checkTodoTitleEmpty: 'checkTodoTitleEmpty',
-  checkLabelTitleEmpty: 'checkLabelTitleEmpty',
-  checkCreateModalOpen: 'checkCreateModalOpen',
-  compareLabelItemsEqual: 'compareLabelItemsEqual',
-} as const;
-
 export type IDB = typeof IDB[keyof typeof IDB];
 export const IDB = {
   Todos: 'Todos',

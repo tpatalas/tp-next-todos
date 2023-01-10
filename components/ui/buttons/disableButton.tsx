@@ -1,19 +1,17 @@
 import { TypesDataButton } from '@lib/types/typesData';
-import { useLabelConditionalCheckState, useTodoConditionalCheckState } from '@states/utilsStates';
 import { Types } from 'lib/types';
 import { Button } from './button';
 
 type Props = { data: TypesDataButton } & Partial<
-  Pick<Types, 'className' | 'onClick' | 'condition' | 'children' | 'todo' | 'label'>
+  Pick<Types, 'className' | 'onClick' | 'conditionalRendering' | 'children'>
 >;
 
-export const DisableButton = ({ todo, label, data, onClick, children = data.name }: Props) => {
-  const condition =
-    typeof label === 'undefined'
-      ? useTodoConditionalCheckState(todo?._id)
-      : useLabelConditionalCheckState(label._id);
-  const conditionalRendering = typeof data.condition !== 'undefined' && condition(data.condition);
-
+export const DisableButton = ({
+  data,
+  onClick,
+  conditionalRendering,
+  children = data.name,
+}: Props) => {
   return (
     <Button
       data={{

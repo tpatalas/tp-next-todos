@@ -23,7 +23,7 @@ export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
     <ConfirmModal
       show={isConfirmModalOpen}
       initialFocus={initialFocusButton}
-      todo={todo}
+      itemIds={todo}
       headerIcons={<SvgIcon data={dataSvgConfirmModalHeaderIcon} />}
       headerContents={
         <HeaderContentFragment>

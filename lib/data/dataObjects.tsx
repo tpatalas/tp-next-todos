@@ -24,7 +24,7 @@ import {
   ICON_REPORT,
   ICON_WARNING,
 } from './materialSymbols';
-import { CONDITION, POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './stateObjects';
+import { POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './stateObjects';
 import {
   STYLE_BUTTON_NORMAL_BLUE,
   STYLE_BUTTON_NORMAL_RED,
@@ -97,10 +97,9 @@ export const dataButtonNetworkStatus: TypesDataButton = {
 
 // Create Todo
 export const dataButtonCreateTodo: TypesDataButton = {
-  tooltip: 'Create Todo',
+  tooltip: 'Create todo',
   kbd: 'T',
   className: classNames(STYLE_BUTTON_WIDE_BLUE),
-  condition: CONDITION['checkCreateModalOpen'],
 };
 
 // Calendar
@@ -172,10 +171,9 @@ export const dataButtonMiniModalOpenFull: TypesDataButton = {
 
 // Create TodoModal
 export const dataButtonTodoModalAddTodo: TypesDataButton = {
-  tooltip: 'Add Todo',
+  tooltip: 'Add todo',
   kbd: 'Enter',
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
-  condition: CONDITION['checkTodoTitleEmpty'],
 };
 
 export const dataButtonTodoModalMinimize: TypesDataButton = {
@@ -201,22 +199,21 @@ export const dataButtonItemModalUpdate: TypesDataButton = {
   tooltip: 'Update',
   kbd: 'Enter',
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-3'),
-  condition: CONDITION['compareTodoItemsEqual'],
 };
 
 /**
  * Label
  **/
 export const dataButtonLabelModalAddLabel: TypesDataButton = {
-  tooltip: 'Add Label',
+  tooltip: 'Add label',
+  kbd: 'Enter',
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
-  condition: CONDITION['checkLabelTitleEmpty'],
 };
 
 export const dataButtonLabelModalUpdateLabel: TypesDataButton = {
-  tooltip: 'Update Label',
+  tooltip: 'Update label',
+  kbd: 'Enter',
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
-  condition: CONDITION['compareLabelItemsEqual'],
 };
 /**
  * * TypesDataPriority

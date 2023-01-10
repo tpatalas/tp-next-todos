@@ -84,7 +84,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
                     className: 'mr-3 fill-white h-5 w-5',
                   }}
                 />
-                Create Todo
+                Create todo
               </span>
             </DisableButton>
           </div>
