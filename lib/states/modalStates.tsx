@@ -2,6 +2,7 @@ import { CATCH_MODAL } from '@data/stateObjects';
 import { Labels, Todos } from '@lib/types';
 import { atomFamily, RecoilValue, useRecoilCallback } from 'recoil';
 import { useCalResetDateItemOnly } from './calendarStates';
+import { atomSelectorLabelItem } from './labelStates';
 import { atomSelectorTodoItem, atomTodoNew, useTodoStateRemove } from './todoStates';
 import {
   atomCatch,
@@ -222,6 +223,7 @@ export const useLabelModalStateClose = (_id: Labels['_id']) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     reset(atomLabelModalOpen(_id));
+    reset(atomSelectorLabelItem(_id));
     get(atomCatch(CATCH_MODAL.labelModal)) && reset(atomCatch(CATCH_MODAL.labelModal));
   });
 };

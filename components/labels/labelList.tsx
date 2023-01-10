@@ -4,6 +4,7 @@ import { ICON_ADD } from '@data/materialSymbols';
 import { useLabelModalStateOpen } from '@states/modalStates';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
+import { LabelItem } from './labelItem';
 
 export const LabelList = () => {
   const labelList = useRecoilValue(atomQueryLabels);
@@ -21,7 +22,9 @@ export const LabelList = () => {
         </div>
         <ul>
           {labelList.map((label) => (
-            <li key={label._id}>{label.name}</li>
+            <li key={label._id?.toString()}>
+              <LabelItem label={label} />
+            </li>
           ))}
         </ul>
       </div>

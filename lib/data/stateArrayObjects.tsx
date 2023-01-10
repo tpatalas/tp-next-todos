@@ -79,6 +79,12 @@ export const DATA_NOTIFICATION: TypesNotification[] = [
     iconPath: ICON_TASK_ALT,
     iconPresetStyle: 'h-6 w-6 fill-green-500',
   },
+  {
+    _id: NOTIFICATION['updatedLabel'],
+    message: 'label updated',
+    iconPath: ICON_TASK_ALT,
+    iconPresetStyle: 'h-6 w-6 fill-blue-500',
+  },
 ];
 
 export const DATA_IDB: TypesIDB[] = [

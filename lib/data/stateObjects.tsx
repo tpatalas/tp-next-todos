@@ -19,6 +19,8 @@ export const FOCUS = {
 export type NOTIFICATION = typeof NOTIFICATION[keyof typeof NOTIFICATION];
 export const NOTIFICATION = {
   offline: 'offline',
+  actionUndone: 'actionUndone',
+  //todo
   completeTodo: 'completeTodo',
   unCompleteTodo: 'unCompleteTodo',
   deleteTodo: 'deleteTodo',
@@ -26,8 +28,9 @@ export const NOTIFICATION = {
   createdTodo: 'createdTodo',
   updatedDueDate: `updatedDueDate`,
   removedDueDate: `removedDueDate`,
-  actionUndone: 'actionUndone',
+  //label
   createdLabel: 'createdLabel',
+  updatedLabel: 'updatedLabel',
 } as const;
 
 export type OBJECT_ID = typeof OBJECT_ID[keyof typeof OBJECT_ID];
@@ -69,6 +72,7 @@ export const CONDITION = {
   checkTodoTitleEmpty: 'checkTodoTitleEmpty',
   checkLabelTitleEmpty: 'checkLabelTitleEmpty',
   checkCreateModalOpen: 'checkCreateModalOpen',
+  compareLabelItemsEqual: 'compareLabelItemsEqual',
 } as const;
 
 export type IDB = typeof IDB[keyof typeof IDB];

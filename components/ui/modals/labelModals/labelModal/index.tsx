@@ -6,31 +6,39 @@ import {
   dataButtonTodoModalClose,
 } from '@data/dataObjects';
 import { classNames } from '@lib/utils';
-import { atomLabelNew, useLabelStateAdd } from '@states/labelStates';
+import {
+  atomLabelNew,
+  atomSelectorLabelItem,
+  useLabelStateAdd,
+  useLabelValueUpdate,
+} from '@states/labelStates';
 import { atomLabelModalOpen, useLabelModalStateClose } from '@states/modalStates';
-import ObjectID from 'bson-objectid';
 import { Types } from 'lib/types';
 import { Fragment as LabelModalFragment, useRef } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { Button as CancelButton } from '../../../buttons/button';
 import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 
 type Props = Partial<
-  Pick<Types, 'todo' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>
+  Pick<Types, 'label' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>
 >;
 
 export const LabelModal = ({
-  headerContents = 'Create New Label',
+  label,
   footerButtons,
   children,
+  headerContents = 'Create New Label',
 }: Props) => {
-  const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(undefined));
-  const closeModal = useLabelModalStateClose(undefined);
+  const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
+  const closeModal = useLabelModalStateClose(label?._id);
   const initialFocusDiv = useRef<HTMLInputElement>(null);
-  const labelItem = useRecoilValue(atomLabelNew);
-  const setLabelItem = useSetRecoilState(atomLabelNew);
+  const labelItem =
+    typeof label === 'undefined'
+      ? useRecoilValue(atomLabelNew)
+      : useRecoilValue(atomSelectorLabelItem(label._id));
+  const updateLabelItem = useLabelValueUpdate(label);
   const addLabel = useLabelStateAdd();
 
   return (
@@ -59,13 +67,7 @@ export const LabelModal = ({
               type='text'
               name='label'
               value={labelItem.name}
-              onChange={(event) =>
-                setLabelItem({
-                  ...labelItem,
-                  name: event.target.value,
-                  _id: ObjectID().toHexString(),
-                })
-              }
+              onChange={(event) => updateLabelItem(event.target.value)}
               ref={initialFocusDiv}
             />
           </div>
