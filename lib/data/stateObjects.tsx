@@ -31,6 +31,7 @@ export const NOTIFICATION = {
   //label
   createdLabel: 'createdLabel',
   updatedLabel: 'updatedLabel',
+  deleteLabel: 'deleteLabel',
 } as const;
 
 export type OBJECT_ID = typeof OBJECT_ID[keyof typeof OBJECT_ID];

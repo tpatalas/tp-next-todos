@@ -2,7 +2,7 @@ import { CATCH_MODAL } from '@data/stateObjects';
 import { Labels, Todos } from '@lib/types';
 import { atomFamily, RecoilValue, useRecoilCallback } from 'recoil';
 import { useCalResetDateItemOnly } from './calendarStates';
-import { atomSelectorLabelItem } from './labelStates';
+import { atomSelectorLabelItem, useLabelStateRemove } from './labelStates';
 import { atomSelectorTodoItem, atomTodoNew, useTodoStateRemove } from './todoStates';
 import {
   atomCatch,
@@ -50,8 +50,8 @@ export const atomConfirmModalDelete = atomFamily({
 /**
  * Hooks
  * */
-// Confirm Modal
-export const useModalConfirmStateCancel = (_id: Todos['_id']) => {
+// Todo Confirm Modal
+export const useTodoModalConfirmStateCancel = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -61,7 +61,7 @@ export const useModalConfirmStateCancel = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalConfirmStateDiscard = (_id: Todos['_id']) => {
+export const useTodoModalConfirmStateDiscard = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -77,7 +77,7 @@ export const useModalConfirmStateDiscard = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalConfirmStateDelete = (_id: Todos['_id']) => {
+export const useTodoModalConfirmStateDelete = (_id: Todos['_id']) => {
   const removeTodo = useTodoStateRemove(_id);
 
   return useRecoilCallback(({ reset, snapshot }) => () => {
@@ -90,7 +90,7 @@ export const useModalConfirmStateDelete = (_id: Todos['_id']) => {
   });
 };
 
-export const useModalConfirmStateReset = (_id: Todos['_id']) => {
+export const useTodoModalConfirmStateReset = (_id: Todos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -98,6 +98,29 @@ export const useModalConfirmStateReset = (_id: Todos['_id']) => {
     get(atomConfirmModalDiscard(_id)) && reset(atomConfirmModalDiscard(_id));
     if (!get(atomConfirmModalDelete(_id)) && !get(atomConfirmModalDiscard(_id)))
       reset(atomCatch(CATCH_MODAL.confirmModal));
+  });
+};
+
+// Label Confirm Modal
+export const useLabelModalConfirmStateDelete = (_id: Labels['_id']) => {
+  const removeLabel = useLabelStateRemove(_id);
+
+  return useRecoilCallback(({ reset, snapshot }) => () => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+
+    if (typeof _id === 'undefined') return;
+    get(atomConfirmModalDelete(_id)) && reset(atomConfirmModalDelete(_id));
+    get(atomConfirmModalDelete(_id)) && removeLabel();
+    get(atomCatch(CATCH_MODAL.confirmModal)) && reset(atomCatch(CATCH_MODAL.confirmModal));
+  });
+};
+
+export const useLabelModalConfirmStateCancel = (_id: Labels['_id']) => {
+  return useRecoilCallback(({ reset, snapshot }) => () => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+
+    get(atomConfirmModalDelete(_id)) && reset(atomConfirmModalDelete(_id));
+    get(atomCatch(CATCH_MODAL.confirmModal)) && reset(atomCatch(CATCH_MODAL.confirmModal));
   });
 };
 

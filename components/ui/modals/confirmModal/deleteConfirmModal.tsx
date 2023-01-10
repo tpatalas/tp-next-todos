@@ -3,7 +3,7 @@ import { dataButtonConfirmModalDelete, dataSvgConfirmModalDelete } from '@data/d
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
-import { useModalConfirmStateDelete, atomConfirmModalDelete } from '@states/modalStates';
+import { useTodoModalConfirmStateDelete, atomConfirmModalDelete } from '@states/modalStates';
 import { useAsyncTodoItem } from '@states/todoStates';
 import dynamic from 'next/dynamic';
 import {
@@ -16,7 +16,7 @@ const ConfirmModal = dynamic(() => import('.').then((mod) => mod.ConfirmModal));
 const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
 
 export const DeleteConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
-  const deleteConfirmModal = useModalConfirmStateDelete(todo?._id);
+  const deleteConfirmModal = useTodoModalConfirmStateDelete(todo?._id);
   const isConfirmModalOpen = useRecoilValue(atomConfirmModalDelete(todo?._id));
   const initialFocusButton = useRef<HTMLButtonElement>(null);
   const todoItem = useAsyncTodoItem(todo?._id);
