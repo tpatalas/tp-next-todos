@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 import { LabelModal } from '.';
 
 export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
-  const updateLabel = useLabelStateUpdate(label);
+  const updateLabel = useLabelStateUpdate(label._id);
 
   return (
     <Fragment>

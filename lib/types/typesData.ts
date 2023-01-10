@@ -45,6 +45,7 @@ export type TypesDataDropdown = Partial<
       | 'color'
       | 'text'
       | 'contentWidth'
+      | 'hoverBg'
     >
 >;
 

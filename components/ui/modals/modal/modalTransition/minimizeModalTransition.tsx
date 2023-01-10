@@ -23,7 +23,7 @@ export const MinimizeModalTransition = ({
       leaveTo='transform translate-y-5 opacity-0 scale-95'>
       <div
         className={classNames(
-          'pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:p-6',
+          'pointer-events-none fixed inset-0 z-[100] flex items-end px-4 py-6 sm:p-6',
           positionY,
         )}>
         <div className={classNames('flex w-full flex-col items-center space-y-4', positionX)}>

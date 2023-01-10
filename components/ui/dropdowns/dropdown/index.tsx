@@ -8,7 +8,8 @@ import { useState } from 'react';
 import { usePopper } from 'react-popper';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
-type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents'>> & Pick<Types, 'children'>;
+type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents'>> &
+  Pick<Types, 'children'>;
 
 export const Dropdown = ({
   headerContents,
@@ -19,6 +20,7 @@ export const Dropdown = ({
     menuWidth,
     borderRadius,
     path,
+    hoverBg = 'hover:bg-gray-100',
     placement = 'bottom-start',
     group = 'group',
     padding = 'p-2',
@@ -49,9 +51,12 @@ export const Dropdown = ({
           <Menu.Button
             className={classNames(
               group,
-              'inline-flex w-full items-center text-gray-400 ease-in hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0',
+              'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0',
               padding,
-              initialVisible ? 'visible' : 'invisible group-focus-within:visible group-hover:visible',
+              hoverBg,
+              initialVisible
+                ? 'visible'
+                : 'invisible group-focus-within:visible group-hover:visible',
               borderRadius,
               !borderRadius && headerContents ? 'rounded-lg' : 'rounded-full',
             )}
@@ -93,9 +98,7 @@ export const Dropdown = ({
               ref={setPopperElement}
               style={styles.popper}
               {...attributes.popper}>
-              <div className={classNames(divider && 'divide-y divide-gray-100')}>
-                {children}
-              </div>
+              <div className={classNames(divider && 'divide-y divide-gray-100')}>{children}</div>
             </Menu.Items>
           </Transition>
         </Menu>
