@@ -5,6 +5,7 @@ import {
   dataButtonTodoModalCancel,
   dataButtonTodoModalClose,
 } from '@data/dataObjects';
+import { LabelModalWithKeyEffect } from '@effects/labelModalWithKeyEffect';
 import { classNames } from '@lib/utils';
 import {
   atomLabelNew,
@@ -13,6 +14,7 @@ import {
   useLabelValueUpdate,
 } from '@states/labelStates';
 import { atomLabelModalOpen, useLabelModalStateClose } from '@states/modalStates';
+import { useConditionCheckLabelTitleEmpty } from '@states/utilsStates';
 import { Types } from 'lib/types';
 import { Fragment as LabelModalFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -29,7 +31,7 @@ export const LabelModal = ({
   label,
   footerButtons,
   children,
-  headerContents = 'Create New Label',
+  headerContents = 'Create new label',
 }: Props) => {
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
   const closeModal = useLabelModalStateClose(label?._id);
@@ -40,6 +42,7 @@ export const LabelModal = ({
       : useRecoilValue(atomSelectorLabelItem(label._id));
   const updateLabelItem = useLabelValueUpdate(label);
   const addLabel = useLabelStateAdd();
+  const condition = useConditionCheckLabelTitleEmpty();
 
   return (
     <LabelModalFragment>
@@ -49,7 +52,7 @@ export const LabelModal = ({
         onClose={() => closeModal()}>
         <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
-            <div className='flex flex-row items-center justify-between pl-2 text-base font-semibold text-gray-600 sm:mb-1 '>
+            <div className='flex flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
               {headerContents}
               <IconButton
                 data={dataButtonTodoModalClose}
@@ -79,6 +82,7 @@ export const LabelModal = ({
             </CancelButton>
             {footerButtons || (
               <DisableButton
+                conditionalRendering={condition}
                 data={dataButtonLabelModalAddLabel}
                 onClick={() => addLabel()}>
                 Add Label
@@ -88,6 +92,7 @@ export const LabelModal = ({
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}
+      <LabelModalWithKeyEffect />
     </LabelModalFragment>
   );
 };

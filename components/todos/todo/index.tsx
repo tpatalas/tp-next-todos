@@ -9,8 +9,10 @@ import { TodoItemFocuser } from './todoItemFocuser';
 const TodoItemDropdown = dynamic(() =>
   import('@dropdowns/todoItemDropdown').then((mod) => mod.TodoItemDropdown),
 );
-const DeleteConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/deleteConfirmModal').then((mod) => mod.DeleteConfirmModal),
+const DeleteTodoConfirmModal = dynamic(() =>
+  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then(
+    (mod) => mod.DeleteTodoConfirmModal,
+  ),
 );
 const DiscardConfirmModal = dynamic(() =>
   import('@modals/confirmModal/discardConfirmModal').then((mod) => mod.DiscardConfirmModal),
@@ -54,7 +56,7 @@ export const Todo = ({ todo, index }: Props) => {
       <ModalActionsFragment>
         <ItemTodoModal todo={todo} />
         <DiscardConfirmModal todo={todo} />
-        <DeleteConfirmModal todo={todo} />
+        <DeleteTodoConfirmModal todo={todo} />
         <MinimizedModal todo={todo} />
       </ModalActionsFragment>
     </>

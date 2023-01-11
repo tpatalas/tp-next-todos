@@ -284,11 +284,6 @@ export const useTodoIdsWithPathname = () => {
   }
 };
 
-export const useAsyncTodoItem = (todoId: Todos['_id']) => {
-  return useRecoilCallback(({ snapshot }) => () => {
-    return snapshot.getLoadable(atomQueryTodoItem(todoId)).getValue();
-  });
-};
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BREAKPOINT,
-  CONDITION,
   IDB,
   IDB_STORE,
   NOTIFICATION,
@@ -47,7 +46,12 @@ export interface TypesEditor {
 /**
  * Types Array Object
  */
-type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Settings;
+type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Settings & TypesGlobals;
+
+// GlobalTypes
+export interface TypesGlobals {
+  itemIds: TodoIds | LabelIds;
+}
 
 // Todos
 export interface Todos extends TodosEditors, TodoIds {
@@ -199,7 +203,7 @@ export interface TypesUi {
   priorityImportant: string;
   priorityUrgent: string;
   priorityNormal: string;
-  condition: CONDITION;
+  conditionalRendering: boolean;
 }
 
 export interface TypesLoadings {
@@ -255,6 +259,7 @@ export interface TypesInputAttributes {
 export interface TypesModals {
   onClickConfirm: Types['onClick'];
   onClickCancel: Types['onClick'];
+  deletingItem: string;
 }
 
 export interface TypesElement {

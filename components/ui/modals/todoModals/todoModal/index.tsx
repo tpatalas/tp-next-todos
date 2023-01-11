@@ -2,12 +2,15 @@ import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
 import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
-import { AnyModalWithKeyEffect } from '@effects/anyModalWithKeyEffect';
+import { TodoModalWithKeyEffect } from '@effects/todoModalWithKeyEffect';
 import { classNames } from '@lib/utils';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendarStates';
-import { atomTodoModalOpen, atomTodoModalMax, useTodoModalStateClose } from '@states/modalStates';
+import { atomTodoModalMax, atomTodoModalOpen, useTodoModalStateClose } from '@states/modalStates';
 import { useTodoStateAdd } from '@states/todoStates';
+import {
+    useConditionCheckTodoTitleEmpty
+} from '@states/utilsStates';
 import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -34,6 +37,7 @@ export const TodoModal = ({
   const initialFocusDiv = useRef<HTMLDivElement>(null);
   const updateCalendarItem = useCalUpdateItem(todo?._id);
   const addTodo = useTodoStateAdd();
+  const condition = useConditionCheckTodoTitleEmpty();
 
   return (
     <TodoModalFragment>
@@ -81,16 +85,17 @@ export const TodoModal = ({
             {footerButtons ||
               (typeof todo === 'undefined' && (
                 <DisableButton
+                  conditionalRendering={condition}
                   data={dataButtonTodoModalAddTodo}
                   onClick={() => addTodo()}>
-                  Add Todo
+                  Add todo
                 </DisableButton>
               ))}
           </div>
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}
-      <AnyModalWithKeyEffect todo={todo} />
+      <TodoModalWithKeyEffect />
     </TodoModalFragment>
   );
 };

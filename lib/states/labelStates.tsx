@@ -1,4 +1,4 @@
-import { NOTIFICATION } from '@data/stateObjects';
+import { CATCH_MODAL, NOTIFICATION } from '@data/stateObjects';
 import {
   createDataNewLabel,
   deleteDataLabelItem,
@@ -8,8 +8,9 @@ import { Labels, Types } from '@lib/types';
 import ObjectID from 'bson-objectid';
 import { atom, atomFamily, RecoilValue, useRecoilCallback, selectorFamily } from 'recoil';
 import { atomQueryLabels } from './atomQueries';
-import { atomLabelModalOpen } from './modalStates';
+import { atomConfirmModalDelete, atomLabelModalOpen } from './modalStates';
 import { useNotificationState } from './notificationStates';
+import { atomCatch } from './utilsStates';
 
 /*
  * Atom
@@ -31,7 +32,7 @@ export const atomSelectorLabelItem = atomFamily<Labels, Labels['_id']>({
     get:
       (label_id) =>
       ({ get }) =>
-        get(atomQueryLabels).find((label) => label._id === label_id)!,
+        get(atomQueryLabels).find((label) => label._id === label_id) || ({} as Labels),
   }),
 });
 
@@ -65,6 +66,7 @@ export const useLabelStateAdd = () => {
     reset(atomLabelNew);
     reset(atomLabelModalOpen(undefined));
     setNotification(NOTIFICATION['createdLabel']);
+    get(atomCatch(CATCH_MODAL.labelModal)) && reset(atomCatch(CATCH_MODAL.labelModal));
   });
 };
 
@@ -83,18 +85,26 @@ export const useLabelStateUpdate = (_id: Labels['_id']) => {
     updateDataLabelItem(_id, get(atomSelectorLabelItem(_id)));
     reset(atomLabelModalOpen(_id));
     setNotification(NOTIFICATION['updatedLabel']);
+    get(atomCatch(CATCH_MODAL.labelModal)) && reset(atomCatch(CATCH_MODAL.labelModal));
   });
 };
 
 export const useLabelStateRemove = (_id: Labels['_id']) => {
   const setNotification = useNotificationState();
 
-  return useRecoilCallback(({ snapshot, set }) => () => {
+  return useRecoilCallback(({ snapshot, set, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+
+    if (!get(atomConfirmModalDelete(_id))) {
+      set(atomConfirmModalDelete(_id), true);
+      !get(atomCatch(CATCH_MODAL.confirmModal)) && set(atomCatch(CATCH_MODAL.confirmModal), true);
+      return;
+    }
 
     const removeLabel = get(atomQueryLabels).filter((label) => label._id !== _id);
     set(atomQueryLabels, removeLabel);
     deleteDataLabelItem(_id);
-    setNotification(NOTIFICATION['updatedLabel']);
+    setNotification(NOTIFICATION['deleteLabel']);
+    get(atomCatch(CATCH_MODAL.labelModal)) && reset(atomCatch(CATCH_MODAL.labelModal));
   });
 };

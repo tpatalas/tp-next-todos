@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 type Props = Partial<Pick<TypesTodo, 'todo'>>;
 
-export const AnyModalWithKeyEffect = ({ todo }: Props) => {
+export const TodoModalWithKeyEffect = ({ todo }: Props) => {
   const windowCreateModalKeydownHandler = useKeyWithTodoModal(todo?._id);
 
   useEffect(() => {
