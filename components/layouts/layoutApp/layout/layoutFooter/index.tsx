@@ -3,12 +3,14 @@ import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@lib/utils';
 import { selectorSidebarOpen } from '@states/layoutStates';
+import { atomDisableScroll } from '@states/utilsStates';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterSidebar } from './footerSidebar';
 
 export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
   const isSidebarOpen = useRecoilValue(selectorSidebarOpen);
+  const isScrollDisabled = useRecoilValue(atomDisableScroll);
 
   return (
     <LayoutFooterFragment>
@@ -32,10 +34,14 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
         <FooterBodyFragment>
           <div
             className={classNames(
-              'relative mr-3 mb-3 flex w-full flex-row justify-between overflow-y-auto rounded-md bg-white shadow-md shadow-slate-200 transition-[margin-left] duration-200 ease-in-out ',
+              'relative mr-3 mb-3 flex w-full flex-row justify-between rounded-md bg-white shadow-md shadow-slate-200 transition-[margin-left] duration-200 ease-in-out ',
               isSidebarOpen ? 'ml-3 md:ml-[266px]' : 'ml-3',
             )}>
-            <main className='absolute h-full w-full'>
+            <main
+              className={classNames(
+                'absolute h-[calc(100vh-4.3rem)] w-full lg:h-full',
+                isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
+              )}>
               <div className='flex max-w-7xl justify-start pb-64'>{children}</div>
             </main>
           </div>
