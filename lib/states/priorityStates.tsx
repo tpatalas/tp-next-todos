@@ -63,7 +63,8 @@ export const selectorFilterPioirtyRankScore = selector({
         ? taskCapacityImportant
         : (taskCapacity - conditionalTaskCapacityUrgent) * 0.7;
     const conditionalTaskCapacityNormal =
-      prsNormalFiltered.length > taskCapacityUrgent
+      prsImportantFiltered.length > taskCapacityImportant ||
+      prsUrgentFiltered.length > taskCapacityUrgent
         ? taskCapacityNormal
         : taskCapacity - prsUrgentFiltered.length - prsImportantFiltered.length;
 
