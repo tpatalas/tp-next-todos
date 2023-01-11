@@ -134,7 +134,7 @@ export const useKeyWithLabelModal = (_id: Labels['_id']) => {
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
-        if (typeof _id !== 'undefined') return updateLabel();
+        if (get(atomLabelModalOpen(_id)) && typeof _id !== 'undefined') return updateLabel();
         get(atomLabelModalOpen(undefined)) && addLabel();
         return;
       default:
