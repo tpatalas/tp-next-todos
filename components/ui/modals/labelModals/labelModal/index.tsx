@@ -52,7 +52,7 @@ export const LabelModal = ({
         onClose={() => closeModal()}>
         <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
-            <div className='flex flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
+            <div className='flex w-full flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
               {headerContents}
               <IconButton
                 data={dataButtonTodoModalClose}

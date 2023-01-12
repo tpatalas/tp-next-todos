@@ -14,7 +14,9 @@ export const LayoutLogo = () => {
           </LogoFragment>
         </PrefetchRouterButton>
       </LogoContainerFragment>
-      <NetworkStatus />
+      <div className='ml-4'>
+        <NetworkStatus />
+      </div>
     </nav>
   );
 };

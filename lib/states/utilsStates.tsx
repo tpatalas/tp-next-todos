@@ -1,7 +1,7 @@
 import { CATCH_MODAL } from '@data/stateObjects';
 import { Labels, Todos } from '@lib/types';
 import equal from 'fast-deep-equal/react';
-import { atomFamily, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { atom, atomFamily, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { atomQueryLabels, atomQueryTodoItem } from './atomQueries';
 import { atomLabelNew, atomSelectorLabelItem } from './labelStates';
 import { atomTodoModalMini, atomTodoModalOpen } from './modalStates';
@@ -12,6 +12,11 @@ import { atomSelectorTodoItem, atomTodoNew } from './todoStates';
  */
 export const atomCatch = atomFamily<boolean, CATCH_MODAL>({
   key: 'atomCatch',
+  default: false,
+});
+
+export const atomDisableScroll = atom<boolean>({
+  key: 'atomDisableScroll',
   default: false,
 });
 
@@ -62,5 +67,3 @@ export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
   const labelItemCompare = useRecoilValue(atomSelectorLabelItem(_id));
   return equal(labelItem, labelItemCompare);
 };
-
-

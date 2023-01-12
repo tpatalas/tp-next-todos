@@ -6,8 +6,10 @@ import { dataButtonCreateTodo, dataLoadingLabels } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
+import { classNames } from '@lib/utils';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
 import { useTodoModalStateOpen } from '@states/modalStates';
+import { atomDisableScroll } from '@states/utilsStates';
 import dynamic from 'next/dynamic';
 import {
   forwardRef,
@@ -17,7 +19,7 @@ import {
   Fragment,
   Fragment as LayoutLogoFragment,
 } from 'react';
-import { useRecoilCallback } from 'recoil';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
 
 const LabelList = dynamic(
@@ -28,6 +30,7 @@ const LabelList = dynamic(
 );
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
+  const isScrollDisabled = useRecoilValue(atomDisableScroll);
   const openModal = useTodoModalStateOpen(undefined);
   const setSidebarOpen = useSidebarOpen();
   const isSidebarMobileOpen = useRecoilCallback(({ snapshot }) => () => {
@@ -56,9 +59,9 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
       </BackdropFragment>
       <div
         ref={ref}
-        className='fixed left-0 top-0 z-20 h-full w-72 bg-white px-3 pt-3 md:top-[4.6rem] md:flex md:w-full md:max-w-3xs md:flex-col md:bg-transparent md:pt-0 md:pl-3 md:pr-0'>
+        className='fixed left-0 top-0 z-20 w-72 bg-white pl-3 pr-0 pt-3 md:top-[4.6rem] md:z-auto md:flex md:w-full md:max-w-[16.5rem] md:flex-col md:bg-transparent md:pt-0 md:pl-3 md:pr-0'>
         <LayoutLogoFragment>
-          <div className='mb-4 mt-0 flex flex-row items-center justify-between md:hidden'>
+          <div className='mb-4 mt-0 flex flex-row items-center justify-between pr-3 md:hidden'>
             <IconButton
               data={{
                 path: ICON_MENU,
@@ -73,7 +76,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
           </div>
         </LayoutLogoFragment>
         <CreateTodoFragment>
-          <div className='mb-4 flex w-full flex-row justify-center bg-transparent'>
+          <div className='mb-4 flex w-full flex-row justify-center bg-transparent pr-3'>
             <DisableButton
               data={dataButtonCreateTodo}
               onClick={() => openModal()}>
@@ -89,7 +92,11 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
             </DisableButton>
           </div>
         </CreateTodoFragment>
-        <div className='flex h-full flex-grow flex-col bg-transparent'>
+        <div
+          className={classNames(
+            'flex h-[calc(100vh-7.8rem)] w-full flex-grow flex-col bg-transparent pr-3 md:h-[calc(100vh-8.5rem)]',
+            isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
+          )}>
           <div className='flex flex-grow flex-col'>
             <nav className='flex-1 space-y-1 pb-4'>
               <FooterSidebarMenu />
