@@ -8,9 +8,7 @@ import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHe
 import { useCalUpdateItem } from '@states/calendarStates';
 import { atomTodoModalMax, atomTodoModalOpen, useTodoModalStateClose } from '@states/modalStates';
 import { useTodoStateAdd } from '@states/todoStates';
-import {
-    useConditionCheckTodoTitleEmpty
-} from '@states/utilsStates';
+import { useConditionCheckTodoTitleEmpty } from '@states/utilsStates';
 import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -49,7 +47,7 @@ export const TodoModal = ({
           className={classNames(
             'h-80 min-h-[20rem] px-4 pt-2 pb-5 sm:relative',
             isTodoModalMax
-              ? 'sm:bottom-0 sm:h-full sm:max-h-[44rem] sm:max-w-3xl md:max-h-[54rem] md:max-w-5xl lg:max-w-6xl'
+              ? 'sm:bottom-0 sm:h-full sm:max-h-[calc(100vh-10vh)] sm:max-w-[calc(100vw-10vw)]'
               : 'sm:bottom-20 sm:h-[28rem] sm:max-w-2xl',
           )}>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
@@ -95,7 +93,7 @@ export const TodoModal = ({
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}
-      <TodoModalWithKeyEffect />
+      <TodoModalWithKeyEffect todo={todo} />
     </TodoModalFragment>
   );
 };
