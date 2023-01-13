@@ -13,10 +13,12 @@ const LabelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  title_id: {
-    type: mongoose.Types.ObjectId,
-    required: false,
-  },
+  title_id: [
+    {
+      type: mongoose.Types.ObjectId,
+      required: false,
+    },
+  ],
   user_id: {
     type: mongoose.Types.ObjectId,
     required: false,
