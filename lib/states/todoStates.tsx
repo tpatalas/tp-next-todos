@@ -20,7 +20,7 @@ import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 import { atomNetworkStatusEffect } from './miscStates';
 import { atomConfirmModalDelete, useTodoModalStateReset } from './modalStates';
 import { useNotificationState } from './notificationStates';
-import { selectorFilterPioirtyRankScore, usePriorityRankScore } from './priorityStates';
+import { selectorFilterPriorityRankScore, usePriorityRankScore } from './priorityStates';
 import {
   atomCatch,
   useConditionCheckTodoTitleEmpty,
@@ -103,7 +103,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
     ({ get }) => {
       switch (pathname) {
         case PATHNAME['app']:
-          return get(selectorFilterPioirtyRankScore);
+          return get(selectorFilterPriorityRankScore);
         case PATHNAME['urgent']:
           return get(atomQueryTodoIds).filter(
             (todo) => !todo.completed && todo.priorityLevel === 1,
@@ -283,7 +283,6 @@ export const useTodoIdsWithPathname = () => {
       return app;
   }
 };
-
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();

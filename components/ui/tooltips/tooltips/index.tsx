@@ -1,3 +1,4 @@
+import { Portal } from '@headlessui/react';
 import { classNames } from '@lib/utils';
 import { TypesTooltipAttributes, Types } from 'lib/types';
 import React, { Fragment as TooltipFragment, memo } from 'react';
@@ -32,20 +33,24 @@ export const Tooltip = memo(
       <TooltipFragment>
         <span ref={setTriggerRef}>{children}</span>
         {visible && (
-          <div
-            ref={setTooltipRef}
-            {...getTooltipProps()}
-            className={classNames(
-              tooltip && ' z-50 whitespace-nowrap rounded-md bg-gray-700 p-2 text-xs text-white opacity-90',
-            )}>
-            <span>{tooltip}</span>
-            <kbd
+          <Portal>
+            <div
+              ref={setTooltipRef}
+              {...getTooltipProps()}
               className={classNames(
-                kbd && 'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
+                tooltip &&
+                  'z-50 whitespace-nowrap rounded-md bg-gray-700 p-2 text-xs text-white opacity-90',
               )}>
-              {kbd}
-            </kbd>
-          </div>
+              <span>{tooltip}</span>
+              <kbd
+                className={classNames(
+                  kbd &&
+                    'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
+                )}>
+                {kbd}
+              </kbd>
+            </div>
+          </Portal>
         )}
       </TooltipFragment>
     );

@@ -34,7 +34,7 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
       refetchOnMutation: true,
-      refetchDelayOnMutation: 500,
+      refetchDelayOnMutation: 800,
     }),
   ],
 });

@@ -21,7 +21,7 @@ export const LabelList = () => {
               tooltip: 'Add new label',
               hoverBg: 'hover:enabled:bg-gray-200',
               padding: 'p-2',
-              color: 'hover:endabled:bg-fill-700',
+              color: 'hover:enabled:bg-fill-700',
             }}
             onClick={() => labelModalOpen()}
           />

@@ -33,8 +33,8 @@ export const selectorDynamicPriority = selectorFamily<Todos['priorityLevel'], To
   },
 });
 
-export const selectorFilterPioirtyRankScore = selector({
-  key: 'selectorFilterPioirtyRankScore',
+export const selectorFilterPriorityRankScore = selector({
+  key: 'selectorFilterPriorityRankScore',
   get: ({ get }) => {
     const taskCapacity = get(selectorTaskCompleteCapacity);
     const prsUrgentFiltered = get(atomQueryTodoIds).filter(
