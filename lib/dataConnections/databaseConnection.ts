@@ -11,6 +11,7 @@ export const databaseConnect = async () => {
       keepAlive: true,
       keepAliveInitialDelay: 300000, // in ms: 5 min total,
     };
+    mongoose.set('strictQuery', false);
     cachedConnection = await mongoose.connect(uri, options);
   }
 
