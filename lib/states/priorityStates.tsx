@@ -56,6 +56,9 @@ export const selectorFilterPriorityRankScore = selector({
     const taskCapacityImportant = Math.round(taskCapacity * 0.3);
     const taskCapacityNormal = Math.round(taskCapacity * 0.2);
 
+    const rest = taskCapacity - prsUrgentFiltered.length - prsImportantFiltered.length;
+    const taskCapacityRest = rest > 0 ? rest : taskCapacityNormal;
+
     const conditionalTaskCapacityUrgent =
       prsUrgentFiltered.length > taskCapacityUrgent ? taskCapacityUrgent : prsUrgentFiltered.length;
     const conditionalTaskCapacityImportant =
@@ -63,10 +66,10 @@ export const selectorFilterPriorityRankScore = selector({
         ? taskCapacityImportant
         : (taskCapacity - conditionalTaskCapacityUrgent) * 0.7;
     const conditionalTaskCapacityNormal =
-      prsImportantFiltered.length > taskCapacityImportant ||
+      prsImportantFiltered.length > taskCapacityImportant &&
       prsUrgentFiltered.length > taskCapacityUrgent
         ? taskCapacityNormal
-        : taskCapacity - prsUrgentFiltered.length - prsImportantFiltered.length;
+        : taskCapacityRest;
 
     const prsUrgent = prsUrgentFiltered
       .sort((todoA, todoB) => todoA.priorityRankScore! - todoB.priorityRankScore!)
