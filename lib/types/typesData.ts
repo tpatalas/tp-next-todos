@@ -10,17 +10,18 @@ export type TypesDataSvg = Partial<
 export type TypesDataButton = Partial<
   Pick<
     Types,
-    | 'className'
-    | 'disabled'
-    | 'path'
-    | 'name'
-    | 'tooltip'
-    | 'offset'
-    | 'kbd'
-    | 'placement'
+    'className' | 'disabled' | 'path' | 'name' | 'tooltip' | 'offset' | 'kbd' | 'placement'
   > & {
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & Pick<
+      TypesStyleAttributes,
+      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'containerWidth' | 'hoverBg'
+    >
+>;
+
+export type TypesDataPseudoButton = Partial<
+  Pick<Types, 'className' | 'path' | 'name' | 'tooltip' | 'offset' | 'kbd' | 'placement'> &
+    Pick<
       TypesStyleAttributes,
       'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'containerWidth' | 'hoverBg'
     >
