@@ -1,28 +1,31 @@
 import { ErrorState } from '@components/loadable/errorState';
-import { LoadingState } from '@components/loadable/loadingStates';
-import { dataLoadingTodos } from '@data/dataObjects';
 import { LayoutApp } from '@layouts/layoutApp';
 import dynamic from 'next/dynamic';
-import { Fragment as AppByIdFramgnet } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { Fragment as AppByIdFragment } from 'react';
 
+const LoadingTodos = dynamic(() =>
+  import('@components/loadable/loadingStates/loadingTodos').then((mod) => mod.LoadingTodos),
+);
 const TodoList = dynamic(() => import('components/todos/todoList').then((mod) => mod.TodoList), {
-  loading: () => <LoadingState data={dataLoadingTodos} />,
+  loading: () => <LoadingTodos />,
 });
 const FilterTodoIdsEffect = dynamic(() =>
   import('@effects/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
 );
+const ErrorBoundary = dynamic(() =>
+  import('react-error-boundary').then((mod) => mod.ErrorBoundary),
+);
 
 const AppById = () => {
   return (
-    <AppByIdFramgnet>
+    <AppByIdFragment>
       <FilterTodoIdsEffect />
       <LayoutApp>
         <ErrorBoundary fallback={<ErrorState />}>
           <TodoList />
         </ErrorBoundary>
       </LayoutApp>
-    </AppByIdFramgnet>
+    </AppByIdFragment>
   );
 };
 export default AppById;
