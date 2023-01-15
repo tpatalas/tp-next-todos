@@ -1,8 +1,7 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { LoadingState } from '@components/loadable/loadingStates';
-import { dataButtonCreateTodo, dataLoadingLabels } from '@data/dataObjects';
+import { dataButtonCreateTodo } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
@@ -22,10 +21,13 @@ import {
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
 
+const LoadingLabels = dynamic(() =>
+  import('@components/loadable/loadingStates/loadingLabels').then((mod) => mod.LoadingLabels),
+);
 const LabelList = dynamic(
   () => import('@components/labels/labelList').then((mod) => mod.LabelList),
   {
-    loading: () => <LoadingState data={dataLoadingLabels} />,
+    loading: () => <LoadingLabels />,
   },
 );
 

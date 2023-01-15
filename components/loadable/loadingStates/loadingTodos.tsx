@@ -1,10 +1,11 @@
+import { dataLoadingTodos } from '@data/dataObjects';
 import { Fragment as LoadingStateFragment } from 'react';
-import { LoadingSkeletonTodos } from './loadingSkeletons/loadingSkeletonTodos';
+import { LoadingState } from '.';
 
-export const LoadingTodos0 = () => {
+export const LoadingTodos = () => {
   return (
     <LoadingStateFragment>
-      <div className='ml-8 mt-5 space-y-10'>{Array(10).fill(<LoadingSkeletonTodos />)}</div>
+      <LoadingState data={dataLoadingTodos} />
     </LoadingStateFragment>
   );
 };

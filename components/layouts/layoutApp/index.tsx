@@ -1,4 +1,3 @@
-import { WindowBeforeunloadEffect } from '@effects/windowBeforeunloadEffect';
 import { Types } from '@lib/types';
 import dynamic from 'next/dynamic';
 import {
@@ -7,7 +6,6 @@ import {
   Fragment as LayoutAppFragment,
   Fragment as ModalActionsFragment,
 } from 'react';
-import { Layout } from './layout';
 const CreateTodoModal = dynamic(() =>
   import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
 );
@@ -23,6 +21,10 @@ const Notification = dynamic(() =>
 const LabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
 );
+const WindowBeforeunloadEffect = dynamic(() =>
+  import('@effects/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
+);
+const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
 
 type Props = Pick<Types, 'children'>;
 
