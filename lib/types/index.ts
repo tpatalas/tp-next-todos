@@ -84,7 +84,7 @@ export interface TypesTodo {
 // Labels
 export interface Labels extends LabelIds {
   parent_id?: OBJECT_ID;
-  title_id?: OBJECT_ID;
+  title_id?: OBJECT_ID[];
   name: string;
 }
 

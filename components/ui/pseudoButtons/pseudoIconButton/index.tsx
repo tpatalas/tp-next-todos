@@ -23,11 +23,11 @@ export const PseudoIconButton = ({
         data={{
           className: classNames(
             data.className,
-            'group-pseudoButton border-gray-300 bg-transparent text-gray-500 hover:bg-white focus-visible:ring-blue-500 hover:enabled:text-gray-700',
+            'group-pseudoButton border-gray-300 bg-transparent text-gray-500 hover:bg-white focus-visible:ring-blue-500 hover:text-gray-700',
             headerContents ? 'rounded-lg' : 'rounded-full',
             data.padding || 'p-2',
             data.margin || 'ml-px',
-            data.hoverBg || 'hover:enabled:bg-gray-100',
+            data.hoverBg || 'hover:bg-gray-100',
             data.display,
             data.width,
           ),
