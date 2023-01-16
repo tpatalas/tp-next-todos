@@ -8,7 +8,7 @@ import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { classNames } from '@lib/utils';
 import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
 import { useTodoModalStateOpen } from '@states/modalStates';
-import { atomDisableScroll } from '@states/utilsStates';
+import { atomDisableScroll, useConditionCheckCreateModalOpen } from '@states/utilsStates';
 import dynamic from 'next/dynamic';
 import {
   forwardRef,
@@ -38,6 +38,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isSidebarMobileOpen = useRecoilCallback(({ snapshot }) => () => {
     return snapshot.getLoadable(atomSidebarOpenMobile).getValue();
   });
+  const condition = useConditionCheckCreateModalOpen();
 
   return (
     <FooterSidebarFragment>
@@ -81,7 +82,8 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
           <div className='mb-4 flex w-full flex-row justify-center bg-transparent pr-3'>
             <DisableButton
               data={dataButtonCreateTodo}
-              onClick={() => openModal()}>
+              onClick={() => openModal()}
+              conditionalRendering={condition}>
               <span className='flex flex-row items-center'>
                 <SvgIcon
                   data={{

@@ -1,4 +1,6 @@
+import { CATCH_MODAL } from '@data/stateObjects';
 import { Types } from '@lib/types';
+import { atomCatch } from '@states/utilsStates';
 import dynamic from 'next/dynamic';
 import {
   Fragment as FooterFragment,
@@ -6,6 +8,7 @@ import {
   Fragment as LayoutAppFragment,
   Fragment as ModalActionsFragment,
 } from 'react';
+import { useRecoilValue } from 'recoil';
 const CreateTodoModal = dynamic(() =>
   import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
 );
@@ -29,6 +32,8 @@ const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
 type Props = Pick<Types, 'children'>;
 
 export const LayoutApp = ({ children }: Props) => {
+  const catchTodoModal = useRecoilValue(atomCatch(CATCH_MODAL.todoModal));
+
   return (
     <LayoutAppFragment>
       <HeaderFragment>
@@ -41,7 +46,7 @@ export const LayoutApp = ({ children }: Props) => {
           <CreateTodoModal />
           <DiscardConfirmModal />
           <MinimizedModal />
-          <LabelModal />
+          {!catchTodoModal && <LabelModal />}
         </ModalActionsFragment>
       </FooterFragment>
     </LayoutAppFragment>

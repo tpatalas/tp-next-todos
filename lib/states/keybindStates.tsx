@@ -148,7 +148,12 @@ export const useKeyWithNavigate = () => {
   const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    if (get(atomCatch(CATCH_MODAL.todoModal)) || get(atomCatch(CATCH_MODAL.confirmModal))) return;
+    if (
+      get(atomCatch(CATCH_MODAL.todoModal)) ||
+      get(atomCatch(CATCH_MODAL.confirmModal)) ||
+      get(atomCatch(CATCH_MODAL.labelModal))
+    )
+      return;
 
     switch (event.key) {
       case 'ArrowDown':
