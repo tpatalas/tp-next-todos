@@ -2,8 +2,10 @@ import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
 import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
+import { DisableScrollEffect } from '@effects/disableScrollEffect';
 import { TodoModalWithKeyEffect } from '@effects/todoModalWithKeyEffect';
 import { classNames } from '@lib/utils';
+import { LabelModal } from '@modals/labelModals/labelModal';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendarStates';
 import { atomTodoModalMax, atomTodoModalOpen, useTodoModalStateClose } from '@states/modalStates';
@@ -43,6 +45,8 @@ export const TodoModal = ({
         show={isTodoModalOpen}
         initialFocus={initialFocusDiv}
         onClose={() => closeModal()}>
+        {/* nested modal */}
+        <LabelModal label={undefined} />
         <ModalTransitionChild
           className={classNames(
             'h-80 min-h-[20rem] px-4 pt-2 pb-5 sm:relative',
@@ -94,6 +98,7 @@ export const TodoModal = ({
       </ModalTransitionRoot>
       {children}
       <TodoModalWithKeyEffect todo={todo} />
+      <DisableScrollEffect open={isTodoModalOpen} />
     </TodoModalFragment>
   );
 };

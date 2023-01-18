@@ -40,7 +40,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
               className: classNames(
                 data.size || 'h-5 w-5',
                 data.color || 'fill-gray-500',
-                data.color && !data.disabled && '[.group-button:hover_&]:fill-gray-700',
+                !data.disabled && '[.group-button:hover_&]:fill-gray-700',
               ),
             }}
           />

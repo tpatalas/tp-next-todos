@@ -183,6 +183,7 @@ export interface TypesReactChildren {
   headerButtons: Types['children'];
   headerIcons: Types['children'];
   headerContents: Types['children'];
+  nestedModal: Types['children'];
 }
 
 export interface TypesUi {

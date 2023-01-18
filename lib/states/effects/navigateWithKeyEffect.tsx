@@ -17,6 +17,7 @@ export const NavigateWithKeyEffect = ({ index, divFocus, todo }: Props) => {
   const isOnBlur = useRecoilValue(atomOnBlur);
   const isTodoModalOpen = useRecoilValue(atomCatch(CATCH_MODAL.todoModal));
   const isConfirmModalOpen = useRecoilValue(atomCatch(CATCH_MODAL.confirmModal));
+  const isLabelModalOpen = useRecoilValue(atomCatch(CATCH_MODAL.labelModal));
 
   const navigateCondition = useRecoilCallback(({ snapshot, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -34,7 +35,7 @@ export const NavigateWithKeyEffect = ({ index, divFocus, todo }: Props) => {
       isOnBlur && reset(atomOnBlur);
       return;
     }
-    if (isTodoModalOpen || isConfirmModalOpen) return; // Cannot use useRecoilCallback with useEffect
+    if (isTodoModalOpen || isConfirmModalOpen || isLabelModalOpen) return; // Cannot use useRecoilCallback with useEffect
     if (currentFocus === index) {
       divFocus.current?.focus();
     }

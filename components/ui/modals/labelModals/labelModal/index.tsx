@@ -35,7 +35,7 @@ export const LabelModal = ({
 }: Props) => {
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
   const closeModal = useLabelModalStateClose(label?._id);
-  const initialFocusDiv = useRef<HTMLInputElement>(null);
+  const initialFocusInput = useRef<HTMLInputElement>(null);
   const labelItem =
     typeof label === 'undefined'
       ? useRecoilValue(atomLabelNew)
@@ -48,7 +48,7 @@ export const LabelModal = ({
     <LabelModalFragment>
       <ModalTransitionRoot
         show={isLabelModalOpen}
-        initialFocus={initialFocusDiv}
+        initialFocus={initialFocusInput}
         onClose={() => closeModal()}>
         <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
@@ -71,7 +71,7 @@ export const LabelModal = ({
               name='label'
               value={labelItem.name}
               onChange={(event) => updateLabelItem(event.target.value)}
-              ref={initialFocusDiv}
+              ref={initialFocusInput}
             />
           </div>
           <div className='flex flex-row justify-end pt-4'>
@@ -92,7 +92,7 @@ export const LabelModal = ({
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}
-      <LabelModalWithKeyEffect />
+      <LabelModalWithKeyEffect label={label} />
     </LabelModalFragment>
   );
 };
