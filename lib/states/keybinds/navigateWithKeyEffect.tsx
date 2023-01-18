@@ -30,7 +30,7 @@ export const NavigateWithKeyEffect = ({ index, divFocus, todo }: Props) => {
     }
     if (
       isOnBlur ||
-      (get(atomTodoModalOpen(todo._id)) && get(atomQueryTodoItem(todo._id)).completed)
+      (get(atomTodoModalOpen(todo._id)) && get(atomQueryTodoItem(todo._id)).isCompleted)
     ) {
       divFocus.current?.blur();
       isOnBlur && reset(atomOnBlur);

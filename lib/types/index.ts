@@ -155,6 +155,8 @@ type CollectTypesMISC = TypesIndexedDB &
   TypesTooltipAttributes &
   TypesSvgIconAttributes &
   TypesInputAttributes &
+  TypesComboboxAttributes &
+  TypesDropdownAttributes &
   TypesModals &
   TypesElement &
   TypesEffects &
@@ -228,7 +230,7 @@ export interface TypesStyleAttributes {
   menuWidth: string;
   display: string;
   width: string;
-  containerWidth: string;
+  container: string;
   hoverBg: string;
 }
 
@@ -251,9 +253,20 @@ export interface TypesSvgIconAttributes {
   isAriaHidden: boolean;
 }
 
+export interface TypesComboboxAttributes {
+  selected: unknown[];
+  hasComboBoxBoardStyle: boolean;
+  comboBoxInputButton: Types['children'];
+}
+
+export interface TypesDropdownAttributes {
+  hasDropdownBoardStyle: boolean;
+}
+
 export interface TypesInputAttributes {
   isChecked: boolean;
   onChange: (value: unknown) => void;
+  onChangeTypeNever: (value: never) => void;
 }
 
 export interface TypesModals {

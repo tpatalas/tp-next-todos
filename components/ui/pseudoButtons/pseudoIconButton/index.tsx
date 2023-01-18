@@ -18,7 +18,7 @@ export const PseudoIconButton = ({
   children = data.name,
 }: Props) => {
   return (
-    <span className={data.containerWidth}>
+    <span className={data.container}>
       <PseudoButton
         data={{
           className: classNames(

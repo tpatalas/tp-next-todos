@@ -18,8 +18,8 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
 
     return (
       <Tooltip
-        tooltip={isClicked ? undefined : data.tooltip}
-        kbd={isClicked ? undefined : data.kbd}
+        tooltip={isClicked || data.isDisabled ? undefined : data.tooltip}
+        kbd={isClicked || data.isDisabled ? undefined : data.kbd}
         placement={data.placement}
         offset={data.offset}>
         <button
