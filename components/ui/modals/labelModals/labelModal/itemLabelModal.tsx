@@ -1,9 +1,9 @@
 import { DisableButton } from '@buttons/disableButton';
 import { dataButtonLabelModalUpdateLabel } from '@data/dataObjects';
-import { LabelModalWithKeyEffect } from '@effects/labelModalWithKeyEffect';
 import { Types } from '@lib/types';
-import { useLabelStateUpdate } from '@states/labelStates';
-import { useConditionCompareLabelItemsEqual } from '@states/utilsStates';
+import { LabelModalWithKeyEffect } from '@states/keybinds/labelModalWithKeyEffect';
+import { useLabelStateUpdate } from '@states/labels/hooks';
+import { useConditionCompareLabelItemsEqual } from '@states/utils/hooks';
 import { Fragment } from 'react';
 import { LabelModal } from '.';
 

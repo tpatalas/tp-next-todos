@@ -1,6 +1,6 @@
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/dropdown/dropdownMenuItem';
-import { useTodoModalStateOpen } from '@states/modalStates';
+import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { TypesTodo } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';

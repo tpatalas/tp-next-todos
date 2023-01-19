@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { classNames } from '@states/utils';
 import { Types } from 'lib/types';
 import { Fragment } from 'react';
-import { classNames } from '@lib/utils';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'className'>>;
 

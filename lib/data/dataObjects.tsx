@@ -8,7 +8,7 @@ import {
   TypesDataPriority,
   TypesDataSvg,
 } from '@lib/types/typesData';
-import { classNames } from '@lib/utils';
+import { classNames } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
 import {
   ICON_CHEVRON_LEFT,

@@ -1,16 +1,14 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
-import {
-  dataButtonCalendarNextMonth,
-  dataButtonCalendarPrevMonth,
-} from '@data/dataObjects';
+import { dataButtonCalendarNextMonth, dataButtonCalendarPrevMonth } from '@data/dataObjects';
 import { ICON_TODAY } from '@data/materialSymbols';
 import { CALENDAR } from '@data/stateObjects';
 import { STYLE_CALENDAR_COL_START } from '@data/stylePreset';
 import { Types } from '@lib/types';
-import { classNames } from '@lib/utils';
-import { atomDayPickerUpdater, atomCurrentMonth, useCalState, useCalUpdateItem, useCalSelectDay } from '@states/calendarStates';
-import { atomSelectorTodoItem } from '@states/todoStates';
+import { useCalState, useCalUpdateItem, useCalSelectDay } from '@states/calendars/hooks';
+import { atomDayPickerUpdater, atomCurrentMonth } from '@states/calendars/states';
+import { atomSelectorTodoItem } from '@states/todos/states';
+import { classNames } from '@states/utils';
 import {
   format,
   getDay,
@@ -54,10 +52,7 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
             data={{
               path: ICON_TODAY,
               tooltip: 'Today',
-              disabled:
-                isToday(selectedDay) && isThisMonth(new Date(currentMonth))
-                  ? true
-                  : false,
+              disabled: isToday(selectedDay) && isThisMonth(new Date(currentMonth)) ? true : false,
             }}
             onClick={() => {
               setCalendar(CALENDAR['today']);
@@ -85,10 +80,7 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
         {days!.map((day, dayIdx) => (
           <div
             key={day.toString()}
-            className={classNames(
-              dayIdx === 0 && STYLE_CALENDAR_COL_START[getDay(day)],
-              'py-1',
-            )}>
+            className={classNames(dayIdx === 0 && STYLE_CALENDAR_COL_START[getDay(day)], 'py-1')}>
             <Button
               onClick={() => {
                 if (isPast(day) && !isToday(day)) return;

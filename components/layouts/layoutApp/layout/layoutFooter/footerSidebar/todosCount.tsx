@@ -1,5 +1,5 @@
 import { PATHNAME } from '@data/stateObjects';
-import { selectorFilterTodoIdsByPathname } from '@states/todoStates';
+import { selectorFilterTodoIdsByPathname } from '@states/todos/states';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 

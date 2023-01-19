@@ -1,5 +1,5 @@
-import { renderWithRecoilRoot } from '@lib/utils';
-import { atomNetworkStatusEffect } from '@states/miscStates';
+import { atomNetworkStatusEffect } from '@states/misc/states';
+import { renderWithRecoilRoot } from '@states/utils';
 import { screen } from '@testing-library/react';
 import { snapshot_UNSTABLE } from 'recoil';
 import { NetworkStatus } from '../networkStatus';

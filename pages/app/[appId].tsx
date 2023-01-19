@@ -10,7 +10,7 @@ const TodoList = dynamic(() => import('components/todos/todoList').then((mod) =>
   loading: () => <LoadingTodos />,
 });
 const FilterTodoIdsEffect = dynamic(() =>
-  import('@effects/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
+  import('@states/todos/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
 );
 const ErrorBoundary = dynamic(() =>
   import('react-error-boundary').then((mod) => mod.ErrorBoundary),

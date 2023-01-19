@@ -1,9 +1,8 @@
+import { classNames } from '@states/utils';
+
 /**
  * Button
  */
-
-import { classNames } from '@lib/utils';
-
 // Base
 export const STYLE_BUTTON_BASE =
   'inline-flex items-center justify-center rounded-md border text-sm font-medium leading-4 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';

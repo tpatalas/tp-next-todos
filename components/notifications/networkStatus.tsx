@@ -1,6 +1,6 @@
 import { Button as NetworkStatusReadOnlyButton } from '@buttons/button';
 import { dataButtonNetworkStatus, dataSvgNetworkStatus } from '@data/dataObjects';
-import { atomNetworkStatusEffect } from '@states/miscStates';
+import { atomNetworkStatusEffect } from '@states/misc/states';
 import dynamic from 'next/dynamic';
 import { Fragment as NetworkStatusFragment } from 'react';
 import { useRecoilValue } from 'recoil';

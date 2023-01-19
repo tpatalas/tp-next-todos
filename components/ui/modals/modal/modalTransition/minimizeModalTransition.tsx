@@ -1,8 +1,8 @@
 import { Transition } from '@headlessui/react';
 import { Types } from 'lib/types';
 import { Fragment } from 'react';
-import { classNames } from '@lib/utils';
 import { TypesDataMinimizedModalTransition } from '@lib/types/typesData';
+import { classNames } from '@states/utils';
 
 type Props = { data: TypesDataMinimizedModalTransition } & Pick<Types, 'show' | 'children'>;
 

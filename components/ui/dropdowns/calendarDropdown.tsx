@@ -8,9 +8,13 @@ import {
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
-import { classNames } from '@lib/utils';
-import { useCalResetDayUpdater, useCalResetDateItemOnly, useCalResetDateAll } from '@states/calendarStates';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todoStates';
+import {
+  useCalResetDayUpdater,
+  useCalResetDateItemOnly,
+  useCalResetDateAll,
+} from '@states/calendars/hooks';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todos/states';
+import { classNames } from '@states/utils';
 import { Calendar } from '@ui/calendars/calendar';
 import { format } from 'date-fns';
 import { Types } from 'lib/types';
@@ -52,9 +56,7 @@ export const CalendarDropdown = ({
       }}
       headerContents={
         <HeaderContentsFragment>
-          {noDaySelected
-            ? 'Due date'
-            : format(new Date(todoItem.dueDate as Date), 'MMM dd, yy')}
+          {noDaySelected ? 'Due date' : format(new Date(todoItem.dueDate as Date), 'MMM dd, yy')}
         </HeaderContentsFragment>
       }>
       <div className='p-2'>

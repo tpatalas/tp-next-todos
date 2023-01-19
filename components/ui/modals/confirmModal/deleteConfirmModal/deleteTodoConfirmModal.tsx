@@ -1,6 +1,7 @@
-import { atomQueryTodoItem } from '@atomQueries/index';
 import { Types } from '@lib/types';
-import { atomConfirmModalDelete, useTodoModalConfirmStateDelete } from '@states/modalStates';
+import { useTodoModalConfirmStateDelete } from '@states/modals/hooks';
+import { atomConfirmModalDelete } from '@states/modals/states';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';

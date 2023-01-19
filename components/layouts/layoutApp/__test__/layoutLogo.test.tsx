@@ -1,4 +1,4 @@
-import { renderWithRecoilRoot } from '@lib/utils';
+import { renderWithRecoilRoot } from '@states/utils';
 import { screen } from '@testing-library/react';
 import { LayoutLogo } from '../layoutLogo';
 

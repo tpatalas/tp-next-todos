@@ -5,10 +5,12 @@ import { dataButtonCreateTodo } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
-import { classNames } from '@lib/utils';
-import { atomSidebarOpenMobile, useSidebarOpen } from '@states/layoutStates';
-import { useTodoModalStateOpen } from '@states/modalStates';
-import { atomDisableScroll, useConditionCheckCreateModalOpen } from '@states/utilsStates';
+import { useSidebarOpen } from '@states/layouts/hooks';
+import { atomSidebarOpenMobile } from '@states/layouts/states';
+import { useTodoModalStateOpen } from '@states/modals/hooks';
+import { classNames } from '@states/utils';
+import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
+import { atomDisableScroll } from '@states/utils/states';
 import dynamic from 'next/dynamic';
 import {
   forwardRef,

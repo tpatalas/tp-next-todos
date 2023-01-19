@@ -3,8 +3,9 @@ import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_CLOSE, ICON_MENU, ICON_SEARCH } from '@data/materialSymbols';
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
-import { classNames } from '@lib/utils';
-import { atomSearchInput, useSidebarOpen } from '@states/layoutStates';
+import { useSidebarOpen } from '@states/layouts/hooks';
+import { atomSearchInput } from '@states/layouts/states';
+import { classNames } from '@states/utils';
 import Image from 'next/image';
 import {
   Fragment,
@@ -59,7 +60,7 @@ export const LayoutHeader = () => {
               <div className='relative flex flex-1 flex-row items-center justify-between'>
                 <form
                   className={classNames(
-                    'md:mr-15 sm:mr-10 relative flex w-full max-w-xl items-center rounded-md border border-transparent text-gray-400 drop-shadow-sm focus-within:border-slate-200 focus-within:border-opacity-50 focus-within:text-gray-600 focus-within:shadow-lg focus-within:shadow-slate-300/60 lg:mr-10 xl:max-w-2xl',
+                    'md:mr-15 relative flex w-full max-w-xl items-center rounded-md border border-transparent text-gray-400 drop-shadow-sm focus-within:border-slate-200 focus-within:border-opacity-50 focus-within:text-gray-600 focus-within:shadow-lg focus-within:shadow-slate-300/60 sm:mr-10 lg:mr-10 xl:max-w-2xl',
                   )}
                   action='#'
                   method='GET'>

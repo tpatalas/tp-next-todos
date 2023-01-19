@@ -1,6 +1,6 @@
 import { CATCH_MODAL } from '@data/stateObjects';
 import { Types } from '@lib/types';
-import { atomCatch } from '@states/utilsStates';
+import { atomCatch } from '@states/utils/states';
 import dynamic from 'next/dynamic';
 import {
   Fragment as FooterFragment,
@@ -25,7 +25,7 @@ const LabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
 );
 const WindowBeforeunloadEffect = dynamic(() =>
-  import('@effects/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
+  import('@states/misc/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
 const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
 

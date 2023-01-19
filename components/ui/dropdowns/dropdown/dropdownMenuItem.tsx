@@ -1,15 +1,23 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { classNames } from '@lib/utils';
-import { selectorActiveMenuItem } from '@states/miscStates';
+import { selectorActiveMenuItem } from '@states/misc/states';
+import { classNames } from '@states/utils';
 import { Tooltip } from '@tooltips/tooltips';
 import { useRecoilValue } from 'recoil';
 
 type Props = Partial<
   Pick<
     Types,
-    'tooltip' | 'kbd' | 'onClick' | 'children' | 'disableCloseOnClick' | 'path' | 'padding' | 'size' | 'color'
+    | 'tooltip'
+    | 'kbd'
+    | 'onClick'
+    | 'children'
+    | 'disableCloseOnClick'
+    | 'path'
+    | 'padding'
+    | 'size'
+    | 'color'
   >
 >;
 

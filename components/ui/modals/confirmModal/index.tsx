@@ -1,11 +1,11 @@
 import { Button as CancelButton } from '@buttons/button';
 import { IconButton as CloseIconButton } from '@buttons/iconButton';
 import { dataButtonConfirmModalCancel, dataButtonConfirmModalCancelIcon } from '@data/dataObjects';
+import { useModalConfirmStateCancel } from '@states/modals/hooks';
 import { Types } from 'lib/types';
 import { Fragment as ConfirmModalFragment, useRef } from 'react';
 import { ModalTransitionChild } from '../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../modal/modalTransition/modalTransitionRoot';
-import { useModalConfirmStateCancel } from '@states/modalStates';
 
 type Props = Pick<Types, 'show' | 'headerContents' | 'headerIcons' | 'footerButtons'> &
   Partial<

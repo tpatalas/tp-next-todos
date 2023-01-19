@@ -1,9 +1,9 @@
-import { SidebarMobileResetEffect } from '@effects/sidebarMobileResetEffect';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { classNames } from '@lib/utils';
-import { selectorSidebarOpen } from '@states/layoutStates';
-import { atomDisableScroll } from '@states/utilsStates';
+import { SidebarMobileResetEffect } from '@states/layouts/sidebarMobileResetEffect';
+import { selectorSidebarOpen } from '@states/layouts/states';
+import { classNames } from '@states/utils';
+import { atomDisableScroll } from '@states/utils/states';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterSidebar } from './footerSidebar';

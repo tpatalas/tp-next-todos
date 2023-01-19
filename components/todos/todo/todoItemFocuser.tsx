@@ -1,6 +1,6 @@
-import { NavigateWithKeyEffect } from '@effects/navigateWithKeyEffect';
-import { useFocusOnClick } from '@states/focusStates';
-import { useKeyWithFocus } from '@states/keybindStates';
+import { useFocusOnClick } from '@states/focus/hooks';
+import { useKeyWithFocus } from '@states/keybinds/hooks';
+import { NavigateWithKeyEffect } from '@states/keybinds/navigateWithKeyEffect';
 import { Types, TypesTodo } from 'lib/types';
 import { useRef } from 'react';
 

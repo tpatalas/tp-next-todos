@@ -1,5 +1,5 @@
 import { Todos, Types } from '@lib/types';
-import { queries } from '@lib/utils';
+import { queries } from '@states/utils';
 
 export const getDataTodoIds = async ({
   model,
