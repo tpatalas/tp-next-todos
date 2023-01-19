@@ -57,7 +57,7 @@ export const PriorityButton = ({ todo, data, onClick }: Props) => {
           padding: data.padding,
         }}
         headerContents={
-          data.initialVisible &&
+          data.isInitiallyVisible &&
           classNames(
             levelImportant && !priorityImportant && data.priorityNormal,
             levelImportant && priorityImportant && data.priorityImportant,

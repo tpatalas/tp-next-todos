@@ -39,7 +39,7 @@ export const Todo = ({ todo, index }: Props) => {
             <TodoItem todo={todo} />
           </TodoItemFocuser>
           <TodoItemDropdown
-            data={{ initialVisible: false }}
+            data={{ isInitiallyVisible: false }}
             todo={todo}>
             <div className='py-1'>
               <DropdownMenuItem

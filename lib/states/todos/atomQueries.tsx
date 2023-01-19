@@ -15,7 +15,7 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
       storeName: IDB_STORE['todos'],
       queryKey: 'todoIds',
       queryFunction: () => getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
-      refetchOnMutation: true,
+      isRefetchingOnMutation: true,
     }),
   ],
 });
@@ -29,7 +29,7 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
       storeName: IDB_STORE['todos'],
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
-      refetchOnMutation: true,
+      isRefetchingOnMutation: true,
       refetchDelayOnMutation: 800,
     }),
   ],

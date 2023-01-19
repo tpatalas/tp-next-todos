@@ -38,14 +38,14 @@ export const selectorFilterPriorityRankScore = selector({
   get: ({ get }) => {
     const taskCapacity = get(selectorTaskCompleteCapacity);
     const prsUrgentFiltered = get(atomQueryTodoIds).filter(
-      (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'],
+      (todo) => !todo.isCompleted && todo.priorityLevel === PRIORITY_LEVEL['urgent'],
     );
     const prsImportantFiltered = get(atomQueryTodoIds).filter(
-      (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'],
+      (todo) => !todo.isCompleted && todo.priorityLevel === PRIORITY_LEVEL['important'],
     );
     const prsNormalFiltered = get(atomQueryTodoIds).filter(
       (todo) =>
-        !todo.completed &&
+        !todo.isCompleted &&
         todo.priorityLevel !== PRIORITY_LEVEL['urgent'] &&
         todo.priorityLevel !== PRIORITY_LEVEL['important'],
     );
@@ -93,7 +93,7 @@ export const selectorTaskCompleteCapacity = selector({
     const fiveDaysFromToday = subDays(new Date(), 5);
     const todoIdsCompletedLastFiveDays = get(atomQueryTodoIds).filter((todo) => {
       const fiveDaysFromTodayCompleted = new Date(todo.completedDate!) > fiveDaysFromToday;
-      return todo.completed && fiveDaysFromTodayCompleted;
+      return todo.isCompleted && fiveDaysFromTodayCompleted;
     });
     const taskCapacity = todoIdsCompletedLastFiveDays.length / 5;
     return taskCapacity < 5 ? 7 : taskCapacity;
@@ -111,7 +111,9 @@ export const selectorPrsDueDate = selectorFamily<number, Todos['_id']>({
       const taskCapacityPerDay = get(selectorTaskCompleteCapacity);
       const todoItem = get(selectorDynamicTodoItem(todoId));
       const priority = get(selectorDynamicPriority(todoId)) as PRIORITY_LEVEL;
-      const totalUncompletedTodos = get(atomQueryTodoIds).filter((todo) => !todo.completed).length;
+      const totalUncompletedTodos = get(atomQueryTodoIds).filter(
+        (todo) => !todo.isCompleted,
+      ).length;
       const dueDate = todoItem.dueDate != null && todoItem.dueDate;
       const daysToDueDate = differenceInDays(new Date(dueDate as Date), new Date()) + 1;
       const overDueFactor = Math.abs(daysToDueDate) * 200;

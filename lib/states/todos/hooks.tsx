@@ -117,7 +117,7 @@ export const useTodoStateCompletedDate = (todoId: Todos['_id']) => {
 
     set(atomQueryTodoItem(todoId), {
       ...get(atomQueryTodoItem(todoId)),
-      completedDate: get(atomQueryTodoItem(todoId)).completed ? new Date() : null,
+      completedDate: get(atomQueryTodoItem(todoId)).isCompleted ? new Date() : null,
     });
   });
 };
@@ -132,7 +132,7 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
 
     set(atomQueryTodoItem(todoId), {
       ...get(atomQueryTodoItem(todoId)),
-      completed: !get(atomQueryTodoItem(todoId)).completed,
+      isCompleted: !get(atomQueryTodoItem(todoId)).isCompleted,
     });
 
     setTimeout(() => {
@@ -153,11 +153,11 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
     updateCompletedDate();
     completeDataTodo(
       todoId,
-      get(atomQueryTodoItem(todoId)).completed,
+      get(atomQueryTodoItem(todoId)).isCompleted,
       get(atomQueryTodoItem(todoId)).completedDate,
     );
 
-    get(atomQueryTodoItem(todoId)).completed
+    get(atomQueryTodoItem(todoId)).isCompleted
       ? setNotification(NOTIFICATION['completeTodo'])
       : setNotification(NOTIFICATION['unCompleteTodo']);
   };

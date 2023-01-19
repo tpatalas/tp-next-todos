@@ -3,21 +3,21 @@ import { Types } from 'lib/types';
 import { Button } from './button';
 
 type Props = { data: TypesDataButton } & Partial<
-  Pick<Types, 'className' | 'onClick' | 'conditionalRendering' | 'children'>
+  Pick<Types, 'className' | 'onClick' | 'isConditionalRendering' | 'children'>
 >;
 
 export const DisableButton = ({
   data,
   onClick,
-  conditionalRendering,
+  isConditionalRendering,
   children = data.name,
 }: Props) => {
   return (
     <Button
       data={{
-        disabled: conditionalRendering ? true : false,
-        kbd: conditionalRendering ? '' : data.kbd,
-        tooltip: conditionalRendering ? '' : data.tooltip,
+        isDisabled: isConditionalRendering ? true : false,
+        kbd: isConditionalRendering ? '' : data.kbd,
+        tooltip: isConditionalRendering ? '' : data.tooltip,
         className: data.className,
       }}
       onClick={onClick}>

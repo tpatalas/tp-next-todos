@@ -9,10 +9,10 @@ import { Editor, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
 export const EditorAutoFocusEffect = ({
-  autoFocus,
+  isAutoFocus,
   editor,
 }: {
-  autoFocus: Types['autoFocus'];
+  isAutoFocus: Types['isAutoFocus'];
   editor: CustomEditor;
 }) => {
   const router = useRouter();
@@ -22,13 +22,13 @@ export const EditorAutoFocusEffect = ({
   useEffect(() => {
     ReactEditor.blur(editor);
 
-    if (!autoFocus || isCatchConfirmModal || completedPath) return;
+    if (!isAutoFocus || isCatchConfirmModal || completedPath) return;
 
     setTimeout(() => {
       ReactEditor.focus(editor);
       Transforms.select(editor, Editor.end(editor, []));
     }, 100);
-  }, [autoFocus, completedPath, editor, isCatchConfirmModal]);
+  }, [isAutoFocus, completedPath, editor, isCatchConfirmModal]);
 
   return null;
 };

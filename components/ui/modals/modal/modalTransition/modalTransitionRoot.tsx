@@ -2,7 +2,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Types } from 'lib/types';
 import { Fragment } from 'react';
 
-type Props = Pick<Types, 'children' | 'show' | 'onClose'> & Partial<Pick<Types, 'initialFocus' | 'children'>>;
+type Props = Pick<Types, 'children' | 'show' | 'onClose'> &
+  Partial<Pick<Types, 'initialFocus' | 'children'>>;
 
 export const ModalTransitionRoot = ({ children, show, onClose, initialFocus }: Props) => {
   return (

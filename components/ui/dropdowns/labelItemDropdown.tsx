@@ -9,7 +9,7 @@ import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 
 type Props = { data: TypesDataDropdown } & Pick<Types, 'label'>;
 
-export const LabelItemDropdown = ({ label, data: { initialVisible } }: Props) => {
+export const LabelItemDropdown = ({ label, data: { isInitiallyVisible } }: Props) => {
   const openModal = useLabelModalStateOpen(label?._id);
   const removeLabel = useLabelStateRemove(label._id);
 
@@ -21,7 +21,7 @@ export const LabelItemDropdown = ({ label, data: { initialVisible } }: Props) =>
         padding: 'p-2',
         color: 'fill-gray-500 group-hover:fill-gray-700',
         hoverBg: 'hover:bg-gray-200',
-        initialVisible: initialVisible,
+        isInitiallyVisible: isInitiallyVisible,
       }}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}

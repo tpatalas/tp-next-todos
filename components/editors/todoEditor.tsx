@@ -11,7 +11,7 @@ export const TodoEditors = ({ todo }: Props) => {
       <EditorComposer
         placeholder='Todo Name'
         titleName='title'
-        autoFocus={true}
+        isAutoFocus={true}
         todo={todo}
       />
       <EditorComposer

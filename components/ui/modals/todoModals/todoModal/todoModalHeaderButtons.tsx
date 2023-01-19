@@ -38,7 +38,7 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
         <HeaderFragment>
           {typeof todo !== 'undefined' && (
             <TodoItemDropdown
-              data={{ initialVisible: true }}
+              data={{ isInitiallyVisible: true }}
               todo={todo}
             />
           )}

@@ -82,7 +82,7 @@ export const dataButtonGlobalClose: TypesDataButton = {
 
 // Network Status
 export const dataButtonNetworkStatus: TypesDataButton = {
-  disabled: true,
+  isDisabled: true,
   className:
     'break-word inline-flex w-auto items-center justify-center rounded-md border py-1 px-2 text-sm  shadow-sm',
   tooltip: (
@@ -222,20 +222,20 @@ export const dataButtonLabelModalUpdateLabel: TypesDataButton = {
 // .TodoModal
 export const dataPriorityTodoModalImportant: TypesDataPriority = {
   priorityLevel: PRIORITY_LEVEL['important'],
-  initialVisible: false,
+  isInitiallyVisible: false,
   margin: '-ml-1',
 };
 
 export const dataPriorityTodoModalUrgent: TypesDataPriority = {
   priorityLevel: PRIORITY_LEVEL['urgent'],
-  initialVisible: false,
+  isInitiallyVisible: false,
   margin: '-ml-1 mr-1',
 };
 
 // Dropdown
 export const dataPriorityDropdownImportant: TypesDataPriority = {
   priorityLevel: PRIORITY_LEVEL['important'],
-  initialVisible: true,
+  isInitiallyVisible: true,
   priorityImportant: 'Mark as normal',
   priorityNormal: 'Mark as important',
   padding: 'px-4 py-2',
@@ -246,7 +246,7 @@ export const dataPriorityDropdownImportant: TypesDataPriority = {
 
 export const dataPriorityDropdownUrgent: TypesDataPriority = {
   priorityLevel: PRIORITY_LEVEL['urgent'],
-  initialVisible: true,
+  isInitiallyVisible: true,
   priorityUrgent: 'Mark as normal',
   priorityNormal: 'Mark as urgent',
   padding: 'px-4 py-2',

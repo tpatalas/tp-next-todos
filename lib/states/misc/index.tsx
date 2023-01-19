@@ -13,8 +13,8 @@ export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({
   effects: (breakpoint) => [
     mediaQueryEffect({
       breakpoint: breakpoint,
-      stateOverBreakpoint: true,
-      stateUnderBreakpoint: false,
+      isStateOverBreakpoint: true,
+      isStateUnderBreakpoint: false,
     }),
   ],
 });

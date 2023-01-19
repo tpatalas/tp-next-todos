@@ -14,7 +14,7 @@ export const atomQueryLabels = atom<Labels[]>({
       storeName: IDB_STORE['labels'],
       queryKey: 'labels',
       queryFunction: () => getDataLabels(),
-      refetchOnMutation: false, // fetching the list of labels is too expensive.
+      isRefetchingOnMutation: false, // fetching the list of labels is too expensive.
     }),
   ],
 });

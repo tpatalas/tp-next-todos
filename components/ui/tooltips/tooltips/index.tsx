@@ -13,8 +13,8 @@ export const Tooltip = memo(
     delayShow = 50,
     offset = [0, 25],
     placement = 'bottom',
-    onVisible,
-    closeOnTriggerHidden,
+    isVisible,
+    isCloseOnTriggerHidden,
     tooltip,
     kbd,
   }: Props) => {
@@ -25,8 +25,8 @@ export const Tooltip = memo(
       offset: offset,
       interactive: false,
       placement: placement,
-      visible: onVisible,
-      closeOnTriggerHidden: closeOnTriggerHidden,
+      visible: isVisible,
+      closeOnTriggerHidden: isCloseOnTriggerHidden,
     });
 
     return (
