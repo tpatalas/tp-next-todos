@@ -1,6 +1,7 @@
-import { atomQueryLabels } from '@atomQueries/index';
 import { Labels, Types } from '@lib/types';
-import { atomConfirmModalDelete, useLabelModalConfirmStateDelete } from '@states/modalStates';
+import { atomQueryLabels } from '@states/labels/states';
+import { useLabelModalConfirmStateDelete } from '@states/modals/hooks';
+import { atomConfirmModalDelete } from '@states/modals/states';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';

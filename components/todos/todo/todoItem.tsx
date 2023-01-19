@@ -1,4 +1,3 @@
-import { atomQueryTodoItem } from '@atomQueries/index';
 import { SvgIcon } from '@components/icons/svgIcon';
 import {
   dataSvgCalendarDueDate,
@@ -8,9 +7,10 @@ import {
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
-import { classNames } from '@lib/utils';
-import { useTodoModalStateOpen } from '@states/modalStates';
-import { useTodoStateComplete } from '@states/todoStates';
+import { useTodoModalStateOpen } from '@states/modals/hooks';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { useTodoStateComplete } from '@states/todos/hooks';
+import { classNames } from '@states/utils';
 import { format } from 'date-fns';
 import { Fragment as TodoItemFragment } from 'react';
 import { useRecoilValue } from 'recoil';

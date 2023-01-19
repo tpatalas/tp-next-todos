@@ -5,16 +5,13 @@ import {
   dataButtonTodoModalCancel,
   dataButtonTodoModalClose,
 } from '@data/dataObjects';
-import { LabelModalWithKeyEffect } from '@effects/labelModalWithKeyEffect';
-import { classNames } from '@lib/utils';
-import {
-  atomLabelNew,
-  atomSelectorLabelItem,
-  useLabelStateAdd,
-  useLabelValueUpdate,
-} from '@states/labelStates';
-import { atomLabelModalOpen, useLabelModalStateClose } from '@states/modalStates';
-import { useConditionCheckLabelTitleEmpty } from '@states/utilsStates';
+import { LabelModalWithKeyEffect } from '@states/keybinds/labelModalWithKeyEffect';
+import { useLabelValueUpdate, useLabelStateAdd } from '@states/labels/hooks';
+import { atomLabelNew, atomSelectorLabelItem } from '@states/labels/states';
+import { useLabelModalStateClose } from '@states/modals/hooks';
+import { atomLabelModalOpen } from '@states/modals/states';
+import { classNames } from '@states/utils';
+import { useConditionCheckLabelTitleEmpty } from '@states/utils/hooks';
 import { Types } from 'lib/types';
 import { Fragment as LabelModalFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';

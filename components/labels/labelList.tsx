@@ -1,7 +1,7 @@
-import { atomQueryLabels } from '@atomQueries/index';
 import { IconButton } from '@buttons/iconButton';
 import { ICON_NEW_LABEL } from '@data/materialSymbols';
-import { useLabelModalStateOpen } from '@states/modalStates';
+import { atomQueryLabels } from '@states/labels/states';
+import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { LabelItem } from './labelItem';

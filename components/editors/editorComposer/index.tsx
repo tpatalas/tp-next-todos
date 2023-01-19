@@ -1,9 +1,9 @@
-import { atomQueryTodoItem } from '@atomQueries/index';
-import { EditorAutoFocusEffect } from '@effects/editorAutoFocusEffect';
 import { renderPlaceholder, renderCustomElement } from '@lib/editors';
 import { Types } from '@lib/types';
-import { useEditorInitialValue, useEditorChangeHandler } from '@states/editorStates';
-import { useKeyWithEditor } from '@states/keybindStates';
+import { EditorAutoFocusEffect } from '@states/editors/editorAutoFocusEffect';
+import { useEditorInitialValue, useEditorChangeHandler } from '@states/editors/hooks';
+import { useKeyWithEditor } from '@states/keybinds/hooks';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createEditor } from 'slate';

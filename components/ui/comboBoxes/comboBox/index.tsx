@@ -1,4 +1,3 @@
-import { atomQueryLabels } from '@atomQueries/index';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import {
@@ -9,9 +8,10 @@ import {
 } from '@data/materialSymbols';
 import { Combobox, Transition } from '@headlessui/react';
 import { Labels, Types } from '@lib/types';
-import { classNames } from '@lib/utils';
-import { useLabelModalStateOpen } from '@states/modalStates';
-import { atomTodoNew } from '@states/todoStates';
+import { atomQueryLabels } from '@states/labels/states';
+import { useLabelModalStateOpen } from '@states/modals/hooks';
+import { atomTodoNew } from '@states/todos/states';
+import { classNames } from '@states/utils';
 import { PseudoIconButton } from '@ui/pseudoButtons/pseudoIconButton';
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

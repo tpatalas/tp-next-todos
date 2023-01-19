@@ -1,8 +1,8 @@
 import { ICON_DELETE, ICON_EDIT_NOTE, ICON_MORE_VERT } from '@data/materialSymbols';
-import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
 import { TypesDataDropdown } from '@lib/types/typesData';
-import { useLabelStateRemove } from '@states/labelStates';
-import { useLabelModalStateOpen } from '@states/modalStates';
+import { useLabelStateRemove } from '@states/labels/hooks';
+import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
+import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { Types } from 'lib/types';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';

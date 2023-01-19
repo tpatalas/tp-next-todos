@@ -1,7 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { DATA_SIDEBAR_MENU } from '@data/stateArrayObjects';
-import { classNames } from '@lib/utils';
+import { classNames } from '@states/utils';
 import { useRouter } from 'next/router';
 import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
 import { TodosCount } from './todosCount';

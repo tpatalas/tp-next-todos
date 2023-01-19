@@ -8,13 +8,12 @@ import {
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { Types } from '@lib/types';
 import { TypesDataPriority } from '@lib/types/typesData';
-import { classNames } from '@lib/utils';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todoStates';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todos/states';
+import { classNames } from '@states/utils';
 import { Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-type Props = { data: TypesDataPriority } & Partial<Pick<Types, 'todo'>> &
-  Pick<Types, 'onClick'>;
+type Props = { data: TypesDataPriority } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClick'>;
 
 export const PriorityButton = ({ todo, data, onClick }: Props) => {
   const todoItem =
@@ -49,9 +48,7 @@ export const PriorityButton = ({ todo, data, onClick }: Props) => {
             levelImportant &&
               priorityImportant &&
               'fill-yellow-500 [.group-button:hover_&]:fill-yellow-600',
-            levelUrgent &&
-              priorityUrgent &&
-              'fill-red-600 [.group-button:hover_&]:fill-red-700',
+            levelUrgent && priorityUrgent && 'fill-red-600 [.group-button:hover_&]:fill-red-700',
           ),
           margin: data.margin,
           display: data.display,

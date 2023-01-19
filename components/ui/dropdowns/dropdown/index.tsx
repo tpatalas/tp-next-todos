@@ -1,7 +1,7 @@
-import { DisableScrollEffect } from '@effects/disableScrollEffect';
 import { Menu, Portal, Transition } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
-import { classNames } from '@lib/utils';
+import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
+import { classNames } from '@states/utils';
 import { SvgIcon } from 'components/icons/svgIcon';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';

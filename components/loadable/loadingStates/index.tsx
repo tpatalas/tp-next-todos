@@ -1,5 +1,5 @@
 import { TypesDataLoadingState } from '@lib/types/typesData';
-import { classNames } from '@lib/utils';
+import { classNames } from '@states/utils';
 import { Fragment, useEffect, useState } from 'react';
 
 export const LoadingState = ({

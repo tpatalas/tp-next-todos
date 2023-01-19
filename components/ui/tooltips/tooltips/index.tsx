@@ -1,5 +1,5 @@
 import { Portal } from '@headlessui/react';
-import { classNames } from '@lib/utils';
+import { classNames } from '@states/utils';
 import { TypesTooltipAttributes, Types } from 'lib/types';
 import React, { Fragment as TooltipFragment, memo } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
