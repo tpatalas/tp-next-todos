@@ -1,7 +1,7 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { selectorActiveMenuItem } from '@states/misc/states';
+import { selectorActiveMenuItem } from '@states/misc';
 import { classNames } from '@states/utils';
 import { Tooltip } from '@tooltips/tooltips';
 import { useRecoilValue } from 'recoil';

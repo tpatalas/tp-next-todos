@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilCallback, useResetRecoilState } from 'recoil';
-import { atomNotificationOpen, atomNotificationCounter } from './states';
+import { atomNotificationOpen, atomNotificationCounter } from '.';
 
 export const NotificationResetEffect = () => {
   const resetNotification = useResetRecoilState(atomNotificationOpen);

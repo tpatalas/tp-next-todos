@@ -9,14 +9,14 @@ import {
   dataButtonMiniModalOpenFull,
   dataMinimizedModal,
 } from '@data/dataObjects';
+import { atomTodoModalMini } from '@states/modals';
 import {
   useTodoModalStateClose,
   useTodoModalStateMaximize,
   useTodoModalStateExitMinimize,
 } from '@states/modals/hooks';
 import { ModalStateOnBreakpointEffect } from '@states/modals/modalStateOnBreakpointEffect';
-import { atomTodoModalMini } from '@states/modals/states';
-import { atomTodoNew } from '@states/todos/states';
+import { atomTodoNew } from '@states/todos';
 import { TypesTodo } from 'lib/types';
 import { useRecoilValue } from 'recoil';
 import { MinimizeModalTransition } from './modal/modalTransition/minimizeModalTransition';

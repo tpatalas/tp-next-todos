@@ -1,7 +1,7 @@
 import { Types } from '@lib/types';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { atomActiveMenuItemId } from './states';
+import { atomActiveMenuItemId } from '.';
 
 export const ActiveDropdownMenuItemEffect = ({
   menuItemId,

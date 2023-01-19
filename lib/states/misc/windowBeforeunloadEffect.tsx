@@ -1,5 +1,5 @@
 import { CATCH_MODAL } from '@data/stateObjects';
-import { atomCatch } from '@states/utils/states';
+import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 

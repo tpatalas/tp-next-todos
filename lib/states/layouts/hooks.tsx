@@ -1,7 +1,7 @@
 import { BREAKPOINT } from '@data/stateObjects';
-import { atomMediaQuery } from '@states/misc/states';
+import { atomMediaQuery } from '@states/misc';
 import { useRecoilCallback, RecoilValue } from 'recoil';
-import { atomSidebarOpenMobile, atomSidebarOpenSetting } from './states';
+import { atomSidebarOpenMobile, atomSidebarOpenSetting } from '.';
 
 /**
  * Hooks

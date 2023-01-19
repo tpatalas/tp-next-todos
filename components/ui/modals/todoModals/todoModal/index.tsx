@@ -7,8 +7,8 @@ import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHe
 import { useCalUpdateItem } from '@states/calendars/hooks';
 import { TodoModalWithKeyEffect } from '@states/keybinds/todoModalWithKeyEffect';
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
+import { atomTodoModalOpen, atomTodoModalMax } from '@states/modals';
 import { useTodoModalStateClose } from '@states/modals/hooks';
-import { atomTodoModalOpen, atomTodoModalMax } from '@states/modals/states';
 import { useTodoStateAdd } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCheckTodoTitleEmpty } from '@states/utils/hooks';

@@ -1,8 +1,8 @@
 import { Todos, Labels, Types } from '@lib/types';
-import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '@states/labels/states';
-import { atomTodoModalOpen, atomTodoModalMini } from '@states/modals/states';
+import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '@states/labels';
+import { atomTodoModalOpen, atomTodoModalMini } from '@states/modals';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos/states';
 import equal from 'fast-deep-equal/react';
 import { useEffect } from 'react';
 import { useRecoilCallback, RecoilValue, useRecoilValue, RecoilState } from 'recoil';

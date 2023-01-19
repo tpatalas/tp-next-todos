@@ -1,6 +1,6 @@
 import { BREAKPOINT } from '@data/stateObjects';
 import { mediaQueryEffect } from '@effects/atomEffects';
-import { atomMediaQuery } from '@states/misc/states';
+import { atomMediaQuery } from '@states/misc';
 import { atom, selector } from 'recoil';
 
 /**

@@ -1,6 +1,6 @@
 import { CATCH_MODAL } from '@data/stateObjects';
 import { Types } from '@lib/types';
-import { atomCatch } from '@states/utils/states';
+import { atomCatch } from '@states/utils';
 import dynamic from 'next/dynamic';
 import {
   Fragment as FooterFragment,

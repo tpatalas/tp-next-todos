@@ -1,6 +1,6 @@
 import { NOTIFICATION } from '@data/stateObjects';
 import { useRecoilCallback } from 'recoil';
-import { atomNotificationCounter, atomNotificationID, atomNotificationOpen } from './states';
+import { atomNotificationCounter, atomNotificationID, atomNotificationOpen } from '.';
 
 /*
  * Hooks

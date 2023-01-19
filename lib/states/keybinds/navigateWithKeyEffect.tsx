@@ -1,11 +1,11 @@
 import { CATCH_MODAL, FOCUS } from '@lib/data/stateObjects';
 import { Types } from '@lib/types';
+import { atomCurrentFocus, atomOnBlur } from '@states/focus';
 import { useFocusState } from '@states/focus/hooks';
-import { atomCurrentFocus, atomOnBlur } from '@states/focus/states';
 import { useKeyWithNavigate } from '@states/keybinds/hooks';
-import { atomTodoModalOpen } from '@states/modals/states';
+import { atomTodoModalOpen } from '@states/modals';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { atomCatch } from '@states/utils/states';
+import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 

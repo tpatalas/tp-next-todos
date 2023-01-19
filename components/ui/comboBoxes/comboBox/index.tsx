@@ -8,9 +8,9 @@ import {
 } from '@data/materialSymbols';
 import { Combobox, Transition } from '@headlessui/react';
 import { Labels, Types } from '@lib/types';
-import { atomQueryLabels } from '@states/labels/states';
+import { atomQueryLabels } from '@states/labels';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
-import { atomTodoNew } from '@states/todos/states';
+import { atomTodoNew } from '@states/todos';
 import { classNames } from '@states/utils';
 import { PseudoIconButton } from '@ui/pseudoButtons/pseudoIconButton';
 import { useState } from 'react';

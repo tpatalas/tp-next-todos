@@ -4,7 +4,7 @@ import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
 import { TodoModalWithKeyEffect } from '@states/keybinds/todoModalWithKeyEffect';
-import { atomPriority } from '@states/priorities/states';
+import { atomPriority } from '@states/priorities';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoStateUpdate, useTodoStateComplete } from '@states/todos/hooks';
 import { classNames } from '@states/utils';

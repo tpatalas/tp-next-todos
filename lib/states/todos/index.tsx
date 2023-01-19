@@ -1,6 +1,6 @@
 import { PATHNAME } from '@data/stateObjects';
 import { Todos, TodoIds } from '@lib/types';
-import { selectorFilterPriorityRankScore } from '@states/priorities/states';
+import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, atomFamily, selectorFamily, selector } from 'recoil';
 import { atomQueryTodoItem, atomQueryTodoIds } from './atomQueries';
 

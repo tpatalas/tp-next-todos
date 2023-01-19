@@ -1,9 +1,15 @@
 import { CATCH_MODAL, BREAKPOINT } from '@data/stateObjects';
 import { Todos, Types, Labels } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
-import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus/states';
+import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';
 import { useLabelStateAdd, useLabelStateUpdate } from '@states/labels/hooks';
-import { atomMediaQuery } from '@states/misc/states';
+import { atomMediaQuery } from '@states/misc';
+import {
+  atomTodoModalOpen,
+  atomTodoModalMini,
+  atomLabelModalOpen,
+  atomConfirmModalDiscard,
+} from '@states/modals';
 import {
   useTodoModalStateOpen,
   useTodoModalStateExpand,
@@ -11,12 +17,6 @@ import {
   useTodoModalStateMinimize,
   useTodoModalStateMaximize,
 } from '@states/modals/hooks';
-import {
-  atomTodoModalOpen,
-  atomTodoModalMini,
-  atomLabelModalOpen,
-  atomConfirmModalDiscard,
-} from '@states/modals/states';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import {
   useTodoStateComplete,
@@ -25,7 +25,7 @@ import {
   useTodoStateUpdate,
   useFilterTodoIdsWithPathname,
 } from '@states/todos/hooks';
-import { atomCatch } from '@states/utils/states';
+import { atomCatch } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';

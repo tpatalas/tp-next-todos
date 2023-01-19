@@ -5,20 +5,19 @@ import { dataButtonCreateTodo } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
 import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
+import { atomSidebarOpenMobile } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
-import { atomSidebarOpenMobile } from '@states/layouts/states';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
-import { classNames } from '@states/utils';
+import { atomDisableScroll, classNames } from '@states/utils';
 import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
-import { atomDisableScroll } from '@states/utils/states';
 import dynamic from 'next/dynamic';
 import {
-  forwardRef,
-  Fragment as BackdropFragment,
-  Fragment as CreateTodoFragment,
-  Fragment as FooterSidebarFragment,
-  Fragment,
-  Fragment as LayoutLogoFragment,
+    forwardRef,
+    Fragment as BackdropFragment,
+    Fragment as CreateTodoFragment,
+    Fragment as FooterSidebarFragment,
+    Fragment,
+    Fragment as LayoutLogoFragment
 } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';

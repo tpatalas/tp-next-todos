@@ -1,6 +1,6 @@
 import { Types } from '@lib/types';
+import { atomConfirmModalDelete } from '@states/modals';
 import { useTodoModalConfirmStateDelete } from '@states/modals/hooks';
-import { atomConfirmModalDelete } from '@states/modals/states';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';

@@ -1,7 +1,7 @@
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { Todos } from '@lib/types';
+import { selectorDynamicTodoItem } from '@states/todos';
 import { atomQueryTodoIds } from '@states/todos/atomQueries';
-import { selectorDynamicTodoItem } from '@states/todos/states';
 import { subDays, differenceInDays } from 'date-fns';
 import { atomFamily, selectorFamily, selector } from 'recoil';
 
