@@ -8,7 +8,7 @@ import {
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { Types } from '@lib/types';
 import { TypesDataPriority } from '@lib/types/typesData';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos/states';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
 import { classNames } from '@states/utils';
 import { Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilValue } from 'recoil';

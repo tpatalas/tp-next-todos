@@ -1,6 +1,6 @@
-import { Todos } from "@lib/types";
-import { format, startOfToday } from "date-fns";
-import { atomFamily, selectorFamily } from "recoil";
+import { Todos } from '@lib/types';
+import { format, startOfToday } from 'date-fns';
+import { atomFamily, selectorFamily } from 'recoil';
 
 /**
  * atoms
@@ -29,5 +29,3 @@ export const atomCurrentMonth = atomFamily<string, Todos['_id']>({
   key: 'atomCurrentMonth',
   default: format(startOfToday(), 'MMM-yyyy'),
 });
-
-

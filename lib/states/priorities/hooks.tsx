@@ -1,10 +1,10 @@
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos/states';
 import { useRecoilCallback, RecoilValue } from 'recoil';
-import { atomPriority, selectorPriorityRankScore } from './states';
+import { atomPriority, selectorPriorityRankScore } from '.';
 
 /**
  * Hooks

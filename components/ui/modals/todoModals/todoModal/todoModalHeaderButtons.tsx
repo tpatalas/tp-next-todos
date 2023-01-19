@@ -8,13 +8,13 @@ import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols
 import { BREAKPOINT } from '@data/stateObjects';
 import { TodoItemDropdown } from '@dropdowns/todoItemDropdown';
 import { Types } from '@lib/types';
-import { atomMediaQuery } from '@states/misc/states';
+import { atomMediaQuery } from '@states/misc';
+import { atomTodoModalMax } from '@states/modals';
 import {
   useTodoModalStateMinimize,
   useTodoModalStateExpand,
   useTodoModalStateClose,
 } from '@states/modals/hooks';
-import { atomTodoModalMax } from '@states/modals/states';
 import {
   Fragment as ContainerFragment,
   Fragment as HeaderFragment,

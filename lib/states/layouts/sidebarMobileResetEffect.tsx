@@ -1,9 +1,9 @@
 import { BREAKPOINT, CATCH_MODAL } from '@data/stateObjects';
-import { atomSidebarOpenMobile } from '@states/layouts/states';
-import { atomMediaQuery } from '@states/misc/states';
-import { atomCatch } from '@states/utils/states';
+import { atomMediaQuery } from '@states/misc';
+import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { atomSidebarOpenMobile } from '.';
 
 export const SidebarMobileResetEffect = () => {
   const isTodoModalOpen = useRecoilValue(

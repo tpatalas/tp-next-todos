@@ -1,8 +1,8 @@
 import { PATHNAME } from '@data/stateObjects';
-import { atomFilterTodoIds } from '@states/todos/states';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
+import { atomFilterTodoIds } from '.';
 
 export const FilterTodoIdsEffect = () => {
   const router = useRouter();

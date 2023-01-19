@@ -1,9 +1,9 @@
 import { Todos, Types, TodosEditors } from '@lib/types';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos/states';
+import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Descendant } from 'slate';
-import { atomEditorDeserialize, atomEditorSerialize } from './states';
+import { atomEditorDeserialize, atomEditorSerialize } from '.';
 
 /*
  * Hooks

@@ -3,8 +3,8 @@ import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_CLOSE, ICON_MENU, ICON_SEARCH } from '@data/materialSymbols';
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
+import { atomSearchInput } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
-import { atomSearchInput } from '@states/layouts/states';
 import { classNames } from '@states/utils';
 import Image from 'next/image';
 import {

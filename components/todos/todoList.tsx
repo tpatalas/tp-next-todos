@@ -1,4 +1,4 @@
-import { selectorFilterTodoIds } from '@states/todos/states';
+import { selectorFilterTodoIds } from '@states/todos';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';

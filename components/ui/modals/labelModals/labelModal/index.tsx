@@ -6,10 +6,10 @@ import {
   dataButtonTodoModalClose,
 } from '@data/dataObjects';
 import { LabelModalWithKeyEffect } from '@states/keybinds/labelModalWithKeyEffect';
+import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { useLabelValueUpdate, useLabelStateAdd } from '@states/labels/hooks';
-import { atomLabelNew, atomSelectorLabelItem } from '@states/labels/states';
+import { atomLabelModalOpen } from '@states/modals';
 import { useLabelModalStateClose } from '@states/modals/hooks';
-import { atomLabelModalOpen } from '@states/modals/states';
 import { classNames } from '@states/utils';
 import { useConditionCheckLabelTitleEmpty } from '@states/utils/hooks';
 import { Types } from 'lib/types';

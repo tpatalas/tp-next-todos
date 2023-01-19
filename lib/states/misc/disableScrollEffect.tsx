@@ -1,4 +1,4 @@
-import { atomDisableScroll } from '@states/utils/states';
+import { atomDisableScroll } from '@states/utils';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 

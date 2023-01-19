@@ -1,31 +1,30 @@
+import { CATCH_MODAL, NOTIFICATION, PATHNAME } from '@data/stateObjects';
+import {
+  completeDataTodo,
+  createDataNewTodo,
+  deleteDataTodo,
+  updateDataTodo,
+} from '@lib/queries/queryTodos';
+import { Todos } from '@lib/types';
+import { atomNetworkStatusEffect } from '@states/misc';
+import { atomConfirmModalDelete } from '@states/modals';
+import { useTodoModalStateReset } from '@states/modals/hooks';
+import { useNotificationState } from '@states/notifications/hooks';
+import { usePriorityRankScore } from '@states/priorities/hooks';
+import { atomCatch } from '@states/utils';
+import {
+  useConditionCheckTodoTitleEmpty,
+  useConditionCompareTodoItemsEqual,
+  useGetWithRecoilCallback,
+} from '@states/utils/hooks';
+import { useRouter } from 'next/router';
+import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { atomTodoNew, atomSelectorTodoItem, selectorFilterTodoIdsByPathname } from '.';
+import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
+
 /**
  * Hooks
  * */
-
-import { NOTIFICATION, CATCH_MODAL, PATHNAME } from '@data/stateObjects';
-import {
-  createDataNewTodo,
-  updateDataTodo,
-  deleteDataTodo,
-  completeDataTodo,
-} from '@lib/queries/queryTodos';
-import { Todos } from '@lib/types';
-import { atomNetworkStatusEffect } from '@states/misc/states';
-import { useTodoModalStateReset } from '@states/modals/hooks';
-import { atomConfirmModalDelete } from '@states/modals/states';
-import { useNotificationState } from '@states/notifications/hooks';
-import { usePriorityRankScore } from '@states/priorities/hooks';
-import {
-  useConditionCheckTodoTitleEmpty,
-  useGetWithRecoilCallback,
-  useConditionCompareTodoItemsEqual,
-} from '@states/utils/hooks';
-import { atomCatch } from '@states/utils/states';
-import { useRouter } from 'next/router';
-import { useRecoilCallback, RecoilValue, useRecoilValue } from 'recoil';
-import { atomQueryTodoItem, atomQueryTodoIds } from './atomQueries';
-import { atomTodoNew, atomSelectorTodoItem, selectorFilterTodoIdsByPathname } from './states';
-
 export const useTodoStateAdd = () => {
   const setNotification = useNotificationState();
   const resetModal = useTodoModalStateReset(undefined);

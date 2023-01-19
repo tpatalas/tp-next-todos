@@ -1,10 +1,10 @@
 import { FOCUS } from '@data/stateObjects';
 import { Todos, Types } from '@lib/types';
+import { atomTodoModalMini } from '@states/modals';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
-import { atomTodoModalMini } from '@states/modals/states';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useRecoilCallback, RecoilValue } from 'recoil';
-import { atomOnFocus, atomCurrentFocus } from './states';
+import { atomOnFocus, atomCurrentFocus } from '.';
 
 /*
  * Hooks

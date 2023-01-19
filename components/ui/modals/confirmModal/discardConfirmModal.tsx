@@ -3,8 +3,8 @@ import { dataButtonConfirmModalDiscard, dataSvgConfirmModalHeaderIcon } from '@d
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
+import { atomConfirmModalDiscard } from '@states/modals';
 import { useTodoModalConfirmStateDiscard } from '@states/modals/hooks';
-import { atomConfirmModalDiscard } from '@states/modals/states';
 import dynamic from 'next/dynamic';
 import {
   Fragment as DiscardHeaderContentFragment,

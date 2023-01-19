@@ -1,6 +1,6 @@
 import { CATCH_MODAL, PATHNAME } from '@data/stateObjects';
 import { CustomEditor } from '@lib/types/typesSlate';
-import { atomCatch } from '@states/utils/states';
+import { atomCatch } from '@states/utils';
 import { Types } from 'lib/types';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

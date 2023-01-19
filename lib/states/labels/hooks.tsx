@@ -5,12 +5,12 @@ import {
   deleteDataLabelItem,
 } from '@lib/queries/queryLabels';
 import { Types, Labels } from '@lib/types';
-import { atomLabelModalOpen, atomConfirmModalDelete } from '@states/modals/states';
+import { atomLabelModalOpen, atomConfirmModalDelete } from '@states/modals';
 import { useNotificationState } from '@states/notifications/hooks';
-import { atomCatch } from '@states/utils/states';
+import { atomCatch } from '@states/utils';
 import ObjectID from 'bson-objectid';
 import { useRecoilCallback, RecoilValue } from 'recoil';
-import { atomSelectorLabelItem, atomLabelNew, atomQueryLabels } from './states';
+import { atomSelectorLabelItem, atomLabelNew, atomQueryLabels } from '.';
 
 /**
  * Hooks

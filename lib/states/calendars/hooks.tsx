@@ -3,8 +3,8 @@ import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { useNotificationState } from '@states/notifications/hooks';
 import { usePriorityRankScore } from '@states/priorities/hooks';
+import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos/states';
 import { useGetWithRecoilCallback } from '@states/utils/hooks';
 import {
   parse,
@@ -20,7 +20,7 @@ import {
 } from 'date-fns';
 import equal from 'fast-deep-equal/react';
 import { useRecoilCallback, RecoilValue } from 'recoil';
-import { atomCurrentMonth, atomDayPickerUpdater, atomDayPicker } from './states';
+import { atomCurrentMonth, atomDayPickerUpdater, atomDayPicker } from '.';
 
 /**
  * Hooks

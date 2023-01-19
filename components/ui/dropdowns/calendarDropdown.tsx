@@ -13,7 +13,7 @@ import {
   useCalResetDateItemOnly,
   useCalResetDateAll,
 } from '@states/calendars/hooks';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos/states';
+import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
 import { classNames } from '@states/utils';
 import { Calendar } from '@ui/calendars/calendar';
 import { format } from 'date-fns';
