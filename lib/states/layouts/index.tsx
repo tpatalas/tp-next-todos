@@ -12,8 +12,8 @@ export const atomSidebarOpen = atom({
   effects: [
     mediaQueryEffect({
       breakpoint: BREAKPOINT['md'],
-      stateUnderBreakpoint: false,
-      stateOverBreakpoint: true,
+      isStateUnderBreakpoint: false,
+      isStateOverBreakpoint: true,
     }),
   ],
 });

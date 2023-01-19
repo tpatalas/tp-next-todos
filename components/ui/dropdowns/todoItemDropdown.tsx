@@ -18,7 +18,7 @@ import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 
 type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
 
-export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: Props) => {
+export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } }: Props) => {
   const removeTodo = useTodoStateRemove(todo?._id);
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
   const setPriority =
@@ -29,14 +29,14 @@ export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: P
       data={{
         tooltip: 'Menu',
         path: ICON_MORE_VERT,
-        initialVisible: initialVisible,
+        isInitiallyVisible: isInitiallyVisible,
       }}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       {children}
       <div className='py-1'>
         <DropdownMenuItem
-          disableCloseOnClick={true}
+          isDisabledCloseOnClick={true}
           padding='p-0'>
           <div className='w-full'>
             <CalendarDropdown
@@ -49,7 +49,7 @@ export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: P
       </div>
       <div className='py-1'>
         <DropdownMenuItem
-          disableCloseOnClick={true}
+          isDisabledCloseOnClick={true}
           padding='p-0'>
           <PriorityButton
             data={dataPriorityDropdownUrgent}
@@ -58,7 +58,7 @@ export const TodoItemDropdown = ({ todo, children, data: { initialVisible } }: P
           />
         </DropdownMenuItem>
         <DropdownMenuItem
-          disableCloseOnClick={true}
+          isDisabledCloseOnClick={true}
           padding='p-0'>
           <PriorityButton
             todo={todo}

@@ -6,7 +6,7 @@ import { useState } from 'react';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
 type Props = Partial<
-  Pick<Types, 'className' | 'name' | 'disabled' | 'kbd' | 'tooltip'> & {
+  Pick<Types, 'className' | 'name' | 'isDisabled' | 'kbd' | 'tooltip'> & {
     type: Exclude<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & TypesInputAttributes
 >;
@@ -17,9 +17,9 @@ export const Input = ({
   kbd,
   type,
   className,
-  checked,
+  isChecked,
   onChange,
-  disabled,
+  isDisabled,
 }: Props) => {
   const [isClicked, setClick] = useState(false);
 
@@ -34,9 +34,9 @@ export const Input = ({
         onMouseDown={() => setClick(true)}
         onMouseEnter={() => setClick(false)}
         onMouseLeave={() => setClick(true)}
-        checked={checked}
+        checked={isChecked}
         onChange={onChange}
-        disabled={disabled}
+        disabled={isDisabled}
       />
     </Tooltip>
   );

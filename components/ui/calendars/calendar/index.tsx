@@ -52,7 +52,8 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
             data={{
               path: ICON_TODAY,
               tooltip: 'Today',
-              disabled: isToday(selectedDay) && isThisMonth(new Date(currentMonth)) ? true : false,
+              isDisabled:
+                isToday(selectedDay) && isThisMonth(new Date(currentMonth)) ? true : false,
             }}
             onClick={() => {
               setCalendar(CALENDAR['today']);

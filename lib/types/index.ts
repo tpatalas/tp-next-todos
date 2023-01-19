@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BREAKPOINT,
   IDB,
@@ -36,7 +35,7 @@ type CollectTypesEditor = TypesEditor;
 
 export interface TypesEditor {
   titleName: string;
-  autoFocus: boolean;
+  isAutoFocus: boolean;
   placeholder: string;
   initialValue: Descendant[];
   changeHandler: (value: Descendant[]) => void;
@@ -62,7 +61,7 @@ export interface Todos extends TodosEditors, TodoIds {
 
 export interface TodoIds {
   _id?: OBJECT_ID;
-  completed?: boolean;
+  isCompleted?: boolean;
   priorityLevel?: PRIORITY_LEVEL | null;
   priorityRankScore?: number;
   completedDate?: Date | null;
@@ -163,7 +162,7 @@ type CollectTypesMISC = TypesIndexedDB &
 
 export interface TypesRouter {
   pathName: string;
-  prefetchOnHover: boolean;
+  isPrefetchingOnHover: boolean;
 }
 
 export interface TypesIndexedDB {
@@ -198,13 +197,13 @@ export interface TypesUi {
   tooltipItem: Element;
   iconBgColor: string;
   itemTitle: string;
-  initialVisible: boolean;
-  divider: boolean;
+  isInitiallyVisible: boolean;
+  hasDivider: boolean;
   menuItemId: string | null;
   priorityImportant: string;
   priorityUrgent: string;
   priorityNormal: string;
-  conditionalRendering: boolean;
+  isConditionalRendering: boolean;
 }
 
 export interface TypesLoadings {
@@ -240,8 +239,8 @@ export interface TypesTooltipAttributes {
   trigger: TriggerType | TriggerType[] | null;
   offset: [number, number];
   placement: Placement;
-  onVisible: boolean;
-  closeOnTriggerHidden: boolean;
+  isVisible: boolean;
+  isCloseOnTriggerHidden: boolean;
 }
 
 export interface TypesSvgIconAttributes {
@@ -249,11 +248,11 @@ export interface TypesSvgIconAttributes {
   height: string | number;
   width: string | number;
   viewBox: string;
-  ariaHidden: boolean;
+  isAriaHidden: boolean;
 }
 
 export interface TypesInputAttributes {
-  checked: boolean;
+  isChecked: boolean;
   onChange: (value: unknown) => void;
 }
 
@@ -276,26 +275,27 @@ export interface TypesElement {
   positionX: POSITION_X;
   positionY: POSITION_Y;
   minimizedModalPadding: string;
-  noValidate: boolean;
-  ariaHidden: boolean;
-  disabled: boolean;
-  disableCloseOnClick: boolean;
+  isNoValidate: boolean;
+  isAriaHidden: boolean;
+  isDisabled: boolean;
+  isDisabledCloseOnClick: boolean;
 }
 export interface TypesEffects {
   // Refetch Effect
   queryKey: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queryFunction(): Promise<any>;
   storeName: IDB_STORE;
-  enableIndexedDb: boolean;
-  refetchOnMutation: boolean;
-  refetchOnFocus: boolean;
-  refetchOnBlur: boolean;
+  isIndexedDbEnabled: boolean;
+  isRefetchingOnMutation: boolean;
+  isRefetchingOnFocus: boolean;
+  isRefetchingOnBlur: boolean;
   refetchDelayOnMutation: number;
   refetchInterval: number;
   // MediaQuery Effect
   breakpoint: BREAKPOINT;
-  stateUnderBreakpoint: boolean;
-  stateOverBreakpoint: boolean;
+  isStateUnderBreakpoint: boolean;
+  isStateOverBreakpoint: boolean;
 }
 /**
  * Types Atom Effects - Recoil
@@ -305,21 +305,21 @@ export interface TypesEffects {
 export type TypesRefetchEffect = <T>({
   queryKey,
   queryFunction,
-  enableIndexedDb,
+  isIndexedDbEnabled,
   storeName,
-  refetchOnMutation,
+  isRefetchingOnMutation,
   refetchDelayOnMutation,
-  refetchOnFocus,
-  refetchOnBlur,
+  isRefetchingOnFocus,
+  isRefetchingOnBlur,
   refetchInterval,
 }: Partial<
   Pick<
     Types,
-    | 'enableIndexedDb'
-    | 'refetchOnMutation'
+    | 'isIndexedDbEnabled'
+    | 'isRefetchingOnMutation'
     | 'refetchDelayOnMutation'
-    | 'refetchOnFocus'
-    | 'refetchOnBlur'
+    | 'isRefetchingOnFocus'
+    | 'isRefetchingOnBlur'
     | 'refetchInterval'
   >
 > &
@@ -327,10 +327,12 @@ export type TypesRefetchEffect = <T>({
 
 export type TypesMediaQueryEffect = <T>({
   breakpoint,
-  stateUnderBreakpoint,
-  stateOverBreakpoint,
+  isStateUnderBreakpoint,
+  isStateOverBreakpoint,
 }: Pick<Types, 'breakpoint'> &
-  Partial<Pick<Types, 'stateUnderBreakpoint' | 'stateOverBreakpoint'>>) => AtomEffect<T | boolean>;
+  Partial<Pick<Types, 'isStateUnderBreakpoint' | 'isStateOverBreakpoint'>>) => AtomEffect<
+  T | boolean
+>;
 
 export type TypesAtomEffect<T> = AtomEffect<T>;
 export type TypesAtomEffectWithParam<T, P> = (key: P) => AtomEffect<T>;

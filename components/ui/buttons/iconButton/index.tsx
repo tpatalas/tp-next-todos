@@ -29,7 +29,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
           tooltip: data.tooltip,
           kbd: data.kbd,
           offset: data.offset,
-          disabled: data.disabled,
+          isDisabled: data.isDisabled,
         }}
         onClick={onClick}>
         <div className='flex flex-row items-center justify-center'>
@@ -40,7 +40,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
               className: classNames(
                 data.size || 'h-5 w-5',
                 data.color || 'fill-gray-500',
-                !data.disabled && '[.group-button:hover_&]:fill-gray-700',
+                !data.isDisabled && '[.group-button:hover_&]:fill-gray-700',
               ),
             }}
           />
@@ -49,7 +49,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
               <span
                 className={classNames(
                   'px-3 text-sm font-normal text-gray-500',
-                  !data.disabled && '[.group-button:hover_&]:text-gray-700',
+                  !data.isDisabled && '[.group-button:hover_&]:text-gray-700',
                 )}>
                 {headerContents}
               </span>

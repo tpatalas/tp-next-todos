@@ -16,9 +16,9 @@ import {
   Editable,
 } from 'slate-react';
 
-type Props = Pick<Types, 'titleName' | 'placeholder'> & Partial<Pick<Types, 'autoFocus' | 'todo'>>;
+type Props = Pick<Types, 'titleName' | 'placeholder'> & Partial<Pick<Types, 'isAutoFocus' | 'todo'>>;
 
-export const EditorComposer = ({ autoFocus, todo, titleName, ...props }: Props) => {
+export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const editorKeyHandler = useKeyWithEditor(titleName, todo?._id, editor);
   const initialValue = useEditorInitialValue(todo?._id, titleName);
@@ -26,11 +26,11 @@ export const EditorComposer = ({ autoFocus, todo, titleName, ...props }: Props) 
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
   const completed =
-    typeof todo !== 'undefined' && useRecoilValue(atomQueryTodoItem(todo?._id)).completed;
+    typeof todo !== 'undefined' && useRecoilValue(atomQueryTodoItem(todo?._id)).isCompleted;
   const renderCustomElementWithProps = (props: RenderElementProps) =>
     renderCustomElement({
       titleName: titleName,
-      completed: completed,
+      isCompleted: completed,
       ...props,
     });
 
@@ -48,7 +48,7 @@ export const EditorComposer = ({ autoFocus, todo, titleName, ...props }: Props) 
       />
       <EditorAutoFocusEffect
         editor={editor}
-        autoFocus={autoFocus as boolean}
+        isAutoFocus={isAutoFocus as boolean}
       />
     </Slate>
   );

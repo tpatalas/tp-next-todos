@@ -16,7 +16,7 @@ export const useFocusState = (_id: Todos['_id']) => {
 
     switch (state) {
       case FOCUS['openTodoModalOnFocus']:
-        !get(atomQueryTodoItem(_id))?.completed && openModal();
+        !get(atomQueryTodoItem(_id))?.isCompleted && openModal();
         break;
       case FOCUS['returnOnNoFocus']:
         if (!get(atomOnFocus)) return;

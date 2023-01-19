@@ -31,7 +31,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
           <div className='mr-3 mb-[0.045em]'>
             <CompleteTodoCheckBox
               todoItem={todoItem}
-              checked={todoItem.completed}
+              isChecked={todoItem.isCompleted}
               checkBoxColor={classNames(
                 currentPriority === PRIORITY_LEVEL['important'] && 'border-yellow-500 border-2 ',
                 currentPriority === PRIORITY_LEVEL['urgent'] && 'border-red-600 border-2 ',
@@ -46,7 +46,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
         <FooterButtonsFragment>
           <DisableButton
             data={dataButtonItemModalUpdate}
-            conditionalRendering={condition}
+            isConditionalRendering={condition}
             onClick={() => updateTodo()}>
             Update
           </DisableButton>

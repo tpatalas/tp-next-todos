@@ -79,7 +79,7 @@ export const LabelModal = ({
             </CancelButton>
             {footerButtons || (
               <DisableButton
-                conditionalRendering={condition}
+                isConditionalRendering={condition}
                 data={dataButtonLabelModalAddLabel}
                 onClick={() => addLabel()}>
                 Add Label

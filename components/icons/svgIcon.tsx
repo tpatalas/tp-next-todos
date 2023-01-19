@@ -9,7 +9,7 @@ export const SvgIcon = memo(
       height = '24',
       width = '24',
       viewBox = '0 0 24 24',
-      ariaHidden = true,
+      isAriaHidden = true,
       className = 'h-5 w-5 fill-gray-500 hover:fill-gray-700',
       path,
     },
@@ -17,7 +17,7 @@ export const SvgIcon = memo(
     return (
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        aria-hidden={ariaHidden}
+        aria-hidden={isAriaHidden}
         height={height}
         width={width}
         viewBox={viewBox}

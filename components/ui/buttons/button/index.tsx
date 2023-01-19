@@ -25,11 +25,11 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         <button
           type={data.type || 'button'}
           className={data.className}
-          disabled={data.disabled}
+          disabled={data.isDisabled}
           onMouseOver={onMouseOver}
-          onMouseDown={() => !data.disabled && setClick(true)}
-          onMouseEnter={() => !data.disabled && setClick(false)}
-          onMouseLeave={() => !data.disabled && setClick(true)}
+          onMouseDown={() => !data.isDisabled && setClick(true)}
+          onMouseEnter={() => !data.isDisabled && setClick(false)}
+          onMouseLeave={() => !data.isDisabled && setClick(true)}
           onClick={onClick}
           onKeyDown={onKeyDown}
           onDoubleClick={onDoubleClick}

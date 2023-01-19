@@ -12,12 +12,12 @@ import { atomDisableScroll, classNames } from '@states/utils';
 import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
 import dynamic from 'next/dynamic';
 import {
-    forwardRef,
-    Fragment as BackdropFragment,
-    Fragment as CreateTodoFragment,
-    Fragment as FooterSidebarFragment,
-    Fragment,
-    Fragment as LayoutLogoFragment
+  forwardRef,
+  Fragment as BackdropFragment,
+  Fragment as CreateTodoFragment,
+  Fragment as FooterSidebarFragment,
+  Fragment,
+  Fragment as LayoutLogoFragment,
 } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
@@ -84,7 +84,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
             <DisableButton
               data={dataButtonCreateTodo}
               onClick={() => openModal()}
-              conditionalRendering={condition}>
+              isConditionalRendering={condition}>
               <span className='flex flex-row items-center'>
                 <SvgIcon
                   data={{

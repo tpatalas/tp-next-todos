@@ -13,7 +13,7 @@ type Props = Partial<
     | 'kbd'
     | 'onClick'
     | 'children'
-    | 'disableCloseOnClick'
+    | 'isDisabledCloseOnClick'
     | 'path'
     | 'padding'
     | 'size'
@@ -25,7 +25,7 @@ export const DropdownMenuItem = ({
   tooltip,
   kbd,
   onClick,
-  disableCloseOnClick,
+  isDisabledCloseOnClick,
   padding,
   path,
   size,
@@ -44,7 +44,7 @@ export const DropdownMenuItem = ({
             <div
               onClick={(event) => {
                 onClick && onClick(event);
-                disableCloseOnClick && event.preventDefault();
+                isDisabledCloseOnClick && event.preventDefault();
               }}
               className={classNames(
                 'group-1 block w-full cursor-pointer text-left text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-700',

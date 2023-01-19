@@ -25,8 +25,8 @@ export const Dropdown = ({
     placement = 'bottom-start',
     group = 'group',
     padding = 'p-2',
-    divider = true,
-    initialVisible = true,
+    hasDivider = true,
+    isInitiallyVisible = true,
     size = 'h-5 w-5',
     color = 'fill-gray-500 group-hover:fill-gray-700',
     text = 'group-hover:text-grey-700',
@@ -64,7 +64,7 @@ export const Dropdown = ({
                   hoverBg,
                   borderRadius,
                   !borderRadius && headerContents ? 'rounded-lg' : 'rounded-full',
-                  visibility(initialVisible, open),
+                  visibility(isInitiallyVisible, open),
                 )}
                 ref={setReferenceElement}
                 onMouseDown={() => setClick(true)}
@@ -105,7 +105,7 @@ export const Dropdown = ({
                     ref={setPopperElement}
                     style={styles.popper}
                     {...attributes.popper}>
-                    <div className={classNames(divider && 'divide-y divide-gray-100')}>
+                    <div className={classNames(hasDivider && 'divide-y divide-gray-100')}>
                       {children}
                     </div>
                   </Menu.Items>

@@ -31,7 +31,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
         </div>
         <LabelItemDropdown
           label={label}
-          data={{ initialVisible: false }}
+          data={{ isInitiallyVisible: false }}
         />
       </div>
       <LabelModalFragment>

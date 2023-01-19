@@ -7,21 +7,26 @@ export const PrefetchRouterButton = ({
   pathName,
   children,
   className,
-  prefetchOnHover,
+  isPrefetchingOnHover,
   onClick,
   tooltip,
   kbd,
   offset,
-  placement
+  placement,
 }: Pick<Types, 'pathName' | 'children'> &
-  Partial<Pick<Types, 'className' | 'prefetchOnHover' | 'onClick' | 'tooltip' | 'kbd' | 'offset' | 'placement'>>) => {
+  Partial<
+    Pick<
+      Types,
+      'className' | 'isPrefetchingOnHover' | 'onClick' | 'tooltip' | 'kbd' | 'offset' | 'placement'
+    >
+  >) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!prefetchOnHover || typeof prefetchOnHover === 'undefined') {
+    if (!isPrefetchingOnHover || typeof isPrefetchingOnHover === 'undefined') {
       router.prefetch(pathName);
     }
-  }, [pathName, prefetchOnHover, router]);
+  }, [pathName, isPrefetchingOnHover, router]);
 
   return (
     <Fragment>
@@ -31,9 +36,9 @@ export const PrefetchRouterButton = ({
           tooltip: tooltip,
           kbd: kbd,
           placement: placement,
-          offset: offset
+          offset: offset,
         }}
-        onMouseOver={() => prefetchOnHover && router.prefetch(pathName)}
+        onMouseOver={() => isPrefetchingOnHover && router.prefetch(pathName)}
         onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
           event.preventDefault();
           router.push(pathName);

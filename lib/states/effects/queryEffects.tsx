@@ -13,18 +13,18 @@ export const queryEffect: TypesRefetchEffect =
   ({
     storeName,
     queryKey,
-    enableIndexedDb,
+    isIndexedDbEnabled,
     queryFunction,
-    refetchOnMutation,
+    isRefetchingOnMutation,
     refetchDelayOnMutation,
-    refetchOnFocus,
-    refetchOnBlur,
+    isRefetchingOnFocus,
+    isRefetchingOnBlur,
     refetchInterval,
   }) =>
   ({ setSelf, onSet, trigger }) => {
     if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
 
-    const onIndexedDB = enableIndexedDb || typeof enableIndexedDb === 'undefined';
+    const onIndexedDB = isIndexedDbEnabled || typeof isIndexedDbEnabled === 'undefined';
 
     // initial fetch.
     // Multiple fetches will be cached and will fetch only once. ex) using `atomQueryTodoIds` more than one location will fetch multiple time at the initial page load then saved to indexedDB
@@ -64,7 +64,7 @@ export const queryEffect: TypesRefetchEffect =
       isReset ? del(storeName, queryKey) : set(storeName, queryKey, newValue);
 
       // refetch and re-sync indexedDb with database if they are not matching.
-      if (refetchOnMutation && typeof refetchOnMutation !== 'undefined' && !isReset) {
+      if (isRefetchingOnMutation && typeof isRefetchingOnMutation !== 'undefined' && !isReset) {
         const timeoutID = setTimeout(
           () => querySyncData(),
           refetchDelayOnMutation ? refetchDelayOnMutation : 100,
@@ -84,10 +84,10 @@ export const queryEffect: TypesRefetchEffect =
       };
     }
 
-    refetchOnFocus && window.addEventListener('focus', querySyncData);
-    refetchOnBlur && window.addEventListener('blur', querySyncData);
+    isRefetchingOnFocus && window.addEventListener('focus', querySyncData);
+    isRefetchingOnBlur && window.addEventListener('blur', querySyncData);
     return () => {
-      refetchOnFocus && window.removeEventListener('focus', querySyncData);
-      refetchOnBlur && window.removeEventListener('blur', querySyncData);
+      isRefetchingOnFocus && window.removeEventListener('focus', querySyncData);
+      isRefetchingOnBlur && window.removeEventListener('blur', querySyncData);
     };
   };

@@ -8,8 +8,7 @@ const PlaceHolderElement = ({
   return (
     <div
       {...attributes}
-      className={`overflow-hidden text-ellipsis font-roboto font-normal text-gray-900 ${props.className}`}
-    >
+      className={`overflow-hidden text-ellipsis font-roboto font-normal text-gray-900 ${props.className}`}>
       <span>{props.children}</span>
     </div>
   );
@@ -20,7 +19,9 @@ const CodeElement = ({
   ...props
 }: RenderElementProps & Partial<Pick<Types, 'className'>>) => {
   return (
-    <pre {...attributes} className={`${props.className}`}>
+    <pre
+      {...attributes}
+      className={`${props.className}`}>
       <code>{props.children}</code>
     </pre>
   );
@@ -31,7 +32,9 @@ const DefaultElement = ({
   ...props
 }: RenderElementProps & Partial<Pick<Types, 'className'>>) => {
   return (
-    <div {...attributes} className={`${props.className} text-slate-700`}>
+    <div
+      {...attributes}
+      className={`${props.className} text-slate-700`}>
       {props.children}
     </div>
   );
@@ -46,8 +49,7 @@ export const renderPlaceholder = ({
   return (
     <PlaceHolderElement
       {...props}
-      className={props.titleName === 'title' ? 'text-2xl' : 'text-base'}
-    >
+      className={props.titleName === 'title' ? 'text-2xl' : 'text-base'}>
       {props.children}
     </PlaceHolderElement>
   );
@@ -55,7 +57,7 @@ export const renderPlaceholder = ({
 
 export const renderCustomElement = ({
   ...props
-}: RenderElementProps & Partial<Pick<Types, 'titleName' | 'completed'>>) => {
+}: RenderElementProps & Partial<Pick<Types, 'titleName' | 'isCompleted'>>) => {
   switch (props.element.type) {
     case 'code':
       return <CodeElement {...props} />;
@@ -65,7 +67,7 @@ export const renderCustomElement = ({
           {...props}
           className={`
           ${props.titleName === 'title' ? 'text-2xl' : 'text-base'}
-          ${props.completed ? 'text-opacity-60' : 'text-slate-700'}`}
+          ${props.isCompleted ? 'text-opacity-60' : 'text-slate-700'}`}
         />
       );
   }
