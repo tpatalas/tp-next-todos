@@ -13,7 +13,7 @@ export const atomTodoNew = atom<Todos>({
     _id: undefined,
     title: '',
     note: '',
-    isCompleted: false,
+    completed: false,
     createdDate: new Date(),
   } as Todos,
 });
@@ -64,7 +64,7 @@ export const selectorFilterTodoIds = selector({
       case 'completed':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
       default:
-        return get(atomQueryTodoIds).filter((todo) => !todo.isCompleted);
+        return get(atomQueryTodoIds).filter((todo) => !todo.completed);
     }
   },
   cachePolicy_UNSTABLE: {
@@ -82,16 +82,16 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
           return get(selectorFilterPriorityRankScore);
         case PATHNAME['urgent']:
           return get(atomQueryTodoIds).filter(
-            (todo) => !todo.isCompleted && todo.priorityLevel === 1,
+            (todo) => !todo.completed && todo.priorityLevel === 1,
           );
         case PATHNAME['important']:
           return get(atomQueryTodoIds).filter(
-            (todo) => !todo.isCompleted && todo.priorityLevel === 2,
+            (todo) => !todo.completed && todo.priorityLevel === 2,
           );
         case PATHNAME['showAll']:
-          return get(atomQueryTodoIds).filter((todo) => !todo.isCompleted);
+          return get(atomQueryTodoIds).filter((todo) => !todo.completed);
         case PATHNAME['completed']:
-          return get(atomQueryTodoIds).filter((todo) => todo.isCompleted);
+          return get(atomQueryTodoIds).filter((todo) => todo.completed);
       }
     },
   cachePolicy_UNSTABLE: {

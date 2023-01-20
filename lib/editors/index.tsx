@@ -57,7 +57,7 @@ export const renderPlaceholder = ({
 
 export const renderCustomElement = ({
   ...props
-}: RenderElementProps & Partial<Pick<Types, 'titleName' | 'isCompleted'>>) => {
+}: RenderElementProps & Partial<Pick<Types, 'titleName' | 'completed'>>) => {
   switch (props.element.type) {
     case 'code':
       return <CodeElement {...props} />;
@@ -67,7 +67,7 @@ export const renderCustomElement = ({
           {...props}
           className={`
           ${props.titleName === 'title' ? 'text-2xl' : 'text-base'}
-          ${props.isCompleted ? 'text-opacity-60' : 'text-slate-700'}`}
+          ${props.completed ? 'text-opacity-60' : 'text-slate-700'}`}
         />
       );
   }

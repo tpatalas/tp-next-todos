@@ -27,7 +27,7 @@ export const TodoItem = ({ todo }: Props) => {
       <div className='relative bottom-px ml-1 flex items-start '>
         <CompleteTodoCheckBox
           todoItem={todoItem}
-          isChecked={todoItem.isCompleted}
+          isChecked={todoItem.completed}
           checkBoxColor={classNames(
             todoItem.priorityLevel === PRIORITY_LEVEL['important'] && 'border-yellow-500 border-2 ',
             todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && 'border-red-600 border-2 ',
@@ -41,12 +41,12 @@ export const TodoItem = ({ todo }: Props) => {
         <div
           className={classNames(
             'break-words pr-1 ',
-            todoItem.isCompleted ? 'italic opacity-60' : '',
+            todoItem.completed ? 'italic opacity-60' : '',
           )}>
           <div
             className={classNames(
               'font-medium decoration-red-600 decoration-2 line-clamp-1',
-              todoItem.isCompleted ? ' text-gray-500 line-through' : '',
+              todoItem.completed ? ' text-gray-500 line-through' : '',
             )}>
             {todoItem.title}
           </div>

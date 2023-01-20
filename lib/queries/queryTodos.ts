@@ -3,7 +3,7 @@ import { queries } from '@states/utils';
 
 export const getDataTodoIds = async ({
   model,
-}: Partial<Pick<Types, 'isCompleted' | 'completedFromToday' | 'priorityLevel'>> &
+}: Partial<Pick<Types, 'completed' | 'completedFromToday' | 'priorityLevel'>> &
   Pick<Types, 'model'>) => {
   const response = await fetch('/api/v1/todos?' + queries('model=' + model));
   if (!response.ok) throw new Error(response.statusText);
@@ -46,7 +46,7 @@ export const updateDataTodo = async (_id: Todos['_id'], inputValue: Todos) => {
 
 export const completeDataTodo = async (
   _id: Todos['_id'],
-  completed: Todos['isCompleted'],
+  completed: Todos['completed'],
   completedDate: Todos['completedDate'],
 ) => {
   const response = await fetch(`/api/v1/todos/${_id}`, {

@@ -22,15 +22,15 @@ export const CheckBox = ({
       type='checkbox'
       className={classNames(
         'h-5 w-5 cursor-pointer rounded-md hover:ring-4 hover:ring-gray-200 hover:ring-offset-2 focus:ring-4 focus:ring-gray-200 focus:ring-offset-2',
-        !conditionalDisable && !todoItem.isCompleted ? 'cursor-not-allowed bg-gray-100' : '',
+        !conditionalDisable && !todoItem.completed ? 'cursor-not-allowed bg-gray-100' : '',
         checkBoxColor,
         checkedColor,
       )}
-      tooltip={!todoItem.isCompleted ? 'Complete' : 'Undo Complete'}
+      tooltip={!todoItem.completed ? 'Complete' : 'Undo Complete'}
       kbd='⌘ + Enter'
       isChecked={isChecked}
       onChange={onChange}
-      isDisabled={!conditionalDisable && !todoItem.isCompleted}
+      isDisabled={!conditionalDisable && !todoItem.completed}
     />
   );
 };
