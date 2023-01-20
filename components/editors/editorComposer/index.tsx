@@ -16,7 +16,8 @@ import {
   Editable,
 } from 'slate-react';
 
-type Props = Pick<Types, 'titleName' | 'placeholder'> & Partial<Pick<Types, 'isAutoFocus' | 'todo'>>;
+type Props = Pick<Types, 'titleName' | 'placeholder'> &
+  Partial<Pick<Types, 'isAutoFocus' | 'todo'>>;
 
 export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -26,11 +27,11 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
   const completed =
-    typeof todo !== 'undefined' && useRecoilValue(atomQueryTodoItem(todo?._id)).isCompleted;
+    typeof todo !== 'undefined' && useRecoilValue(atomQueryTodoItem(todo?._id)).completed;
   const renderCustomElementWithProps = (props: RenderElementProps) =>
     renderCustomElement({
       titleName: titleName,
-      isCompleted: completed,
+      completed: completed,
       ...props,
     });
 

@@ -41,7 +41,7 @@ export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
   if (typeof _id === 'undefined') return;
   const todoItem = useRecoilValue(atomQueryTodoItem(_id));
   const selectorTodoItem = useRecoilValue(atomSelectorTodoItem(_id));
-  const todoItemCompletedEqual = equal(todoItem.isCompleted, selectorTodoItem.isCompleted);
+  const todoItemCompletedEqual = equal(todoItem.completed, selectorTodoItem.completed);
   // Disable update button if completed
   return !todoItemCompletedEqual ? true : equal(todoItem, selectorTodoItem);
 };

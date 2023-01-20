@@ -61,7 +61,7 @@ export interface Todos extends TodosEditors, TodoIds {
 
 export interface TodoIds {
   _id?: OBJECT_ID;
-  isCompleted?: boolean;
+  completed?: boolean;
   priorityLevel?: PRIORITY_LEVEL | null;
   priorityRankScore?: number;
   completedDate?: Date | null;
