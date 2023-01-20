@@ -5,7 +5,7 @@ import {
   dataButtonTodoModalCancel,
   dataButtonTodoModalClose,
 } from '@data/dataObjects';
-import { LabelModalWithKeyEffect } from '@states/keybinds/labelModalWithKeyEffect';
+import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { useLabelValueUpdate, useLabelStateAdd } from '@states/labels/hooks';
 import { atomLabelModalOpen } from '@states/modals';
@@ -91,7 +91,7 @@ export const LabelModal = ({
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}
-      <LabelModalWithKeyEffect label={label} />
+      <KeysWithLabelModalEffect label={label} />
     </LabelModalFragment>
   );
 };

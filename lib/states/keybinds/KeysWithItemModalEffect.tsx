@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 type Props = Pick<TypesTodo, 'todo'>;
 
-export const ItemModalWithKeyEffect = ({ todo }: Props) => {
+export const KeysWithItemModalEffect = ({ todo }: Props) => {
   const todoItemKeyHandler = useItemModalWithKey(todo._id);
 
   useEffect(() => {

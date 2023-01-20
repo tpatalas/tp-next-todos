@@ -11,7 +11,7 @@ import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 
 type Props = Pick<Types, 'index' | 'divFocus' | 'todo'>;
 
-export const NavigateWithKeyEffect = ({ index, divFocus, todo }: Props) => {
+export const KeysWithNavigationEffect = ({ index, divFocus, todo }: Props) => {
   const setFocus = useFocusState(todo._id);
   const keyDownNavigate = useKeyWithNavigate();
   const currentFocus = useRecoilValue(atomCurrentFocus);
