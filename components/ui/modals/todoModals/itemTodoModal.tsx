@@ -3,7 +3,7 @@ import { dataButtonItemModalUpdate } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
-import { TodoModalWithKeyEffect } from '@states/keybinds/todoModalWithKeyEffect';
+import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
 import { atomPriority } from '@states/priorities';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoStateUpdate, useTodoStateComplete } from '@states/todos/hooks';
@@ -52,7 +52,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
           </DisableButton>
         </FooterButtonsFragment>
       }>
-      <TodoModalWithKeyEffect todo={todo} />
+      <KeysWithTodoModalEffect todo={todo} />
     </TodoModal>
   );
 };

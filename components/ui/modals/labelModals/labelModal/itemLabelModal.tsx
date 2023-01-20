@@ -1,7 +1,7 @@
 import { DisableButton } from '@buttons/disableButton';
 import { dataButtonLabelModalUpdateLabel } from '@data/dataObjects';
 import { Types } from '@lib/types';
-import { LabelModalWithKeyEffect } from '@states/keybinds/labelModalWithKeyEffect';
+import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { useLabelStateUpdate } from '@states/labels/hooks';
 import { useConditionCompareLabelItemsEqual } from '@states/utils/hooks';
 import { Fragment } from 'react';
@@ -24,7 +24,7 @@ export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
             Update
           </DisableButton>
         }>
-        <LabelModalWithKeyEffect label={label} />
+        <KeysWithLabelModalEffect label={label} />
       </LabelModal>
     </Fragment>
   );

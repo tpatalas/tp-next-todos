@@ -6,9 +6,9 @@ import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
 import { LabelModal } from '@modals/labelModals/labelModal';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendars/hooks';
-import { TodoModalWithKeyEffect } from '@states/keybinds/todoModalWithKeyEffect';
+import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
-import { atomTodoModalOpen, atomTodoModalMax } from '@states/modals';
+import { atomTodoModalMax, atomTodoModalOpen } from '@states/modals';
 import { useTodoModalStateClose } from '@states/modals/hooks';
 import { useTodoStateAdd } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
@@ -100,7 +100,7 @@ export const TodoModal = ({
         </ModalTransitionChild>
       </ModalTransitionRoot>
       {children}
-      <TodoModalWithKeyEffect todo={todo} />
+      <KeysWithTodoModalEffect todo={todo} />
       <DisableScrollEffect open={isTodoModalOpen} />
     </TodoModalFragment>
   );

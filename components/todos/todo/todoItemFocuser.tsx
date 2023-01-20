@@ -1,6 +1,6 @@
 import { useFocusOnClick } from '@states/focus/hooks';
 import { useKeyWithFocus } from '@states/keybinds/hooks';
-import { NavigateWithKeyEffect } from '@states/keybinds/navigateWithKeyEffect';
+import { KeysWithNavigationEffect } from '@states/keybinds/KeysWithNavigateEffect';
 import { Types, TypesTodo } from 'lib/types';
 import { useRef } from 'react';
 
@@ -18,7 +18,7 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
       ref={divFocus}
       onKeyDown={focusKeyHandler}
       onClick={() => focusOnClick()}>
-      <NavigateWithKeyEffect
+      <KeysWithNavigationEffect
         index={index}
         divFocus={divFocus}
         todo={todo}
