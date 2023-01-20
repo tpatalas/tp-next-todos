@@ -81,7 +81,7 @@ export const Dropdown = ({
                 {headerContents && (
                   <span
                     className={classNames(
-                      'flex flex-row items-start justify-start pl-3 text-sm font-normal text-gray-500',
+                      'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
                       text,
                     )}>
                     {headerContents}

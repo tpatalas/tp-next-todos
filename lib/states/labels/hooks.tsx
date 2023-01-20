@@ -1,5 +1,5 @@
 import { CATCH_MODAL, NOTIFICATION } from '@data/stateObjects';
-import { STYLE_COLORS_BG } from '@data/stylePreset';
+import { STYLE_COLORS } from '@data/stylePreset';
 import {
   createDataNewLabel,
   deleteDataLabelItem,
@@ -11,7 +11,7 @@ import { useNotificationState } from '@states/notifications/hooks';
 import { atomTodoNew } from '@states/todos';
 import { atomCatch } from '@states/utils';
 import ObjectID from 'bson-objectid';
-import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { RecoilValue, useRecoilCallback } from 'recoil';
 import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '.';
 
 /**
@@ -19,7 +19,7 @@ import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '.';
  **/
 export const useLabelValueUpdate = (label?: Types['label']) => {
   return useRecoilCallback(({ set }) => (content: string) => {
-    const randomBgColor = STYLE_COLORS_BG[Math.floor(Math.random() * STYLE_COLORS_BG.length)];
+    const randomBgColor = STYLE_COLORS[Math.floor(Math.random() * STYLE_COLORS.length)];
     typeof label !== 'undefined'
       ? set(atomSelectorLabelItem(label._id), {
           name: content,
@@ -89,11 +89,33 @@ export const useLabelStateRemove = (_id: Labels['_id']) => {
   });
 };
 
+export const useRemoveTitleId = (_id: Todos['_id']) => {
+  return useRecoilCallback(({ set, snapshot }) => (labelId: Labels['_id']) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const todoId = _id ? _id! : get(atomTodoNew)._id!;
+
+    const filteredLabelsRemoved = get(atomQueryLabels).map((label) => {
+      const labelIdMatched = label._id === labelId;
+      const unFilteredLabel = label.title_id && label.title_id;
+      const filteredLabel =
+        label.title_id && label.title_id.filter((titleId) => titleId !== todoId);
+
+      return {
+        ...label,
+        title_id: labelIdMatched ? filteredLabel : unFilteredLabel,
+      };
+    });
+    set(atomQueryLabels, filteredLabelsRemoved);
+  });
+};
+
 export const useLabelChangeHandler = (_id: Todos['_id']) => {
-  const todoNew = useRecoilValue(atomTodoNew);
-  const labels = useRecoilValue(atomQueryLabels);
-  const todoId = _id ? _id! : todoNew._id!;
-  return useRecoilCallback(({ set }) => (selected: Labels[]) => {
+  return useRecoilCallback(({ set, snapshot }) => (selected: Labels[]) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const todoNew = get(atomTodoNew);
+    const todoId = _id ? _id! : todoNew._id!;
+    const labels = get(atomQueryLabels);
+
     const updateChange = labels.map((label) => {
       const labelId = selected.filter((select) => select._id === label._id)[0]?._id;
       const isTodoIdExist = label.title_id && label.title_id.includes(todoId);

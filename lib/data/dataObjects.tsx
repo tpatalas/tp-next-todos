@@ -272,7 +272,7 @@ export const dataDropdownComboBox: TypesDataDropdown = {
   tooltip: 'Add label',
   hasDivider: false,
   contentWidth: 'w-72',
-  menuWidth: 'ml-2',
+  menuWidth: 'ml-1',
   padding: 'px-3 py-2',
 };
 

@@ -14,12 +14,12 @@ type Props = { data: TypesDataButton } & Partial<
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
   ({ data, onClick, onKeyDown, onDoubleClick, onMouseOver, children = data.name }: Props, ref) => {
-    const [isClicked, setClick] = useState(false);
+    const [hasTooltip, setTooltip] = useState(false);
 
     return (
       <Tooltip
-        tooltip={isClicked || data.isDisabled ? undefined : data.tooltip}
-        kbd={isClicked || data.isDisabled ? undefined : data.kbd}
+        tooltip={hasTooltip || data.isDisabled ? undefined : data.tooltip}
+        kbd={hasTooltip || data.isDisabled ? undefined : data.kbd}
         placement={data.placement}
         offset={data.offset}>
         <button
@@ -27,9 +27,9 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
           className={data.className}
           disabled={data.isDisabled}
           onMouseOver={onMouseOver}
-          onMouseDown={() => !data.isDisabled && setClick(true)}
-          onMouseEnter={() => !data.isDisabled && setClick(false)}
-          onMouseLeave={() => !data.isDisabled && setClick(true)}
+          onMouseDown={() => !data.isDisabled && setTooltip(true)}
+          onMouseEnter={() => !data.isDisabled && setTooltip(false)}
+          onMouseLeave={() => !data.isDisabled && setTooltip(true)}
           onClick={onClick}
           onKeyDown={onKeyDown}
           onDoubleClick={onDoubleClick}

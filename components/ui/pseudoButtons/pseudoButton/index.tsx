@@ -14,20 +14,21 @@ type Props = { data: TypesDataPseudoButton } & Partial<
 
 export const PseudoButton = forwardRef<HTMLDivElement, Props>(
   ({ data, onClick, onKeyDown, onDoubleClick, onMouseOver, children = data.name }: Props, ref) => {
-    const [isClicked, setClick] = useState(false);
+    const [hasTooltip, setTooltip] = useState(false);
 
     return (
       <Tooltip
-        tooltip={isClicked ? undefined : data.tooltip}
-        kbd={isClicked ? undefined : data.kbd}
+        tooltip={hasTooltip ? undefined : data.tooltip}
+        kbd={hasTooltip ? undefined : data.kbd}
         placement={data.placement}
         offset={data.offset}>
         <div
           className={data.className}
           onMouseOver={onMouseOver}
-          onMouseDown={() => setClick(true)}
-          onMouseEnter={() => setClick(false)}
-          onMouseLeave={() => setClick(true)}
+          onMouseDown={() => setTooltip(true)}
+          onMouseEnter={() => setTooltip(false)}
+          onMouseLeave={() => setTooltip(true)}
+          onWheel={() => setTooltip(true)}
           onClick={onClick}
           onKeyDown={onKeyDown}
           onDoubleClick={onDoubleClick}

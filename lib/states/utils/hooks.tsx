@@ -1,11 +1,11 @@
-import { Todos, Labels, Types } from '@lib/types';
+import { Labels, Todos, Types } from '@lib/types';
 import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '@states/labels';
-import { atomTodoModalOpen, atomTodoModalMini } from '@states/modals';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
+import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
+import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import equal from 'fast-deep-equal/react';
 import { useEffect } from 'react';
-import { useRecoilCallback, RecoilValue, useRecoilValue, RecoilState } from 'recoil';
+import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 
 /**
  * Hooks
