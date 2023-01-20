@@ -19,7 +19,7 @@ export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
         footerButtons={
           <DisableButton
             data={dataButtonLabelModalUpdateLabel}
-            conditionalRendering={condition}
+            isConditionalRendering={condition}
             onClick={() => updateLabel()}>
             Update
           </DisableButton>

@@ -20,6 +20,7 @@ import {
   ICON_LABEL_IMPORTANT_FILL,
   ICON_MAXIMIZE,
   ICON_MINIMIZE,
+  ICON_NEW_LABEL,
   ICON_OPEN_IN_FULL,
   ICON_REPORT,
   ICON_WARNING,
@@ -201,9 +202,7 @@ export const dataButtonItemModalUpdate: TypesDataButton = {
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-3'),
 };
 
-/**
- * Label
- **/
+// Labels
 export const dataButtonLabelModalAddLabel: TypesDataButton = {
   tooltip: 'Add label',
   kbd: 'Enter',
@@ -215,6 +214,7 @@ export const dataButtonLabelModalUpdateLabel: TypesDataButton = {
   kbd: 'Enter',
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
 };
+
 /**
  * * TypesDataPriority
  */
@@ -239,7 +239,7 @@ export const dataPriorityDropdownImportant: TypesDataPriority = {
   priorityImportant: 'Mark as normal',
   priorityNormal: 'Mark as important',
   padding: 'px-4 py-2',
-  containerWidth: 'w-full',
+  container: 'w-full',
   width: 'w-full',
   display: 'flex flex-row',
 };
@@ -250,7 +250,7 @@ export const dataPriorityDropdownUrgent: TypesDataPriority = {
   priorityUrgent: 'Mark as normal',
   priorityNormal: 'Mark as urgent',
   padding: 'px-4 py-2',
-  containerWidth: 'w-full',
+  container: 'w-full',
   width: 'w-full',
   display: 'flex flex-row',
 };
@@ -264,6 +264,16 @@ export const dataDropdownCalendar: TypesDataDropdown = {
   padding: 'px-4 py-2',
   menuWidth: 'w-full',
   tooltip: 'Due Date',
+};
+
+// Combobox
+export const dataDropdownComboBox: TypesDataDropdown = {
+  path: ICON_NEW_LABEL,
+  tooltip: 'Add label',
+  hasDivider: false,
+  contentWidth: 'w-72',
+  menuWidth: 'ml-2',
+  padding: 'px-3 py-2',
 };
 
 /**

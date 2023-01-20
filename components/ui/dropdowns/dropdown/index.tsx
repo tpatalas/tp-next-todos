@@ -9,12 +9,13 @@ import { Fragment as MenuFragment, useState } from 'react';
 import { usePopper } from 'react-popper';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
-type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents'>> &
+type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents' | 'show'>> &
   Pick<Types, 'children'>;
 
 export const Dropdown = ({
   headerContents,
   children,
+  show,
   data: {
     tooltip,
     kbd,
@@ -27,9 +28,10 @@ export const Dropdown = ({
     padding = 'p-2',
     hasDivider = true,
     isInitiallyVisible = true,
+    hasDropdownBoardStyle = true,
     size = 'h-5 w-5',
     color = 'fill-gray-500 group-hover:fill-gray-700',
-    text = 'group-hover:text-grey-700',
+    text = 'group-hover:text-gray-700',
     contentWidth = 'w-60',
   },
 }: Props) => {
@@ -88,6 +90,7 @@ export const Dropdown = ({
               </Menu.Button>
               <Transition
                 as='div'
+                show={show ? show : open}
                 className='relative z-20 '
                 enter='transition ease-out duration-100'
                 enterFrom='transform opacity-0 scale-95'
@@ -99,12 +102,15 @@ export const Dropdown = ({
                   <DisableScrollEffect open={open} />
                   <Menu.Items
                     className={classNames(
-                      'absolute right-0 z-50 origin-top-right rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none',
+                      'absolute right-0 z-50 origin-top-right focus:outline-none',
                       contentWidth,
+                      hasDropdownBoardStyle &&
+                        'rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5',
                     )}
                     ref={setPopperElement}
                     style={styles.popper}
-                    {...attributes.popper}>
+                    {...attributes.popper}
+                    static>
                     <div className={classNames(hasDivider && 'divide-y divide-gray-100')}>
                       {children}
                     </div>

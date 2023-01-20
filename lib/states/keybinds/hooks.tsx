@@ -81,7 +81,7 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
             break;
           case event.key === 'Escape':
             event.preventDefault();
-            if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
+            if (get(atomQueryTodoItem(_id)).isCompleted && get(atomTodoModalOpen(_id))) return;
             !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
             reset(atomCurrentFocus);
             set(atomOnBlur, true);
@@ -130,7 +130,7 @@ export const useKeyWithLabelModal = (_id: Labels['_id']) => {
   return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    if (get(atomCatch(CATCH_MODAL.todoModal)) || get(atomCatch(CATCH_MODAL.confirmModal))) return;
+    if (get(atomCatch(CATCH_MODAL.confirmModal))) return;
 
     if (!event) return;
     switch (event.key) {

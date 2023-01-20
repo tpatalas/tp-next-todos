@@ -13,7 +13,7 @@ type Props = { data: TypesDataButton } & Partial<
 
 export const IconButton = ({ data, headerContents, onClick, children = data.name }: Props) => {
   return (
-    <span className={data.containerWidth}>
+    <span className={data.container}>
       <Button
         data={{
           className: classNames(

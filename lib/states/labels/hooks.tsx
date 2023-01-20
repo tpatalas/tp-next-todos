@@ -1,16 +1,17 @@
-import { NOTIFICATION, CATCH_MODAL } from '@data/stateObjects';
+import { CATCH_MODAL, NOTIFICATION } from '@data/stateObjects';
 import {
-  createDataNewLabel,
-  updateDataLabelItem,
-  deleteDataLabelItem,
+    createDataNewLabel,
+    deleteDataLabelItem,
+    updateDataLabelItem
 } from '@lib/queries/queryLabels';
-import { Types, Labels } from '@lib/types';
-import { atomLabelModalOpen, atomConfirmModalDelete } from '@states/modals';
+import { Labels, Todos, Types } from '@lib/types';
+import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
 import { useNotificationState } from '@states/notifications/hooks';
+import { atomTodoNew } from '@states/todos';
 import { atomCatch } from '@states/utils';
 import ObjectID from 'bson-objectid';
-import { useRecoilCallback, RecoilValue } from 'recoil';
-import { atomSelectorLabelItem, atomLabelNew, atomQueryLabels } from '.';
+import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '.';
 
 /**
  * Hooks
@@ -82,5 +83,34 @@ export const useLabelStateRemove = (_id: Labels['_id']) => {
     deleteDataLabelItem(_id);
     setNotification(NOTIFICATION['deleteLabel']);
     get(atomCatch(CATCH_MODAL.labelModal)) && reset(atomCatch(CATCH_MODAL.labelModal));
+  });
+};
+
+export const useLabelChangeHandler = (_id: Todos['_id']) => {
+  const todoNew = useRecoilValue(atomTodoNew);
+  const labels = useRecoilValue(atomQueryLabels);
+  const todoId = _id ? _id! : todoNew._id!;
+  return useRecoilCallback(({ set }) => (selected: Labels[]) => {
+    const updateChange = labels.map((label) => {
+      const labelId = selected.filter((select) => select._id === label._id)[0]?._id;
+      const isTodoIdExist = label.title_id && label.title_id.includes(todoId);
+      const addOrCreateTodoId = label.title_id ? [...label.title_id, todoId] : [todoId];
+      const updateTitleId = () => {
+        if (!labelId) return label;
+        return {
+          ...label,
+          title_id: !isTodoIdExist ? addOrCreateTodoId : label.title_id,
+        };
+      };
+      const removeTitleId = () => {
+        if (labelId) return label;
+        return {
+          ...label,
+          title_id: label.title_id && label.title_id.filter((titleId) => titleId !== todoId),
+        };
+      };
+      return isTodoIdExist ? removeTitleId() : updateTitleId();
+    });
+    set(atomQueryLabels, updateChange);
   });
 };

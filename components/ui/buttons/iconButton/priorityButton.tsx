@@ -53,7 +53,7 @@ export const PriorityButton = ({ todo, data, onClick }: Props) => {
           margin: data.margin,
           display: data.display,
           width: data.width,
-          containerWidth: data.containerWidth,
+          container: data.container,
           padding: data.padding,
         }}
         headerContents={

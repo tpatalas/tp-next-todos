@@ -15,7 +15,7 @@ export type TypesDataButton = Partial<
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & Pick<
       TypesStyleAttributes,
-      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'containerWidth' | 'hoverBg'
+      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg'
     >
 >;
 
@@ -23,18 +23,27 @@ export type TypesDataPseudoButton = Partial<
   Pick<Types, 'className' | 'path' | 'name' | 'tooltip' | 'offset' | 'kbd' | 'placement'> &
     Pick<
       TypesStyleAttributes,
-      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'containerWidth' | 'hoverBg'
+      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg'
     >
 >;
 
 export type TypesDataPriority = Partial<
   Pick<Types, 'isInitiallyVisible' | 'priorityImportant' | 'priorityNormal' | 'priorityUrgent'> &
-    Pick<TypesStyleAttributes, 'margin' | 'display' | 'width' | 'containerWidth' | 'padding'>
+    Pick<TypesStyleAttributes, 'margin' | 'display' | 'width' | 'container' | 'padding'>
 > &
   Pick<Types, 'priorityLevel'>;
 
 export type TypesDataDropdown = Partial<
-  Pick<Types, 'placement' | 'tooltip' | 'kbd' | 'hasDivider' | 'path' | 'isInitiallyVisible'> &
+  Pick<
+    Types,
+    | 'placement'
+    | 'tooltip'
+    | 'kbd'
+    | 'hasDivider'
+    | 'path'
+    | 'isInitiallyVisible'
+    | 'hasDropdownBoardStyle'
+  > &
     Pick<
       TypesStyleAttributes,
       | 'group'

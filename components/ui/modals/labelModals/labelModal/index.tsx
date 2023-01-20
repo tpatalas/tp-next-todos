@@ -60,9 +60,11 @@ export const LabelModal = ({
               <PlainLineDivider />
             </div>
           </div>
-          <div className='h-full w-full overflow-scroll pl-2'>
+          <div className='h-full w-full overflow-scroll pl-2 pr-3'>
             <input
-              className={classNames('border-0 pl-2 outline-none focus:ring-0 focus:ring-offset-0')}
+              className={classNames(
+                'w-full rounded-lg border-0 py-1 pl-2 outline-none focus:ring-0 focus:ring-offset-0',
+              )}
               placeholder='Enter new label'
               type='text'
               name='label'

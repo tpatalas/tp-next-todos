@@ -2,6 +2,7 @@ import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
 import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
+import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
 import { LabelModal } from '@modals/labelModals/labelModal';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendars/hooks';
@@ -68,12 +69,13 @@ export const TodoModal = ({
             <div className='hidden sm:mb-2 sm:block'>
               <PlainLineDivider />
             </div>
-            <div className='m-1 sm:flex'>
+            <div className='m-1 sm:flex sm:flex-row'>
               <CalendarDropdown
-                data={{ tooltip: 'Due Date' }}
+                data={{ tooltip: 'Due date' }}
                 todo={todo}
                 onClickConfirm={() => updateCalendarItem()}
               />
+              <LabelComboBoxDropdown todo={todo} />
             </div>
           </div>
           <div className='h-full w-full overflow-scroll '>
@@ -88,7 +90,7 @@ export const TodoModal = ({
             {footerButtons ||
               (typeof todo === 'undefined' && (
                 <DisableButton
-                  conditionalRendering={condition}
+                  isConditionalRendering={condition}
                   data={dataButtonTodoModalAddTodo}
                   onClick={() => addTodo()}>
                   Add todo
