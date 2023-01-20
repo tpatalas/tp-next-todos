@@ -85,6 +85,7 @@ export interface Labels extends LabelIds {
   parent_id?: OBJECT_ID;
   title_id?: OBJECT_ID[];
   name: string;
+  color?: string;
 }
 
 export interface LabelIds {

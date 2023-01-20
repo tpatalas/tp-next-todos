@@ -1,8 +1,9 @@
 import { CATCH_MODAL, NOTIFICATION } from '@data/stateObjects';
+import { STYLE_COLORS_BG } from '@data/stylePreset';
 import {
-    createDataNewLabel,
-    deleteDataLabelItem,
-    updateDataLabelItem
+  createDataNewLabel,
+  deleteDataLabelItem,
+  updateDataLabelItem,
 } from '@lib/queries/queryLabels';
 import { Labels, Todos, Types } from '@lib/types';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
@@ -18,6 +19,7 @@ import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '.';
  **/
 export const useLabelValueUpdate = (label?: Types['label']) => {
   return useRecoilCallback(({ set }) => (content: string) => {
+    const randomBgColor = STYLE_COLORS_BG[Math.floor(Math.random() * STYLE_COLORS_BG.length)];
     typeof label !== 'undefined'
       ? set(atomSelectorLabelItem(label._id), {
           name: content,
@@ -25,6 +27,7 @@ export const useLabelValueUpdate = (label?: Types['label']) => {
       : set(atomLabelNew, {
           name: content,
           _id: ObjectID().toHexString(),
+          color: randomBgColor,
         });
   });
 };
@@ -37,7 +40,7 @@ export const useLabelStateAdd = () => {
 
     set(atomQueryLabels, [
       ...get(atomQueryLabels),
-      { _id: get(atomLabelNew)._id, name: get(atomLabelNew).name },
+      { _id: get(atomLabelNew)._id, name: get(atomLabelNew).name, color: get(atomLabelNew).color },
     ]);
     createDataNewLabel(get(atomLabelNew));
     reset(atomLabelNew);

@@ -103,7 +103,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
             isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
           )}>
           <div className='flex flex-grow flex-col'>
-            <nav className='flex-1 space-y-1 pb-24'>
+            <nav className='flex-1 space-y-1 pb-20'>
               <FooterSidebarMenu />
               <LabelList />
             </nav>
