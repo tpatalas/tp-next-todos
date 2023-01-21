@@ -28,7 +28,7 @@ type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo'>> &
 export const CalendarDropdown = ({
   todo,
   onClickConfirm,
-  data: { borderRadius, menuWidth, tooltip, padding = 'px-3 py-2' },
+  data: { borderRadius, tooltip, padding = 'px-3 py-2' },
 }: Props) => {
   const resetCalendar = useCalResetDayUpdater(todo?._id);
   const resetDateItemOnly = useCalResetDateItemOnly(todo?._id);
@@ -45,7 +45,6 @@ export const CalendarDropdown = ({
         tooltip: tooltip,
         padding: padding,
         borderRadius: borderRadius,
-        menuWidth: menuWidth,
         color: noDaySelected
           ? 'fill-gray-500 [.group-calendarDropdown:hover_&]:fill-gray-700'
           : 'fill-blue-500 [.group-calendarDropdown:hover_&]:fill-blue-700',

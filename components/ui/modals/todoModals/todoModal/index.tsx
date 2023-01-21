@@ -69,7 +69,7 @@ export const TodoModal = ({
             <div className='hidden sm:mb-2 sm:block'>
               <PlainLineDivider />
             </div>
-            <div className='m-1 sm:flex sm:flex-row'>
+            <div className='m-1 items-center sm:flex sm:flex-row '>
               <CalendarDropdown
                 data={{ tooltip: 'Due date' }}
                 todo={todo}

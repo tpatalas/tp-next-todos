@@ -1,4 +1,4 @@
-import { DATA_IDB } from '@data/stateArrayObjects';
+import { DATA_IDB } from '@data/dataArrayObjects';
 import { IDB } from '@data/stateObjects';
 import { Types, TypesIDB } from '@lib/types';
 import { openDB } from 'idb';

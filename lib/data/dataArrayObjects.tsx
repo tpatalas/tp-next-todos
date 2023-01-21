@@ -139,7 +139,7 @@ export const DATA_SIDEBAR_MENU = [
   },
   {
     name: 'Show All',
-    tooltip: 'Show all incompleted todos',
+    tooltip: 'Show all incomplete todos',
     icon: ICON_LIST,
     iconActive: ICON_LIST,
     iconColor: 'fill-purple-600',

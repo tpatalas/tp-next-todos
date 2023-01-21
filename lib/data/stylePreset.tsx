@@ -72,16 +72,16 @@ export const STYLE_CALENDAR_COL_START = [
  * Color palette
  **/
 // background color
-export const STYLE_COLORS_BG = [
-  'bg-stone-400 hover:bg-stone-700',
-  'bg-orange-400 hover:bg-orange-700',
-  'bg-amber-400 hover:bg-amber-700',
-  'bg-lime-400 hover:bg-lime-700',
-  'bg-green-400 hover:bg-green-700',
-  'bg-teal-400 hover:bg-teal-700',
-  'bg-cyan-400 hover:bg-cyan-700',
-  'bg-blue-400 hover:bg-blue-700',
-  'bg-indigo-400 hover:bg-indigo-700',
-  'bg-purple-400 hover:bg-purple-700',
-  'bg-rose-400 hover:bg-rose-700',
+export const STYLE_COLORS = [
+  'bg-stone-400',
+  'bg-orange-400',
+  'bg-amber-400',
+  'bg-lime-400',
+  'bg-green-400',
+  'bg-teal-400',
+  'bg-cyan-400',
+  'bg-blue-400',
+  'bg-indigo-400',
+  'bg-purple-400',
+  'bg-rose-400',
 ];
