@@ -29,6 +29,7 @@ export const atomLabelNew = atom<Labels>({
   default: {
     _id: undefined,
     name: '',
+    color: '',
     title_id: undefined,
     parent_id: undefined,
   } as Labels,
