@@ -11,7 +11,7 @@ const Home = () => {
     <div className='flex w-full flex-row justify-center'>
       <PrefetchRouterButton
         className={STYLE_BUTTON_NORMAL_BLUE}
-        pathName={PATHNAME['app']}>
+        path={PATHNAME['app']}>
         Go to App
       </PrefetchRouterButton>
     </div>

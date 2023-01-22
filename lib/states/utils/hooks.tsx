@@ -4,7 +4,8 @@ import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import equal from 'fast-deep-equal/react';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo } from 'react';
 import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 
 /**
@@ -65,4 +66,16 @@ export const RecoilObserver = <T,>({
   const value = useRecoilValue(node);
   useEffect(() => onChange(value), [onChange, value]);
   return null;
+};
+
+export const useNextQuerySlug = (path: string): string | undefined => {
+  const router = useRouter();
+
+  const value = useMemo(() => {
+    const match = router.asPath.match(new RegExp(`${path}/(.*)(&|$)`));
+    if (!match) return undefined;
+    return decodeURIComponent(match[1]);
+  }, [path, router]);
+
+  return value;
 };

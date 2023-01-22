@@ -1,6 +1,6 @@
 import ObjectID from 'bson-objectid';
 
-export type CATCH_MODAL = typeof CATCH_MODAL[keyof typeof CATCH_MODAL];
+export type CATCH_MODAL = (typeof CATCH_MODAL)[keyof typeof CATCH_MODAL];
 export const CATCH_MODAL = {
   todoModal: 'todoModal',
   labelModal: 'labelModal',
@@ -8,7 +8,7 @@ export const CATCH_MODAL = {
   minimizedModal: 'minimizedModal',
 } as const;
 
-export type FOCUS = typeof FOCUS[keyof typeof FOCUS];
+export type FOCUS = (typeof FOCUS)[keyof typeof FOCUS];
 export const FOCUS = {
   openTodoModalOnFocus: 'openTodoModalOnFocus',
   returnOnNoFocus: 'returnOnNoFocus',
@@ -16,7 +16,7 @@ export const FOCUS = {
   resetCurrentFocus: 'resetCurrentFocus',
 } as const;
 
-export type NOTIFICATION = typeof NOTIFICATION[keyof typeof NOTIFICATION];
+export type NOTIFICATION = (typeof NOTIFICATION)[keyof typeof NOTIFICATION];
 export const NOTIFICATION = {
   offline: 'offline',
   actionUndone: 'actionUndone',
@@ -34,13 +34,13 @@ export const NOTIFICATION = {
   deleteLabel: 'deleteLabel',
 } as const;
 
-export type OBJECT_ID = typeof OBJECT_ID[keyof typeof OBJECT_ID];
+export type OBJECT_ID = (typeof OBJECT_ID)[keyof typeof OBJECT_ID];
 export const OBJECT_ID = {
   objectID: ObjectID().toHexString(),
 } as const;
 
-export type POSITION_X = typeof POSITION_X[keyof typeof POSITION_X];
-export type POSITION_Y = typeof POSITION_Y[keyof typeof POSITION_Y];
+export type POSITION_X = (typeof POSITION_X)[keyof typeof POSITION_X];
+export type POSITION_Y = (typeof POSITION_Y)[keyof typeof POSITION_Y];
 export const POSITION_X = {
   left: 'sm:items-start',
   right: 'sm:items-end',
@@ -52,14 +52,14 @@ export const POSITION_Y = {
   center: 'sm:items-center',
 } as const;
 
-export type PRIORITY_LEVEL = typeof PRIORITY_LEVEL[keyof typeof PRIORITY_LEVEL];
+export type PRIORITY_LEVEL = (typeof PRIORITY_LEVEL)[keyof typeof PRIORITY_LEVEL];
 export const PRIORITY_LEVEL = {
   urgent: 1,
   important: 2,
   normal: 3,
 } as const;
 
-export type CALENDAR = typeof CALENDAR[keyof typeof CALENDAR];
+export type CALENDAR = (typeof CALENDAR)[keyof typeof CALENDAR];
 export const CALENDAR = {
   today: 'today',
   nextMonth: 'nextMonth',
@@ -67,7 +67,7 @@ export const CALENDAR = {
   days: 'days',
 } as const;
 
-export type IDB = typeof IDB[keyof typeof IDB];
+export type IDB = (typeof IDB)[keyof typeof IDB];
 export const IDB = {
   Todos: 'Todos',
   Labels: 'Labels',
@@ -75,7 +75,7 @@ export const IDB = {
   Cache: 'Cache',
 } as const;
 
-export type IDB_STORE = typeof IDB_STORE[keyof typeof IDB_STORE];
+export type IDB_STORE = (typeof IDB_STORE)[keyof typeof IDB_STORE];
 export const IDB_STORE = {
   todos: 'todos',
   labels: 'labels',
@@ -84,7 +84,7 @@ export const IDB_STORE = {
   cache: 'cache',
 } as const;
 
-export type BREAKPOINT = typeof BREAKPOINT[keyof typeof BREAKPOINT];
+export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];
 export const BREAKPOINT = {
   sm: 640,
   md: 768,
@@ -96,13 +96,13 @@ export const BREAKPOINT = {
   '5xl': 2304,
 } as const;
 
-export type SCHEMA_TODO = typeof SCHEMA_TODO[keyof typeof SCHEMA_TODO];
+export type SCHEMA_TODO = (typeof SCHEMA_TODO)[keyof typeof SCHEMA_TODO];
 export const SCHEMA_TODO = {
   todoItem: 'todoItem',
   todoNote: 'todoNote',
 } as const;
 
-export type FITLER_TODOIDS = typeof FILTER_TODOIDS[keyof typeof FILTER_TODOIDS];
+export type FITLER_TODOIDS = (typeof FILTER_TODOIDS)[keyof typeof FILTER_TODOIDS];
 export const FILTER_TODOIDS = {
   focus: 'focus',
   showAll: 'showAll',
@@ -111,11 +111,12 @@ export const FILTER_TODOIDS = {
   completed: 'completed',
 } as const;
 
-export type PATHNAME = typeof PATHNAME[keyof typeof PATHNAME];
+export type PATHNAME = (typeof PATHNAME)[keyof typeof PATHNAME];
 export const PATHNAME = {
   app: '/app',
   urgent: '/app/urgent',
   important: '/app/important',
   showAll: '/app/showall',
   completed: '/app/completed',
+  label: '/app/label/(.*)$',
 } as const;

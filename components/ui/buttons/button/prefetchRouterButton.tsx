@@ -4,7 +4,7 @@ import { Fragment, useEffect } from 'react';
 import { Button } from '.';
 
 export const PrefetchRouterButton = ({
-  pathName,
+  path,
   children,
   className,
   isPrefetchingOnHover,
@@ -13,7 +13,7 @@ export const PrefetchRouterButton = ({
   kbd,
   offset,
   placement,
-}: Pick<Types, 'pathName' | 'children'> &
+}: Pick<Types, 'path' | 'children'> &
   Partial<
     Pick<
       Types,
@@ -24,9 +24,9 @@ export const PrefetchRouterButton = ({
 
   useEffect(() => {
     if (!isPrefetchingOnHover || typeof isPrefetchingOnHover === 'undefined') {
-      router.prefetch(pathName);
+      router.prefetch(path);
     }
-  }, [pathName, isPrefetchingOnHover, router]);
+  }, [path, isPrefetchingOnHover, router]);
 
   return (
     <Fragment>
@@ -38,11 +38,11 @@ export const PrefetchRouterButton = ({
           placement: placement,
           offset: offset,
         }}
-        onMouseOver={() => isPrefetchingOnHover && router.prefetch(pathName)}
+        onMouseOver={() => isPrefetchingOnHover && router.prefetch(path)}
         onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
           event.preventDefault();
-          router.push(pathName);
-          onClick;
+          router.push(path);
+          onClick && onClick(event);
         }}>
         {children}
       </Button>

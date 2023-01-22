@@ -4,6 +4,7 @@ import {
   IDB_STORE,
   NOTIFICATION,
   OBJECT_ID,
+  PATHNAME,
   POSITION_X,
   POSITION_Y,
   PRIORITY_LEVEL,
@@ -164,7 +165,8 @@ type CollectTypesMISC = TypesIndexedDB &
   TypesStyleAttributes;
 
 export interface TypesRouter {
-  pathName: string;
+  path: string;
+  pathname: PATHNAME;
   isPrefetchingOnHover: boolean;
 }
 
