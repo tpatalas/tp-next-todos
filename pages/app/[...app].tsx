@@ -1,13 +1,14 @@
 import dynamic from 'next/dynamic';
-import { Fragment } from 'react';
+import { Fragment, ReactElement } from 'react';
 
 const LayoutApp = dynamic(() => import('@layouts/layoutApp').then((mod) => mod.LayoutApp));
 
 const CatchAllApp = () => {
-  return (
-    <LayoutApp>
-      <Fragment />
-    </LayoutApp>
-  );
+  return <Fragment />;
 };
+
+CatchAllApp.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutApp>{page}</LayoutApp>;
+};
+
 export default CatchAllApp;

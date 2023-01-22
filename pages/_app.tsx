@@ -1,17 +1,26 @@
 import { LayoutHome } from '@layouts/layoutHome';
+import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import { ReactElement, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <RecoilRoot>
-      <LayoutHome>
-        <Component {...pageProps} />
-      </LayoutHome>
+      <LayoutHome>{getLayout(<Component {...pageProps} />)}</LayoutHome>
     </RecoilRoot>
   );
 };
 
 export default MyApp;
-

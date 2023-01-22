@@ -1,7 +1,7 @@
 import { ErrorState } from '@components/loadable/errorState';
 import { LayoutApp } from '@layouts/layoutApp';
 import dynamic from 'next/dynamic';
-import { Fragment as AppFragment } from 'react';
+import { Fragment as AppFragment, ReactElement } from 'react';
 
 const LoadingTodos = dynamic(() =>
   import('@components/loadable/loadingStates/loadingTodos').then((mod) => mod.LoadingTodos),
@@ -20,12 +20,15 @@ const App = () => {
   return (
     <AppFragment>
       <FilterTodoIdsEffect />
-      <LayoutApp>
-        <ErrorBoundary fallback={<ErrorState />}>
-          <TodoList />
-        </ErrorBoundary>
-      </LayoutApp>
+      <ErrorBoundary fallback={<ErrorState />}>
+        <TodoList />
+      </ErrorBoundary>
     </AppFragment>
   );
 };
+
+App.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutApp>{page}</LayoutApp>;
+};
+
 export default App;
