@@ -9,11 +9,14 @@ import { Fragment as MenuFragment, useState } from 'react';
 import { usePopper } from 'react-popper';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
-type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents' | 'show'>> &
+type Props = { data: TypesDataDropdown } & Partial<
+  Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>
+> &
   Pick<Types, 'children'>;
 
 export const Dropdown = ({
   headerContents,
+  headerContentsOnClose,
   children,
   show,
   data: {
@@ -45,7 +48,7 @@ export const Dropdown = ({
 
   const visibility = (initialVisible: boolean, open: boolean) => {
     if (initialVisible || open) return 'visible';
-    return 'invisible group-focus-within:visible group-hover:visible';
+    return 'invisible group-hover:visible';
   };
 
   return (
@@ -88,6 +91,7 @@ export const Dropdown = ({
                   </span>
                 )}
               </Menu.Button>
+              {!open && headerContentsOnClose}
               <Transition
                 as='div'
                 show={show ? show : open}
@@ -99,7 +103,7 @@ export const Dropdown = ({
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'>
                 <Portal>
-                  <DisableScrollEffect open={open} />
+                  {open && <DisableScrollEffect open={open} />}
                   <Menu.Items
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',

@@ -32,7 +32,7 @@ export const LabelComboBoxDropdown = ({ todo }: Props) => {
             <li key={label._id}>
               <div
                 className={classNames(
-                  'mr-1 flex cursor-pointer flex-row items-center justify-center rounded-lg py-[3px] pl-2 pr-1 text-sm text-gray-700',
+                  'ml-1 flex cursor-pointer flex-row items-center justify-center rounded-lg py-[3px] pl-2 pr-1 text-sm text-gray-700',
                   label.color && label.color,
                   'bg-opacity-40 hover:bg-opacity-60',
                 )}>
@@ -40,7 +40,6 @@ export const LabelComboBoxDropdown = ({ todo }: Props) => {
                   path={paths('/app/label/', label._id)}
                   className='max-w-[5.3rem] truncate pr-1'
                   tooltip={label.name}
-                  offset={[10, 15]}
                   onClick={() => closeTodoModal()}>
                   {label.name}
                 </PrefetchRouterButton>
@@ -48,7 +47,7 @@ export const LabelComboBoxDropdown = ({ todo }: Props) => {
                   data={{
                     path: ICON_CLOSE,
                     padding: 'p-[2px]',
-                    hoverBg: 'bg-opacity-0 hover:bg-opacity-30',
+                    hoverBg: 'hover:bg-gray-900 hover:bg-opacity-10',
                     size: 'h-4 w-4',
                     color: 'fill-gray-700 hover:fill-gray-900',
                     container: 'h-5',

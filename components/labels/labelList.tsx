@@ -14,7 +14,7 @@ export const LabelList = () => {
     <Fragment>
       <div className='text-sm text-gray-900'>
         <div className='item-center flex flex-row justify-between fill-gray-500 pb-1 text-base opacity-90'>
-          <div className='py-2 pl-1'>Labels</div>
+          <div className='py-2 pl-2'>Labels</div>
           <IconButton
             data={{
               path: ICON_NEW_LABEL,

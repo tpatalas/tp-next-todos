@@ -7,9 +7,14 @@ import { Types } from 'lib/types';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 
-type Props = { data: TypesDataDropdown } & Pick<Types, 'label'>;
+type Props = { data: TypesDataDropdown } & Pick<Types, 'label'> &
+  Partial<Pick<Types, 'headerContentsOnClose'>>;
 
-export const LabelItemDropdown = ({ label, data: { isInitiallyVisible } }: Props) => {
+export const LabelItemDropdown = ({
+  label,
+  data: { isInitiallyVisible, hoverBg },
+  headerContentsOnClose,
+}: Props) => {
   const openModal = useLabelModalStateOpen(label?._id);
   const removeLabel = useLabelStateRemove(label._id);
 
@@ -18,11 +23,12 @@ export const LabelItemDropdown = ({ label, data: { isInitiallyVisible } }: Props
       data={{
         tooltip: 'Menu',
         path: ICON_MORE_VERT,
-        padding: 'p-2',
+        padding: 'p-[0.3rem]',
         color: 'fill-gray-500 group-hover:fill-gray-700',
-        hoverBg: 'hover:bg-gray-200',
+        hoverBg: hoverBg,
         isInitiallyVisible: isInitiallyVisible,
-      }}>
+      }}
+      headerContentsOnClose={headerContentsOnClose}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       <div className='py-1'>

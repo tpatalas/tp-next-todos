@@ -13,22 +13,22 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
 
   return (
     <LayoutFooterFragment>
-      <SidebarMobileResetEffect />
       <div className='flex h-full flex-row'>
         <Transition.Root
           show={isSidebarOpen}
-          as={Fragment}>
+          as='div'>
           <Transition.Child
             appear={true}
             as={Fragment}
-            enter='transition transform ease-in-out duration-200'
-            enterFrom='transform -translate-x-40 opacity-0'
+            enter='transition transform ease-in-out duration-350'
+            enterFrom='transform -translate-x-24 opacity-0'
             enterTo='transform translate-x-0 opacity-100'
-            leave='transition ease-in-out duration-200'
+            leave='transition ease-in-out duration-350'
             leaveFrom='transform translate-x-0 opacity-100'
-            leaveTo='transform -translate-x-40 opacity-0'>
+            leaveTo='transform -translate-x-24 opacity-0'>
             <FooterSidebar />
           </Transition.Child>
+          <SidebarMobileResetEffect />
         </Transition.Root>
         <FooterBodyFragment>
           <div

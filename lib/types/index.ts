@@ -264,6 +264,7 @@ export interface TypesComboboxAttributes {
 
 export interface TypesDropdownAttributes {
   hasDropdownBoardStyle: boolean;
+  headerContentsOnClose: Types['children'];
 }
 
 export interface TypesInputAttributes {
