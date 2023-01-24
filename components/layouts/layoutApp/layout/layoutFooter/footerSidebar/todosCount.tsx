@@ -1,11 +1,14 @@
-import { PATHNAME } from '@data/stateObjects';
-import { selectorFilterTodoIdsByPathname } from '@states/todos';
+import { Types } from '@lib/types';
+import { selectorTodosCount } from '@states/todos';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-export const TodosCount = ({ pathname }: { pathname: PATHNAME }) => {
-  const todoIdsByPathName = useRecoilValue(selectorFilterTodoIdsByPathname(pathname));
-  const todoCounts = todoIdsByPathName.length;
+type Props = Partial<Pick<Types, 'label' | 'pathname'>>;
 
-  return <Fragment>{todoCounts}</Fragment>;
+export const TodosCount = ({ pathname, label }: Props) => {
+  const todosCount = useRecoilValue(
+    selectorTodosCount({ pathname: pathname, labelId: label?._id }),
+  );
+
+  return <Fragment>{todosCount > 0 ? todosCount : undefined}</Fragment>;
 };

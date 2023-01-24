@@ -7,7 +7,7 @@ export const LayoutLogo = () => {
     <nav className='flex h-0 flex-row items-center'>
       <LogoContainerFragment>
         <PrefetchRouterButton
-          pathName='/'
+          path='/'
           className='cursor-pointer'>
           <LogoFragment>
             <div>I am a LOGO</div>

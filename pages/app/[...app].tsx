@@ -4,7 +4,7 @@ import { Fragment, ReactElement } from 'react';
 const LayoutApp = dynamic(() => import('@layouts/layoutApp').then((mod) => mod.LayoutApp));
 
 const CatchAllApp = () => {
-  return <Fragment />;
+  return <Fragment>Nothing to show you</Fragment>;
 };
 
 CatchAllApp.getLayout = function getLayout(page: ReactElement) {

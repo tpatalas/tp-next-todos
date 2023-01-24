@@ -1,12 +1,13 @@
+import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { dataDropdownComboBox } from '@data/dataObjects';
 import { ICON_CLOSE } from '@data/materialSymbols';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useRemoveTitleId } from '@states/labels/hooks';
-import { classNames } from '@states/utils';
+import { useTodoModalStateClose } from '@states/modals/hooks';
+import { classNames, paths } from '@states/utils';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
-import { PseudoButton } from '@ui/pseudoButtons/pseudoButton';
 import { Fragment as LabelComboBoxDropdownFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
@@ -16,6 +17,7 @@ type Props = Partial<Pick<Types, 'todo'>>;
 export const LabelComboBoxDropdown = ({ todo }: Props) => {
   const selectedLabels = useRecoilValue(selectorSelectedLabels(todo?._id));
   const removeTitleId = useRemoveTitleId(todo?._id);
+  const closeTodoModal = useTodoModalStateClose(todo?._id);
 
   return (
     <LabelComboBoxDropdownFragment>
@@ -34,14 +36,14 @@ export const LabelComboBoxDropdown = ({ todo }: Props) => {
                   label.color && label.color,
                   'bg-opacity-40 hover:bg-opacity-60',
                 )}>
-                <PseudoButton
-                  data={{
-                    className: 'max-w-[5.3rem] truncate pr-1',
-                    tooltip: label.name,
-                    offset: [10, 15],
-                  }}>
+                <PrefetchRouterButton
+                  path={paths('/app/label/', label._id)}
+                  className='max-w-[5.3rem] truncate pr-1'
+                  tooltip={label.name}
+                  offset={[10, 15]}
+                  onClick={() => closeTodoModal()}>
                   {label.name}
-                </PseudoButton>
+                </PrefetchRouterButton>
                 <IconButton
                   data={{
                     path: ICON_CLOSE,

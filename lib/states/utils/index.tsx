@@ -1,8 +1,7 @@
 import { CATCH_MODAL } from '@data/stateObjects';
-import { atomFamily, atom } from 'recoil';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
-import { RecoilRoot } from 'recoil';
+import { atom, atomFamily, RecoilRoot } from 'recoil';
 
 /**
  * Atoms
@@ -25,14 +24,13 @@ export const atomDisableScroll = atom<boolean>({
 export const dayInSecond = 60 * 60 * 24;
 
 // tailwind classNames
-export const classNames = (...classes: unknown[]) => {
-  return classes.filter(Boolean).join(' ') || undefined;
-};
+export const classNames = (...classes: unknown[]) => classes.filter(Boolean).join(' ') || undefined;
 
 // Query Joins
-export const queries = (...queries: unknown[]) => {
-  return queries.filter(Boolean).join('&') || '';
-};
+export const queries = (...queries: unknown[]) => queries.filter(Boolean).join('&') || '';
+
+// path joins
+export const paths = (...paths: unknown[]) => paths.filter(Boolean).join('') || '';
 
 // test-utils for custom render
 const RecoilRootProvider: FC<{ children: React.ReactNode }> = ({ children }) => {

@@ -19,12 +19,12 @@ export const FooterSidebarMenu = () => {
             <PrefetchRouterButton
               tooltip={item.tooltip}
               offset={[0, 5]}
-              pathName={item.path}
+              path={item.path}
               className={classNames(
                 router.asPath === item.path
                   ? 'cursor-default bg-blue-100 text-gray-900'
                   : 'text-gray-600 hover:bg-gray-200 hover:bg-opacity-80 hover:text-gray-900',
-                'group flex w-full items-center rounded-md px-2 py-2 text-sm font-medium',
+                'group ml-[0.05rem] mt-[0.05rem] flex w-full items-center rounded-md px-2 py-2 text-sm font-medium focus:outline-none focus:ring-0 focus:ring-offset-0',
               )}>
               <span className='pr-3'>
                 <SvgIcon

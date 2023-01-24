@@ -162,26 +162,6 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
       : setNotification(NOTIFICATION['unCompleteTodo']);
   };
 };
-export const useTodoIdsWithPathname = () => {
-  const router = useRouter();
-  const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['app']));
-  const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
-  const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['important']));
-  const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
-
-  switch (router.asPath) {
-    case PATHNAME['app']:
-      return app;
-    case PATHNAME['urgent']:
-      return urgent;
-    case PATHNAME['important']:
-      return important;
-    case PATHNAME['completed']:
-      return completed;
-    default:
-      return app;
-  }
-};
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();

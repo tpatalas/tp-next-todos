@@ -1,8 +1,9 @@
-import { PATHNAME } from '@data/stateObjects';
-import { Todos, TodoIds } from '@lib/types';
+import { OBJECT_ID, PATHNAME, PRIORITY_LEVEL } from '@data/stateObjects';
+import { Labels, TodoIds, Todos, Types } from '@lib/types';
+import { atomLabelId, atomQueryLabels } from '@states/labels';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
-import { atom, atomFamily, selectorFamily, selector } from 'recoil';
-import { atomQueryTodoItem, atomQueryTodoIds } from './atomQueries';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 
 /**
  * atoms
@@ -63,6 +64,8 @@ export const selectorFilterTodoIds = selector({
         return get(selectorFilterTodoIdsByPathname(PATHNAME['showAll']));
       case 'completed':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
+      case 'label':
+        return get(selectorFilterTodoIdsByPathname(PATHNAME['label']));
       default:
         return get(atomQueryTodoIds).filter((todo) => !todo.completed);
     }
@@ -82,19 +85,73 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
           return get(selectorFilterPriorityRankScore);
         case PATHNAME['urgent']:
           return get(atomQueryTodoIds).filter(
-            (todo) => !todo.completed && todo.priorityLevel === 1,
+            (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'],
           );
         case PATHNAME['important']:
           return get(atomQueryTodoIds).filter(
-            (todo) => !todo.completed && todo.priorityLevel === 2,
+            (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'],
           );
         case PATHNAME['showAll']:
           return get(atomQueryTodoIds).filter((todo) => !todo.completed);
         case PATHNAME['completed']:
           return get(atomQueryTodoIds).filter((todo) => todo.completed);
+        case PATHNAME['label']:
+          const titleIdsByCurrentLabel = get(atomQueryLabels).filter(
+            (label) => label._id === get(atomLabelId),
+          )[0]?.title_id;
+          return get(atomQueryTodoIds).filter((todo) => {
+            const todoId = todo._id as OBJECT_ID;
+            return (
+              !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId)
+            );
+          });
       }
     },
   cachePolicy_UNSTABLE: {
     eviction: 'keep-all',
+  },
+});
+
+export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TodoIds[], Labels['_id']>({
+  key: 'selectorFilterTodoIdsByQueryId',
+  get:
+    (labelId) =>
+    ({ get }) => {
+      const titleIdsByCurrentLabel = get(atomQueryLabels).filter(
+        (label) => label._id === labelId,
+      )[0]?.title_id;
+      return get(atomQueryTodoIds).filter((todo) => {
+        const todoId = todo._id as OBJECT_ID;
+        return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
+      });
+    },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
+export const selectorTodosCount = selectorFamily<
+  number,
+  Partial<{ labelId: Labels['_id']; pathname: Types['pathname'] }>
+>({
+  key: 'selectorTodosCount',
+  get:
+    ({ labelId, pathname }) =>
+    ({ get }) => {
+      const labels = get(atomQueryLabels);
+      if (labelId) {
+        const todos = get(atomQueryTodoIds);
+        const titleIds = labels.filter((item) => item._id === labelId)[0]?.title_id;
+        const todoIds = todos.filter(
+          (todo) => !todo.completed && titleIds && titleIds.includes(todo._id as OBJECT_ID),
+        );
+        return todoIds.length;
+      }
+      const todoIdsPathname = get(selectorFilterTodoIdsByPathname(pathname as PATHNAME));
+      return todoIdsPathname.length;
+    },
+  cachePolicy_UNSTABLE: {
+    eviction: 'lru',
+    maxSize: 100,
   },
 });

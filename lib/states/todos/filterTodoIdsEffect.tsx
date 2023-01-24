@@ -1,30 +1,25 @@
 import { PATHNAME } from '@data/stateObjects';
+import { atomLabelId } from '@states/labels';
+import { useNextQuerySlug } from '@states/utils/hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { atomFilterTodoIds } from '.';
 
 export const FilterTodoIdsEffect = () => {
-  const router = useRouter();
+  const labelId = useNextQuerySlug('/app/label');
+  const { asPath } = useRouter();
+
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
-    switch (router.asPath) {
-      case PATHNAME['app']:
-        set(atomFilterTodoIds, 'focus');
-        break;
-      case PATHNAME['urgent']:
-        set(atomFilterTodoIds, 'urgent');
-        break;
-      case PATHNAME['important']:
-        set(atomFilterTodoIds, 'important');
-        break;
-      case PATHNAME['showAll']:
-        set(atomFilterTodoIds, 'showAll');
-        break;
-      case PATHNAME['completed']:
-        set(atomFilterTodoIds, 'completed');
-        break;
-      default:
-        break;
+    if (asPath === PATHNAME['app']) return set(atomFilterTodoIds, 'focus');
+    if (asPath === PATHNAME['urgent']) return set(atomFilterTodoIds, 'urgent');
+    if (asPath === PATHNAME['important']) return set(atomFilterTodoIds, 'important');
+    if (asPath === PATHNAME['showAll']) return set(atomFilterTodoIds, 'showAll');
+    if (asPath === PATHNAME['completed']) return set(atomFilterTodoIds, 'completed');
+    if (asPath.match(new RegExp(PATHNAME['label']))) {
+      set(atomFilterTodoIds, 'label');
+      set(atomLabelId, labelId);
+      return;
     }
   });
 

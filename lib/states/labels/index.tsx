@@ -46,6 +46,11 @@ export const atomSelectorLabelItem = atomFamily<Labels, Labels['_id']>({
   }),
 });
 
+export const atomLabelId = atom<Labels['_id']>({
+  key: 'atomLabelId',
+  default: undefined,
+});
+
 /**
  * Selectors
  **/

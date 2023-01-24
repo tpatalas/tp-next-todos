@@ -51,6 +51,7 @@ export const CalendarDropdown = ({
         path: noDaySelected ? ICON_EVENT_AVAILABLE : ICON_EVENT_AVAILABLE_FILL,
         group: 'group-calendarDropdown',
         contentWidth: 'w-[21rem]',
+        menuWidth: 'w-full',
         text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
       }}
       headerContents={
