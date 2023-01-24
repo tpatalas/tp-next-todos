@@ -26,16 +26,18 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
 
   return (
     <Fragment>
-      <div className='group relative -mb-0 flex w-full cursor-pointer flex-row items-center justify-between'>
+      <div
+        className={classNames(
+          'group relative flex w-full cursor-pointer flex-row items-center justify-between rounded-md pr-[0.20rem]',
+          matchedSlug
+            ? 'bg-blue-100 font-semibold text-opacity-80'
+            : 'hover:bg-gray-200 hover:bg-opacity-80 ',
+        )}>
         <div className='mr-[0.5rem] inline-block w-full'>
           <PrefetchRouterButton
             tooltip={label.name}
-            offset={[0, 10]}
             path={paths('/app/label/', label._id)}
-            className={classNames(
-              'w-full rounded-lg hover:bg-gray-200 hover:bg-opacity-80 focus:outline-none focus:ring-0 focus:ring-offset-0',
-              matchedSlug && 'bg-blue-100 font-semibold',
-            )}>
+            className={classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0')}>
             <div className='flex w-full flex-row py-2 px-2'>
               {matchedSlug ? (
                 <SvgIcon
@@ -58,11 +60,18 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
         </div>
         <LabelItemDropdown
           label={label}
-          data={{ isInitiallyVisible: false }}
+          data={{
+            isInitiallyVisible: false,
+            hoverBg: matchedSlug
+              ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]'
+              : 'hover:bg-gray-900 hover:bg-opacity-[0.07]',
+          }}
+          headerContentsOnClose={
+            <span className='absolute right-[0.73rem] top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400 group-hover:invisible'>
+              <TodosCount label={label} />
+            </span>
+          }
         />
-        <span className='absolute right-3 top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400'>
-          <TodosCount label={label} />
-        </span>
       </div>
       <LabelModalFragment>
         <ItemLabelModal label={label} />
