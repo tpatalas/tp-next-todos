@@ -5,7 +5,7 @@ import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo } from 'react';
+import { RefObject, useEffect, useMemo, useState } from 'react';
 import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 
 /**
@@ -78,4 +78,35 @@ export const useNextQuerySlug = (path: string): string | undefined => {
   }, [path, router]);
 
   return value;
+};
+
+export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
+  const [leftPosition, setLeftPosition] = useState(-1);
+  const [rightPosition, setRightPosition] = useState(-1);
+  const [isOverflow, setIsOverflow] = useState(false);
+
+  useEffect(() => {
+    const currentRef = ref.current;
+
+    if (currentRef) {
+      const overflown = currentRef.clientWidth < currentRef.scrollWidth;
+      setIsOverflow(overflown);
+    }
+
+    const handleScroll = () => {
+      if (currentRef) {
+        const scrollWidth = currentRef.scrollWidth - currentRef.clientWidth;
+        const rightPosition = scrollWidth && scrollWidth - currentRef.scrollLeft;
+        setLeftPosition(ref.current.scrollLeft);
+        setRightPosition(rightPosition as number);
+      }
+    };
+
+    ref.current && ref.current.addEventListener('scroll', handleScroll);
+    return () => {
+      currentRef && currentRef.removeEventListener('scroll', handleScroll);
+    };
+  }, [ref]);
+
+  return { leftPosition, rightPosition, isOverflow };
 };

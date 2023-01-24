@@ -5,6 +5,7 @@ import {
   dataSvgPriorityUrgent,
 } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/stateObjects';
+import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
@@ -52,25 +53,28 @@ export const TodoItem = ({ todo }: Props) => {
           </div>
           <p className='text-sm text-gray-500 line-clamp-2'>{todoItem.note}</p>
         </div>
-        <div className='flex flex-row items-center'>
+        <div className='-ml-2 mt-1 flex w-full max-w-[38rem] flex-row items-center'>
           {todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && (
-            <div className='mt-2 mr-3 flex flex-row items-center text-gray-500'>
+            <div className='m-2 flex flex-row items-center text-gray-500'>
               <SvgIcon data={dataSvgPriorityUrgent} />
-              <div className='ml-1 text-sm'>Urgent</div>
+              <div className='ml-1 whitespace-nowrap text-sm'>Urgent</div>
             </div>
           )}
           {todoItem.priorityLevel === PRIORITY_LEVEL['important'] && (
-            <div className='mt-2 mr-3 flex flex-row items-center text-gray-500'>
+            <div className='m-2 flex flex-row items-center text-gray-500'>
               <SvgIcon data={dataSvgPriorityImportant} />
-              <div className='ml-1 text-sm'>Important</div>
+              <div className='ml-1 whitespace-nowrap text-sm'>Important</div>
             </div>
           )}
           {todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined' && (
-            <div className='mt-2 flex flex-row items-center text-gray-500'>
+            <div className='m-2 flex flex-row items-center text-gray-500'>
               <SvgIcon data={dataSvgCalendarDueDate} />
-              <div className='ml-1 text-sm'>{format(new Date(todoItem.dueDate), 'MMM dd, yy')}</div>
+              <div className='ml-1 whitespace-nowrap text-sm'>
+                {format(new Date(todoItem.dueDate), 'MMM dd, yy')}
+              </div>
             </div>
           )}
+          <LabelComboBoxDropdown todo={todo} />
         </div>
       </div>
     </TodoItemFragment>
