@@ -5,7 +5,7 @@ import { ICON_CHECK_BOX_FILL, ICON_CHECK_BOX_OUTLINE_BLANK } from '@data/materia
 import { Combobox } from '@headlessui/react';
 import { Labels, Types } from '@lib/types';
 import { atomComboBoxQuery } from '@states/comboBoxes';
-import { ComboBoxResetFilterLabelsEffect } from '@states/comboBoxes/comboBoxResetFilterLabelsEffect';
+import { ComboBoxSelectedLabelsEffect } from '@states/comboBoxes/comboBoxSelectedLabelsEffect';
 import { useSetFilterLabels } from '@states/comboBoxes/hooks';
 import { selectorComboBoxFilteredLabels, selectorSelectedLabels } from '@states/labels';
 import { useLabelChangeHandler } from '@states/labels/hooks';
@@ -16,7 +16,7 @@ import { useRecoilValue } from 'recoil';
 import { ComboBox } from './comboBox';
 import { ComboBoxNewItemButton } from './comboBox/comboBoxNewItemButton';
 
-type Props = Partial<Pick<Types, 'todo'>>;
+type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels'>>;
 
 export const LabelComboBox = ({ todo }: Props) => {
   const onChangeLabelHandler = useLabelChangeHandler(todo?._id);
@@ -101,7 +101,7 @@ export const LabelComboBox = ({ todo }: Props) => {
           onClick={() => labelModalOpen()}
         />
       </ComboBox>
-      <ComboBoxResetFilterLabelsEffect todo={todo} />
+      <ComboBoxSelectedLabelsEffect todo={todo} />
     </LabelComboBoxFragment>
   );
 };

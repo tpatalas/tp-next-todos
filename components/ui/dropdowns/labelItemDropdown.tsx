@@ -1,6 +1,6 @@
 import { ICON_DELETE, ICON_EDIT_NOTE, ICON_MORE_VERT } from '@data/materialSymbols';
 import { TypesDataDropdown } from '@lib/types/typesData';
-import { useLabelStateRemove } from '@states/labels/hooks';
+import { useLabelRemoveItem } from '@states/labels/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { Types } from 'lib/types';
@@ -16,7 +16,7 @@ export const LabelItemDropdown = ({
   headerContentsOnClose,
 }: Props) => {
   const openModal = useLabelModalStateOpen(label?._id);
-  const removeLabel = useLabelStateRemove(label._id);
+  const removeLabel = useLabelRemoveItem(label._id);
 
   return (
     <Dropdown

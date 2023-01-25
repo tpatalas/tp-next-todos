@@ -1,44 +1,36 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { dataDropdownComboBox } from '@data/dataObjects';
+import { GRADIENT_POSITION } from '@data/dataTypesObjects';
 import { ICON_CLOSE } from '@data/materialSymbols';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
-import { useRemoveTitleId } from '@states/labels/hooks';
+import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
 import { useTodoModalStateClose } from '@states/modals/hooks';
 import { classNames, paths } from '@states/utils';
-import { useHorizontalScrollPosition } from '@states/utils/hooks';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
-import {
-  Fragment as GradientLeftFragment,
-  Fragment as GradientRightFragment,
-  Fragment as LabelComboBoxDropdownFragment,
-  useRef,
-} from 'react';
+import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
+import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
 
-type Props = Partial<Pick<Types, 'todo'>>;
+type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels'>>;
 
-export const LabelComboBoxDropdown = ({ todo }: Props) => {
-  const selectedLabels = useRecoilValue(selectorSelectedLabels(todo?._id));
-  const removeTitleId = useRemoveTitleId(todo?._id);
+export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
+  const removeTitleId = useLabelRemoveItemTitleId(todo?._id);
   const closeTodoModal = useTodoModalStateClose(todo?._id);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { leftPosition, rightPosition, isOverflow } = useHorizontalScrollPosition(scrollRef);
+  const selectedLabels = selectedQueryLabels
+    ? selectedQueryLabels
+    : useRecoilValue(selectorSelectedLabels(todo?._id));
 
   return (
     <LabelComboBoxDropdownFragment>
       <div className='relative flex w-full max-w-[27rem] flex-row'>
-        <GradientLeftFragment>
-          <div
-            className={classNames(
-              'absolute left-0 top-1/2 ml-2 block h-[calc(100%-20%)] w-10 -translate-y-2/4 bg-gradient-to-r',
-              leftPosition > 0 &&
-                'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
-            )}
-          />
-        </GradientLeftFragment>
+        <LabelsHorizontalGradients
+          scrollRef={scrollRef}
+          position={GRADIENT_POSITION['left']}
+        />
         <div
           className='scrollbar-hide ml-1 flex flex-row items-center justify-start overflow-x-auto py-1 px-1'
           ref={scrollRef}>
@@ -79,16 +71,10 @@ export const LabelComboBoxDropdown = ({ todo }: Props) => {
             ))}
           </ul>
         </div>
-        <GradientRightFragment>
-          <div
-            className={classNames(
-              'absolute right-0 top-1/2 block h-[calc(100%-20%)] w-5 -translate-y-2/4 bg-gradient-to-l',
-              isOverflow && rightPosition !== 0
-                ? 'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100'
-                : 'from-transparent group-hover/focuser:from-transparent group-focus/focuser:from-transparent',
-            )}
-          />
-        </GradientRightFragment>
+        <LabelsHorizontalGradients
+          scrollRef={scrollRef}
+          position={GRADIENT_POSITION['right']}
+        />
       </div>
     </LabelComboBoxDropdownFragment>
   );

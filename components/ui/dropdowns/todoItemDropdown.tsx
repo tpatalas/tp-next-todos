@@ -10,7 +10,7 @@ import { TypesDataDropdown } from '@lib/types/typesData';
 import { useCalUpdateDataItem } from '@states/calendars/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorities/hooks';
-import { useTodoStateRemove } from '@states/todos/hooks';
+import { useTodoRemoveItem } from '@states/todos/hooks';
 import { Types } from 'lib/types';
 import { CalendarDropdown } from './calendarDropdown';
 import { Dropdown } from './dropdown';
@@ -19,7 +19,7 @@ import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
 
 export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } }: Props) => {
-  const removeTodo = useTodoStateRemove(todo?._id);
+  const removeTodo = useTodoRemoveItem(todo?._id);
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
   const setPriority =
     typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);

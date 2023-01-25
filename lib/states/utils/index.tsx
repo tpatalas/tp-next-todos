@@ -1,4 +1,4 @@
-import { CATCH_MODAL } from '@data/dataTypesObjects';
+import { CATCH } from '@data/dataTypesObjects';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';
@@ -6,7 +6,7 @@ import { atom, atomFamily, RecoilRoot } from 'recoil';
 /**
  * Atoms
  */
-export const atomCatch = atomFamily<boolean, CATCH_MODAL>({
+export const atomCatch = atomFamily<boolean, CATCH>({
   key: 'atomCatch',
   default: false,
 });

@@ -1,12 +1,12 @@
-import { CATCH_MODAL } from '@data/dataTypesObjects';
+import { CATCH } from '@data/dataTypesObjects';
 import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 export const WindowBeforeunloadEffect = () => {
-  const catchConfirmModal = useRecoilValue(atomCatch(CATCH_MODAL.confirmModal));
-  const catchMinimizedModal = useRecoilValue(atomCatch(CATCH_MODAL.minimizedModal));
-  const catchTodoModal = useRecoilValue(atomCatch(CATCH_MODAL.todoModal));
+  const catchConfirmModal = useRecoilValue(atomCatch(CATCH.confirmModal));
+  const catchMinimizedModal = useRecoilValue(atomCatch(CATCH.minimizedModal));
+  const catchTodoModal = useRecoilValue(atomCatch(CATCH.todoModal));
 
   const beforeunload = (event: BeforeUnloadEvent) => {
     event.preventDefault();

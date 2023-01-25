@@ -10,7 +10,7 @@ import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffec
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { atomTodoModalMax, atomTodoModalOpen } from '@states/modals';
 import { useTodoModalStateClose } from '@states/modals/hooks';
-import { useTodoStateAdd } from '@states/todos/hooks';
+import { useTodoAdd } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCheckTodoTitleEmpty } from '@states/utils/hooks';
 import { Types } from 'lib/types';
@@ -38,7 +38,7 @@ export const TodoModal = ({
   const closeModal = useTodoModalStateClose(todo?._id);
   const initialFocusDiv = useRef<HTMLDivElement>(null);
   const updateCalendarItem = useCalUpdateItem(todo?._id);
-  const addTodo = useTodoStateAdd();
+  const addTodo = useTodoAdd();
   const condition = useConditionCheckTodoTitleEmpty();
 
   return (

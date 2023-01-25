@@ -4,14 +4,15 @@ import {
   dataSvgPriorityImportant,
   dataSvgPriorityUrgent,
 } from '@data/dataObjects';
-import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { CATCH, PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
 import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
+import { selectorSelectedQueryLabels } from '@states/labels';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { useTodoStateComplete } from '@states/todos/hooks';
-import { classNames } from '@states/utils';
+import { useTodoCompleteItem } from '@states/todos/hooks';
+import { atomCatch, classNames } from '@states/utils';
 import { format } from 'date-fns';
 import { Fragment as CheckBoxFragment, Fragment as TodoItemFragment } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -20,10 +21,13 @@ type Props = Pick<TypesTodo, 'todo'>;
 
 export const TodoItem = ({ todo }: Props) => {
   const openModal = useTodoModalStateOpen(todo._id);
-  const completeTodo = useTodoStateComplete(todo._id);
+  const completeTodo = useTodoCompleteItem(todo._id);
   const todoItem = useRecoilValue(atomQueryTodoItem(todo._id));
   const important = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
   const urgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
+  const selectedQueryLabels = useRecoilValue(selectorSelectedQueryLabels(todo._id));
+  const isComboBoxOpen = useRecoilValue(atomCatch(CATCH['comboBox']));
+  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH['todoModal']));
 
   return (
     <TodoItemFragment>
@@ -48,7 +52,7 @@ export const TodoItem = ({ todo }: Props) => {
       </CheckBoxFragment>
       <div
         className='ml-4 w-full max-w-sm select-none text-base sm:max-w-2xl'
-        onDoubleClick={() => openModal()}>
+        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}>
         <div
           className={classNames(
             'break-words pr-1 ',
@@ -87,7 +91,10 @@ export const TodoItem = ({ todo }: Props) => {
               </div>
             </div>
           )}
-          <LabelComboBoxDropdown todo={todo} />
+          <LabelComboBoxDropdown
+            todo={todo}
+            selectedQueryLabels={selectedQueryLabels}
+          />
         </div>
       </div>
     </TodoItemFragment>

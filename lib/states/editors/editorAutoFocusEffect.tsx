@@ -1,4 +1,4 @@
-import { PATHNAME, CATCH_MODAL } from '@data/dataTypesObjects';
+import { PATHNAME, CATCH } from '@data/dataTypesObjects';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomCatch } from '@states/utils';
 import { Types } from 'lib/types';
@@ -17,7 +17,7 @@ export const EditorAutoFocusEffect = ({
 }) => {
   const router = useRouter();
   const completedPath = router.asPath === PATHNAME['completed'];
-  const isCatchConfirmModal = useRecoilValue(atomCatch(CATCH_MODAL.confirmModal));
+  const isCatchConfirmModal = useRecoilValue(atomCatch(CATCH.confirmModal));
 
   useEffect(() => {
     ReactEditor.blur(editor);

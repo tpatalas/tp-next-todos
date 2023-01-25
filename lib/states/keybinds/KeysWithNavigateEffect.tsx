@@ -1,4 +1,4 @@
-import { CATCH_MODAL, FOCUS } from '@data/dataTypesObjects';
+import { CATCH, FOCUS } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
 import { atomCurrentFocus, atomOnBlur } from '@states/focus';
 import { useFocusState } from '@states/focus/hooks';
@@ -16,9 +16,10 @@ export const KeysWithNavigationEffect = ({ index, divFocus, todo }: Props) => {
   const keyDownNavigate = useKeyWithNavigate();
   const currentFocus = useRecoilValue(atomCurrentFocus);
   const isOnBlur = useRecoilValue(atomOnBlur);
-  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH_MODAL.todoModal));
-  const isConfirmModalOpen = useRecoilValue(atomCatch(CATCH_MODAL.confirmModal));
-  const isLabelModalOpen = useRecoilValue(atomCatch(CATCH_MODAL.labelModal));
+  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH.todoModal));
+  const isConfirmModalOpen = useRecoilValue(atomCatch(CATCH.confirmModal));
+  const isLabelModalOpen = useRecoilValue(atomCatch(CATCH.labelModal));
+  const isComboBoxOpen = useRecoilValue(atomCatch(CATCH.comboBox));
 
   const navigateCondition = useRecoilCallback(({ snapshot, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -28,15 +29,16 @@ export const KeysWithNavigationEffect = ({ index, divFocus, todo }: Props) => {
       divFocus.current?.blur();
       return;
     }
+    if (isTodoModalOpen || isConfirmModalOpen || isLabelModalOpen || isComboBoxOpen) return;
     if (
       isOnBlur ||
       (get(atomTodoModalOpen(todo._id)) && get(atomQueryTodoItem(todo._id)).completed)
     ) {
-      divFocus.current?.blur();
       isOnBlur && reset(atomOnBlur);
+      setFocus(FOCUS['resetFocus']);
+      divFocus.current?.blur();
       return;
     }
-    if (isTodoModalOpen || isConfirmModalOpen || isLabelModalOpen) return; // Cannot use useRecoilCallback with useEffect
     if (currentFocus === index) {
       divFocus.current?.focus();
     }

@@ -7,7 +7,7 @@ import {
 } from '@data/dataObjects';
 import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
-import { useLabelValueUpdate, useLabelStateAdd } from '@states/labels/hooks';
+import { useLabelValueUpdate, useLabelAdd } from '@states/labels/hooks';
 import { atomLabelModalOpen } from '@states/modals';
 import { useLabelModalStateClose } from '@states/modals/hooks';
 import { classNames } from '@states/utils';
@@ -38,7 +38,7 @@ export const LabelModal = ({
       ? useRecoilValue(atomLabelNew)
       : useRecoilValue(atomSelectorLabelItem(label._id));
   const updateLabelItem = useLabelValueUpdate(label);
-  const addLabel = useLabelStateAdd();
+  const addLabel = useLabelAdd();
   const condition = useConditionCheckLabelTitleEmpty();
 
   return (

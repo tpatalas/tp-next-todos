@@ -6,7 +6,7 @@ import { Types } from '@lib/types';
 import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
 import { atomPriority } from '@states/priorities';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { useTodoStateUpdate, useTodoStateComplete } from '@states/todos/hooks';
+import { useTodoUpdateItem, useTodoCompleteItem } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import dynamic from 'next/dynamic';
@@ -17,8 +17,8 @@ const TodoModal = dynamic(() =>
 );
 
 export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
-  const updateTodo = useTodoStateUpdate(todo._id);
-  const completeTodo = useTodoStateComplete(todo._id);
+  const updateTodo = useTodoUpdateItem(todo._id);
+  const completeTodo = useTodoCompleteItem(todo._id);
   const todoItem = useRecoilValue(atomQueryTodoItem(todo._id));
   const currentPriority = useRecoilValue(atomPriority(todo._id));
   const condition = useConditionCompareTodoItemsEqual(todo._id);
