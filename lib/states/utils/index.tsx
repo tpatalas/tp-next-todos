@@ -1,4 +1,4 @@
-import { CATCH_MODAL } from '@data/stateObjects';
+import { CATCH_MODAL } from '@data/dataTypesObjects';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';

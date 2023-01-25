@@ -1,4 +1,3 @@
-import { SCHEMA_TODO } from '@data/stateObjects';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
@@ -7,6 +6,7 @@ import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
+import { SCHEMA_TODO } from '@data/dataTypesObjects';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();

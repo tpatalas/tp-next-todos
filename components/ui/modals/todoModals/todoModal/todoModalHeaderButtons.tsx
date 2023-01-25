@@ -4,8 +4,8 @@ import {
   IconButton as MinimizeIconButton,
 } from '@buttons/iconButton';
 import { dataButtonTodoModalClose, dataButtonTodoModalMinimize } from '@data/dataObjects';
+import { BREAKPOINT } from '@data/dataTypesObjects';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
-import { BREAKPOINT } from '@data/stateObjects';
 import { TodoItemDropdown } from '@dropdowns/todoItemDropdown';
 import { Types } from '@lib/types';
 import { atomMediaQuery } from '@states/misc';

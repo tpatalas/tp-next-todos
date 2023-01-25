@@ -1,4 +1,4 @@
-import { CATCH_MODAL, BREAKPOINT } from '@data/stateObjects';
+import { CATCH_MODAL, BREAKPOINT } from '@data/dataTypesObjects';
 import { Todos, Types, Labels } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';

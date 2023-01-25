@@ -1,4 +1,4 @@
-import { CATCH_MODAL, FOCUS } from '@lib/data/stateObjects';
+import { CATCH_MODAL, FOCUS } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
 import { atomCurrentFocus, atomOnBlur } from '@states/focus';
 import { useFocusState } from '@states/focus/hooks';

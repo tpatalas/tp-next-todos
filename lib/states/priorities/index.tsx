@@ -1,4 +1,4 @@
-import { PRIORITY_LEVEL } from '@data/stateObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { Todos } from '@lib/types';
 import { selectorDynamicTodoItem } from '@states/todos';
 import { atomQueryTodoIds } from '@states/todos/atomQueries';

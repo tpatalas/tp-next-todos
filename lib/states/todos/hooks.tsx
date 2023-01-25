@@ -1,4 +1,4 @@
-import { CATCH_MODAL, NOTIFICATION, PATHNAME } from '@data/stateObjects';
+import { NOTIFICATION, CATCH_MODAL, PATHNAME } from '@data/dataTypesObjects';
 import {
   completeDataTodo,
   createDataNewTodo,

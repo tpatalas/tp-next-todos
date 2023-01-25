@@ -1,4 +1,4 @@
-import { OBJECT_ID, PATHNAME, PRIORITY_LEVEL } from '@data/stateObjects';
+import { PATHNAME, PRIORITY_LEVEL, OBJECT_ID } from '@data/dataTypesObjects';
 import { Labels, TodoIds, Todos, Types } from '@lib/types';
 import { atomLabelId, atomQueryLabels } from '@states/labels';
 import { selectorFilterPriorityRankScore } from '@states/priorities';

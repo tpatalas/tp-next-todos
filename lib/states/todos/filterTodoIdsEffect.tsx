@@ -1,4 +1,4 @@
-import { PATHNAME } from '@data/stateObjects';
+import { PATHNAME } from '@data/dataTypesObjects';
 import { atomLabelId } from '@states/labels';
 import { useNextQuerySlug } from '@states/utils/hooks';
 import { useRouter } from 'next/router';

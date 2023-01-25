@@ -1,4 +1,4 @@
-import { PRIORITY_LEVEL } from '@data/stateObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';

@@ -1,5 +1,5 @@
 import { DATA_IDB } from '@data/dataArrayObjects';
-import { IDB } from '@data/stateObjects';
+import { IDB } from '@data/dataTypesObjects';
 import { Types, TypesIDB } from '@lib/types';
 import { openDB } from 'idb';
 

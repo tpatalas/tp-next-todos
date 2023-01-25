@@ -3,18 +3,15 @@ import { classNames } from '@states/utils';
 import { Fragment, useEffect, useState } from 'react';
 
 export const LoadingState = ({
-  data: { margin, space, loadingSkeleton, repeatingCount, delay = 150 },
+  data: { margin, space, loadingSkeleton, repeatingCount },
 }: {
   data: TypesDataLoadingState;
 }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShow(true), delay);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [delay]);
+    setShow(true);
+  }, []);
 
   return (
     <Fragment>

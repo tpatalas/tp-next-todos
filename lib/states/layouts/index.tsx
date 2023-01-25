@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@data/stateObjects';
+import { BREAKPOINT } from '@data/dataTypesObjects';
 import { mediaQueryEffect } from '@effects/atomEffects';
 import { atomMediaQuery } from '@states/misc';
 import { atom, selector } from 'recoil';

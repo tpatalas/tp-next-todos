@@ -1,15 +1,16 @@
 import {
-  BREAKPOINT,
+  OBJECT_ID,
+  PRIORITY_LEVEL,
+  SCHEMA_TODO,
+  NOTIFICATION,
   IDB,
   IDB_STORE,
-  NOTIFICATION,
-  OBJECT_ID,
   PATHNAME,
   POSITION_X,
   POSITION_Y,
-  PRIORITY_LEVEL,
-  SCHEMA_TODO,
-} from '@lib/data/stateObjects';
+  BREAKPOINT,
+  DURATION,
+} from '@data/dataTypesObjects';
 import { Placement } from '@popperjs/core';
 import {
   KeyboardEventHandler,
@@ -209,6 +210,8 @@ export interface TypesUi {
   priorityUrgent: string;
   priorityNormal: string;
   isConditionalRendering: boolean;
+  enterDuration: DURATION;
+  leaveDuration: DURATION;
 }
 
 export interface TypesLoadings {

@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@data/stateObjects';
+import { BREAKPOINT } from '@data/dataTypesObjects';
 import { atomMediaQuery } from '@states/misc';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { atomSidebarOpenMobile, atomSidebarOpenSetting } from '.';
