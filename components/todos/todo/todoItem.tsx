@@ -6,14 +6,14 @@ import {
 } from '@data/dataObjects';
 import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
-import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
+import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoStateComplete } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { format } from 'date-fns';
-import { Fragment as TodoItemFragment } from 'react';
+import { Fragment as CheckBoxFragment, Fragment as TodoItemFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
 type Props = Pick<TypesTodo, 'todo'>;
@@ -22,31 +22,44 @@ export const TodoItem = ({ todo }: Props) => {
   const openModal = useTodoModalStateOpen(todo._id);
   const completeTodo = useTodoStateComplete(todo._id);
   const todoItem = useRecoilValue(atomQueryTodoItem(todo._id));
+  const important = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
+  const urgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
 
   return (
     <TodoItemFragment>
-      <div className='relative bottom-px ml-1 flex items-start '>
-        <CompleteTodoCheckBox
-          todoItem={todoItem}
-          isChecked={todoItem.completed}
-          checkBoxColor={classNames(
-            todoItem.priorityLevel === PRIORITY_LEVEL['important'] && 'border-yellow-500 border-2 ',
-            todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && 'border-red-600 border-2 ',
-          )}
-          onChange={() => completeTodo()}
-        />
-      </div>
+      <CheckBoxFragment>
+        <div className='relative bottom-px ml-1 flex items-start '>
+          <CheckBox
+            todoItem={todoItem}
+            isChecked={todoItem.completed}
+            checkBoxColor={classNames(
+              !important && !urgent && 'border-blue-600 border-2',
+              important && 'border-yellow-500 border-2',
+              urgent && 'border-red-600 border-2',
+            )}
+            checkedColor={classNames(
+              !important && !urgent && 'text-blue-600',
+              important && 'text-yellow-500',
+              urgent && 'text-red-600',
+            )}
+            onChange={() => completeTodo()}
+          />
+        </div>
+      </CheckBoxFragment>
       <div
         className='ml-4 w-full max-w-sm select-none text-base sm:max-w-2xl'
         onDoubleClick={() => openModal()}>
         <div
           className={classNames(
             'break-words pr-1 ',
-            todoItem.completed ? 'italic opacity-60' : '',
+            todoItem.completed ? 'italic opacity-80' : '',
           )}>
           <div
             className={classNames(
-              'font-medium decoration-red-600 decoration-2 line-clamp-1',
+              'font-medium decoration-2 line-clamp-1',
+              urgent && 'decoration-red-600',
+              important && 'decoration-yellow-500',
+              !important && !urgent && 'decoration-blue-600',
               todoItem.completed ? ' text-gray-500 line-through' : '',
             )}>
             {todoItem.title}
