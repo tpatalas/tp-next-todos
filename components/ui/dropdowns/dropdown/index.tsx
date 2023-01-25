@@ -25,7 +25,7 @@ export const Dropdown = ({
     menuWidth,
     borderRadius,
     path,
-    hoverBg = 'hover:bg-gray-100',
+    hoverBg = 'hover:bg-gray-900 hover:bg-opacity-10',
     placement = 'bottom-start',
     group = 'group',
     padding = 'p-2',

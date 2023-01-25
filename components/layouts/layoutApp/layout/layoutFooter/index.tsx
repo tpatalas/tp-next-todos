@@ -38,10 +38,10 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
             )}>
             <main
               className={classNames(
-                'absolute h-[calc(100vh-4.3rem)] w-full lg:h-full',
+                'absolute m-10 h-[calc(100vh-4.3rem)] w-full lg:h-full',
                 isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
               )}>
-              <div className='flex max-w-7xl justify-start pb-64'>{children}</div>
+              <div className='flex max-w-7xl justify-start pt-1 pb-64'>{children}</div>
             </main>
           </div>
         </FooterBodyFragment>

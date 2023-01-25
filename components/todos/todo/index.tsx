@@ -31,7 +31,7 @@ export const Todo = ({ todo, index }: Props) => {
 
   return (
     <>
-      <div className='my-2 flex flex-row items-center justify-center'>
+      <div className='flex flex-row items-center justify-center px-1'>
         <div className='group relative mr-4 flex w-screen cursor-pointer flex-row justify-between sm:max-w-[46rem]'>
           <TodoItemFocuser
             todo={todo}

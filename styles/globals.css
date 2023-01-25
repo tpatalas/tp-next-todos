@@ -10,3 +10,12 @@
     @apply hidden;
   }
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
