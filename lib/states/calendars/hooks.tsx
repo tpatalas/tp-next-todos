@@ -1,4 +1,4 @@
-import { CALENDAR, NOTIFICATION } from '@data/stateObjects';
+import { CALENDAR, NOTIFICATION } from '@data/dataTypesObjects';
 import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { useNotificationState } from '@states/notifications/hooks';

@@ -4,7 +4,7 @@ import {
   dataSvgPriorityImportant,
   dataSvgPriorityUrgent,
 } from '@data/dataObjects';
-import { PRIORITY_LEVEL } from '@data/stateObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';

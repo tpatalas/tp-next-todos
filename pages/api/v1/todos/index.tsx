@@ -1,4 +1,4 @@
-import { SCHEMA_TODO } from '@data/stateObjects';
+import { SCHEMA_TODO } from '@data/dataTypesObjects';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';

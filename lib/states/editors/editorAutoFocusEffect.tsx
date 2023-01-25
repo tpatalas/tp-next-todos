@@ -1,4 +1,4 @@
-import { CATCH_MODAL, PATHNAME } from '@data/stateObjects';
+import { PATHNAME, CATCH_MODAL } from '@data/dataTypesObjects';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomCatch } from '@states/utils';
 import { Types } from 'lib/types';

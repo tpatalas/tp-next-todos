@@ -1,4 +1,4 @@
-import { BREAKPOINT, CATCH_MODAL } from '@data/stateObjects';
+import { CATCH_MODAL, BREAKPOINT } from '@data/dataTypesObjects';
 import { atomMediaQuery } from '@states/misc';
 import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';

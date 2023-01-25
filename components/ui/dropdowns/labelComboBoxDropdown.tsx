@@ -40,7 +40,7 @@ export const LabelComboBoxDropdown = ({ todo }: Props) => {
           />
         </GradientLeftFragment>
         <div
-          className='scrollbar-hide ml-2 flex flex-row items-center justify-start overflow-x-auto py-1'
+          className='scrollbar-hide ml-1 flex flex-row items-center justify-start overflow-x-auto py-1 px-1'
           ref={scrollRef}>
           <Dropdown
             data={dataDropdownComboBox}

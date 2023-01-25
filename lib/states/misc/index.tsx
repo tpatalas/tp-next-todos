@@ -2,7 +2,7 @@
  * Atoms
  * */
 
-import { BREAKPOINT } from '@data/stateObjects';
+import { BREAKPOINT } from '@data/dataTypesObjects';
 import { mediaQueryEffect, networkStatusEffect } from '@effects/atomEffects';
 import { atomFamily, atom, selector } from 'recoil';
 

@@ -15,7 +15,7 @@ import {
   ICON_LIST,
   ICON_TASK_ALT,
 } from './materialSymbols';
-import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './stateObjects';
+import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './dataTypesObjects';
 
 export const DATA_NOTIFICATION: TypesNotification[] = [
   {

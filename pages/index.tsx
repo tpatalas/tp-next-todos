@@ -1,4 +1,4 @@
-import { PATHNAME } from '@data/stateObjects';
+import { PATHNAME } from '@data/dataTypesObjects';
 import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import dynamic from 'next/dynamic';
 

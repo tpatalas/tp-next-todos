@@ -1,4 +1,4 @@
-import { CATCH_MODAL } from '@data/stateObjects';
+import { CATCH_MODAL } from '@data/dataTypesObjects';
 import { Todos, Labels } from '@lib/types';
 import { useCalResetDateItemOnly } from '@states/calendars/hooks';
 import { atomSelectorLabelItem, atomLabelNew } from '@states/labels';

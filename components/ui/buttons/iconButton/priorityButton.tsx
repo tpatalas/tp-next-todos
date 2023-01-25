@@ -1,11 +1,11 @@
 import { IconButton } from '@buttons/iconButton';
+import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import {
   ICON_FLAG,
   ICON_FLAG_FILL,
   ICON_LABEL_IMPORTANT,
   ICON_LABEL_IMPORTANT_FILL,
 } from '@data/materialSymbols';
-import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { Types } from '@lib/types';
 import { TypesDataPriority } from '@lib/types/typesData';
 import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';

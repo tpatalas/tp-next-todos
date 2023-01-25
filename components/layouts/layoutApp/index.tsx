@@ -1,4 +1,4 @@
-import { CATCH_MODAL } from '@data/stateObjects';
+import { CATCH_MODAL } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
 import { atomCatch } from '@states/utils';
 import dynamic from 'next/dynamic';

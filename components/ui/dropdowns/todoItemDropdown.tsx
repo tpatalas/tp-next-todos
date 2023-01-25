@@ -4,8 +4,8 @@ import {
   dataPriorityDropdownImportant,
   dataPriorityDropdownUrgent,
 } from '@data/dataObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
-import { PRIORITY_LEVEL } from '@data/stateObjects';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import { useCalUpdateDataItem } from '@states/calendars/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';

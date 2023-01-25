@@ -1,8 +1,8 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import { dataButtonCalendarNextMonth, dataButtonCalendarPrevMonth } from '@data/dataObjects';
+import { CALENDAR } from '@data/dataTypesObjects';
 import { ICON_TODAY } from '@data/materialSymbols';
-import { CALENDAR } from '@data/stateObjects';
 import { STYLE_CALENDAR_COL_START } from '@data/stylePreset';
 import { Types } from '@lib/types';
 import { atomDayPickerUpdater, atomCurrentMonth } from '@states/calendars';

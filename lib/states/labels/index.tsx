@@ -1,4 +1,4 @@
-import { IDB_STORE } from '@data/stateObjects';
+import { IDB_STORE } from '@data/dataTypesObjects';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { Labels, Todos } from '@lib/types';

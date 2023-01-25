@@ -1,4 +1,4 @@
-import { IDB_STORE, SCHEMA_TODO } from '@data/stateObjects';
+import { IDB_STORE, SCHEMA_TODO } from '@data/dataTypesObjects';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';

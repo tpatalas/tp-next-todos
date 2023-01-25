@@ -1,4 +1,4 @@
-import { CATCH_MODAL, NOTIFICATION } from '@data/stateObjects';
+import { NOTIFICATION, CATCH_MODAL } from '@data/dataTypesObjects';
 import { STYLE_COLORS } from '@data/stylePreset';
 import {
   createDataNewLabel,
