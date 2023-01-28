@@ -1,4 +1,4 @@
-import { Menu, Portal, Transition } from '@headlessui/react';
+import { Menu, Transition } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { classNames } from '@states/utils';
@@ -7,6 +7,7 @@ import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as MenuFragment, useState } from 'react';
 import { usePopper } from 'react-popper';
+import { ConditionalPortal } from './conditionalPortal';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
 type Props = { data: TypesDataDropdown } & Partial<
@@ -36,6 +37,7 @@ export const Dropdown = ({
     color = 'fill-gray-500 group-hover:fill-gray-700',
     text = 'group-hover:text-gray-700',
     contentWidth = 'w-60',
+    isPortal = false,
   },
 }: Props) => {
   const [isClicked, setClick] = useState(false);
@@ -102,7 +104,7 @@ export const Dropdown = ({
                 leave='transition ease-in duration-75'
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'>
-                <Portal>
+                <ConditionalPortal isPortal={isPortal}>
                   {open && <DisableScrollEffect open={open} />}
                   <Menu.Items
                     className={classNames(
@@ -119,7 +121,7 @@ export const Dropdown = ({
                       {children}
                     </div>
                   </Menu.Items>
-                </Portal>
+                </ConditionalPortal>
               </Transition>
             </MenuFragment>
           </Tooltip>
