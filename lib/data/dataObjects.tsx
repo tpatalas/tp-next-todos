@@ -273,6 +273,7 @@ export const dataDropdownComboBox: TypesDataDropdown = {
   tooltip: 'Add label',
   hasDivider: false,
   contentWidth: 'w-72',
+  isPortal: true,
 };
 
 /**
