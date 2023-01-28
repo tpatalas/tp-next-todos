@@ -27,6 +27,7 @@ import {
   ICON_WARNING,
 } from './materialSymbols';
 import {
+  STYLE_BUTTON_KEY_ONLY_RING,
   STYLE_BUTTON_NORMAL_BLUE,
   STYLE_BUTTON_NORMAL_RED,
   STYLE_BUTTON_NORMAL_WHITE,
@@ -260,7 +261,7 @@ export const dataPriorityDropdownUrgent: TypesDataPriority = {
  */
 // Calendar
 export const dataDropdownCalendar: TypesDataDropdown = {
-  borderRadius: 'rounded-none',
+  borderRadius: classNames('rounded-none focus-visible:rounded-lg', STYLE_BUTTON_KEY_ONLY_RING),
   padding: 'px-4 py-2',
   menuWidth: 'w-full',
   tooltip: 'Due Date',

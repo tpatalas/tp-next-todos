@@ -212,6 +212,7 @@ export interface TypesUi {
   isConditionalRendering: boolean;
   enterDuration: DURATION;
   leaveDuration: DURATION;
+  isPortal: boolean;
 }
 
 export interface TypesLoadings {

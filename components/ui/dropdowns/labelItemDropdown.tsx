@@ -27,6 +27,7 @@ export const LabelItemDropdown = ({
         color: 'fill-gray-500 group-hover:fill-gray-700',
         hoverBg: hoverBg,
         isInitiallyVisible: isInitiallyVisible,
+        isPortal: true,
       }}
       headerContentsOnClose={headerContentsOnClose}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />

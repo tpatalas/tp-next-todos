@@ -43,6 +43,7 @@ export type TypesDataDropdown = Partial<
     | 'path'
     | 'isInitiallyVisible'
     | 'hasDropdownBoardStyle'
+    | 'isPortal'
   > &
     Pick<
       TypesStyleAttributes,
