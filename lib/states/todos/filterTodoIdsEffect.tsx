@@ -1,5 +1,5 @@
 import { PATHNAME } from '@data/dataTypesObjects';
-import { atomLabelId } from '@states/labels';
+import { atomLabelQuerySlug } from '@states/labels';
 import { useNextQuerySlug } from '@states/utils/hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -18,7 +18,7 @@ export const FilterTodoIdsEffect = () => {
     if (asPath === PATHNAME['completed']) return set(atomFilterTodoIds, 'completed');
     if (asPath.match(new RegExp(PATHNAME['label']))) {
       set(atomFilterTodoIds, 'label');
-      set(atomLabelId, labelId);
+      set(atomLabelQuerySlug, labelId);
       return;
     }
   });

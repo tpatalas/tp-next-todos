@@ -1,5 +1,6 @@
 import { Menu, Transition } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
+import { atomOnBlur } from '@states/focus';
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { classNames } from '@states/utils';
 import { SvgIcon } from 'components/icons/svgIcon';
@@ -7,6 +8,7 @@ import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as MenuFragment, useState } from 'react';
 import { usePopper } from 'react-popper';
+import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
@@ -47,6 +49,7 @@ export const Dropdown = ({
     placement: placement,
     modifiers: [{ name: 'offset', options: { offset: [0, 5] } }],
   });
+  const setFocusOnBlur = useSetRecoilState(atomOnBlur);
 
   const visibility = (initialVisible: boolean, open: boolean) => {
     if (initialVisible || open) return 'visible';
@@ -76,7 +79,8 @@ export const Dropdown = ({
                 ref={setReferenceElement}
                 onMouseDown={() => setClick(true)}
                 onMouseEnter={() => setClick(false)}
-                onMouseLeave={() => setClick(true)}>
+                onMouseLeave={() => setClick(true)}
+                onClick={() => setFocusOnBlur(true)}>
                 <SvgIcon
                   data={{
                     path: path,
@@ -105,7 +109,7 @@ export const Dropdown = ({
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'>
                 <ConditionalPortal isPortal={isPortal}>
-                  {open && <DisableScrollEffect open={open} />}
+                  <DisableScrollEffect open={open} />
                   <Menu.Items
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',

@@ -3,20 +3,18 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { dataButtonCreateTodo } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
-import { Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { atomDisableScroll, classNames } from '@states/utils';
 import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
+import { Backdrop } from '@ui/backdrops/backdrop';
 import dynamic from 'next/dynamic';
 import {
   forwardRef,
-  Fragment as BackdropFragment,
   Fragment as CreateTodoFragment,
   Fragment as FooterSidebarFragment,
-  Fragment,
   Fragment as LayoutLogoFragment,
 } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
@@ -43,24 +41,11 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <FooterSidebarFragment>
-      <BackdropFragment>
-        <Transition
-          show={isSidebarMobileOpen()}
-          as={Fragment}
-          appear={true}
-          enter='transition-opacity ease-in-out duration-200'
-          enterFrom='opacity-0'
-          enterTo='opacity-100'
-          leave='transition-opacity ease-in-out duration-200'
-          leaveFrom='opacity-100'
-          leaveTo='opacity-0'>
-          <div
-            className='fixed inset-0 z-10 bg-gray-500 bg-opacity-20'
-            aria-hidden='true'
-            onClick={() => setSidebarOpen()}
-          />
-        </Transition>
-      </BackdropFragment>
+      <Backdrop
+        data={{ isPortal: false }}
+        show={isSidebarMobileOpen()}
+        onClick={() => setSidebarOpen()}
+      />
       <div
         ref={ref}
         className='fixed left-0 top-0 z-20 w-72 bg-white pl-2 pr-0 pt-3 md:top-[4.6rem] md:z-auto md:flex md:w-full md:max-w-[16.5rem] md:flex-col md:bg-transparent md:pt-0 md:pl-2 md:pr-0'>

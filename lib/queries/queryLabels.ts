@@ -22,6 +22,16 @@ export const createDataNewLabel = async (inputValue: Labels) => {
   return await response.json();
 };
 
+export const updateDataLabels = async (inputValue: Labels[]) => {
+  const response = await fetch('/api/v1/labels', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(inputValue),
+  });
+  if (!response.ok) throw new Error(response.statusText);
+  return await response.json();
+};
+
 export const updateDataLabelItem = async (_id: Labels['_id'], inputValue: Labels) => {
   const response = await fetch(`/api/v1/labels/${_id}`, {
     method: 'PUT',

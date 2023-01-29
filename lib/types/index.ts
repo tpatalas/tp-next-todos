@@ -1,21 +1,22 @@
 import {
-  OBJECT_ID,
-  PRIORITY_LEVEL,
-  SCHEMA_TODO,
-  NOTIFICATION,
+  BREAKPOINT,
+  DURATION,
   IDB,
   IDB_STORE,
+  NOTIFICATION,
+  OBJECT_ID,
   PATHNAME,
   POSITION_X,
   POSITION_Y,
-  BREAKPOINT,
-  DURATION,
+  PRIORITY_LEVEL,
+  SCHEMA_TODO,
 } from '@data/dataTypesObjects';
 import { Placement } from '@popperjs/core';
 import {
+  ElementType,
+  FocusEventHandler,
   KeyboardEventHandler,
   MouseEventHandler,
-  MutableRefObject,
   ReactElement,
   ReactNode,
   RefObject,
@@ -96,6 +97,7 @@ export interface LabelIds {
 
 export interface TypesLabel {
   label: Labels;
+  selectedQueryLabels: Labels[];
 }
 // Users
 export interface Users extends UsersIds {
@@ -163,7 +165,8 @@ type CollectTypesMISC = TypesIndexedDB &
   TypesModals &
   TypesElement &
   TypesEffects &
-  TypesStyleAttributes;
+  TypesStyleAttributes &
+  TypesRefs;
 
 export interface TypesRouter {
   path: string;
@@ -178,7 +181,6 @@ export interface TypesIndexedDB {
 
 export interface TypesWindow {
   mediaQueryValue: number;
-  divFocus: RefObject<HTMLDivElement>;
 }
 
 export interface TypesReactChildren {
@@ -190,12 +192,16 @@ export interface TypesReactChildren {
   headerContents: Types['children'];
   nestedModal: Types['children'];
 }
+export interface TypesRefs {
+  initialFocus: RefObject<HTMLElement | null>;
+  divFocus: RefObject<HTMLDivElement>;
+  scrollRef: RefObject<HTMLDivElement>;
+}
 
 export interface TypesUi {
   confirmTooltip: string | ReactElement;
   cancelTooltip: string | ReactElement;
   message: string;
-  initialFocus: MutableRefObject<HTMLElement | null>;
   buttonStyle: string;
   show: boolean;
   onClose: (value: boolean) => void;
@@ -239,6 +245,7 @@ export interface TypesStyleAttributes {
   width: string;
   container: string;
   hoverBg: string;
+  zIndex: string;
 }
 
 export interface TypesTooltipAttributes {
@@ -269,6 +276,7 @@ export interface TypesComboboxAttributes {
 export interface TypesDropdownAttributes {
   hasDropdownBoardStyle: boolean;
   headerContentsOnClose: Types['children'];
+  as: ElementType;
 }
 
 export interface TypesInputAttributes {
@@ -287,6 +295,8 @@ export interface TypesElement {
   name: string;
   type: 'button' | 'submit' | 'reset' | 'checkbox';
   onClick: MouseEventHandler<HTMLElement>;
+  onBlur: FocusEventHandler<HTMLElement>;
+  onFocus: FocusEventHandler<HTMLElement>;
   onMouseOver: MouseEventHandler<HTMLElement>;
   onMouseEnter: MouseEventHandler<HTMLElement>;
   onMouseLeave: MouseEventHandler<HTMLElement>;

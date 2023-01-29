@@ -15,7 +15,6 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       try {
         const getUser = await User.find({ _id: userId }, '_id');
-        // res.setHeader('Cache-Control', `private, max-age=${dayInSecond * 30}`);
         if (!getUser) return res.status(400).json({ success: false });
       } catch (error) {
         res.status(400).json({ success: false });

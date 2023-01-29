@@ -75,10 +75,12 @@ export const STYLE_CALENDAR_COL_START = [
 export const STYLE_COLORS = [
   'bg-stone-400',
   'bg-orange-400',
+  'bg-pink-400',
   'bg-amber-400',
   'bg-lime-400',
   'bg-green-400',
   'bg-teal-400',
+  'bg-red-400',
   'bg-cyan-400',
   'bg-blue-400',
   'bg-indigo-400',

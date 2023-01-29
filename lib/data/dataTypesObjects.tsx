@@ -1,11 +1,12 @@
 import ObjectID from 'bson-objectid';
 
-export type CATCH_MODAL = (typeof CATCH_MODAL)[keyof typeof CATCH_MODAL];
-export const CATCH_MODAL = {
+export type CATCH = (typeof CATCH)[keyof typeof CATCH];
+export const CATCH = {
   todoModal: 'todoModal',
   labelModal: 'labelModal',
   confirmModal: 'confirmModal',
   minimizedModal: 'minimizedModal',
+  comboBox: 'comboBox',
 } as const;
 
 export type FOCUS = (typeof FOCUS)[keyof typeof FOCUS];
@@ -131,4 +132,10 @@ export const DURATION = {
   500: 'duration-500',
   700: 'duration-700',
   1000: 'duration-1000',
+} as const;
+
+export type GRADIENT_POSITION = (typeof GRADIENT_POSITION)[keyof typeof GRADIENT_POSITION];
+export const GRADIENT_POSITION = {
+  left: 'left',
+  right: 'right',
 } as const;

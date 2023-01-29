@@ -33,6 +33,11 @@ export type TypesDataPriority = Partial<
 > &
   Pick<Types, 'priorityLevel'>;
 
+export type TypesDataBackdrop = Partial<
+  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration' | 'as'> &
+    Pick<TypesStyleAttributes, 'color' | 'zIndex'>
+>;
+
 export type TypesDataDropdown = Partial<
   Pick<
     Types,

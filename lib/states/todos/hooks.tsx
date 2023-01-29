@@ -1,4 +1,4 @@
-import { NOTIFICATION, CATCH_MODAL, PATHNAME } from '@data/dataTypesObjects';
+import { CATCH, NOTIFICATION } from '@data/dataTypesObjects';
 import {
   completeDataTodo,
   createDataNewTodo,
@@ -6,6 +6,7 @@ import {
   updateDataTodo,
 } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
+import { useLabelUpdateDataItem } from '@states/labels/hooks';
 import { atomNetworkStatusEffect } from '@states/misc';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useTodoModalStateReset } from '@states/modals/hooks';
@@ -17,15 +18,14 @@ import {
   useConditionCompareTodoItemsEqual,
   useGetWithRecoilCallback,
 } from '@states/utils/hooks';
-import { useRouter } from 'next/router';
-import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
-import { atomTodoNew, atomSelectorTodoItem, selectorFilterTodoIdsByPathname } from '.';
+import { RecoilValue, useRecoilCallback } from 'recoil';
+import { atomSelectorTodoItem, atomTodoNew } from '.';
 import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
 
 /**
  * Hooks
  * */
-export const useTodoStateAdd = () => {
+export const useTodoAdd = () => {
   const setNotification = useNotificationState();
   const resetModal = useTodoModalStateReset(undefined);
   const checkTodoTitleEmpty = useConditionCheckTodoTitleEmpty();
@@ -53,7 +53,8 @@ export const useTodoStateAdd = () => {
   };
 };
 
-export const useTodoStateUpdate = (todoId: Todos['_id']) => {
+export const useTodoUpdateItem = (todoId: Todos['_id']) => {
+  const updateLabelItem = useLabelUpdateDataItem();
   const setNotification = useNotificationState();
   const resetModal = useTodoModalStateReset(todoId);
   const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(todoId);
@@ -78,10 +79,11 @@ export const useTodoStateUpdate = (todoId: Todos['_id']) => {
     updatePriorityRankScore();
     updateQueryTodoItem();
     resetModal();
+    updateLabelItem();
   };
 };
 
-export const useTodoStateRemove = (todoId: Todos['_id']) => {
+export const useTodoRemoveItem = (todoId: Todos['_id']) => {
   const setNotification = useNotificationState();
   const get = useGetWithRecoilCallback();
   const removeTodoItem = useRecoilCallback(({ set, reset, snapshot }) => () => {
@@ -89,7 +91,7 @@ export const useTodoStateRemove = (todoId: Todos['_id']) => {
 
     if (!get(atomConfirmModalDelete(todoId))) {
       set(atomConfirmModalDelete(todoId), true);
-      !get(atomCatch(CATCH_MODAL.confirmModal)) && set(atomCatch(CATCH_MODAL.confirmModal), true);
+      !get(atomCatch(CATCH.confirmModal)) && set(atomCatch(CATCH.confirmModal), true);
       return;
     }
     set(
@@ -99,7 +101,7 @@ export const useTodoStateRemove = (todoId: Todos['_id']) => {
     deleteDataTodo(todoId);
     setNotification(NOTIFICATION['deleteTodo']);
     reset(atomQueryTodoItem(todoId));
-    get(atomCatch(CATCH_MODAL.todoModal)) && reset(atomCatch(CATCH_MODAL.todoModal));
+    get(atomCatch(CATCH.todoModal)) && reset(atomCatch(CATCH.todoModal));
   });
 
   return () => {
@@ -111,7 +113,7 @@ export const useTodoStateRemove = (todoId: Todos['_id']) => {
   };
 };
 
-export const useTodoStateCompletedDate = (todoId: Todos['_id']) => {
+export const useTodoCompleteDate = (todoId: Todos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -122,8 +124,8 @@ export const useTodoStateCompletedDate = (todoId: Todos['_id']) => {
   });
 };
 
-export const useTodoStateComplete = (todoId: Todos['_id']) => {
-  const updateCompletedDate = useTodoStateCompletedDate(todoId);
+export const useTodoCompleteItem = (todoId: Todos['_id']) => {
+  const updateCompletedDate = useTodoCompleteDate(todoId);
   const setNotification = useNotificationState();
   const get = useGetWithRecoilCallback();
   const updateQueryTodoItem = useRecoilCallback(({ set, snapshot }) => () => {
@@ -149,7 +151,6 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
       return;
     }
     updateQueryTodoItem();
-
     updateCompletedDate();
     completeDataTodo(
       todoId,
@@ -161,28 +162,4 @@ export const useTodoStateComplete = (todoId: Todos['_id']) => {
       ? setNotification(NOTIFICATION['completeTodo'])
       : setNotification(NOTIFICATION['unCompleteTodo']);
   };
-};
-
-export const useFilterTodoIdsWithPathname = () => {
-  const router = useRouter();
-  const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['app']));
-  const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
-  const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['important']));
-  const showAll = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['showAll']));
-  const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
-
-  switch (router.asPath) {
-    case PATHNAME['app']:
-      return app;
-    case PATHNAME['urgent']:
-      return urgent;
-    case PATHNAME['important']:
-      return important;
-    case PATHNAME['showAll']:
-      return showAll;
-    case PATHNAME['completed']:
-      return completed;
-    default:
-      return app;
-  }
 };

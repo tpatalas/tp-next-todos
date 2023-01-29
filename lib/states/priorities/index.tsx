@@ -50,7 +50,7 @@ export const selectorFilterPriorityRankScore = selector({
         todo.priorityLevel !== PRIORITY_LEVEL['important'],
     );
 
-    // NOTE: The ratio can be configurable in the user setting in the future implementation.
+    // NOTE: IDEA: The ratio can be configurable in the user setting in the future implementation.
     // Base ratio
     const taskCapacityUrgent = Math.round(taskCapacity * 0.5);
     const taskCapacityImportant = Math.round(taskCapacity * 0.3);

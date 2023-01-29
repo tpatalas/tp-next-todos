@@ -1,4 +1,4 @@
-import { CATCH_MODAL } from '@data/dataTypesObjects';
+import { CATCH } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
 import { atomCatch } from '@states/utils';
 import dynamic from 'next/dynamic';
@@ -32,7 +32,7 @@ const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
 type Props = Pick<Types, 'children'>;
 
 export const LayoutApp = ({ children }: Props) => {
-  const catchTodoModal = useRecoilValue(atomCatch(CATCH_MODAL.todoModal));
+  const catchTodoModal = useRecoilValue(atomCatch(CATCH.todoModal));
 
   return (
     <LayoutAppFragment>

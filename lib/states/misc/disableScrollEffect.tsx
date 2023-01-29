@@ -1,16 +1,14 @@
 import { atomDisableScroll } from '@states/utils';
 import { useEffect } from 'react';
-import { useRecoilCallback } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
 export const DisableScrollEffect = ({ open }: { open: boolean }) => {
-  const disableScroll = useRecoilCallback(({ set, reset }) => () => {
-    if (open) return set(atomDisableScroll, true);
-    reset(atomDisableScroll);
-  });
+  const setDisableScroll = useSetRecoilState(atomDisableScroll);
+  const resetDisableScroll = useResetRecoilState(atomDisableScroll);
 
   useEffect(() => {
-    disableScroll();
-  }, [disableScroll, open]);
+    open ? setDisableScroll(true) : resetDisableScroll();
+  }, [open, resetDisableScroll, setDisableScroll]);
 
   return null;
 };

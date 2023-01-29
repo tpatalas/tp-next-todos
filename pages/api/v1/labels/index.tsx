@@ -20,7 +20,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       try {
         const getLabels = await Label.find(filter())
-          .select({ _id: 1, name: 1, parent_id: 1, title_id: 1 })
+          .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1 })
           .lean();
         res.status(200).json({ success: true, data: getLabels });
       } catch (error) {
@@ -28,14 +28,28 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'POST':
-      const { _id, parent_id, title_id, name } = body;
-      const labelItem = { _id, parent_id, title_id, name, user_id: userInfo._id };
+      const { _id, parent_id, title_id, name, color } = body;
+      const labelItem = { _id, parent_id, title_id, name, color, user_id: userInfo._id };
       try {
         const createLabel = await Label.create(labelItem);
         res.status(201).json({ success: true, data: createLabel });
       } catch (error) {
         res.status(400).json({ success: false });
       }
+      break;
+    case 'PUT':
+      try {
+        const updateLabel = await Promise.all(
+          body.map(async (label: TypesQuery) => {
+            return await Label.updateMany({ _id: label._id }, { $set: label }, { upsert: true });
+          }),
+        );
+        if (!updateLabel) return res.status(400).json({ success: false });
+        res.status(200).json({ success: true, data: updateLabel });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+
       break;
     default:
       res.status(400).json({ success: false });

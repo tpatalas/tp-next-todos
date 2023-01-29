@@ -1,9 +1,10 @@
-import { CATCH_MODAL, BREAKPOINT } from '@data/dataTypesObjects';
+import { CATCH, BREAKPOINT } from '@data/dataTypesObjects';
 import { Todos, Types, Labels } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';
-import { useLabelStateAdd, useLabelStateUpdate } from '@states/labels/hooks';
+import { useLabelAdd, useLabelUpdateDataItem, useLabelUpdateItem } from '@states/labels/hooks';
 import { atomMediaQuery } from '@states/misc';
+import { useFilterTodoIdsWithPathname } from '@states/misc/hooks';
 import {
   atomTodoModalOpen,
   atomTodoModalMini,
@@ -19,11 +20,10 @@ import {
 } from '@states/modals/hooks';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import {
-  useTodoStateComplete,
-  useTodoStateRemove,
-  useTodoStateAdd,
-  useTodoStateUpdate,
-  useFilterTodoIdsWithPathname,
+  useTodoCompleteItem,
+  useTodoRemoveItem,
+  useTodoAdd,
+  useTodoUpdateItem,
 } from '@states/todos/hooks';
 import { atomCatch } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
@@ -31,8 +31,8 @@ import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
-  const completeTodo = useTodoStateComplete(_id);
-  const removeTodo = useTodoStateRemove(_id);
+  const completeTodo = useTodoCompleteItem(_id);
+  const removeTodo = useTodoRemoveItem(_id);
 
   const itemModalKeyHandler = useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
     const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
@@ -55,9 +55,9 @@ export const useItemModalWithKey = (_id: Todos['_id']) => {
 };
 
 export const useKeyWithFocus = (_id: Todos['_id']) => {
-  const completeTodo = useTodoStateComplete(_id);
+  const completeTodo = useTodoCompleteItem(_id);
   const openModal = useTodoModalStateOpen(_id);
-  const removeTodo = useTodoStateRemove(_id);
+  const removeTodo = useTodoRemoveItem(_id);
   const focusKeyHandler = useRecoilCallback(
     ({ set, reset, snapshot }) =>
       (event: React.KeyboardEvent) => {
@@ -97,8 +97,8 @@ export const useKeyWithEditor = (
   _id: Todos['_id'],
   editor: CustomEditor,
 ) => {
-  const addTodo = useTodoStateAdd();
-  const updateTodo = useTodoStateUpdate(_id);
+  const addTodo = useTodoAdd();
+  const updateTodo = useTodoUpdateItem(_id);
   const editorKeyHandler = useRecoilCallback(() => (event: React.KeyboardEvent) => {
     if (!event) return;
     switch (event.key) {
@@ -124,15 +124,16 @@ export const useKeyWithEditor = (
   return editorKeyHandler;
 };
 
+// with labels
 export const useKeyWithLabelModal = (_id: Labels['_id']) => {
-  const addLabel = useLabelStateAdd();
-  const updateLabel = useLabelStateUpdate(_id);
+  const addLabel = useLabelAdd();
+  const updateLabel = useLabelUpdateItem(_id);
   return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const isConfirmModalOpen = get(atomCatch(CATCH.confirmModal));
 
-    if (get(atomCatch(CATCH_MODAL.confirmModal))) return;
+    if (isConfirmModalOpen || !event) return;
 
-    if (!event) return;
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
@@ -145,15 +146,34 @@ export const useKeyWithLabelModal = (_id: Labels['_id']) => {
   });
 };
 
+export const useKeyWithLabelDropdown = () => {
+  const updateLabelData = useLabelUpdateDataItem();
+  return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const isTodoModalOpen = get(atomCatch(CATCH['todoModal']));
+
+    if (isTodoModalOpen || !event) return;
+
+    switch (event.key) {
+      case 'Escape':
+        event.preventDefault();
+        updateLabelData();
+        return;
+      default:
+        return;
+    }
+  });
+};
+// with  Navigate
 export const useKeyWithNavigate = () => {
   const filteredTodoIds = useFilterTodoIdsWithPathname();
   const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     if (
-      get(atomCatch(CATCH_MODAL.todoModal)) ||
-      get(atomCatch(CATCH_MODAL.confirmModal)) ||
-      get(atomCatch(CATCH_MODAL.labelModal))
+      get(atomCatch(CATCH.todoModal)) ||
+      get(atomCatch(CATCH.confirmModal)) ||
+      get(atomCatch(CATCH.labelModal))
     )
       return;
 
@@ -198,10 +218,10 @@ export const useKeyWithTodoModal = (_id: Todos['_id']) => {
     switch (true) {
       case event.key === 't' || event.key === 'T':
         if (
-          get(atomCatch(CATCH_MODAL.todoModal)) ||
-          get(atomCatch(CATCH_MODAL.minimizedModal)) ||
-          get(atomCatch(CATCH_MODAL.confirmModal)) ||
-          get(atomCatch(CATCH_MODAL.labelModal))
+          get(atomCatch(CATCH.todoModal)) ||
+          get(atomCatch(CATCH.minimizedModal)) ||
+          get(atomCatch(CATCH.confirmModal)) ||
+          get(atomCatch(CATCH.labelModal))
         )
           return;
         typeof _id === 'undefined' && openModal();

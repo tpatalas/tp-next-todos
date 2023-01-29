@@ -4,7 +4,7 @@ import { getDataLabels } from '@lib/queries/queryLabels';
 import { Labels, Todos } from '@lib/types';
 import { atomComboBoxQuery, atomFilterSelected } from '@states/comboBoxes';
 import { atomTodoNew } from '@states/todos';
-import { atom, atomFamily, selectorFamily } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**
  * Atom Queries
@@ -21,6 +21,16 @@ export const atomQueryLabels = atom<Labels[]>({
   ],
 });
 
+export const atomSelectorLabels = atom({
+  key: 'atomSelectorLabels',
+  default: selector({
+    key: 'selectorAtomSelectorLabels',
+    get: ({ get }) => get(atomQueryLabels),
+    cachePolicy_UNSTABLE: {
+      eviction: 'most-recent',
+    },
+  }),
+});
 /*
  * Atom
  * */
@@ -46,8 +56,8 @@ export const atomSelectorLabelItem = atomFamily<Labels, Labels['_id']>({
   }),
 });
 
-export const atomLabelId = atom<Labels['_id']>({
-  key: 'atomLabelId',
+export const atomLabelQuerySlug = atom<Labels['_id']>({
+  key: 'atomLabelQuerySlug',
   default: undefined,
 });
 
@@ -55,6 +65,21 @@ export const atomLabelId = atom<Labels['_id']>({
  * Selectors
  **/
 export const selectorSelectedLabels = selectorFamily<Labels[], Todos['_id']>({
+  key: 'selectorSelectedLabels',
+  get:
+    (_id) =>
+    ({ get }) => {
+      const todoId = _id ? _id! : get(atomTodoNew)._id!;
+      return get(atomSelectorLabels).filter(
+        (label) => label.title_id && label.title_id.includes(todoId),
+      );
+    },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
+export const selectorSelectedQueryLabels = selectorFamily<Labels[], Todos['_id']>({
   key: 'selectorSelectedLabels',
   get:
     (_id) =>
@@ -75,7 +100,7 @@ export const selectorComboBoxFilteredLabels = selectorFamily<Labels[], Todos['_i
     (todoId) =>
     ({ get }) => {
       const query = get(atomComboBoxQuery);
-      const labels = get(atomQueryLabels);
+      const labels = get(atomSelectorLabels);
       const isFiltered = get(atomFilterSelected(todoId));
       const filteredLabels =
         query === ''

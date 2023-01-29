@@ -1,6 +1,6 @@
 import { PATHNAME, PRIORITY_LEVEL, OBJECT_ID } from '@data/dataTypesObjects';
 import { Labels, TodoIds, Todos, Types } from '@lib/types';
-import { atomLabelId, atomQueryLabels } from '@states/labels';
+import { atomLabelQuerySlug, atomQueryLabels } from '@states/labels';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
@@ -97,7 +97,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
           return get(atomQueryTodoIds).filter((todo) => todo.completed);
         case PATHNAME['label']:
           const titleIdsByCurrentLabel = get(atomQueryLabels).filter(
-            (label) => label._id === get(atomLabelId),
+            (label) => label._id === get(atomLabelQuerySlug),
           )[0]?.title_id;
           return get(atomQueryTodoIds).filter((todo) => {
             const todoId = todo._id as OBJECT_ID;
