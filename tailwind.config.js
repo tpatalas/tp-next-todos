@@ -15,14 +15,9 @@ module.exports = {
       // => @media (min-width: 640px) { ... }
       sm: '640px',
       md: '768px',
-      // '2md': '896px',
+      ml: '896px',
       lg: '1024px',
-      // '2lg': '1152px',
       xl: '1280px',
-      '2xl': '1536px',
-      '3xl': '1792px',
-      '4xl': '2048px',
-      '5xl': '2304px',
     },
     scale: {
       '-1': '-1', // allows icon flip such as '-scale-y-1'

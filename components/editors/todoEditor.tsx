@@ -7,7 +7,7 @@ const EditorComposer = dynamic(() => import('./editorComposer').then((mod) => mo
 
 export const TodoEditors = ({ todo }: Props) => {
   return (
-    <div className='mt-2 space-y-3 text-left sm:mx-3'>
+    <div className='mx-3 mt-2 space-y-3 text-left'>
       <EditorComposer
         placeholder='Todo Name'
         titleName='title'

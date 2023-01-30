@@ -1,3 +1,4 @@
+import { classNames } from '@states/utils';
 import { Types } from 'lib/types';
 import { RenderElementProps, RenderPlaceholderProps } from 'slate-react';
 
@@ -21,7 +22,7 @@ const CodeElement = ({
   return (
     <pre
       {...attributes}
-      className={`${props.className}`}>
+      className={classNames(props.className)}>
       <code>{props.children}</code>
     </pre>
   );
@@ -34,7 +35,7 @@ const DefaultElement = ({
   return (
     <div
       {...attributes}
-      className={`${props.className} text-slate-700`}>
+      className={classNames(props.className ?? 'text-slate-700')}>
       {props.children}
     </div>
   );

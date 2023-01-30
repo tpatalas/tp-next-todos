@@ -89,12 +89,9 @@ export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];
 export const BREAKPOINT = {
   sm: 640,
   md: 768,
+  ml: 896,
   lg: 1024,
   xl: 1280,
-  '2xl': 1536,
-  '3xl': 1792,
-  '4xl': 2048,
-  '5xl': 2304,
 } as const;
 
 export type SCHEMA_TODO = (typeof SCHEMA_TODO)[keyof typeof SCHEMA_TODO];
