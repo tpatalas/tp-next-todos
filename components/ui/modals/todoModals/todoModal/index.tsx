@@ -51,15 +51,15 @@ export const TodoModal = ({
         <LabelModal label={undefined} />
         <ModalTransitionChild
           className={classNames(
-            'h-80 min-h-[20rem] px-4 pt-2 pb-5 sm:relative',
+            'h-[28rem] px-4 pt-2 pb-5 sm:relative',
             isTodoModalMax
-              ? 'sm:bottom-0 sm:h-full sm:max-h-[calc(100vh-10vh)] sm:max-w-[calc(100vw-10vw)]'
-              : 'sm:bottom-20 sm:h-[28rem] sm:max-w-2xl',
+              ? 'sm:bottom-0 sm:h-full sm:max-h-[90vh] sm:max-w-[90vw] xl:max-w-6xl'
+              : 'sm:max-h-[28rem] sm:max-w-2xl md:bottom-[calc(23vh-6rem)]',
           )}>
-          <div className='flex flex-row items-center justify-between sm:inline-block'>
+          <div className='flex flex-col items-start justify-center sm:inline-block sm:flex-row sm:items-center sm:justify-between'>
             <div
               ref={initialFocusDiv}
-              className='flex flex-row justify-between sm:mb-1'>
+              className='flex w-full flex-row justify-between sm:mb-1'>
               <TodoModalHeaderContents todo={todo}>{headerContents}</TodoModalHeaderContents>
               <div>
                 {headerButtons}
@@ -69,13 +69,20 @@ export const TodoModal = ({
             <div className='hidden sm:mb-2 sm:block'>
               <PlainLineDivider />
             </div>
-            <div className='m-1 items-center sm:flex sm:flex-row '>
+            <div className='flex flex-row items-center sm:m-1 '>
               <CalendarDropdown
                 data={{ tooltip: 'Due date' }}
                 todo={todo}
                 onClickConfirm={() => updateCalendarItem()}
               />
-              <LabelComboBoxDropdown todo={todo} />
+              <LabelComboBoxDropdown
+                todo={todo}
+                container={classNames(
+                  isTodoModalMax
+                    ? 'w-full max-w-[85%]'
+                    : 'max-w-[32rem] md:w-[75%] w-[calc(70vw-2rem)]',
+                )}
+              />
             </div>
           </div>
           <div className='h-full w-full overflow-scroll '>

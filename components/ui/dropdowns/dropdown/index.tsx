@@ -70,7 +70,7 @@ export const Dropdown = ({
               <Menu.Button
                 className={classNames(
                   group,
-                  'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0',
+                  'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
                   padding,
                   hoverBg,
                   borderRadius,
