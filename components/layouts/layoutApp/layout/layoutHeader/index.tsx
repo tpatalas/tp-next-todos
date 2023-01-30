@@ -55,7 +55,7 @@ export const LayoutHeader = () => {
           </div>
         </LeftSideFragment>
         <RightSidebarFragment>
-          <div className='flex flex-1 px-3'>
+          <div className='flex flex-1 px-2'>
             <SearchInputFragment>
               <div className='relative flex flex-1 flex-row items-center justify-between'>
                 <form
