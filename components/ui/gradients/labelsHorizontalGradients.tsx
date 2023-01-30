@@ -11,9 +11,7 @@ import {
 type Props = Pick<Types, 'scrollRef'> & Partial<{ position: GRADIENT_POSITION }>;
 
 export const LabelsHorizontalGradients = ({ scrollRef, position }: Props) => {
-  const { leftPosition, rightPosition } = useHorizontalScrollPosition(scrollRef);
-  const ref = scrollRef.current;
-  const isOverflow = (ref && ref.scrollWidth > 300) || (ref && ref.clientWidth < ref.scrollWidth);
+  const { leftPosition, rightPosition, isOverflow } = useHorizontalScrollPosition(scrollRef);
 
   return (
     <GradientFragment>
