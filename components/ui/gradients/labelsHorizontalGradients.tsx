@@ -11,7 +11,9 @@ import {
 type Props = Pick<Types, 'scrollRef'> & Partial<{ position: GRADIENT_POSITION }>;
 
 export const LabelsHorizontalGradients = ({ scrollRef, position }: Props) => {
-  const { leftPosition, rightPosition, isOverflow } = useHorizontalScrollPosition(scrollRef);
+  const { leftPosition, rightPosition } = useHorizontalScrollPosition(scrollRef);
+  const ref = scrollRef.current;
+  const isOverflow = (ref && ref.scrollWidth > 300) || (ref && ref.clientWidth < ref.scrollWidth);
 
   return (
     <GradientFragment>
@@ -30,7 +32,7 @@ export const LabelsHorizontalGradients = ({ scrollRef, position }: Props) => {
         <GradientRightFragment>
           <div
             className={classNames(
-              'absolute right-0 top-1/2 block h-[calc(100%-20%)] w-5 -translate-y-2/4 bg-gradient-to-l from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
+              'absolute right-0 top-1/2 block h-[calc(100%-20%)] w-5 -translate-y-2/4 bg-gradient-to-l',
               isOverflow &&
                 rightPosition !== 0 &&
                 'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
