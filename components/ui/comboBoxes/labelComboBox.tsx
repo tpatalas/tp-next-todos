@@ -57,7 +57,7 @@ export const LabelComboBox = ({ todo }: Props) => {
                 className={({ active }) =>
                   `relative cursor-pointer select-none py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:ring-offset-0 ${
                     active
-                      ? 'gray-text-700 bg-slate-600 bg-opacity-10'
+                      ? 'gray-text-700 bg-slate-600 bg-opacity-10 font-semibold'
                       : `text-gray-500 ${STYLE_HOVER_SLATE_LIGHT}`
                   }`
                 }
