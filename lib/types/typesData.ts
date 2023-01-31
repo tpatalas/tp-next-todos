@@ -15,7 +15,15 @@ export type TypesDataButton = Partial<
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & Pick<
       TypesStyleAttributes,
-      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg'
+      | 'padding'
+      | 'margin'
+      | 'display'
+      | 'width'
+      | 'size'
+      | 'color'
+      | 'container'
+      | 'hoverBg'
+      | 'borderRadius'
     >
 >;
 
