@@ -1,4 +1,4 @@
-import { STYLE_HOVER_SLATE_ON_DARK } from '@data/stylePreset';
+import { STYLE_HOVER_SLATE_DARK } from '@data/stylePreset';
 import { Types } from '@lib/types';
 import { TypesDataButton } from '@lib/types/typesData';
 import { classNames } from '@states/utils';
@@ -23,7 +23,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
             data.borderRadius ?? 'rounded-full',
             data.padding ?? 'p-2',
             data.margin ?? 'ml-px',
-            data.hoverBg ?? STYLE_HOVER_SLATE_ON_DARK,
+            data.hoverBg ?? STYLE_HOVER_SLATE_DARK,
             data.display,
             data.width,
           ),
