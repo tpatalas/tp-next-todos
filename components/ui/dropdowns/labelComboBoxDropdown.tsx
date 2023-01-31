@@ -32,7 +32,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
           position={GRADIENT_POSITION['left']}
         />
         <div
-          className='scrollbar-hide ml-0 flex lg:max-w-[26rem] sm:max-w-[calc(100vw-40rem)] w-full flex-row items-center justify-start overflow-x-auto py-1 px-0 md:px-1 md:ml-1'
+          className='scrollbar-hide ml-0 flex w-full max-w-[calc(100vw-42rem)] flex-row items-center justify-start overflow-x-auto py-1 px-0 md:ml-1 md:px-1 lg:max-w-[32rem]'
           ref={scrollRef}>
           <Dropdown
             data={dataDropdownComboBox}

@@ -15,7 +15,7 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
     <FocuserFragment>
       <div
         tabIndex={0}
-        className='group/focuser mr-1 flex w-full max-w-2xl flex-row rounded-lg bg-gradient-to-r px-5 pt-4 pb-2 outline-none hover:bg-slate-100 focus:bg-blue-100'
+        className='group/focuser mr-1 flex w-full max-w-3xl flex-row rounded-lg bg-gradient-to-r px-5 pt-4 pb-2 outline-none hover:bg-slate-100 focus:bg-blue-100'
         ref={divFocus}
         onKeyDown={focusKeyHandler}
         onClick={() => focusOnClick()}>
