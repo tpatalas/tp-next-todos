@@ -264,7 +264,7 @@ export const dataDropdownCalendar: TypesDataDropdown = {
   borderRadius: classNames('rounded-none focus-visible:rounded-lg', STYLE_BUTTON_KEY_ONLY_RING),
   padding: 'px-4 py-2',
   menuWidth: 'w-full',
-  tooltip: 'Due Date',
+  tooltip: 'Due date',
 };
 
 // Combobox
