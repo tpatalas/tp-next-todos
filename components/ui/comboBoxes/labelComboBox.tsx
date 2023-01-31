@@ -2,6 +2,7 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { useDataButtonComboboxFilterLabel } from '@data/dataObjectsHooks';
 import { ICON_CHECK_BOX_FILL, ICON_CHECK_BOX_OUTLINE_BLANK } from '@data/materialSymbols';
+import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Combobox } from '@headlessui/react';
 import { Labels, Types } from '@lib/types';
 import { atomComboBoxQuery } from '@states/comboBoxes';
@@ -55,7 +56,9 @@ export const LabelComboBox = ({ todo }: Props) => {
                 key={label._id}
                 className={({ active }) =>
                   `relative cursor-pointer select-none py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:ring-offset-0 ${
-                    active ? 'gray-text-700 bg-gray-100' : 'text-gray-500'
+                    active
+                      ? 'gray-text-700 bg-slate-600 bg-opacity-10'
+                      : `text-gray-500 ${STYLE_HOVER_SLATE_LIGHT}`
                   }`
                 }
                 value={label}>
