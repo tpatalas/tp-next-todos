@@ -56,6 +56,11 @@ export const STYLE_BUTTON_KEY_ONLY_RING =
   'focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
 
 /**
+ * Hover Effect
+ **/
+export const STYLE_HOVER_GRAY =
+  'hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700';
+/**
  * Calendar
  */
 export const STYLE_CALENDAR_COL_START = [
