@@ -26,13 +26,13 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
 
   return (
     <LabelComboBoxDropdownFragment>
-      <div className='relative flex w-full max-w-[27rem] flex-row'>
+      <div className='relative flex w-full flex-row'>
         <LabelsHorizontalGradients
           scrollRef={scrollRef}
           position={GRADIENT_POSITION['left']}
         />
         <div
-          className='scrollbar-hide ml-1 flex flex-row items-center justify-start overflow-x-auto py-1 px-1'
+          className='scrollbar-hide ml-1 flex max-w-[26rem] flex-row items-center justify-start overflow-x-auto py-1 px-1'
           ref={scrollRef}>
           <Dropdown
             data={dataDropdownComboBox}
