@@ -1,16 +1,17 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import {
-    dataButtonCalendarCancel,
-    dataButtonCalendarConfirm,
-    dataButtonCalendarResetDate
+  dataButtonCalendarCancel,
+  dataButtonCalendarConfirm,
+  dataButtonCalendarResetDate,
 } from '@data/dataObjects';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
-import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Menu } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import {
-    useCalResetDateAll, useCalResetDateItemOnly, useCalResetDayUpdater
+  useCalResetDateAll,
+  useCalResetDateItemOnly,
+  useCalResetDayUpdater,
 } from '@states/calendars/hooks';
 import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { classNames } from '@states/utils';
@@ -51,7 +52,7 @@ export const CalendarDropdown = ({
         group: 'group-calendarDropdown',
         contentWidth: 'w-[21rem]',
         menuWidth: 'w-full',
-        hoverBg: STYLE_HOVER_SLATE_LIGHT,
+        hoverBg: 'hover:bg-transparent',
         text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
       }}
       headerContents={

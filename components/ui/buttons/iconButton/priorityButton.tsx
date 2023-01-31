@@ -52,6 +52,7 @@ export const PriorityButton = ({ todo, data, onClick }: Props) => {
           ),
           borderRadius: 'rounded-none focus-visible:rounded-lg',
           margin: 'ml-0',
+          hoverBg: 'hover:bg-transparent',
           display: data.display,
           width: data.width,
           container: data.container,
