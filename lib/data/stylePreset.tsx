@@ -50,7 +50,7 @@ export const STYLE_BUTTON_NORMAL_GRAY = classNames(
 
 // misc
 export const STYLE_BUTTON_ICON =
-  'border-gray-300 bg-white text-gray-400 hover:enabled:bg-gray-100 hover:enabled:text-gray-500 focus-visible:ring-blue-500 ';
+  'border-transparent bg-transparent text-gray-500 hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700 focus-visible:ring-blue-500 ';
 export const STYLE_BUTTON_NO_RING = 'focus:outline-none focus:ring-0 focus:ring-offset-0';
 export const STYLE_BUTTON_KEY_ONLY_RING =
   'focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
