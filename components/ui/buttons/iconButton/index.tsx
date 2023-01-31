@@ -1,4 +1,4 @@
-import { STYLE_HOVER_GRAY_ON_DARK } from '@data/stylePreset';
+import { STYLE_HOVER_SLATE_ON_DARK } from '@data/stylePreset';
 import { Types } from '@lib/types';
 import { TypesDataButton } from '@lib/types/typesData';
 import { classNames } from '@states/utils';
@@ -20,10 +20,10 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
           className: classNames(
             data.className,
             'group-button border-gray-300 bg-transparent text-gray-500 focus-visible:ring-blue-500 hover:enabled:text-gray-700 hover:disabled:cursor-not-allowed',
-            headerContents ? 'rounded-lg' : 'rounded-full',
-            data.padding || 'p-2',
-            data.margin || 'ml-px',
-            data.hoverBg || STYLE_HOVER_GRAY_ON_DARK,
+            data.borderRadius ?? 'rounded-full',
+            data.padding ?? 'p-2',
+            data.margin ?? 'ml-px',
+            data.hoverBg ?? STYLE_HOVER_SLATE_ON_DARK,
             data.display,
             data.width,
           ),
@@ -39,8 +39,8 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
             data={{
               path: data.path,
               className: classNames(
-                data.size || 'h-5 w-5',
-                data.color || 'fill-gray-500',
+                data.size ?? 'h-5 w-5',
+                data.color ?? 'fill-gray-500',
                 !data.isDisabled && '[.group-button:hover_&]:fill-gray-700',
               ),
             }}
