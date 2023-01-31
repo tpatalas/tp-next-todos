@@ -3,7 +3,7 @@ import { IconButton } from '@buttons/iconButton';
 import { dataDropdownComboBox } from '@data/dataObjects';
 import { GRADIENT_POSITION } from '@data/dataTypesObjects';
 import { ICON_CLOSE } from '@data/materialSymbols';
-import { STYLE_HOVER_GRAY_ON_DARK } from '@data/stylePreset';
+import { STYLE_HOVER_SLATE_ON_DARK } from '@data/stylePreset';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
@@ -60,7 +60,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
                     data={{
                       path: ICON_CLOSE,
                       padding: 'p-[2px]',
-                      hoverBg: STYLE_HOVER_GRAY_ON_DARK,
+                      hoverBg: STYLE_HOVER_SLATE_ON_DARK,
                       size: 'h-4 w-4',
                       color: 'fill-gray-700 hover:fill-gray-900',
                       container: 'h-5',
