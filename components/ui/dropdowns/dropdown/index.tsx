@@ -1,3 +1,4 @@
+import { STYLE_HOVER_GRAY_ON_DARK } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import { atomOnBlur } from '@states/focus';
@@ -28,7 +29,7 @@ export const Dropdown = ({
     menuWidth,
     borderRadius,
     path,
-    hoverBg = 'hover:bg-gray-900 hover:bg-opacity-10',
+    hoverBg = STYLE_HOVER_GRAY_ON_DARK,
     placement = 'bottom-start',
     group = 'group',
     padding = 'p-2',
