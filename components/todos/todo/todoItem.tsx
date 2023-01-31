@@ -70,7 +70,7 @@ export const TodoItem = ({ todo }: Props) => {
           </div>
           <p className='text-sm text-gray-500 line-clamp-2'>{todoItem.note}</p>
         </div>
-        <div className='-ml-2 mt-1 flex w-full flex-col items-start justify-start md:flex-row md:items-center'>
+        <div className='-ml-2 mt-1 flex w-full flex-col items-start justify-start lg:flex-row lg:items-center'>
           <div className='flex flex-row'>
             {todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && (
               <div className='m-2 flex flex-row items-center text-gray-500'>

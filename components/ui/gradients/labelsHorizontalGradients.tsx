@@ -19,7 +19,7 @@ export const LabelsHorizontalGradients = ({ scrollRef, position }: Props) => {
         <GradientLeftFragment>
           <div
             className={classNames(
-              'absolute md:left-0 -left-1 top-1/2 ml-1 block h-[calc(100%-20%)] w-10 -translate-y-2/4 bg-gradient-to-r',
+              'absolute -left-1 top-1/2 ml-1 block h-[calc(100%-20%)] w-10 -translate-y-2/4 bg-gradient-to-r lg:left-0',
               leftPosition > 0 &&
                 'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
             )}
