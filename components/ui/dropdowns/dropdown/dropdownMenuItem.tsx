@@ -25,12 +25,12 @@ export const DropdownMenuItem = ({
   tooltip,
   kbd,
   onClick,
-  isDisabledCloseOnClick,
   padding,
   path,
   size,
   color,
   children,
+  isDisabledCloseOnClick = true,
 }: Props) => {
   const isActive = useRecoilValue(selectorActiveMenuItem);
 
