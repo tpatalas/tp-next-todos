@@ -58,8 +58,8 @@ export const STYLE_BUTTON_KEY_ONLY_RING =
 /**
  * Hover Effect
  **/
-export const STYLE_HOVER_GRAY =
-  'hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700';
+export const STYLE_HOVER_GRAY_ON_DARK = 'hover:enabled:bg-gray-900 hover:enabled:bg-opacity-10';
+export const STYLE_HOVER_GRAY_ON_LIGHT = 'hover:enabled:bg-gray-400 hover:enabled:bg-opacity-10';
 /**
  * Calendar
  */
