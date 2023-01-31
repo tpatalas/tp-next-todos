@@ -265,6 +265,7 @@ export const dataDropdownCalendar: TypesDataDropdown = {
   padding: 'px-4 py-2',
   menuWidth: 'w-full',
   tooltip: 'Due date',
+  hoverBg: 'bg-transparent',
 };
 
 // Combobox

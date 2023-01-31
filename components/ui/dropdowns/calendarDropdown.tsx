@@ -28,7 +28,7 @@ type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo'>> &
 export const CalendarDropdown = ({
   todo,
   onClickConfirm,
-  data: { borderRadius, tooltip, padding = 'px-3 py-2' },
+  data: { borderRadius, tooltip, hoverBg, padding = 'px-3 py-2' },
 }: Props) => {
   const resetCalendar = useCalResetDayUpdater(todo?._id);
   const resetDateItemOnly = useCalResetDateItemOnly(todo?._id);
@@ -52,7 +52,7 @@ export const CalendarDropdown = ({
         group: 'group-calendarDropdown',
         contentWidth: 'w-[21rem]',
         menuWidth: 'w-full',
-        hoverBg: 'hover:bg-transparent',
+        hoverBg: hoverBg,
         text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
       }}
       headerContents={
