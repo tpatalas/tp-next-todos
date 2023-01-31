@@ -43,6 +43,7 @@ export const Todo = ({ todo, index }: Props) => {
             todo={todo}>
             <div className='py-1'>
               <DropdownMenuItem
+                isDisabledCloseOnClick={false}
                 onClick={() => openModal()}
                 path={ICON_EDIT_NOTE}
                 tooltip='Edit'
