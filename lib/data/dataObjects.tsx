@@ -298,7 +298,7 @@ export const dataMinimizedModal: TypesDataMinimizedModalTransition = {
 export const dataLoadingTodos: TypesDataLoadingState = {
   loadingSkeleton: <LoadingSkeletonTodos />,
   repeatingCount: 10,
-  margin: 'ml-8 mt-5',
+  margin: 'ml-7 mt-5',
   space: 'space-y-10',
 };
 
