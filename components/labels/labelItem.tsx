@@ -39,7 +39,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
             tooltip={label.name}
             path={paths('/app/label/', label._id)}
             className={classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0')}>
-            <div className='flex w-full flex-row py-2 px-2'>
+            <div className='flex w-full flex-row  py-2 px-2'>
               {matchedSlug ? (
                 <SvgIcon
                   data={{
@@ -55,7 +55,9 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
                   }}
                 />
               )}
-              <div className='pl-2 text-gray-600 group-hover:text-gray-900'>{label.name}</div>
+              <div className='max-w-[10.7rem] truncate pl-2 text-gray-600 group-hover:text-gray-900'>
+                {label.name}
+              </div>
             </div>
           </PrefetchRouterButton>
         </div>

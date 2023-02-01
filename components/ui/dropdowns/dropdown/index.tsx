@@ -73,8 +73,8 @@ export const Dropdown = ({
                   'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
                   padding,
                   hoverBg,
-                  borderRadius,
-                  !borderRadius && headerContents ? 'rounded-lg' : 'rounded-full',
+                  borderRadius ?? 'rounded-lg',
+                  (!borderRadius && headerContents) || 'rounded-full',
                   visibility(isInitiallyVisible, open),
                 )}
                 ref={setReferenceElement}

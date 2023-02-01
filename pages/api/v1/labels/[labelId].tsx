@@ -24,6 +24,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'PUT':
       try {
         const updateLabelById = await Label.findByIdAndUpdate(labelId, body, {
+          upsert: true,
           new: true,
           runValidators: true,
         });

@@ -1,37 +1,36 @@
 import { LoadingSkeletonLabels } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels';
 import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
 import {
-  TypesDataButton,
-  TypesDataDropdown,
-  TypesDataLoadingState,
-  TypesDataMinimizedModalTransition,
-  TypesDataPriority,
-  TypesDataSvg,
+    TypesDataButton,
+    TypesDataDropdown,
+    TypesDataLoadingState,
+    TypesDataMinimizedModalTransition,
+    TypesDataPriority,
+    TypesDataSvg
 } from '@lib/types/typesData';
 import { classNames } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
-import { PRIORITY_LEVEL, POSITION_X, POSITION_Y } from './dataTypesObjects';
+import { POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './dataTypesObjects';
 import {
-  ICON_CHEVRON_LEFT,
-  ICON_CHEVRON_RIGHT,
-  ICON_CLOSE,
-  ICON_DELETE,
-  ICON_EVENT_AVAILABLE_FILL,
-  ICON_FLAG_FILL,
-  ICON_LABEL_IMPORTANT_FILL,
-  ICON_MAXIMIZE,
-  ICON_MINIMIZE,
-  ICON_NEW_LABEL,
-  ICON_OPEN_IN_FULL,
-  ICON_REPORT,
-  ICON_WARNING,
+    ICON_CHEVRON_LEFT,
+    ICON_CHEVRON_RIGHT,
+    ICON_CLOSE,
+    ICON_DELETE,
+    ICON_EVENT_AVAILABLE_FILL,
+    ICON_FLAG_FILL,
+    ICON_LABEL_IMPORTANT_FILL,
+    ICON_MAXIMIZE,
+    ICON_MINIMIZE,
+    ICON_NEW_LABEL,
+    ICON_OPEN_IN_FULL,
+    ICON_REPORT,
+    ICON_WARNING
 } from './materialSymbols';
 import {
-  STYLE_BUTTON_KEY_ONLY_RING,
-  STYLE_BUTTON_NORMAL_BLUE,
-  STYLE_BUTTON_NORMAL_RED,
-  STYLE_BUTTON_NORMAL_WHITE,
-  STYLE_BUTTON_WIDE_BLUE,
+    STYLE_BUTTON_NORMAL_BLUE,
+    STYLE_BUTTON_NORMAL_RED,
+    STYLE_BUTTON_NORMAL_WHITE,
+    STYLE_BUTTON_WIDE_BLUE
 } from './stylePreset';
 
 /**
@@ -261,7 +260,7 @@ export const dataPriorityDropdownUrgent: TypesDataPriority = {
  */
 // Calendar
 export const dataDropdownCalendar: TypesDataDropdown = {
-  borderRadius: classNames('rounded-none focus-visible:rounded-lg', STYLE_BUTTON_KEY_ONLY_RING),
+  borderRadius: classNames('rounded-md focus-visible:rounded-md'),
   padding: 'px-4 py-2',
   menuWidth: 'w-full',
   tooltip: 'Due date',

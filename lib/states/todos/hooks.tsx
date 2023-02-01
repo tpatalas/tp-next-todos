@@ -6,7 +6,7 @@ import {
   updateDataTodo,
 } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import { useLabelUpdateDataItem } from '@states/labels/hooks';
+import { atomQueryLabels, atomSelectorLabels } from '@states/labels';
 import { atomNetworkStatusEffect } from '@states/misc';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useTodoModalStateReset } from '@states/modals/hooks';
@@ -34,6 +34,7 @@ export const useTodoAdd = () => {
   const updateQueryTodoItem = useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
+    set(atomQueryLabels, get(atomSelectorLabels));
     set(atomQueryTodoItem(get(atomTodoNew)._id), get(atomTodoNew));
     set(atomQueryTodoIds, [...get(atomQueryTodoIds), { _id: get(atomTodoNew)._id }]);
     reset(atomTodoNew);
@@ -54,7 +55,6 @@ export const useTodoAdd = () => {
 };
 
 export const useTodoUpdateItem = (todoId: Todos['_id']) => {
-  const updateLabelItem = useLabelUpdateDataItem();
   const setNotification = useNotificationState();
   const resetModal = useTodoModalStateReset(todoId);
   const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(todoId);
@@ -63,11 +63,14 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
   const updateQueryTodoItem = useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
+    set(atomQueryLabels, get(atomSelectorLabels));
     set(atomQueryTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
     updateDataTodo(todoId, get(atomSelectorTodoItem(todoId)));
     set(atomQueryTodoIds, [...get(atomQueryTodoIds)]); // refetch: This will trigger re-Render the list.
     setNotification(NOTIFICATION['updatedTodo']);
+
     reset(atomSelectorTodoItem(todoId));
+    reset(atomSelectorLabels);
   });
 
   return () => {
@@ -79,7 +82,6 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
     updatePriorityRankScore();
     updateQueryTodoItem();
     resetModal();
-    updateLabelItem();
   };
 };
 

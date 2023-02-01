@@ -9,11 +9,10 @@ import {
 import { Labels, Todos, Types } from '@lib/types';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
 import { useNotificationState } from '@states/notifications/hooks';
-import { atomTodoNew } from '@states/todos';
+import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { atomCatch } from '@states/utils';
-import { useGetWithRecoilCallback } from '@states/utils/hooks';
+import { useCompareToQueryLabels, useGetWithRecoilCallback } from '@states/utils/hooks';
 import ObjectID from 'bson-objectid';
-import equal from 'fast-deep-equal/react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem, atomSelectorLabels } from '.';
 
@@ -41,10 +40,9 @@ export const useLabelAdd = () => {
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomQueryLabels, [
-      ...get(atomQueryLabels),
-      { _id: get(atomLabelNew)._id, name: get(atomLabelNew).name, color: get(atomLabelNew).color },
-    ]);
+    set(atomSelectorLabels, [...get(atomSelectorLabels), { ...get(atomLabelNew) }]);
+    set(atomQueryLabels, [...get(atomQueryLabels), { ...get(atomLabelNew) }]);
+
     createDataNewLabel(get(atomLabelNew));
     reset(atomLabelNew);
     reset(atomLabelModalOpen(undefined));
@@ -66,6 +64,7 @@ export const useLabelUpdateItem = (_id: Labels['_id']) => {
 
     set(atomQueryLabels, updateLabels);
     updateDataLabelItem(_id, get(atomSelectorLabelItem(_id)));
+
     reset(atomLabelModalOpen(_id));
     setNotification(NOTIFICATION['updatedLabel']);
     get(atomCatch(CATCH.labelModal)) && reset(atomCatch(CATCH.labelModal));
@@ -95,6 +94,7 @@ export const useLabelRemoveItem = (_id: Labels['_id']) => {
 export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
   const updateDataLabels = useLabelUpdateDataItem();
   const get = useGetWithRecoilCallback();
+
   const removeLabelItemTitleId = useRecoilCallback(
     ({ snapshot, set }) =>
       (labelId: Labels['_id']) => {
@@ -113,8 +113,19 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
           };
         });
         set(atomSelectorLabels, filteredLabelsRemoved);
+
+        typeof _id === 'undefined'
+          ? set(atomTodoNew, {
+              ...get(atomTodoNew),
+              labelItem: filteredLabelsRemoved,
+            })
+          : set(atomSelectorTodoItem(todoId), {
+              ...get(atomSelectorTodoItem(todoId)),
+              labelItem: filteredLabelsRemoved,
+            });
       },
   );
+
   return (labelId: Labels['_id']) => {
     removeLabelItemTitleId(labelId);
     !get(atomCatch(CATCH.todoModal)) && updateDataLabels();
@@ -122,27 +133,28 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
 };
 
 export const useLabelUpdateDataItem = () => {
-  return useRecoilCallback(({ snapshot, set }) => () => {
+  const compareLabelsToQueryLabel = useCompareToQueryLabels();
+  return useRecoilCallback(({ snapshot, set, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const updatedLabels = get(atomSelectorLabels);
-    const filteredLabels = get(atomSelectorLabels).filter((label) => {
-      return !get(atomQueryLabels).find((queriedLabel) => equal(label, queriedLabel));
-    });
+    const filteredLabels = compareLabelsToQueryLabel(get(atomSelectorLabels));
 
     set(atomQueryLabels, updatedLabels);
     if (filteredLabels.length === 0) return;
     updateDataLabels(filteredLabels);
+    reset(atomSelectorLabels);
   });
 };
 
 export const useLabelChangeHandler = (_id: Todos['_id']) => {
+  const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ set, snapshot }) => (selected: Labels[]) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const todoNew = get(atomTodoNew);
-    const todoId = _id ? _id! : todoNew._id!;
+    const todoId = _id ? _id! : get(atomTodoNew)._id!;
     const labels = get(atomQueryLabels);
+    const isTodoModalOpen = get(atomCatch(CATCH['todoModal']));
 
-    const labelsUpdateChange = [...labels].map((label) => {
+    const labelsUpdatedChanges = [...labels].map((label) => {
       const labelItem = selected.filter((select) => select._id === label._id)[0];
       const isTodoIdExist = label.title_id && label.title_id.includes(todoId);
       const addOrCreateTodoId = label.title_id ? [...label.title_id, todoId] : [todoId];
@@ -162,6 +174,18 @@ export const useLabelChangeHandler = (_id: Todos['_id']) => {
       };
       return isTodoIdExist ? removeTitleId() : updateTitleId();
     });
-    set(atomSelectorLabels, labelsUpdateChange);
+    const filteredLabelsUpdatedChanges = compareLabelsToQueryLabel(labelsUpdatedChanges);
+
+    set(atomSelectorLabels, labelsUpdatedChanges);
+    if (!isTodoModalOpen) return;
+    typeof _id === 'undefined'
+      ? set(atomTodoNew, {
+          ...get(atomTodoNew),
+          labelItem: filteredLabelsUpdatedChanges,
+        })
+      : set(atomSelectorTodoItem(todoId), {
+          ...get(atomSelectorTodoItem(todoId)),
+          labelItem: filteredLabelsUpdatedChanges,
+        });
   });
 };

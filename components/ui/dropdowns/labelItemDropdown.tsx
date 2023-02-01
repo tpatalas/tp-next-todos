@@ -34,6 +34,7 @@ export const LabelItemDropdown = ({
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       <div className='py-1'>
         <DropdownMenuItem
+          isDisabledCloseOnClick={false}
           onClick={() => openModal()}
           path={ICON_EDIT_NOTE}
           tooltip='Edit'>
@@ -42,6 +43,7 @@ export const LabelItemDropdown = ({
       </div>
       <div className='py-1'>
         <DropdownMenuItem
+          isDisabledCloseOnClick={false}
           onClick={() => removeLabel()}
           path={ICON_DELETE}
           tooltip='Delete'>
