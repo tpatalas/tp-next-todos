@@ -50,11 +50,20 @@ export const STYLE_BUTTON_NORMAL_GRAY = classNames(
 
 // misc
 export const STYLE_BUTTON_ICON =
-  'border-gray-300 bg-white text-gray-400 hover:enabled:bg-gray-100 hover:enabled:text-gray-500 focus-visible:ring-blue-500 ';
+  'border-transparent bg-transparent text-gray-500 hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700 focus-visible:ring-blue-500 ';
 export const STYLE_BUTTON_NO_RING = 'focus:outline-none focus:ring-0 focus:ring-offset-0';
 export const STYLE_BUTTON_KEY_ONLY_RING =
   'focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
 
+/**
+ * Hover Effect
+ **/
+export const STYLE_HOVER_SLATE_DARK = 'hover:bg-slate-900 hover:bg-opacity-10';
+export const STYLE_HOVER_SLATE_LIGHT = 'hover:bg-slate-600 hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_DARK =
+  'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_LIGHT =
+  'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
 /**
  * Calendar
  */

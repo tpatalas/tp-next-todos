@@ -1,6 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_LABEL, ICON_LABEL_FILL } from '@data/materialSymbols';
+import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { TodosCount } from '@layouts/layoutApp/layout/layoutFooter/footerSidebar/todosCount';
 import { Types } from '@lib/types';
 import { classNames, paths } from '@states/utils';
@@ -64,7 +65,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
             isInitiallyVisible: false,
             hoverBg: matchedSlug
               ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]'
-              : 'hover:bg-gray-900 hover:bg-opacity-[0.07]',
+              : STYLE_HOVER_ENABLED_SLATE_DARK,
           }}
           headerContentsOnClose={
             <span className='absolute right-[0.73rem] top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400 group-hover:invisible'>

@@ -3,6 +3,7 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { dataButtonCreateTodo } from '@data/dataObjects';
 import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
+import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
@@ -55,7 +56,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
               data={{
                 path: ICON_MENU,
                 size: 'h-6 w-6',
-                hoverBg: 'hover:enabled:bg-gray-200 hover:enabled:bg-opacity-70',
+                hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
               }}
               onClick={() => setSidebarOpen()}
             />

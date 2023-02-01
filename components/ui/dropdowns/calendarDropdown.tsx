@@ -9,11 +9,11 @@ import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialS
 import { Menu } from '@headlessui/react';
 import { TypesDataDropdown } from '@lib/types/typesData';
 import {
-  useCalResetDayUpdater,
-  useCalResetDateItemOnly,
   useCalResetDateAll,
+  useCalResetDateItemOnly,
+  useCalResetDayUpdater,
 } from '@states/calendars/hooks';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
+import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { classNames } from '@states/utils';
 import { Calendar } from '@ui/calendars/calendar';
 import { format } from 'date-fns';
@@ -28,7 +28,7 @@ type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo'>> &
 export const CalendarDropdown = ({
   todo,
   onClickConfirm,
-  data: { borderRadius, tooltip, padding = 'px-3 py-2' },
+  data: { borderRadius, tooltip, hoverBg, padding },
 }: Props) => {
   const resetCalendar = useCalResetDayUpdater(todo?._id);
   const resetDateItemOnly = useCalResetDateItemOnly(todo?._id);
@@ -43,7 +43,7 @@ export const CalendarDropdown = ({
     <Dropdown
       data={{
         tooltip: tooltip,
-        padding: padding,
+        padding: padding ?? 'px-2 sm:px-3 py-2',
         borderRadius: borderRadius,
         color: noDaySelected
           ? 'fill-gray-500 [.group-calendarDropdown:hover_&]:fill-gray-700'
@@ -51,7 +51,8 @@ export const CalendarDropdown = ({
         path: noDaySelected ? ICON_EVENT_AVAILABLE : ICON_EVENT_AVAILABLE_FILL,
         group: 'group-calendarDropdown',
         contentWidth: 'w-[21rem]',
-        menuWidth: 'w-full',
+        menuWidth: 'sm:w-full',
+        hoverBg: hoverBg,
         text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
       }}
       headerContents={

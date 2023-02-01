@@ -85,11 +85,14 @@ export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
   const [rightPosition, setRightPosition] = useState(-1);
   const [isOverflow, setIsOverflow] = useState(false);
 
+  const initialOverflown = ref.current && ref.current.scrollWidth > 300;
+
   useEffect(() => {
     const currentRef = ref.current;
 
     if (currentRef) {
-      const overflown = currentRef.clientWidth < currentRef.scrollWidth;
+      const overScrollWidth = currentRef.clientWidth < currentRef.scrollWidth;
+      const overflown = overScrollWidth || (initialOverflown as boolean);
       setIsOverflow(overflown);
     }
 
@@ -106,7 +109,7 @@ export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
     return () => {
       currentRef && currentRef.removeEventListener('scroll', handleScroll);
     };
-  }, [ref]);
+  }, [initialOverflown, ref]);
 
   return { leftPosition, rightPosition, isOverflow };
 };

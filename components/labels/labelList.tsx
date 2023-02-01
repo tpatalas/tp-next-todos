@@ -19,7 +19,6 @@ export const LabelList = () => {
             data={{
               path: ICON_NEW_LABEL,
               tooltip: 'Add new label',
-              hoverBg: 'hover:enabled:bg-gray-200',
               padding: 'p-2',
               color: 'hover:enabled:bg-fill-700',
             }}

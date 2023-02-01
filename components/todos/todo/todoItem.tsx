@@ -51,7 +51,7 @@ export const TodoItem = ({ todo }: Props) => {
         </div>
       </CheckBoxFragment>
       <div
-        className='ml-4 w-full max-w-sm select-none text-base sm:max-w-2xl'
+        className='ml-4 w-full select-none text-base'
         onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}>
         <div
           className={classNames(
@@ -70,27 +70,29 @@ export const TodoItem = ({ todo }: Props) => {
           </div>
           <p className='text-sm text-gray-500 line-clamp-2'>{todoItem.note}</p>
         </div>
-        <div className='-ml-2 mt-1 flex w-full max-w-[38rem] flex-row items-center'>
-          {todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && (
-            <div className='m-2 flex flex-row items-center text-gray-500'>
-              <SvgIcon data={dataSvgPriorityUrgent} />
-              <div className='ml-1 whitespace-nowrap text-sm'>Urgent</div>
-            </div>
-          )}
-          {todoItem.priorityLevel === PRIORITY_LEVEL['important'] && (
-            <div className='m-2 flex flex-row items-center text-gray-500'>
-              <SvgIcon data={dataSvgPriorityImportant} />
-              <div className='ml-1 whitespace-nowrap text-sm'>Important</div>
-            </div>
-          )}
-          {todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined' && (
-            <div className='m-2 flex flex-row items-center text-gray-500'>
-              <SvgIcon data={dataSvgCalendarDueDate} />
-              <div className='ml-1 whitespace-nowrap text-sm'>
-                {format(new Date(todoItem.dueDate), 'MMM dd, yy')}
+        <div className='-ml-2 mt-1 flex w-full flex-col items-start justify-start ml:flex-row ml:items-center'>
+          <div className='flex flex-row'>
+            {todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && (
+              <div className='m-2 flex flex-row items-center text-gray-500'>
+                <SvgIcon data={dataSvgPriorityUrgent} />
+                <div className='ml-1 whitespace-nowrap text-sm'>Urgent</div>
               </div>
-            </div>
-          )}
+            )}
+            {todoItem.priorityLevel === PRIORITY_LEVEL['important'] && (
+              <div className='m-2 flex flex-row items-center text-gray-500'>
+                <SvgIcon data={dataSvgPriorityImportant} />
+                <div className='ml-1 whitespace-nowrap text-sm'>Important</div>
+              </div>
+            )}
+            {todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined' && (
+              <div className='m-2 flex flex-row items-center text-gray-500'>
+                <SvgIcon data={dataSvgCalendarDueDate} />
+                <div className='ml-1 whitespace-nowrap text-sm'>
+                  {format(new Date(todoItem.dueDate), 'MMM dd, yy')}
+                </div>
+              </div>
+            )}
+          </div>
           <LabelComboBoxDropdown
             todo={todo}
             selectedQueryLabels={selectedQueryLabels}

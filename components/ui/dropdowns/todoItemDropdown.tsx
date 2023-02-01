@@ -35,9 +35,7 @@ export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } 
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       {children}
       <div className='py-1'>
-        <DropdownMenuItem
-          isDisabledCloseOnClick={true}
-          padding='p-0'>
+        <DropdownMenuItem padding='p-0'>
           <div className='w-full'>
             <CalendarDropdown
               data={dataDropdownCalendar}
@@ -48,18 +46,14 @@ export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } 
         </DropdownMenuItem>
       </div>
       <div className='py-1'>
-        <DropdownMenuItem
-          isDisabledCloseOnClick={true}
-          padding='p-0'>
+        <DropdownMenuItem padding='p-0'>
           <PriorityButton
             data={dataPriorityDropdownUrgent}
             todo={todo}
             onClick={() => setPriority(PRIORITY_LEVEL['urgent'])}
           />
         </DropdownMenuItem>
-        <DropdownMenuItem
-          isDisabledCloseOnClick={true}
-          padding='p-0'>
+        <DropdownMenuItem padding='p-0'>
           <PriorityButton
             todo={todo}
             data={dataPriorityDropdownImportant}
@@ -69,6 +63,7 @@ export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } 
       </div>
       <div className='py-1'>
         <DropdownMenuItem
+          isDisabledCloseOnClick={false}
           onClick={() => removeTodo()}
           path={ICON_DELETE}
           tooltip='Delete'

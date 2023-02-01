@@ -1,6 +1,7 @@
 import { useFocusOnClick } from '@states/focus/hooks';
 import { useKeyWithFocus } from '@states/keybinds/hooks';
 import { KeysWithNavigationEffect } from '@states/keybinds/KeysWithNavigateEffect';
+import { classNames } from '@states/utils';
 import { Types, TypesTodo } from 'lib/types';
 import { Fragment as FocuserFragment, useRef } from 'react';
 
@@ -15,7 +16,10 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
     <FocuserFragment>
       <div
         tabIndex={0}
-        className='group/focuser flex w-full max-w-2xl flex-row rounded-lg bg-gradient-to-r px-3 pt-4 pb-2 outline-none hover:bg-slate-100 focus:bg-blue-100'
+        className={classNames(
+          'group/focuser mr-1 flex w-full flex-row rounded-lg px-5 pt-4 pb-2 outline-none hover:bg-slate-100 focus:bg-blue-100',
+          'w-[calc(100vw-7rem)] max-w-3xl md:w-[calc(65vw-5rem)] ml:w-[calc(70vw-5rem)]',
+        )}
         ref={divFocus}
         onKeyDown={focusKeyHandler}
         onClick={() => focusOnClick()}>

@@ -57,13 +57,13 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
                 kbd: isMacOs ? '⌘ E' : 'Ctrl E',
               }}
             />
-            <CloseIconButton
-              data={dataButtonTodoModalClose}
-              onClick={() => closeModal()}
-            />
           </HeaderButtonFragment>
         </HeaderFragment>
       )}
+      <CloseIconButton
+        data={dataButtonTodoModalClose}
+        onClick={() => closeModal()}
+      />
     </ContainerFragment>
   );
 };

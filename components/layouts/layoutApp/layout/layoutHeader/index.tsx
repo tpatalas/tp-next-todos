@@ -1,7 +1,7 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_CLOSE, ICON_MENU, ICON_SEARCH } from '@data/materialSymbols';
-import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
+import { STYLE_BUTTON_KEY_ONLY_RING, STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { atomSearchInput } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
@@ -41,7 +41,7 @@ export const LayoutHeader = () => {
                 data={{
                   path: ICON_MENU,
                   size: 'h-6 w-6',
-                  hoverBg: 'hover:enabled:bg-gray-200 hover:enabled:bg-opacity-70',
+                  hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
                 }}
                 onClick={() => setSidebarOpen()}
               />
@@ -55,7 +55,7 @@ export const LayoutHeader = () => {
           </div>
         </LeftSideFragment>
         <RightSidebarFragment>
-          <div className='flex flex-1 px-3'>
+          <div className='flex flex-1 px-2'>
             <SearchInputFragment>
               <div className='relative flex flex-1 flex-row items-center justify-between'>
                 <form

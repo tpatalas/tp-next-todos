@@ -12,6 +12,7 @@ export const ComboBoxNewItemButton = ({ headerContents, onClick }: Props) => {
           path: ICON_ADD,
           size: 'h-6 w-6',
           width: 'w-full',
+          borderRadius: 'rounded-lg',
         }}
         headerContents={headerContents}
         onClick={onClick}

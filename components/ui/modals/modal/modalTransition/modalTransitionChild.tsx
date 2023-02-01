@@ -22,7 +22,7 @@ export const ModalTransitionChild = ({
         <div className='fixed inset-0 bg-gray-500 bg-opacity-20' />
       </Transition.Child>
       <div className='fixed inset-0 overflow-y-auto'>
-        <div className='flex flex-row justify-center p-4 text-center sm:h-full sm:items-center sm:p-14'>
+        <div className='flex h-full flex-row items-start justify-center p-4 text-center md:items-center'>
           <Transition.Child
             as={Fragment}
             enter='transition ease-out duration-150'
@@ -33,7 +33,7 @@ export const ModalTransitionChild = ({
             leaveTo='transform opacity-0 scale-95'>
             <Dialog.Panel
               className={classNames(
-                'flex w-full max-w-lg transform flex-col justify-between overflow-visible rounded-2xl bg-white text-left align-middle shadow-xl transition-all',
+                'flex w-full max-w-xl transform flex-col justify-between overflow-visible rounded-2xl bg-white text-left align-middle shadow-xl transition-all',
                 className,
               )}>
               {children}

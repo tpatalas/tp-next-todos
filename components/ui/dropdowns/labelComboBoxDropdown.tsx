@@ -14,9 +14,9 @@ import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
 
-type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels'>>;
+type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels' | 'container'>>;
 
-export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
+export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: Props) => {
   const removeTitleId = useLabelRemoveItemTitleId(todo?._id);
   const closeTodoModal = useTodoModalStateClose(todo?._id);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -26,13 +26,20 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
 
   return (
     <LabelComboBoxDropdownFragment>
-      <div className='relative flex w-full max-w-[27rem] flex-row'>
+      <div
+        className={classNames(
+          'relative flex flex-row',
+          container ??
+            'w-[calc(80vw-5rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
+        )}>
         <LabelsHorizontalGradients
           scrollRef={scrollRef}
           position={GRADIENT_POSITION['left']}
         />
         <div
-          className='scrollbar-hide ml-1 flex flex-row items-center justify-start overflow-x-auto py-1 px-1'
+          className={classNames(
+            'scrollbar-hide ml-0 flex w-full flex-row items-center justify-start overflow-x-auto py-1 px-1 lg:ml-1 lg:px-1',
+          )}
           ref={scrollRef}>
           <Dropdown
             data={dataDropdownComboBox}
@@ -59,7 +66,6 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels }: Props) => {
                     data={{
                       path: ICON_CLOSE,
                       padding: 'p-[2px]',
-                      hoverBg: 'hover:bg-gray-900 hover:bg-opacity-10',
                       size: 'h-4 w-4',
                       color: 'fill-gray-700 hover:fill-gray-900',
                       container: 'h-5',
