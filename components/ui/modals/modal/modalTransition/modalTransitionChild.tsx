@@ -22,7 +22,7 @@ export const ModalTransitionChild = ({
         <div className='fixed inset-0 bg-gray-500 bg-opacity-20' />
       </Transition.Child>
       <div className='fixed inset-0 overflow-y-auto'>
-        <div className='flex flex-row justify-center p-4 text-center sm:h-full sm:items-center sm:p-14'>
+        <div className='flex flex-row justify-center p-4 text-center sm:h-full sm:items-center'>
           <Transition.Child
             as={Fragment}
             enter='transition ease-out duration-150'
