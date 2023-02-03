@@ -7,15 +7,13 @@ import { classNames } from '@states/utils';
 import { SvgIcon } from 'components/icons/svgIcon';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
-import { Fragment as MenuFragment, useState } from 'react';
+import { Fragment as MenuFragment, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
-type Props = { data: TypesDataDropdown } & Partial<
-  Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>
-> &
+type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>> &
   Pick<Types, 'children'>;
 
 export const Dropdown = ({
@@ -44,13 +42,14 @@ export const Dropdown = ({
   },
 }: Props) => {
   const [isClicked, setClick] = useState(false);
-  const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
+  const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: placement,
     modifiers: [{ name: 'offset', options: { offset: [0, 5] } }],
   });
   const setFocusOnBlur = useSetRecoilState(atomOnBlur);
+  const focusRef = useRef<HTMLButtonElement>(null);
 
   const visibility = (initialVisible: boolean, open: boolean) => {
     if (initialVisible || open) return 'visible';
@@ -67,37 +66,43 @@ export const Dropdown = ({
             tooltip={isClicked || open ? undefined : tooltip}
             kbd={isClicked || open ? undefined : kbd}>
             <MenuFragment>
-              <Menu.Button
-                className={classNames(
-                  group,
-                  'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
-                  padding,
-                  hoverBg,
-                  borderRadius ?? 'rounded-lg',
-                  (!borderRadius && headerContents) || 'rounded-full',
-                  visibility(isInitiallyVisible, open),
-                )}
-                ref={setReferenceElement}
-                onMouseDown={() => setClick(true)}
-                onMouseEnter={() => setClick(false)}
-                onMouseLeave={() => setClick(true)}
-                onClick={() => setFocusOnBlur(true)}>
-                <SvgIcon
-                  data={{
-                    path: path,
-                    className: classNames(size, color),
+              <div ref={setReferenceElement}>
+                <Menu.Button
+                  className={classNames(
+                    group,
+                    'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
+                    padding,
+                    hoverBg,
+                    borderRadius ?? 'rounded-lg',
+                    (!borderRadius && headerContents) || 'rounded-full',
+                    visibility(isInitiallyVisible, open),
+                  )}
+                  onMouseDown={() => setClick(true)}
+                  onMouseEnter={() => setClick(false)}
+                  onMouseLeave={() => setClick(true)}
+                  onClick={() => setFocusOnBlur(true)}
+                  onKeyDown={(event: React.KeyboardEvent) => {
+                    event.preventDefault();
+                    event.key === 'Escape' && focusRef.current!.blur();
                   }}
-                />
-                {headerContents && (
-                  <span
-                    className={classNames(
-                      'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
-                      text,
-                    )}>
-                    {headerContents}
-                  </span>
-                )}
-              </Menu.Button>
+                  ref={focusRef}>
+                  <SvgIcon
+                    data={{
+                      path: path,
+                      className: classNames(size, color),
+                    }}
+                  />
+                  {headerContents && (
+                    <span
+                      className={classNames(
+                        'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
+                        text,
+                      )}>
+                      {headerContents}
+                    </span>
+                  )}
+                </Menu.Button>
+              </div>
               {!open && headerContentsOnClose}
               <Transition
                 as='div'
@@ -115,16 +120,13 @@ export const Dropdown = ({
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',
                       contentWidth,
-                      hasDropdownBoardStyle &&
-                        'rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5',
+                      hasDropdownBoardStyle && 'rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5',
                     )}
                     ref={setPopperElement}
                     style={styles.popper}
                     {...attributes.popper}
                     static>
-                    <div className={classNames(hasDivider && 'divide-y divide-gray-100')}>
-                      {children}
-                    </div>
+                    <div className={classNames(hasDivider && 'divide-y divide-gray-100')}>{children}</div>
                   </Menu.Items>
                 </ConditionalPortal>
               </Transition>
