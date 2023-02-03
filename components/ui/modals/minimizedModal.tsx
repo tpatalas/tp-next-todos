@@ -4,17 +4,13 @@ import {
   IconButton as OpenFullIconButton,
 } from '@buttons/iconButton';
 import {
-  dataButtonGlobalClose,
-  dataButtonMiniModalMaximize,
-  dataButtonMiniModalOpenFull,
-  dataMinimizedModal,
-} from '@data/dataObjects';
+  optionsMinimizedModal,
+  optionsButtonMiniModalMaximize,
+  optionsButtonMiniModalOpenFull,
+  optionsButtonGlobalClose,
+} from '@data/dataOptions';
 import { atomTodoModalMini } from '@states/modals';
-import {
-  useTodoModalStateClose,
-  useTodoModalStateMaximize,
-  useTodoModalStateExitMinimize,
-} from '@states/modals/hooks';
+import { useTodoModalStateClose, useTodoModalStateMaximize, useTodoModalStateExitMinimize } from '@states/modals/hooks';
 import { ModalStateOnBreakpointEffect } from '@states/modals/modalStateOnBreakpointEffect';
 import { atomTodoNew } from '@states/todos';
 import { TypesTodo } from 'lib/types';
@@ -33,24 +29,22 @@ export const MinimizedModal = ({ todo }: Props) => {
   return (
     <MinimizeModalTransition
       show={isTodoModalMiniOpen}
-      data={dataMinimizedModal}>
+      options={optionsMinimizedModal}>
       <div className=' flex flex-shrink-0 flex-row items-center justify-between'>
         <div className='flex flex-1 flex-col justify-center'>
-          <p className='w-44 break-words text-sm font-medium text-gray-500 line-clamp-1'>
-            {newTodo.title}
-          </p>
+          <p className='w-44 break-words text-sm font-medium text-gray-500 line-clamp-1'>{newTodo.title}</p>
         </div>
         <div className='flex h-fit flex-row'>
           <MaxIconButton
-            data={dataButtonMiniModalMaximize}
+            options={optionsButtonMiniModalMaximize}
             onClick={() => exitMinimizeModal()}
           />
           <OpenFullIconButton
-            data={dataButtonMiniModalOpenFull}
+            options={optionsButtonMiniModalOpenFull}
             onClick={() => maximizeModal()}
           />
           <CloseIconButton
-            data={dataButtonGlobalClose}
+            options={optionsButtonGlobalClose}
             onClick={() => closeModal()}
           />
         </div>

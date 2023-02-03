@@ -1,4 +1,4 @@
-import { ICON_UNFOLD_MORE } from '@data/materialSymbols';
+import { optionsButtonComboBoxToggle } from '@data/dataOptions';
 import { Combobox, Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { atomComboBoxQuery } from '@states/comboBoxes';
@@ -34,8 +34,7 @@ export const ComboBox = ({
             <div
               className={classNames(
                 'relative flex flex-col rounded-lg outline-none',
-                hasComboBoxBoardStyle &&
-                  'group/comboBox focus-within:shadow-2xl focus-within:shadow-slate-300/40',
+                hasComboBoxBoardStyle && 'group/comboBox focus-within:shadow-2xl focus-within:shadow-slate-300/40',
               )}>
               <div
                 className={classNames(
@@ -51,19 +50,10 @@ export const ComboBox = ({
                 {!comboBoxInputButton ? (
                   <Combobox.Button className='absolute inset-y-0 right-0 flex items-center pr-1'>
                     {/* PseudoIconButton is used since button elements cannot be nested */}
-                    <PseudoIconButton
-                      data={{
-                        path: ICON_UNFOLD_MORE,
-                        padding: 'p-1',
-                        color: 'fill-gray-400',
-                        tooltip: 'Open/close a list',
-                      }}
-                    />
+                    <PseudoIconButton options={optionsButtonComboBoxToggle} />
                   </Combobox.Button>
                 ) : (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-1'>
-                    {comboBoxInputButton}
-                  </div>
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-1'>{comboBoxInputButton}</div>
                 )}
               </div>
               <Transition

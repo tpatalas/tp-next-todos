@@ -1,34 +1,27 @@
 import { IconButton } from '@buttons/iconButton';
 import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
-import {
-  ICON_FLAG,
-  ICON_FLAG_FILL,
-  ICON_LABEL_IMPORTANT,
-  ICON_LABEL_IMPORTANT_FILL,
-} from '@data/materialSymbols';
+import { ICON_FLAG, ICON_FLAG_FILL, ICON_LABEL_IMPORTANT, ICON_LABEL_IMPORTANT_FILL } from '@data/materialSymbols';
 import { Types } from '@lib/types';
-import { TypesDataPriority } from '@lib/types/typesData';
+import { TypesOptionsPriority } from '@lib/types/typesOptions';
 import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
 import { classNames } from '@states/utils';
 import { Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-type Props = { data: TypesDataPriority } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClick'>;
+type Props = { options: TypesOptionsPriority } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClick'>;
 
-export const PriorityButton = ({ todo, data, onClick }: Props) => {
+export const PriorityButton = ({ todo, options, onClick }: Props) => {
   const todoItem =
-    typeof todo === 'undefined'
-      ? useRecoilValue(atomTodoNew)
-      : useRecoilValue(atomSelectorTodoItem(todo._id));
+    typeof todo === 'undefined' ? useRecoilValue(atomTodoNew) : useRecoilValue(atomSelectorTodoItem(todo._id));
   const priorityImportant = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
   const priorityUrgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
-  const levelImportant = data.priorityLevel === PRIORITY_LEVEL['important'];
-  const levelUrgent = data.priorityLevel === PRIORITY_LEVEL['urgent'];
+  const levelImportant = options.priorityLevel === PRIORITY_LEVEL['important'];
+  const levelUrgent = options.priorityLevel === PRIORITY_LEVEL['urgent'];
 
   return (
     <TodoPriorityFragment>
       <IconButton
-        data={{
+        options={{
           path: classNames(
             levelImportant && !priorityImportant && ICON_LABEL_IMPORTANT,
             levelImportant && priorityImportant && ICON_LABEL_IMPORTANT_FILL,
@@ -42,29 +35,25 @@ export const PriorityButton = ({ todo, data, onClick }: Props) => {
             levelUrgent && priorityUrgent && 'Urgent',
           ),
           color: classNames(
-            !priorityImportant &&
-              !priorityUrgent &&
-              'fill-gray-500 [.group-button:hover_&]:fill-gray-700',
-            levelImportant &&
-              priorityImportant &&
-              'fill-yellow-500 [.group-button:hover_&]:fill-yellow-600',
+            !priorityImportant && !priorityUrgent && 'fill-gray-500 [.group-button:hover_&]:fill-gray-700',
+            levelImportant && priorityImportant && 'fill-yellow-500 [.group-button:hover_&]:fill-yellow-600',
             levelUrgent && priorityUrgent && 'fill-red-600 [.group-button:hover_&]:fill-red-700',
           ),
           borderRadius: 'rounded-md focus-visible:rounded-md',
           margin: 'ml-0',
           hoverBg: 'hover:bg-transparent',
-          display: data.display,
-          width: data.width,
-          container: data.container,
-          padding: data.padding,
+          display: options.display,
+          width: options.width,
+          container: options.container,
+          padding: options.padding,
         }}
         headerContents={
-          data.isInitiallyVisible &&
+          options.isInitiallyVisible &&
           classNames(
-            levelImportant && !priorityImportant && data.priorityNormal,
-            levelImportant && priorityImportant && data.priorityImportant,
-            levelUrgent && !priorityUrgent && data.priorityNormal,
-            levelUrgent && priorityUrgent && data.priorityUrgent,
+            levelImportant && !priorityImportant && options.priorityNormal,
+            levelImportant && priorityImportant && options.priorityImportant,
+            levelUrgent && !priorityUrgent && options.priorityNormal,
+            levelUrgent && priorityUrgent && options.priorityUrgent,
           )
         }
         onClick={onClick}

@@ -1,5 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
-import { dataButtonLabelModalUpdateLabel } from '@data/dataObjects';
+import { optionsButtonLabelModalUpdateLabel } from '@data/dataOptions';
 import { Types } from '@lib/types';
 import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { useLabelUpdateItem } from '@states/labels/hooks';
@@ -18,7 +18,7 @@ export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
         headerContents='Update label'
         footerButtons={
           <DisableButton
-            data={dataButtonLabelModalUpdateLabel}
+            options={optionsButtonLabelModalUpdateLabel}
             isConditionalRendering={condition}
             onClick={() => updateLabel()}>
             Update

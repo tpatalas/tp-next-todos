@@ -1,35 +1,32 @@
-import { TypesDataButton } from '@lib/types/typesData';
+import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { forwardRef, useState } from 'react';
 
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
-type Props = { data: TypesDataButton } & Partial<
-  Pick<
-    Types,
-    'onKeyDown' | 'children' | 'onClick' | 'onDoubleClick' | 'onMouseEnter' | 'onMouseOver'
-  >
+type Props = { options: TypesOptionsButton } & Partial<
+  Pick<Types, 'onKeyDown' | 'children' | 'onClick' | 'onDoubleClick' | 'onMouseEnter' | 'onMouseOver'>
 >;
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ data, onClick, onKeyDown, onDoubleClick, onMouseOver, children = data.name }: Props, ref) => {
+  ({ options, onClick, onKeyDown, onDoubleClick, onMouseOver, children = options.name }: Props, ref) => {
     const [hasTooltip, setTooltip] = useState(false);
 
     return (
       <Tooltip
-        tooltip={hasTooltip || data.isDisabled ? undefined : data.tooltip}
-        kbd={hasTooltip || data.isDisabled ? undefined : data.kbd}
-        placement={data.placement}
-        offset={data.offset}>
+        tooltip={hasTooltip || options.isDisabled ? undefined : options.tooltip}
+        kbd={hasTooltip || options.isDisabled ? undefined : options.kbd}
+        placement={options.placement}
+        offset={options.offset}>
         <button
-          type={data.type || 'button'}
-          className={data.className}
-          disabled={data.isDisabled}
+          type={options.type || 'button'}
+          className={options.className}
+          disabled={options.isDisabled}
           onMouseOver={onMouseOver}
-          onMouseDown={() => !data.isDisabled && setTooltip(true)}
-          onMouseEnter={() => !data.isDisabled && setTooltip(false)}
-          onMouseLeave={() => !data.isDisabled && setTooltip(true)}
+          onMouseDown={() => !options.isDisabled && setTooltip(true)}
+          onMouseEnter={() => !options.isDisabled && setTooltip(false)}
+          onMouseLeave={() => !options.isDisabled && setTooltip(true)}
           onClick={onClick}
           onKeyDown={onKeyDown}
           onDoubleClick={onDoubleClick}

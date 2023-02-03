@@ -1,6 +1,6 @@
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { Types } from '@lib/types';
-import { TypesDataButton } from '@lib/types/typesData';
+import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 import dynamic from 'next/dynamic';
 import { Fragment as HeaderContentsFragment } from 'react';
@@ -8,40 +8,40 @@ import { Fragment as HeaderContentsFragment } from 'react';
 const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
 const Button = dynamic(() => import('../button').then((mod) => mod.Button));
 
-type Props = { data: TypesDataButton } & Partial<
+type Props = { options: TypesOptionsButton } & Partial<
   Pick<Types, 'headerContents' | 'children' | 'onClick' | 'children'>
 >;
 
-export const IconButton = ({ data, headerContents, onClick, children = data.name }: Props) => {
+export const IconButton = ({ options, headerContents, onClick, children = options.name }: Props) => {
   return (
-    <span className={data.container}>
+    <span className={options.container}>
       <Button
-        data={{
+        options={{
           className: classNames(
-            data.className,
+            options.className,
             'group-button border-slate-300 bg-transparent text-gray-500 focus-visible:ring-blue-500 hover:enabled:text-gray-700 hover:disabled:cursor-not-allowed',
-            data.borderRadius ?? 'rounded-full',
-            data.padding ?? 'p-2',
-            data.margin ?? 'ml-px',
-            data.hoverBg ?? STYLE_HOVER_ENABLED_SLATE_DARK,
-            data.display,
-            data.width,
+            options.borderRadius ?? 'rounded-full',
+            options.padding ?? 'p-2',
+            options.margin ?? 'ml-px',
+            options.hoverBg ?? STYLE_HOVER_ENABLED_SLATE_DARK,
+            options.display,
+            options.width,
           ),
-          tooltip: data.tooltip,
-          kbd: data.kbd,
-          offset: data.offset,
-          isDisabled: data.isDisabled,
+          tooltip: options.tooltip,
+          kbd: options.kbd,
+          offset: options.offset,
+          isDisabled: options.isDisabled,
         }}
         onClick={onClick}>
         <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
-            data={{
-              path: data.path,
+            options={{
+              path: options.path,
               className: classNames(
-                data.size ?? 'h-5 w-5',
-                data.color ?? 'fill-gray-500',
-                !data.isDisabled && '[.group-button:hover_&]:fill-gray-700',
+                options.size ?? 'h-5 w-5',
+                options.color ?? 'fill-gray-500',
+                !options.isDisabled && '[.group-button:hover_&]:fill-gray-700',
               ),
             }}
           />
@@ -50,7 +50,7 @@ export const IconButton = ({ data, headerContents, onClick, children = data.name
               <span
                 className={classNames(
                   'px-3 text-sm font-normal text-gray-500',
-                  !data.isDisabled && '[.group-button:hover_&]:text-gray-700',
+                  !options.isDisabled && '[.group-button:hover_&]:text-gray-700',
                 )}>
                 {headerContents}
               </span>

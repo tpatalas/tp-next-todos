@@ -1,24 +1,19 @@
-import { TypesDataButton } from '@lib/types/typesData';
+import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { Types } from 'lib/types';
 import { Button } from './button';
 
-type Props = { data: TypesDataButton } & Partial<
+type Props = { options: TypesOptionsButton } & Partial<
   Pick<Types, 'className' | 'onClick' | 'isConditionalRendering' | 'children'>
 >;
 
-export const DisableButton = ({
-  data,
-  onClick,
-  isConditionalRendering,
-  children = data.name,
-}: Props) => {
+export const DisableButton = ({ options, onClick, isConditionalRendering, children = options.name }: Props) => {
   return (
     <Button
-      data={{
+      options={{
         isDisabled: isConditionalRendering ? true : false,
-        kbd: isConditionalRendering ? '' : data.kbd,
-        tooltip: isConditionalRendering ? '' : data.tooltip,
-        className: data.className,
+        kbd: isConditionalRendering ? '' : options.kbd,
+        tooltip: isConditionalRendering ? '' : options.tooltip,
+        className: options.className,
       }}
       onClick={onClick}>
       {children}

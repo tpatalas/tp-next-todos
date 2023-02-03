@@ -1,12 +1,12 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import {
-  dataDropdownCalendar,
-  dataPriorityDropdownImportant,
-  dataPriorityDropdownUrgent,
-} from '@data/dataObjects';
+  optionsDropdownCalendar,
+  optionsPriorityDropdownUrgent,
+  optionsPriorityDropdownImportant,
+} from '@data/dataOptions';
 import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
-import { TypesDataDropdown } from '@lib/types/typesData';
+import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useCalUpdateDataItem } from '@states/calendars/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorities/hooks';
@@ -16,20 +16,19 @@ import { CalendarDropdown } from './calendarDropdown';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 
-type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
+type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
 
-export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } }: Props) => {
+export const TodoItemDropdown = ({ todo, children, options }: Props) => {
   const removeTodo = useTodoRemoveItem(todo?._id);
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
-  const setPriority =
-    typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);
+  const setPriority = typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);
 
   return (
     <Dropdown
-      data={{
+      options={{
         tooltip: 'Menu',
         path: ICON_MORE_VERT,
-        isInitiallyVisible: isInitiallyVisible,
+        isInitiallyVisible: options.isInitiallyVisible,
       }}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
@@ -38,7 +37,7 @@ export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } 
         <DropdownMenuItem padding='p-0'>
           <div className='w-full'>
             <CalendarDropdown
-              data={dataDropdownCalendar}
+              options={optionsDropdownCalendar}
               todo={todo}
               onClickConfirm={() => updateCalendarDataItem()}
             />
@@ -48,7 +47,7 @@ export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } 
       <div className='py-1'>
         <DropdownMenuItem padding='p-0'>
           <PriorityButton
-            data={dataPriorityDropdownUrgent}
+            options={optionsPriorityDropdownUrgent}
             todo={todo}
             onClick={() => setPriority(PRIORITY_LEVEL['urgent'])}
           />
@@ -56,7 +55,7 @@ export const TodoItemDropdown = ({ todo, children, data: { isInitiallyVisible } 
         <DropdownMenuItem padding='p-0'>
           <PriorityButton
             todo={todo}
-            data={dataPriorityDropdownImportant}
+            options={optionsPriorityDropdownImportant}
             onClick={() => setPriority(PRIORITY_LEVEL['important'])}
           />
         </DropdownMenuItem>

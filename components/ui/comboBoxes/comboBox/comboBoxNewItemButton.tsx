@@ -5,15 +5,11 @@ import { Types } from '@lib/types';
 type Props = Pick<Types, 'onClick'> & Partial<Pick<Types, 'headerContents'>>;
 
 export const ComboBoxNewItemButton = ({ headerContents, onClick }: Props) => {
+  const options = { path: ICON_ADD, size: 'h-6 w-6', width: 'w-full', borderRadius: 'rounded-lg' };
   return (
     <div className='p-2'>
       <IconButton
-        data={{
-          path: ICON_ADD,
-          size: 'h-6 w-6',
-          width: 'w-full',
-          borderRadius: 'rounded-lg',
-        }}
+        options={options}
         headerContents={headerContents}
         onClick={onClick}
       />

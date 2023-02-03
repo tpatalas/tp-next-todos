@@ -35,21 +35,17 @@ export const LabelComboBox = ({ todo }: Props) => {
         onChangeTypeNever={onChangeLabelHandler}
         hasComboBoxBoardStyle={false}
         placeholder={
-          selectedLabels.length > 0
-            ? 'Labels selected ' + '(' + selectedLabels.length + ')'
-            : 'Enter a label'
+          selectedLabels.length > 0 ? 'Labels selected ' + '(' + selectedLabels.length + ')' : 'Enter a label'
         }
         comboBoxInputButton={
           <IconButton
-            data={dataComboBoxInputButton}
+            options={dataComboBoxInputButton}
             onClick={() => setFilter()}
           />
         }>
         <Combobox.Options className='relative max-h-60 w-full overflow-auto bg-white py-1 text-base ring-0 ring-transparent focus:outline-none sm:text-sm'>
           {filteredLabels.length === 0 && query !== '' ? (
-            <div className='relative cursor-default select-none py-2 px-4 text-gray-500'>
-              Nothing found!
-            </div>
+            <div className='relative cursor-default select-none py-2 px-4 text-gray-500'>Nothing found!</div>
           ) : (
             filteredLabels.map((label: Labels) => (
               <Combobox.Option
@@ -74,7 +70,7 @@ export const LabelComboBox = ({ todo }: Props) => {
                     {selected ? (
                       <span className='absolute inset-y-0 top-[0.15em] left-0 flex items-center pl-3'>
                         <SvgIcon
-                          data={{
+                          options={{
                             path: ICON_CHECK_BOX_FILL,
                             className: 'h-6 w-6 fill-red-500',
                           }}
@@ -83,12 +79,9 @@ export const LabelComboBox = ({ todo }: Props) => {
                     ) : (
                       <span className='absolute inset-y-0 left-0 top-[0.15em] flex items-center pl-3'>
                         <SvgIcon
-                          data={{
+                          options={{
                             path: ICON_CHECK_BOX_OUTLINE_BLANK,
-                            className: classNames(
-                              'h-6 w-6 opacity-80',
-                              active ? 'fill-gray-400' : 'fill-gray-300',
-                            ),
+                            className: classNames('h-6 w-6 opacity-80', active ? 'fill-gray-400' : 'fill-gray-300'),
                           }}
                         />
                       </span>

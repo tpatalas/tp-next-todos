@@ -1,7 +1,8 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { ICON_CLOSE, ICON_MENU, ICON_SEARCH } from '@data/materialSymbols';
-import { STYLE_BUTTON_KEY_ONLY_RING, STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
+import { optionsButtonSidebarToggle } from '@data/dataOptions';
+import { ICON_CLOSE, ICON_SEARCH } from '@data/materialSymbols';
+import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { atomSearchInput } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
@@ -38,11 +39,7 @@ export const LayoutHeader = () => {
           <div className='flex flex-row items-center justify-between pl-3 md:w-full md:max-w-3xs'>
             <SidebarButtonFragment>
               <IconButton
-                data={{
-                  path: ICON_MENU,
-                  size: 'h-6 w-6',
-                  hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
-                }}
+                options={optionsButtonSidebarToggle}
                 onClick={() => setSidebarOpen()}
               />
               <span className='sr-only'>Open sidebar</span>
@@ -71,7 +68,7 @@ export const LayoutHeader = () => {
                   </label>
                   <div className='pointer-events-none absolute inset-y-0 left-4 flex items-center'>
                     <SvgIcon
-                      data={{
+                      options={{
                         path: ICON_SEARCH,
                         className: 'h-6 w-6 fill-gray-500',
                       }}
@@ -90,7 +87,7 @@ export const LayoutHeader = () => {
                     {searchInputValue && (
                       <div className='absolute right-2 bg-transparent'>
                         <IconButton
-                          data={{
+                          options={{
                             path: ICON_CLOSE,
                           }}
                           onClick={() => resetSearchInput()}

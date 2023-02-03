@@ -1,20 +1,19 @@
 import { DisableButton } from '@buttons/disableButton';
-import { dataButtonItemModalUpdate } from '@data/dataObjects';
+import { optionsButtonItemModalUpdate } from '@data/dataOptions';
 import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
+import { KeysWithItemModalEffect } from '@states/keybinds/KeysWithItemModalEffect';
 import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
 import { atomPriority } from '@states/priorities';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { useTodoUpdateItem, useTodoCompleteItem } from '@states/todos/hooks';
+import { useTodoCompleteItem, useTodoUpdateItem } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment as FooterButtonsFragment, Fragment as HeaderContentFragment } from 'react';
 import { useRecoilValue } from 'recoil';
-const TodoModal = dynamic(() =>
-  import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
-);
+const TodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
 
 export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
   const updateTodo = useTodoUpdateItem(todo._id);
@@ -45,7 +44,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
       footerButtons={
         <FooterButtonsFragment>
           <DisableButton
-            data={dataButtonItemModalUpdate}
+            options={optionsButtonItemModalUpdate}
             isConditionalRendering={condition}
             onClick={() => updateTodo()}>
             Update
@@ -53,6 +52,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
         </FooterButtonsFragment>
       }>
       <KeysWithTodoModalEffect todo={todo} />
+      <KeysWithItemModalEffect todo={todo} />
     </TodoModal>
   );
 };

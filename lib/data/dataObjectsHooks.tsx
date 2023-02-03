@@ -1,5 +1,5 @@
 import { Todos } from '@lib/types';
-import { TypesDataButton } from '@lib/types/typesData';
+import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { atomFilterSelected } from '@states/comboBoxes';
 import { selectorSelectedLabels } from '@states/labels';
 import { useEffect } from 'react';
@@ -7,11 +7,11 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { ICON_FILTER_LIST, ICON_FILTER_LIST_OFF } from './materialSymbols';
 
 /**
- * TypesDataButton
+ * TypesOptionsButton
  **/
 
 // combobox
-export const useDataButtonComboboxFilterLabel = (_id: Todos['_id']): TypesDataButton => {
+export const useDataButtonComboboxFilterLabel = (_id: Todos['_id']): TypesOptionsButton => {
   const isFilterOn = useRecoilValue(atomFilterSelected(_id));
   const resetFilter = useResetRecoilState(atomFilterSelected(_id));
   const selectedLabels = useRecoilValue(selectorSelectedLabels(_id));
@@ -20,12 +20,12 @@ export const useDataButtonComboboxFilterLabel = (_id: Todos['_id']): TypesDataBu
     if (selectedLabels.length === 0 && isFilterOn) return resetFilter();
   }, [resetFilter, isFilterOn, selectedLabels]);
 
-  const data = {
+  const options = {
     path: isFilterOn ? ICON_FILTER_LIST_OFF : ICON_FILTER_LIST,
     color: 'fill-gray-400',
     padding: 'p-1',
     isDisabled: selectedLabels.length === 0 && true,
     tooltip: isFilterOn ? 'show all labels' : 'show selected labels',
   };
-  return data;
+  return options;
 };

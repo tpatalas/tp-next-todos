@@ -28,7 +28,7 @@ export const FooterSidebarMenu = () => {
               )}>
               <span className='pr-3'>
                 <SvgIcon
-                  data={{
+                  options={{
                     path: router.asPath === item.path ? item.iconActive : item.icon,
                     className: classNames(item.iconColor, 'h-6 w-6 flex-shrink-0'),
                   }}

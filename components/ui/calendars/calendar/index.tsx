@@ -1,6 +1,6 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
-import { dataButtonCalendarNextMonth, dataButtonCalendarPrevMonth } from '@data/dataObjects';
+import { optionsButtonCalendarPrevMonth, optionsButtonCalendarNextMonth } from '@data/dataOptions';
 import { CALENDAR } from '@data/dataTypesObjects';
 import { ICON_TODAY } from '@data/materialSymbols';
 import { STYLE_CALENDAR_COL_START } from '@data/stylePreset';
@@ -9,16 +9,7 @@ import { atomDayPickerUpdater, atomCurrentMonth } from '@states/calendars';
 import { useCalState, useCalUpdateItem, useCalSelectDay } from '@states/calendars/hooks';
 import { atomSelectorTodoItem } from '@states/todos';
 import { classNames } from '@states/utils';
-import {
-  format,
-  getDay,
-  isEqual,
-  isPast,
-  isSameMonth,
-  isThisMonth,
-  isToday,
-  parse,
-} from 'date-fns';
+import { format, getDay, isEqual, isPast, isSameMonth, isThisMonth, isToday, parse } from 'date-fns';
 import { useRecoilValue } from 'recoil';
 
 type Props = Partial<Pick<Types, 'todo' | 'headerButtons'>>;
@@ -26,8 +17,7 @@ type Props = Partial<Pick<Types, 'todo' | 'headerButtons'>>;
 export const Calendar = ({ todo, headerButtons }: Props) => {
   const itemDay = useRecoilValue(atomDayPickerUpdater(todo?._id)) as Date;
   const queryDay =
-    typeof todo !== 'undefined' &&
-    new Date(useRecoilValue(atomSelectorTodoItem(todo?._id)).dueDate as Date);
+    typeof todo !== 'undefined' && new Date(useRecoilValue(atomSelectorTodoItem(todo?._id)).dueDate as Date);
   const selectedDay = queryDay || itemDay;
   const currentMonth = useRecoilValue(atomCurrentMonth(todo?._id));
   const setCalendar = useCalState(todo?._id);
@@ -39,21 +29,18 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
   return (
     <div className='w-full p-1 font-sans'>
       <div className='mt-2 flex flex-row items-center justify-between pl-3'>
-        <h2 className='text-sm font-semibold text-gray-900'>
-          {format(firstDayCurrentMonth, 'MMMM yyyy')}
-        </h2>
+        <h2 className='text-sm font-semibold text-gray-900'>{format(firstDayCurrentMonth, 'MMMM yyyy')}</h2>
         <div className='flex flex-row items-center justify-center space-x-1'>
           <IconButton
-            data={dataButtonCalendarPrevMonth}
+            options={optionsButtonCalendarPrevMonth}
             onClick={() => setCalendar(CALENDAR['previousMonth'])}>
             <span className='sr-only'>Previous month</span>
           </IconButton>
           <IconButton
-            data={{
+            options={{
               path: ICON_TODAY,
               tooltip: 'Today',
-              isDisabled:
-                isToday(selectedDay) && isThisMonth(new Date(currentMonth)) ? true : false,
+              isDisabled: isToday(selectedDay) && isThisMonth(new Date(currentMonth)) ? true : false,
             }}
             onClick={() => {
               setCalendar(CALENDAR['today']);
@@ -61,7 +48,7 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
             }}
           />
           <IconButton
-            data={dataButtonCalendarNextMonth}
+            options={optionsButtonCalendarNextMonth}
             onClick={() => setCalendar(CALENDAR['nextMonth'])}>
             <span className='sr-only'>Next month</span>
           </IconButton>
@@ -88,7 +75,7 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
                 selectDay(day);
                 updateCalendarItem();
               }}
-              data={{
+              options={{
                 className: classNames(
                   isEqual(day, selectedDay) && 'text-white',
                   !isEqual(day, selectedDay) && isToday(day) && 'text-blue-600',

@@ -9,21 +9,10 @@ import {
   Fragment as ModalActionsFragment,
 } from 'react';
 import { useRecoilValue } from 'recoil';
-const CreateTodoModal = dynamic(() =>
-  import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
-);
-const MinimizedModal = dynamic(() =>
-  import('@modals/minimizedModal').then((mod) => mod.MinimizedModal),
-);
-const DiscardConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/discardConfirmModal').then((mod) => mod.DiscardConfirmModal),
-);
-const Notification = dynamic(() =>
-  import('components/notifications/notification').then((mod) => mod.Notification),
-);
-const LabelModal = dynamic(() =>
-  import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
-);
+const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
+const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
+const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
+const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal));
 const WindowBeforeunloadEffect = dynamic(() =>
   import('@states/misc/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
@@ -44,7 +33,6 @@ export const LayoutApp = ({ children }: Props) => {
         <WindowBeforeunloadEffect />
         <ModalActionsFragment>
           <CreateTodoModal />
-          <DiscardConfirmModal />
           <MinimizedModal />
           {!catchTodoModal && <LabelModal />}
         </ModalActionsFragment>
