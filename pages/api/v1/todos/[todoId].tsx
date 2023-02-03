@@ -1,12 +1,13 @@
+import { SCHEMA_TODO } from '@data/dataTypesObjects';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
+import { databaseConnect } from '@lib/dataConnections/databaseConnection';
+import Label from '@lib/models/Label';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
 import { TypesQuery } from '@lib/types';
-import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
-import { SCHEMA_TODO } from '@data/dataTypesObjects';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
@@ -37,9 +38,6 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!getItem) {
           return res.status(400).json({ success: false });
         }
-        // ? uncomment below to enable the API cache
-        // res.setHeader('Cache-Control', `private, max-age=${dayInSecond * 30}`);
-        // Seems not necessary if indexedDd is use.
         res.status(200).json({ success: true, data: getItem });
       } catch (error) {
         res.status(400).json({ success: false });
@@ -56,6 +54,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         createdDate,
         priorityLevel,
         priorityRankScore,
+        labelItem,
         note,
       } = body;
       const todoItem = {
@@ -71,33 +70,55 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         note,
       };
 
-      const updatedTodoItem = await TodoItem.findOneAndUpdate(
-        filter(SCHEMA_TODO['todoItem']),
-        todoItem,
-        {
-          session: session,
-          upsert: true,
-          new: true,
-          runValidators: true,
-        },
-      );
-      const updatedTodoNote = await TodoNote.findOneAndUpdate(
-        filter(SCHEMA_TODO['todoNote']),
-        todoNote,
-        {
-          session: session,
-          upsert: true,
-          new: true,
-          runValidators: true,
-        },
-      );
       try {
-        const updatedTodo = await Promise.all([updatedTodoItem, updatedTodoNote]).then(
-          ([updatedTodoItem, updatedTodoNote]) => ({
-            updatedTodoItem,
-            updatedTodoNote,
-          }),
+        const updatedTodoItem = await TodoItem.findOneAndUpdate(
+          filter(SCHEMA_TODO['todoItem']),
+          todoItem,
+          {
+            session: session,
+            upsert: true,
+            new: true,
+            runValidators: true,
+          },
         );
+
+        const updatedTodoNote = await TodoNote.findOneAndUpdate(
+          filter(SCHEMA_TODO['todoNote']),
+          todoNote,
+          {
+            session: session,
+            upsert: true,
+            new: true,
+            runValidators: true,
+          },
+        );
+
+        const updatedLabel =
+          labelItem &&
+          (await Promise.all(
+            labelItem.map(async (label: TypesQuery) => {
+              return await Label.updateMany(
+                { _id: label._id },
+                { $set: label },
+                {
+                  session: session,
+                  upsert: true,
+                  new: true,
+                  runValidators: true,
+                },
+              );
+            }),
+          ));
+
+        const updatedTodo = await Promise.all([
+          updatedTodoItem,
+          updatedTodoNote,
+          updatedLabel,
+        ]).then(([updatedTodoItem, updatedTodoNote, updatedLabel]) => ({
+          updatedTodoItem,
+          updatedTodoNote,
+          updatedLabel,
+        }));
         await session.commitTransaction();
         res.status(200).json({ success: true, data: updatedTodo });
       } catch (error) {

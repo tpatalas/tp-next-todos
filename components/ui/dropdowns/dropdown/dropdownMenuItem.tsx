@@ -48,7 +48,7 @@ export const DropdownMenuItem = ({
                 isDisabledCloseOnClick && event.preventDefault();
               }}
               className={classNames(
-                'group-1 block w-full cursor-pointer text-left text-sm text-gray-500 hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700',
+                'group-1 block w-full cursor-pointer text-left text-sm text-gray-500 hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700 focus-visible:rounded-md',
                 padding ?? 'px-4 py-2',
                 active && isActive && STYLE_HOVER_SLATE_LIGHT,
               )}>

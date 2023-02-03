@@ -50,7 +50,7 @@ export const PriorityButton = ({ todo, data, onClick }: Props) => {
               'fill-yellow-500 [.group-button:hover_&]:fill-yellow-600',
             levelUrgent && priorityUrgent && 'fill-red-600 [.group-button:hover_&]:fill-red-700',
           ),
-          borderRadius: 'rounded-none focus-visible:rounded-lg',
+          borderRadius: 'rounded-md focus-visible:rounded-md',
           margin: 'ml-0',
           hoverBg: 'hover:bg-transparent',
           display: data.display,

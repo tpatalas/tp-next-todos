@@ -1,5 +1,6 @@
 import { SCHEMA_TODO } from '@data/dataTypesObjects';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
+import Label from '@lib/models/Label';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
 import { TypesQuery } from '@lib/types';
@@ -16,11 +17,8 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
     query: { model: model },
   } = req;
 
-  const filter = () => {
-    const query: TypesQuery = {};
-    query.user_id = userInfo._id;
-    return query;
-  };
+  const query: TypesQuery = {};
+  query.user_id = userInfo._id;
 
   switch (method) {
     case 'GET':
@@ -31,7 +29,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
       try {
         const getTodo = await SCHEMA[model as SCHEMA_TODO]
-          .find(filter())
+          .find(query)
           .select({
             _id: 1,
             priorityLevel: 1,
@@ -59,6 +57,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         createdDate,
         priorityLevel,
         priorityRankScore,
+        labelItem,
         note,
       } = body;
       const todoItem = {
@@ -77,11 +76,25 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         title_id: _id,
         user_id: userInfo._id,
       };
-      const createdTodoItem = await TodoItem.create([todoItem], { session });
-      const createdTodoNote = note && (await TodoNote.create([todoNote]), { session });
 
       try {
-        await Promise.all([createdTodoItem, createdTodoNote]);
+        const createdTodoItem = await TodoItem.create([todoItem], { session: session });
+        const createdTodoNote = note && (await TodoNote.create([todoNote], { session: session }));
+        const createdLabel =
+          labelItem &&
+          (await Promise.all(
+            labelItem.map(async (label: TypesQuery) => {
+              return await Label.updateMany(
+                { _id: label._id },
+                { $set: label },
+                {
+                  session: session,
+                },
+              );
+            }),
+          ));
+
+        await Promise.all([createdTodoItem, createdTodoNote, createdLabel]);
         await session.commitTransaction();
         res.status(201).json({ success: true, data: body });
       } catch (error) {

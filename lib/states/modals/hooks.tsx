@@ -10,6 +10,7 @@ import {
   useConditionCheckTodoTitleEmpty,
   useConditionCompareTodoItemsEqual,
 } from '@states/utils/hooks';
+import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import {
   atomConfirmModalDelete,
@@ -167,6 +168,8 @@ export const useTodoModalStateOpen = (_id: Todos['_id']) => {
     set(atomTodoModalOpen(_id), true);
     !get(atomCatch(CATCH.todoModal)) && set(atomCatch(CATCH.todoModal), true);
     resetDateItemOnly();
+    typeof _id === 'undefined' &&
+      set(atomTodoNew, { ...get(atomTodoNew), _id: ObjectID().toHexString() });
   });
 };
 

@@ -60,6 +60,7 @@ export interface Todos extends TodosEditors, TodoIds {
   createdDate: Date;
   dueDate: Date | null;
   completedDate: Date | null;
+  labelItem: Labels[];
 }
 
 export interface TodoIds {

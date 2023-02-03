@@ -113,3 +113,12 @@ export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
 
   return { leftPosition, rightPosition, isOverflow };
 };
+
+export const useCompareToQueryLabels = () => {
+  return useRecoilCallback(({ snapshot }) => (compare: Labels[]) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    return compare.filter((label) => {
+      return !get(atomQueryLabels).find((queryLabel) => equal(label, queryLabel));
+    });
+  });
+};

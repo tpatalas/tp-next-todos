@@ -41,7 +41,11 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const updateLabel = await Promise.all(
           body.map(async (label: TypesQuery) => {
-            return await Label.updateMany({ _id: label._id }, { $set: label }, { upsert: true });
+            return await Label.updateMany(
+              { _id: label._id },
+              { $set: label },
+              { upsert: true, new: true, runValidators: true },
+            );
           }),
         );
         if (!updateLabel) return res.status(400).json({ success: false });
