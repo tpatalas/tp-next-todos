@@ -1,8 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
-import { dataDropdownComboBox } from '@data/dataObjects';
+import { optionsButtonLabelRemove, optionsDropdownComboBox } from '@data/dataOptions';
 import { GRADIENT_POSITION } from '@data/dataTypesObjects';
-import { ICON_CLOSE } from '@data/materialSymbols';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
@@ -20,17 +19,14 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
   const removeTitleId = useLabelRemoveItemTitleId(todo?._id);
   const closeTodoModal = useTodoModalStateClose(todo?._id);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const selectedLabels = selectedQueryLabels
-    ? selectedQueryLabels
-    : useRecoilValue(selectorSelectedLabels(todo?._id));
+  const selectedLabels = selectedQueryLabels ? selectedQueryLabels : useRecoilValue(selectorSelectedLabels(todo?._id));
 
   return (
     <LabelComboBoxDropdownFragment>
       <div
         className={classNames(
           'relative flex flex-row',
-          container ??
-            'w-[calc(80vw-5rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
+          container ?? 'w-[calc(80vw-5rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
         )}>
         <LabelsHorizontalGradients
           scrollRef={scrollRef}
@@ -42,7 +38,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
           )}
           ref={scrollRef}>
           <Dropdown
-            data={dataDropdownComboBox}
+            options={optionsDropdownComboBox}
             headerContents={selectedLabels.length === 0 && 'Label'}>
             <LabelComboBox todo={todo} />
           </Dropdown>
@@ -63,13 +59,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                     {label.name}
                   </PrefetchRouterButton>
                   <IconButton
-                    data={{
-                      path: ICON_CLOSE,
-                      padding: 'p-[2px]',
-                      size: 'h-4 w-4',
-                      color: 'fill-gray-700 hover:fill-gray-900',
-                      container: 'h-5',
-                    }}
+                    options={optionsButtonLabelRemove}
                     onClick={() => removeTitleId(label._id)}
                   />
                 </div>

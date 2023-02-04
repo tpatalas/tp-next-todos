@@ -1,8 +1,10 @@
 import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
-import { dataButtonTodoModalAddTodo, dataButtonTodoModalCancel } from '@data/dataObjects';
+import { optionsButtonTodoModalAddTodo, optionsButtonTodoModalCancel } from '@data/dataOptions';
 import { CalendarDropdown } from '@dropdowns/calendarDropdown';
 import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
+import { DeleteTodoConfirmModal } from '@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal';
+import { DiscardConfirmModal } from '@modals/confirmModal/discardConfirmModal';
 import { LabelModal } from '@modals/labelModals/labelModal';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendars/hooks';
@@ -22,17 +24,9 @@ import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitio
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 import { TodoModalHeaderContents } from './todoModalHeaderContents';
 
-type Props = Partial<
-  Pick<Types, 'todo' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>
->;
+type Props = Partial<Pick<Types, 'todo' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>>;
 
-export const TodoModal = ({
-  todo,
-  headerContents,
-  headerButtons,
-  footerButtons,
-  children,
-}: Props) => {
+export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, children }: Props) => {
   const isTodoModalOpen = useRecoilValue(atomTodoModalOpen(todo?._id));
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
   const closeModal = useTodoModalStateClose(todo?._id);
@@ -49,6 +43,8 @@ export const TodoModal = ({
         onClose={() => closeModal()}>
         {/* nested modal */}
         <LabelModal label={undefined} />
+        <DiscardConfirmModal todo={todo} />
+        {typeof todo !== 'undefined' && <DeleteTodoConfirmModal todo={todo} />}
         <ModalTransitionChild
           className={classNames(
             'h-[28rem] px-4 pt-2 pb-5 sm:relative',
@@ -71,16 +67,14 @@ export const TodoModal = ({
             </div>
             <div className='flex flex-row items-center sm:m-1 '>
               <CalendarDropdown
-                data={{ tooltip: 'Due date' }}
+                options={{ tooltip: 'Due date' }}
                 todo={todo}
                 onClickConfirm={() => updateCalendarItem()}
               />
               <LabelComboBoxDropdown
                 todo={todo}
                 container={classNames(
-                  isTodoModalMax
-                    ? 'w-full max-w-[85%]'
-                    : 'max-w-[32rem] md:w-[75%] w-[calc(70vw-2rem)]',
+                  isTodoModalMax ? 'w-full max-w-[85%]' : 'max-w-[32rem] md:w-[75%] w-[calc(70vw-2rem)]',
                 )}
               />
             </div>
@@ -90,7 +84,7 @@ export const TodoModal = ({
           </div>
           <div className='flex flex-row justify-end pt-4'>
             <CancelButton
-              data={dataButtonTodoModalCancel}
+              options={optionsButtonTodoModalCancel}
               onClick={() => closeModal()}>
               Cancel
             </CancelButton>
@@ -98,7 +92,7 @@ export const TodoModal = ({
               (typeof todo === 'undefined' && (
                 <DisableButton
                   isConditionalRendering={condition}
-                  data={dataButtonTodoModalAddTodo}
+                  options={optionsButtonTodoModalAddTodo}
                   onClick={() => addTodo()}>
                   Add todo
                 </DisableButton>

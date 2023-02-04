@@ -5,12 +5,7 @@ import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';
 import { useLabelAdd, useLabelUpdateDataItem, useLabelUpdateItem } from '@states/labels/hooks';
 import { atomMediaQuery } from '@states/misc';
 import { useFilterTodoIdsWithPathname } from '@states/misc/hooks';
-import {
-  atomTodoModalOpen,
-  atomTodoModalMini,
-  atomLabelModalOpen,
-  atomConfirmModalDiscard,
-} from '@states/modals';
+import { atomTodoModalOpen, atomTodoModalMini, atomLabelModalOpen, atomConfirmModalDiscard } from '@states/modals';
 import {
   useTodoModalStateOpen,
   useTodoModalStateExpand,
@@ -19,12 +14,7 @@ import {
   useTodoModalStateMaximize,
 } from '@states/modals/hooks';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import {
-  useTodoCompleteItem,
-  useTodoRemoveItem,
-  useTodoAdd,
-  useTodoUpdateItem,
-} from '@states/todos/hooks';
+import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from '@states/todos/hooks';
 import { atomCatch } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
@@ -58,45 +48,38 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
   const openModal = useTodoModalStateOpen(_id);
   const removeTodo = useTodoRemoveItem(_id);
-  const focusKeyHandler = useRecoilCallback(
-    ({ set, reset, snapshot }) =>
-      (event: React.KeyboardEvent) => {
-        const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
-        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+  const focusKeyHandler = useRecoilCallback(({ set, reset, snapshot }) => (event: React.KeyboardEvent) => {
+    const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-        if (!get(atomOnFocus)) return;
+    if (!get(atomOnFocus)) return;
 
-        switch (true) {
-          case metaCtrlKey && event.key === 'Enter':
-            event.preventDefault();
-            completeTodo();
-            break;
-          case metaCtrlKey && event.key === 'Backspace':
-            event.preventDefault();
-            removeTodo();
-            break;
-          case event.key === 'Enter':
-            event.preventDefault();
-            openModal();
-            break;
-          case event.key === 'Escape':
-            event.preventDefault();
-            if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
-            !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
-            reset(atomCurrentFocus);
-            set(atomOnBlur, true);
-            break;
-        }
-      },
-  );
+    switch (true) {
+      case metaCtrlKey && event.key === 'Enter':
+        event.preventDefault();
+        completeTodo();
+        break;
+      case metaCtrlKey && event.key === 'Backspace':
+        event.preventDefault();
+        removeTodo();
+        break;
+      case event.key === 'Enter':
+        event.preventDefault();
+        openModal();
+        break;
+      case event.key === 'Escape':
+        event.preventDefault();
+        if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
+        !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
+        reset(atomCurrentFocus);
+        set(atomOnBlur, true);
+        break;
+    }
+  });
   return focusKeyHandler;
 };
 
-export const useKeyWithEditor = (
-  titleName: Types['titleName'],
-  _id: Todos['_id'],
-  editor: CustomEditor,
-) => {
+export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'], editor: CustomEditor) => {
   const addTodo = useTodoAdd();
   const updateTodo = useTodoUpdateItem(_id);
   const editorKeyHandler = useRecoilCallback(() => (event: React.KeyboardEvent) => {
@@ -130,12 +113,14 @@ export const useKeyWithLabelModal = (_id: Labels['_id']) => {
   const updateLabel = useLabelUpdateItem(_id);
   return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const isConfirmModalOpen = get(atomCatch(CATCH.confirmModal));
+    const isConfirmModalOpen = get(atomCatch(CATCH['confirmModal']));
+    const isLabelModalOpen = get(atomCatch(CATCH['labelModal']));
 
     if (isConfirmModalOpen || !event) return;
 
     switch (event.key) {
       case 'Enter':
+        if (!isLabelModalOpen) return;
         event.preventDefault();
         if (get(atomLabelModalOpen(_id)) && typeof _id !== 'undefined') return updateLabel();
         get(atomLabelModalOpen(undefined)) && addLabel();
@@ -170,11 +155,7 @@ export const useKeyWithNavigate = () => {
   const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    if (
-      get(atomCatch(CATCH.todoModal)) ||
-      get(atomCatch(CATCH.confirmModal)) ||
-      get(atomCatch(CATCH.labelModal))
-    )
+    if (get(atomCatch(CATCH.todoModal)) || get(atomCatch(CATCH.confirmModal)) || get(atomCatch(CATCH.labelModal)))
       return;
 
     switch (event.key) {
@@ -182,9 +163,7 @@ export const useKeyWithNavigate = () => {
         event.preventDefault();
         set(
           atomCurrentFocus,
-          get(atomCurrentFocus) === filteredTodoIds.length - 1
-            ? filteredTodoIds.length - 1
-            : get(atomCurrentFocus) + 1,
+          get(atomCurrentFocus) === filteredTodoIds.length - 1 ? filteredTodoIds.length - 1 : get(atomCurrentFocus) + 1,
         );
         !get(atomOnFocus) && set(atomOnFocus, true);
         break;

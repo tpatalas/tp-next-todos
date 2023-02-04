@@ -3,23 +3,15 @@ import {
   IconButton as ExpandReversibleIconButton,
   IconButton as MinimizeIconButton,
 } from '@buttons/iconButton';
-import { dataButtonTodoModalClose, dataButtonTodoModalMinimize } from '@data/dataObjects';
+import { optionsButtonTodoModalMinimize, optionsButtonTodoModalClose } from '@data/dataOptions';
 import { BREAKPOINT } from '@data/dataTypesObjects';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
 import { TodoItemDropdown } from '@dropdowns/todoItemDropdown';
 import { Types } from '@lib/types';
 import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMax } from '@states/modals';
-import {
-  useTodoModalStateMinimize,
-  useTodoModalStateExpand,
-  useTodoModalStateClose,
-} from '@states/modals/hooks';
-import {
-  Fragment as ContainerFragment,
-  Fragment as HeaderFragment,
-  Fragment as HeaderButtonFragment,
-} from 'react';
+import { useTodoModalStateMinimize, useTodoModalStateExpand, useTodoModalStateClose } from '@states/modals/hooks';
+import { Fragment as ContainerFragment, Fragment as HeaderFragment, Fragment as HeaderButtonFragment } from 'react';
 import { isMacOs } from 'react-device-detect';
 import { useRecoilValue } from 'recoil';
 
@@ -38,20 +30,20 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
         <HeaderFragment>
           {typeof todo !== 'undefined' && (
             <TodoItemDropdown
-              data={{ isInitiallyVisible: true }}
+              options={{ isInitiallyVisible: true }}
               todo={todo}
             />
           )}
           <HeaderButtonFragment>
             {typeof todo === 'undefined' && (
               <MinimizeIconButton
-                data={dataButtonTodoModalMinimize}
+                options={optionsButtonTodoModalMinimize}
                 onClick={() => minimizeModal()}
               />
             )}
             <ExpandReversibleIconButton
               onClick={() => expandModal()}
-              data={{
+              options={{
                 path: !isTodoModalMax ? ICON_OPEN_IN_FULL : ICON_CLOSE_FULL_SCREEN,
                 tooltip: !isTodoModalMax ? 'Expand' : 'Exit expand',
                 kbd: isMacOs ? '⌘ E' : 'Ctrl E',
@@ -61,7 +53,7 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
         </HeaderFragment>
       )}
       <CloseIconButton
-        data={dataButtonTodoModalClose}
+        options={optionsButtonTodoModalClose}
         onClick={() => closeModal()}
       />
     </ContainerFragment>

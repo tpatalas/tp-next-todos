@@ -1,5 +1,5 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
-import { dataPriorityTodoModalImportant, dataPriorityTodoModalUrgent } from '@data/dataObjects';
+import { optionsPriorityTodoModalImportant, optionsPriorityTodoModalUrgent } from '@data/dataOptions';
 import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
@@ -16,18 +16,16 @@ export const TodoModalHeaderContents = ({ todo, children }: Props) => {
         {children}
         <PriorityButton
           todo={todo}
-          data={dataPriorityTodoModalImportant}
+          options={optionsPriorityTodoModalImportant}
           onClick={() => setPriority(PRIORITY_LEVEL['important'])}
         />
         <PriorityButton
           todo={todo}
-          data={dataPriorityTodoModalUrgent}
+          options={optionsPriorityTodoModalUrgent}
           onClick={() => setPriority(PRIORITY_LEVEL['urgent'])}
         />
         <HeaderDescription>
-          <span className='font-semibold'>
-            {typeof todo === 'undefined' ? 'Create todo' : 'Update todo'}
-          </span>
+          <span className='font-semibold'>{typeof todo === 'undefined' ? 'Create todo' : 'Update todo'}</span>
         </HeaderDescription>
       </div>
     </div>

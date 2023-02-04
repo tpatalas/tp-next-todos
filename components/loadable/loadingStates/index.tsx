@@ -1,12 +1,8 @@
-import { TypesDataLoadingState } from '@lib/types/typesData';
+import { TypesOptionsLoadingState } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 import { Fragment, useEffect, useState } from 'react';
 
-export const LoadingState = ({
-  data: { margin, space, loadingSkeleton, repeatingCount },
-}: {
-  data: TypesDataLoadingState;
-}) => {
+export const LoadingState = ({ options }: { options: TypesOptionsLoadingState }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -16,10 +12,10 @@ export const LoadingState = ({
   return (
     <Fragment>
       {show && (
-        <div className={classNames(margin, space)}>
+        <div className={classNames(options.margin, options.space)}>
           {/* It is reasonable to use index as unique key as this component is static once prop is set */}
-          {[...Array(repeatingCount)].map((_, index) => (
-            <ul key={index}>{loadingSkeleton}</ul>
+          {[...Array(options.repeatingCount)].map((_, index) => (
+            <ul key={index}>{options.loadingSkeleton}</ul>
           ))}
         </div>
       )}

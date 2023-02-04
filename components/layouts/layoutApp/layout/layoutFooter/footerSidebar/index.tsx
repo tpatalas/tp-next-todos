@@ -1,9 +1,8 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { dataButtonCreateTodo } from '@data/dataObjects';
-import { ICON_ADD_TASK, ICON_MENU } from '@data/materialSymbols';
-import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
+import { optionsButtonCreateTodo, optionsButtonSidebarToggle } from '@data/dataOptions';
+import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
@@ -24,12 +23,9 @@ import { FooterSidebarMenu } from './footerSidebarMenu';
 const LoadingLabels = dynamic(() =>
   import('@components/loadable/loadingStates/loadingLabels').then((mod) => mod.LoadingLabels),
 );
-const LabelList = dynamic(
-  () => import('@components/labels/labelList').then((mod) => mod.LabelList),
-  {
-    loading: () => <LoadingLabels />,
-  },
-);
+const LabelList = dynamic(() => import('@components/labels/labelList').then((mod) => mod.LabelList), {
+  loading: () => <LoadingLabels />,
+});
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
@@ -43,7 +39,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <FooterSidebarFragment>
       <Backdrop
-        data={{ isPortal: false }}
+        options={{ isPortal: false }}
         show={isSidebarMobileOpen()}
         onClick={() => setSidebarOpen()}
       />
@@ -53,11 +49,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
         <LayoutLogoFragment>
           <div className='mb-4 mt-0 flex flex-row items-center justify-between pr-3 md:hidden'>
             <IconButton
-              data={{
-                path: ICON_MENU,
-                size: 'h-6 w-6',
-                hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
-              }}
+              options={optionsButtonSidebarToggle}
               onClick={() => setSidebarOpen()}
             />
             <div className='mr-10 flex w-full justify-center'>
@@ -68,12 +60,12 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
         <CreateTodoFragment>
           <div className='mb-4 flex w-full flex-row justify-center bg-transparent pr-2'>
             <DisableButton
-              data={dataButtonCreateTodo}
+              options={optionsButtonCreateTodo}
               onClick={() => openModal()}
               isConditionalRendering={condition}>
               <span className='flex flex-row items-center'>
                 <SvgIcon
-                  data={{
+                  options={{
                     path: ICON_ADD_TASK,
                     className: 'mr-3 fill-white h-5 w-5',
                   }}
@@ -85,7 +77,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
         </CreateTodoFragment>
         <div
           className={classNames(
-            'flex h-[calc(100vh-7.8rem)] w-full flex-grow flex-col bg-transparent pr-2 md:h-[calc(100vh-8.5rem)]',
+            'h- flex w-full flex-grow flex-col bg-transparent pr-2 md:h-[calc(100vh-8.5rem)]',
             isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
           )}>
           <div className='flex flex-grow flex-col'>

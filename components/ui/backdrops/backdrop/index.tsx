@@ -1,21 +1,13 @@
 import { ConditionalPortal } from '@dropdowns/dropdown/conditionalPortal';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { TypesDataBackdrop } from '@lib/types/typesData';
+import { TypesOptionsBackdrop } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 import { Fragment as BackdropFragment, Fragment, useEffect, useRef, useState } from 'react';
 
-type Props = { data: TypesDataBackdrop } & Partial<
-  Pick<Types, 'onClick' | 'show' | 'onBlur' | 'onFocus'>
->;
+type Props = { options: TypesOptionsBackdrop } & Partial<Pick<Types, 'onClick' | 'show' | 'onBlur' | 'onFocus'>>;
 
-export const Backdrop = ({
-  data: { isPortal, color, zIndex, enterDuration, leaveDuration, as },
-  onClick,
-  onBlur,
-  onFocus,
-  show,
-}: Props) => {
+export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => {
   const [isShow, setIsShow] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -30,23 +22,23 @@ export const Backdrop = ({
 
   return (
     <BackdropFragment>
-      <ConditionalPortal isPortal={isPortal ?? true}>
+      <ConditionalPortal isPortal={options.isPortal ?? true}>
         <Transition
           show={show ?? isShow}
-          as={as ?? Fragment}
+          as={options.as ?? Fragment}
           appear={true}
-          enter={classNames('transition-opacity ease-in-out', enterDuration ?? 'duration-200')}
+          enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-200')}
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave={classNames('transition-opacity ease-in-out', leaveDuration ?? 'duration-200')}
+          leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-200')}
           leaveFrom='opacity-100'
           leaveTo='opacity-0'>
           <div
             tabIndex={-1}
             className={classNames(
               'fixed inset-0',
-              color ?? 'bg-gray-500 bg-opacity-20',
-              zIndex ?? 'z-10',
+              options.color ?? 'bg-gray-500 bg-opacity-20',
+              options.zIndex ?? 'z-10',
             )}
             aria-hidden='true'
             onClick={onClick}

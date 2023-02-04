@@ -39,3 +39,5 @@ const RecoilRootProvider: FC<{ children: React.ReactNode }> = ({ children }) => 
 
 export const renderWithRecoilRoot = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
   render(ui, { wrapper: RecoilRootProvider, ...options });
+
+export const mergeObjects = <T,>(target: T, source: T): T => Object.assign({}, target, source);

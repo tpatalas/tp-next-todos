@@ -1,18 +1,14 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import {
-  dataButtonCalendarCancel,
-  dataButtonCalendarConfirm,
-  dataButtonCalendarResetDate,
-} from '@data/dataObjects';
+  optionsButtonCalendarResetDate,
+  optionsButtonCalendarCancel,
+  optionsButtonCalendarConfirm,
+} from '@data/dataOptions';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
-import { TypesDataDropdown } from '@lib/types/typesData';
-import {
-  useCalResetDateAll,
-  useCalResetDateItemOnly,
-  useCalResetDayUpdater,
-} from '@states/calendars/hooks';
+import { TypesOptionsDropdown } from '@lib/types/typesOptions';
+import { useCalResetDateAll, useCalResetDateItemOnly, useCalResetDayUpdater } from '@states/calendars/hooks';
 import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
 import { classNames } from '@states/utils';
 import { Calendar } from '@ui/calendars/calendar';
@@ -22,29 +18,22 @@ import { Fragment as HeaderContentsFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
 
-type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'todo'>> &
-  Pick<Types, 'onClickConfirm'>;
+type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClickConfirm'>;
 
-export const CalendarDropdown = ({
-  todo,
-  onClickConfirm,
-  data: { borderRadius, tooltip, hoverBg, padding },
-}: Props) => {
+export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
   const resetCalendar = useCalResetDayUpdater(todo?._id);
   const resetDateItemOnly = useCalResetDateItemOnly(todo?._id);
   const resetDateAll = useCalResetDateAll(todo?._id);
   const todoItem =
-    typeof todo === 'undefined'
-      ? useRecoilValue(atomTodoNew)
-      : useRecoilValue(atomSelectorTodoItem(todo._id));
+    typeof todo === 'undefined' ? useRecoilValue(atomTodoNew) : useRecoilValue(atomSelectorTodoItem(todo._id));
   const noDaySelected = todoItem.dueDate == null;
 
   return (
     <Dropdown
-      data={{
-        tooltip: tooltip,
-        padding: padding ?? 'px-2 sm:px-3 py-2',
-        borderRadius: borderRadius,
+      options={{
+        tooltip: options.tooltip,
+        padding: options.padding ?? 'px-2 sm:px-3 py-2',
+        borderRadius: options.borderRadius,
         color: noDaySelected
           ? 'fill-gray-500 [.group-calendarDropdown:hover_&]:fill-gray-700'
           : 'fill-blue-500 [.group-calendarDropdown:hover_&]:fill-blue-700',
@@ -52,7 +41,7 @@ export const CalendarDropdown = ({
         group: 'group-calendarDropdown',
         contentWidth: 'w-[21rem]',
         menuWidth: 'sm:w-full',
-        hoverBg: hoverBg,
+        hoverBg: options.hoverBg,
         text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
       }}
       headerContents={
@@ -64,13 +53,13 @@ export const CalendarDropdown = ({
         <Calendar todo={todo} />
         <div className='flex flex-row items-center justify-between px-4 pb-4 pt-5'>
           <IconButton
-            data={dataButtonCalendarResetDate}
+            options={optionsButtonCalendarResetDate}
             onClick={() => resetDateAll()}
           />
           <div className='flex flex-row justify-end'>
             <Menu.Item>
               <Button
-                data={dataButtonCalendarCancel}
+                options={optionsButtonCalendarCancel}
                 onClick={() => {
                   resetCalendar();
                   resetDateItemOnly();
@@ -80,7 +69,7 @@ export const CalendarDropdown = ({
             </Menu.Item>
             <Menu.Item>
               <Button
-                data={dataButtonCalendarConfirm}
+                options={optionsButtonCalendarConfirm}
                 onClick={onClickConfirm}>
                 Ok
               </Button>

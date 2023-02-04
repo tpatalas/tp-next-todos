@@ -6,23 +6,12 @@ import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';
 import { TodoItem } from './todoItem';
 import { TodoItemFocuser } from './todoItemFocuser';
-const TodoItemDropdown = dynamic(() =>
-  import('@dropdowns/todoItemDropdown').then((mod) => mod.TodoItemDropdown),
-);
+const TodoItemDropdown = dynamic(() => import('@dropdowns/todoItemDropdown').then((mod) => mod.TodoItemDropdown));
 const DeleteTodoConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then(
-    (mod) => mod.DeleteTodoConfirmModal,
-  ),
+  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then((mod) => mod.DeleteTodoConfirmModal),
 );
-const DiscardConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/discardConfirmModal').then((mod) => mod.DiscardConfirmModal),
-);
-const ItemTodoModal = dynamic(() =>
-  import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal),
-);
-const MinimizedModal = dynamic(() =>
-  import('@modals/minimizedModal').then((mod) => mod.MinimizedModal),
-);
+const ItemTodoModal = dynamic(() => import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal));
+const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 
 type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
 
@@ -39,7 +28,7 @@ export const Todo = ({ todo, index }: Props) => {
             <TodoItem todo={todo} />
           </TodoItemFocuser>
           <TodoItemDropdown
-            data={{ isInitiallyVisible: false }}
+            options={{ isInitiallyVisible: false }}
             todo={todo}>
             <div className='py-1'>
               <DropdownMenuItem
@@ -55,9 +44,8 @@ export const Todo = ({ todo, index }: Props) => {
         </div>
       </div>
       <ModalActionsFragment>
+        {typeof todo !== 'undefined' && <DeleteTodoConfirmModal todo={todo} />}
         <ItemTodoModal todo={todo} />
-        <DiscardConfirmModal todo={todo} />
-        <DeleteTodoConfirmModal todo={todo} />
         <MinimizedModal todo={todo} />
       </ModalActionsFragment>
     </>

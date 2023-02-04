@@ -1,19 +1,14 @@
 import { Button as ConfirmButton } from '@buttons/button';
-import { dataButtonConfirmModalDelete, dataSvgConfirmModalDelete } from '@data/dataObjects';
+import { optionsSvgConfirmModalDelete, optionsButtonConfirmModalDelete } from '@data/dataOptions';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
 import dynamic from 'next/dynamic';
-import {
-  Fragment as DeleteHeaderContentFragment,
-  Fragment as HeaderContentFragment,
-  useRef,
-} from 'react';
+import { Fragment as DeleteHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
 const ConfirmModal = dynamic(() => import('..').then((mod) => mod.ConfirmModal));
 const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
 
-type Props = Pick<Types, 'onClickConfirm' | 'show' | 'deletingItem'> &
-  Partial<Pick<Types, 'itemIds'>>;
+type Props = Pick<Types, 'onClickConfirm' | 'show' | 'deletingItem'> & Partial<Pick<Types, 'itemIds'>>;
 
 export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem }: Props) => {
   const initialFocusButton = useRef<HTMLButtonElement>(null);
@@ -23,7 +18,7 @@ export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem
       itemIds={itemIds}
       show={show}
       initialFocus={initialFocusButton}
-      headerIcons={<SvgIcon data={dataSvgConfirmModalDelete} />}
+      headerIcons={<SvgIcon options={optionsSvgConfirmModalDelete} />}
       headerContents={
         <HeaderContentFragment>
           <HeaderTitle>Delete item</HeaderTitle>
@@ -39,7 +34,7 @@ export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem
       }
       footerButtons={
         <ConfirmButton
-          data={dataButtonConfirmModalDelete}
+          options={optionsButtonConfirmModalDelete}
           onClick={onClickConfirm}
           ref={initialFocusButton}>
           Delete

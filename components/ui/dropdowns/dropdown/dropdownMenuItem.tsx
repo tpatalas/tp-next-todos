@@ -10,15 +10,7 @@ import { useRecoilValue } from 'recoil';
 type Props = Partial<
   Pick<
     Types,
-    | 'tooltip'
-    | 'kbd'
-    | 'onClick'
-    | 'children'
-    | 'isDisabledCloseOnClick'
-    | 'path'
-    | 'padding'
-    | 'size'
-    | 'color'
+    'tooltip' | 'kbd' | 'onClick' | 'children' | 'isDisabledCloseOnClick' | 'path' | 'padding' | 'size' | 'color'
   >
 >;
 
@@ -55,7 +47,7 @@ export const DropdownMenuItem = ({
               <div className='flex flex-row'>
                 {typeof path !== 'undefined' && (
                   <SvgIcon
-                    data={{
+                    options={{
                       path: path,
                       className: classNames(
                         'mr-3',

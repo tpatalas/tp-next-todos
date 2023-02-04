@@ -1,5 +1,5 @@
 import { IconButton } from '@buttons/iconButton';
-import { dataButtonGlobalClose, dataNotification } from '@data/dataObjects';
+import { optionsNotification, optionsButtonGlobalClose } from '@data/dataOptions';
 import { MinimizeModalTransition } from '@modals/modal/modalTransition/minimizeModalTransition';
 import { selectorNotificationState, atomNotificationOpen } from '@states/notifications';
 import { NotificationResetEffect } from '@states/notifications/notificationResetEffect';
@@ -19,13 +19,13 @@ export const Notification = () => {
     <NotificationFragment>
       <MinimizeModalTransition
         show={isNotificationOpen}
-        data={dataNotification}>
+        options={optionsNotification}>
         <div className='flex flex-col'>
           <div className='flex flex-row justify-between'>
             <div className='flex flex-row items-center '>
               <div className='flex flex-shrink-0'>
                 <SvgIcon
-                  data={{
+                  options={{
                     path: notification.iconPath,
                     className: notification.iconPresetStyle,
                   }}
@@ -35,7 +35,7 @@ export const Notification = () => {
             </div>
             <div className='ml-4 flex flex-shrink-0'>
               <IconButton
-                data={dataButtonGlobalClose}
+                options={optionsButtonGlobalClose}
                 onClick={() => setNotificationOpen(false)}
               />
             </div>

@@ -1,5 +1,5 @@
 import { Button as NetworkStatusReadOnlyButton } from '@buttons/button';
-import { dataButtonNetworkStatus, dataSvgNetworkStatus } from '@data/dataObjects';
+import { optionsButtonNetworkStatus, optionsSvgNetworkStatus } from '@data/dataOptions';
 import { atomNetworkStatusEffect } from '@states/misc';
 import dynamic from 'next/dynamic';
 import { Fragment as NetworkStatusFragment } from 'react';
@@ -14,8 +14,8 @@ export const NetworkStatus = () => {
     <NetworkStatusFragment>
       {!isOnline && (
         <div className='text-red-500'>
-          <NetworkStatusReadOnlyButton data={dataButtonNetworkStatus}>
-            <SvgIcon data={dataSvgNetworkStatus} />
+          <NetworkStatusReadOnlyButton options={optionsButtonNetworkStatus}>
+            <SvgIcon options={optionsSvgNetworkStatus} />
           </NetworkStatusReadOnlyButton>
         </div>
       )}

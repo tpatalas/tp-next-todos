@@ -1,6 +1,6 @@
 import { STYLE_HOVER_SLATE_DARK } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
-import { TypesDataDropdown } from '@lib/types/typesData';
+import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { atomOnBlur } from '@states/focus';
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { classNames } from '@states/utils';
@@ -13,39 +13,18 @@ import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
-type Props = { data: TypesDataDropdown } & Partial<Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>> &
+type Props = { options: TypesOptionsDropdown } & Partial<
+  Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>
+> &
   Pick<Types, 'children'>;
 
-export const Dropdown = ({
-  headerContents,
-  headerContentsOnClose,
-  children,
-  show,
-  data: {
-    tooltip,
-    kbd,
-    menuWidth,
-    borderRadius,
-    path,
-    hoverBg = STYLE_HOVER_SLATE_DARK,
-    placement = 'bottom-start',
-    group = 'group',
-    padding = 'p-2',
-    hasDivider = true,
-    isInitiallyVisible = true,
-    hasDropdownBoardStyle = true,
-    size = 'h-5 w-5',
-    color = 'fill-gray-500 group-hover:fill-gray-700',
-    text = 'group-hover:text-gray-700',
-    contentWidth = 'w-60',
-    isPortal = false,
-  },
-}: Props) => {
+export const Dropdown = ({ headerContents, headerContentsOnClose, children, show, options }: Props) => {
+  const { hasDivider = true, hasDropdownBoardStyle = true, isPortal = true, isInitiallyVisible = true } = options;
   const [isClicked, setClick] = useState(false);
   const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: placement,
+    placement: options.placement ?? 'bottom-start',
     modifiers: [{ name: 'offset', options: { offset: [0, 5] } }],
   });
   const setFocusOnBlur = useSetRecoilState(atomOnBlur);
@@ -60,22 +39,22 @@ export const Dropdown = ({
     <span>
       <Menu
         as='div'
-        className={classNames('relative inline-block text-left', menuWidth)}>
+        className={classNames('relative inline-block text-left', options.menuWidth)}>
         {({ open }) => (
           <Tooltip
-            tooltip={isClicked || open ? undefined : tooltip}
-            kbd={isClicked || open ? undefined : kbd}>
+            tooltip={isClicked || open ? undefined : options.tooltip}
+            kbd={isClicked || open ? undefined : options.kbd}>
             <MenuFragment>
               <div ref={setReferenceElement}>
                 <Menu.Button
                   className={classNames(
-                    group,
+                    options.group ?? 'group',
                     'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
-                    padding,
-                    hoverBg,
-                    borderRadius ?? 'rounded-lg',
-                    (!borderRadius && headerContents) || 'rounded-full',
-                    visibility(isInitiallyVisible, open),
+                    options.padding ?? 'p-2',
+                    options.hoverBg ?? STYLE_HOVER_SLATE_DARK,
+                    options.borderRadius ?? 'rounded-lg',
+                    (!options.borderRadius && headerContents) || 'rounded-full',
+                    visibility(isInitiallyVisible ?? true, open),
                   )}
                   onMouseDown={() => setClick(true)}
                   onMouseEnter={() => setClick(false)}
@@ -87,16 +66,19 @@ export const Dropdown = ({
                   }}
                   ref={focusRef}>
                   <SvgIcon
-                    data={{
-                      path: path,
-                      className: classNames(size, color),
+                    options={{
+                      path: options.path,
+                      className: classNames(
+                        options.size ?? 'h-5 w-5',
+                        options.color ?? 'fill-gray-500 group-hover:fill-gray-700',
+                      ),
                     }}
                   />
                   {headerContents && (
                     <span
                       className={classNames(
                         'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
-                        text,
+                        options.text ?? 'group-hover:text-gray-700',
                       )}>
                       {headerContents}
                     </span>
@@ -119,7 +101,7 @@ export const Dropdown = ({
                   <Menu.Items
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',
-                      contentWidth,
+                      options.contentWidth ?? 'w-60',
                       hasDropdownBoardStyle && 'rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5',
                     )}
                     ref={setPopperElement}

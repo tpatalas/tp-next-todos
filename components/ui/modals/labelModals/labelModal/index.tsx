@@ -1,10 +1,6 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
-import {
-  dataButtonLabelModalAddLabel,
-  dataButtonTodoModalCancel,
-  dataButtonTodoModalClose,
-} from '@data/dataObjects';
+import { optionsButtonTodoModalClose, optionsButtonTodoModalCancel, optionsButtonLabelModalAddLabel } from '@data/dataOptions';
 import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { useLabelValueUpdate, useLabelAdd } from '@states/labels/hooks';
@@ -20,23 +16,14 @@ import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 
-type Props = Partial<
-  Pick<Types, 'label' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>
->;
+type Props = Partial<Pick<Types, 'label' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>>;
 
-export const LabelModal = ({
-  label,
-  footerButtons,
-  children,
-  headerContents = 'Create new label',
-}: Props) => {
+export const LabelModal = ({ label, footerButtons, children, headerContents = 'Create new label' }: Props) => {
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
   const closeModal = useLabelModalStateClose(label?._id);
   const initialFocusInput = useRef<HTMLInputElement>(null);
   const labelItem =
-    typeof label === 'undefined'
-      ? useRecoilValue(atomLabelNew)
-      : useRecoilValue(atomSelectorLabelItem(label._id));
+    typeof label === 'undefined' ? useRecoilValue(atomLabelNew) : useRecoilValue(atomSelectorLabelItem(label._id));
   const updateLabelItem = useLabelValueUpdate(label);
   const addLabel = useLabelAdd();
   const condition = useConditionCheckLabelTitleEmpty();
@@ -52,7 +39,7 @@ export const LabelModal = ({
             <div className='flex w-full flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
               {headerContents}
               <IconButton
-                data={dataButtonTodoModalClose}
+                options={optionsButtonTodoModalClose}
                 onClick={() => closeModal()}
               />
             </div>
@@ -75,14 +62,14 @@ export const LabelModal = ({
           </div>
           <div className='flex flex-row justify-end pt-4'>
             <CancelButton
-              data={dataButtonTodoModalCancel}
+              options={optionsButtonTodoModalCancel}
               onClick={() => closeModal()}>
               Cancel
             </CancelButton>
             {footerButtons || (
               <DisableButton
                 isConditionalRendering={condition}
-                data={dataButtonLabelModalAddLabel}
+                options={optionsButtonLabelModalAddLabel}
                 onClick={() => addLabel()}>
                 Add Label
               </DisableButton>

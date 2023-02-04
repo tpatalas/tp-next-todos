@@ -1,5 +1,5 @@
 import { IconButton } from '@buttons/iconButton';
-import { ICON_NEW_LABEL } from '@data/materialSymbols';
+import { optionsButtonLabelAddMore } from '@data/dataOptions';
 import { atomQueryLabels } from '@states/labels';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { Fragment } from 'react';
@@ -16,12 +16,7 @@ export const LabelList = () => {
         <div className='item-center flex flex-row justify-between fill-gray-500 pb-1 text-base opacity-90'>
           <div className='py-2 pl-2'>Labels</div>
           <IconButton
-            data={{
-              path: ICON_NEW_LABEL,
-              tooltip: 'Add new label',
-              padding: 'p-2',
-              color: 'hover:enabled:bg-fill-700',
-            }}
+            options={optionsButtonLabelAddMore}
             onClick={() => labelModalOpen()}
           />
         </div>

@@ -1,16 +1,12 @@
 import { Transition } from '@headlessui/react';
 import { Types } from 'lib/types';
 import { Fragment } from 'react';
-import { TypesDataMinimizedModalTransition } from '@lib/types/typesData';
+import { TypesOptionsMinimizedModalTransition } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 
-type Props = { data: TypesDataMinimizedModalTransition } & Pick<Types, 'show' | 'children'>;
+type Props = { options: TypesOptionsMinimizedModalTransition } & Pick<Types, 'show' | 'children'>;
 
-export const MinimizeModalTransition = ({
-  children,
-  show,
-  data: { positionY, positionX, minimizedModalPadding = 'p-3.5' },
-}: Props) => {
+export const MinimizeModalTransition = ({ children, show, options }: Props) => {
   return (
     <Transition
       show={show}
@@ -24,11 +20,11 @@ export const MinimizeModalTransition = ({
       <div
         className={classNames(
           'pointer-events-none fixed inset-0 z-[100] flex items-end px-4 py-6 sm:p-6',
-          positionY,
+          options.positionY,
         )}>
-        <div className={classNames('flex w-full flex-col items-center space-y-4', positionX)}>
+        <div className={classNames('flex w-full flex-col items-center space-y-4', options.positionX)}>
           <div className='pointer-events-auto w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5'>
-            <div className={classNames(minimizedModalPadding)}>{children}</div>
+            <div className={classNames(options.minimizedModalPadding ?? 'p-3.5')}>{children}</div>
           </div>
         </div>
       </div>

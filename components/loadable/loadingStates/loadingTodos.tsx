@@ -1,4 +1,4 @@
-import { dataLoadingTodos } from '@data/dataObjects';
+import { optionsLoadingTodos } from '@data/dataOptions';
 import { DURATION } from '@data/dataTypesObjects';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { Fragment as LoadingStateFragment } from 'react';
@@ -10,7 +10,7 @@ export const LoadingTodos = () => {
       <SmoothTransition
         enterDuration={DURATION[75]}
         leaveDuration={DURATION[500]}>
-        <LoadingState data={dataLoadingTodos} />
+        <LoadingState options={optionsLoadingTodos} />
       </SmoothTransition>
     </LoadingStateFragment>
   );
