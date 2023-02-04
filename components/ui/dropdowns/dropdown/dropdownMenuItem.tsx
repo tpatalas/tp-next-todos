@@ -2,37 +2,24 @@ import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
+import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { selectorActiveMenuItem } from '@states/misc';
 import { classNames } from '@states/utils';
 import { Tooltip } from '@tooltips/tooltips';
 import { useRecoilValue } from 'recoil';
 
-type Props = Partial<
-  Pick<
-    Types,
-    'tooltip' | 'kbd' | 'onClick' | 'children' | 'isDisabledCloseOnClick' | 'path' | 'padding' | 'size' | 'color'
-  >
->;
+type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'onClick' | 'children'>>;
 
-export const DropdownMenuItem = ({
-  tooltip,
-  kbd,
-  onClick,
-  padding,
-  path,
-  size,
-  color,
-  children,
-  isDisabledCloseOnClick = true,
-}: Props) => {
+export const DropdownMenuItem = ({ options, onClick, children }: Props) => {
   const isActive = useRecoilValue(selectorActiveMenuItem);
+  const { isDisabledCloseOnClick = true, isDisabled = false } = options;
 
   return (
     <span>
       <Tooltip
-        tooltip={tooltip}
-        kbd={kbd}>
-        <Menu.Item>
+        tooltip={options.tooltip}
+        kbd={options.kbd}>
+        <Menu.Item disabled={isDisabled}>
           {({ active }) => (
             <div
               onClick={(event) => {
@@ -40,19 +27,22 @@ export const DropdownMenuItem = ({
                 isDisabledCloseOnClick && event.preventDefault();
               }}
               className={classNames(
-                'group-1 block w-full cursor-pointer text-left text-sm text-gray-500 hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700 focus-visible:rounded-md',
-                padding ?? 'px-4 py-2',
+                'group/menuItem block w-full cursor-pointer text-left text-sm text-gray-500',
+                isDisabled
+                  ? 'cursor-not-allowed select-none opacity-50'
+                  : 'hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700 focus-visible:rounded-md',
+                options.padding ?? 'px-4 py-2',
                 active && isActive && STYLE_HOVER_SLATE_LIGHT,
               )}>
               <div className='flex flex-row'>
-                {typeof path !== 'undefined' && (
+                {typeof options.path !== 'undefined' && (
                   <SvgIcon
                     options={{
-                      path: path,
+                      path: options.path,
                       className: classNames(
                         'mr-3',
-                        size ?? 'h-5 w-5',
-                        color ?? 'fill-gray-500 [.group-1:hover_&]:fill-gray-700',
+                        options.size ?? 'h-5 w-5',
+                        options.color ?? 'fill-gray-500 group-hover/menuItem:fill-gray-700',
                       ),
                     }}
                   />
