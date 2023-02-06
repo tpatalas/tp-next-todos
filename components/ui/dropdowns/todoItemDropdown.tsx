@@ -1,8 +1,8 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import {
   optionsDropdownCalendar,
-  optionsPriorityDropdownUrgent,
   optionsPriorityDropdownImportant,
+  optionsPriorityDropdownUrgent,
 } from '@data/dataOptions';
 import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
@@ -10,8 +10,10 @@ import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useCalUpdateDataItem } from '@states/calendars/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorities/hooks';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoRemoveItem } from '@states/todos/hooks';
 import { Types } from 'lib/types';
+import { useRecoilCallback } from 'recoil';
 import { CalendarDropdown } from './calendarDropdown';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
@@ -22,6 +24,9 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
   const removeTodo = useTodoRemoveItem(todo?._id);
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
   const setPriority = typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);
+  const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
+    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo?._id)).getValue().completed;
+  });
 
   return (
     <Dropdown
@@ -34,7 +39,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       {children}
       <div className='py-1'>
-        <DropdownMenuItem padding='p-0'>
+        <DropdownMenuItem options={{ padding: 'p-0', isDisabled: isTodoCompleted() && true }}>
           <div className='w-full'>
             <CalendarDropdown
               options={optionsDropdownCalendar}
@@ -45,14 +50,14 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
         </DropdownMenuItem>
       </div>
       <div className='py-1'>
-        <DropdownMenuItem padding='p-0'>
+        <DropdownMenuItem options={{ padding: 'p-0', isDisabled: isTodoCompleted() && true }}>
           <PriorityButton
             options={optionsPriorityDropdownUrgent}
             todo={todo}
             onClick={() => setPriority(PRIORITY_LEVEL['urgent'])}
           />
         </DropdownMenuItem>
-        <DropdownMenuItem padding='p-0'>
+        <DropdownMenuItem options={{ padding: 'p-0', isDisabled: isTodoCompleted() && true }}>
           <PriorityButton
             todo={todo}
             options={optionsPriorityDropdownImportant}
@@ -62,11 +67,13 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
       </div>
       <div className='py-1'>
         <DropdownMenuItem
-          isDisabledCloseOnClick={false}
-          onClick={() => removeTodo()}
-          path={ICON_DELETE}
-          tooltip='Delete'
-          kbd='⌘ + Delete'>
+          options={{
+            isDisabledCloseOnClick: false,
+            tooltip: 'Delete',
+            path: ICON_DELETE,
+            kbd: '⌘ + Delete',
+          }}
+          onClick={() => removeTodo()}>
           Delete
         </DropdownMenuItem>
       </div>

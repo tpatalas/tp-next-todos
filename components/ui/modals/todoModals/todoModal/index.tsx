@@ -12,12 +12,13 @@ import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffec
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { atomTodoModalMax, atomTodoModalOpen } from '@states/modals';
 import { useTodoModalStateClose } from '@states/modals/hooks';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoAdd } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCheckTodoTitleEmpty } from '@states/utils/hooks';
 import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Button as CancelButton } from '../../../buttons/button';
 import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
@@ -34,6 +35,9 @@ export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, 
   const updateCalendarItem = useCalUpdateItem(todo?._id);
   const addTodo = useTodoAdd();
   const condition = useConditionCheckTodoTitleEmpty();
+  const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
+    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo._id)).getValue().completed;
+  });
 
   return (
     <TodoModalFragment>
@@ -67,7 +71,10 @@ export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, 
             </div>
             <div className='flex flex-row items-center sm:m-1 '>
               <CalendarDropdown
-                options={{ tooltip: 'Due date' }}
+                options={{
+                  tooltip: 'Due date',
+                  container: isTodoCompleted() ? 'cursor-not-allowed select-none opacity-50' : '',
+                }}
                 todo={todo}
                 onClickConfirm={() => updateCalendarItem()}
               />

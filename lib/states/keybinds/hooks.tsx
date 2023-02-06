@@ -68,8 +68,8 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
         openModal();
         break;
       case event.key === 'Escape':
-        event.preventDefault();
         if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
+        event.preventDefault();
         !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
         reset(atomCurrentFocus);
         set(atomOnBlur, true);

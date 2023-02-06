@@ -6,11 +6,12 @@ import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
 import { useTodoModalStateClose } from '@states/modals/hooks';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { classNames, paths } from '@states/utils';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
 import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
 
 type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels' | 'container'>>;
@@ -20,6 +21,9 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
   const closeTodoModal = useTodoModalStateClose(todo?._id);
   const scrollRef = useRef<HTMLDivElement>(null);
   const selectedLabels = selectedQueryLabels ? selectedQueryLabels : useRecoilValue(selectorSelectedLabels(todo?._id));
+  const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
+    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo?._id)).getValue().completed;
+  });
 
   return (
     <LabelComboBoxDropdownFragment>
@@ -37,11 +41,13 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
             'scrollbar-hide ml-0 flex w-full flex-row items-center justify-start overflow-x-auto py-1 px-1 lg:ml-1 lg:px-1',
           )}
           ref={scrollRef}>
-          <Dropdown
-            options={optionsDropdownComboBox}
-            headerContents={selectedLabels.length === 0 && 'Label'}>
-            <LabelComboBox todo={todo} />
-          </Dropdown>
+          {!isTodoCompleted() && (
+            <Dropdown
+              options={optionsDropdownComboBox}
+              headerContents={selectedLabels.length === 0 && 'Label'}>
+              <LabelComboBox todo={todo} />
+            </Dropdown>
+          )}
           <ul className='flex flex-row items-center justify-center'>
             {selectedLabels.map((label) => (
               <li key={label._id}>
@@ -58,10 +64,12 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                     onClick={() => closeTodoModal()}>
                     {label.name}
                   </PrefetchRouterButton>
-                  <IconButton
-                    options={optionsButtonLabelRemove}
-                    onClick={() => removeTitleId(label._id)}
-                  />
+                  {!isTodoCompleted() && (
+                    <IconButton
+                      options={optionsButtonLabelRemove}
+                      onClick={() => removeTitleId(label._id)}
+                    />
+                  )}
                 </div>
               </li>
             ))}

@@ -20,7 +20,7 @@ export type TypesOptionsPseudoButton = Partial<
 
 export type TypesOptionsPriority = Partial<
   Pick<Types, 'isInitiallyVisible' | 'priorityImportant' | 'priorityNormal' | 'priorityUrgent'> &
-    Pick<TypesStyleAttributes, 'margin' | 'display' | 'width' | 'container' | 'padding'>
+    Pick<TypesStyleAttributes, 'margin' | 'display' | 'width' | 'container' | 'padding' | 'size' | 'color'>
 > &
   Pick<Types, 'priorityLevel'>;
 
@@ -39,10 +39,21 @@ export type TypesOptionsDropdown = Partial<
     | 'isInitiallyVisible'
     | 'hasDropdownBoardStyle'
     | 'isPortal'
+    | 'isDisabledCloseOnClick'
+    | 'isDisabled'
   > &
     Pick<
       TypesStyleAttributes,
-      'group' | 'padding' | 'borderRadius' | 'menuWidth' | 'size' | 'color' | 'text' | 'contentWidth' | 'hoverBg'
+      | 'group'
+      | 'padding'
+      | 'borderRadius'
+      | 'menuWidth'
+      | 'size'
+      | 'color'
+      | 'text'
+      | 'contentWidth'
+      | 'hoverBg'
+      | 'container'
     >
 >;
 

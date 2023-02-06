@@ -4,11 +4,19 @@ import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { usePriorityUpdate } from '@states/priorities/hooks';
+import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { mergeObjects } from '@states/utils';
+import { useRecoilCallback } from 'recoil';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
 
 export const TodoModalHeaderContents = ({ todo, children }: Props) => {
   const setPriority = usePriorityUpdate(todo?._id);
+  const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
+    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo._id)).getValue().completed;
+  });
+  const disabledStyle = isTodoCompleted() ? 'cursor-not-allowed opacity-50 select-none' : '';
+  const conditionalHeaderDescription = isTodoCompleted() ? 'Completed todo' : 'Update todo';
 
   return (
     <div className='sm:flex sm:items-center'>
@@ -16,16 +24,18 @@ export const TodoModalHeaderContents = ({ todo, children }: Props) => {
         {children}
         <PriorityButton
           todo={todo}
-          options={optionsPriorityTodoModalImportant}
+          options={mergeObjects(optionsPriorityTodoModalImportant, { container: disabledStyle })}
           onClick={() => setPriority(PRIORITY_LEVEL['important'])}
         />
         <PriorityButton
           todo={todo}
-          options={optionsPriorityTodoModalUrgent}
+          options={mergeObjects(optionsPriorityTodoModalUrgent, { container: disabledStyle })}
           onClick={() => setPriority(PRIORITY_LEVEL['urgent'])}
         />
         <HeaderDescription>
-          <span className='font-semibold'>{typeof todo === 'undefined' ? 'Create todo' : 'Update todo'}</span>
+          <span className='font-semibold'>
+            {typeof todo === 'undefined' ? 'Create todo' : conditionalHeaderDescription}
+          </span>
         </HeaderDescription>
       </div>
     </div>
