@@ -9,7 +9,7 @@ describe('LayoutLogo', () => {
   let logoComponent: HTMLElement;
 
   it('should render the logo', async () => {
-    logoComponent = await screen.findByText(/I am a LOGO/i);
+    logoComponent = await screen.findByText('Logo');
     expect(logoComponent).toBeInTheDocument();
   });
 
