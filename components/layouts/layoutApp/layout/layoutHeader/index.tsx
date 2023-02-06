@@ -4,6 +4,7 @@ import { optionsButtonSidebarToggle } from '@data/dataOptions';
 import { ICON_CLOSE, ICON_SEARCH } from '@data/materialSymbols';
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
+import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSearchInput } from '@states/layouts';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { classNames } from '@states/utils';
@@ -19,7 +20,6 @@ import {
   Fragment as SidebarButtonFragment,
 } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { LayoutLogo } from '../../layoutLogo';
 
 const userNavigation = [
   { name: 'Settings', href: '#' },

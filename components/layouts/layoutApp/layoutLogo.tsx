@@ -10,6 +10,7 @@ export const LayoutLogo = () => {
           path='/'
           className='cursor-pointer'>
           <LogoFragment>
+            <span className='sr-only'>Logo</span>
             <div>I am a LOGO</div>
           </LogoFragment>
         </PrefetchRouterButton>
