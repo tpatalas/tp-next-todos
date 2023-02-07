@@ -8,4 +8,5 @@ declare global {
     }
   }
 }
+
 export {};

@@ -3,6 +3,14 @@ Dockerfile
 node_modules
 npm-debug.log
 README.md
+LICENSE
 .next
 .git
 .gitignore
+.DS_Store
+.log
+.zip
+.tmp
+.vscode
+.tar.gz
+
