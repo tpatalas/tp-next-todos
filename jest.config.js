@@ -17,7 +17,7 @@ const createJestConfig = nextJest({
 /** @type {import('jest').Config} */
 const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // remove if jest.setup.js is deleted
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@atomQueries/(.*)$': ['<rootDir>/lib/states/atomQuries/$1'],

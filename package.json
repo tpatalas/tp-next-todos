@@ -6,7 +6,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "pre-commit": "lint-staged",
+    "pre-commit": "npm run lint --fix && git add -A .",
     "test": "jest --watch"
   },
   "dependencies": {
@@ -34,6 +34,7 @@
     "react-error-boundary": "^3.1.4",
     "react-popper-tooltip": "^4.4.2",
     "recoil": "^0.7.6",
+    "sharp": "^0.31.3",
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",
     "slate-hyperscript": "^0.77.0",
