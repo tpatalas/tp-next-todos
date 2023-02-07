@@ -56,13 +56,7 @@ export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
 };
 
 // recoil test observer: required to observe state change on unit test
-export const RecoilObserver = <T,>({
-  node,
-  onChange,
-}: {
-  node: RecoilState<T>;
-  onChange: Types['onChange'];
-}) => {
+export const RecoilObserver = <T,>({ node, onChange }: { node: RecoilState<T>; onChange: Types['onChange'] }) => {
   const value = useRecoilValue(node);
   useEffect(() => onChange(value), [onChange, value]);
   return null;
@@ -121,4 +115,19 @@ export const useCompareToQueryLabels = () => {
       return !get(atomQueryLabels).find((queryLabel) => equal(label, queryLabel));
     });
   });
+};
+
+export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) => {
+  let response;
+  for (let i = 0; i < retryCount; i++) {
+    try {
+      response = await fetch(url, options);
+      if (response.ok) return response;
+    } catch (error) {
+      response = error;
+    }
+    // delay re-attempt to fetch every time fetch fails
+    await new Promise((resolve) => setTimeout(resolve, 700));
+  }
+  throw response;
 };

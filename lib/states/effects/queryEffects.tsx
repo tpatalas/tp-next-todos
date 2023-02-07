@@ -1,5 +1,5 @@
 import { del, get, set } from '@lib/dataConnections/indexedDB';
-import { TypesQuery, TypesRefetchEffect } from '@lib/types';
+import { TypesRefetchEffect } from '@lib/types';
 import equal from 'fast-deep-equal/react';
 
 /**
@@ -30,7 +30,7 @@ export const queryEffect: TypesRefetchEffect =
     // Multiple fetches will be cached and will fetch only once. ex) using `atomQueryTodoIds` more than one location will fetch multiple time at the initial page load then saved to indexedDB
     // Every fetch will be saved to IndexedDB
     const queryInitial = async () => {
-      const { data }: TypesQuery = await queryFunction();
+      const { data } = await queryFunction();
       if (onIndexedDB) {
         set(storeName, queryKey, data);
       }
@@ -39,22 +39,26 @@ export const queryEffect: TypesRefetchEffect =
 
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
-      const { data }: TypesQuery = await queryFunction();
-      if (!data) return;
-      if (onIndexedDB) {
-        const indexedDb = await get(storeName, queryKey).then((value) => value);
-        if (equal(data, indexedDb)) return;
-        set(storeName, queryKey, data);
+      let data = null;
+      try {
+        const { queriedData } = await queryFunction();
+        data = queriedData;
+        if (!data) return;
+        if (onIndexedDB) {
+          const indexedDb = await get(storeName, queryKey).then((value) => value);
+          if (equal(data, indexedDb)) return;
+          set(storeName, queryKey, data);
+        }
+        setSelf(data);
+      } catch (error) {
+        data = error;
       }
-      setSelf(data);
     };
 
     // get indexedDb if available, and fetch if the data is not available from indexedDb
     if (trigger === 'get') {
       onIndexedDB
-        ? setSelf(
-            get(storeName, queryKey).then((value) => (value != null ? value : queryInitial())),
-          )
+        ? setSelf(get(storeName, queryKey).then((value) => (value != null ? value : queryInitial())))
         : setSelf(queryInitial());
     }
 
@@ -65,10 +69,7 @@ export const queryEffect: TypesRefetchEffect =
 
       // refetch and re-sync indexedDb with database if they are not matching.
       if (isRefetchingOnMutation && typeof isRefetchingOnMutation !== 'undefined' && !isReset) {
-        const timeoutID = setTimeout(
-          () => querySyncData(),
-          refetchDelayOnMutation ? refetchDelayOnMutation : 100,
-        );
+        const timeoutID = setTimeout(() => querySyncData(), refetchDelayOnMutation ? refetchDelayOnMutation : 100);
         if (timeoutID == null) {
           return timeoutID;
         }

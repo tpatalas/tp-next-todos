@@ -1,13 +1,14 @@
 import { Settings, Users } from '@lib/types';
+import { fetchWithRetry } from '@states/utils/hooks';
 
 export const getDataSetting = async (_id: Users['_id']) => {
-  const response = await fetch(`/api/v1/users/settings?userId=${_id}`);
+  const response = await fetchWithRetry(`/api/v1/users/settings?userId=${_id}`);
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
 export const createDataNewSetting = async (inputValue: Settings) => {
-  const response = await fetch('/api/v1/users/settings', {
+  const response = await fetchWithRetry('/api/v1/users/settings', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(inputValue),
@@ -17,7 +18,7 @@ export const createDataNewSetting = async (inputValue: Settings) => {
 };
 
 export const updateDataSetting = async (_id: Settings['_id'], inputValue: Settings) => {
-  const response = await fetch(`/api/v1/users/settings/${_id}`, {
+  const response = await fetchWithRetry(`/api/v1/users/settings/${_id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(inputValue),
@@ -27,7 +28,7 @@ export const updateDataSetting = async (_id: Settings['_id'], inputValue: Settin
 };
 
 export const deleteDataSetting = async (_id: Settings['_id']) => {
-  const response = await fetch(`/api/v1/users/settings/${_id}`, {
+  const response = await fetchWithRetry(`/api/v1/users/settings/${_id}`, {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error(response.statusText);
@@ -38,7 +39,7 @@ export const updateDataTaskCapacityPerDaySetting = async (
   _id: Settings['_id'],
   taskCapacity: Settings['taskCapacityPerDay'],
 ) => {
-  const response = await fetch(`/api/v1/users/settings/${_id}`, {
+  const response = await fetchWithRetry(`/api/v1/users/settings/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ taskCapacityPerDay: taskCapacity }),
