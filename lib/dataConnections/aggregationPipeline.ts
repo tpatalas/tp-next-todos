@@ -1,7 +1,13 @@
-import { TypesQuery } from '@lib/types';
+import { Todos } from '@lib/types';
 import mongoose, { PipelineStage } from 'mongoose';
 
-export const aggregatedTodoItem = ({ todoId, userId }: TypesQuery): PipelineStage[] => {
+export const aggregatedTodoItem = ({
+  todoId,
+  userId,
+}: {
+  todoId: Todos['_id'];
+  userId: Todos['user_id'];
+}): PipelineStage[] => {
   //   * Example:
   //   const getItem = await TodoItem.aggregate(
   //   aggregatedTodoNote({ todoId: todoId, userId: users._id }),

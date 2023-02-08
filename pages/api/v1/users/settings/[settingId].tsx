@@ -1,15 +1,18 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Setting from '@lib/models/User/setting';
+import { Settings } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const UserSettingById = async (req: NextApiRequest, res: NextApiResponse) => {
+  await databaseConnect();
+
   const {
     method,
     body,
     query: { settingId },
   } = req;
 
-  await databaseConnect();
+  const data: Settings = body;
 
   switch (method) {
     case 'GET':
@@ -39,7 +42,7 @@ const UserSettingById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'PATCH':
       try {
-        const updateSettingById = await Setting.findByIdAndUpdate(settingId, body, {
+        const updateSettingById = await Setting.findByIdAndUpdate(settingId, data, {
           new: true,
           runValidators: true,
         });

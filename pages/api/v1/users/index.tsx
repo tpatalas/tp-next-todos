@@ -1,15 +1,18 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import User from '@lib/models/User';
+import { Users } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const Users = async (req: NextApiRequest, res: NextApiResponse) => {
+  await databaseConnect();
+
   const {
     method,
     body,
     query: { _id: userId },
   } = req;
 
-  await databaseConnect();
+  const data: Users = body;
 
   switch (method) {
     case 'GET':
@@ -22,7 +25,7 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'POST':
       try {
-        const createUser = await User.create(body);
+        const createUser = await User.create(data);
         if (!createUser) return res.status(400).json({ success: false });
         res.status(201).json({ success: true, data: createUser });
       } catch (error) {
