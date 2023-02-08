@@ -1,4 +1,3 @@
-import { LayoutHome } from '@layouts/layoutHome';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
@@ -16,11 +15,7 @@ type AppPropsWithLayout = AppProps & {
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return (
-    <RecoilRoot>
-      <LayoutHome>{getLayout(<Component {...pageProps} />)}</LayoutHome>
-    </RecoilRoot>
-  );
+  return <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>;
 };
 
 export default MyApp;

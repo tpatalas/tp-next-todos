@@ -4,7 +4,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head></Head>
+        <Head />
         <body className='overflow-hidden bg-slate-50 font-roboto'>
           <Main />
           <NextScript />

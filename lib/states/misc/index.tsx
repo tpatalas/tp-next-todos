@@ -1,10 +1,10 @@
-/*
- * Atoms
- * */
-
 import { BREAKPOINT } from '@data/dataTypesObjects';
 import { mediaQueryEffect, networkStatusEffect } from '@effects/atomEffects';
 import { atomFamily, atom, selector } from 'recoil';
+
+/*
+ * Atoms
+ * */
 
 // Media Queries
 export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({
@@ -42,6 +42,14 @@ export const atomActiveMenuItem = atomFamily<boolean, string | null>({
   ],
 });
 
+export const atomHtmlTitleTag = atom<string>({
+  key: 'atomHtmlTitleTag',
+  default: '',
+});
+
+/**
+ * selector
+ * */
 export const selectorActiveMenuItem = selector({
   key: 'selectorActiveMenuItem',
   get: ({ get }) => {

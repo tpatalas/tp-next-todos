@@ -9,7 +9,7 @@ export const LayoutHome = ({ children }: Props) => {
   return (
     <LayoutFragment>
       <Head>
-        <title>Task name</title>
+        <title>Home</title>
       </Head>
       {children}
     </LayoutFragment>
