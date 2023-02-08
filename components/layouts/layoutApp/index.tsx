@@ -1,7 +1,9 @@
 import { CATCH } from '@data/dataTypesObjects';
 import { Types } from '@lib/types';
+import { atomHtmlTitleTag } from '@states/misc';
 import { atomCatch } from '@states/utils';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import {
   Fragment as FooterFragment,
   Fragment as HeaderFragment,
@@ -22,9 +24,13 @@ type Props = Pick<Types, 'children'>;
 
 export const LayoutApp = ({ children }: Props) => {
   const catchTodoModal = useRecoilValue(atomCatch(CATCH.todoModal));
+  const slug = useRecoilValue(atomHtmlTitleTag);
 
   return (
     <LayoutAppFragment>
+      <Head>
+        <title>{'My Todo App: ' + slug}</title>
+      </Head>
       <HeaderFragment>
         <Layout>{children}</Layout>
       </HeaderFragment>

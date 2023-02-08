@@ -1,6 +1,8 @@
 import { PATHNAME } from '@data/dataTypesObjects';
 import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
+import { LayoutHome } from '@layouts/layoutHome';
 import dynamic from 'next/dynamic';
+import { ReactElement } from 'react';
 
 const PrefetchRouterButton = dynamic(() =>
   import('@buttons/button/prefetchRouterButton').then((mod) => mod.PrefetchRouterButton),
@@ -17,4 +19,9 @@ const Home = () => {
     </div>
   );
 };
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutHome>{page}</LayoutHome>;
+};
+
 export default Home;
