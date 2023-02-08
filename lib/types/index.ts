@@ -61,6 +61,8 @@ export interface Todos extends TodosEditors, TodoIds {
   dueDate: Date | null;
   completedDate: Date | null;
   labelItem: Labels[];
+  title_id?: OBJECT_ID;
+  user_id?: OBJECT_ID;
 }
 
 export interface TodoIds {
@@ -88,6 +90,7 @@ export interface TypesTodo {
 export interface Labels extends LabelIds {
   parent_id?: OBJECT_ID;
   title_id?: OBJECT_ID[];
+  user_id?: OBJECT_ID;
   name: string;
   color?: string;
 }
@@ -118,17 +121,6 @@ export interface Settings extends SettingsIds {
 
 export interface SettingsIds {
   _id?: OBJECT_ID;
-}
-
-/**
- * Data Query Types
- * Non-Collectable Types
- */
-
-//* Query
-export interface TypesQuery {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
 }
 
 /**
@@ -361,8 +353,7 @@ export type TypesMediaQueryEffect = <T>({
   breakpoint,
   isStateUnderBreakpoint,
   isStateOverBreakpoint,
-}: Pick<Types, 'breakpoint'> &
-  Partial<Pick<Types, 'isStateUnderBreakpoint' | 'isStateOverBreakpoint'>>) => AtomEffect<
+}: Pick<Types, 'breakpoint'> & Partial<Pick<Types, 'isStateUnderBreakpoint' | 'isStateOverBreakpoint'>>) => AtomEffect<
   T | boolean
 >;
 

@@ -1,5 +1,6 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
+import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -10,6 +11,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
     body,
     query: { labelId },
   } = req;
+  const data: Labels = body;
 
   switch (method) {
     case 'GET':
@@ -23,7 +25,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'PUT':
       try {
-        const updateLabelById = await Label.findByIdAndUpdate(labelId, body, {
+        const updateLabelById = await Label.findByIdAndUpdate(labelId, data, {
           upsert: true,
           new: true,
           runValidators: true,

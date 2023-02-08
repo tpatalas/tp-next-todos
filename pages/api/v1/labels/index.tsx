@@ -1,6 +1,6 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
-import { TypesQuery } from '@lib/types';
+import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
 
@@ -9,8 +9,10 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { method, body } = req;
 
+  const data: Labels = body;
+
   const filter = () => {
-    const query: TypesQuery = {};
+    const query: Partial<Labels> = {};
     query.user_id = userInfo._id;
 
     return query;
@@ -28,7 +30,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'POST':
-      const { _id, parent_id, title_id, name, color } = body;
+      const { _id, parent_id, title_id, name, color } = data;
       const labelItem = { _id, parent_id, title_id, name, color, user_id: userInfo._id };
       try {
         const createLabel = await Label.create(labelItem);
@@ -38,9 +40,10 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'PUT':
+      const arrayObjectData: Labels[] = body;
       try {
         const updateLabel = await Promise.all(
-          body.map(async (label: TypesQuery) => {
+          arrayObjectData.map(async (label: Labels) => {
             return await Label.updateMany(
               { _id: label._id },
               { $set: label },

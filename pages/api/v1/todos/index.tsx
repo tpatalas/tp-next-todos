@@ -3,7 +3,7 @@ import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
-import { TypesQuery } from '@lib/types';
+import { Labels, Todos } from '@lib/types';
 import mongoose from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { userInfo } from 'userInfo';
@@ -17,7 +17,9 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
     query: { model: model },
   } = req;
 
-  const query: TypesQuery = {};
+  const data: Todos = body;
+  const query: Partial<Todos> = {};
+
   query.user_id = userInfo._id;
 
   switch (method) {
@@ -48,6 +50,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       const session = await mongoose.startSession();
       session.startTransaction();
+
       const {
         _id,
         title,
@@ -59,7 +62,8 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         priorityRankScore,
         labelItem,
         note,
-      } = body;
+      } = data;
+
       const todoItem = {
         title,
         _id,
@@ -71,6 +75,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         priorityRankScore,
         user_id: userInfo._id,
       };
+
       const todoNote = {
         note,
         title_id: _id,
@@ -83,7 +88,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         const createdLabel =
           labelItem &&
           (await Promise.all(
-            labelItem.map(async (label: TypesQuery) => {
+            labelItem.map(async (label: Labels) => {
               return await Label.updateMany(
                 { _id: label._id },
                 { $set: label },
@@ -96,7 +101,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
         await Promise.all([createdTodoItem, createdTodoNote, createdLabel]);
         await session.commitTransaction();
-        res.status(201).json({ success: true, data: body });
+        res.status(201).json({ success: true, data: data });
       } catch (error) {
         await session.abortTransaction();
         res.status(400).json({ success: false });
