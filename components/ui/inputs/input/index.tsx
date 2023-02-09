@@ -3,7 +3,7 @@ import { classNames } from '@states/utils';
 import { Types, TypesElement, TypesInputAttributes } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
+const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip), { ssr: false });
 
 type Props = Partial<
   Pick<Types, 'className' | 'name' | 'isDisabled' | 'kbd' | 'tooltip'> & {
@@ -11,16 +11,7 @@ type Props = Partial<
   } & TypesInputAttributes
 >;
 
-export const Input = ({
-  name,
-  tooltip,
-  kbd,
-  type,
-  className,
-  isChecked,
-  onChange,
-  isDisabled,
-}: Props) => {
+export const Input = ({ name, tooltip, kbd, type, className, isChecked, onChange, isDisabled }: Props) => {
   const [isClicked, setClick] = useState(false);
 
   return (

@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import { Fragment as NotificationFragment } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-const SvgIcon = dynamic(() => import('components/icons/svgIcon').then((mod) => mod.SvgIcon));
+const SvgIcon = dynamic(() => import('components/icons/svgIcon').then((mod) => mod.SvgIcon), { ssr: false });
 
 export const Notification = () => {
   const notification = useRecoilValue(selectorNotificationState) as TypesNotification;

@@ -11,7 +11,7 @@ import { Fragment as MenuFragment, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
-const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
+const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip), { ssr: false });
 
 type Props = { options: TypesOptionsDropdown } & Partial<
   Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>

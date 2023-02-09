@@ -3,7 +3,7 @@ import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { forwardRef, useState } from 'react';
 
-const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
+const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip), { ssr: false });
 
 type Props = { options: TypesOptionsPseudoButton } & Partial<
   Pick<Types, 'onKeyDown' | 'children' | 'onClick' | 'onDoubleClick' | 'onMouseEnter' | 'onMouseOver'>

@@ -1,15 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const ContentSecurityPolicy = `
-  default-src 'self';
+  default-src 'self'; connect-src 'self'; 
   child-src 'self' youtube.com;
   font-src 'self' ;
   img-src 'self' data:;
-  ${
-    process.env.Node_EVN !== 'production'
-      ? `style-src 'self' 'unsafe-inline' 'unsafe-eval'`
-      : `style-src 'self'`
-  };
+  ${process.env.Node_EVN !== 'production' ? `style-src 'self' 'unsafe-inline' 'unsafe-eval'` : `style-src 'self'`};
   ${
     process.env.Node_EVN !== 'production'
       ? `script-src 'self' 'unsafe-eval' 'unsafe-inline' apis.google.com`
@@ -53,7 +49,7 @@ const securityHeaders = [
   },
   {
     key: 'Access-Control-Allow-Origin',
-    value: 'teempress.com,',
+    value: process.env.NEXT_PUBLIC_HOST,
   },
 ];
 
@@ -70,10 +66,7 @@ module.exports = withBundleAnalyzer({
     ignoreDuringBuilds: false,
   },
   images: {
-    domains:
-      process.env.Node_EVN !== 'production'
-        ? ['images.unsplash.com', 'tailwindui.com']
-        : [''],
+    domains: process.env.Node_EVN !== 'production' ? ['images.unsplash.com', 'tailwindui.com'] : [''],
   },
   output: 'standalone',
   swcMinify: true,

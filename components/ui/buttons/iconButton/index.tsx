@@ -5,8 +5,8 @@ import { classNames } from '@states/utils';
 import dynamic from 'next/dynamic';
 import { Fragment as HeaderContentsFragment } from 'react';
 
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
-const Button = dynamic(() => import('../button').then((mod) => mod.Button));
+const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon), { ssr: false });
+const Button = dynamic(() => import('../button').then((mod) => mod.Button), { ssr: false });
 
 type Props = { options: TypesOptionsButton } & Partial<
   Pick<Types, 'headerContents' | 'children' | 'onClick' | 'children'>

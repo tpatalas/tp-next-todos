@@ -8,8 +8,8 @@ import { useTodoModalConfirmStateDiscard } from '@states/modals/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment as DiscardHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-const ConfirmModal = dynamic(() => import('.').then((mod) => mod.ConfirmModal));
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
+const ConfirmModal = dynamic(() => import('.').then((mod) => mod.ConfirmModal), { ssr: false });
+const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon), { ssr: false });
 
 export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
   const discardConfirmModal = useTodoModalConfirmStateDiscard(todo?._id);

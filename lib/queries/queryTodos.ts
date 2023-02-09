@@ -2,22 +2,24 @@ import { Todos, Types } from '@lib/types';
 import { queries } from '@states/utils';
 import { fetchWithRetry } from '@states/utils/hooks';
 
+const apiTodos = process.env.NEXT_PUBLIC_API_ENDPOINT_TODOS as string;
+
 export const getDataTodoIds = async ({
   model,
 }: Partial<Pick<Types, 'completed' | 'completedFromToday' | 'priorityLevel'>> & Pick<Types, 'model'>) => {
-  const response = await fetchWithRetry('/api/v1/todos?' + queries('model=' + model));
+  const response = await fetchWithRetry(apiTodos + '?' + queries('model=' + model));
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
 export const getDataTodoItem = async ({ _id }: Pick<Types, '_id'>) => {
-  const response = await fetchWithRetry(`/api/v1/todos/${_id}`);
+  const response = await fetchWithRetry(apiTodos + `/${_id}`);
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 };
 
 export const createDataNewTodo = async (inputValue: Todos) => {
-  const response = await fetchWithRetry('/api/v1/todos', {
+  const response = await fetchWithRetry(apiTodos, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(inputValue),
@@ -27,7 +29,7 @@ export const createDataNewTodo = async (inputValue: Todos) => {
 };
 
 export const deleteDataTodo = async (_id: Todos['_id']) => {
-  const response = await fetchWithRetry(`/api/v1/todos/${_id}`, {
+  const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error(response.statusText);
@@ -35,7 +37,7 @@ export const deleteDataTodo = async (_id: Todos['_id']) => {
 };
 
 export const updateDataTodo = async (_id: Todos['_id'], inputValue: Todos) => {
-  const response = await fetchWithRetry(`/api/v1/todos/${_id}`, {
+  const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(inputValue),
@@ -49,7 +51,7 @@ export const completeDataTodo = async (
   completed: Todos['completed'],
   completedDate: Todos['completedDate'],
 ) => {
-  const response = await fetchWithRetry(`/api/v1/todos/${_id}`, {
+  const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ completed: completed, completedDate: completedDate }),
@@ -63,7 +65,7 @@ export const updateDataCalendarTodo = async (
   dueDate: Todos['dueDate'],
   priorityRankScore: Todos['priorityRankScore'],
 ) => {
-  const response = await fetchWithRetry(`/api/v1/todos/${_id}`, {
+  const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ dueDate: dueDate, priorityRankScore: priorityRankScore }),
@@ -77,7 +79,7 @@ export const updateDataPriorityTodo = async (
   priority: Todos['priorityLevel'],
   priorityRankScore: Todos['priorityRankScore'],
 ) => {
-  const response = await fetchWithRetry(`/api/v1/todos/${_id}`, {
+  const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
