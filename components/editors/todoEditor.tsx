@@ -6,7 +6,7 @@ import { useRecoilCallback } from 'recoil';
 
 type Props = Partial<Pick<Types, 'todo'>>;
 
-const EditorComposer = dynamic(() => import('./editorComposer').then((mod) => mod.EditorComposer));
+const EditorComposer = dynamic(() => import('./editorComposer').then((mod) => mod.EditorComposer), { ssr: false });
 
 export const TodoEditors = ({ todo }: Props) => {
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {

@@ -13,4 +13,5 @@ LICENSE
 .tmp
 .vscode
 .tar.gz
-
+.env.development.local
+.env.local

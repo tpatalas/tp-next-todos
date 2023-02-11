@@ -4,8 +4,9 @@ import { LayoutHome } from '@layouts/layoutHome';
 import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 
-const PrefetchRouterButton = dynamic(() =>
-  import('@buttons/button/prefetchRouterButton').then((mod) => mod.PrefetchRouterButton),
+const PrefetchRouterButton = dynamic(
+  () => import('@buttons/button/prefetchRouterButton').then((mod) => mod.PrefetchRouterButton),
+  { ssr: false },
 );
 
 const Home = () => {

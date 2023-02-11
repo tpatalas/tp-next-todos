@@ -13,7 +13,7 @@ import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment as FooterButtonsFragment, Fragment as HeaderContentFragment } from 'react';
 import { useRecoilValue } from 'recoil';
-const TodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
+const TodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal), { ssr: false });
 
 export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
   const updateTodo = useTodoUpdateItem(todo._id);

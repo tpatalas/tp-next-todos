@@ -6,17 +6,16 @@ import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const DeleteConfirmModal = dynamic(() =>
-  import('../deleteConfirmModal').then((mod) => mod.DeleteConfirmModal),
-);
+const DeleteConfirmModal = dynamic(() => import('../deleteConfirmModal').then((mod) => mod.DeleteConfirmModal), {
+  ssr: false,
+});
 
 type Props = Pick<Types, 'label'>;
 
 export const DeleteLabelConfirmModal = ({ label }: Props) => {
   const deleteConfirmModal = useLabelModalConfirmStateDelete(label._id);
   const isConfirmModalOpen = useRecoilValue(atomConfirmModalDelete(label._id));
-  const labelItem =
-    useRecoilValue(atomQueryLabels).find((item) => item._id === label._id) || ({} as Labels);
+  const labelItem = useRecoilValue(atomQueryLabels).find((item) => item._id === label._id) || ({} as Labels);
 
   return (
     <Fragment>
