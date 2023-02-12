@@ -1,14 +1,20 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { DATA_SIDEBAR_MENU } from '@data/dataArrayObjects';
+import { BREAKPOINT } from '@data/dataTypesObjects';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
+import { useSidebarOpen } from '@states/layouts/hooks';
+import { atomMediaQuery } from '@states/misc';
 import { classNames } from '@states/utils';
 import { useRouter } from 'next/router';
 import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
+import { useRecoilValue } from 'recoil';
 import { TodosCount } from './todosCount';
 
 export const FooterSidebarMenu = () => {
   const router = useRouter();
+  const setSidebarOpen = useSidebarOpen();
+  const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
 
   return (
     <FooterSidebarMenuFragment>
@@ -25,7 +31,8 @@ export const FooterSidebarMenu = () => {
                   ? 'cursor-default bg-blue-100 font-semibold text-gray-900 text-opacity-80'
                   : `font-medium text-gray-600 hover:text-gray-900 ${STYLE_HOVER_SLATE_LIGHT}`,
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-0 focus:ring-offset-0',
-              )}>
+              )}
+              onClick={() => !isBreakpointMd && setSidebarOpen()}>
               <span className='pr-3'>
                 <SvgIcon
                   options={{

@@ -1,13 +1,17 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@data/dataOptions';
+import { BREAKPOINT } from '@data/dataTypesObjects';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { TodosCount } from '@layouts/layoutApp/layout/layoutFooter/footerSidebar/todosCount';
 import { Types } from '@lib/types';
+import { useSidebarOpen } from '@states/layouts/hooks';
+import { atomMediaQuery } from '@states/misc';
 import { classNames, paths } from '@states/utils';
 import { useNextQuerySlug } from '@states/utils/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment, Fragment as LabelModalFragment } from 'react';
+import { useRecoilValue } from 'recoil';
 
 const LabelItemDropdown = dynamic(() => import('@dropdowns/labelItemDropdown').then((mod) => mod.LabelItemDropdown), {
   ssr: false,
@@ -27,6 +31,8 @@ const DeleteLabelConfirmModal = dynamic(
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
   const slug = useNextQuerySlug('/app/label');
   const matchedSlug = slug === label._id;
+  const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
+  const setSideBarOpen = useSidebarOpen();
 
   return (
     <Fragment>
@@ -39,7 +45,8 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
           <PrefetchRouterButton
             tooltip={label.name}
             path={paths('/app/label/', label._id)}
-            className={classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0')}>
+            className={classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0')}
+            onClick={() => !isBreakpointMd && setSideBarOpen()}>
             <div className='flex w-full flex-row  py-2 px-2'>
               {matchedSlug ? (
                 <SvgIcon options={optionsButtonLabelRouteMatched} />
