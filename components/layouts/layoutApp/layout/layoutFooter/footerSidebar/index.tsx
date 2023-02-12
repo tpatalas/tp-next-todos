@@ -79,7 +79,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
         </CreateTodoFragment>
         <div
           className={classNames(
-            'h- flex w-full flex-grow flex-col bg-transparent pr-2 md:h-[calc(100vh-8.5rem)]',
+            'flex h-[calc(100vh-8.5rem)] w-full flex-grow flex-col bg-transparent pr-2',
             isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
           )}>
           <div className='flex flex-grow flex-col'>
