@@ -234,6 +234,7 @@ export interface TypesStyleAttributes {
   space: string;
   text: string;
   menuWidth: string;
+  menuHeight: string;
   display: string;
   width: string;
   container: string;

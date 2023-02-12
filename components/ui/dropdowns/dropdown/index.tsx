@@ -39,7 +39,7 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
     <span>
       <Menu
         as='div'
-        className={classNames('relative inline-block text-left', options.menuWidth)}>
+        className={classNames('relative inline-block text-left', options.menuWidth, options.menuHeight)}>
         {({ open }) => (
           <Tooltip
             tooltip={isClicked || open ? undefined : options.tooltip}
@@ -52,7 +52,7 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
                     'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
                     options.padding ?? 'p-2',
                     options.hoverBg ?? STYLE_HOVER_SLATE_DARK,
-                    options.borderRadius ?? 'rounded-lg',
+                    options.borderRadius ?? 'rounded-full',
                     (!options.borderRadius && headerContents) || 'rounded-full',
                     visibility(isInitiallyVisible ?? true, open),
                   )}

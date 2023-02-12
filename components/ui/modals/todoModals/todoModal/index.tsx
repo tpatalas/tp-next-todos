@@ -81,7 +81,9 @@ export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, 
               <LabelComboBoxDropdown
                 todo={todo}
                 container={classNames(
-                  isTodoModalMax ? 'w-full max-w-[85%]' : 'max-w-[32rem] md:w-[75%] w-[calc(70vw-2rem)]',
+                  isTodoModalMax
+                    ? 'w-full max-w-[85%]'
+                    : 'max-w-[32rem] md:w-[75%] sm:w-[calc(70vw-2rem)] w-[calc(70vw-4rem)]',
                 )}
               />
             </div>

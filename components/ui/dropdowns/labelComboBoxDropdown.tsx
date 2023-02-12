@@ -30,7 +30,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
       <div
         className={classNames(
           'relative flex flex-row',
-          container ?? 'w-[calc(80vw-5rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
+          container ?? 'w-[calc(80vw-6rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
         )}>
         <LabelsHorizontalGradients
           scrollRef={scrollRef}
