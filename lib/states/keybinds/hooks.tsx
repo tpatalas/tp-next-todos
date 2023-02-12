@@ -16,6 +16,7 @@ import {
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from '@states/todos/hooks';
 import { atomCatch } from '@states/utils';
+import { useConditionCheckLabelTitleEmpty } from '@states/utils/hooks';
 import { isMacOs } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';
@@ -109,6 +110,7 @@ export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'
 
 // with labels
 export const useKeyWithLabelModal = (_id: Labels['_id']) => {
+  const isLabelEmpty = useConditionCheckLabelTitleEmpty();
   const addLabel = useLabelAdd();
   const updateLabel = useLabelUpdateItem(_id);
   return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
@@ -120,7 +122,7 @@ export const useKeyWithLabelModal = (_id: Labels['_id']) => {
 
     switch (event.key) {
       case 'Enter':
-        if (!isLabelModalOpen) return;
+        if (!isLabelModalOpen || isLabelEmpty) return;
         event.preventDefault();
         if (get(atomLabelModalOpen(_id)) && typeof _id !== 'undefined') return updateLabel();
         get(atomLabelModalOpen(undefined)) && addLabel();
