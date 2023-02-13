@@ -51,7 +51,7 @@ export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, 
         {typeof todo !== 'undefined' && <DeleteTodoConfirmModal todo={todo} />}
         <ModalTransitionChild
           className={classNames(
-            'h-[28rem] px-4 pt-2 pb-5 sm:relative',
+            'h-[28rem] px-4 pt-2 pb-7 sm:relative',
             isTodoModalMax
               ? 'sm:bottom-0 sm:h-full sm:max-h-[90vh] sm:max-w-[90vw] xl:max-w-6xl'
               : 'sm:max-h-[28rem] sm:max-w-2xl md:bottom-[calc(23vh-6rem)]',
@@ -83,7 +83,7 @@ export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, 
                 container={classNames(
                   isTodoModalMax
                     ? 'w-full max-w-[85%]'
-                    : 'max-w-[32rem] md:w-[75%] sm:w-[calc(70vw-2rem)] w-[calc(70vw-4rem)]',
+                    : 'max-w-[32rem] md:w-[78%] sm:w-[calc(70vw-2rem)] w-[calc(70vw-4rem)]',
                 )}
               />
             </div>

@@ -19,9 +19,8 @@ export const LabelsHorizontalGradients = ({ scrollRef, position }: Props) => {
         <GradientLeftFragment>
           <div
             className={classNames(
-              'absolute -left-1 top-1/2 ml-1 block h-[calc(100%-20%)] w-10 -translate-y-2/4 bg-gradient-to-r lg:left-0',
-              leftPosition > 0 &&
-                'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
+              'absolute -left-2 top-1/2 ml-1 block h-[calc(100%-20%)] w-10 -translate-y-2/4 bg-gradient-to-r sm:-left-2',
+              leftPosition > 0 && 'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
             )}
           />
         </GradientLeftFragment>
@@ -30,7 +29,7 @@ export const LabelsHorizontalGradients = ({ scrollRef, position }: Props) => {
         <GradientRightFragment>
           <div
             className={classNames(
-              'absolute top-1/2 right-0 block h-[calc(100%-20%)] w-5 -translate-y-2/4 bg-gradient-to-l',
+              'absolute top-1/2 -right-1 block h-[calc(100%-20%)] w-5 -translate-y-2/4 bg-gradient-to-l sm:-right-1',
               isOverflow &&
                 rightPosition !== 0 &&
                 'from-white group-hover/focuser:from-slate-100 group-focus/focuser:from-blue-100',
