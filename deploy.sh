@@ -7,6 +7,7 @@ function gcloud_run_deploy() {
   gcloud run deploy \
     $VPC_FLAG \
     $SECRET_FLAG \
+    $SERVICE_NAME \
     --image gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG \
     --project $GCP_PROJECT_ID \
     --region $DEPLOY_REGION \
@@ -19,6 +20,7 @@ source .env.local
 # NOTE: .env.local must hold the following environment variables
 # .env.local SHOULD NOT be shared and only served from the local. 
 #
+# SERVICE_NAME
 # IMAGE_NAME
 # IMAGE_TAG
 # GCP_PROJECT_ID
