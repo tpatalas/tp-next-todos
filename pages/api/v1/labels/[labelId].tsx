@@ -1,7 +1,9 @@
+import { OBJECT_ID } from '@data/dataTypesObjects';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { userInfo } from 'userInfo';
 
 const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
@@ -13,10 +15,16 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
   } = req;
   const data: Labels = body;
 
+  const query: Partial<Labels> = {
+    _id: labelId as OBJECT_ID,
+    deleted: { $ne: true },
+    user_id: userInfo._id,
+  };
+
   switch (method) {
     case 'GET':
       try {
-        const getLabelById = await Label.findById(labelId);
+        const getLabelById = await Label.findOne(query);
         if (!getLabelById) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: getLabelById });
       } catch (error) {
@@ -38,7 +46,16 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'DELETE':
       try {
-        const deleteLabelById = await Label.findByIdAndDelete(labelId);
+        const deleteLabelById = await Label.findByIdAndUpdate(
+          labelId,
+          {
+            deleted: true,
+          },
+          {
+            new: true,
+            runValidators: true,
+          },
+        );
         if (!deleteLabelById) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: deleteLabelById });
       } catch (error) {

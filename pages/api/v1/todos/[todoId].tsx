@@ -26,11 +26,12 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
     data;
 
   const filter = (type: SCHEMA_TODO) => {
-    const query: Partial<Todos> = {};
-    query.user_id = userInfo._id;
+    const query: Partial<Todos> = {
+      deleted: { $ne: false },
+      user_id: userInfo._id,
+    };
     type === SCHEMA_TODO['todoItem'] && (query._id = queriedTodoId);
     type === SCHEMA_TODO['todoNote'] && (query.title_id = queriedTodoId);
-
     return query;
   };
 
@@ -42,11 +43,11 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         ).then((data: Todos[]) => data[0]);
 
         if (!getItem) {
-          return res.status(400).json({ success: false });
+          return res.status(400).json({ success: false, data: {} });
         }
         res.status(200).json({ success: true, data: getItem });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ success: false, data: {} });
       }
       break;
     case 'PUT':
@@ -132,12 +133,24 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'DELETE':
       session.startTransaction();
-      const deleteItem = await TodoItem.findOneAndDelete(filter(SCHEMA_TODO['todoItem']), {
-        session,
-      });
-      const deleteNote = await TodoNote.findOneAndDelete(filter(SCHEMA_TODO['todoNote']), {
-        session,
-      });
+      const deleteItem = await TodoItem.findOneAndUpdate(
+        filter(SCHEMA_TODO['todoItem']),
+        { deleted: true },
+        {
+          session: session,
+          new: true,
+          runValidators: true,
+        },
+      );
+      const deleteNote = await TodoNote.findOneAndUpdate(
+        filter(SCHEMA_TODO['todoNote']),
+        { deleted: true },
+        {
+          session: session,
+          new: true,
+          runValidators: true,
+        },
+      );
 
       try {
         const deletedTodo = await Promise.all([deleteItem, deleteNote]).then(([deletedItem, deletedNote]) => ({

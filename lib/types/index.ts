@@ -71,6 +71,7 @@ export interface TodoIds {
   priorityLevel?: PRIORITY_LEVEL | null;
   priorityRankScore?: number;
   completedDate?: Date | null;
+  deleted?: boolean | { $ne: boolean };
 }
 
 export interface TodosEditors {
@@ -97,6 +98,7 @@ export interface Labels extends LabelIds {
 
 export interface LabelIds {
   _id?: OBJECT_ID;
+  deleted?: boolean | { $ne: boolean };
 }
 
 export interface TypesLabel {
