@@ -38,11 +38,17 @@ const TodoItemSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  update: {
+    type: Number,
+    default: Date.now,
+    required: false,
+  },
   user_id: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
 });
-TodoItemSchema.index({ _id: 1, user_id: -1 }, { unique: true });
+TodoItemSchema.index({ update: 1, user_id: -1 }, { unique: true });
+TodoItemSchema.index({ title: 'text' });
 
 export default mongoose.models['Todo-Items'] || mongoose.model('Todo-Items', TodoItemSchema);
