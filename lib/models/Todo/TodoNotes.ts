@@ -11,11 +11,18 @@ const TodoNoteSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
+  update: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
   user_id: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
 });
 
-TodoNoteSchema.index({ title_id: 1, user_id: -1 }, { unique: true });
+TodoNoteSchema.index({ update: 1, title_id: 1, user_id: -1 }, { unique: true });
+TodoNoteSchema.index({ note: 'text' });
+
 export default mongoose.models['Todo-Notes'] || mongoose.model('Todo-Notes', TodoNoteSchema);
