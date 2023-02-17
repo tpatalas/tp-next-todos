@@ -266,12 +266,16 @@ export const optionsPriorityTodoModalImportant: TypesOptionsPriority = {
   priorityLevel: PRIORITY_LEVEL['important'],
   isInitiallyVisible: false,
   margin: '-ml-1',
+  borderRadius: 'rounded-full focus-visible:rounded-full',
+  hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
 };
 
 export const optionsPriorityTodoModalUrgent: TypesOptionsPriority = {
   priorityLevel: PRIORITY_LEVEL['urgent'],
   isInitiallyVisible: false,
   margin: '-ml-1 mr-1',
+  borderRadius: 'rounded-full focus-visible:rounded-full',
+  hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
 };
 
 // dropdown
@@ -316,6 +320,7 @@ export const optionsDropdownComboBox: TypesOptionsDropdown = {
   hasDivider: false,
   contentWidth: 'w-72',
   isPortal: true,
+  borderRadius: 'rounded-lg',
 };
 // labels
 export const optionsDropdownLabelItem: TypesOptionsDropdown = {
@@ -347,7 +352,7 @@ export const optionsMinimizedModal: TypesOptionsMinimizedModalTransition = {
 export const optionsLoadingTodos: TypesOptionsLoadingState = {
   loadingSkeleton: <LoadingSkeletonTodos />,
   repeatingCount: 10,
-  margin: 'ml-7 mt-5',
+  margin: 'ml-4 sm:ml-1 mt-5',
   space: 'space-y-10',
 };
 

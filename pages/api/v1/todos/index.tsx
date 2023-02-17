@@ -19,12 +19,13 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data: Todos = body;
   const query: Partial<Todos> = {
-    deleted: { $ne: true },
     user_id: userInfo._id,
   };
 
   switch (method) {
     case 'GET':
+      query.deleted = { $ne: true };
+
       const SCHEMA = {
         todoItem: TodoItem,
         todoNote: TodoNote,
@@ -74,12 +75,14 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         createdDate,
         priorityLevel,
         priorityRankScore,
+        update: Date.now(),
         user_id: userInfo._id,
       };
 
       const todoNote = {
         note,
         title_id: _id,
+        update: Date.now(),
         user_id: userInfo._id,
       };
 

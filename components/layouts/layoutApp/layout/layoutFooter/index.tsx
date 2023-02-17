@@ -33,15 +33,15 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
         <FooterBodyFragment>
           <div
             className={classNames(
-              'relative mr-3 mb-3 flex w-full flex-row justify-between rounded-md bg-white shadow-md shadow-slate-200 transition-[margin-left] duration-200 ease-in-out ',
-              isSidebarOpen ? 'ml-3 md:ml-[266px]' : 'ml-3',
+              'relative flex w-full flex-row justify-between rounded-md bg-transparent transition-all duration-200 ease-in-out sm:mr-3 sm:mb-3 sm:bg-white sm:shadow-md sm:shadow-slate-200',
+              isSidebarOpen ? 'ml-3 md:ml-[266px]' : 'sm:ml-3',
             )}>
             <main
               className={classNames(
                 'absolute h-[calc(100vh-5.4rem)] w-full sm:h-[calc(100vh-4.4rem)] lg:h-full',
                 isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
               )}>
-              <div className='flex w-full justify-center pt-10 pb-64 pl-0 sm:pl-5 lg:justify-center lg:pl-10'>
+              <div className='flex w-full justify-center pt-2 pb-64 sm:pt-10 sm:pl-5 lg:justify-center lg:pl-10'>
                 {children}
               </div>
             </main>

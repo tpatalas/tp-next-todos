@@ -52,8 +52,7 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
                     'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
                     options.padding ?? 'p-2',
                     options.hoverBg ?? STYLE_HOVER_SLATE_DARK,
-                    options.borderRadius ?? 'rounded-full',
-                    (!options.borderRadius && headerContents) || 'rounded-full',
+                    options.borderRadius && headerContents ? options.borderRadius : 'rounded-full',
                     visibility(isInitiallyVisible ?? true, open),
                   )}
                   onMouseDown={() => setClick(true)}

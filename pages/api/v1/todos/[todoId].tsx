@@ -27,7 +27,6 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const filter = (type: SCHEMA_TODO) => {
     const query: Partial<Todos> = {
-      deleted: { $ne: false },
       user_id: userInfo._id,
     };
     type === SCHEMA_TODO['todoItem'] && (query._id = queriedTodoId);
@@ -43,11 +42,11 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         ).then((data: Todos[]) => data[0]);
 
         if (!getItem) {
-          return res.status(400).json({ success: false, data: {} });
+          return res.status(400).json({ success: false });
         }
         res.status(200).json({ success: true, data: getItem });
       } catch (error) {
-        res.status(400).json({ success: false, data: {} });
+        res.status(400).json({ success: false });
       }
       break;
     case 'PUT':
@@ -61,10 +60,12 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         createdDate,
         priorityLevel,
         priorityRankScore,
+        update: Date.now(),
       };
 
       const todoNote = {
         note,
+        update: Date.now(),
       };
 
       try {
@@ -118,10 +119,14 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'PATCH':
       try {
-        const updateItem = await TodoItem.findOneAndUpdate(filter(SCHEMA_TODO['todoItem']), data, {
-          new: true,
-          runValidators: true,
-        });
+        const updateItem = await TodoItem.findOneAndUpdate(
+          filter(SCHEMA_TODO['todoItem']),
+          { ...data, update: Date.now() },
+          {
+            new: true,
+            runValidators: true,
+          },
+        );
         if (!updateItem) {
           return res.status(400).json({ success: false });
         }
@@ -135,21 +140,13 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       session.startTransaction();
       const deleteItem = await TodoItem.findOneAndUpdate(
         filter(SCHEMA_TODO['todoItem']),
-        { deleted: true },
-        {
-          session: session,
-          new: true,
-          runValidators: true,
-        },
+        { update: Date.now(), deleted: true },
+        { session: session, new: true, runValidators: true },
       );
       const deleteNote = await TodoNote.findOneAndUpdate(
         filter(SCHEMA_TODO['todoNote']),
-        { deleted: true },
-        {
-          session: session,
-          new: true,
-          runValidators: true,
-        },
+        { update: Date.now(), deleted: true },
+        { session: session, new: true, runValidators: true },
       );
 
       try {

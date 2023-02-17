@@ -326,8 +326,8 @@ export interface TypesEffects {
   // Local Storage Effect
   storageKey: string;
   storageValue(): string;
+  storageUpdateDelayOnBlur: number;
   isLocalStorageOnMount: boolean;
-  isLocalStorageSetOnFocus: boolean;
   isLocalStorageSetOnBlur: boolean;
   isLocalStorageSetOnBeforeUnload: boolean;
 }
@@ -339,12 +339,14 @@ export interface TypesEffects {
 export type TypesLocalStorageEffect = <T>({
   isLocalStorageOnMount,
   isLocalStorageSetOnBlur,
-  isLocalStorageSetOnFocus,
   isLocalStorageSetOnBeforeUnload,
+  storageKey,
+  storageValue,
+  storageUpdateDelayOnBlur,
 }: Partial<
   Pick<
     Types,
-    'isLocalStorageOnMount' | 'isLocalStorageSetOnFocus' | 'isLocalStorageSetOnBlur' | 'isLocalStorageSetOnBeforeUnload'
+    'storageUpdateDelayOnBlur' | 'isLocalStorageOnMount' | 'isLocalStorageSetOnBlur' | 'isLocalStorageSetOnBeforeUnload'
   >
 > &
   Pick<Types, 'storageKey' | 'storageValue'>) => AtomEffect<T>;

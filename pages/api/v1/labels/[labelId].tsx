@@ -17,12 +17,13 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const query: Partial<Labels> = {
     _id: labelId as OBJECT_ID,
-    deleted: { $ne: true },
     user_id: userInfo._id,
   };
 
   switch (method) {
     case 'GET':
+      query.deleted = { $ne: true };
+
       try {
         const getLabelById = await Label.findOne(query);
         if (!getLabelById) return res.status(400).json({ success: false });
@@ -33,11 +34,11 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'PUT':
       try {
-        const updateLabelById = await Label.findByIdAndUpdate(labelId, data, {
-          upsert: true,
-          new: true,
-          runValidators: true,
-        });
+        const updateLabelById = await Label.findByIdAndUpdate(
+          labelId,
+          { ...data, update: Date.now() },
+          { upsert: true, new: true, runValidators: true },
+        );
         if (!updateLabelById) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: updateLabelById });
       } catch (error) {
@@ -49,6 +50,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
         const deleteLabelById = await Label.findByIdAndUpdate(
           labelId,
           {
+            update: Date.now(),
             deleted: true,
           },
           {
