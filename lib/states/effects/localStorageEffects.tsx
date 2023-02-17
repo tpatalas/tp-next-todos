@@ -1,7 +1,14 @@
 import { TypesLocalStorageEffect } from '@lib/types';
 
 export const localStorageEffects: TypesLocalStorageEffect =
-  ({ isLocalStorageOnMount, isLocalStorageSetOnFocus, isLocalStorageSetOnBlur, storageKey, storageValue }) =>
+  ({
+    isLocalStorageOnMount,
+    isLocalStorageSetOnFocus,
+    isLocalStorageSetOnBlur,
+    isLocalStorageSetOnBeforeUnload,
+    storageKey,
+    storageValue,
+  }) =>
   ({ setSelf, onSet, trigger }) => {
     if (typeof window === 'undefined') return;
 
@@ -27,8 +34,10 @@ export const localStorageEffects: TypesLocalStorageEffect =
 
     isLocalStorageSetOnFocus && window.addEventListener('focus', localStorageSync);
     isLocalStorageSetOnBlur && window.addEventListener('blur', localStorageSync);
+    isLocalStorageSetOnBeforeUnload && window.addEventListener('beforeunload', localStorageSync);
     return () => {
       isLocalStorageSetOnFocus && window.removeEventListener('focus', localStorageSync);
       isLocalStorageSetOnBlur && window.removeEventListener('blur', localStorageSync);
+      isLocalStorageSetOnBeforeUnload && window.removeEventListener('beforeunload', localStorageSync);
     };
   };

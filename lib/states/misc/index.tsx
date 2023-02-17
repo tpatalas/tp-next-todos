@@ -15,7 +15,7 @@ export const atomLocalStorageLastUpdate = atom<string>({
     localStorageEffects({
       storageKey: 'lastUpdate',
       storageValue: () => Date.now().toString(),
-      isLocalStorageSetOnBlur: true,
+      isLocalStorageSetOnBeforeUnload: true,
     }),
   ],
 });
