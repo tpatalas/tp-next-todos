@@ -323,11 +323,24 @@ export interface TypesEffects {
   breakpoint: BREAKPOINT;
   isStateUnderBreakpoint: boolean;
   isStateOverBreakpoint: boolean;
+  // Local Storage Effect
+  storageKey: string;
+  storageValue(): string;
+  isLocalStorageOnMount: boolean;
+  isLocalStorageSetOnFocus: boolean;
+  isLocalStorageSetOnBlur: boolean;
 }
 /**
  * Types Atom Effects - Recoil
  * none-collectable Types
  */
+
+export type TypesLocalStorageEffect = <T>({
+  isLocalStorageOnMount,
+  isLocalStorageSetOnBlur,
+  isLocalStorageSetOnFocus,
+}: Partial<Pick<Types, 'isLocalStorageOnMount' | 'isLocalStorageSetOnFocus' | 'isLocalStorageSetOnBlur'>> &
+  Pick<Types, 'storageKey' | 'storageValue'>) => AtomEffect<T>;
 
 export type TypesRefetchEffect = <T>({
   queryKey,
