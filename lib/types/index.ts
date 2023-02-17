@@ -329,6 +329,7 @@ export interface TypesEffects {
   isLocalStorageOnMount: boolean;
   isLocalStorageSetOnFocus: boolean;
   isLocalStorageSetOnBlur: boolean;
+  isLocalStorageSetOnBeforeUnload: boolean;
 }
 /**
  * Types Atom Effects - Recoil
@@ -339,7 +340,13 @@ export type TypesLocalStorageEffect = <T>({
   isLocalStorageOnMount,
   isLocalStorageSetOnBlur,
   isLocalStorageSetOnFocus,
-}: Partial<Pick<Types, 'isLocalStorageOnMount' | 'isLocalStorageSetOnFocus' | 'isLocalStorageSetOnBlur'>> &
+  isLocalStorageSetOnBeforeUnload,
+}: Partial<
+  Pick<
+    Types,
+    'isLocalStorageOnMount' | 'isLocalStorageSetOnFocus' | 'isLocalStorageSetOnBlur' | 'isLocalStorageSetOnBeforeUnload'
+  >
+> &
   Pick<Types, 'storageKey' | 'storageValue'>) => AtomEffect<T>;
 
 export type TypesRefetchEffect = <T>({
