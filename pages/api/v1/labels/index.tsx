@@ -11,17 +11,15 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data: Labels = body;
 
-  const filter = () => {
-    const query: Partial<Labels> = {};
-    query.user_id = userInfo._id;
-
-    return query;
+  const query: Partial<Labels> = {
+    deleted: { $ne: true },
+    user_id: userInfo._id,
   };
 
   switch (method) {
     case 'GET':
       try {
-        const getLabels = await Label.find(filter())
+        const getLabels = await Label.find(query)
           .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1 })
           .lean();
         res.status(200).json({ success: true, data: getLabels });

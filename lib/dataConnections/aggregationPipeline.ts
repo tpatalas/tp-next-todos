@@ -18,6 +18,7 @@ export const aggregatedTodoItem = ({
       $match: {
         _id: new mongoose.Types.ObjectId(`${todoId}`),
         user_id: new mongoose.Types.ObjectId(`${userId}`),
+        deleted: { $ne: true },
       },
     },
     { $sort: { _id: -1 } },

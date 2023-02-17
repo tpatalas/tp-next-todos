@@ -43,12 +43,17 @@ const TodoItemSchema = new mongoose.Schema({
     default: Date.now,
     required: false,
   },
+  deleted: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
   user_id: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
 });
-TodoItemSchema.index({ update: 1, user_id: -1 }, { unique: true });
+TodoItemSchema.index({ deleted: 1, update: 1, user_id: -1 }, { unique: true });
 TodoItemSchema.index({ title: 'text' });
 
 export default mongoose.models['Todo-Items'] || mongoose.model('Todo-Items', TodoItemSchema);

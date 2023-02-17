@@ -18,9 +18,10 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
   } = req;
 
   const data: Todos = body;
-  const query: Partial<Todos> = {};
-
-  query.user_id = userInfo._id;
+  const query: Partial<Todos> = {
+    deleted: { $ne: true },
+    user_id: userInfo._id,
+  };
 
   switch (method) {
     case 'GET':

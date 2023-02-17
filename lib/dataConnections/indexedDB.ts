@@ -3,6 +3,8 @@ import { IDB } from '@data/dataTypesObjects';
 import { Types, TypesIDB } from '@lib/types';
 import { openDB } from 'idb';
 
+// this will create new database per object store. This is easier to modify 
+// the schema if necessary.                   
 const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVersion']) => {
   const dbName = DATA_IDB.find((db: TypesIDB) => db.store === storeName)?.name as IDB;
 
