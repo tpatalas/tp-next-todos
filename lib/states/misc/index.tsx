@@ -1,10 +1,24 @@
 import { BREAKPOINT } from '@data/dataTypesObjects';
 import { mediaQueryEffect, networkStatusEffect } from '@effects/atomEffects';
+import { localStorageEffects } from '@effects/localStorageEffects';
 import { atomFamily, atom, selector } from 'recoil';
 
 /*
  * Atoms
  * */
+
+// Update Effect
+export const atomLocalStorageLastUpdate = atom<string>({
+  key: 'atomUpdateEffect',
+  default: '',
+  effects: [
+    localStorageEffects({
+      storageKey: 'lastUpdate',
+      storageValue: () => Date.now().toString(),
+      isLocalStorageSetOnBlur: true,
+    }),
+  ],
+});
 
 // Media Queries
 export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({
