@@ -3,19 +3,34 @@ import { TypesLocalStorageEffect } from '@lib/types';
 export const localStorageEffects: TypesLocalStorageEffect =
   ({
     isLocalStorageOnMount,
-    isLocalStorageSetOnFocus,
     isLocalStorageSetOnBlur,
     isLocalStorageSetOnBeforeUnload,
     storageKey,
     storageValue,
+    storageUpdateDelayOnBlur, // 10 mins default
   }) =>
   ({ setSelf, onSet, trigger }) => {
     if (typeof window === 'undefined') return;
+
+    let blurTimeout: ReturnType<typeof setTimeout> | null;
 
     const localStorageSync = () => {
       const value = storageValue();
       setSelf(JSON.parse(value));
       localStorage.setItem(storageKey, JSON.stringify(value));
+    };
+
+    const localStorageSyncOnBlur = () => {
+      blurTimeout = setTimeout(() => {
+        localStorageSync();
+      }, storageUpdateDelayOnBlur ?? 600000); // 10 mins delay as default
+    };
+
+    const localStorageSyncOnFocus = () => {
+      if (blurTimeout) {
+        clearTimeout(blurTimeout);
+        blurTimeout = null;
+      }
     };
 
     // isLocalStorageOnMount: true then get new value. if storageValue is static, the value will be same
@@ -32,12 +47,16 @@ export const localStorageEffects: TypesLocalStorageEffect =
       setSelf(newValue);
     });
 
-    isLocalStorageSetOnFocus && window.addEventListener('focus', localStorageSync);
-    isLocalStorageSetOnBlur && window.addEventListener('blur', localStorageSync);
+    if (isLocalStorageSetOnBlur) {
+      window.addEventListener('focus', localStorageSyncOnFocus);
+      window.addEventListener('blur', localStorageSyncOnBlur);
+    }
     isLocalStorageSetOnBeforeUnload && window.addEventListener('beforeunload', localStorageSync);
     return () => {
-      isLocalStorageSetOnFocus && window.removeEventListener('focus', localStorageSync);
-      isLocalStorageSetOnBlur && window.removeEventListener('blur', localStorageSync);
+      if (isLocalStorageSetOnBlur) {
+        window.removeEventListener('focus', localStorageSyncOnFocus);
+        window.removeEventListener('blur', localStorageSyncOnBlur);
+      }
       isLocalStorageSetOnBeforeUnload && window.removeEventListener('beforeunload', localStorageSync);
     };
   };

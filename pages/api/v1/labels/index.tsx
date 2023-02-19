@@ -12,12 +12,13 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
   const data: Labels = body;
 
   const query: Partial<Labels> = {
-    deleted: { $ne: true },
     user_id: userInfo._id,
   };
 
   switch (method) {
     case 'GET':
+      query.deleted = { $ne: true };
+
       try {
         const getLabels = await Label.find(query)
           .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1 })
@@ -29,7 +30,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'POST':
       const { _id, parent_id, title_id, name, color } = data;
-      const labelItem = { _id, parent_id, title_id, name, color, user_id: userInfo._id };
+      const labelItem = { _id, parent_id, title_id, name, color, update: Date.now(), user_id: userInfo._id };
       try {
         const createLabel = await Label.create(labelItem);
         res.status(201).json({ success: true, data: createLabel });
@@ -42,9 +43,13 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const updateLabel = await Promise.all(
           arrayObjectData.map(async (label: Labels) => {
+            const updatedLabel = {
+              ...label,
+              update: Date.now(),
+            };
             return await Label.updateMany(
               { _id: label._id },
-              { $set: label },
+              { $set: updatedLabel },
               { upsert: true, new: true, runValidators: true },
             );
           }),

@@ -73,6 +73,7 @@ export const TodoModal = ({ todo, headerContents, headerButtons, footerButtons, 
               <CalendarDropdown
                 options={{
                   tooltip: 'Due date',
+                  borderRadius: 'rounded-lg',
                   container: isTodoCompleted() ? 'cursor-not-allowed select-none opacity-50' : '',
                 }}
                 todo={todo}

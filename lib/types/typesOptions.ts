@@ -20,7 +20,10 @@ export type TypesOptionsPseudoButton = Partial<
 
 export type TypesOptionsPriority = Partial<
   Pick<Types, 'isInitiallyVisible' | 'priorityImportant' | 'priorityNormal' | 'priorityUrgent'> &
-    Pick<TypesStyleAttributes, 'margin' | 'display' | 'width' | 'container' | 'padding' | 'size' | 'color'>
+    Pick<
+      TypesStyleAttributes,
+      'margin' | 'display' | 'width' | 'container' | 'padding' | 'size' | 'color' | 'borderRadius' | 'hoverBg'
+    >
 > &
   Pick<Types, 'priorityLevel'>;
 

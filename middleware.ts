@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {
   if (req.nextUrl.pathname.match('/')) {
-    return NextResponse.rewrite(new URL('/app', req.url));
+    return NextResponse.redirect(new URL('/app', req.url));
   }
 }
 

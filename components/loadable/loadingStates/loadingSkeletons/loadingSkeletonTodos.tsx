@@ -12,8 +12,8 @@ export const LoadingSkeletonTodos = () => {
 
   return (
     <LoadingSkeletonFragment>
-      <div className='mr-2  flex w-full max-w-7xl animate-pulse flex-row justify-start space-x-2'>
-        <div className='mr-1 flex w-[calc(100vw-9rem)] max-w-[46rem] flex-row space-x-3 md:w-[calc(65vw-7rem)] ml:w-[calc(70vw-7rem)]'>
+      <div className='mr-2 flex w-full max-w-7xl animate-pulse flex-row justify-start space-x-2'>
+        <div className='mr-1 flex w-[calc(100vw-6rem)] max-w-[46rem] flex-row space-x-3 sm:w-[calc(100vw-9rem)] md:w-[calc(65vw-7rem)] ml:w-[calc(70vw-7rem)]'>
           <div className='h-5 w-5 min-w-[1.25rem] rounded-md bg-slate-200' />
           <div className='flex w-[94%] flex-col space-y-3'>
             <div className='h-5 w-[75%] rounded-full bg-slate-200' />

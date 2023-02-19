@@ -8,14 +8,15 @@ import { atomFamily, atom, selector } from 'recoil';
  * */
 
 // Update Effect
-export const atomLocalStorageLastUpdate = atom<string>({
+export const atomLocalStorageLastUpdate = atom<string | null>({
   key: 'atomUpdateEffect',
-  default: '',
+  default: null,
   effects: [
     localStorageEffects({
       storageKey: 'lastUpdate',
       storageValue: () => Date.now().toString(),
       isLocalStorageSetOnBeforeUnload: true,
+      isLocalStorageSetOnBlur: true,
     }),
   ],
 });

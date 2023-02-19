@@ -33,7 +33,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
       options={{
         tooltip: 'Menu',
         path: ICON_MORE_VERT,
-        menuHeight: 'mt-2',
+        menuHeight: options.menuHeight ?? 'mt-2',
         isInitiallyVisible: options.isInitiallyVisible,
       }}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />

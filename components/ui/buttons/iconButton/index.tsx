@@ -1,12 +1,10 @@
+import { Button } from '@buttons/button';
+import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { Types } from '@lib/types';
 import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
-import dynamic from 'next/dynamic';
 import { Fragment as HeaderContentsFragment } from 'react';
-
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon), { ssr: false });
-const Button = dynamic(() => import('../button').then((mod) => mod.Button), { ssr: false });
 
 type Props = { options: TypesOptionsButton } & Partial<
   Pick<Types, 'headerContents' | 'children' | 'onClick' | 'children'>
