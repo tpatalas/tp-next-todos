@@ -1,4 +1,4 @@
-import { OBJECT_ID, SCHEMA_TODO } from '@data/dataTypesObjects';
+import { OBJECT_ID, SCHEMA_TODO } from '@data/dataTypesConst';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
@@ -21,9 +21,6 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data: Todos = body;
   const queriedTodoId = todoId as OBJECT_ID;
-
-  const { title, completed, completedDate, dueDate, createdDate, priorityLevel, priorityRankScore, labelItem, note } =
-    data;
 
   const filter = (type: SCHEMA_TODO) => {
     const query: Partial<Todos> = {
@@ -53,18 +50,18 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       session.startTransaction();
 
       const todoItem = {
-        title,
-        completed,
-        completedDate,
-        dueDate,
-        createdDate,
-        priorityLevel,
-        priorityRankScore,
+        title: data.title,
+        completed: data.completed,
+        completedDate: data.completedDate,
+        dueDate: data.dueDate,
+        createdDate: data.createdDate,
+        priorityLevel: data.priorityLevel,
+        priorityRankScore: data.priorityRankScore,
         update: Date.now(),
       };
 
       const todoNote = {
-        note,
+        note: data.note,
         update: Date.now(),
       };
 
@@ -84,12 +81,13 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         });
 
         const updatedLabel =
-          labelItem &&
+          data.labelItem &&
           (await Promise.all(
-            labelItem.map(async (label: Labels) => {
+            data.labelItem.map(async (label: Labels) => {
+              const updatedLabel = { ...label, update: Date.now() };
               return await Label.updateMany(
                 { _id: label._id },
-                { $set: label },
+                { $set: updatedLabel },
                 {
                   session: session,
                   upsert: true,
@@ -140,7 +138,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       session.startTransaction();
       const deleteItem = await TodoItem.findOneAndUpdate(
         filter(SCHEMA_TODO['todoItem']),
-        { update: Date.now(), deleted: true },
+        { deleted: true, update: Date.now() },
         { session: session, new: true, runValidators: true },
       );
       const deleteNote = await TodoNote.findOneAndUpdate(

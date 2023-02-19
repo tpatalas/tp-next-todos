@@ -1,10 +1,10 @@
-import { CALENDAR, NOTIFICATION } from '@data/dataTypesObjects';
+import { CALENDAR, NOTIFICATION } from '@data/dataTypesConst';
 import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { useNotificationState } from '@states/notifications/hooks';
 import { usePriorityRankScore } from '@states/priorities/hooks';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { atomTodoNew } from '@states/todos';
+import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { useGetWithRecoilCallback } from '@states/utils/hooks';
 import {
   parse,
@@ -152,8 +152,7 @@ export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
   return () => {
     updateCalItem();
     updatePriorityRankScore();
-    if (equal(get(atomQueryTodoItem(todoId)).dueDate, get(atomSelectorTodoItem(todoId)).dueDate))
-      return;
+    if (equal(get(atomQueryTodoItem(todoId)).dueDate, get(atomSelectorTodoItem(todoId)).dueDate)) return;
     get(atomSelectorTodoItem(todoId)).dueDate
       ? setNotification(NOTIFICATION['updatedDueDate'])
       : setNotification(NOTIFICATION['removedDueDate']);

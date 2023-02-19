@@ -1,4 +1,4 @@
-import { CATCH, BREAKPOINT } from '@data/dataTypesObjects';
+import { CATCH, BREAKPOINT } from '@data/dataTypesConst';
 import { Todos, Types, Labels } from '@lib/types';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';

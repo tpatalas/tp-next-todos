@@ -1,6 +1,9 @@
+import { OBJECT_ID, STORAGE_KEY } from '@data/dataTypesConst';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesRefetchEffect } from '@lib/types';
+import { hasTimePast } from '@states/utils';
 import equal from 'fast-deep-equal/react';
+import { DefaultValue } from 'recoil';
 
 /**
  * * Data refetch Effect
@@ -13,7 +16,7 @@ export const queryEffect: TypesRefetchEffect =
   ({
     storeName,
     queryKey,
-    isIndexedDbEnabled,
+    isIndexedDBEnabled,
     queryFunction,
     isRefetchingOnMutation,
     refetchDelayOnMutation,
@@ -24,40 +27,67 @@ export const queryEffect: TypesRefetchEffect =
   ({ setSelf, onSet, trigger }) => {
     if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
 
-    const onIndexedDB = isIndexedDbEnabled || typeof isIndexedDbEnabled === 'undefined';
+    const onIndexedDB = isIndexedDBEnabled || typeof isIndexedDBEnabled === 'undefined';
+    const lastUpdateTime = Number(JSON.parse(localStorage.getItem(STORAGE_KEY[storeName]) || '0'));
+    const hasTenMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 10 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
 
-    // initial fetch.
-    // Multiple fetches will be cached and will fetch only once. ex) using `atomQueryTodoIds` more than one location will fetch multiple time at the initial page load then saved to indexedDB
-    // Every fetch will be saved to IndexedDB
+    //concat indexedDB with data if data is in array
+    const concatDataWithIndexedDB = async (data: Promise<DefaultValue>) => {
+      const indexedDB = await get(storeName, queryKey);
+
+      // find the deleted item with given condition
+      const deletedItem = (_id: OBJECT_ID, deleted: boolean) => {
+        if (!Array.isArray(data)) return;
+        return data.find((item) => item._id === _id && item.deleted === deleted);
+      };
+
+      // remove deleted item from the array of object
+      const updatedIndexedDBArray = Array.isArray(indexedDB) && indexedDB.filter((idb) => !deletedItem(idb._id, true));
+
+      // remove deleted object from indexedDB
+      if (Array.isArray(indexedDB)) {
+        const deletedItemsIndexedDBArray = indexedDB.filter((idb) => deletedItem(idb._id, true));
+        await Promise.all(deletedItemsIndexedDBArray.map((deletedItem) => del(storeName, deletedItem._id)));
+      }
+
+      // filter data as newData
+      const newData =
+        Array.isArray(data) &&
+        data.filter(
+          (item) =>
+            Array.isArray(updatedIndexedDBArray) &&
+            !updatedIndexedDBArray.some((idb) => idb._id === item._id) &&
+            !item.deleted,
+        );
+
+      // insert newData to indexedDB
+      const updatedData = Array.isArray(updatedIndexedDBArray)
+        ? Array.isArray(newData) && [...updatedIndexedDBArray, ...newData]
+        : data;
+
+      return updatedData as Promise<DefaultValue>;
+    };
+
+    // initial fetch - every fetch will be saved to IndexedDB if `isIndexedDb`
     const queryInitial = async () => {
       const { data } = await queryFunction();
-      if (onIndexedDB) {
-        set(storeName, queryKey, data);
-      }
-      return data;
+      const newData = await concatDataWithIndexedDB(data);
+      set(storeName, queryKey, newData);
+      return newData;
     };
 
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
-      let data = null;
-      try {
-        const { queriedData } = await queryFunction();
-        data = queriedData;
-        if (!data) return;
-        if (onIndexedDB) {
-          const indexedDb = await get(storeName, queryKey).then((value) => value);
-          if (equal(data, indexedDb)) return;
-          set(storeName, queryKey, data);
-        }
-        setSelf(data);
-      } catch (error) {
-        data = error;
-      }
+      const { data } = await queryFunction();
+      const indexedDB = await get(storeName, queryKey);
+      const newData = await concatDataWithIndexedDB(data);
+      if (onIndexedDB && equal(data, indexedDB)) return;
+      set(storeName, queryKey, newData);
+      setSelf(newData);
     };
 
-    // get indexedDb if available, and fetch if the data is not available from indexedDb
     if (trigger === 'get') {
-      onIndexedDB
+      onIndexedDB && !hasTenMinTimePast
         ? setSelf(get(storeName, queryKey).then((value) => (value != null ? value : queryInitial())))
         : setSelf(queryInitial());
     }

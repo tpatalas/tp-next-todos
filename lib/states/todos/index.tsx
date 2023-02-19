@@ -1,9 +1,10 @@
-import { OBJECT_ID, PATHNAME, PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { PATHNAME, PRIORITY_LEVEL, OBJECT_ID } from '@data/dataTypesConst';
 import { Labels, TodoIds, Todos, Types } from '@lib/types';
-import { atomLabelQuerySlug, atomQueryLabels } from '@states/labels';
+import { atomLabelQuerySlug } from '@states/labels';
+import { atomQueryLabels } from '@states/labels/atomQueries';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
-import { atom, atomFamily, selector, selectorFamily } from 'recoil';
-import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
+import { atom, selector, selectorFamily } from 'recoil';
+import { atomQueryTodoIds, atomSelectorTodoItem } from './atomQueries';
 
 /**
  * atoms
@@ -19,17 +20,6 @@ export const atomTodoNew = atom<Todos>({
     labelItem: [] as Labels[],
   } as Todos,
 });
-
-export const atomSelectorTodoItem = atomFamily<Todos, Todos['_id']>({
-  key: 'atomSelectorTodoItem',
-  default: selectorFamily({
-    key: 'selectorAtomTodoItem',
-    get:
-      (todoId) =>
-      ({ get }) =>
-        get(atomQueryTodoItem(todoId))!,
-  }),
-}); // Overwrite atomQueryTodoItem to prevent unnecessary re-rendering.
 
 export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
   key: 'selectorDynamicTodoItem',
@@ -102,9 +92,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
           )[0]?.title_id;
           return get(atomQueryTodoIds).filter((todo) => {
             const todoId = todo._id as OBJECT_ID;
-            return (
-              !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId)
-            );
+            return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
           });
       }
     },
@@ -118,9 +106,7 @@ export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TodoIds[], Lab
   get:
     (labelId) =>
     ({ get }) => {
-      const titleIdsByCurrentLabel = get(atomQueryLabels).filter(
-        (label) => label._id === labelId,
-      )[0]?.title_id;
+      const titleIdsByCurrentLabel = get(atomQueryLabels).filter((label) => label._id === labelId)[0]?.title_id;
       return get(atomQueryTodoIds).filter((todo) => {
         const todoId = todo._id as OBJECT_ID;
         return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
@@ -143,9 +129,7 @@ export const selectorTodosCount = selectorFamily<
       if (labelId) {
         const todos = get(atomQueryTodoIds);
         const titleIds = labels.filter((item) => item._id === labelId)[0]?.title_id;
-        const todoIds = todos.filter(
-          (todo) => !todo.completed && titleIds && titleIds.includes(todo._id as OBJECT_ID),
-        );
+        const todoIds = todos.filter((todo) => !todo.completed && titleIds && titleIds.includes(todo._id as OBJECT_ID));
         return todoIds.length;
       }
       const todoIdsPathname = get(selectorFilterTodoIdsByPathname(pathname as PATHNAME));

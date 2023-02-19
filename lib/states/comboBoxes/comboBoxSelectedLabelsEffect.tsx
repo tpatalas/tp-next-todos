@@ -1,4 +1,4 @@
-import { CATCH } from '@data/dataTypesObjects';
+import { CATCH } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { useLabelUpdateDataItem } from '@states/labels/hooks';
 import { atomCatch } from '@states/utils';

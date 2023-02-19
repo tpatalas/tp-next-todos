@@ -1,4 +1,4 @@
-import { OBJECT_ID } from '@data/dataTypesObjects';
+import { OBJECT_ID } from '@data/dataTypesConst';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { Labels } from '@lib/types';
@@ -22,8 +22,6 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      query.deleted = { $ne: true };
-
       try {
         const getLabelById = await Label.findOne(query);
         if (!getLabelById) return res.status(400).json({ success: false });

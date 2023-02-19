@@ -1,7 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonLabelRemove, optionsDropdownComboBox } from '@data/dataOptions';
-import { GRADIENT_POSITION } from '@data/dataTypesObjects';
+import { GRADIENT_POSITION } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';

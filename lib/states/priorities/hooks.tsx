@@ -1,9 +1,9 @@
-import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import { atomTodoNew, atomSelectorTodoItem } from '@states/todos';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { useRecoilCallback, RecoilValue } from 'recoil';
+import { atomTodoNew } from '@states/todos';
+import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
+import { RecoilValue, useRecoilCallback } from 'recoil';
 import { atomPriority, selectorPriorityRankScore } from '.';
 
 /**
@@ -29,32 +29,29 @@ export const usePriorityUpdateTodoItem = (todoId: Todos['_id']) => {
 
 export const usePriorityUpdate = (todoId: Todos['_id']) => {
   const updatePriorityTodoItem = usePriorityUpdateTodoItem(todoId);
-  const updatePriority = useRecoilCallback(
-    ({ set, reset, snapshot }) =>
-      (state: PRIORITY_LEVEL) => {
-        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-        const levelImportant = state === PRIORITY_LEVEL['important'];
-        const levelUrgent = state === PRIORITY_LEVEL['urgent'];
-        const priorityImportant =
-          typeof todoId === 'undefined'
-            ? get(atomPriority(todoId)) === PRIORITY_LEVEL['important']
-            : get(atomSelectorTodoItem(todoId)).priorityLevel === PRIORITY_LEVEL['important'];
-        const priorityUrgent =
-          typeof todoId === 'undefined'
-            ? get(atomPriority(todoId)) === PRIORITY_LEVEL['urgent']
-            : get(atomSelectorTodoItem(todoId)).priorityLevel === PRIORITY_LEVEL['urgent'];
+  const updatePriority = useRecoilCallback(({ set, reset, snapshot }) => (state: PRIORITY_LEVEL) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const levelImportant = state === PRIORITY_LEVEL['important'];
+    const levelUrgent = state === PRIORITY_LEVEL['urgent'];
+    const priorityImportant =
+      typeof todoId === 'undefined'
+        ? get(atomPriority(todoId)) === PRIORITY_LEVEL['important']
+        : get(atomSelectorTodoItem(todoId)).priorityLevel === PRIORITY_LEVEL['important'];
+    const priorityUrgent =
+      typeof todoId === 'undefined'
+        ? get(atomPriority(todoId)) === PRIORITY_LEVEL['urgent']
+        : get(atomSelectorTodoItem(todoId)).priorityLevel === PRIORITY_LEVEL['urgent'];
 
-        if (levelImportant && !priorityImportant) {
-          set(atomPriority(todoId), PRIORITY_LEVEL['important']);
-          return;
-        }
-        if (levelUrgent && !priorityUrgent) {
-          set(atomPriority(todoId), PRIORITY_LEVEL['urgent']);
-          return;
-        }
-        reset(atomPriority(todoId));
-      },
-  );
+    if (levelImportant && !priorityImportant) {
+      set(atomPriority(todoId), PRIORITY_LEVEL['important']);
+      return;
+    }
+    if (levelUrgent && !priorityUrgent) {
+      set(atomPriority(todoId), PRIORITY_LEVEL['urgent']);
+      return;
+    }
+    reset(atomPriority(todoId));
+  });
 
   return (state: PRIORITY_LEVEL) => {
     updatePriority(state);

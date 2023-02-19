@@ -1,4 +1,4 @@
-import { PATHNAME, CATCH } from '@data/dataTypesObjects';
+import { PATHNAME, CATCH } from '@data/dataTypesConst';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomCatch } from '@states/utils';
 import { Types } from 'lib/types';

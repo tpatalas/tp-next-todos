@@ -1,36 +1,9 @@
-import { IDB_STORE } from '@data/dataTypesObjects';
-import { queryEffect } from '@effects/queryEffects';
-import { getDataLabels } from '@lib/queries/queryLabels';
 import { Labels, Todos } from '@lib/types';
 import { atomComboBoxQuery, atomFilterSelected } from '@states/comboBoxes';
 import { atomTodoNew } from '@states/todos';
-import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+import { atom, atomFamily, selectorFamily } from 'recoil';
+import { atomQueryLabels, atomSelectorLabels } from './atomQueries';
 
-/**
- * Atom Queries
- **/
-export const atomQueryLabels = atom<Labels[]>({
-  key: 'atomQueryLabels',
-  effects: [
-    queryEffect({
-      storeName: IDB_STORE['labels'],
-      queryKey: 'labels',
-      queryFunction: () => getDataLabels(),
-      isRefetchingOnMutation: false, // fetching the list of labels is too expensive.
-    }),
-  ],
-});
-
-export const atomSelectorLabels = atom({
-  key: 'atomSelectorLabels',
-  default: selector({
-    key: 'selectorAtomSelectorLabels',
-    get: ({ get }) => get(atomQueryLabels),
-    cachePolicy_UNSTABLE: {
-      eviction: 'most-recent',
-    },
-  }),
-});
 /*
  * Atom
  * */
@@ -70,9 +43,7 @@ export const selectorSelectedLabels = selectorFamily<Labels[], Todos['_id']>({
     (_id) =>
     ({ get }) => {
       const todoId = _id ? _id! : get(atomTodoNew)._id!;
-      return get(atomSelectorLabels).filter(
-        (label) => label.title_id && label.title_id.includes(todoId),
-      );
+      return get(atomSelectorLabels).filter((label) => label.title_id && label.title_id.includes(todoId));
     },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
@@ -85,9 +56,7 @@ export const selectorSelectedQueryLabels = selectorFamily<Labels[], Todos['_id']
     (_id) =>
     ({ get }) => {
       const todoId = _id ? _id! : get(atomTodoNew)._id!;
-      return get(atomQueryLabels).filter(
-        (label) => label.title_id && label.title_id.includes(todoId),
-      );
+      return get(atomQueryLabels).filter((label) => label.title_id && label.title_id.includes(todoId));
     },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
@@ -106,10 +75,7 @@ export const selectorComboBoxFilteredLabels = selectorFamily<Labels[], Todos['_i
         query === ''
           ? labels
           : labels.filter((label) =>
-              label.name
-                .toLowerCase()
-                .replace(/\s+/g, '')
-                .includes(query.toLowerCase().replace(/\s+/g, '')),
+              label.name.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, '')),
             );
       const selectedFilteredLabels = [...filteredLabels].filter((label) => {
         return label.title_id && label.title_id.includes(todoId!);

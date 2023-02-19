@@ -10,8 +10,8 @@ import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialS
 import { Menu } from '@headlessui/react';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useCalResetDateAll, useCalResetDateItemOnly, useCalResetDayUpdater } from '@states/calendars/hooks';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { atomTodoNew } from '@states/todos';
+import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { classNames } from '@states/utils';
 import { Calendar } from '@ui/calendars/calendar';
 import { format } from 'date-fns';

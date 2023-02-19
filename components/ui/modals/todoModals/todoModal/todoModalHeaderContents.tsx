@@ -1,6 +1,6 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import { optionsPriorityTodoModalImportant, optionsPriorityTodoModalUrgent } from '@data/dataOptions';
-import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { usePriorityUpdate } from '@states/priorities/hooks';

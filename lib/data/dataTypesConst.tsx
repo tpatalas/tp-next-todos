@@ -82,7 +82,14 @@ export const IDB_STORE = {
   labels: 'labels',
   users: 'users',
   settings: 'settings',
-  cache: 'cache',
+} as const;
+
+export type STORAGE_KEY = (typeof STORAGE_KEY)[keyof typeof STORAGE_KEY];
+export const STORAGE_KEY = {
+  [IDB_STORE['todos']]: 'last_update_todos',
+  [IDB_STORE['labels']]: 'last_update_labels',
+  [IDB_STORE['users']]: 'last_update_users',
+  [IDB_STORE['settings']]: 'last_update_settings',
 } as const;
 
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];

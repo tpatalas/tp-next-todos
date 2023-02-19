@@ -1,6 +1,6 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import { optionsSvgPriorityUrgent, optionsSvgPriorityImportant, optionsSvgCalendarDueDate } from '@data/dataOptions';
-import { CATCH, PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { PRIORITY_LEVEL, CATCH } from '@data/dataTypesConst';
 import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
 import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';

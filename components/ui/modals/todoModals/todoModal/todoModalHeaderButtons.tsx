@@ -4,7 +4,7 @@ import {
   IconButton as MinimizeIconButton,
 } from '@buttons/iconButton';
 import { optionsButtonTodoModalMinimize, optionsButtonTodoModalClose } from '@data/dataOptions';
-import { BREAKPOINT } from '@data/dataTypesObjects';
+import { BREAKPOINT } from '@data/dataTypesConst';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
 import { TodoItemDropdown } from '@dropdowns/todoItemDropdown';
 import { Types } from '@lib/types';

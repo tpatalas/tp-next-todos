@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';
 import { TodoItem } from './todoItem';
 import { TodoItemFocuser } from './todoItemFocuser';
+
 const DeleteTodoConfirmModal = dynamic(
   () =>
     import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then((mod) => mod.DeleteTodoConfirmModal),

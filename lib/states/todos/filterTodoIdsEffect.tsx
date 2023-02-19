@@ -1,6 +1,7 @@
-import { PATHNAME } from '@data/dataTypesObjects';
+import { PATHNAME } from '@data/dataTypesConst';
 import { Labels } from '@lib/types';
-import { atomLabelQuerySlug, atomQueryLabels } from '@states/labels';
+import { atomLabelQuerySlug } from '@states/labels';
+import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomHtmlTitleTag } from '@states/misc';
 import { useNextQuerySlug } from '@states/utils/hooks';
 import { useRouter } from 'next/router';

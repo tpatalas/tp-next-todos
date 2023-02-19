@@ -1,16 +1,15 @@
 import {
-  BREAKPOINT,
-  DURATION,
+  OBJECT_ID,
+  PRIORITY_LEVEL,
+  NOTIFICATION,
   IDB,
   IDB_STORE,
-  NOTIFICATION,
-  OBJECT_ID,
   PATHNAME,
+  DURATION,
   POSITION_X,
   POSITION_Y,
-  PRIORITY_LEVEL,
-  SCHEMA_TODO,
-} from '@data/dataTypesObjects';
+  BREAKPOINT,
+} from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
 import {
   ElementType,
@@ -48,11 +47,16 @@ export interface TypesEditor {
 /**
  * Types Array Object
  */
-type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Settings & TypesGlobals;
+type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Settings & TypesGlobals & TypesMongoDB;
 
 // GlobalTypes
 export interface TypesGlobals {
   itemIds: TodoIds | LabelIds;
+}
+
+export interface TypesMongoDB {
+  notEqual: { $ne: boolean };
+  greaterThan: { $gt: number };
 }
 
 // Todos
@@ -71,7 +75,8 @@ export interface TodoIds {
   priorityLevel?: PRIORITY_LEVEL | null;
   priorityRankScore?: number;
   completedDate?: Date | null;
-  deleted?: boolean | { $ne: boolean };
+  deleted?: boolean | TypesMongoDB['notEqual'];
+  update?: number | TypesMongoDB['greaterThan'];
 }
 
 export interface TodosEditors {
@@ -83,8 +88,6 @@ export interface TypesTodo {
   todoItem: Todos;
   todo: TodoIds;
   index: number;
-  completedFromToday: number;
-  model: SCHEMA_TODO;
 }
 
 // Labels
@@ -98,7 +101,8 @@ export interface Labels extends LabelIds {
 
 export interface LabelIds {
   _id?: OBJECT_ID;
-  deleted?: boolean | { $ne: boolean };
+  deleted?: boolean | TypesMongoDB['notEqual'];
+  update?: number | TypesMongoDB['greaterThan'];
 }
 
 export interface TypesLabel {
@@ -313,7 +317,7 @@ export interface TypesEffects {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queryFunction(): Promise<any>;
   storeName: IDB_STORE;
-  isIndexedDbEnabled: boolean;
+  isIndexedDBEnabled: boolean;
   isRefetchingOnMutation: boolean;
   isRefetchingOnFocus: boolean;
   isRefetchingOnBlur: boolean;
@@ -323,38 +327,16 @@ export interface TypesEffects {
   breakpoint: BREAKPOINT;
   isStateUnderBreakpoint: boolean;
   isStateOverBreakpoint: boolean;
-  // Local Storage Effect
-  storageKey: string;
-  storageValue(): string;
-  storageUpdateDelayOnBlur: number;
-  isLocalStorageOnMount: boolean;
-  isLocalStorageSetOnBlur: boolean;
-  isLocalStorageSetOnBeforeUnload: boolean;
 }
 /**
  * Types Atom Effects - Recoil
  * none-collectable Types
  */
 
-export type TypesLocalStorageEffect = <T>({
-  isLocalStorageOnMount,
-  isLocalStorageSetOnBlur,
-  isLocalStorageSetOnBeforeUnload,
-  storageKey,
-  storageValue,
-  storageUpdateDelayOnBlur,
-}: Partial<
-  Pick<
-    Types,
-    'storageUpdateDelayOnBlur' | 'isLocalStorageOnMount' | 'isLocalStorageSetOnBlur' | 'isLocalStorageSetOnBeforeUnload'
-  >
-> &
-  Pick<Types, 'storageKey' | 'storageValue'>) => AtomEffect<T>;
-
 export type TypesRefetchEffect = <T>({
   queryKey,
   queryFunction,
-  isIndexedDbEnabled,
+  isIndexedDBEnabled,
   storeName,
   isRefetchingOnMutation,
   refetchDelayOnMutation,
@@ -364,7 +346,7 @@ export type TypesRefetchEffect = <T>({
 }: Partial<
   Pick<
     Types,
-    | 'isIndexedDbEnabled'
+    | 'isIndexedDBEnabled'
     | 'isRefetchingOnMutation'
     | 'refetchDelayOnMutation'
     | 'isRefetchingOnFocus'

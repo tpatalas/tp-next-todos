@@ -9,7 +9,7 @@ import {
   optionsButtonMiniModalOpenFull,
   optionsButtonGlobalClose,
 } from '@data/dataOptions';
-import { BREAKPOINT } from '@data/dataTypesObjects';
+import { BREAKPOINT } from '@data/dataTypesConst';
 import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMini } from '@states/modals';
 import { useTodoModalStateClose, useTodoModalStateMaximize, useTodoModalStateExitMinimize } from '@states/modals/hooks';
