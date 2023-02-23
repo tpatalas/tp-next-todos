@@ -1,4 +1,4 @@
-import { IDB_STORE } from '@data/dataTypesConst';
+import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
@@ -12,10 +12,11 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
   key: 'atomQueryTodoIds',
   effects: [
     queryEffect({
-      storeName: IDB_STORE['todos'],
-      queryKey: 'todoIds',
+      storeName: IDB_STORE['idMaps'],
+      queryKey: IDB_KEY['todoIds'],
       queryFunction: () => getDataTodoIds(),
       isRefetchingOnMutation: true,
+      isRefetchingOnFocus: true,
     }),
   ],
 });
@@ -26,11 +27,12 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
   //! Default value must be set to trigger the reset (reset removes the data from indexedDB)
   effects: (todoId) => [
     queryEffect({
-      storeName: IDB_STORE['todos'],
+      storeName: IDB_STORE['todoItems'],
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
       isRefetchingOnMutation: true,
       refetchDelayOnMutation: 800,
+      isRefetchingOnFocus: true,
     }),
   ],
 });

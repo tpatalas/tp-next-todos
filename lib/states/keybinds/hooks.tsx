@@ -157,8 +157,6 @@ export const useKeyWithNavigate = () => {
   const filteredTodoIds = useFilterTodoIdsWithPathname();
   const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const catchModal =
-      get(atomCatch(CATCH.todoModal)) || get(atomCatch(CATCH.confirmModal)) || get(atomCatch(CATCH.labelModal));
 
     const catchModals =
       get(atomCatch(CATCH.todoModal)) || get(atomCatch(CATCH.confirmModal)) || get(atomCatch(CATCH.labelModal));

@@ -8,8 +8,8 @@ export const LoadingTodos = () => {
   return (
     <LoadingStateFragment>
       <SmoothTransition
-        enterDuration={DURATION[75]}
-        leaveDuration={DURATION[500]}>
+        enterDuration={DURATION['75']}
+        leaveDuration={DURATION['1000']}>
         <LoadingState options={optionsLoadingTodos} />
       </SmoothTransition>
     </LoadingStateFragment>

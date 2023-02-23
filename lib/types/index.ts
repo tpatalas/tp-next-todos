@@ -52,6 +52,8 @@ type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Setting
 // GlobalTypes
 export interface TypesGlobals {
   itemIds: TodoIds | LabelIds;
+  data: unknown;
+  matchingId: OBJECT_ID;
 }
 
 export interface TypesMongoDB {
@@ -311,6 +313,7 @@ export interface TypesElement {
   isDisabled: boolean;
   isDisabledCloseOnClick: boolean;
 }
+
 export interface TypesEffects {
   // Refetch Effect
   queryKey: string;
@@ -336,6 +339,7 @@ export interface TypesEffects {
 export type TypesRefetchEffect = <T>({
   queryKey,
   queryFunction,
+  depQueryFunction,
   isIndexedDBEnabled,
   storeName,
   isRefetchingOnMutation,
@@ -352,6 +356,7 @@ export type TypesRefetchEffect = <T>({
     | 'isRefetchingOnFocus'
     | 'isRefetchingOnBlur'
     | 'refetchInterval'
+    | 'depQueryFunction'
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
