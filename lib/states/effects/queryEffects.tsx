@@ -29,10 +29,10 @@ export const queryEffect: TypesRefetchEffect =
 
     const onIndexedDB = isIndexedDBEnabled || typeof isIndexedDBEnabled === 'undefined';
     const lastUpdateTime = Number(JSON.parse(localStorage.getItem(STORAGE_KEY[storeName]) || '0'));
-    const hasTenMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 10 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
+    const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
 
     //concat indexedDB with data if data is in array
-    const concatDataWithIndexedDB = async (data: Promise<DefaultValue>) => {
+    const concatDataWithIndexedDB = async (data: unknown) => {
       const indexedDB = await get(storeName, queryKey);
 
       // find the deleted item with given condition
@@ -41,31 +41,31 @@ export const queryEffect: TypesRefetchEffect =
         return data.find((item) => item._id === _id && item.deleted === deleted);
       };
 
-      // remove deleted item from the array of object
+      // filter the deleted item from the array of object
       const updatedIndexedDBArray = Array.isArray(indexedDB) && indexedDB.filter((idb) => !deletedItem(idb._id, true));
-
-      // remove deleted object from indexedDB
-      if (Array.isArray(indexedDB)) {
-        const deletedItemsIndexedDBArray = indexedDB.filter((idb) => deletedItem(idb._id, true));
-        await Promise.all(deletedItemsIndexedDBArray.map((deletedItem) => del(storeName, deletedItem._id)));
-      }
 
       // filter data as newData
       const newData =
         Array.isArray(data) &&
         data.filter(
           (item) =>
-            Array.isArray(updatedIndexedDBArray) &&
-            !updatedIndexedDBArray.some((idb) => idb._id === item._id) &&
-            !item.deleted,
+            updatedIndexedDBArray && !updatedIndexedDBArray.some((idb) => idb._id === item._id) && !item.deleted,
         );
 
-      // insert newData to indexedDB
-      const updatedData = Array.isArray(updatedIndexedDBArray)
-        ? Array.isArray(newData) && [...updatedIndexedDBArray, ...newData]
-        : data;
+      const updatedData = async () => {
+        // remove deleted object from indexedDB
+        if (Array.isArray(indexedDB)) {
+          const deletedItemsIndexedDBArray = indexedDB.filter((idb) => deletedItem(idb._id, true));
+          await Promise.all(deletedItemsIndexedDBArray.map((deletedItem) => del(storeName, deletedItem._id)));
+        }
 
-      return updatedData as Promise<DefaultValue>;
+        // insert newData to indexedDB
+        if (Array.isArray(updatedIndexedDBArray) && newData) {
+          return [...updatedIndexedDBArray, ...newData];
+        }
+        return data;
+      };
+      return updatedData();
     };
 
     // initial fetch - every fetch will be saved to IndexedDB if `isIndexedDb`
@@ -73,21 +73,21 @@ export const queryEffect: TypesRefetchEffect =
       const { data } = await queryFunction();
       const newData = await concatDataWithIndexedDB(data);
       set(storeName, queryKey, newData);
-      return newData;
+      return newData as DefaultValue;
     };
 
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
       const { data } = await queryFunction();
       const indexedDB = await get(storeName, queryKey);
-      const newData = await concatDataWithIndexedDB(data);
+      const newData = (await concatDataWithIndexedDB(data)) as DefaultValue;
       if (onIndexedDB && equal(data, indexedDB)) return;
       set(storeName, queryKey, newData);
       setSelf(newData);
     };
 
     if (trigger === 'get') {
-      onIndexedDB && !hasTenMinTimePast
+      onIndexedDB && !hasFiveMinTimePast
         ? setSelf(get(storeName, queryKey).then((value) => (value != null ? value : queryInitial())))
         : setSelf(queryInitial());
     }

@@ -1,14 +1,14 @@
 import {
-  OBJECT_ID,
-  PRIORITY_LEVEL,
-  NOTIFICATION,
+  BREAKPOINT,
+  DURATION,
   IDB,
   IDB_STORE,
+  NOTIFICATION,
+  OBJECT_ID,
   PATHNAME,
-  DURATION,
   POSITION_X,
   POSITION_Y,
-  BREAKPOINT,
+  PRIORITY_LEVEL,
 } from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
 import {
@@ -314,8 +314,8 @@ export interface TypesElement {
 export interface TypesEffects {
   // Refetch Effect
   queryKey: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  queryFunction(): Promise<any>;
+  queryFunction<T>(): Promise<{ data: T }>;
+  depQueryFunction<T>(): Promise<{ data: T }>;
   storeName: IDB_STORE;
   isIndexedDBEnabled: boolean;
   isRefetchingOnMutation: boolean;
