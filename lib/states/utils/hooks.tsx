@@ -1,8 +1,9 @@
 import { Labels, Todos, Types } from '@lib/types';
-import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem } from '@states/labels';
+import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
+import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { atomTodoNew } from '@states/todos';
+import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
 import { RefObject, useEffect, useMemo, useState } from 'react';
@@ -115,19 +116,4 @@ export const useCompareToQueryLabels = () => {
       return !get(atomQueryLabels).find((queryLabel) => equal(label, queryLabel));
     });
   });
-};
-
-export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) => {
-  let response;
-  for (let i = 0; i < retryCount; i++) {
-    try {
-      response = await fetch(url, options);
-      if (response.ok) return response;
-    } catch (error) {
-      response = error;
-    }
-    // delay re-attempt to fetch every time fetch fails
-    await new Promise((resolve) => setTimeout(resolve, 700));
-  }
-  throw response;
 };

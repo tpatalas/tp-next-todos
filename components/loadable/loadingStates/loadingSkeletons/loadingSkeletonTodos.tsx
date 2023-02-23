@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@data/dataTypesObjects';
+import { BREAKPOINT } from '@data/dataTypesConst';
 import { atomMediaQuery } from '@states/misc';
 import { RepeatingElements } from '@ui/repeatings/repeatingElements';
 import { Fragment as LoadingSkeletonFragment } from 'react';

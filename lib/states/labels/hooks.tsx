@@ -1,4 +1,4 @@
-import { CATCH, NOTIFICATION } from '@data/dataTypesObjects';
+import { NOTIFICATION, CATCH } from '@data/dataTypesConst';
 import { STYLE_COLORS } from '@data/stylePreset';
 import {
   createDataNewLabel,
@@ -9,12 +9,14 @@ import {
 import { Labels, Todos, Types } from '@lib/types';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
 import { useNotificationState } from '@states/notifications/hooks';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
+import { atomTodoNew } from '@states/todos';
+import { atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { atomCatch } from '@states/utils';
 import { useCompareToQueryLabels, useGetWithRecoilCallback } from '@states/utils/hooks';
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback } from 'recoil';
-import { atomLabelNew, atomQueryLabels, atomSelectorLabelItem, atomSelectorLabels } from '.';
+import { atomLabelNew, atomSelectorLabelItem } from '.';
+import { atomQueryLabels, atomSelectorLabels } from './atomQueries';
 
 /**
  * Hooks
@@ -95,36 +97,32 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
   const updateDataLabels = useLabelUpdateDataItem();
   const get = useGetWithRecoilCallback();
 
-  const removeLabelItemTitleId = useRecoilCallback(
-    ({ snapshot, set }) =>
-      (labelId: Labels['_id']) => {
-        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-        const todoId = _id ? _id! : get(atomTodoNew)._id!;
+  const removeLabelItemTitleId = useRecoilCallback(({ snapshot, set }) => (labelId: Labels['_id']) => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const todoId = _id ? _id! : get(atomTodoNew)._id!;
 
-        const filteredLabelsRemoved = get(atomSelectorLabels).map((label) => {
-          const labelIdMatched = label._id === labelId;
-          const unFilteredLabelTitleIds = label.title_id && label.title_id;
-          const filteredLabelTitleIds =
-            label.title_id && label.title_id.filter((titleId) => titleId !== todoId);
+    const filteredLabelsRemoved = get(atomSelectorLabels).map((label) => {
+      const labelIdMatched = label._id === labelId;
+      const unFilteredLabelTitleIds = label.title_id && label.title_id;
+      const filteredLabelTitleIds = label.title_id && label.title_id.filter((titleId) => titleId !== todoId);
 
-          return {
-            ...label,
-            title_id: labelIdMatched ? filteredLabelTitleIds : unFilteredLabelTitleIds,
-          };
+      return {
+        ...label,
+        title_id: labelIdMatched ? filteredLabelTitleIds : unFilteredLabelTitleIds,
+      };
+    });
+    set(atomSelectorLabels, filteredLabelsRemoved);
+
+    typeof _id === 'undefined'
+      ? set(atomTodoNew, {
+          ...get(atomTodoNew),
+          labelItem: filteredLabelsRemoved,
+        })
+      : set(atomSelectorTodoItem(todoId), {
+          ...get(atomSelectorTodoItem(todoId)),
+          labelItem: filteredLabelsRemoved,
         });
-        set(atomSelectorLabels, filteredLabelsRemoved);
-
-        typeof _id === 'undefined'
-          ? set(atomTodoNew, {
-              ...get(atomTodoNew),
-              labelItem: filteredLabelsRemoved,
-            })
-          : set(atomSelectorTodoItem(todoId), {
-              ...get(atomSelectorTodoItem(todoId)),
-              labelItem: filteredLabelsRemoved,
-            });
-      },
-  );
+  });
 
   return (labelId: Labels['_id']) => {
     removeLabelItemTitleId(labelId);

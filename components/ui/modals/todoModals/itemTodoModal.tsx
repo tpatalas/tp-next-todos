@@ -1,6 +1,6 @@
 import { DisableButton } from '@buttons/disableButton';
 import { optionsButtonItemModalUpdate } from '@data/dataOptions';
-import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
 import { KeysWithItemModalEffect } from '@states/keybinds/KeysWithItemModalEffect';

@@ -1,4 +1,4 @@
-import { DURATION } from '@data/dataTypesObjects';
+import { DURATION } from '@data/dataTypesConst';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@states/utils';
@@ -6,11 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'enterDuration' | 'leaveDuration'>>;
 
-export const SmoothTransition = ({
-  children,
-  enterDuration = DURATION[100],
-  leaveDuration = DURATION[150],
-}: Props) => {
+export const SmoothTransition = ({ children, enterDuration = DURATION[100], leaveDuration = DURATION[150] }: Props) => {
   const [isShowing, setIsShowing] = useState(false);
 
   const setTransition = useCallback(() => {

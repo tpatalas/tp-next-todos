@@ -1,4 +1,4 @@
-import { fetchWithRetry } from "@states/utils/hooks";
+import { fetchWithRetry } from '@states/utils';
 
 export const getDataUserId = async () => {
   const dummyUserId = '63583219c2cd1c54e452521f';

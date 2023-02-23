@@ -1,4 +1,5 @@
 import { TypesIDB, TypesNotification } from 'lib/types';
+import { NOTIFICATION, IDB, IDB_STORE, PATHNAME } from './dataTypesConst';
 import {
   ICON_DELETE,
   ICON_DONE_ALL,
@@ -15,7 +16,6 @@ import {
   ICON_LIST,
   ICON_TASK_ALT,
 } from './materialSymbols';
-import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './dataTypesObjects';
 
 export const DATA_NOTIFICATION: TypesNotification[] = [
   {

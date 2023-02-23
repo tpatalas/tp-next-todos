@@ -1,6 +1,6 @@
-import { DATA_NOTIFICATION } from '@data/dataArrayObjects';
+import { DATA_NOTIFICATION } from '@data/dataArrayOfObjects';
 import { TypesNotification } from '@lib/types';
-import { atom, atomFamily, selectorFamily, selector } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**
  * Atoms

@@ -1,6 +1,5 @@
 import { Settings, Users } from '@lib/types';
-import { queries } from '@states/utils';
-import { fetchWithRetry } from '@states/utils/hooks';
+import { fetchWithRetry, queries } from '@states/utils';
 
 const apiSettings = process.env.NEXT_PUBLIC_API_ENDPOINT_SETTINGS as string;
 

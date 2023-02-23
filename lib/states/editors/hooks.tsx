@@ -1,5 +1,6 @@
 import { Todos, TodosEditors, Types } from '@lib/types';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
+import { atomTodoNew } from '@states/todos';
+import { atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { Descendant } from 'slate';
 import { atomEditorDeserialize, atomEditorSerialize } from '.';

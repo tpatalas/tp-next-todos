@@ -1,8 +1,8 @@
-import { IDB_STORE, SCHEMA_TODO } from '@data/dataTypesObjects';
+import { IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
-import { atom, atomFamily } from 'recoil';
+import { atom, atomFamily, selectorFamily } from 'recoil';
 
 /**
  * Query Todos
@@ -14,7 +14,7 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
     queryEffect({
       storeName: IDB_STORE['todos'],
       queryKey: 'todoIds',
-      queryFunction: () => getDataTodoIds({ model: SCHEMA_TODO['todoItem'] }),
+      queryFunction: () => getDataTodoIds(),
       isRefetchingOnMutation: true,
     }),
   ],
@@ -34,3 +34,17 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
     }),
   ],
 });
+
+/**
+ * Derived Query Todos
+ **/
+export const atomSelectorTodoItem = atomFamily<Todos, Todos['_id']>({
+  key: 'atomSelectorTodoItem',
+  default: selectorFamily({
+    key: 'selectorAtomTodoItem',
+    get:
+      (todoId) =>
+      ({ get }) =>
+        get(atomQueryTodoItem(todoId))!,
+  }),
+}); // Overwrite atomQueryTodoItem to prevent unnecessary re-rendering.

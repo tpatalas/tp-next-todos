@@ -1,4 +1,4 @@
-import { FOCUS } from '@data/dataTypesObjects';
+import { FOCUS } from '@data/dataTypesConst';
 import { Todos, Types } from '@lib/types';
 import { atomTodoModalMini } from '@states/modals';
 import { useTodoModalStateOpen } from '@states/modals/hooks';

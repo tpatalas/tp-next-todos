@@ -1,15 +1,17 @@
+import { STORAGE_KEY } from '@data/dataTypesConst';
 import { Todos, Types } from '@lib/types';
-import { queries } from '@states/utils';
-import { fetchWithRetry } from '@states/utils/hooks';
+import { fetchWithRetry, queries } from '@states/utils';
 
 const apiTodos = process.env.NEXT_PUBLIC_API_ENDPOINT_TODOS as string;
 
-export const getDataTodoIds = async ({
-  model,
-}: Partial<Pick<Types, 'completed' | 'completedFromToday' | 'priorityLevel'>> & Pick<Types, 'model'>) => {
-  const response = await fetchWithRetry(apiTodos + '?' + queries('model=' + model));
+export const getDataTodoIds = async () => {
+  const storageKey = STORAGE_KEY['todos'];
+  const lastUpdate = JSON.parse(localStorage.getItem(storageKey) || '0');
+  const response = await fetchWithRetry(apiTodos + '?' + queries('update=' + lastUpdate));
   if (!response.ok) throw new Error(response.statusText);
-  return await response.json();
+  const { data, update } = await response.json();
+  update && localStorage.setItem(storageKey, JSON.stringify(update));
+  return { data };
 };
 
 export const getDataTodoItem = async ({ _id }: Pick<Types, '_id'>) => {
@@ -18,11 +20,11 @@ export const getDataTodoItem = async ({ _id }: Pick<Types, '_id'>) => {
   return await response.json();
 };
 
-export const createDataNewTodo = async (inputValue: Todos) => {
+export const createDataNewTodo = async (data: Todos) => {
   const response = await fetchWithRetry(apiTodos, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(inputValue),
+    body: JSON.stringify(data),
   });
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
@@ -36,11 +38,11 @@ export const deleteDataTodo = async (_id: Todos['_id']) => {
   return await response.json();
 };
 
-export const updateDataTodo = async (_id: Todos['_id'], inputValue: Todos) => {
+export const updateDataTodo = async (_id: Todos['_id'], data: Todos) => {
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(inputValue),
+    body: JSON.stringify(data),
   });
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
@@ -54,7 +56,10 @@ export const completeDataTodo = async (
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ completed: completed, completedDate: completedDate }),
+    body: JSON.stringify({
+      completed: completed,
+      completedDate: completedDate,
+    }),
   });
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
@@ -68,7 +73,10 @@ export const updateDataCalendarTodo = async (
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ dueDate: dueDate, priorityRankScore: priorityRankScore }),
+    body: JSON.stringify({
+      dueDate: dueDate,
+      priorityRankScore: priorityRankScore,
+    }),
   });
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();

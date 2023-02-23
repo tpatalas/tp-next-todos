@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@data/dataTypesObjects';
+import { BREAKPOINT } from '@data/dataTypesConst';
 import { atomMediaQuery } from '@states/misc';
 import { useGetWithRecoilCallback } from '@states/utils/hooks';
 import { useEffect } from 'react';

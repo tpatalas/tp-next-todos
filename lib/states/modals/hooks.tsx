@@ -1,15 +1,14 @@
-import { CATCH } from '@data/dataTypesObjects';
+import { CATCH } from '@data/dataTypesConst';
 import { Labels, Todos } from '@lib/types';
 import { useCalResetDateItemOnly } from '@states/calendars/hooks';
-import { atomLabelNew, atomSelectorLabelItem, atomSelectorLabels } from '@states/labels';
+import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
+import { atomSelectorLabels } from '@states/labels/atomQueries';
 import { useLabelRemoveItem } from '@states/labels/hooks';
-import { atomSelectorTodoItem, atomTodoNew } from '@states/todos';
+import { atomTodoNew } from '@states/todos';
+import { atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { useTodoRemoveItem } from '@states/todos/hooks';
 import { atomCatch } from '@states/utils';
-import {
-  useConditionCheckTodoTitleEmpty,
-  useConditionCompareTodoItemsEqual,
-} from '@states/utils/hooks';
+import { useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import {
@@ -97,9 +96,7 @@ export const useTodoModalCloseState = (_id: Todos['_id']) => {
         set(atomConfirmModalDiscard(undefined), true);
         !get(atomCatch(CATCH.confirmModal)) && set(atomCatch(CATCH.confirmModal), true);
         break;
-      case !get(atomTodoModalOpen(undefined)) &&
-        !get(atomTodoModalMini(undefined)) &&
-        !compareTodoItemsEqual:
+      case !get(atomTodoModalOpen(undefined)) && !get(atomTodoModalMini(undefined)) && !compareTodoItemsEqual:
         set(atomConfirmModalDiscard(_id), true);
         !get(atomCatch(CATCH.confirmModal)) && set(atomCatch(CATCH.confirmModal), true);
         break;
@@ -168,8 +165,7 @@ export const useTodoModalStateOpen = (_id: Todos['_id']) => {
     set(atomTodoModalOpen(_id), true);
     !get(atomCatch(CATCH.todoModal)) && set(atomCatch(CATCH.todoModal), true);
     resetDateItemOnly();
-    typeof _id === 'undefined' &&
-      set(atomTodoNew, { ...get(atomTodoNew), _id: ObjectID().toHexString() });
+    typeof _id === 'undefined' && set(atomTodoNew, { ...get(atomTodoNew), _id: ObjectID().toHexString() });
   });
 };
 

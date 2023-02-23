@@ -7,7 +7,11 @@ import { userInfo } from 'userInfo';
 const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
 
-  const { method, body } = req;
+  const {
+    method,
+    body,
+    query: { update: lastUpdate },
+  } = req;
 
   const data: Labels = body;
 
@@ -17,13 +21,16 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      query.deleted = { $ne: true };
+      query.update = { $gt: Number(lastUpdate) };
+      if (Number(lastUpdate) === 0) query.deleted = { $ne: true };
 
       try {
         const getLabels = await Label.find(query)
-          .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1 })
+          .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1, deleted: 1 })
           .lean();
-        res.status(200).json({ success: true, data: getLabels });
+        getLabels.length === 0
+          ? res.status(200).json({ success: true, data: getLabels }) // Don't update the client if there is update value. getTodo will return [] empty array
+          : res.status(200).json({ success: true, update: Date.now().toString(), data: getLabels });
       } catch (error) {
         res.status(400).json({ success: false });
       }

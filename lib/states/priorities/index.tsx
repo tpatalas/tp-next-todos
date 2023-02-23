@@ -1,4 +1,4 @@
-import { PRIORITY_LEVEL } from '@data/dataTypesObjects';
+import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Todos } from '@lib/types';
 import { selectorDynamicTodoItem } from '@states/todos';
 import { atomQueryTodoIds } from '@states/todos/atomQueries';
@@ -66,8 +66,7 @@ export const selectorFilterPriorityRankScore = selector({
         ? taskCapacityImportant
         : (taskCapacity - conditionalTaskCapacityUrgent) * 0.7;
     const conditionalTaskCapacityNormal =
-      prsImportantFiltered.length > taskCapacityImportant &&
-      prsUrgentFiltered.length > taskCapacityUrgent
+      prsImportantFiltered.length > taskCapacityImportant && prsUrgentFiltered.length > taskCapacityUrgent
         ? taskCapacityNormal
         : taskCapacityRest;
 

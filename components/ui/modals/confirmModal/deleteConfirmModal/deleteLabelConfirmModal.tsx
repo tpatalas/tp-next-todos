@@ -1,5 +1,5 @@
 import { Labels, Types } from '@lib/types';
-import { atomQueryLabels } from '@states/labels';
+import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useLabelModalConfirmStateDelete } from '@states/modals/hooks';
 import dynamic from 'next/dynamic';

@@ -1,7 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@data/dataOptions';
-import { BREAKPOINT } from '@data/dataTypesObjects';
+import { BREAKPOINT } from '@data/dataTypesConst';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { TodosCount } from '@layouts/layoutApp/layout/layoutFooter/footerSidebar/todosCount';
 import { Types } from '@lib/types';

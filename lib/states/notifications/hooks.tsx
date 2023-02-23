@@ -1,4 +1,4 @@
-import { NOTIFICATION } from '@data/dataTypesObjects';
+import { NOTIFICATION } from '@data/dataTypesConst';
 import { useRecoilCallback } from 'recoil';
 import { atomNotificationCounter, atomNotificationID, atomNotificationOpen } from '.';
 

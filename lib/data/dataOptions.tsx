@@ -10,7 +10,7 @@ import {
 } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
-import { PRIORITY_LEVEL, POSITION_X, POSITION_Y } from './dataTypesObjects';
+import { PRIORITY_LEVEL, POSITION_X, POSITION_Y } from './dataTypesConst';
 import {
   ICON_CHEVRON_LEFT,
   ICON_CHEVRON_RIGHT,

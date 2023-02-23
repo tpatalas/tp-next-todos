@@ -1,4 +1,3 @@
-import { SCHEMA_TODO } from '@data/dataTypesObjects';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import TodoItem from '@lib/models/Todo/TodoItems';
@@ -14,7 +13,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     method,
     body,
-    query: { model: model },
+    query: { update: lastUpdate },
   } = req;
 
   const data: Todos = body;
@@ -24,26 +23,24 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      query.deleted = { $ne: true };
-
-      const SCHEMA = {
-        todoItem: TodoItem,
-        todoNote: TodoNote,
-      };
+      query.update = { $gt: Number(lastUpdate) };
+      if (Number(lastUpdate) === 0) query.deleted = { $ne: true };
 
       try {
-        const getTodo = await SCHEMA[model as SCHEMA_TODO]
-          .find(query)
+        const getTodo = await TodoItem.find(query)
           .select({
             _id: 1,
             priorityLevel: 1,
             priorityRankScore: 1,
             completed: 1,
             completedDate: 1,
+            deleted: 1,
           })
           .lean();
         if (!getTodo) return res.status(400).json({ success: false });
-        res.status(200).json({ success: true, data: getTodo });
+        getTodo.length === 0
+          ? res.status(200).json({ success: true, data: getTodo }) // Don't update the client if there is update value. getTodo will return [] empty array
+          : res.status(200).json({ success: true, update: Date.now().toString(), data: getTodo });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -53,49 +50,40 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
       const session = await mongoose.startSession();
       session.startTransaction();
 
-      const {
-        _id,
-        title,
-        completed,
-        completedDate,
-        dueDate,
-        createdDate,
-        priorityLevel,
-        priorityRankScore,
-        labelItem,
-        note,
-      } = data;
-
       const todoItem = {
-        title,
-        _id,
-        completed,
-        completedDate,
-        dueDate,
-        createdDate,
-        priorityLevel,
-        priorityRankScore,
+        title: data.title,
+        _id: data._id,
+        completed: data.completed,
+        completedDate: data.completedDate,
+        dueDate: data.dueDate,
+        createdDate: data.createdDate,
+        priorityLevel: data.priorityLevel,
+        priorityRankScore: data.priorityRankScore,
         update: Date.now(),
         user_id: userInfo._id,
       };
 
       const todoNote = {
-        note,
-        title_id: _id,
+        note: data.note,
+        title_id: data._id,
         update: Date.now(),
         user_id: userInfo._id,
       };
 
       try {
         const createdTodoItem = await TodoItem.create([todoItem], { session: session });
-        const createdTodoNote = note && (await TodoNote.create([todoNote], { session: session }));
+        const createdTodoNote = data.note && (await TodoNote.create([todoNote], { session: session }));
         const createdLabel =
-          labelItem &&
+          data.labelItem &&
           (await Promise.all(
-            labelItem.map(async (label: Labels) => {
+            data.labelItem.map(async (label: Labels) => {
+              const updatedLabel = {
+                ...label,
+                update: Date.now(),
+              };
               return await Label.updateMany(
                 { _id: label._id },
-                { $set: label },
+                { $set: updatedLabel },
                 {
                   session: session,
                 },

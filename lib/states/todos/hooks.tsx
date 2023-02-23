@@ -1,8 +1,7 @@
-import { CATCH, FOCUS, NOTIFICATION } from '@data/dataTypesObjects';
+import { NOTIFICATION, CATCH } from '@data/dataTypesConst';
 import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import { useFocusState } from '@states/focus/hooks';
-import { atomQueryLabels, atomSelectorLabels } from '@states/labels';
+import { atomQueryLabels, atomSelectorLabels } from '@states/labels/atomQueries';
 import { atomNetworkStatusEffect } from '@states/misc';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useTodoModalStateReset } from '@states/modals/hooks';
@@ -15,8 +14,8 @@ import {
   useGetWithRecoilCallback,
 } from '@states/utils/hooks';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
-import { atomSelectorTodoItem, atomTodoNew } from '.';
-import { atomQueryTodoIds, atomQueryTodoItem } from './atomQueries';
+import { atomTodoNew } from '.';
+import { atomQueryTodoIds, atomQueryTodoItem, atomSelectorTodoItem } from './atomQueries';
 
 /**
  * Hooks
@@ -33,7 +32,14 @@ export const useTodoAdd = () => {
 
     set(atomQueryLabels, get(atomSelectorLabels));
     set(atomQueryTodoItem(get(atomTodoNew)._id), get(atomTodoNew));
-    set(atomQueryTodoIds, [...get(atomQueryTodoIds), { _id: get(atomTodoNew)._id }]);
+    set(atomQueryTodoIds, [
+      ...get(atomQueryTodoIds),
+      {
+        _id: get(atomTodoNew)._id,
+        completed: get(atomTodoNew).completed,
+        priorityRankScore: get(atomTodoNew).priorityRankScore,
+      },
+    ]);
     createDataNewTodo(get(atomTodoNew));
     setNotification(NOTIFICATION['createdTodo']);
   });
@@ -84,7 +90,6 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
 
 export const useTodoRemoveItem = (todoId: Todos['_id']) => {
   const setNotification = useNotificationState();
-  const setFocus = useFocusState(todoId);
   const get = useGetWithRecoilCallback();
   const removeTodoItem = useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -110,7 +115,7 @@ export const useTodoRemoveItem = (todoId: Todos['_id']) => {
       return;
     }
     removeTodoItem();
-    setFocus(FOCUS['resetFocus']);
+    // setFocus(FOCUS['resetFocus']);
   };
 };
 

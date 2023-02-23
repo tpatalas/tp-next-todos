@@ -1,5 +1,5 @@
 import { optionsLoadingLabels } from '@data/dataOptions';
-import { DURATION } from '@data/dataTypesObjects';
+import { DURATION } from '@data/dataTypesConst';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { Fragment } from 'react';
 import { LoadingState } from '.';

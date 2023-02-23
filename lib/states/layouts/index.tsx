@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@data/dataTypesObjects';
+import { BREAKPOINT } from '@data/dataTypesConst';
 import { mediaQueryEffect } from '@effects/atomEffects';
 import { atomMediaQuery } from '@states/misc';
 import { atom, selector } from 'recoil';
@@ -40,8 +40,7 @@ export const selectorSidebarOpen = selector({
   key: 'selectorSidebarOpen',
   get: ({ get }) => {
     const breakpointMedium = get(atomMediaQuery(BREAKPOINT['md']));
-    if (get(atomSidebarOpenSetting) && breakpointMedium)
-      return get(atomSidebarOpenSetting) ? false : true;
+    if (get(atomSidebarOpenSetting) && breakpointMedium) return get(atomSidebarOpenSetting) ? false : true;
     return breakpointMedium ? get(atomSidebarOpen) : get(atomSidebarOpenMobile);
   },
   cachePolicy_UNSTABLE: {

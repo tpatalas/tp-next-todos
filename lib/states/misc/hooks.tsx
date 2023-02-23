@@ -1,4 +1,4 @@
-import { PATHNAME } from '@data/dataTypesObjects';
+import { PATHNAME } from '@data/dataTypesConst';
 import { selectorFilterTodoIdsByPathname } from '@states/todos';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';

@@ -1,6 +1,6 @@
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonLabelAddMore } from '@data/dataOptions';
-import { atomQueryLabels } from '@states/labels';
+import { atomQueryLabels } from '@states/labels/atomQueries';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
