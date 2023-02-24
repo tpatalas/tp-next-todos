@@ -5,8 +5,8 @@ import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription'
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
 import dynamic from 'next/dynamic';
 import { Fragment as DeleteHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
-const ConfirmModal = dynamic(() => import('..').then((mod) => mod.ConfirmModal), { ssr: false });
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon), { ssr: false });
+const ConfirmModal = dynamic(() => import('..').then((mod) => mod.ConfirmModal));
+const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
 
 type Props = Pick<Types, 'onClickConfirm' | 'show' | 'deletingItem'> & Partial<Pick<Types, 'itemIds'>>;
 

@@ -8,17 +8,11 @@ import { Fragment as ModalActionsFragment } from 'react';
 import { TodoItem } from './todoItem';
 import { TodoItemFocuser } from './todoItemFocuser';
 
-const DeleteTodoConfirmModal = dynamic(
-  () =>
-    import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then((mod) => mod.DeleteTodoConfirmModal),
-  { ssr: false },
+const DeleteTodoConfirmModal = dynamic(() =>
+  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then((mod) => mod.DeleteTodoConfirmModal),
 );
-const ItemTodoModal = dynamic(() => import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal), {
-  ssr: false,
-});
-const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal), {
-  ssr: false,
-});
+const ItemTodoModal = dynamic(() => import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal));
+const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 
 type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
 

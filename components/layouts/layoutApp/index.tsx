@@ -12,23 +12,14 @@ import {
   Fragment as ModalActionsFragment,
 } from 'react';
 import { useRecoilValue } from 'recoil';
-const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal), {
-  ssr: false,
-});
-const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal), {
-  ssr: false,
-});
-const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification), {
-  ssr: false,
-});
-const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal), {
-  ssr: false,
-});
-const WindowBeforeunloadEffect = dynamic(
-  () => import('@states/misc/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
-  { ssr: false },
+const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
+const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
+const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
+const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal));
+const WindowBeforeunloadEffect = dynamic(() =>
+  import('@states/misc/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
-const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout), { ssr: false });
+const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
 
 type Props = Pick<Types, 'children'>;
 
