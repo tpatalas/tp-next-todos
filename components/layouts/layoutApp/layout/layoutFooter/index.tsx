@@ -38,7 +38,7 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
             )}>
             <main
               className={classNames(
-                'absolute h-[calc(100vh-5.4rem)] w-full sm:h-[calc(100vh-4.4rem)] lg:h-full',
+                'absolute mb-10 h-full w-full',
                 isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
               )}>
               <div className='flex w-full justify-center pt-2 pb-64 sm:pt-10 sm:pl-5 lg:justify-center lg:pl-10'>

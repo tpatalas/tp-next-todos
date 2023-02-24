@@ -110,7 +110,7 @@ export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'
 
 // with labels
 export const useKeyWithLabelModal = (_id: Labels['_id']) => {
-  const isLabelEmpty = useConditionCheckLabelTitleEmpty();
+  const isLabelEmpty = typeof _id === 'undefined' && useConditionCheckLabelTitleEmpty();
   const addLabel = useLabelAdd();
   const updateLabel = useLabelUpdateItem(_id);
   return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
