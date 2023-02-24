@@ -1,6 +1,10 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
-import { optionsButtonTodoModalClose, optionsButtonTodoModalCancel, optionsButtonLabelModalAddLabel } from '@data/dataOptions';
+import {
+  optionsButtonTodoModalClose,
+  optionsButtonTodoModalCancel,
+  optionsButtonLabelModalAddLabel,
+} from '@data/dataOptions';
 import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { useLabelValueUpdate, useLabelAdd } from '@states/labels/hooks';
