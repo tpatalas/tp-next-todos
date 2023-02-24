@@ -13,19 +13,12 @@ import dynamic from 'next/dynamic';
 import { Fragment, Fragment as LabelModalFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const LabelItemDropdown = dynamic(() => import('@dropdowns/labelItemDropdown').then((mod) => mod.LabelItemDropdown), {
-  ssr: false,
-});
-const ItemLabelModal = dynamic(
-  () => import('@modals/labelModals/labelModal/itemLabelModal').then((mod) => mod.ItemLabelModal),
-  { ssr: false },
+const LabelItemDropdown = dynamic(() => import('@dropdowns/labelItemDropdown').then((mod) => mod.LabelItemDropdown));
+const ItemLabelModal = dynamic(() =>
+  import('@modals/labelModals/labelModal/itemLabelModal').then((mod) => mod.ItemLabelModal),
 );
-const DeleteLabelConfirmModal = dynamic(
-  () =>
-    import('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal').then(
-      (mod) => mod.DeleteLabelConfirmModal,
-    ),
-  { ssr: false },
+const DeleteLabelConfirmModal = dynamic(() =>
+  import('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal').then((mod) => mod.DeleteLabelConfirmModal),
 );
 
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {

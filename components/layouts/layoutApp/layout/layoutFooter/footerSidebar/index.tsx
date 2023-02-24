@@ -20,13 +20,11 @@ import {
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
 
-const LoadingLabels = dynamic(
-  () => import('@components/loadable/loadingStates/loadingLabels').then((mod) => mod.LoadingLabels),
-  { ssr: false },
+const LoadingLabels = dynamic(() =>
+  import('@components/loadable/loadingStates/loadingLabels').then((mod) => mod.LoadingLabels),
 );
 const LabelList = dynamic(() => import('@components/labels/labelList').then((mod) => mod.LabelList), {
   loading: () => <LoadingLabels />,
-  ssr: false,
 });
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
