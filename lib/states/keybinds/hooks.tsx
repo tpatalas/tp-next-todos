@@ -17,7 +17,7 @@ import { atomQueryTodoItem } from '@states/todos/atomQueries';
 import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from '@states/todos/hooks';
 import { atomCatch } from '@states/utils';
 import { useConditionCheckLabelTitleEmpty } from '@states/utils/hooks';
-import { isMacOs } from 'react-device-detect';
+import { isMacOs, isMobile } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';
 
@@ -29,7 +29,7 @@ export const useItemModalWithKey = (_id: Todos['_id']) => {
     const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    if (typeof _id === 'undefined' || !get(atomTodoModalOpen(_id))) return;
+    if (typeof _id === 'undefined' || !get(atomTodoModalOpen(_id)) || isMobile) return;
 
     switch (true) {
       case metaCtrlKey && event.key === 'Enter':
@@ -53,7 +53,7 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
     const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    if (!get(atomOnFocus)) return;
+    if (!get(atomOnFocus) || isMobile) return;
 
     switch (true) {
       case metaCtrlKey && event.key === 'Enter':
@@ -84,7 +84,8 @@ export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'
   const addTodo = useTodoAdd();
   const updateTodo = useTodoUpdateItem(_id);
   const editorKeyHandler = useRecoilCallback(() => (event: React.KeyboardEvent) => {
-    if (!event) return;
+    if (!event || isMobile) return;
+
     switch (event.key) {
       case 'Enter':
         if (titleName === 'title') {
@@ -118,7 +119,7 @@ export const useKeyWithLabelModal = (_id: Labels['_id']) => {
     const isConfirmModalOpen = get(atomCatch(CATCH['confirmModal']));
     const isLabelModalOpen = get(atomCatch(CATCH['labelModal']));
 
-    if (isConfirmModalOpen || !event) return;
+    if (isConfirmModalOpen || !event || isMobile) return;
 
     switch (event.key) {
       case 'Enter':
@@ -139,7 +140,7 @@ export const useKeyWithLabelDropdown = () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const isTodoModalOpen = get(atomCatch(CATCH['todoModal']));
 
-    if (isTodoModalOpen || !event) return;
+    if (isTodoModalOpen || !event || isMobile) return;
 
     switch (event.key) {
       case 'Escape':
@@ -156,9 +157,10 @@ export const useKeyWithNavigate = () => {
   const filteredTodoIds = useFilterTodoIdsWithPathname();
   const keyDownNavigate = useRecoilCallback(({ set, snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const catchModal =
+      get(atomCatch(CATCH.todoModal)) || get(atomCatch(CATCH.confirmModal)) || get(atomCatch(CATCH.labelModal));
 
-    if (get(atomCatch(CATCH.todoModal)) || get(atomCatch(CATCH.confirmModal)) || get(atomCatch(CATCH.labelModal)))
-      return;
+    if (catchModal || isMobile) return;
 
     switch (event.key) {
       case 'ArrowDown':
@@ -195,6 +197,8 @@ export const useKeyWithTodoModal = (_id: Todos['_id']) => {
   const keyDownTodoModal = useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
+
+    if (isMobile) return;
 
     switch (true) {
       case event.key === 't' || event.key === 'T':
