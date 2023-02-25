@@ -4,11 +4,11 @@ import { useCallback, useEffect } from 'react';
 
 export const ClientStoragesResetEffect = () => {
   const clientStorageChecker = async () => {
-    const todosLocalStorage = localStorage.getItem(STORAGE_KEY['todos']);
+    const todosLocalStorage = localStorage.getItem(STORAGE_KEY['todoIds']);
     const labelsLocalStorage = localStorage.getItem(STORAGE_KEY['labels']);
     const localStorageLastUpdate = todosLocalStorage || labelsLocalStorage;
-    const indexedDBTodosCount = await count(IDB_STORE['todos']);
-    const indexedDBLabelsCount = await count(IDB_STORE['labels']);
+    const indexedDBTodosCount = await count(IDB_STORE['todoItems']);
+    const indexedDBLabelsCount = await count(IDB_STORE['idMaps']);
 
     return !localStorageLastUpdate || !indexedDBTodosCount || !indexedDBLabelsCount;
   };
@@ -17,9 +17,9 @@ export const ClientStoragesResetEffect = () => {
     const isClientStorageEmpty = await clientStorageChecker();
 
     if (isClientStorageEmpty) {
-      await clear(IDB_STORE['todos']);
-      await clear(IDB_STORE['labels']);
-      localStorage.removeItem(STORAGE_KEY['todos']);
+      await clear(IDB_STORE['todoItems']);
+      await clear(IDB_STORE['idMaps']);
+      localStorage.removeItem(STORAGE_KEY['todoIds']);
       localStorage.removeItem(STORAGE_KEY['labels']);
       window.location.reload();
     }

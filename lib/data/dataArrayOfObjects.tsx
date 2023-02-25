@@ -95,19 +95,19 @@ export const DATA_NOTIFICATION: TypesNotification[] = [
 
 export const DATA_IDB: TypesIDB[] = [
   {
-    name: IDB['Todos'],
-    store: IDB_STORE['todos'],
+    name: IDB['todo'],
+    store: IDB_STORE['todoItems'],
   },
   {
-    name: IDB['Labels'],
-    store: IDB_STORE['labels'],
+    name: IDB['idMap'],
+    store: IDB_STORE['idMaps'],
   },
   {
-    name: IDB['Users'],
+    name: IDB['user'],
     store: IDB_STORE['users'],
   },
   {
-    name: IDB['Users'],
+    name: IDB['setting'],
     store: IDB_STORE['settings'],
   },
 ];

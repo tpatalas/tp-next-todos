@@ -70,26 +70,35 @@ export const CALENDAR = {
 
 export type IDB = (typeof IDB)[keyof typeof IDB];
 export const IDB = {
-  Todos: 'Todos',
-  Labels: 'Labels',
-  Users: 'Users',
-  Cache: 'Cache',
+  todo: 'todo',
+  idMap: 'idMap',
+  user: 'user',
+  setting: 'setting',
 } as const;
 
 export type IDB_STORE = (typeof IDB_STORE)[keyof typeof IDB_STORE];
 export const IDB_STORE = {
-  todos: 'todos',
-  labels: 'labels',
+  todoItems: 'todoItems',
+  idMaps: 'idMaps',
   users: 'users',
   settings: 'settings',
 } as const;
 
+export type IDB_KEY = (typeof IDB_KEY)[keyof typeof IDB_KEY];
+export const IDB_KEY = {
+  todoIds: 'todoIds',
+  labels: 'labels',
+} as const;
+
+export type IDB_KEY_STORE = (typeof IDB_KEY_STORE)[keyof typeof IDB_KEY_STORE];
+export const IDB_KEY_STORE = {
+  [IDB_KEY['todoIds']]: IDB_STORE['todoItems'],
+} as const;
+
 export type STORAGE_KEY = (typeof STORAGE_KEY)[keyof typeof STORAGE_KEY];
 export const STORAGE_KEY = {
-  [IDB_STORE['todos']]: 'last_update_todos',
-  [IDB_STORE['labels']]: 'last_update_labels',
-  [IDB_STORE['users']]: 'last_update_users',
-  [IDB_STORE['settings']]: 'last_update_settings',
+  [IDB_KEY['todoIds']]: 'last_update_todos',
+  [IDB_KEY['labels']]: 'last_update_labels',
 } as const;
 
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];

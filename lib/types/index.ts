@@ -1,14 +1,14 @@
 import {
-  OBJECT_ID,
-  PRIORITY_LEVEL,
-  NOTIFICATION,
+  BREAKPOINT,
+  DURATION,
   IDB,
   IDB_STORE,
+  NOTIFICATION,
+  OBJECT_ID,
   PATHNAME,
-  DURATION,
   POSITION_X,
   POSITION_Y,
-  BREAKPOINT,
+  PRIORITY_LEVEL,
 } from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
 import {
@@ -52,6 +52,8 @@ type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Setting
 // GlobalTypes
 export interface TypesGlobals {
   itemIds: TodoIds | LabelIds;
+  data: unknown;
+  matchingId: OBJECT_ID;
 }
 
 export interface TypesMongoDB {
@@ -311,11 +313,12 @@ export interface TypesElement {
   isDisabled: boolean;
   isDisabledCloseOnClick: boolean;
 }
+
 export interface TypesEffects {
   // Refetch Effect
   queryKey: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  queryFunction(): Promise<any>;
+  queryFunction<T>(): Promise<{ data: T }>;
+  depQueryFunction<T>(): Promise<{ data: T }>;
   storeName: IDB_STORE;
   isIndexedDBEnabled: boolean;
   isRefetchingOnMutation: boolean;
@@ -336,6 +339,7 @@ export interface TypesEffects {
 export type TypesRefetchEffect = <T>({
   queryKey,
   queryFunction,
+  depQueryFunction,
   isIndexedDBEnabled,
   storeName,
   isRefetchingOnMutation,
@@ -352,6 +356,7 @@ export type TypesRefetchEffect = <T>({
     | 'isRefetchingOnFocus'
     | 'isRefetchingOnBlur'
     | 'refetchInterval'
+    | 'depQueryFunction'
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
