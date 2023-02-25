@@ -34,7 +34,7 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
           <div
             className={classNames(
               'relative flex w-full flex-row justify-between rounded-md bg-transparent transition-all duration-200 ease-in-out sm:mr-3 sm:mb-3 sm:bg-white sm:shadow-md sm:shadow-slate-200',
-              isSidebarOpen ? 'ml-3 md:ml-[266px]' : 'sm:ml-3',
+              isSidebarOpen ? 'md:ml-[266px]' : 'md:ml-3',
             )}>
             <main
               className={classNames(
