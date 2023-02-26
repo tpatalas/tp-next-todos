@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { Fragment as NetworkStatusFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const SvgIcon = dynamic(() => import('components/icons/svgIcon').then((mod) => mod.SvgIcon), { ssr: false });
+const SvgIcon = dynamic(() => import('components/icons/svgIcon').then((mod) => mod.SvgIcon));
 
 export const NetworkStatus = () => {
   const isOnline = useRecoilValue(atomNetworkStatusEffect);

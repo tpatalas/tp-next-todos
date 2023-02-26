@@ -1,4 +1,4 @@
-import { IDB_STORE } from '@data/dataTypesConst';
+import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { Labels } from '@lib/types';
@@ -11,10 +11,10 @@ export const atomQueryLabels = atom<Labels[]>({
   key: 'atomQueryLabels',
   effects: [
     queryEffect({
-      storeName: IDB_STORE['labels'],
-      queryKey: 'labels',
+      storeName: IDB_STORE['idMaps'],
+      queryKey: IDB_KEY['labels'],
       queryFunction: () => getDataLabels(),
-      isRefetchingOnMutation: false, // fetching the list of labels is too expensive.
+      isRefetchingOnMutation: true, // fetching the list of labels is too expensive.
     }),
   ],
 });

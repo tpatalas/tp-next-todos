@@ -5,7 +5,7 @@ import { fetchWithRetry, queries } from '@states/utils';
 const apiTodos = process.env.NEXT_PUBLIC_API_ENDPOINT_TODOS as string;
 
 export const getDataTodoIds = async () => {
-  const storageKey = STORAGE_KEY['todos'];
+  const storageKey = STORAGE_KEY['todoIds'];
   const lastUpdate = JSON.parse(localStorage.getItem(storageKey) || '0');
   const response = await fetchWithRetry(apiTodos + '?' + queries('update=' + lastUpdate));
   if (!response.ok) throw new Error(response.statusText);
