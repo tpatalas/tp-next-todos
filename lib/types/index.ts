@@ -6,6 +6,7 @@ import {
   NOTIFICATION,
   OBJECT_ID,
   PATHNAME,
+  PATHNAME_IMAGE,
   POSITION_X,
   POSITION_Y,
   PRIORITY_LEVEL,
@@ -147,6 +148,21 @@ export interface TypesNotification {
 export interface TypesIDB {
   name: IDB;
   store: IDB_STORE;
+}
+
+export interface TypesSidebarMenu {
+  name: string;
+  tooltip: string;
+  icon: string;
+  iconActive: string;
+  iconColor: string;
+  path: PATHNAME;
+}
+export interface TypesPathnameImage {
+  path: PATHNAME_IMAGE;
+  alt: string;
+  title: string;
+  description: string;
 }
 
 /**

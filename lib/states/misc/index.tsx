@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@data/dataTypesConst';
+import { BREAKPOINT, PATHNAME_IMAGE } from '@data/dataTypesConst';
 import { mediaQueryEffect, networkStatusEffect } from '@effects/atomEffects';
 import { atom, atomFamily, selector } from 'recoil';
 
@@ -45,6 +45,11 @@ export const atomActiveMenuItem = atomFamily<boolean, string | null>({
 export const atomHtmlTitleTag = atom<string>({
   key: 'atomHtmlTitleTag',
   default: '',
+});
+
+export const atomPathnameImage = atom<PATHNAME_IMAGE>({
+  key: 'atomPathnameImage',
+  default: PATHNAME_IMAGE['app'],
 });
 
 /**
