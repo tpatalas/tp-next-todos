@@ -12,8 +12,8 @@ function gcloud_run_deploy() {
     --project $GCP_PROJECT_ID \
     --region $DEPLOY_REGION \
     --platform managed \
-    --allow-unauthenticated 
-
+    --allow-unauthenticated \
+    --set-env-vars HOSTNAME=$HOSTNAME
 }
 
 source .env.local
