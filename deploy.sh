@@ -8,12 +8,12 @@ function gcloud_run_deploy() {
     $VPC_FLAG \
     $SECRET_FLAG \
     $SERVICE_NAME \
+    $ENV_VARS \
     --image gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG \
     --project $GCP_PROJECT_ID \
     --region $DEPLOY_REGION \
     --platform managed \
-    --allow-unauthenticated 
-
+    --allow-unauthenticated
 }
 
 source .env.local
@@ -25,6 +25,8 @@ source .env.local
 # IMAGE_TAG
 # GCP_PROJECT_ID
 # DEPLOY_REGION 
+# HOSTNAME 
+# IMAGE_DOMAIN (optional)
 # VPC_CONNECTOR (optional)
 # VPC_REGION (optional)
 # SECRET_ENVIRONMENT_VARIABLE_* (optional: name of environment variable as secret on Google Cloud Run)
@@ -33,6 +35,12 @@ source .env.local
 docker build -t $IMAGE_NAME:$IMAGE_TAG .
 docker tag $IMAGE_NAME:$IMAGE_TAG gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
 docker push gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+
+if [ -n "$IMAGE_DOMAIN" ]; then
+  IMAGE_VARS=",IMAGE_DOMAIN=$IMAGE_DOMAIN"
+fi
+
+ENV_VARS="--set-env-vars HOSTNAME=$HOSTNAME${IMAGE_VARS}"
 
 if [ -n "$VPC_REGION" ] && [ -n "$VPC_CONNECTOR" ]; then
   VPC_FLAG="--vpc-connector $VPC_CONNECTOR --region=$VPC_REGION --vpc-egress=all-traffic"
