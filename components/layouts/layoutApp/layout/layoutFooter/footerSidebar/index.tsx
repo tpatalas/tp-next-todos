@@ -1,6 +1,7 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
+import { LabelList } from '@components/labels/labelList';
 import { optionsButtonCreateTodo, optionsButtonSidebarToggle } from '@data/dataOptions';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
@@ -10,7 +11,6 @@ import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { atomDisableScroll, classNames } from '@states/utils';
 import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
 import { Backdrop } from '@ui/backdrops/backdrop';
-import dynamic from 'next/dynamic';
 import {
   forwardRef,
   Fragment as CreateTodoFragment,
@@ -19,13 +19,6 @@ import {
 } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
-
-const LoadingLabels = dynamic(() =>
-  import('@components/loadable/loadingStates/loadingLabels').then((mod) => mod.LoadingLabels),
-);
-const LabelList = dynamic(() => import('@components/labels/labelList').then((mod) => mod.LabelList), {
-  loading: () => <LoadingLabels />,
-});
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
