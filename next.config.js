@@ -14,7 +14,10 @@ module.exports = withBundleAnalyzer({
     ignoreDuringBuilds: false,
   },
   images: {
-    domains: process.env.NODE_ENV !== 'production' ? ['images.unsplash.com', 'tailwindui.com'] : [''],
+    domains:
+      process.env.NODE_ENV !== 'production'
+        ? ['images.unsplash.com', 'tailwindui.com', process.env.IMAGE_DOMAIN || '']
+        : [process.env.IMAGE_DOMAIN || ''],
   },
   output: 'standalone',
   swcMinify: true,
