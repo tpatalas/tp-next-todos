@@ -8,8 +8,8 @@ export const LoadingLabels = () => {
   return (
     <Fragment>
       <SmoothTransition
-        enterDuration={DURATION[75]}
-        leaveDuration={DURATION[300]}>
+        enterDuration={DURATION['500']}
+        leaveDuration={DURATION['500']}>
         <LoadingState options={optionsLoadingLabels} />
       </SmoothTransition>
     </Fragment>

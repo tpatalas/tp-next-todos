@@ -135,6 +135,16 @@ export const PATHNAME = {
   label: '/app/label/(.*)$',
 } as const;
 
+export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
+export const PATHNAME_IMAGE = {
+  app: '/focus.webp',
+  urgent: '/urgent.webp',
+  important: '/important.webp',
+  showAll: '/showall.webp',
+  completed: '/completed.webp',
+  label: '/label.webp',
+};
+
 export type DURATION = (typeof DURATION)[keyof typeof DURATION];
 export const DURATION = {
   75: 'duration-75',

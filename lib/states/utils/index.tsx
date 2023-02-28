@@ -61,8 +61,7 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
   const currentTime = Date.now();
   const difference = currentTime - updateTimeInMilliSeconds;
   const numberOfMinutes = checkingTimeInMinutes ?? 10;
-  const checkingTime = numberOfMinutes;
-  // * 60 * 1000;
+  const checkingTime = numberOfMinutes * 60 * 1000;
 
   return difference > checkingTime;
 };
