@@ -44,7 +44,7 @@ export const LayoutHeader = () => {
           </div>
         </LeftSideFragment>
         <RightSidebarFragment>
-          <div className='flex flex-1 px-2'>
+          <div className='flex flex-1 pl-2 pr-3'>
             <HeaderSearchBar />
             <div className='ml-4 flex items-center md:ml-6'>
               {/* Profile dropdown */}
@@ -59,11 +59,11 @@ export const LayoutHeader = () => {
                     )}>
                     <span className='sr-only'>Open user menu</span>
                     <Image
-                      width={40}
-                      height={40}
-                      className='rounded-full drop-shadow-md'
-                      src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                      alt=''
+                      width={32}
+                      height={32}
+                      className='rounded-full drop-shadow-lg'
+                      src={process.env.NEXT_PUBLIC_IMAGE_DOMAIN + '/user_avatar.webp'}
+                      alt='User avatar'
                     />
                   </Menu.Button>
                 </div>

@@ -1,5 +1,5 @@
-import { TypesIDB, TypesNotification } from 'lib/types';
-import { NOTIFICATION, IDB, IDB_STORE, PATHNAME } from './dataTypesConst';
+import { TypesIDB, TypesNotification, TypesPathnameImage, TypesSidebarMenu } from 'lib/types';
+import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './dataTypesConst';
 import {
   ICON_DELETE,
   ICON_DONE_ALL,
@@ -112,7 +112,7 @@ export const DATA_IDB: TypesIDB[] = [
   },
 ];
 
-export const DATA_SIDEBAR_MENU = [
+export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [
   {
     name: "Today's Focus",
     tooltip: "Today's Focus",
@@ -152,5 +152,46 @@ export const DATA_SIDEBAR_MENU = [
     iconActive: ICON_DONE_ALL,
     iconColor: 'fill-green-600',
     path: PATHNAME['completed'],
+  },
+];
+
+export const DATA_PATHNAME_IMAGE: TypesPathnameImage[] = [
+  {
+    path: '/focus.webp',
+    alt: 'Placeholder image of focus',
+    title: "Todos for today's focus",
+    description:
+      "Congratulations! You've completed all of your todos for today's focus. Take a moment to celebrate your accomplishments.",
+  },
+  {
+    path: '/urgent.webp',
+    alt: 'Placeholder image of urgent',
+    title: 'Your urgent todos',
+    description: 'Prioritize time-sensitive todos that require immediate attention.',
+  },
+  {
+    path: '/important.webp',
+    alt: 'Placeholder image of important',
+    title: 'Your important todos',
+    description: 'Identify todos that are crucial to your long-term goals and success.',
+  },
+  {
+    path: '/showall.webp',
+    alt: 'Placeholder image of showall',
+    title: 'All uncompleted todos',
+    description:
+      'This is a complete list of all your todos, including those that have not yet been completed. Keep track of your progress here.',
+  },
+  {
+    path: '/completed.webp',
+    alt: 'Placeholder image of completed',
+    title: 'Your completed todos',
+    description: 'While there are no completed todos yet, every step counts towards achieving your goals.',
+  },
+  {
+    path: '/label.webp',
+    alt: 'Placeholder image of label',
+    title: 'Your labeled todos',
+    description: 'Organize your todos by using labels to keep track of your progress and priorities.',
   },
 ];

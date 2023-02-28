@@ -1,8 +1,8 @@
-import { PATHNAME } from '@data/dataTypesConst';
+import { PATHNAME, PATHNAME_IMAGE } from '@data/dataTypesConst';
 import { Labels } from '@lib/types';
 import { atomLabelQuerySlug } from '@states/labels';
 import { atomQueryLabels } from '@states/labels/atomQueries';
-import { atomHtmlTitleTag } from '@states/misc';
+import { atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useNextQuerySlug } from '@states/utils/hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -22,32 +22,38 @@ export const FilterTodoIdsEffect = () => {
     if (asPath === PATHNAME['app']) {
       set(atomFilterTodoIds, 'focus');
       set(atomHtmlTitleTag, "Today's Focus");
+      set(atomPathnameImage, PATHNAME_IMAGE['app']);
       return;
     }
     if (asPath === PATHNAME['urgent']) {
       set(atomFilterTodoIds, 'urgent');
       set(atomHtmlTitleTag, 'Priority - Urgent');
+      set(atomPathnameImage, PATHNAME_IMAGE['urgent']);
       return;
     }
     if (asPath === PATHNAME['important']) {
       set(atomFilterTodoIds, 'important');
       set(atomHtmlTitleTag, 'Priority - Important');
+      set(atomPathnameImage, PATHNAME_IMAGE['important']);
       return;
     }
     if (asPath === PATHNAME['showAll']) {
       set(atomFilterTodoIds, 'showAll');
       set(atomHtmlTitleTag, 'All Todos');
+      set(atomPathnameImage, PATHNAME_IMAGE['showAll']);
       return;
     }
     if (asPath === PATHNAME['completed']) {
       set(atomFilterTodoIds, 'completed');
       set(atomHtmlTitleTag, 'Task Completed Todos');
+      set(atomPathnameImage, PATHNAME_IMAGE['completed']);
       return;
     }
     if (asPath.match(new RegExp(PATHNAME['label']))) {
       set(atomFilterTodoIds, 'label');
       set(atomLabelQuerySlug, labelId);
       set(atomHtmlTitleTag, `Label - ${label.name}`);
+      set(atomPathnameImage, PATHNAME_IMAGE['label']);
       return;
     }
   });
