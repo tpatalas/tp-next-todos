@@ -7,7 +7,7 @@ import { classNames } from '@states/utils';
 import { SvgIcon } from 'components/icons/svgIcon';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
-import { Fragment as MenuFragment, useRef, useState } from 'react';
+import { Fragment, Fragment as MenuFragment, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
@@ -46,42 +46,44 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
             kbd={isClicked || open ? undefined : options.kbd}>
             <MenuFragment>
               <div ref={setReferenceElement}>
-                <Menu.Button
-                  className={classNames(
-                    options.group ?? 'group',
-                    'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
-                    options.padding ?? 'p-2',
-                    options.hoverBg ?? STYLE_HOVER_SLATE_DARK,
-                    options.borderRadius && headerContents ? options.borderRadius : 'rounded-full',
-                    visibility(isInitiallyVisible ?? true, open),
-                  )}
-                  onMouseDown={() => setClick(true)}
-                  onMouseEnter={() => setClick(false)}
-                  onMouseLeave={() => setClick(true)}
-                  onClick={() => setFocusOnBlur(true)}
-                  onKeyDown={(event: React.KeyboardEvent) => {
-                    event.preventDefault();
-                    event.key === 'Escape' && focusRef.current!.blur();
-                  }}
-                  ref={focusRef}>
-                  <SvgIcon
-                    options={{
-                      path: options.path,
-                      className: classNames(
-                        options.size ?? 'h-5 w-5',
-                        options.color ?? 'fill-gray-500 group-hover:fill-gray-700',
-                      ),
+                <Menu.Button as={Fragment}>
+                  <button
+                    className={classNames(
+                      options.group ?? 'group',
+                      'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
+                      options.padding ?? 'p-2',
+                      options.hoverBg ?? STYLE_HOVER_SLATE_DARK,
+                      options.borderRadius && headerContents ? options.borderRadius : 'rounded-full',
+                      visibility(isInitiallyVisible ?? true, open),
+                    )}
+                    onMouseDown={() => setClick(true)}
+                    onMouseEnter={() => setClick(false)}
+                    onMouseLeave={() => setClick(true)}
+                    onClick={() => setFocusOnBlur(true)}
+                    onKeyDown={(event: React.KeyboardEvent) => {
+                      event.preventDefault();
+                      event.key === 'Escape' && focusRef.current!.blur();
                     }}
-                  />
-                  {headerContents && (
-                    <span
-                      className={classNames(
-                        'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
-                        options.text ?? 'group-hover:text-gray-700',
-                      )}>
-                      {headerContents}
-                    </span>
-                  )}
+                    ref={focusRef}>
+                    <SvgIcon
+                      options={{
+                        path: options.path,
+                        className: classNames(
+                          options.size ?? 'h-5 w-5',
+                          options.color ?? 'fill-gray-500 group-hover:fill-gray-700',
+                        ),
+                      }}
+                    />
+                    {headerContents && (
+                      <span
+                        className={classNames(
+                          'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
+                          options.text ?? 'group-hover:text-gray-700',
+                        )}>
+                        {headerContents}
+                      </span>
+                    )}
+                  </button>
                 </Menu.Button>
               </div>
               {!open && headerContentsOnClose}
