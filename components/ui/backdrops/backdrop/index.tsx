@@ -25,7 +25,7 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => 
       <ConditionalPortal isPortal={options.isPortal ?? true}>
         <Transition
           show={show ?? isShow}
-          as={options.as ?? Fragment}
+          as={Fragment}
           appear={true}
           enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-200')}
           enterFrom='opacity-0'

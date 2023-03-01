@@ -12,15 +12,7 @@ import {
   PRIORITY_LEVEL,
 } from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
-import {
-  ElementType,
-  FocusEventHandler,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-  RefObject,
-} from 'react';
+import { FocusEventHandler, KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode, RefObject } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
 import { AtomEffect } from 'recoil';
 import { Descendant } from 'slate';
@@ -294,7 +286,6 @@ export interface TypesComboboxAttributes {
 export interface TypesDropdownAttributes {
   hasDropdownBoardStyle: boolean;
   headerContentsOnClose: Types['children'];
-  as: ElementType;
 }
 
 export interface TypesInputAttributes {

@@ -28,7 +28,7 @@ export type TypesOptionsPriority = Partial<
   Pick<Types, 'priorityLevel'>;
 
 export type TypesOptionsBackdrop = Partial<
-  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration' | 'as'> & Pick<TypesStyleAttributes, 'color' | 'zIndex'>
+  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration'> & Pick<TypesStyleAttributes, 'color' | 'zIndex'>
 >;
 
 export type TypesOptionsDropdown = Partial<
