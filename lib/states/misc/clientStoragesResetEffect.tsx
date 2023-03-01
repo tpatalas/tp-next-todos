@@ -1,14 +1,15 @@
-import { IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
+import { IDB_STORE, IDB_VERSION, STORAGE_KEY } from '@data/dataTypesConst';
 import { clear, count } from '@lib/dataConnections/indexedDB';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const ClientStoragesResetEffect = () => {
+  const [isConfirmMessage, setIsConfirmMessage] = useState(false);
   const clientStorageChecker = async () => {
     const todosLocalStorage = localStorage.getItem(STORAGE_KEY['todoIds']);
     const labelsLocalStorage = localStorage.getItem(STORAGE_KEY['labels']);
     const localStorageLastUpdate = todosLocalStorage || labelsLocalStorage;
-    const indexedDBTodosCount = await count(IDB_STORE['todoItems']);
-    const indexedDBLabelsCount = await count(IDB_STORE['idMaps']);
+    const indexedDBTodosCount = await count(IDB_STORE['todoItems'], IDB_VERSION['current']);
+    const indexedDBLabelsCount = await count(IDB_STORE['idMaps'], IDB_VERSION['current']);
 
     return !localStorageLastUpdate || !indexedDBTodosCount || !indexedDBLabelsCount;
   };
@@ -17,8 +18,8 @@ export const ClientStoragesResetEffect = () => {
     const isClientStorageEmpty = await clientStorageChecker();
 
     if (isClientStorageEmpty) {
-      await clear(IDB_STORE['todoItems']);
-      await clear(IDB_STORE['idMaps']);
+      await clear(IDB_STORE['todoItems'], IDB_VERSION['current']);
+      await clear(IDB_STORE['idMaps'], IDB_VERSION['current']);
       localStorage.removeItem(STORAGE_KEY['todoIds']);
       localStorage.removeItem(STORAGE_KEY['labels']);
       window.location.reload();
@@ -28,16 +29,25 @@ export const ClientStoragesResetEffect = () => {
   const showMessageBeforeReload = useCallback(async () => {
     const isClientStorageEmpty = await clientStorageChecker();
 
-    const confirmMessage = 'Client storage deletion detected. The page will be fully loaded.';
-    const shouldReload = isClientStorageEmpty && window.confirm(confirmMessage);
+    const confirmMessage =
+      'Client storage has been deleted or upgraded. The page will now reload to ensure data consistency.';
 
-    shouldReload && resetClientStores();
-  }, [resetClientStores]);
+    const shouldReload = isClientStorageEmpty && !isConfirmMessage && window.confirm(confirmMessage);
+
+    if (shouldReload) {
+      resetClientStores();
+      setIsConfirmMessage(true);
+    }
+  }, [isConfirmMessage, resetClientStores]);
 
   useEffect(() => {
+    const timeId = setTimeout(() => {
+      showMessageBeforeReload();
+    }, 2000);
     window.addEventListener('focus', showMessageBeforeReload);
     return () => {
       window.removeEventListener('focus', showMessageBeforeReload);
+      clearTimeout(timeId);
     };
   }, [resetClientStores, showMessageBeforeReload]);
 

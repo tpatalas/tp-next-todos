@@ -68,6 +68,12 @@ export const CALENDAR = {
   days: 'days',
 } as const;
 
+export type IDB_VERSION = (typeof IDB_VERSION)[keyof typeof IDB_VERSION];
+export const IDB_VERSION = {
+  previous: 0,
+  current: 1,
+};
+
 export type IDB = (typeof IDB)[keyof typeof IDB];
 export const IDB = {
   todo: 'todo',

@@ -3,6 +3,7 @@ import {
   DURATION,
   IDB,
   IDB_STORE,
+  IDB_VERSION,
   NOTIFICATION,
   OBJECT_ID,
   PATHNAME,
@@ -138,8 +139,10 @@ export interface TypesNotification {
 }
 
 export interface TypesIDB {
-  name: IDB;
+  dbName: IDB;
   store: IDB_STORE;
+  oldVersion: IDB_VERSION;
+  newVersion: IDB_VERSION;
 }
 
 export interface TypesSidebarMenu {
