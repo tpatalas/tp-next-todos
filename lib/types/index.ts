@@ -3,6 +3,7 @@ import {
   DURATION,
   IDB,
   IDB_STORE,
+  IDB_VERSION,
   NOTIFICATION,
   OBJECT_ID,
   PATHNAME,
@@ -12,15 +13,7 @@ import {
   PRIORITY_LEVEL,
 } from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
-import {
-  ElementType,
-  FocusEventHandler,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-  RefObject,
-} from 'react';
+import { FocusEventHandler, KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode, RefObject } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
 import { AtomEffect } from 'recoil';
 import { Descendant } from 'slate';
@@ -146,8 +139,10 @@ export interface TypesNotification {
 }
 
 export interface TypesIDB {
-  name: IDB;
+  dbName: IDB;
   store: IDB_STORE;
+  oldVersion: IDB_VERSION;
+  newVersion: IDB_VERSION;
 }
 
 export interface TypesSidebarMenu {
@@ -294,7 +289,6 @@ export interface TypesComboboxAttributes {
 export interface TypesDropdownAttributes {
   hasDropdownBoardStyle: boolean;
   headerContentsOnClose: Types['children'];
-  as: ElementType;
 }
 
 export interface TypesInputAttributes {
