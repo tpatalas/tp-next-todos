@@ -108,6 +108,7 @@ export interface TypesLabel {
 // Users
 export interface Users extends UsersIds {
   email: 'string';
+  password: 'string';
 }
 
 export interface UsersIds {
