@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-import { ObjectID } from 'bson';
 
 const SettingSchema = new mongoose.Schema({
   _id: {
-    type: ObjectID,
+    type: mongoose.Types.ObjectId,
     required: true,
   },
   createdDate: {
@@ -11,7 +10,11 @@ const SettingSchema = new mongoose.Schema({
     required: false,
     default: new Date().toISOString(),
   },
-  userId: { type: ObjectID, required: true, unique: true },
+  userId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    unique: true,
+  },
 });
 
 export default mongoose.models.Setting || mongoose.model('Setting', SettingSchema);

@@ -1,5 +1,5 @@
 import { TypesIDB, TypesNotification, TypesPathnameImage, TypesSidebarMenu } from 'lib/types';
-import { IDB, IDB_STORE, NOTIFICATION, PATHNAME } from './dataTypesConst';
+import { IDB, IDB_STORE, IDB_VERSION, NOTIFICATION, PATHNAME } from './dataTypesConst';
 import {
   ICON_DELETE,
   ICON_DONE_ALL,
@@ -95,20 +95,28 @@ export const DATA_NOTIFICATION: TypesNotification[] = [
 
 export const DATA_IDB: TypesIDB[] = [
   {
-    name: IDB['todo'],
+    dbName: IDB['todo'],
     store: IDB_STORE['todoItems'],
+    oldVersion: IDB_VERSION['previous'],
+    newVersion: IDB_VERSION['current'],
   },
   {
-    name: IDB['idMap'],
+    dbName: IDB['idMap'],
     store: IDB_STORE['idMaps'],
+    oldVersion: IDB_VERSION['previous'],
+    newVersion: IDB_VERSION['current'],
   },
   {
-    name: IDB['user'],
+    dbName: IDB['user'],
     store: IDB_STORE['users'],
+    oldVersion: IDB_VERSION['previous'],
+    newVersion: IDB_VERSION['current'],
   },
   {
-    name: IDB['setting'],
+    dbName: IDB['setting'],
     store: IDB_STORE['settings'],
+    oldVersion: IDB_VERSION['previous'],
+    newVersion: IDB_VERSION['current'],
   },
 ];
 

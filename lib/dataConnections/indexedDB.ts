@@ -1,18 +1,26 @@
 import { DATA_IDB } from '@data/dataArrayOfObjects';
 import { IDB } from '@data/dataTypesConst';
 import { Types, TypesIDB } from '@lib/types';
-import { openDB } from 'idb';
+import { deleteDB, openDB } from 'idb';
 
 // this will create new database per object store. This is easier to modify
 // the schema if necessary.
 const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVersion']) => {
-  const dbName = DATA_IDB.find((db: TypesIDB) => db.store === storeName)?.name as IDB;
+  const idb = DATA_IDB.find((db: TypesIDB) => db.store === storeName);
+  const newDbName = idb && idb.dbName + 'v' + idb.newVersion;
+  const oldDbName = idb && idb.dbName + 'v' + idb.oldVersion;
 
-  return await openDB(dbName, dbVersion || 1, {
+  const db = await openDB(newDbName as IDB, dbVersion || 1, {
+    // To auto upgrade indexedDB, update the IDB_VERSION's previous and current.
+    // The purpose of upgrade is the schema changes in indexedDB
     upgrade(db) {
       db.createObjectStore(storeName);
     },
   });
+  if (oldDbName) {
+    await deleteDB(oldDbName);
+  }
+  return db;
 };
 
 export const get = async (storeName: Types['storeName'], key: string, dbVersion?: Types['dbVersion']) => {
