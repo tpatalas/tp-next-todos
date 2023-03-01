@@ -48,7 +48,7 @@
     "@types/node": "18.14.2",
     "@types/react": "^18.0.28",
     "eslint": "8.35.0",
-    "eslint-config-next": "13.2.1",
+    "eslint-config-next": "13.2.3",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-testing-library": "^5.10.2",
     "husky": "^8.0.3",
