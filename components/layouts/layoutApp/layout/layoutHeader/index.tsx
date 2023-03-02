@@ -1,6 +1,7 @@
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonSidebarToggle } from '@data/dataOptions';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
+import { LoginButton } from '@layouts/layoutApp/loginButton';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import dynamic from 'next/dynamic';
 import {

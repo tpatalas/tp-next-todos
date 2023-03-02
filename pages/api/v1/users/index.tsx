@@ -31,6 +31,12 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
       };
 
       try {
+        const newUser = {
+          email: data.email,
+          password: hashDataString(data.password),
+        };
+
+        const createUser = await User.create(newUser);
         if (
           !data.email ||
           !data.password ||
