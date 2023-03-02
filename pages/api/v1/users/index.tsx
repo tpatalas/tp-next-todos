@@ -16,8 +16,8 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
+      const getUser = await User.find({ _id: userId }, '_id');
       try {
-        const getUser = await User.find({ _id: userId }, '_id');
         if (!getUser) return res.status(400).json({ success: false });
       } catch (error) {
         res.status(400).json({ success: false });
@@ -25,22 +25,21 @@ const Users = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
 
     case 'POST':
-      try {
-        const newUser = {
-          email: data.email,
-          password: hashDataString(data.password),
-        };
+      const newUser = {
+        email: data.email,
+        password: await hashDataString(data.password),
+      };
 
-        const createUser = await User.create(newUser);
+      try {
         if (
           !data.email ||
           !data.password ||
           !validateEmailFormat(data.email) ||
-          !validateStrongPassword(data.password) ||
-          !createUser
+          !validateStrongPassword(data.password)
         ) {
           return res.status(400).json({ success: false });
         }
+        await User.create(newUser);
         res.status(201).json({ success: true, message: 'Created user successfully' });
       } catch (error) {
         res.status(400).json({ success: false });

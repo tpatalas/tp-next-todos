@@ -168,3 +168,9 @@ export const GRADIENT_POSITION = {
   left: 'left',
   right: 'right',
 } as const;
+
+export type USER = (typeof USER)[keyof typeof USER];
+export const USER = {
+  email: 'email',
+  password: 'password',
+} as const;
