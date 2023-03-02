@@ -3,6 +3,7 @@ import { optionsButtonSidebarToggle } from '@data/dataOptions';
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
+import { LoginButton } from '@layouts/layoutApp/loginButton';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { classNames } from '@states/utils';
 import Image from 'next/image';
@@ -52,20 +53,24 @@ export const LayoutHeader = () => {
                 as='div'
                 className='relative ml-3'>
                 <div>
-                  <Menu.Button
-                    className={classNames(
-                      'flex max-w-xs items-center rounded-full bg-transparent text-sm outline-none transition-all duration-300 hover:ring-4 hover:ring-gray-200 hover:transition-all focus:ring-0 focus:ring-offset-0',
-                      STYLE_BUTTON_KEY_ONLY_RING,
-                    )}>
-                    <span className='sr-only'>Open user menu</span>
-                    <Image
-                      width={32}
-                      height={32}
-                      className='rounded-full drop-shadow-lg'
-                      src={process.env.NEXT_PUBLIC_IMAGE_DOMAIN + '/user_avatar.webp'}
-                      alt='User avatar'
-                    />
-                  </Menu.Button>
+                  {true ? (
+                    <LoginButton />
+                  ) : (
+                    <Menu.Button
+                      className={classNames(
+                        'flex max-w-xs items-center rounded-full bg-transparent text-sm outline-none transition-all duration-300 hover:ring-4 hover:ring-gray-200 hover:transition-all focus:ring-0 focus:ring-offset-0',
+                        STYLE_BUTTON_KEY_ONLY_RING,
+                      )}>
+                      <span className='sr-only'>Open user menu</span>
+                      <Image
+                        width={32}
+                        height={32}
+                        className='rounded-full drop-shadow-lg'
+                        src={process.env.NEXT_PUBLIC_IMAGE_DOMAIN + '/user_avatar.webp'}
+                        alt='User avatar'
+                      />
+                    </Menu.Button>
+                  )}
                 </div>
                 <Transition
                   as={Fragment}
