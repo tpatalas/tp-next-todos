@@ -2,6 +2,7 @@ import { CATCH } from '@data/dataTypesConst';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';
+import { hash } from 'bcryptjs';
 
 /**
  * Atoms
@@ -57,6 +58,7 @@ export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) 
   throw response;
 };
 
+// timer
 export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinutes?: number) => {
   const currentTime = Date.now();
   const difference = currentTime - updateTimeInMilliSeconds;
@@ -64,4 +66,20 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
   const checkingTime = numberOfMinutes * 60 * 1000;
 
   return difference > checkingTime;
+};
+
+// hash data string with bcrypt
+export const hashDataString = async (data: string) => await hash(data, 12);
+
+// test password with regex
+export const validateStrongPassword = (password: string) => {
+  //Minimum 8 characters, maximum 100 characters at least one uppercase letter, one lowercase letter, one number and one special character
+  const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,100})');
+  return strongRegex.test(password);
+};
+
+// test if email has standard format of email address
+export const validateEmailFormat = (email: string) => {
+  const emailFormat = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$');
+  return emailFormat.test(email);
 };

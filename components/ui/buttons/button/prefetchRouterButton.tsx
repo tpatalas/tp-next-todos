@@ -25,11 +25,13 @@ export const PrefetchRouterButton = ({
     placement: placement,
     offset: offset,
   };
+  const urlPath = `${process.env.NEXT_PUBLIC_HOST}${path}`;
+
   useEffect(() => {
     if (!isPrefetchingOnHover || typeof isPrefetchingOnHover === 'undefined') {
-      router.prefetch(path);
+      router.prefetch(urlPath);
     }
-  }, [path, isPrefetchingOnHover, router]);
+  }, [isPrefetchingOnHover, router, urlPath]);
 
   return (
     <Fragment>
@@ -38,7 +40,7 @@ export const PrefetchRouterButton = ({
         onMouseOver={() => isPrefetchingOnHover && router.prefetch(path)}
         onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
           event.preventDefault();
-          router.push(path);
+          router.push(urlPath);
           onClick && onClick(event);
         }}>
         {children}
