@@ -7,10 +7,10 @@ import { classNames } from '@states/utils';
 import { Fragment as HeaderContentsFragment } from 'react';
 
 type Props = { options: TypesOptionsButton } & Partial<
-  Pick<Types, 'headerContents' | 'children' | 'onClick' | 'children'>
+  Pick<Types, 'menuButtonContent' | 'children' | 'onClick' | 'children'>
 >;
 
-export const IconButton = ({ options, headerContents, onClick, children = options.name }: Props) => {
+export const IconButton = ({ options, menuButtonContent, onClick, children = options.name }: Props) => {
   return (
     <span className={options.container}>
       <Button
@@ -30,7 +30,8 @@ export const IconButton = ({ options, headerContents, onClick, children = option
           offset: options.offset,
           isDisabled: options.isDisabled,
         }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
@@ -44,13 +45,14 @@ export const IconButton = ({ options, headerContents, onClick, children = option
             }}
           />
           <HeaderContentsFragment>
-            {headerContents && (
+            {menuButtonContent && (
               <span
                 className={classNames(
                   'px-3 text-sm font-normal text-gray-500',
                   !options.isDisabled && '[.group-button:hover_&]:text-gray-700',
-                )}>
-                {headerContents}
+                )}
+              >
+                {menuButtonContent}
               </span>
             )}
           </HeaderContentsFragment>

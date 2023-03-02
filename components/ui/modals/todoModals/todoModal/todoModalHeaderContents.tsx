@@ -5,7 +5,6 @@ import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { usePriorityUpdate } from '@states/priorities/hooks';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { mergeObjects } from '@states/utils';
 import { useRecoilCallback } from 'recoil';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
@@ -24,12 +23,12 @@ export const TodoModalHeaderContents = ({ todo, children }: Props) => {
         {children}
         <PriorityButton
           todo={todo}
-          options={mergeObjects(optionsPriorityTodoModalImportant, { container: disabledStyle })}
+          options={{ container: disabledStyle, ...optionsPriorityTodoModalImportant }}
           onClick={() => setPriority(PRIORITY_LEVEL['important'])}
         />
         <PriorityButton
           todo={todo}
-          options={mergeObjects(optionsPriorityTodoModalUrgent, { container: disabledStyle })}
+          options={{ container: disabledStyle, ...optionsPriorityTodoModalUrgent }}
           onClick={() => setPriority(PRIORITY_LEVEL['urgent'])}
         />
         <HeaderDescription>

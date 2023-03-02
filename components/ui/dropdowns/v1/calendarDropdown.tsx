@@ -69,12 +69,12 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
                 : 'fill-blue-500 [.group-calendarDropdown:hover_&]:fill-blue-700',
               path: noDaySelected ? ICON_EVENT_AVAILABLE : ICON_EVENT_AVAILABLE_FILL,
               group: 'group-calendarDropdown',
-              contentWidth: 'w-[21rem]',
+              menuItemsWidth: 'w-[21rem]',
               menuWidth: 'sm:w-full',
               hoverBg: options.hoverBg,
               text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
             }}
-            headerContents={<HeaderContentsFragment>{renderDueDate}</HeaderContentsFragment>}>
+            menuButtonContent={<HeaderContentsFragment>{renderDueDate}</HeaderContentsFragment>}>
             <div className='p-2'>
               <Calendar todo={todo} />
               <div className='flex flex-row items-center justify-between px-4 pb-4 pt-5'>

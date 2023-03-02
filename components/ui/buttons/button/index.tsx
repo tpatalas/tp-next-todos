@@ -13,12 +13,16 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
   ({ options, onClick, onKeyDown, onDoubleClick, onMouseOver, children = options.name }: Props, ref) => {
     const [hasTooltip, setTooltip] = useState(false);
 
+    const tooltipOptions = {
+      container: options.container,
+      tooltip: (hasTooltip || options.isDisabled) && !options.tooltip ? undefined : options.tooltip,
+      kbd: (hasTooltip || options.isDisabled) && !options.kbd ? undefined : options.kbd,
+      placement: options.placement,
+      offset: options.offset,
+    };
+
     return (
-      <Tooltip
-        tooltip={hasTooltip || options.isDisabled ? undefined : options.tooltip}
-        kbd={hasTooltip || options.isDisabled ? undefined : options.kbd}
-        placement={options.placement}
-        offset={options.offset}>
+      <Tooltip options={tooltipOptions}>
         <button
           type={options.type || 'button'}
           className={options.className}

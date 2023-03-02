@@ -40,8 +40,6 @@ const RecoilRootProvider: FC<{ children: React.ReactNode }> = ({ children }) => 
 export const renderWithRecoilRoot = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
   render(ui, { wrapper: RecoilRootProvider, ...options });
 
-export const mergeObjects = <T,>(target: T, source: T): T => Object.assign({}, target, source);
-
 export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) => {
   let response;
   for (let i = 0; i < retryCount; i++) {
@@ -57,6 +55,7 @@ export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) 
   throw response;
 };
 
+// timer
 export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinutes?: number) => {
   const currentTime = Date.now();
   const difference = currentTime - updateTimeInMilliSeconds;
@@ -69,3 +68,10 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
 export const nextImageLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
   return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality || 75}`;
 };
+
+// test if email has standard format of email address
+export const validateEmailFormat = (email: string) => {
+  const emailFormat = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]{2,}$');
+  return emailFormat.test(email);
+};
+

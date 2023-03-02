@@ -15,15 +15,17 @@ export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
     <Fragment>
       <LabelModal
         label={label}
-        headerContents='Update label'
+        menuButtonContent='Update label'
         footerButtons={
           <DisableButton
             options={optionsButtonLabelModalUpdateLabel}
             isConditionalRendering={condition}
-            onClick={() => updateLabel()}>
+            onClick={() => updateLabel()}
+          >
             Update
           </DisableButton>
-        }>
+        }
+      >
         <KeysWithLabelModalEffect label={label} />
       </LabelModal>
     </Fragment>

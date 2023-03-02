@@ -22,7 +22,7 @@ export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
       initialFocus={initialFocusButton}
       itemIds={todo}
       headerIcons={<SvgIcon options={optionsSvgConfirmModalHeaderIcon} />}
-      headerContents={
+      menuButtonContent={
         <HeaderContentFragment>
           <HeaderTitle>Discard changes</HeaderTitle>
           <HeaderDescription>
@@ -34,7 +34,8 @@ export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
         <ConfirmButton
           options={optionsButtonConfirmModalDiscard}
           onClick={() => discardConfirmModal()}
-          ref={initialFocusButton}>
+          ref={initialFocusButton}
+        >
           Discard
         </ConfirmButton>
       }

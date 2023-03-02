@@ -44,7 +44,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
           {!isTodoCompleted() && (
             <Dropdown
               options={optionsDropdownComboBox}
-              headerContents={selectedLabels.length === 0 && 'Label'}>
+              menuButtonContent={selectedLabels.length === 0 && 'Label'}>
               <LabelComboBox todo={todo} />
             </Dropdown>
           )}
@@ -58,9 +58,11 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                     'bg-opacity-40 hover:bg-opacity-60',
                   )}>
                   <PrefetchRouterButton
-                    path={paths('/app/label/', label._id)}
-                    className='max-w-[5.3rem] truncate pr-1'
-                    tooltip={label.name}
+                    options={{
+                      path: paths('/app/label/', label._id),
+                      className: 'max-w-[5.3rem] truncate pr-1',
+                      tooltip: label.name,
+                    }}
                     onClick={() => closeTodoModal()}>
                     {label.name}
                   </PrefetchRouterButton>

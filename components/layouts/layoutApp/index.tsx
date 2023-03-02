@@ -1,7 +1,6 @@
 import { CATCH } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { atomHtmlTitleTag } from '@states/misc';
-import { ClientStoragesResetEffect } from '@states/misc/clientStoragesResetEffect';
 import { atomCatch } from '@states/utils';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -44,7 +43,6 @@ export const LayoutApp = ({ children }: Props) => {
           {!catchTodoModal && <LabelModal />}
         </ModalActionsFragment>
       </FooterFragment>
-      <ClientStoragesResetEffect />
     </LayoutAppFragment>
   );
 };

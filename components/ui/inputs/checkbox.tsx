@@ -3,9 +3,7 @@ import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import { Types, TypesTodo } from 'lib/types';
 import { Input } from './input';
 
-type Props = Partial<
-  Pick<Types, 'isChecked' | 'onChange' | 'className' | 'checkBoxColor' | 'checkedColor'>
-> &
+type Props = Partial<Pick<Types, 'isChecked' | 'onChange' | 'className' | 'checkBoxColor' | 'checkedColor'>> &
   Pick<TypesTodo, 'todoItem'>;
 
 export const CheckBox = ({

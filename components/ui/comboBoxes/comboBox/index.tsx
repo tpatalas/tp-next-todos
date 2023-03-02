@@ -8,11 +8,11 @@ import { PseudoIconButton } from '@ui/pseudoButtons/pseudoIconButton';
 import { Fragment as ComboBoxFragment } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
-type Props = Pick<Types, 'onChangeTypeNever' | 'selected' | 'children' | 'placeholder'> &
-  Partial<Pick<Types, 'hasComboBoxBoardStyle' | 'comboBoxInputButton'>>;
+type Props = Pick<Types, 'selected' | 'children' | 'placeholder'> &
+  Partial<Pick<Types, 'hasComboBoxBoardStyle' | 'comboBoxInputButton'>> & { onChange: (value: never) => void };
 
 export const ComboBox = ({
-  onChangeTypeNever,
+  onChange,
   selected,
   children,
   placeholder,
@@ -28,7 +28,7 @@ export const ComboBox = ({
       <div className='relative z-10 w-full min-w-[18rem]'>
         <Combobox
           value={selected}
-          onChange={onChangeTypeNever}
+          onChange={onChange}
           multiple>
           <>
             <div
