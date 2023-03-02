@@ -1,11 +1,12 @@
+import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonSidebarToggle } from '@data/dataOptions';
-import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
+import { STYLE_BUTTON_KEY_ONLY_RING, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
-import { LoginButton } from '@layouts/layoutApp/loginButton';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { classNames } from '@states/utils';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import {
   Fragment,
@@ -24,6 +25,7 @@ const userNavigation = [
 
 export const LayoutHeader = () => {
   const setSidebarOpen = useSidebarOpen();
+  const { data: session } = useSession();
 
   return (
     <LayoutHeaderFragment>
@@ -53,8 +55,15 @@ export const LayoutHeader = () => {
                 as='div'
                 className='relative ml-3'>
                 <div>
-                  {true ? (
-                    <LoginButton />
+                  {!session ? (
+                    <Button
+                      options={{
+                        className: classNames(STYLE_BUTTON_NORMAL_BLUE),
+                        tooltip: 'Sign in',
+                      }}
+                      onClick={() => signIn()}>
+                      Sign In
+                    </Button>
                   ) : (
                     <Menu.Button
                       className={classNames(

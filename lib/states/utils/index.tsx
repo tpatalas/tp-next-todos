@@ -2,7 +2,7 @@ import { CATCH } from '@data/dataTypesConst';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';
-import { hash } from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
 
 /**
  * Atoms
@@ -70,6 +70,9 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
 
 // hash data string with bcrypt
 export const hashDataString = async (data: string) => await hash(data, 12);
+
+// compare hash data string with bcrypt
+export const compareHashedDataString = async (data: string, hashedData: string) => await compare(data, hashedData);
 
 // test password with regex
 export const validateStrongPassword = (password: string) => {
