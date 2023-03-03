@@ -1,7 +1,7 @@
+import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonSidebarToggle } from '@data/dataOptions';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
-import { LoginButton } from '@layouts/layoutApp/loginButton';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import dynamic from 'next/dynamic';
 import {
@@ -18,6 +18,7 @@ const HeaderUser = dynamic(() => import('./headerUser').then((mod) => mod.Header
 
 export const LayoutHeader = () => {
   const setSidebarOpen = useSidebarOpen();
+  const { data: session } = useSession();
 
   return (
     <LayoutHeaderFragment>
