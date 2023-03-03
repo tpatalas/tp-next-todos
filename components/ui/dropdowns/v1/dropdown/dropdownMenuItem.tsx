@@ -12,19 +12,17 @@ type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'onClick' |
 
 export const DropdownMenuItem = ({ options, onClick, children }: Props) => {
   const isActive = useRecoilValue(selectorActiveMenuItem);
-  const { isDisabledCloseOnClick = true, isDisabled = false } = options;
+  const { shouldKeepOpeningOnClick = true, isDisabled = false } = options;
 
   return (
     <span>
-      <Tooltip
-        tooltip={options.tooltip}
-        kbd={options.kbd}>
+      <Tooltip options={options}>
         <Menu.Item disabled={isDisabled}>
           {({ active }) => (
             <div
               onClick={(event) => {
                 onClick && onClick(event);
-                isDisabledCloseOnClick && event.preventDefault();
+                shouldKeepOpeningOnClick && event.preventDefault();
               }}
               className={classNames(
                 'group/menuItem block w-full cursor-pointer text-left text-sm text-gray-500',

@@ -67,7 +67,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
       <div className='py-1'>
         <DropdownMenuItem
           options={{
-            isDisabledCloseOnClick: false,
+            shouldKeepOpeningOnClick: false,
             tooltip: 'Delete',
             path: ICON_DELETE,
             kbd: '⌘ + Delete',

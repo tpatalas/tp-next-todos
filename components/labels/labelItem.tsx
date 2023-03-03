@@ -13,7 +13,7 @@ import dynamic from 'next/dynamic';
 import { Fragment, Fragment as LabelModalFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const LabelItemDropdown = dynamic(() => import('@dropdowns/labelItemDropdown').then((mod) => mod.LabelItemDropdown));
+const LabelItemDropdown = dynamic(() => import('@dropdowns/v1/labelItemDropdown').then((mod) => mod.LabelItemDropdown));
 const ItemLabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal/itemLabelModal').then((mod) => mod.ItemLabelModal),
 );
@@ -56,7 +56,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
             isInitiallyVisible: false,
             hoverBg: matchedSlug ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]' : STYLE_HOVER_ENABLED_SLATE_DARK,
           }}
-          headerContentsOnClose={
+          menuContentOnClose={
             <span className='absolute right-[0.73rem] top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400 group-hover:invisible'>
               <TodosCount label={label} />
             </span>

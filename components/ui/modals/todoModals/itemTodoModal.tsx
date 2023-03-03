@@ -25,7 +25,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
   return (
     <TodoModal
       todo={todo}
-      headerContents={
+      menuButtonContent={
         <HeaderContentFragment>
           <div className='mr-3 mb-[0.045em]'>
             <CompleteTodoCheckBox
@@ -46,11 +46,13 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
           <DisableButton
             options={optionsButtonItemModalUpdate}
             isConditionalRendering={condition}
-            onClick={() => updateTodo()}>
+            onClick={() => updateTodo()}
+          >
             Update
           </DisableButton>
         </FooterButtonsFragment>
-      }>
+      }
+    >
       <KeysWithTodoModalEffect todo={todo} />
       <KeysWithItemModalEffect todo={todo} />
     </TodoModal>
