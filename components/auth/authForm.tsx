@@ -1,7 +1,8 @@
 import { USER } from '@data/dataTypesConst';
 import { atomUserNew } from '@states/users';
 import { useUserCreate, useUserValueUpdate } from '@states/users/hooks';
-import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { FormEvent, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 export const AuthForm = () => {
@@ -10,14 +11,22 @@ export const AuthForm = () => {
   const updateUser = useUserValueUpdate();
   const createUser = useUserCreate();
 
+  const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    isLogin
+      ? await signIn('credentials', {
+          redirect: false,
+          email: user.email,
+          password: user.password,
+          callbackUrl: `${window.location.origin}`,
+        })
+      : createUser();
+  };
+
   return (
     <section>
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          isLogin ? '' : createUser();
-        }}>
+      <form onSubmit={onSubmitHandler}>
         <div>
           <label htmlFor='email'>Your Email</label>
           <input
