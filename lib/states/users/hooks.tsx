@@ -7,7 +7,6 @@ export const useUserValueUpdate = () => {
   return useRecoilCallback(({ set, snapshot }) => (targetName: USER, content: string) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    //create new user
     set(atomUserNew, {
       ...get(atomUserNew),
       [targetName]: content,
