@@ -49,7 +49,8 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
             'flex flex-row rounded-md focus-visible:rounded-md',
             options.padding ?? 'p-2',
             options.container,
-          )}>
+          )}
+        >
           <SvgIcon
             options={{
               path: conditionalPath,
@@ -77,7 +78,7 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
             container: options.container,
             padding: options.padding,
           }}
-          headerContents={options.isInitiallyVisible && conditionalHeaderContent}
+          menuButtonContent={options.isInitiallyVisible && conditionalHeaderContent}
           onClick={onClick}
         />
       )}

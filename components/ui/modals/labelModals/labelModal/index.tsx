@@ -20,9 +20,9 @@ import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 
-type Props = Partial<Pick<Types, 'label' | 'children' | 'headerContents' | 'footerButtons' | 'headerButtons'>>;
+type Props = Partial<Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
 
-export const LabelModal = ({ label, footerButtons, children, headerContents = 'Create new label' }: Props) => {
+export const LabelModal = ({ label, footerButtons, children, menuButtonContent = 'Create new label' }: Props) => {
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
   const closeModal = useLabelModalStateClose(label?._id);
   const initialFocusInput = useRef<HTMLInputElement>(null);
@@ -37,11 +37,12 @@ export const LabelModal = ({ label, footerButtons, children, headerContents = 'C
       <ModalTransitionRoot
         show={isLabelModalOpen}
         initialFocus={initialFocusInput}
-        onClose={() => closeModal()}>
+        onClose={() => closeModal()}
+      >
         <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
             <div className='flex w-full flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
-              {headerContents}
+              {menuButtonContent}
               <IconButton
                 options={optionsButtonTodoModalClose}
                 onClick={() => closeModal()}
@@ -67,14 +68,16 @@ export const LabelModal = ({ label, footerButtons, children, headerContents = 'C
           <div className='flex flex-row justify-end pt-4'>
             <CancelButton
               options={optionsButtonTodoModalCancel}
-              onClick={() => closeModal()}>
+              onClick={() => closeModal()}
+            >
               Cancel
             </CancelButton>
             {footerButtons || (
               <DisableButton
                 isConditionalRendering={condition}
                 options={optionsButtonLabelModalAddLabel}
-                onClick={() => addLabel()}>
+                onClick={() => addLabel()}
+              >
                 Add Label
               </DisableButton>
             )}

@@ -4,30 +4,26 @@ import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useLabelRemoveItem } from '@states/labels/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
-import { mergeObjects } from '@states/utils';
 import { Types } from 'lib/types';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 
-type Props = { options: TypesOptionsDropdown } & Pick<Types, 'label'> & Partial<Pick<Types, 'headerContentsOnClose'>>;
+type Props = { options: TypesOptionsDropdown } & Pick<Types, 'label'> & Partial<Pick<Types, 'menuContentOnClose'>>;
 
-export const LabelItemDropdown = ({ label, options, headerContentsOnClose }: Props) => {
+export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props) => {
   const openModal = useLabelModalStateOpen(label?._id);
   const removeLabel = useLabelRemoveItem(label._id);
 
   return (
     <Dropdown
-      options={mergeObjects<TypesOptionsDropdown>(optionsDropdownLabelItem, {
-        hoverBg: options.hoverBg,
-        isInitiallyVisible: false,
-      })}
-      headerContentsOnClose={headerContentsOnClose}>
+      options={{ hoverBg: options.hoverBg, isInitiallyVisible: false, ...optionsDropdownLabelItem }}
+      menuContentOnClose={menuContentOnClose}>
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       <div className='py-1'>
         <DropdownMenuItem
           options={{
-            isDisabledCloseOnClick: false,
+            shouldKeepOpeningOnClick: false,
             path: ICON_EDIT_NOTE,
             tooltip: 'Edit',
           }}
@@ -38,7 +34,7 @@ export const LabelItemDropdown = ({ label, options, headerContentsOnClose }: Pro
       <div className='py-1'>
         <DropdownMenuItem
           options={{
-            isDisabledCloseOnClick: false,
+            shouldKeepOpeningOnClick: false,
             path: ICON_DELETE,
             tooltip: 'Delete',
           }}

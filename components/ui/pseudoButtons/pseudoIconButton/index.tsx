@@ -8,10 +8,10 @@ const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => 
 const PseudoButton = dynamic(() => import('../pseudoButton').then((mod) => mod.PseudoButton));
 
 type Props = { options: TypesOptionsButton } & Partial<
-  Pick<Types, 'headerContents' | 'children' | 'onClick' | 'children'>
+  Pick<Types, 'menuButtonContent' | 'children' | 'onClick' | 'children'>
 >;
 
-export const PseudoIconButton = ({ options, headerContents, onClick, children = options.name }: Props) => {
+export const PseudoIconButton = ({ options, menuButtonContent, onClick, children = options.name }: Props) => {
   return (
     <span className={options.container}>
       <PseudoButton
@@ -19,7 +19,7 @@ export const PseudoIconButton = ({ options, headerContents, onClick, children = 
           className: classNames(
             options.className,
             'group-pseudoButton border-gray-300 bg-transparent text-gray-500 hover:bg-white focus-visible:ring-blue-500 hover:text-gray-700',
-            headerContents ? 'rounded-lg' : 'rounded-full',
+            menuButtonContent ? 'rounded-lg' : 'rounded-full',
             options.padding ?? 'p-2',
             options.margin ?? 'ml-px',
             options.hoverBg ?? 'hover:bg-gray-100',
@@ -30,7 +30,8 @@ export const PseudoIconButton = ({ options, headerContents, onClick, children = 
           kbd: options.kbd,
           offset: options.offset,
         }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
@@ -44,9 +45,9 @@ export const PseudoIconButton = ({ options, headerContents, onClick, children = 
             }}
           />
           <HeaderContentsFragment>
-            {headerContents && (
+            {menuButtonContent && (
               <span className='px-3 text-sm font-normal text-gray-500 [.group-pseudoButton:hover_&]:text-gray-700'>
-                {headerContents}
+                {menuButtonContent}
               </span>
             )}
           </HeaderContentsFragment>

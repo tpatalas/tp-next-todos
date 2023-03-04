@@ -42,8 +42,9 @@ export type TypesOptionsDropdown = Partial<
     | 'isInitiallyVisible'
     | 'hasDropdownBoardStyle'
     | 'isPortal'
-    | 'isDisabledCloseOnClick'
+    | 'shouldKeepOpeningOnClick'
     | 'isDisabled'
+    | 'show'
   > &
     Pick<
       TypesStyleAttributes,
@@ -55,8 +56,10 @@ export type TypesOptionsDropdown = Partial<
       | 'size'
       | 'color'
       | 'text'
-      | 'contentWidth'
+      | 'menuItemsWidth'
       | 'hoverBg'
+      | 'hoverRing'
+      | 'transition'
       | 'container'
     >
 >;
