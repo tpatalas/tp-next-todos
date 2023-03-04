@@ -377,6 +377,11 @@ export type TypesRefetchEffect = <T>({
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
 
+export type TypesIndexedDBEffect = <T>({
+  storeName,
+  queryKey,
+}: Pick<Types, 'storeName' | 'queryKey'>) => AtomEffect<T | boolean>;
+
 export type TypesMediaQueryEffect = <T>({
   breakpoint,
   isStateUnderBreakpoint,

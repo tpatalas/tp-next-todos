@@ -16,7 +16,7 @@ export const MenuItem = ({ options, onClick, children }: Props) => {
 
   return (
     <span>
-      <Tooltip options={options}>
+      <Tooltip options={!isDisabled ? options : {}}>
         <Menu.Item disabled={isDisabled}>
           {({ active }) => (
             <div
@@ -40,7 +40,8 @@ export const MenuItem = ({ options, onClick, children }: Props) => {
                       className: classNames(
                         'mr-3',
                         options.size ?? 'h-5 w-5',
-                        options.color ?? 'fill-gray-500 group-hover/menuItem:fill-gray-700',
+                        options.color ?? 'fill-gray-500',
+                        !options.color && !isDisabled && 'group-hover/menuItem:fill-gray-700',
                       ),
                     }}
                   />

@@ -17,11 +17,13 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <SessionProvider
-      session={session}
-      basePath={process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH}>
-      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
-    </SessionProvider>
+    <RecoilRoot>
+      <SessionProvider
+        session={session}
+        basePath={process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH}>
+        {getLayout(<Component {...pageProps} />)}
+      </SessionProvider>
+    </RecoilRoot>
   );
 };
 

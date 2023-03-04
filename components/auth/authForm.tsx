@@ -2,6 +2,7 @@ import { USER } from '@data/dataTypesConst';
 import { atomUserNew } from '@states/users';
 import { useUserCreate, useUserValueUpdate } from '@states/users/hooks';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -10,17 +11,19 @@ export const AuthForm = () => {
   const user = useRecoilValue(atomUserNew);
   const updateUser = useUserValueUpdate();
   const createUser = useUserCreate();
+  const router = useRouter();
 
   const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    isLogin
-      ? await signIn('credentials', {
-          redirect: false,
-          email: user.email,
-          password: user.password,
-          callbackUrl: `${window.location.origin}`,
-        })
-      : createUser();
+    if (isLogin) {
+      const response = await signIn('credentials', {
+        redirect: false,
+        email: user.email,
+        password: user.password,
+      });
+      return response && !response.error && router.replace('/app');
+    }
+    createUser();
   };
 
   return (

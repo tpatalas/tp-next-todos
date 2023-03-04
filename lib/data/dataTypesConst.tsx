@@ -94,6 +94,7 @@ export type IDB_KEY = (typeof IDB_KEY)[keyof typeof IDB_KEY];
 export const IDB_KEY = {
   todoIds: 'todoIds',
   labels: 'labels',
+  session: 'session',
 } as const;
 
 export type IDB_KEY_STORE = (typeof IDB_KEY_STORE)[keyof typeof IDB_KEY_STORE];

@@ -6,6 +6,7 @@ import { LayoutHeader } from './layoutHeader';
 const LayoutFooter = dynamic(() => import('./layoutFooter').then((mod) => mod.LayoutFooter), {
   ssr: false,
 });
+// const LayoutHeader = dynamic(() => import('./layoutHeader').then((mod) => mod.LayoutHeader), { ssr: false });
 
 export const Layout = ({ children }: Pick<Types, 'children'>) => {
   return (
