@@ -169,7 +169,7 @@ export const DATA_PATHNAME_IMAGE: TypesPathnameImage[] = [
     alt: 'Placeholder image of focus',
     title: "Todos for today's focus",
     description:
-      "Congratulations! You've completed all of your todos for today's focus. Take a moment to celebrate your accomplishments.",
+      "Today's focus auto-selects important todos based on your priorities and capacity. Stay motivated and achieve your daily goals with increased productivity.",
   },
   {
     path: 'urgent.webp',

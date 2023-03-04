@@ -1,7 +1,7 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import { optionsSvgPriorityUrgent, optionsSvgPriorityImportant, optionsSvgCalendarDueDate } from '@data/dataOptions';
 import { PRIORITY_LEVEL, CATCH } from '@data/dataTypesConst';
-import { LabelComboBoxDropdown } from '@dropdowns/labelComboBoxDropdown';
+import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { selectorSelectedQueryLabels } from '@states/labels';
@@ -48,7 +48,8 @@ export const TodoItem = ({ todo }: Props) => {
       </CheckBoxFragment>
       <div
         className='ml-4 w-full select-none text-base'
-        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}>
+        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}
+      >
         <div className={classNames('break-words pr-1 ', todoItem.completed ? 'italic opacity-80' : '')}>
           <div
             className={classNames(
@@ -57,7 +58,8 @@ export const TodoItem = ({ todo }: Props) => {
               important && 'decoration-yellow-500',
               !important && !urgent && 'decoration-blue-600',
               todoItem.completed ? ' text-gray-500 line-through' : '',
-            )}>
+            )}
+          >
             {todoItem.title}
           </div>
           <p className='text-sm text-gray-500 line-clamp-2'>{todoItem.note}</p>
