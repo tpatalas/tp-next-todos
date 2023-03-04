@@ -1,4 +1,4 @@
-import { ConditionalPortal } from '@dropdowns/dropdown/conditionalPortal';
+import { ConditionalPortal } from '@dropdowns/v1/dropdown/conditionalPortal';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { TypesOptionsBackdrop } from '@lib/types/typesOptions';
@@ -32,7 +32,8 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => 
           enterTo='opacity-100'
           leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-200')}
           leaveFrom='opacity-100'
-          leaveTo='opacity-0'>
+          leaveTo='opacity-0'
+        >
           <div
             tabIndex={-1}
             className={classNames(

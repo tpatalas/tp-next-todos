@@ -16,8 +16,10 @@ export const Input = ({ name, tooltip, kbd, type, className, isChecked, onChange
 
   return (
     <Tooltip
-      tooltip={isClicked ? undefined : tooltip}
-      kbd={isClicked ? undefined : kbd}>
+      options={{
+        tooltip: isClicked ? undefined : tooltip,
+        kbd: isClicked ? undefined : kbd,
+      }}>
       <input
         name={name}
         type={type}

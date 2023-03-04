@@ -5,10 +5,13 @@ import TodoNote from '@lib/models/Todo/TodoNotes';
 import { Labels, Todos } from '@lib/types';
 import mongoose from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { userInfo } from 'userInfo';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
+  const session = await getServerSession(req, res, authOptions);
+  const userId = session?.user._id;
 
   const {
     method,
@@ -18,7 +21,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data: Todos = body;
   const query: Partial<Todos> = {
-    user_id: userInfo._id,
+    user_id: userId,
   };
 
   switch (method) {
@@ -47,8 +50,10 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
 
     case 'POST':
-      const session = await mongoose.startSession();
-      session.startTransaction();
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
+      const sessionPost = await mongoose.startSession();
+      sessionPost.startTransaction();
 
       const todoItem = {
         title: data.title,
@@ -60,19 +65,19 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         priorityLevel: data.priorityLevel,
         priorityRankScore: data.priorityRankScore,
         update: Date.now(),
-        user_id: userInfo._id,
+        user_id: userId,
       };
 
       const todoNote = {
         note: data.note,
         title_id: data._id,
         update: Date.now(),
-        user_id: userInfo._id,
+        user_id: userId,
       };
 
       try {
-        const createdTodoItem = await TodoItem.create([todoItem], { session: session });
-        const createdTodoNote = data.note && (await TodoNote.create([todoNote], { session: session }));
+        const createdTodoItem = await TodoItem.create([todoItem], { session: sessionPost });
+        const createdTodoNote = data.note && (await TodoNote.create([todoNote], { session: sessionPost }));
         const createdLabel =
           data.labelItem &&
           (await Promise.all(
@@ -85,20 +90,20 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
                 { _id: label._id },
                 { $set: updatedLabel },
                 {
-                  session: session,
+                  session: sessionPost,
                 },
               );
             }),
           ));
 
         await Promise.all([createdTodoItem, createdTodoNote, createdLabel]);
-        await session.commitTransaction();
+        await sessionPost.commitTransaction();
         res.status(201).json({ success: true, data: data });
       } catch (error) {
-        await session.abortTransaction();
+        await sessionPost.abortTransaction();
         res.status(400).json({ success: false });
       } finally {
-        session.endSession();
+        sessionPost.endSession();
       }
       break;
     default:

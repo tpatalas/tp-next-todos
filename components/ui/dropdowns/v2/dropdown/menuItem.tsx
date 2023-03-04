@@ -10,21 +10,19 @@ import { useRecoilValue } from 'recoil';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'onClick' | 'children'>>;
 
-export const DropdownMenuItem = ({ options, onClick, children }: Props) => {
+export const MenuItem = ({ options, onClick, children }: Props) => {
   const isActive = useRecoilValue(selectorActiveMenuItem);
-  const { isDisabledCloseOnClick = true, isDisabled = false } = options;
+  const { shouldKeepOpeningOnClick = false, isDisabled = false } = options;
 
   return (
     <span>
-      <Tooltip
-        tooltip={options.tooltip}
-        kbd={options.kbd}>
+      <Tooltip options={!isDisabled ? options : {}}>
         <Menu.Item disabled={isDisabled}>
           {({ active }) => (
             <div
               onClick={(event) => {
                 onClick && onClick(event);
-                isDisabledCloseOnClick && event.preventDefault();
+                shouldKeepOpeningOnClick && event.preventDefault();
               }}
               className={classNames(
                 'group/menuItem block w-full cursor-pointer text-left text-sm text-gray-500',
@@ -42,7 +40,8 @@ export const DropdownMenuItem = ({ options, onClick, children }: Props) => {
                       className: classNames(
                         'mr-3',
                         options.size ?? 'h-5 w-5',
-                        options.color ?? 'fill-gray-500 group-hover/menuItem:fill-gray-700',
+                        options.color ?? 'fill-gray-500',
+                        !options.color && !isDisabled && 'group-hover/menuItem:fill-gray-700',
                       ),
                     }}
                   />

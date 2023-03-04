@@ -19,7 +19,7 @@ export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem
       show={show}
       initialFocus={initialFocusButton}
       headerIcons={<SvgIcon options={optionsSvgConfirmModalDelete} />}
-      headerContents={
+      menuButtonContent={
         <HeaderContentFragment>
           <HeaderTitle>Delete item</HeaderTitle>
           <HeaderDescription>
@@ -36,7 +36,8 @@ export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem
         <ConfirmButton
           options={optionsButtonConfirmModalDelete}
           onClick={onClickConfirm}
-          ref={initialFocusButton}>
+          ref={initialFocusButton}
+        >
           Delete
         </ConfirmButton>
       }
