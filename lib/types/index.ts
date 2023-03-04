@@ -142,8 +142,7 @@ export interface TypesNotification {
 export interface TypesIDB {
   dbName: IDB;
   store: IDB_STORE;
-  oldVersion: IDB_VERSION;
-  newVersion: IDB_VERSION;
+  currentVersion: IDB_VERSION;
 }
 
 export interface TypesSidebarMenu {
@@ -202,7 +201,6 @@ export interface TypesReactChildren {
   footerButtons: Types['children'];
   headerButtons: Types['children'];
   headerIcons: Types['children'];
-  headerContents: Types['children'];
   nestedModal: Types['children'];
 }
 export interface TypesRefs {
@@ -246,7 +244,7 @@ export interface TypesStyleAttributes {
   color: string;
   size: string;
   padding: string;
-  contentWidth: string;
+  menuItemsWidth: string;
   checkedColor: string;
   checkBoxColor: string;
   borderRadius: string;
@@ -259,6 +257,8 @@ export interface TypesStyleAttributes {
   width: string;
   container: string;
   hoverBg: string;
+  hoverRing: string;
+  transition: string;
   zIndex: string;
 }
 
@@ -289,7 +289,11 @@ export interface TypesComboboxAttributes {
 
 export interface TypesDropdownAttributes {
   hasDropdownBoardStyle: boolean;
-  headerContentsOnClose: Types['children'];
+  open: boolean;
+  menuContentOnClose: Types['children'];
+  menuButtonContent: Types['children'];
+  menuButtonIcon: Types['children'];
+  referenceElement: HTMLDivElement | null;
 }
 
 export interface TypesInputAttributes {
@@ -322,10 +326,13 @@ export interface TypesElement {
   isNoValidate: boolean;
   isAriaHidden: boolean;
   isDisabled: boolean;
-  isDisabledCloseOnClick: boolean;
+  shouldKeepOpeningOnClick: boolean;
 }
 
 export interface TypesEffects {
+  // All Effect
+  shouldGet: boolean;
+  shouldSet: boolean;
   // Refetch Effect
   queryKey: string;
   queryFunction<T>(): Promise<{ data: T }>;
@@ -371,6 +378,11 @@ export type TypesRefetchEffect = <T>({
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
+
+export type TypesSessionStorageEffect = <T>({
+  queryKey,
+  shouldGet,
+}: Pick<Types, 'queryKey'> & Partial<Pick<Types, 'shouldGet'>>) => AtomEffect<T | boolean>;
 
 export type TypesMediaQueryEffect = <T>({
   breakpoint,

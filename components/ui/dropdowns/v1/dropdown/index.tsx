@@ -14,11 +14,11 @@ import { ConditionalPortal } from './conditionalPortal';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
 type Props = { options: TypesOptionsDropdown } & Partial<
-  Pick<Types, 'headerContents' | 'show' | 'headerContentsOnClose'>
+  Pick<Types, 'menuButtonContent' | 'show' | 'menuContentOnClose'>
 > &
   Pick<Types, 'children'>;
 
-export const Dropdown = ({ headerContents, headerContentsOnClose, children, show, options }: Props) => {
+export const Dropdown = ({ menuButtonContent, menuContentOnClose, children, show, options }: Props) => {
   const { hasDivider = true, hasDropdownBoardStyle = true, isPortal = true, isInitiallyVisible = true } = options;
   const [isClicked, setClick] = useState(false);
   const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
@@ -42,8 +42,10 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
         className={classNames('relative inline-block text-left', options.menuWidth, options.menuHeight)}>
         {({ open }) => (
           <Tooltip
-            tooltip={isClicked || open ? undefined : options.tooltip}
-            kbd={isClicked || open ? undefined : options.kbd}>
+            options={{
+              tooltip: isClicked || open ? undefined : options.tooltip,
+              kbd: isClicked || open ? undefined : options.kbd,
+            }}>
             <MenuFragment>
               <div ref={setReferenceElement}>
                 <Menu.Button as={Fragment}>
@@ -53,7 +55,7 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
                       'inline-flex w-full items-center text-gray-400 ease-in hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0 sm:ml-0',
                       options.padding ?? 'p-2',
                       options.hoverBg ?? STYLE_HOVER_SLATE_DARK,
-                      options.borderRadius && headerContents ? options.borderRadius : 'rounded-full',
+                      options.borderRadius && menuButtonContent ? options.borderRadius : 'rounded-full',
                       visibility(isInitiallyVisible ?? true, open),
                     )}
                     onMouseDown={() => setClick(true)}
@@ -74,19 +76,19 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
                         ),
                       }}
                     />
-                    {headerContents && (
+                    {menuButtonContent && (
                       <span
                         className={classNames(
                           'flex flex-row items-start justify-start whitespace-nowrap pl-3 text-sm font-normal text-gray-500',
                           options.text ?? 'group-hover:text-gray-700',
                         )}>
-                        {headerContents}
+                        {menuButtonContent}
                       </span>
                     )}
                   </button>
                 </Menu.Button>
               </div>
-              {!open && headerContentsOnClose}
+              {!open && menuContentOnClose}
               <Transition
                 as='div'
                 show={show ? show : open}
@@ -102,7 +104,7 @@ export const Dropdown = ({ headerContents, headerContentsOnClose, children, show
                   <Menu.Items
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',
-                      options.contentWidth ?? 'w-60',
+                      options.menuItemsWidth ?? 'w-60',
                       hasDropdownBoardStyle && 'rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5',
                     )}
                     ref={setPopperElement}

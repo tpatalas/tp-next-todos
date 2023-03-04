@@ -7,11 +7,13 @@ import TodoNote from '@lib/models/Todo/TodoNotes';
 import { Labels, Todos } from '@lib/types';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { userInfo } from 'userInfo';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
-  const session = await mongoose.startSession();
+  const session = await getServerSession(req, res, authOptions);
+  const userId = session?.user._id;
 
   const {
     method,
@@ -24,7 +26,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const filter = (type: SCHEMA_TODO) => {
     const query: Partial<Todos> = {
-      user_id: userInfo._id,
+      user_id: userId,
     };
     type === SCHEMA_TODO['todoItem'] && (query._id = queriedTodoId);
     type === SCHEMA_TODO['todoNote'] && (query.title_id = queriedTodoId);
@@ -34,9 +36,9 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        const getItem = await TodoItem.aggregate(
-          aggregatedTodoItem({ todoId: queriedTodoId, userId: userInfo._id }),
-        ).then((data: Todos[]) => data[0]);
+        const getItem = await TodoItem.aggregate(aggregatedTodoItem({ todoId: queriedTodoId, userId: userId })).then(
+          (data: Todos[]) => data[0],
+        );
 
         if (!getItem) {
           return res.status(400).json({ success: false });
@@ -47,7 +49,11 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'PUT':
-      session.startTransaction();
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
+      const sessionPut = await mongoose.startSession();
+
+      sessionPut.startTransaction();
 
       const todoItem = {
         title: data.title,
@@ -67,14 +73,14 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
       try {
         const updatedTodoItem = await TodoItem.findOneAndUpdate(filter(SCHEMA_TODO['todoItem']), todoItem, {
-          session: session,
+          session: sessionPut,
           upsert: true,
           new: true,
           runValidators: true,
         });
 
         const updatedTodoNote = await TodoNote.findOneAndUpdate(filter(SCHEMA_TODO['todoNote']), todoNote, {
-          session: session,
+          session: sessionPut,
           upsert: true,
           new: true,
           runValidators: true,
@@ -89,7 +95,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
                 { _id: label._id },
                 { $set: updatedLabel },
                 {
-                  session: session,
+                  session: sessionPut,
                   upsert: true,
                   new: true,
                   runValidators: true,
@@ -105,17 +111,19 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
             updatedLabel,
           }),
         );
-        await session.commitTransaction();
+        await sessionPut.commitTransaction();
         res.status(200).json({ success: true, data: updatedTodo });
       } catch (error) {
-        await session.abortTransaction();
+        await sessionPut.abortTransaction();
         res.status(400).json({ success: false });
       } finally {
-        session.endSession();
+        sessionPut.endSession();
       }
       break;
 
     case 'PATCH':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       try {
         const updateItem = await TodoItem.findOneAndUpdate(
           filter(SCHEMA_TODO['todoItem']),
@@ -135,16 +143,20 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
 
     case 'DELETE':
-      session.startTransaction();
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
+      const sessionDelete = await mongoose.startSession();
+
+      sessionDelete.startTransaction();
       const deleteItem = await TodoItem.findOneAndUpdate(
         filter(SCHEMA_TODO['todoItem']),
         { deleted: true, update: Date.now() },
-        { session: session, new: true, runValidators: true },
+        { session: sessionDelete, new: true, runValidators: true },
       );
       const deleteNote = await TodoNote.findOneAndUpdate(
         filter(SCHEMA_TODO['todoNote']),
         { update: Date.now(), deleted: true },
-        { session: session, new: true, runValidators: true },
+        { session: sessionDelete, new: true, runValidators: true },
       );
 
       try {
@@ -152,13 +164,13 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
           deletedItem,
           deletedNote,
         }));
-        await session.commitTransaction();
+        await sessionDelete.commitTransaction();
         res.status(200).json({ success: true, data: deletedTodo });
       } catch (error) {
-        await session.abortTransaction();
+        await sessionDelete.abortTransaction();
         res.status(400).json({ success: false });
       } finally {
-        session.endSession();
+        sessionDelete.endSession();
       }
       break;
     default:

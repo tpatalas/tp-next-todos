@@ -3,28 +3,20 @@ import User from '@lib/models/User';
 import { Users } from '@lib/types';
 import { hashDataString, validateEmailFormat, validateStrongPassword } from '@states/utils';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 const Users = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
+  const session = await getServerSession(req, res, authOptions);
 
-  const {
-    method,
-    body,
-    query: { _id: userId },
-  } = req;
+  const { method, body } = req;
   const data: Users = body;
 
   switch (method) {
-    case 'GET':
-      const getUser = await User.find({ _id: userId }, '_id');
-      try {
-        if (!getUser) return res.status(400).json({ success: false });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-
     case 'POST':
+      if (session) return res.status(401).json({ success: false });
+
       const newUser = {
         email: data.email,
         password: await hashDataString(data.password),

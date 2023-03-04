@@ -1,6 +1,6 @@
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
-import { DropdownMenuItem } from '@dropdowns/dropdown/dropdownMenuItem';
-import { TodoItemDropdown } from '@dropdowns/todoItemDropdown';
+import { DropdownMenuItem } from '@dropdowns/v1/dropdown/dropdownMenuItem';
+import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { TypesTodo } from 'lib/types';
 import dynamic from 'next/dynamic';
@@ -34,7 +34,7 @@ export const Todo = ({ todo, index }: Props) => {
             <div className='py-1'>
               <DropdownMenuItem
                 options={{
-                  isDisabledCloseOnClick: false,
+                  shouldKeepOpeningOnClick: false,
                   path: ICON_EDIT_NOTE,
                   tooltip: 'Edit',
                   kbd: 'Enter',
