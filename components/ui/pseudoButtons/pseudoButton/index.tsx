@@ -15,10 +15,12 @@ export const PseudoButton = forwardRef<HTMLDivElement, Props>(
 
     return (
       <Tooltip
-        tooltip={hasTooltip ? undefined : options.tooltip}
-        kbd={hasTooltip ? undefined : options.kbd}
-        placement={options.placement}
-        offset={options.offset}>
+        options={{
+          tooltip: hasTooltip ? undefined : options.tooltip,
+          kbd: hasTooltip ? undefined : options.kbd,
+          placement: options.placement,
+          offset: options.offset,
+        }}>
         <div
           className={options.className}
           onMouseOver={onMouseOver}

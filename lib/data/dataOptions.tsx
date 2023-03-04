@@ -318,7 +318,7 @@ export const optionsDropdownComboBox: TypesOptionsDropdown = {
   path: ICON_NEW_LABEL,
   tooltip: 'Add label',
   hasDivider: false,
-  contentWidth: 'w-72',
+  menuItemsWidth: 'w-72',
   isPortal: true,
   borderRadius: 'rounded-lg',
 };
