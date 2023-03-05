@@ -33,10 +33,15 @@ export default NextAuth({
   ],
   pages: {
     signIn: '/auth',
+    signOut: '/app',
   },
   adapter: MongoDBAdapter(clientPromise),
   session: {
     strategy: 'jwt',
   },
   debug: process.env.NODE_ENV === 'development',
+  jwt: {
+    secret: process.env.NEXTAUTH_JWT_SECRET,
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 });

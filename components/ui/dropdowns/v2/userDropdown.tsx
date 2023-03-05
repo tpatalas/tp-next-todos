@@ -1,5 +1,6 @@
 import { ICON_LOGOUT, ICON_SETTINGS } from '@data/materialSymbols';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import { Dropdown } from './dropdown';
@@ -28,6 +29,7 @@ export const UserDropdown = () => {
           options={{
             path: ICON_SETTINGS,
             tooltip: 'Settings',
+            isDisabled: true,
           }}>
           Settings
         </MenuItem>
@@ -37,7 +39,8 @@ export const UserDropdown = () => {
           options={{
             path: ICON_LOGOUT,
             tooltip: 'Sign out',
-          }}>
+          }}
+          onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOST + '/app' })}>
           Sign out
         </MenuItem>
       </div>
