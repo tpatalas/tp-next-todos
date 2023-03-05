@@ -93,7 +93,6 @@ export type IDB_KEY = (typeof IDB_KEY)[keyof typeof IDB_KEY];
 export const IDB_KEY = {
   todoIds: 'todoIds',
   labels: 'labels',
-  session: 'session',
 } as const;
 
 export type IDB_KEY_STORE = (typeof IDB_KEY_STORE)[keyof typeof IDB_KEY_STORE];
@@ -105,6 +104,7 @@ export type STORAGE_KEY = (typeof STORAGE_KEY)[keyof typeof STORAGE_KEY];
 export const STORAGE_KEY = {
   [IDB_KEY['todoIds']]: 'last_update_todos',
   [IDB_KEY['labels']]: 'last_update_labels',
+  session: 'session',
 } as const;
 
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];

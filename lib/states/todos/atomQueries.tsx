@@ -10,6 +10,7 @@ import { atom, atomFamily, selectorFamily } from 'recoil';
  */
 export const atomQueryTodoIds = atom<TodoIds[]>({
   key: 'atomQueryTodoIds',
+  default: [],
   effects: [
     queryEffect({
       storeName: IDB_STORE['idMaps'],

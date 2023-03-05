@@ -1,6 +1,5 @@
-import { IDB, IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
+import { IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
 import { clear, count } from '@lib/dataConnections/indexedDB';
-import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
 import { useCallback, useEffect, useMemo } from 'react';
 
@@ -11,7 +10,7 @@ export const ClientStoragesResetEffect = () => {
 
   const clientStorageChecker = useCallback(async () => {
     const counts = await Promise.all(idbStores.map((storeName) => count(storeName)));
-    const hasIDBStores = counts.every((count) => count > 0);
+    const hasIDBStores = counts.every((count) => count && count > 0);
     const hasUpdateKeys = localKeys.every((key) => localStorage.getItem(key));
 
     return !hasUpdateKeys || !hasIDBStores;
@@ -39,21 +38,12 @@ export const ClientStoragesResetEffect = () => {
     }
   }, [clientStorageChecker, idbStores, localKeys]);
 
-  const clearClientData = useCallback(async () => {
-    const allIDBs = await window.indexedDB.databases();
-    if (session) return;
-    await Promise.all(allIDBs.map((idb) => idb && deleteDB(idb.name as IDB)));
-    await Promise.all(localKeys.map((key: STORAGE_KEY) => localStorage.removeItem(key)));
-    return;
-  }, [localKeys, session]);
-
   useEffect(() => {
-    clearClientData();
-    window.addEventListener('beforeunload', showMessageBeforeReload);
+    // window.addEventListener('beforeunload', showMessageBeforeReload);
     return () => {
-      window.removeEventListener('beforeunload', showMessageBeforeReload);
+      // window.removeEventListener('beforeunload', showMessageBeforeReload);
     };
-  }, [clearClientData, clientStorageChecker, session, showMessageBeforeReload]);
+  }, [clientStorageChecker, session, showMessageBeforeReload]);
 
   return null;
 };

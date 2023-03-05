@@ -9,6 +9,7 @@ import { atom, selector } from 'recoil';
  **/
 export const atomQueryLabels = atom<Labels[]>({
   key: 'atomQueryLabels',
+  default: [],
   effects: [
     queryEffect({
       storeName: IDB_STORE['idMaps'],

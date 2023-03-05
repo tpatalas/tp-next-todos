@@ -1,5 +1,4 @@
-import { del, get, set } from '@lib/dataConnections/indexedDB';
-import { TypesAtomEffect, TypesIndexedDBEffect, TypesMediaQueryEffect } from '@lib/types';
+import { TypesAtomEffect, TypesMediaQueryEffect, TypesSessionStorageEffect } from '@lib/types';
 import { DefaultValue } from 'recoil';
 
 /**
@@ -40,13 +39,14 @@ export const networkStatusEffect: TypesAtomEffect<boolean> = ({ setSelf }) => {
   };
 };
 
-export const indexedDBEffect: TypesIndexedDBEffect =
-  ({ storeName, queryKey }) =>
+export const sessionStorageEffect: TypesSessionStorageEffect =
+  ({ queryKey, shouldGet }) =>
   ({ onSet, setSelf, trigger }) => {
-    if (trigger === 'get') {
-      setSelf(get(storeName, queryKey).then((value) => (value != null ? value : new DefaultValue())));
+    if (trigger === 'get' && shouldGet) {
+      const value = sessionStorage.getItem(queryKey);
+      setSelf(value != null ? JSON.parse(value) : new DefaultValue());
     }
     onSet((newValue, _, isReset) => {
-      isReset ? del(storeName, queryKey) : set(storeName, queryKey, newValue);
+      isReset ? sessionStorage.removeItem(queryKey) : sessionStorage.setItem(queryKey, JSON.stringify(newValue));
     });
   };

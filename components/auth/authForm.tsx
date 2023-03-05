@@ -26,19 +26,6 @@ export const AuthForm = () => {
     createUser();
   };
 
-  const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (isLogin) {
-      const response = await signIn('credentials', {
-        redirect: false,
-        email: user.email,
-        password: user.password,
-      });
-      return response && !response.error && router.replace('/app');
-    }
-    createUser();
-  };
-
   return (
     <section>
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
