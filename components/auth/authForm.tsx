@@ -28,14 +28,15 @@ export const AuthForm = () => {
 
   const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    isLogin
-      ? await signIn('credentials', {
-          redirect: false,
-          email: user.email,
-          password: user.password,
-          callbackUrl: `${window.location.origin}`,
-        })
-      : createUser();
+    if (isLogin) {
+      const response = await signIn('credentials', {
+        redirect: false,
+        email: user.email,
+        password: user.password,
+      });
+      return response && !response.error && router.replace('/app');
+    }
+    createUser();
   };
 
   return (
