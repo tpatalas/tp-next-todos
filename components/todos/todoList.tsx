@@ -2,6 +2,7 @@ import { DATA_PATHNAME_IMAGE } from '@data/dataArrayOfObjects';
 import { TypesPathnameImage } from '@lib/types';
 import { atomPathnameImage } from '@states/misc';
 import { selectorFilterTodoIds } from '@states/todos';
+import { nextImageLoader } from '@states/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import Image from 'next/image';
 import { Fragment as TodosFragment } from 'react';
@@ -33,9 +34,10 @@ export const TodoList = () => {
             <div className='mt-7 flex flex-col items-center justify-center'>
               <div className='flex h-full min-h-[300px] flex-col items-center justify-end'>
                 <Image
+                  loader={nextImageLoader}
                   width={300}
                   height={100}
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}${image.path}`}
+                  src={image.path}
                   alt={image.alt}
                 />
               </div>
