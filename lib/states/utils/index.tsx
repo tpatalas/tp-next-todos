@@ -65,3 +65,7 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
 
   return difference > checkingTime;
 };
+
+export const nextImageLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
+  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality || 75}`;
+};

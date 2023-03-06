@@ -19,6 +19,7 @@ function gcloud_run_deploy() {
 source .env.local
 # NOTE: .env.local must hold the following environment variables
 # .env.local SHOULD NOT be shared and only served from the local. 
+# Therefore .env.local must be listed in `dockerignore` and `gitignore`.
 #
 # SERVICE_NAME
 # IMAGE_NAME
@@ -26,21 +27,24 @@ source .env.local
 # GCP_PROJECT_ID
 # DEPLOY_REGION 
 # HOSTNAME 
-# IMAGE_DOMAIN (optional)
+# IMAGE_DOMAIN (optional: this is not a docker image, but external image url)
 # VPC_CONNECTOR (optional)
 # VPC_REGION (optional)
 # SECRET_ENVIRONMENT_VARIABLE_* (optional: name of environment variable as secret on Google Cloud Run)
 # SECRET_NAME_* (optional: name of secret from Google Cloud Secret) 
 
-docker build -t $IMAGE_NAME:$IMAGE_TAG .
+if [ -n "$GCR_IMAGE_DOMAIN" ]; then
+  IMAGE_VARS=",GCR_IMAGE_DOMAIN=$GCR_IMAGE_DOMAIN"
+  IMAGE_ARGS="--build-arg BUILD_IMAGE_DOMAIN=$GCR_IMAGE_DOMAIN"
+fi
+
+BUILD_ARGS="--build-arg BUILD_HOSTNAME=$GCR_HOSTNAME ${IMAGE_ARGS}"
+ENV_VARS="--set-env-vars GCR_HOSTNAME=$GCR_HOSTNAME${IMAGE_VARS}"
+
+docker build $BUILD_ARGS -t $IMAGE_NAME:$IMAGE_TAG .
 docker tag $IMAGE_NAME:$IMAGE_TAG gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
 docker push gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
 
-if [ -n "$IMAGE_DOMAIN" ]; then
-  IMAGE_VARS=",IMAGE_DOMAIN=$IMAGE_DOMAIN"
-fi
-
-ENV_VARS="--set-env-vars HOSTNAME=$HOSTNAME${IMAGE_VARS}"
 
 if [ -n "$VPC_REGION" ] && [ -n "$VPC_CONNECTOR" ]; then
   VPC_FLAG="--vpc-connector $VPC_CONNECTOR --region=$VPC_REGION --vpc-egress=all-traffic"
