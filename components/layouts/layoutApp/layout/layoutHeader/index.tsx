@@ -2,9 +2,6 @@ import { IconButton } from '@buttons/iconButton';
 import { optionsButtonSidebarToggle } from '@data/dataOptions';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { useSidebarOpen } from '@states/layouts/hooks';
-import { classNames, nextImageLoader } from '@states/utils';
-import { classNames } from '@states/utils';
-import { signIn, useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import {
   Fragment as LayoutHeaderFragment,

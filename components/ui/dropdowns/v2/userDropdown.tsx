@@ -1,5 +1,6 @@
 import { ICON_LOGOUT, ICON_SETTINGS } from '@data/materialSymbols';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
+import { nextImageLoader } from '@states/utils';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
@@ -14,10 +15,11 @@ export const UserDropdown = () => {
         <Fragment>
           <span className='sr-only'>Open user menu</span>
           <Image
+            loader={nextImageLoader}
             width={32}
             height={32}
             className='rounded-full drop-shadow-lg'
-            src={process.env.NEXT_PUBLIC_IMAGE_DOMAIN + '/user_avatar.webp'}
+            src='user_avatar.webp'
             alt='User avatar'
           />
         </Fragment>
