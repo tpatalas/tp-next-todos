@@ -10,7 +10,7 @@
     "test": "jest --watch"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.12",
+    "@headlessui/react": "^1.7.13",
     "@headlessui/tailwindcss": "^0.1.2",
     "@next/bundle-analyzer": "^13.2.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
