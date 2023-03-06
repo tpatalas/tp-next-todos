@@ -27,19 +27,27 @@ source .env.local
 # GCP_PROJECT_ID
 # DEPLOY_REGION 
 # HOSTNAME 
-# IMAGE_DOMAIN (optional: this is not a docker image, but external image url)
 # VPC_CONNECTOR (optional)
 # VPC_REGION (optional)
+# GCR_* (optional: name of environment variable that is not secret but storing into Google Cloud Run) 
 # SECRET_ENVIRONMENT_VARIABLE_* (optional: name of environment variable as secret on Google Cloud Run)
 # SECRET_NAME_* (optional: name of secret from Google Cloud Secret) 
 
-if [ -n "$GCR_IMAGE_DOMAIN" ]; then
-  IMAGE_VARS=",GCR_IMAGE_DOMAIN=$GCR_IMAGE_DOMAIN"
-  IMAGE_ARGS="--build-arg BUILD_IMAGE_DOMAIN=$GCR_IMAGE_DOMAIN"
-fi
+gcr_env_var=(${!GCR_*})
+for env_var_name in "${gcr_env_var[@]}"; do
+  env_val=$(eval "echo \${GCR_${env_var_name#GCR_}}")
+  env_var_name=${env_var_name#GCR_}
+  if [ -z "$BUILD_ARGS" ]; then
+    BUILD_ARGS="--build-arg BUILD_$env_var_name=$env_val"
+  else
+    BUILD_ARGS="$BUILD_ARGS --build-arg BUILD_$env_var_name=$env_val"
+  fi
+  ENV_VARS="$ENV_VARS,GCR_$env_var_name=$env_val"
+done
 
-BUILD_ARGS="--build-arg BUILD_HOSTNAME=$GCR_HOSTNAME ${IMAGE_ARGS}"
-ENV_VARS="--set-env-vars GCR_HOSTNAME=$GCR_HOSTNAME${IMAGE_VARS}"
+BUILD_ARGS=$(echo $BUILD_ARGS | sed 's/ --build-arg/ --build-arg/g')
+ENV_VARS="--set-env-vars ${ENV_VARS#,}"
+
 
 docker build $BUILD_ARGS -t $IMAGE_NAME:$IMAGE_TAG .
 docker tag $IMAGE_NAME:$IMAGE_TAG gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
