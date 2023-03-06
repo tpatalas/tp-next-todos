@@ -4,7 +4,7 @@ import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { useSidebarOpen } from '@states/layouts/hooks';
-import { classNames } from '@states/utils';
+import { classNames, nextImageLoader } from '@states/utils';
 import Image from 'next/image';
 import {
   Fragment,
@@ -59,10 +59,11 @@ export const LayoutHeader = () => {
                     )}>
                     <span className='sr-only'>Open user menu</span>
                     <Image
+                      loader={nextImageLoader}
                       width={32}
                       height={32}
                       className='rounded-full drop-shadow-lg'
-                      src={process.env.NEXT_PUBLIC_IMAGE_DOMAIN + '/user_avatar.webp'}
+                      src='user_avatar.webp'
                       alt='User avatar'
                     />
                   </Menu.Button>

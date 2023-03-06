@@ -29,6 +29,31 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
+################################################################################ 
+################# Enviornment Variable Build Time Substitution #################
+################################################################################
+# NOTE:
+# This must be added if an environment variable is added to Google Cloud Run's 
+# environment variables. Google Cloud Run's environment variables are only 
+# available at runtime and ignore build time, but Next.js may require 
+# environment variables during build time. Build-time substitution will
+# resolve the issue by temporarily holding the substitution and getting 
+# replaced with Google Cloud Run's environment variables during deployment 
+# with `deploy.sh`.
+# * Environment variables defined in Google Secret Manager are available at 
+# both build time and runtime, but they are not free.
+#
+# Set build-time arguments. Add BUILD_ prefix to your enviornment variable
+ARG BUILD_IMAGE_DOMAIN
+ARG BUILD_HOST
+#
+# Set environment variables based on build-time arguments by adding GCR_ prefix
+ENV GCR_IMAGE_DOMAIN $BUILD_IMAGE_DOMAIN
+ENV GCR_HOSTNAME $BUILD_HOSTNAME
+#
+################################################################################
+
+
 RUN yarn build
 
 # FROM node:18-alpine AS runner
@@ -41,9 +66,13 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/.env ./.env
+
+# Check if the public folder exists before copying
+RUN if [ -d /app/public ]; then \
+  COPY --from=builder /app/public ./public; \
+fi
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
