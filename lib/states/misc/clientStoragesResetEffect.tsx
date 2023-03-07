@@ -1,55 +1,59 @@
-import { IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
+import { IDB, IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
 import { clear, count } from '@lib/dataConnections/indexedDB';
-import { useCallback, useEffect, useState } from 'react';
+import { deleteDB } from 'idb';
+import { useSession } from 'next-auth/react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 export const ClientStoragesResetEffect = () => {
-  const [isConfirmMessage, setIsConfirmMessage] = useState(false);
-  const clientStorageChecker = async () => {
-    const todosLocalStorage = localStorage.getItem(STORAGE_KEY['todoIds']);
-    const labelsLocalStorage = localStorage.getItem(STORAGE_KEY['labels']);
-    const localStorageLastUpdate = todosLocalStorage || labelsLocalStorage;
-    const indexedDBTodosCount = await count(IDB_STORE['todoItems']);
-    const indexedDBLabelsCount = await count(IDB_STORE['idMaps']);
+  const { data: session } = useSession();
+  const localKeys = useMemo(() => [STORAGE_KEY['todoIds'], STORAGE_KEY['labels']], []);
+  const idbStores = useMemo(() => [IDB_STORE['todoItems'], IDB_STORE['idMaps'], IDB_STORE['users']], []);
 
-    return !localStorageLastUpdate || !indexedDBTodosCount || !indexedDBLabelsCount;
-  };
+  const clientStorageChecker = useCallback(async () => {
+    const counts = await Promise.all(idbStores.map((storeName) => count(storeName)));
+    const hasIDBStores = counts.every((count) => count > 0);
+    const hasUpdateKeys = localKeys.every((key) => localStorage.getItem(key));
 
-  const resetClientStores = useCallback(async () => {
-    const isClientStorageEmpty = await clientStorageChecker();
-
-    if (isClientStorageEmpty) {
-      await clear(IDB_STORE['todoItems']);
-      await clear(IDB_STORE['idMaps']);
-      localStorage.removeItem(STORAGE_KEY['todoIds']);
-      localStorage.removeItem(STORAGE_KEY['labels']);
-      window.location.reload();
-    }
-  }, []);
+    return !hasUpdateKeys || !hasIDBStores;
+  }, [idbStores, localKeys]);
 
   const showMessageBeforeReload = useCallback(async () => {
     const isClientStorageEmpty = await clientStorageChecker();
 
+    const resetClientStores = async () => {
+      if (isClientStorageEmpty) {
+        await Promise.all(idbStores.map((storeName: IDB_STORE) => clear(storeName)));
+        await Promise.all(localKeys.map((key: STORAGE_KEY) => localStorage.removeItem(key)));
+      }
+    };
+
     const confirmMessage =
-      'Client storage has been deleted or upgraded. The page will now reload to ensure data consistency.';
+      'Client storage has been cleared or upgraded. To ensure data consistency, the data will be regenerated.';
 
-    const shouldReload = isClientStorageEmpty && !isConfirmMessage && window.confirm(confirmMessage);
-
-    if (shouldReload) {
+    if (!isClientStorageEmpty) return;
+    const confirm = window.confirm(confirmMessage);
+    if (confirm) {
       resetClientStores();
-      setIsConfirmMessage(true);
+      window.location.reload();
+      return;
     }
-  }, [isConfirmMessage, resetClientStores]);
+  }, [clientStorageChecker, idbStores, localKeys]);
+
+  const clearClientData = useCallback(async () => {
+    const allIDBs = await window.indexedDB.databases();
+    if (session) return;
+    await Promise.all(allIDBs.map((idb) => idb && deleteDB(idb.name as IDB)));
+    await Promise.all(localKeys.map((key: STORAGE_KEY) => localStorage.removeItem(key)));
+    return;
+  }, [localKeys, session]);
 
   useEffect(() => {
-    const timeId = setTimeout(() => {
-      showMessageBeforeReload();
-    }, 2000);
-    window.addEventListener('focus', showMessageBeforeReload);
+    clearClientData();
+    window.addEventListener('beforeunload', showMessageBeforeReload);
     return () => {
-      window.removeEventListener('focus', showMessageBeforeReload);
-      clearTimeout(timeId);
+      window.removeEventListener('beforeunload', showMessageBeforeReload);
     };
-  }, [resetClientStores, showMessageBeforeReload]);
+  }, [clearClientData, clientStorageChecker, session, showMessageBeforeReload]);
 
   return null;
 };

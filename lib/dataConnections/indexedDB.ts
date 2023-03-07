@@ -15,12 +15,13 @@ const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVer
     // To auto upgrade indexedDB, update the IDB_VERSION's previous and current.
     // The purpose of upgrade is the schema changes in indexedDB
     upgrade(db) {
-      db.createObjectStore(storeName);
+      const objectStore = db.createObjectStore(storeName);
+      objectStore.put(true, storeName + 'Data');
     },
   });
-  if (oldIDBNames) {
-    await Promise.all(oldIDBNames.map((dbName) => dbName && deleteDB(dbName)));
-  }
+  if (oldIDBNames) await Promise.all(oldIDBNames.map((dbName) => dbName && deleteDB(dbName)));
+  // if (!session) await Promise.all(allIDBs.map((idb) => idb && deleteDB(idb.name as IDB)));
+
   return db;
 };
 
