@@ -7,21 +7,23 @@ import { deleteDB, openDB } from 'idb';
 // the schema if necessary.
 const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVersion']) => {
   const idb = DATA_IDB.find((db: TypesIDB) => db.store === storeName);
-  const newDbName = idb && idb.dbName + 'v' + idb.newVersion;
-  const oldDbName = idb && idb.dbName + 'v' + idb.oldVersion;
+  const currentIDBName = idb && idb.dbName + 'v' + idb.currentVersion;
+  const previousVersions = Array.from({ length: IDB_VERSION['current'] }, (_, i) => i);
+  const oldIDBNames = previousVersions.map((version) => idb && idb.dbName + 'v' + version);
 
-  const db = await openDB(newDbName as IDB, dbVersion || 1, {
+  const db = await openDB(currentIDBName as IDB, dbVersion || 1, {
     // To auto upgrade indexedDB, update the IDB_VERSION's previous and current.
     // The purpose of upgrade is the schema changes in indexedDB
     upgrade(db) {
       db.createObjectStore(storeName);
     },
   });
-  if (oldDbName) {
-    await deleteDB(oldDbName);
+  if (oldIDBNames) {
+    await Promise.all(oldIDBNames.map((dbName) => dbName && deleteDB(dbName)));
   }
   return db;
 };
+
 export const get = async (storeName: Types['storeName'], key: string, dbVersion?: Types['dbVersion']) => {
   return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).get(storeName, key);
 };

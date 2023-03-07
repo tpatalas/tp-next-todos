@@ -97,26 +97,22 @@ export const DATA_IDB: TypesIDB[] = [
   {
     dbName: IDB['todo'],
     store: IDB_STORE['todoItems'],
-    oldVersion: IDB_VERSION['previous'],
-    newVersion: IDB_VERSION['current'],
+    currentVersion: IDB_VERSION['current'],
   },
   {
     dbName: IDB['idMap'],
     store: IDB_STORE['idMaps'],
-    oldVersion: IDB_VERSION['previous'],
-    newVersion: IDB_VERSION['current'],
+    currentVersion: IDB_VERSION['current'],
   },
   {
     dbName: IDB['user'],
     store: IDB_STORE['users'],
-    oldVersion: IDB_VERSION['previous'],
-    newVersion: IDB_VERSION['current'],
+    currentVersion: IDB_VERSION['current'],
   },
   {
     dbName: IDB['setting'],
     store: IDB_STORE['settings'],
-    oldVersion: IDB_VERSION['previous'],
-    newVersion: IDB_VERSION['current'],
+    currentVersion: IDB_VERSION['current'],
   },
 ];
 
