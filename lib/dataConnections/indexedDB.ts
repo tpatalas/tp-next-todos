@@ -1,5 +1,5 @@
 import { DATA_IDB } from '@data/dataArrayOfObjects';
-import { IDB } from '@data/dataTypesConst';
+import { IDB, IDB_VERSION } from '@data/dataTypesConst';
 import { Types, TypesIDB } from '@lib/types';
 import { deleteDB, openDB } from 'idb';
 
@@ -22,27 +22,26 @@ const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVer
   }
   return db;
 };
-
 export const get = async (storeName: Types['storeName'], key: string, dbVersion?: Types['dbVersion']) => {
-  return (await dbPromise(storeName, dbVersion)).get(storeName, key);
+  return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).get(storeName, key);
 };
 
 export const getAll = async (storeName: Types['storeName'], dbVersion?: Types['dbVersion']) => {
-  return (await dbPromise(storeName, dbVersion)).getAll(storeName);
+  return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).getAll(storeName);
 };
 
 export const count = async (storeName: Types['storeName'], dbVersion?: Types['dbVersion']) => {
-  return (await dbPromise(storeName, dbVersion)).count(storeName);
+  return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).count(storeName);
 };
 
 export const set = async (storeName: Types['storeName'], key: string, val: unknown, dbVersion?: Types['dbVersion']) => {
-  return (await dbPromise(storeName, dbVersion)).put(storeName, val, key);
+  return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).put(storeName, val, key);
 };
 
 export const del = async (storeName: Types['storeName'], key: string, dbVersion?: Types['dbVersion']) => {
-  return (await dbPromise(storeName, dbVersion)).delete(storeName, key);
+  return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).delete(storeName, key);
 };
 
 export const clear = async (storeName: Types['storeName'], dbVersion?: Types['dbVersion']) => {
-  return (await dbPromise(storeName, dbVersion)).clear(storeName);
+  return (await dbPromise(storeName, dbVersion ?? IDB_VERSION['current'])).clear(storeName);
 };

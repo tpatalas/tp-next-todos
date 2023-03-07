@@ -1,4 +1,3 @@
-import { IDB_VERSION } from '@data/dataTypesConst';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesAtomEffect, TypesIndexedDBEffect, TypesMediaQueryEffect } from '@lib/types';
 import { DefaultValue } from 'recoil';
@@ -45,13 +44,9 @@ export const indexedDBEffect: TypesIndexedDBEffect =
   ({ storeName, queryKey }) =>
   ({ onSet, setSelf, trigger }) => {
     if (trigger === 'get') {
-      setSelf(
-        get(storeName, queryKey, IDB_VERSION['current']).then((value) => (value != null ? value : new DefaultValue())),
-      );
+      setSelf(get(storeName, queryKey).then((value) => (value != null ? value : new DefaultValue())));
     }
     onSet((newValue, _, isReset) => {
-      isReset
-        ? del(storeName, queryKey, IDB_VERSION['current'])
-        : set(storeName, queryKey, newValue, IDB_VERSION['current']);
+      isReset ? del(storeName, queryKey) : set(storeName, queryKey, newValue);
     });
   };

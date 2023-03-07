@@ -70,8 +70,8 @@ export const CALENDAR = {
 
 export type IDB_VERSION = (typeof IDB_VERSION)[keyof typeof IDB_VERSION];
 export const IDB_VERSION = {
-  previous: 0,
-  current: 1,
+  current: Number(process.env.NEXT_PUBLIC_IDB_VERSION_CURRENT),
+  previous: Number(process.env.NEXT_PUBLIC_IDB_VERSION_CURRENT) - 1,
 };
 
 export type IDB = (typeof IDB)[keyof typeof IDB];

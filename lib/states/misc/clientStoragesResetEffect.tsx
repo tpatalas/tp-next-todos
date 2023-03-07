@@ -1,4 +1,4 @@
-import { IDB_STORE, IDB_VERSION, STORAGE_KEY } from '@data/dataTypesConst';
+import { IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
 import { clear, count } from '@lib/dataConnections/indexedDB';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -8,8 +8,8 @@ export const ClientStoragesResetEffect = () => {
     const todosLocalStorage = localStorage.getItem(STORAGE_KEY['todoIds']);
     const labelsLocalStorage = localStorage.getItem(STORAGE_KEY['labels']);
     const localStorageLastUpdate = todosLocalStorage || labelsLocalStorage;
-    const indexedDBTodosCount = await count(IDB_STORE['todoItems'], IDB_VERSION['current']);
-    const indexedDBLabelsCount = await count(IDB_STORE['idMaps'], IDB_VERSION['current']);
+    const indexedDBTodosCount = await count(IDB_STORE['todoItems']);
+    const indexedDBLabelsCount = await count(IDB_STORE['idMaps']);
 
     return !localStorageLastUpdate || !indexedDBTodosCount || !indexedDBLabelsCount;
   };
@@ -18,8 +18,8 @@ export const ClientStoragesResetEffect = () => {
     const isClientStorageEmpty = await clientStorageChecker();
 
     if (isClientStorageEmpty) {
-      await clear(IDB_STORE['todoItems'], IDB_VERSION['current']);
-      await clear(IDB_STORE['idMaps'], IDB_VERSION['current']);
+      await clear(IDB_STORE['todoItems']);
+      await clear(IDB_STORE['idMaps']);
       localStorage.removeItem(STORAGE_KEY['todoIds']);
       localStorage.removeItem(STORAGE_KEY['labels']);
       window.location.reload();
