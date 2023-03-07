@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
@@ -12,10 +13,16 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>;
+  return (
+    <SessionProvider
+      session={session}
+      basePath={process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH}>
+      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
+    </SessionProvider>
+  );
 };
 
 export default MyApp;
