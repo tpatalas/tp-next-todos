@@ -142,8 +142,7 @@ export interface TypesNotification {
 export interface TypesIDB {
   dbName: IDB;
   store: IDB_STORE;
-  oldVersion: IDB_VERSION;
-  newVersion: IDB_VERSION;
+  currentVersion: IDB_VERSION;
 }
 
 export interface TypesSidebarMenu {
