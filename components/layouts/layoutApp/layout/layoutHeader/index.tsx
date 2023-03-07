@@ -3,7 +3,6 @@ import { optionsButtonSidebarToggle } from '@data/dataOptions';
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
-import { LoginButton } from '@layouts/layoutApp/loginButton';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { classNames, nextImageLoader } from '@states/utils';
 import Image from 'next/image';
