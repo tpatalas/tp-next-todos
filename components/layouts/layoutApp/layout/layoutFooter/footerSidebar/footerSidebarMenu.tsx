@@ -30,7 +30,7 @@ export const FooterSidebarMenu = () => {
                 router.asPath === item.path
                   ? 'cursor-default bg-blue-100 font-semibold text-gray-900 text-opacity-80'
                   : `font-medium text-gray-600 hover:text-gray-900 ${STYLE_HOVER_SLATE_LIGHT}`,
-                'group flex w-full items-center rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-0 focus:ring-offset-0',
+                'group flex w-full items-center rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-0 focus:ring-offset-0',
               )}
               onClick={() => !isBreakpointMd && setSidebarOpen()}>
               <span className='pr-3'>

@@ -11,9 +11,18 @@ import {
   POSITION_X,
   POSITION_Y,
   PRIORITY_LEVEL,
+  VIEWBOX,
 } from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
-import { FocusEventHandler, KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode, RefObject } from 'react';
+import {
+  ChangeEventHandler,
+  FocusEventHandler,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+  RefObject,
+} from 'react';
 import { TriggerType } from 'react-popper-tooltip';
 import { AtomEffect } from 'recoil';
 import { Descendant } from 'slate';
@@ -277,7 +286,7 @@ export interface TypesSvgIconAttributes {
   path: string;
   height: string | number;
   width: string | number;
-  viewBox: string;
+  viewBox: VIEWBOX;
   isAriaHidden: boolean;
 }
 
@@ -298,8 +307,18 @@ export interface TypesDropdownAttributes {
 
 export interface TypesInputAttributes {
   isChecked: boolean;
-  onChange: (value: unknown) => void;
-  onChangeTypeNever: (value: never) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  inputType: 'email' | 'password' | 'text';
+  autoComplete: string;
+  placeholder: string;
+  required: boolean;
+  isPasswordShown: boolean;
+  inputValue: string | number | readonly string[];
+  isError: boolean;
+  isSignIn: boolean;
+  signUpDefaultMessage: string;
+  signUpErrorMessage: string;
+  signInErrorMessage: string;
 }
 
 export interface TypesModals {
