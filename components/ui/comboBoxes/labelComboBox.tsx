@@ -32,7 +32,7 @@ export const LabelComboBox = ({ todo }: Props) => {
     <LabelComboBoxFragment>
       <ComboBox
         selected={selectedLabels}
-        onChangeTypeNever={onChangeLabelHandler}
+        onChange={onChangeLabelHandler}
         hasComboBoxBoardStyle={false}
         placeholder={
           selectedLabels.length > 0 ? 'Labels selected ' + '(' + selectedLabels.length + ')' : 'Enter a label'
@@ -42,8 +42,7 @@ export const LabelComboBox = ({ todo }: Props) => {
             options={dataComboBoxInputButton}
             onClick={() => setFilter()}
           />
-        }
-      >
+        }>
         <Combobox.Options className='relative max-h-60 w-full overflow-auto bg-white py-1 text-base ring-0 ring-transparent focus:outline-none sm:text-sm'>
           {filteredLabels.length === 0 && query !== '' ? (
             <div className='relative cursor-default select-none py-2 px-4 text-gray-500'>Nothing found!</div>
@@ -58,16 +57,14 @@ export const LabelComboBox = ({ todo }: Props) => {
                       : `text-gray-500 ${STYLE_HOVER_SLATE_LIGHT}`
                   }`
                 }
-                value={label}
-              >
+                value={label}>
                 {({ selected, active }) => (
                   <>
                     <span
                       className={classNames(
                         'block truncate fill-gray-300 pl-2',
                         selected ? 'font-medium' : 'font-normal',
-                      )}
-                    >
+                      )}>
                       {label.name}
                     </span>
                     {selected ? (
