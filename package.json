@@ -38,7 +38,7 @@
     "slate": "^0.91.4",
     "slate-history": "^0.86.0",
     "slate-hyperscript": "^0.77.0",
-    "slate-react": "^0.91.9"
+    "slate-react": "^0.91.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
