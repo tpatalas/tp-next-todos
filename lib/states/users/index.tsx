@@ -1,7 +1,7 @@
 import { STORAGE_KEY } from '@data/dataTypesConst';
 import { sessionStorageEffect } from '@effects/atomEffects';
 import { Users } from '@lib/types';
-import { atom } from 'recoil';
+import { atom, atomFamily } from 'recoil';
 
 export const atomUserNew = atom<Users>({
   key: 'atomUserNew',
@@ -16,4 +16,9 @@ export const atomIDBUserSession = atom<boolean>({
       queryKey: STORAGE_KEY['session'],
     }),
   ],
+});
+
+export const atomUserCredentialError = atomFamily<boolean, boolean>({
+  key: 'atomUserCredentialError',
+  default: false,
 });

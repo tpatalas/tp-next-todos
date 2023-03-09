@@ -31,7 +31,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
     <Fragment>
       <div
         className={classNames(
-          'group relative flex w-full cursor-pointer flex-row items-center justify-between rounded-md pr-[0.20rem]',
+          'group relative flex w-full cursor-pointer flex-row items-center justify-between rounded-lg pr-[0.20rem]',
           matchedSlug ? 'bg-blue-100 font-semibold text-opacity-80' : 'hover:bg-slate-200 hover:bg-opacity-80 ',
         )}>
         <div className='mr-[0.5rem] inline-block w-full'>

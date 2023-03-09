@@ -70,3 +70,23 @@ export type TypesOptionsMinimizedModalTransition = Partial<
 
 export type TypesOptionsLoadingState = Partial<Pick<Types, 'delay'>> &
   Pick<Types, 'loadingSkeleton' | 'repeatingCount' | 'margin' | 'space'>;
+
+export type TypesOptionsFloatingLabelInput = Partial<
+  Pick<
+    Types,
+    | 'isError'
+    | 'tooltip'
+    | 'kbd'
+    | 'inputType'
+    | 'autoComplete'
+    | 'placeholder'
+    | 'required'
+    | 'padding'
+    | 'isPasswordShown'
+    | 'name'
+  >
+>;
+
+export type TypesOptionsAuthErrorMessage = Partial<
+  Pick<Types, 'isError' | 'isSignIn' | 'signUpDefaultMessage' | 'signUpErrorMessage' | 'signInErrorMessage'>
+>;

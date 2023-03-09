@@ -28,7 +28,7 @@ export const MenuItem = ({ options, onClick, children }: Props) => {
                 'group/menuItem block w-full cursor-pointer text-left text-sm text-gray-500',
                 isDisabled
                   ? 'cursor-not-allowed select-none opacity-50'
-                  : 'hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700 focus-visible:rounded-md',
+                  : 'hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700 focus-visible:rounded-lg',
                 options.padding ?? 'px-4 py-2',
                 active && isActive && STYLE_HOVER_SLATE_LIGHT,
               )}>

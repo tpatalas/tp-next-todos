@@ -8,7 +8,7 @@ const Auth = () => {
       <Head>
         <title>My Todo App: Sign in</title>
       </Head>
-      <div className='mt-20 flex flex-row items-center justify-center'>
+      <div className='absolute top-[25%] bottom-1/2 right-0 left-0 m-auto h-fit w-fit'>
         <AuthForm />
       </div>
     </Fragment>
