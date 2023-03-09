@@ -1,46 +1,28 @@
 import { Types } from '@lib/types';
+import { TypesOptionsPrefetchRouterButton } from '@lib/types/typesOptions';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect } from 'react';
 import { Button } from '.';
 
-export const PrefetchRouterButton = ({
-  path,
-  children,
-  className,
-  isPrefetchingOnHover,
-  onClick,
-  tooltip,
-  kbd,
-  offset,
-  placement,
-}: Pick<Types, 'path' | 'children'> &
-  Partial<
-    Pick<Types, 'className' | 'isPrefetchingOnHover' | 'onClick' | 'tooltip' | 'kbd' | 'offset' | 'placement'>
-  >) => {
+type Props = { options: TypesOptionsPrefetchRouterButton } & Pick<Types, 'children'> & Partial<Pick<Types, 'onClick'>>;
+
+export const PrefetchRouterButton = ({ options, children, onClick }: Props) => {
   const router = useRouter();
-  const options = {
-    className: className,
-    tooltip: tooltip,
-    kbd: kbd,
-    placement: placement,
-    offset: offset,
-  };
-  const urlPath = `${process.env.NEXT_PUBLIC_HOST}${path}`;
 
   useEffect(() => {
-    if (!isPrefetchingOnHover || typeof isPrefetchingOnHover === 'undefined') {
-      router.prefetch(urlPath);
+    if (!options.isPrefetchingOnHover || typeof options.isPrefetchingOnHover === 'undefined') {
+      router.prefetch(options.path);
     }
-  }, [isPrefetchingOnHover, router, urlPath]);
+  }, [options.isPrefetchingOnHover, options.path, router]);
 
   return (
     <Fragment>
       <Button
         options={options}
-        onMouseOver={() => isPrefetchingOnHover && router.prefetch(path)}
+        onMouseOver={() => options.isPrefetchingOnHover && router.prefetch(options.path)}
         onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
           event.preventDefault();
-          router.push(urlPath);
+          router.push(options.path);
           onClick && onClick(event);
         }}>
         {children}

@@ -3,8 +3,8 @@ import { sessionStorageEffect } from '@effects/atomEffects';
 import { Users } from '@lib/types';
 import { atom, atomFamily } from 'recoil';
 
-export const atomUserNew = atom<Users>({
-  key: 'atomUserNew',
+export const atomUser = atom<Users>({
+  key: 'atomUser',
   default: { email: '', password: '' } as Users,
 });
 
@@ -18,7 +18,12 @@ export const atomIDBUserSession = atom<boolean>({
   ],
 });
 
-export const atomUserCredentialError = atomFamily<boolean, boolean>({
-  key: 'atomUserCredentialError',
+export const atomUserError = atomFamily<boolean, string>({
+  key: 'atomUserError',
+  default: false,
+});
+
+export const atomUserVerificationRequest = atom({
+  key: 'atomUserVerificationRequest',
   default: false,
 });

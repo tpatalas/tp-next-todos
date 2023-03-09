@@ -31,8 +31,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
         className={classNames(
           'relative flex flex-row',
           container ?? 'w-[calc(80vw-6rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
-        )}
-      >
+        )}>
         <LabelsHorizontalGradients
           scrollRef={scrollRef}
           position={GRADIENT_POSITION['left']}
@@ -41,13 +40,11 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
           className={classNames(
             'scrollbar-hide ml-0 flex w-full flex-row items-center justify-start overflow-x-auto py-1 px-1 lg:ml-1 lg:px-1',
           )}
-          ref={scrollRef}
-        >
+          ref={scrollRef}>
           {!isTodoCompleted() && (
             <Dropdown
               options={optionsDropdownComboBox}
-              menuButtonContent={selectedLabels.length === 0 && 'Label'}
-            >
+              menuButtonContent={selectedLabels.length === 0 && 'Label'}>
               <LabelComboBox todo={todo} />
             </Dropdown>
           )}
@@ -59,14 +56,14 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                     'mx-[0.12rem] flex cursor-pointer flex-row items-center justify-center rounded-lg py-[3px] pl-2 pr-1 text-sm text-gray-700',
                     label.color && label.color,
                     'bg-opacity-40 hover:bg-opacity-60',
-                  )}
-                >
+                  )}>
                   <PrefetchRouterButton
-                    path={paths('/app/label/', label._id)}
-                    className='max-w-[5.3rem] truncate pr-1'
-                    tooltip={label.name}
-                    onClick={() => closeTodoModal()}
-                  >
+                    options={{
+                      path: paths('/app/label/', label._id),
+                      className: 'max-w-[5.3rem] truncate pr-1',
+                      tooltip: label.name,
+                    }}
+                    onClick={() => closeTodoModal()}>
                     {label.name}
                   </PrefetchRouterButton>
                   {!isTodoCompleted() && (

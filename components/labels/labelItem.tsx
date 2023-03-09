@@ -36,9 +36,11 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
         )}>
         <div className='mr-[0.5rem] inline-block w-full'>
           <PrefetchRouterButton
-            tooltip={label.name}
-            path={paths('/app/label/', label._id)}
-            className={classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0')}
+            options={{
+              tooltip: label.name,
+              path: paths('/app/label/', label._id),
+              className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
+            }}
             onClick={() => !isBreakpointMd && setSideBarOpen()}>
             <div className='flex w-full flex-row  py-2 px-2'>
               {matchedSlug ? (

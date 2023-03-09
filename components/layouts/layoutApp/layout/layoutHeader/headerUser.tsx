@@ -23,7 +23,7 @@ export const HeaderUser = () => {
             tooltip: 'Sign in',
           }}
           onClick={() => signIn()}>
-          Sign In
+          Sign in
         </Button>
       )}
     </Fragment>

@@ -1,35 +1,21 @@
-import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import clientPromise from '@lib/dataConnections/mongodb';
-import User from '@lib/models/User';
-import { Users } from '@lib/types';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import { compareHashedDataString } from '@states/utils';
 import type { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import EmailProvider from 'next-auth/providers/email';
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        email: { type: 'email' },
-        password: { type: 'password' },
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
       },
-      async authorize(credentials) {
-        await databaseConnect();
-
-        const query: Partial<Users> = {
-          email: credentials?.email,
-        };
-
-        const user = await User.findOne(query);
-        const validPassword = credentials && (await compareHashedDataString(credentials.password, user.password));
-
-        if (!user || !validPassword) throw new Error('Invalid email or password!');
-
-        return user;
-      },
+      from: process.env.EMAIL_FROM,
     }),
   ],
   callbacks: {

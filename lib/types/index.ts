@@ -316,9 +316,8 @@ export interface TypesInputAttributes {
   inputValue: string | number | readonly string[];
   isError: boolean;
   isSignIn: boolean;
-  signUpDefaultMessage: string;
-  signUpErrorMessage: string;
-  signInErrorMessage: string;
+  defaultMessage: string;
+  errorMessage: string;
 }
 
 export interface TypesModals {
