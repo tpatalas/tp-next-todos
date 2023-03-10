@@ -26,16 +26,20 @@ export const useUserAuthFormSubmit = (isError: Types['isError']) => {
 
   return async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isError) setClientError(true);
+    if (isError) {
+      setClientError(true);
+      return;
+    }
     if (isClientError || isServerError) return;
-    const userEmailSent = async () => {
-      return await signIn('email', {
-        redirect: false,
-        email: user.email,
-      });
-    };
 
     try {
+      const userEmailSent = async () => {
+        return await signIn('email', {
+          redirect: false,
+          email: user.email,
+        });
+      };
+
       const response = await userEmailSent();
       if (response && !response.error) {
         setIsVerificationRequested(true);

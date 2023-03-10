@@ -11,6 +11,7 @@ import {
   POSITION_X,
   POSITION_Y,
   PRIORITY_LEVEL,
+  SVG_LOGO,
   VIEWBOX,
 } from '@data/dataTypesConst';
 import { Placement } from '@popperjs/core';
@@ -169,6 +170,12 @@ export interface TypesPathnameImage {
   description: string;
 }
 
+export interface TypesSvgLogo {
+  name: SVG_LOGO;
+  className: Types['className'];
+  viewBox: string;
+  path: ReactElement;
+}
 /**
  * Types MISC.
  */

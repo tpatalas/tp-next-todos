@@ -5,7 +5,7 @@ import { classNames } from '@states/utils';
  */
 // Base
 export const STYLE_BUTTON_BASE =
-  'inline-flex items-center justify-center rounded-lg border leading-4 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  'transition-all inline-flex items-center justify-center rounded-lg border leading-4 shadow-lg shadow-blue-100 hover:shadow-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
 export const STYLE_BUTTON_SIZE_NORMAL = 'py-[0.6rem] px-6 text-sm';
 export const STYLE_BUTTON_SIZE_LARGE = 'py-[0.6rem] px-14 text-sm';
 export const STYLE_BUTTON_SIZE_FULL = 'py-[0.7rem] px-14 text-base';

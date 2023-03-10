@@ -1,4 +1,5 @@
 import { Button } from '@buttons/button';
+import { SvgLogoButton } from '@buttons/button/svgLogoButton';
 import { optionsFloatingLabelsEmail } from '@data/dataOptions';
 import { ERROR_TYPE, USER } from '@data/dataTypesConst';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
@@ -6,6 +7,7 @@ import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { atomUserError, atomUser } from '@states/users';
 import { useUserAuthFormSubmit, useUserValueUpdate } from '@states/users/hooks';
 import { classNames, validateEmailFormat } from '@states/utils';
+import { Divider } from '@ui/dividers/divider';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AuthErrorMessage } from './authErrorMessage';
 
@@ -59,6 +61,9 @@ export const AuthForm = () => {
             }}>
             Sign in with email
           </Button>
+          <div className='mb-5' />
+          <Divider margin='mb-5'>or</Divider>
+          <SvgLogoButton />
         </form>
       </section>
     </div>

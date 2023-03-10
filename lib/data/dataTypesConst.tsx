@@ -186,3 +186,9 @@ export const ERROR_TYPE = {
   server: 'server',
   client: 'client',
 };
+
+export type SVG_LOGO = (typeof SVG_LOGO)[keyof typeof SVG_LOGO];
+export const SVG_LOGO = {
+  google: 'Google',
+  github: 'GitHub',
+};
