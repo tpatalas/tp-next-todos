@@ -18,7 +18,7 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "autoprefixer": "10.4.13",
+    "autoprefixer": "10.4.14",
     "bson-objectid": "^2.0.4",
     "date-fns": "^2.29.3",
     "eslint-plugin-jest": "^27.2.1",
