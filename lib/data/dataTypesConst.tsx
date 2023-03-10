@@ -180,3 +180,9 @@ export const VIEWBOX = {
   24: '0 0 24 24',
   96: '0 96 960 960',
 } as const;
+
+export type ERROR_TYPE = (typeof ERROR_TYPE)[keyof typeof ERROR_TYPE];
+export const ERROR_TYPE = {
+  server: 'server',
+  client: 'client',
+};

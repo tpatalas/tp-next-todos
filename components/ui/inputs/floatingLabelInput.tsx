@@ -3,10 +3,12 @@ import { TypesOptionsFloatingLabelInput } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 import { forwardRef, Fragment } from 'react';
 
-type Props = { options: TypesOptionsFloatingLabelInput } & Partial<Pick<Types, 'onClick' | 'onChange' | 'inputValue'>>;
+type Props = { options: TypesOptionsFloatingLabelInput } & Partial<
+  Pick<Types, 'onClick' | 'onChange' | 'inputValue' | 'onBlur' | 'onFocus'>
+>;
 
 export const FloatingLabelInput = forwardRef<HTMLInputElement, Props>(
-  ({ options, onChange, inputValue }: Props, ref) => {
+  ({ options, onChange, inputValue, onBlur, onFocus }: Props, ref) => {
     return (
       <div>
         <div className='relative'>
@@ -20,6 +22,8 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, Props>(
               required={options.required}
               value={inputValue}
               onChange={onChange}
+              onBlur={onBlur}
+              onFocus={onFocus}
               ref={ref}
               className={classNames(
                 'peer block w-full appearance-none rounded-xl border py-3 placeholder-transparent shadow-md shadow-slate-200 outline-none transition-all',

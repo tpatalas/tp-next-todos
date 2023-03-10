@@ -20,7 +20,8 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
     <RecoilRoot>
       <SessionProvider
         session={session}
-        basePath={process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH}>
+        basePath={process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH}
+        refetchOnWindowFocus={false}>
         {getLayout(<Component {...pageProps} />)}
       </SessionProvider>
     </RecoilRoot>

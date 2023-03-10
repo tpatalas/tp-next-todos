@@ -88,5 +88,8 @@ export type TypesOptionsFloatingLabelInput = Partial<
 >;
 
 export type TypesOptionsAuthErrorMessage = Partial<
-  Pick<Types, 'isError' | 'isSignIn' | 'signUpDefaultMessage' | 'signUpErrorMessage' | 'signInErrorMessage'>
+  Pick<Types, 'isError' | 'isSignIn' | 'defaultMessage' | 'errorMessage'>
 >;
+
+export type TypesOptionsPrefetchRouterButton = Pick<Types, 'path'> &
+  Partial<Pick<Types, 'className' | 'isPrefetchingOnHover' | 'tooltip' | 'kbd' | 'offset' | 'placement'>>;
