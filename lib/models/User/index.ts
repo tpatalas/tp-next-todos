@@ -1,28 +1,24 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-      minLength: 8,
-      maxLength: 100,
-    },
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    unique: true,
   },
-  {
-    timestamps: true,
+  name: {
+    type: String,
+    required: false,
   },
-);
+  image: {
+    type: String,
+    required: false,
+  },
+});
 
-UserSchema.index({ email: 'text' });
+// next-auth is already indexing the user's information. Additional indexing such
+// as `UserSchema.index({email: text})` will cause issue with login.
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);
