@@ -1,5 +1,6 @@
-import { ERROR_TYPE, USER } from '@data/dataTypesConst';
+import { ERROR_TYPE, SPINNER, USER } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
+import { atomLoadingSpinner } from '@states/misc';
 import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -23,6 +24,7 @@ export const useUserAuthFormSubmit = (isError: Types['isError']) => {
   const isServerError = useRecoilValue(atomUserError(ERROR_TYPE['server']));
   const isClientError = useRecoilValue(atomUserError(ERROR_TYPE['client']));
   const setIsVerificationRequested = useSetRecoilState(atomUserVerificationRequest);
+  const setLoadingSpinner = useSetRecoilState(atomLoadingSpinner(SPINNER['authFrom']));
 
   return async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,6 +41,7 @@ export const useUserAuthFormSubmit = (isError: Types['isError']) => {
           email: user.email,
         });
       };
+      setLoadingSpinner(true);
 
       const response = await userEmailSent();
       if (response && !response.error) {

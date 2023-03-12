@@ -14,6 +14,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
     const [hasTooltip, setTooltip] = useState(false);
 
     const tooltipOptions = {
+      container: options.container,
       tooltip: (hasTooltip || options.isDisabled) && !options.tooltip ? undefined : options.tooltip,
       kbd: (hasTooltip || options.isDisabled) && !options.kbd ? undefined : options.kbd,
       placement: options.placement,

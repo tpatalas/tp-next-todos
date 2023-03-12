@@ -192,3 +192,9 @@ export const SVG_LOGO = {
   google: 'Google',
   github: 'GitHub',
 };
+
+export type SPINNER = (typeof SPINNER)[keyof typeof SPINNER];
+export const SPINNER = {
+  authFrom: 'authForm',
+  verificationConfirm: 'verificationConfirm',
+};

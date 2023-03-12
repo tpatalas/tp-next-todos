@@ -92,4 +92,9 @@ export type TypesOptionsAuthErrorMessage = Partial<
 >;
 
 export type TypesOptionsPrefetchRouterButton = Pick<Types, 'path'> &
-  Partial<Pick<Types, 'className' | 'isPrefetchingOnHover' | 'tooltip' | 'kbd' | 'offset' | 'placement'>>;
+  Partial<
+    Pick<
+      Types,
+      'isDisabled' | 'className' | 'isPrefetchingOnHover' | 'tooltip' | 'kbd' | 'offset' | 'placement' | 'container'
+    >
+  >;

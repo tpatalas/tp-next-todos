@@ -1,9 +1,11 @@
 import { Button } from '@buttons/button';
 import { SvgLogoButton } from '@buttons/button/svgLogoButton';
+import { LoadingSpinner } from '@components/loadable/loadingSpinner';
 import { optionsFloatingLabelsEmail } from '@data/dataOptions';
-import { ERROR_TYPE, USER } from '@data/dataTypesConst';
+import { ERROR_TYPE, SPINNER, USER } from '@data/dataTypesConst';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
+import { atomLoadingSpinner } from '@states/misc';
 import { atomUserError, atomUser } from '@states/users';
 import { useUserAuthFormSubmit, useUserValueUpdate } from '@states/users/hooks';
 import { classNames, validateEmailFormat } from '@states/utils';
@@ -18,11 +20,12 @@ export const AuthForm = () => {
   const isError = isServerError || isClientError;
   const user = useRecoilValue(atomUser);
   const updateUser = useUserValueUpdate();
-  const isEmailInValidated = !validateEmailFormat(user.email) && user.email.length !== 0;
+  const isEmailInValidated = !validateEmailFormat(user.email);
   const onSubmitHandler = useUserAuthFormSubmit(isEmailInValidated);
+  const isLoadingSpinner = useRecoilValue(atomLoadingSpinner(SPINNER['authFrom']));
 
   return (
-    <div className='absolute right-0 left-0 top-[5%] bottom-[50%] m-auto h-fit w-full sm:top-[20%] sm:w-fit'>
+    <div className='absolute right-0 left-0 top-[5%] bottom-[50%] m-auto h-fit w-full sm:top-[30%] sm:w-fit'>
       <section className='border-slate-150 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
         <div className='mb-8 flex flex-col items-center justify-center'>
           <h1 className='mb-4 flex flex-row items-center justify-center text-2xl text-slate-700'>Sign in</h1>
@@ -56,10 +59,11 @@ export const AuthForm = () => {
           <Button
             options={{
               type: 'submit',
-              className: classNames(STYLE_BUTTON_FULL_BLUE, 'w-full'),
-              isDisabled: isClientError,
+              className: classNames(STYLE_BUTTON_FULL_BLUE, 'w-full flex flex-row justify-center'),
+              isDisabled: isClientError || isLoadingSpinner,
             }}>
-            Sign in with email
+            <LoadingSpinner spinnerId={SPINNER['authFrom']} />
+            <div>Sign in with email</div>
           </Button>
           <div className='mb-5' />
           <Divider margin='mb-5'>or</Divider>

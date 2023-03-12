@@ -1,13 +1,18 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
+import { LoadingSpinner } from '@components/loadable/loadingSpinner';
+import { SPINNER } from '@data/dataTypesConst';
 import { ICON_MARK_EMAIL_READ } from '@data/materialSymbols';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
+import { atomLoadingSpinner } from '@states/misc';
 import { atomUser } from '@states/users';
 import { classNames } from '@states/utils';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 export const VerificationConfirmation = () => {
   const user = useRecoilValue(atomUser);
+  const setLoadingSpinner = useSetRecoilState(atomLoadingSpinner(SPINNER['verificationConfirm']));
+  const isLoadingSpinner = useRecoilValue(atomLoadingSpinner(SPINNER['verificationConfirm']));
 
   return (
     <div className='absolute right-0 left-0 top-[20%] bottom-[50%] m-auto h-fit w-full sm:top-[30%] sm:w-fit'>
@@ -38,11 +43,15 @@ export const VerificationConfirmation = () => {
         </div>
         <PrefetchRouterButton
           options={{
+            container: 'w-full',
             path: '/',
             isPrefetchingOnHover: true,
-            className: classNames(STYLE_BUTTON_FULL_BLUE, 'w-full'),
-          }}>
-          Back to homepage
+            isDisabled: isLoadingSpinner,
+            className: classNames(STYLE_BUTTON_FULL_BLUE, 'w-full flex flex-row justify-center'),
+          }}
+          onClick={() => setLoadingSpinner(true)}>
+          <LoadingSpinner spinnerId={SPINNER['verificationConfirm']} />
+          <div>Back to homepage</div>
         </PrefetchRouterButton>
       </section>
     </div>

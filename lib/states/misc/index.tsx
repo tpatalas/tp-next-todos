@@ -1,4 +1,4 @@
-import { BREAKPOINT, PATHNAME_IMAGE } from '@data/dataTypesConst';
+import { BREAKPOINT, PATHNAME_IMAGE, SPINNER } from '@data/dataTypesConst';
 import { mediaQueryEffect, networkStatusEffect } from '@effects/atomEffects';
 import { atom, atomFamily, selector } from 'recoil';
 
@@ -50,6 +50,11 @@ export const atomHtmlTitleTag = atom<string>({
 export const atomPathnameImage = atom<PATHNAME_IMAGE>({
   key: 'atomPathnameImage',
   default: PATHNAME_IMAGE['app'],
+});
+
+export const atomLoadingSpinner = atomFamily<boolean, SPINNER>({
+  key: 'atomLoadingSpinner',
+  default: false,
 });
 
 /**
