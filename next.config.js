@@ -19,7 +19,7 @@ module.exports = withBundleAnalyzer({
   output: 'standalone',
   swcMinify: true,
   compiler: {
-    removeConsole: true,
+    removeConsole: process.env.NODE_ENV !== 'production' ? false : true,
   },
   async headers() {
     return [
