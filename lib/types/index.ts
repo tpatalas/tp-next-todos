@@ -176,6 +176,11 @@ export interface TypesSvgLogo {
   viewBox: string;
   path: ReactElement;
 }
+
+export interface TypesNextAuthError {
+  _id: string;
+  message: string;
+}
 /**
  * Types MISC.
  */
@@ -405,9 +410,10 @@ export type TypesRefetchEffect = <T>({
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
 
 export type TypesSessionStorageEffect = <T>({
+  storeName,
   queryKey,
   shouldGet,
-}: Pick<Types, 'queryKey'> & Partial<Pick<Types, 'shouldGet'>>) => AtomEffect<T | boolean>;
+}: Pick<Types, 'queryKey' | 'storeName'> & Partial<Pick<Types, 'shouldGet'>>) => AtomEffect<T | boolean>;
 
 export type TypesMediaQueryEffect = <T>({
   breakpoint,

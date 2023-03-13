@@ -1,11 +1,12 @@
+import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-  const session = req.cookies.get('next-auth.session-token');
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_JWT_SECRET });
 
   switch (req.nextUrl.pathname) {
     case '/auth':
-      if (session) {
+      if (token) {
         return NextResponse.redirect(new URL('/app', req.url));
       }
       break;
@@ -15,5 +16,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/auth', '/auth/verification'],
+  matcher: ['/', '/auth'],
 };

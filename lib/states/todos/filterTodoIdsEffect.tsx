@@ -3,20 +3,18 @@ import { Labels } from '@lib/types';
 import { atomLabelQuerySlug } from '@states/labels';
 import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
-import { useNextQuerySlug } from '@states/utils/hooks';
+import { useNextQuery } from '@states/utils/hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { atomFilterTodoIds } from '.';
 
 export const FilterTodoIdsEffect = () => {
-  const labelId = useNextQuerySlug('/app/label');
+  const labelId = useNextQuery({ path: '/app/label' });
   const { asPath } = useRouter();
-  const labels = useRecoilCallback(({ snapshot }) => () => {
-    return snapshot.getLoadable(atomQueryLabels).getValue();
-  });
+  const labels = useRecoilValue(atomQueryLabels);
   const label_id = useRecoilValue(atomLabelQuerySlug);
-  const label = labels().find((label) => label._id === label_id) || ({} as Labels);
+  const label = labels.find((label) => label._id === label_id) || ({} as Labels);
 
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
     if (asPath === PATHNAME['app']) {

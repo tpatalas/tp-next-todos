@@ -8,7 +8,7 @@ import { Types } from '@lib/types';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { atomMediaQuery } from '@states/misc';
 import { classNames, paths } from '@states/utils';
-import { useNextQuerySlug } from '@states/utils/hooks';
+import { useNextQuery } from '@states/utils/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment, Fragment as LabelModalFragment } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -22,7 +22,7 @@ const DeleteLabelConfirmModal = dynamic(() =>
 );
 
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
-  const slug = useNextQuerySlug('/app/label');
+  const slug = useNextQuery({ path: '/app/label' });
   const matchedSlug = slug === label._id;
   const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
   const setSideBarOpen = useSidebarOpen();
