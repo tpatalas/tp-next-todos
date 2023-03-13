@@ -181,12 +181,6 @@ export const VIEWBOX = {
   96: '0 96 960 960',
 } as const;
 
-export type ERROR_TYPE = (typeof ERROR_TYPE)[keyof typeof ERROR_TYPE];
-export const ERROR_TYPE = {
-  server: 'server',
-  client: 'client',
-};
-
 export type SVG_LOGO = (typeof SVG_LOGO)[keyof typeof SVG_LOGO];
 export const SVG_LOGO = {
   google: 'Google',
@@ -195,6 +189,6 @@ export const SVG_LOGO = {
 
 export type SPINNER = (typeof SPINNER)[keyof typeof SPINNER];
 export const SPINNER = {
-  authFrom: 'authForm',
+  authForm: 'authForm',
   verificationConfirm: 'verificationConfirm',
 };

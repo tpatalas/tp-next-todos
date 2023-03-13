@@ -10,14 +10,14 @@ export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
       server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
+        host: process.env.GCR_EMAIL_SERVER_HOST,
+        port: process.env.GCR_EMAIL_SERVER_PORT,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
           pass: process.env.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: process.env.EMAIL_FROM,
+      from: process.env.GCR_EMAIL_FROM,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -54,6 +54,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth',
     signOut: '/app',
+    error: '/auth',
   },
   adapter: MongoDBAdapter(clientPromise),
   session: {
