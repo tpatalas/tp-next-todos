@@ -46,7 +46,7 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
       {isTodoCompleted() ? (
         <div
           className={classNames(
-            'flex flex-row rounded-md focus-visible:rounded-md',
+            'flex flex-row rounded-lg focus-visible:rounded-lg',
             options.padding ?? 'p-2',
             options.container,
           )}>
@@ -69,7 +69,7 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
               levelUrgent && priorityUrgent && 'Urgent',
             ),
             color: conditionalFill,
-            borderRadius: options.borderRadius ?? 'rounded-md focus-visible:rounded-md',
+            borderRadius: options.borderRadius ?? 'rounded-lg focus-visible:rounded-md',
             margin: 'ml-0',
             hoverBg: options.hoverBg ?? 'hover:bg-transparent',
             display: options.display,
@@ -77,7 +77,7 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
             container: options.container,
             padding: options.padding,
           }}
-          headerContents={options.isInitiallyVisible && conditionalHeaderContent}
+          menuButtonContent={options.isInitiallyVisible && conditionalHeaderContent}
           onClick={onClick}
         />
       )}

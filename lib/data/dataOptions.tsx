@@ -3,6 +3,7 @@ import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loading
 import {
   TypesOptionsButton,
   TypesOptionsDropdown,
+  TypesOptionsFloatingLabelInput,
   TypesOptionsLoadingState,
   TypesOptionsMinimizedModalTransition,
   TypesOptionsPriority,
@@ -10,7 +11,7 @@ import {
 } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
 import { isMacOs } from 'react-device-detect';
-import { PRIORITY_LEVEL, POSITION_X, POSITION_Y } from './dataTypesConst';
+import { POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './dataTypesConst';
 import {
   ICON_CHEVRON_LEFT,
   ICON_CHEVRON_RIGHT,
@@ -35,7 +36,7 @@ import {
   STYLE_BUTTON_NORMAL_BLUE,
   STYLE_BUTTON_NORMAL_RED,
   STYLE_BUTTON_NORMAL_WHITE,
-  STYLE_BUTTON_WIDE_BLUE,
+  STYLE_BUTTON_LARGE_BLUE,
   STYLE_HOVER_ENABLED_SLATE_DARK,
 } from './stylePreset';
 
@@ -90,7 +91,7 @@ export const optionsButtonGlobalClose: TypesOptionsButton = {
 // network Status
 export const optionsButtonNetworkStatus: TypesOptionsButton = {
   isDisabled: true,
-  className: 'break-word inline-flex w-auto items-center justify-center rounded-md border py-1 px-2 text-sm  shadow-sm',
+  className: 'break-word inline-flex w-auto items-center justify-center rounded-lg border py-1 px-2 text-sm  shadow-sm',
   tooltip: (
     <span>
       <p className='px-1 pb-1 text-sm'>You are offline!</p>
@@ -103,7 +104,7 @@ export const optionsButtonNetworkStatus: TypesOptionsButton = {
 export const optionsButtonCreateTodo: TypesOptionsButton = {
   tooltip: 'Create todo',
   kbd: 'T',
-  className: classNames(STYLE_BUTTON_WIDE_BLUE),
+  className: classNames(STYLE_BUTTON_LARGE_BLUE),
 };
 
 // calendar
@@ -306,7 +307,7 @@ export const optionsPriorityDropdownUrgent: TypesOptionsPriority = {
  */
 // calendar
 export const optionsDropdownCalendar: TypesOptionsDropdown = {
-  borderRadius: classNames('rounded-md focus-visible:rounded-md'),
+  borderRadius: classNames('rounded-lg focus-visible:rounded-lg'),
   padding: 'px-4 py-2',
   menuWidth: 'w-full',
   tooltip: 'Due date',
@@ -318,7 +319,7 @@ export const optionsDropdownComboBox: TypesOptionsDropdown = {
   path: ICON_NEW_LABEL,
   tooltip: 'Add label',
   hasDivider: false,
-  contentWidth: 'w-72',
+  menuItemsWidth: 'w-72',
   isPortal: true,
   borderRadius: 'rounded-lg',
 };
@@ -361,4 +362,29 @@ export const optionsLoadingLabels: TypesOptionsLoadingState = {
   repeatingCount: 10,
   margin: 'ml-4',
   space: 'space-y-4',
+};
+
+export const optionsFloatingLabelsEmail = (isError: boolean): TypesOptionsFloatingLabelInput => {
+  return {
+    name: 'email',
+    inputType: 'email',
+    autoComplete: 'email',
+    placeholder: 'Email address',
+    required: true,
+    isError: isError,
+  };
+};
+
+export const optionsFloatingLabelPassword = (
+  isPasswordShown: boolean,
+  isError: boolean,
+): TypesOptionsFloatingLabelInput => {
+  return {
+    name: 'password',
+    inputType: isPasswordShown ? 'text' : 'password',
+    placeholder: 'Password',
+    required: true,
+    padding: 'pr-14',
+    isError: isError,
+  };
 };

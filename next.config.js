@@ -1,5 +1,5 @@
-/** @type {import('next').NextConfig} */
-const securityHeaders = require('./securityHeaders');
+const securityHeaders = require('./configs/securityHeaders');
+const imageDomains = require('./configs/imageDomains');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -14,10 +14,7 @@ module.exports = withBundleAnalyzer({
     ignoreDuringBuilds: false,
   },
   images: {
-    domains:
-      process.env.NODE_ENV !== 'production'
-        ? ['images.unsplash.com', 'tailwindui.com', process.env.IMAGE_DOMAIN || '']
-        : [process.env.IMAGE_DOMAIN || ''],
+    domains: imageDomains,
   },
   output: 'standalone',
   swcMinify: true,

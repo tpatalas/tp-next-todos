@@ -70,8 +70,7 @@ export const CALENDAR = {
 
 export type IDB_VERSION = (typeof IDB_VERSION)[keyof typeof IDB_VERSION];
 export const IDB_VERSION = {
-  previous: 0,
-  current: 1,
+  current: Number(process.env.NEXT_PUBLIC_IDB_VERSION_CURRENT),
 };
 
 export type IDB = (typeof IDB)[keyof typeof IDB];
@@ -105,6 +104,7 @@ export type STORAGE_KEY = (typeof STORAGE_KEY)[keyof typeof STORAGE_KEY];
 export const STORAGE_KEY = {
   [IDB_KEY['todoIds']]: 'last_update_todos',
   [IDB_KEY['labels']]: 'last_update_labels',
+  session: 'session',
 } as const;
 
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];
@@ -168,3 +168,33 @@ export const GRADIENT_POSITION = {
   left: 'left',
   right: 'right',
 } as const;
+
+export type USER = (typeof USER)[keyof typeof USER];
+export const USER = {
+  email: 'email',
+  password: 'password',
+} as const;
+
+export type VIEWBOX = (typeof VIEWBOX)[keyof typeof VIEWBOX];
+export const VIEWBOX = {
+  24: '0 0 24 24',
+  96: '0 96 960 960',
+} as const;
+
+export type ERROR_TYPE = (typeof ERROR_TYPE)[keyof typeof ERROR_TYPE];
+export const ERROR_TYPE = {
+  server: 'server',
+  client: 'client',
+};
+
+export type SVG_LOGO = (typeof SVG_LOGO)[keyof typeof SVG_LOGO];
+export const SVG_LOGO = {
+  google: 'Google',
+  github: 'GitHub',
+};
+
+export type SPINNER = (typeof SPINNER)[keyof typeof SPINNER];
+export const SPINNER = {
+  authFrom: 'authForm',
+  verificationConfirm: 'verificationConfirm',
+};

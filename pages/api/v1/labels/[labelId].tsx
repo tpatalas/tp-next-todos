@@ -3,10 +3,13 @@ import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { userInfo } from 'userInfo';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
+  const session = await getServerSession(req, res, authOptions);
+  const userId = session?.user._id;
 
   const {
     method,
@@ -17,7 +20,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const query: Partial<Labels> = {
     _id: labelId as OBJECT_ID,
-    user_id: userInfo._id,
+    user_id: userId,
   };
 
   switch (method) {
@@ -31,6 +34,8 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'PUT':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       try {
         const updateLabelById = await Label.findByIdAndUpdate(
           labelId,
@@ -44,6 +49,8 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'DELETE':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       try {
         const deleteLabelById = await Label.findByIdAndUpdate(
           labelId,

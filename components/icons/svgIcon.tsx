@@ -1,3 +1,4 @@
+import { VIEWBOX } from '@data/dataTypesConst';
 import { TypesOptionsSvg } from '@lib/types/typesOptions';
 import { memo } from 'react';
 
@@ -10,7 +11,7 @@ export const SvgIcon = memo(({ options }: Props) => {
       aria-hidden={options.isAriaHidden ?? true}
       height={options.height ?? '24'}
       width={options.width ?? '24'}
-      viewBox={options.viewBox ?? '0 0 24 24'}
+      viewBox={options.viewBox ?? VIEWBOX['24']}
       className={options.className ?? 'h-5 w-5 fill-gray-500 hover:fill-gray-700'}>
       <path d={options.path} />
     </svg>

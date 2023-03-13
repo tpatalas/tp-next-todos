@@ -2,10 +2,13 @@ import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { userInfo } from 'userInfo';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
+  const session = await getServerSession(req, res, authOptions);
+  const userId = session?.user._id;
 
   const {
     method,
@@ -16,7 +19,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
   const data: Labels = body;
 
   const query: Partial<Labels> = {
-    user_id: userInfo._id,
+    user_id: userId,
   };
 
   switch (method) {
@@ -36,8 +39,10 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'POST':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       const { _id, parent_id, title_id, name, color } = data;
-      const labelItem = { _id, parent_id, title_id, name, color, update: Date.now(), user_id: userInfo._id };
+      const labelItem = { _id, parent_id, title_id, name, color, update: Date.now(), user_id: userId };
       try {
         const createLabel = await Label.create(labelItem);
         res.status(201).json({ success: true, data: createLabel });
@@ -46,6 +51,8 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'PUT':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       const arrayObjectData: Labels[] = body;
       try {
         const updateLabel = await Promise.all(

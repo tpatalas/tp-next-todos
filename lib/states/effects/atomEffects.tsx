@@ -1,4 +1,5 @@
-import { TypesAtomEffect, TypesMediaQueryEffect } from '@lib/types';
+import { TypesAtomEffect, TypesMediaQueryEffect, TypesSessionStorageEffect } from '@lib/types';
+import { DefaultValue } from 'recoil';
 
 /**
  * Media Queries
@@ -37,3 +38,15 @@ export const networkStatusEffect: TypesAtomEffect<boolean> = ({ setSelf }) => {
     window.removeEventListener('offline', netWorkOnChange);
   };
 };
+
+export const sessionStorageEffect: TypesSessionStorageEffect =
+  ({ queryKey, shouldGet }) =>
+  ({ onSet, setSelf, trigger }) => {
+    if (trigger === 'get' && shouldGet) {
+      const value = sessionStorage.getItem(queryKey);
+      setSelf(value != null ? JSON.parse(value) : new DefaultValue());
+    }
+    onSet((newValue, _, isReset) => {
+      isReset ? sessionStorage.removeItem(queryKey) : sessionStorage.setItem(queryKey, JSON.stringify(newValue));
+    });
+  };

@@ -1,4 +1,4 @@
-import { Labels, Todos, Types } from '@lib/types';
+import { Labels, Todos } from '@lib/types';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
@@ -57,7 +57,7 @@ export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
 };
 
 // recoil test observer: required to observe state change on unit test
-export const RecoilObserver = <T,>({ node, onChange }: { node: RecoilState<T>; onChange: Types['onChange'] }) => {
+export const RecoilObserver = <T,>({ node, onChange }: { node: RecoilState<T>; onChange: (value: T) => void }) => {
   const value = useRecoilValue(node);
   useEffect(() => onChange(value), [onChange, value]);
   return null;

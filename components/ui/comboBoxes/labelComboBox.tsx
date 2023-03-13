@@ -32,7 +32,7 @@ export const LabelComboBox = ({ todo }: Props) => {
     <LabelComboBoxFragment>
       <ComboBox
         selected={selectedLabels}
-        onChangeTypeNever={onChangeLabelHandler}
+        onChange={onChangeLabelHandler}
         hasComboBoxBoardStyle={false}
         placeholder={
           selectedLabels.length > 0 ? 'Labels selected ' + '(' + selectedLabels.length + ')' : 'Enter a label'
@@ -93,7 +93,7 @@ export const LabelComboBox = ({ todo }: Props) => {
           )}
         </Combobox.Options>
         <ComboBoxNewItemButton
-          headerContents='Add new label'
+          menuButtonContent='Add new label'
           onClick={() => labelModalOpen()}
         />
       </ComboBox>

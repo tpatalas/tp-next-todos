@@ -1,4 +1,4 @@
-import { IDB_KEY, IDB_KEY_STORE, IDB_STORE, IDB_VERSION, STORAGE_KEY } from '@data/dataTypesConst';
+import { IDB_KEY, IDB_KEY_STORE, IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesRefetchEffect } from '@lib/types';
 import { hasTimePast } from '@states/utils';
@@ -16,16 +16,20 @@ export const queryEffect: TypesRefetchEffect =
     isRefetchingOnBlur,
     refetchInterval,
   }) =>
-  ({ setSelf, onSet, trigger }) => {
+  ({ setSelf, onSet, trigger, resetSelf }) => {
     if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
     const onIndexedDB = isIndexedDBEnabled || typeof isIndexedDBEnabled === 'undefined';
     const isIdMapQueryKey = queryKey === IDB_KEY['labels'] || queryKey === IDB_KEY['todoIds'];
     const lastUpdateTime = isIdMapQueryKey && Number(JSON.parse(localStorage.getItem(STORAGE_KEY[queryKey]) || '0'));
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
+    const isSession = sessionStorage.getItem(STORAGE_KEY['session']);
+
+    // return default values if user logged out
+    if (!isSession) return resetSelf();
 
     //concat indexedDB with data if data is in array
     const concatDataWithIndexedDB = async (data: unknown) => {
-      const indexedDB = await get(storeName, queryKey, IDB_VERSION['current']);
+      const indexedDB = await get(storeName, queryKey);
       const arrayIndexedDB = Array.isArray(indexedDB) && indexedDB;
       const arrayData = Array.isArray(data) && data;
 
@@ -51,7 +55,7 @@ export const queryEffect: TypesRefetchEffect =
         if (Array.isArray(updatedData)) {
           await Promise.all(
             updatedData.map((updatedItem) =>
-              del(IDB_KEY_STORE[queryKey as keyof typeof IDB_KEY_STORE], updatedItem._id, IDB_VERSION['current']),
+              del(IDB_KEY_STORE[queryKey as keyof typeof IDB_KEY_STORE], updatedItem._id),
             ),
           );
         }
@@ -68,43 +72,35 @@ export const queryEffect: TypesRefetchEffect =
     const queryInitial = async () => {
       const { data } = await queryFunction();
       const newData = await concatDataWithIndexedDB(data);
-      isIdMapQueryKey && set(storeName, queryKey + 'Temp', data, IDB_VERSION['current']);
-      set(storeName, queryKey, newData, IDB_VERSION['current']);
+      isIdMapQueryKey && set(storeName, queryKey + 'Temp', data);
+      set(storeName, queryKey, newData);
       return newData as DefaultValue;
     };
 
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
       // do not fetch if item is not updated
-      const indexedDB = await get(
-        IDB_STORE['idMaps'],
-        IDB_KEY_STORE[queryKey as keyof typeof IDB_KEY_STORE] + 'Temp',
-        IDB_VERSION['current'],
-      );
+      const indexedDB = await get(IDB_STORE['idMaps'], IDB_KEY_STORE[queryKey as keyof typeof IDB_KEY_STORE] + 'Temp');
       const isQueryKeyInTemp = Array.isArray(indexedDB) && indexedDB.some((idb) => idb._id === queryKey);
       if (!isQueryKeyInTemp && !isIdMapQueryKey) return;
       // proceed normal fetch
       const { data } = await queryFunction();
       const newData = (await concatDataWithIndexedDB(data)) as DefaultValue;
-      isIdMapQueryKey && set(storeName, queryKey + 'Temp', data, IDB_VERSION['current']);
-      set(storeName, queryKey, newData, IDB_VERSION['current']);
+      isIdMapQueryKey && set(storeName, queryKey + 'Temp', data);
+      set(storeName, queryKey, newData);
       setSelf(newData);
     };
 
     if (trigger === 'get') {
       onIndexedDB && !hasFiveMinTimePast
-        ? setSelf(
-            get(storeName, queryKey, IDB_VERSION['current']).then((value) => (value != null ? value : queryInitial())),
-          )
+        ? setSelf(get(storeName, queryKey).then((value) => (value != null ? value : queryInitial())))
         : setSelf(queryInitial());
     }
 
     onSet((newValue, _, isReset) => {
       // change will directly reflect to the indexedDb.
       //! Recoil Reset will remove the data from indexedDb. Atom must have default value to reset
-      isReset
-        ? del(storeName, queryKey, IDB_VERSION['current'])
-        : set(storeName, queryKey, newValue, IDB_VERSION['current']);
+      isReset ? del(storeName, queryKey) : set(storeName, queryKey, newValue);
 
       // refetch and re-sync indexedDb with database if they are not matching.
       if (isRefetchingOnMutation && typeof isRefetchingOnMutation !== 'undefined' && !isReset) {

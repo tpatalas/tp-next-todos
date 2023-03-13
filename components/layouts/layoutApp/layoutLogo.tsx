@@ -7,8 +7,10 @@ export const LayoutLogo = () => {
     <nav className='flex h-0 flex-row items-center'>
       <LogoContainerFragment>
         <PrefetchRouterButton
-          path='/'
-          className='cursor-pointer'>
+          options={{
+            path: '/',
+            className: 'cursor-pointer',
+          }}>
           <LogoFragment>
             <span className='sr-only'>Logo</span>
             <div>I am a LOGO</div>
