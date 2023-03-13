@@ -63,14 +63,18 @@ export const RecoilObserver = <T,>({ node, onChange }: { node: RecoilState<T>; o
   return null;
 };
 
-export const useNextQuerySlug = (path: string): string | undefined => {
+export const useNextQuery = ({ path, key }: { path?: string; key?: string }) => {
+  if ((path && key) || (!path && !key)) throw new Error('Only "path" or "key" can be provided');
   const router = useRouter();
+  const pathRegex = path && `${path}/(.*)(&|$)`;
+  const keyRegex = key && `[&?]${key}=(.*?)(&|$)`;
+  const pathOrKey = (pathRegex || keyRegex) as string;
 
   const value = useMemo(() => {
-    const match = router.asPath.match(new RegExp(`${path}/(.*)(&|$)`));
+    const match = router.asPath.match(new RegExp(pathOrKey));
     if (!match) return undefined;
     return decodeURIComponent(match[1]);
-  }, [path, router]);
+  }, [pathOrKey, router.asPath]);
 
   return value;
 };

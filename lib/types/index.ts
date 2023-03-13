@@ -176,6 +176,11 @@ export interface TypesSvgLogo {
   viewBox: string;
   path: ReactElement;
 }
+
+export interface TypesNextAuthError {
+  _id: string;
+  message: string;
+}
 /**
  * Types MISC.
  */

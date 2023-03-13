@@ -1,7 +1,7 @@
 import { STORAGE_KEY } from '@data/dataTypesConst';
 import { sessionStorageEffect } from '@effects/atomEffects';
 import { Users } from '@lib/types';
-import { atom, atomFamily } from 'recoil';
+import { atom } from 'recoil';
 
 export const atomUser = atom<Users>({
   key: 'atomUser',
@@ -18,9 +18,9 @@ export const atomIDBUserSession = atom<boolean>({
   ],
 });
 
-export const atomUserError = atomFamily<boolean, string>({
-  key: 'atomUserError',
-  default: false,
+export const atomUserErrorMessage = atom<string>({
+  key: 'atomUserErrorMessage',
+  default: '',
 });
 
 export const atomUserVerificationRequest = atom({
