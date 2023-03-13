@@ -33,23 +33,30 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ################# Enviornment Variable Build Time Substitution #################
 ################################################################################
 # NOTE:
-# This must be added if an environment variable is added to Google Cloud Run's 
-# environment variables. Google Cloud Run's environment variables are only 
-# available at runtime and ignore build time, but Next.js may require 
-# environment variables during build time. Build-time substitution will
-# resolve the issue by temporarily holding the substitution and getting 
-# replaced with Google Cloud Run's environment variables during deployment 
-# with `deploy.sh`.
-# * Environment variables defined in Google Secret Manager are available at 
-# both build time and runtime, but they are not free.
+# When environment variables are added to Google Cloud Run's environment, 
+# they are only available at runtime and not during build time. However, 
+# Next.js may require environment variables during build time. To address 
+# this issue, build-time substitution can be used to temporarily hold the 
+# substitution and get replaced with Google Cloud Run's environment variables 
+# during deployment with deploy.sh.
+# --
+# It's important to note that environment variables defined in Google Secret 
+# Manager are available at both build time and runtime, but they may not be 
+# free to use.
 #
 # Set build-time arguments. Add BUILD_ prefix to your enviornment variable
 ARG BUILD_IMAGE_DOMAIN
 ARG BUILD_HOST
+ARG BUILD_EMAIL_SERVER_HOST
+ARG BUILD_EMAIL_SERVER_PORT
+ARG BUILD_EMAIL_FROM
 #
 # Set environment variables based on build-time arguments by adding GCR_ prefix
 ENV GCR_IMAGE_DOMAIN $BUILD_IMAGE_DOMAIN
 ENV GCR_HOSTNAME $BUILD_HOSTNAME
+ENV GCR_EMAIL_SERVER_HOST $BUILD_EMAIL_SERVER_HOST
+ENV GCR_EMAIL_SERVER_PORT $BUILD_EMAIL_SERVER_PORT
+ENV GCR_EMAIL_FROM $BUILD_EMAIL_FROM
 #
 ################################################################################
 
