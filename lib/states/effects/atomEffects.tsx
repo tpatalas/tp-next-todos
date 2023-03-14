@@ -1,5 +1,5 @@
+import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesAtomEffect, TypesMediaQueryEffect, TypesSessionStorageEffect } from '@lib/types';
-import { DefaultValue } from 'recoil';
 
 /**
  * Media Queries
@@ -39,14 +39,24 @@ export const networkStatusEffect: TypesAtomEffect<boolean> = ({ setSelf }) => {
   };
 };
 
-export const sessionStorageEffect: TypesSessionStorageEffect =
-  ({ queryKey, shouldGet }) =>
-  ({ onSet, setSelf, trigger }) => {
-    if (trigger === 'get' && shouldGet) {
-      const value = sessionStorage.getItem(queryKey);
-      setSelf(value != null ? JSON.parse(value) : new DefaultValue());
+export const sessionEffect: TypesSessionStorageEffect =
+  ({ queryKey, shouldGet, storeName }) =>
+  ({ onSet, resetSelf, setSelf, trigger }) => {
+    const session = sessionStorage.getItem(queryKey);
+
+    if (trigger === 'get' && (shouldGet ?? true)) {
+      setSelf(get(storeName, queryKey).then((value) => (value != null ? value : session && JSON.parse(session))));
     }
+
     onSet((newValue, _, isReset) => {
-      isReset ? sessionStorage.removeItem(queryKey) : sessionStorage.setItem(queryKey, JSON.stringify(newValue));
+      if (isReset) {
+        resetSelf();
+        sessionStorage.removeItem(queryKey);
+        del(storeName, queryKey);
+        return;
+      }
+      setSelf(newValue);
+      sessionStorage.setItem(queryKey, JSON.stringify(newValue));
+      set(storeName, queryKey, newValue);
     });
   };

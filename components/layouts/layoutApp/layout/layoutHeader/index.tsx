@@ -40,7 +40,7 @@ export const LayoutHeader = () => {
         <RightSidebarFragment>
           <div className='flex flex-1 pl-2 pr-3'>
             <HeaderSearchBar />
-            <div className='ml-4 flex items-center md:ml-6'>
+            <div className='ml-4 flex min-w-[2rem] items-center md:ml-6'>
               <Suspense>
                 <HeaderUser />
               </Suspense>
