@@ -30,8 +30,7 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
           offset: options.offset,
           isDisabled: options.isDisabled,
         }}
-        onClick={onClick}
-      >
+        onClick={onClick}>
         <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
@@ -50,8 +49,7 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
                 className={classNames(
                   'px-3 text-sm font-normal text-gray-500',
                   !options.isDisabled && '[.group-button:hover_&]:text-gray-700',
-                )}
-              >
+                )}>
                 {menuButtonContent}
               </span>
             )}
