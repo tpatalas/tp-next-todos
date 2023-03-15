@@ -5,19 +5,19 @@ import { classNames } from '@states/utils';
  */
 // Base
 export const STYLE_BUTTON_BASE =
-  'transition-all inline-flex items-center justify-center rounded-lg border leading-4 shadow-lg shadow-blue-100 hover:shadow-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  'transition-all inline-flex items-center justify-center rounded-lg border leading-4 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
 export const STYLE_BUTTON_SIZE_NORMAL = 'py-[0.6rem] px-6 text-sm';
 export const STYLE_BUTTON_SIZE_LARGE = 'py-[0.6rem] px-14 text-sm';
 export const STYLE_BUTTON_SIZE_FULL = 'py-[0.7rem] px-14 text-base';
 // color
 export const STYLE_BUTTON_COLOR_BLUE =
-  'border-transparent bg-blue-600 text-white hover:enabled:bg-blue-700 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-70';
+  'border-transparent bg-blue-600 text-white hover:enabled:bg-blue-700 shadow-blue-100 hover:shadow-blue-200 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-70';
 export const STYLE_BUTTON_COLOR_WHITE =
-  'border-gray-300 bg-white text-gray-600 hover:enabled:bg-gray-100 hover:enabled:text-gray-800 focus-visible:ring-blue-500 disabled:opacity-70';
+  'border-gray-300 bg-white text-gray-600 hover:enabled:bg-gray-100 shadow-slate-100 hover:shadow-slate-200 hover:enabled:text-gray-800 focus-visible:ring-blue-500 disabled:opacity-70';
 export const STYLE_BUTTON_COLOR_RED =
-  'border-transparent bg-red-600 text-white hover:enabled:bg-red-700 focus-visible:ring-red-500 disabled:opacity-70';
+  'border-transparent bg-red-600 text-white hover:enabled:bg-red-700 shadow-red-100 hover:shadow-red-200 focus-visible:ring-red-500 disabled:opacity-70';
 export const STYLE_BUTTON_COLOR_GRAY =
-  'border-transparent bg-gray-200 text-black hover:enabled:bg-gray-300 focus-visible:ring-gray-500 disabled:opacity-70';
+  'border-transparent bg-gray-200 text-black hover:enabled:bg-gray-300 shadow-gray-100 hover:shadow-gray-200 focus-visible:ring-gray-500 disabled:opacity-70';
 // Composition
 // white
 export const STYLE_BUTTON_NORMAL_WHITE = classNames(

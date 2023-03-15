@@ -76,6 +76,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                       path: paths('/app/label/', label._id),
                       className: 'max-w-[5.3rem] truncate pr-1',
                       tooltip: `Go to ${label.name}`,
+                      offset: [8, 15],
                     }}
                     onClick={() => closeTodoModal()}>
                     {label.name}

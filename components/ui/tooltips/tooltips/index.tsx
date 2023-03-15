@@ -31,7 +31,8 @@ export const Tooltip = memo(({ options, children }: Props) => {
             ref={setTooltipRef}
             {...getTooltipProps()}
             className={classNames(
-              options.tooltip && 'z-50 whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
+              options.tooltip &&
+                'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
             )}>
             <span>{options.tooltip}</span>
             <kbd
