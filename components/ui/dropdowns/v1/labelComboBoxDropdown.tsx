@@ -1,20 +1,21 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonLabelRemove, optionsDropdownComboBox } from '@data/dataOptions';
-import { GRADIENT_POSITION } from '@data/dataTypesConst';
+import { CATCH, GRADIENT_POSITION, PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
 import { useTodoModalStateClose } from '@states/modals/hooks';
+import { atomTodoNew } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { classNames, paths } from '@states/utils';
+import { atomCatch, classNames, paths } from '@states/utils';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
 import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
 
-type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels' | 'container'>>;
+type Props = Partial<Pick<Types, 'selectedQueryLabels' | 'container' | 'todo'>>;
 
 export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: Props) => {
   const removeTitleId = useLabelRemoveItemTitleId(todo?._id);
@@ -24,14 +25,26 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
     return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo?._id)).getValue().completed;
   });
+  const todoItem = useRecoilValue(typeof todo !== 'undefined' ? atomQueryTodoItem(todo?._id) : atomTodoNew);
+  const important = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
+  const urgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
+  const priority = important || urgent;
+  const dueDate = todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined';
+  const priorityAndDueDate = priority && dueDate;
+  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH['todoModal']));
+
+  const dynamicLabelWidth = !isTodoModalOpen
+    ? classNames(
+        'w-[83%] sm:w-[92%]',
+        !priorityAndDueDate && 'md:w-[90%] lg:w-[92%]',
+        priorityAndDueDate && 'md:w-[90%] ml:w-[54%] lg:w-[64%] xl:w-[67%]',
+        (priority || dueDate) && !priorityAndDueDate && 'md:w-[88%] ml:w-[74%] lg:w-[76%]',
+      )
+    : 'w-[calc(84vw-8rem)] sm:w-[74%] md:w-[76%]';
 
   return (
     <LabelComboBoxDropdownFragment>
-      <div
-        className={classNames(
-          'relative flex flex-row',
-          container ?? 'w-[calc(80vw-6rem)] max-w-[32rem] md:w-[calc(50vw-2rem)] ml:w-[calc(55vw-13rem)]',
-        )}>
+      <div className={classNames('relative flex flex-row', container ?? dynamicLabelWidth)}>
         <LabelsHorizontalGradients
           scrollRef={scrollRef}
           position={GRADIENT_POSITION['left']}
@@ -55,13 +68,13 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                   className={classNames(
                     'mx-[0.12rem] flex cursor-pointer flex-row items-center justify-center rounded-lg py-[3px] pl-2 pr-1 text-sm text-gray-700',
                     label.color && label.color,
-                    'bg-opacity-40 hover:bg-opacity-60',
+                    'border border-slate-300 shadow-md shadow-slate-100 hover:shadow-slate-200',
                   )}>
                   <PrefetchRouterButton
                     options={{
                       path: paths('/app/label/', label._id),
                       className: 'max-w-[5.3rem] truncate pr-1',
-                      tooltip: label.name,
+                      tooltip: `Go to ${label.name}`,
                     }}
                     onClick={() => closeTodoModal()}>
                     {label.name}
