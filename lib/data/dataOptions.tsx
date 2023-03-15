@@ -239,7 +239,7 @@ export const optionsButtonLabelRemove: TypesOptionsButton = {
   path: ICON_CLOSE,
   padding: 'p-[2px]',
   size: 'h-4 w-4',
-  color: 'fill-gray-700 hover:fill-gray-900',
+  color: 'fill-gray-500',
   container: 'h-5',
 };
 
