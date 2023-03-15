@@ -1,3 +1,4 @@
+import { DATA_DEMO_LABELS } from '@data/dataDemo';
 import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataLabels } from '@lib/queries/queryLabels';
@@ -9,7 +10,7 @@ import { atom, selector } from 'recoil';
  **/
 export const atomQueryLabels = atom<Labels[]>({
   key: 'atomQueryLabels',
-  default: [],
+  default: DATA_DEMO_LABELS,
   effects: [
     queryEffect({
       storeName: IDB_STORE['idMaps'],

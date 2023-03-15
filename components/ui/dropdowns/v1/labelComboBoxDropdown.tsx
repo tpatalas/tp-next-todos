@@ -1,14 +1,14 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonLabelRemove, optionsDropdownComboBox } from '@data/dataOptions';
-import { CATCH, GRADIENT_POSITION, PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { GRADIENT_POSITION, PATHNAME, PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
 import { useTodoModalStateClose } from '@states/modals/hooks';
 import { atomTodoNew } from '@states/todos';
 import { atomQueryTodoItem } from '@states/todos/atomQueries';
-import { atomCatch, classNames, paths } from '@states/utils';
+import { classNames, paths } from '@states/utils';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
 import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
@@ -31,16 +31,13 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
   const priority = important || urgent;
   const dueDate = todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined';
   const priorityAndDueDate = priority && dueDate;
-  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH['todoModal']));
 
-  const dynamicLabelWidth = !isTodoModalOpen
-    ? classNames(
-        'w-[83%] sm:w-[92%]',
-        !priorityAndDueDate && 'md:w-[90%] lg:w-[92%]',
-        priorityAndDueDate && 'md:w-[90%] ml:w-[54%] lg:w-[64%] xl:w-[67%]',
-        (priority || dueDate) && !priorityAndDueDate && 'md:w-[88%] ml:w-[74%] lg:w-[76%]',
-      )
-    : 'w-[calc(84vw-8rem)] sm:w-[74%] md:w-[76%]';
+  const dynamicLabelWidth = classNames(
+    'w-[calc(100%-3rem)]  md:w-[calc(100%-4rem)]',
+    priorityAndDueDate && 'ml:w-[calc(100%-13rem)]',
+    !priorityAndDueDate && 'ml:w-[calc(100%-4rem)]',
+    (priority || dueDate) && !priorityAndDueDate && 'ml:w-[calc(100%-9rem)]',
+  );
 
   return (
     <LabelComboBoxDropdownFragment>
@@ -73,7 +70,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                   )}>
                   <PrefetchRouterButton
                     options={{
-                      path: paths('/app/label/', label._id),
+                      path: paths(PATHNAME['label'] + '/', label._id),
                       className: 'max-w-[5.3rem] truncate pr-1',
                       tooltip: `Go to ${label.name}`,
                       offset: [8, 15],

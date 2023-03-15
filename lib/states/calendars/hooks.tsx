@@ -19,6 +19,7 @@ import {
   sub,
 } from 'date-fns';
 import equal from 'fast-deep-equal/react';
+import { useSession } from 'next-auth/react';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { atomCurrentMonth, atomDayPickerUpdater, atomDayPicker } from '.';
 
@@ -133,6 +134,7 @@ export const useCalUpdateItem = (todoId: Todos['_id']) => {
 };
 
 export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
+  const { status } = useSession();
   const get = useGetWithRecoilCallback();
   const updateCalItem = useCalUpdateItem(todoId);
   const updatePriorityRankScore = usePriorityRankScore(todoId);
@@ -141,11 +143,12 @@ export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     set(atomQueryTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
 
-    updateDataCalendarTodo(
-      todoId,
-      get(atomSelectorTodoItem(todoId)).dueDate as Date,
-      get(atomSelectorTodoItem(todoId)).priorityRankScore,
-    );
+    status === 'authenticated' &&
+      updateDataCalendarTodo(
+        todoId,
+        get(atomSelectorTodoItem(todoId)).dueDate as Date,
+        get(atomSelectorTodoItem(todoId)).priorityRankScore,
+      );
     reset(atomSelectorTodoItem(todoId));
   });
 

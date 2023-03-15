@@ -1,8 +1,14 @@
+import { DATA_DEMO } from '@data/dataDemo';
 import { STORAGE_KEY } from '@data/dataTypesConst';
 import { Todos, Types } from '@lib/types';
 import { fetchWithRetry, queries } from '@states/utils';
 
 const apiTodos = process.env.NEXT_PUBLIC_API_ENDPOINT_TODOS as string;
+
+export const getDemoTodoItem = async ({ _id }: Pick<Types, '_id'>) => {
+  const data = await Promise.resolve(DATA_DEMO.find((todo) => todo._id === _id) || ({} as Todos));
+  return data;
+};
 
 export const getDataTodoIds = async () => {
   const storageKey = STORAGE_KEY['todoIds'];

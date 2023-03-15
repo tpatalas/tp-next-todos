@@ -48,9 +48,8 @@ export const TodoItem = ({ todo }: Props) => {
       </CheckBoxFragment>
       <div
         className='ml-4 w-full select-none text-base'
-        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}
-      >
-        <div className={classNames('break-words pr-1 ', todoItem.completed ? 'italic opacity-80' : '')}>
+        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}>
+        <div className={classNames('break-words pr-10', todoItem.completed ? 'italic opacity-80' : '')}>
           <div
             className={classNames(
               'font-medium decoration-2 line-clamp-1',
@@ -58,13 +57,12 @@ export const TodoItem = ({ todo }: Props) => {
               important && 'decoration-yellow-500',
               !important && !urgent && 'decoration-blue-600',
               todoItem.completed ? ' text-gray-500 line-through' : '',
-            )}
-          >
+            )}>
             {todoItem.title}
           </div>
-          <p className='text-sm text-gray-500 line-clamp-2'>{todoItem.note}</p>
+          <p className='text-sm text-gray-500 line-clamp-1 sm:line-clamp-2'>{todoItem.note}</p>
         </div>
-        <div className='-ml-2 mt-1 flex w-full flex-col items-start justify-start ml:flex-row ml:items-center'>
+        <div className='-ml-2 mt-1 flex w-full flex-col items-start justify-start pr-2 ml:flex-row ml:items-center'>
           <div className='flex flex-row'>
             {todoItem.priorityLevel === PRIORITY_LEVEL['urgent'] && (
               <div className='m-2 flex flex-row items-center text-gray-500'>

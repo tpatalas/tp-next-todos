@@ -24,10 +24,8 @@ export const EditorAutoFocusEffect = ({
 
     if (!isAutoFocus || isCatchConfirmModal || completedPath) return;
 
-    setTimeout(() => {
-      ReactEditor.focus(editor);
-      Transforms.select(editor, Editor.end(editor, []));
-    }, 100);
+    ReactEditor.focus(editor);
+    Transforms.select(editor, Editor.end(editor, []));
   }, [isAutoFocus, completedPath, editor, isCatchConfirmModal]);
 
   return null;

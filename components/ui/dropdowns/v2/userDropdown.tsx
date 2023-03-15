@@ -21,6 +21,7 @@ export const UserDropdown = () => {
             loader={userImage ? undefined : nextImageLoader}
             width={32}
             height={32}
+            priority
             className='rounded-full drop-shadow-lg'
             src={userImage ? userImage : 'user_avatar.webp'}
             alt='User avatar'
@@ -45,7 +46,7 @@ export const UserDropdown = () => {
             path: ICON_LOGOUT,
             tooltip: 'Sign out',
           }}
-          onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOST + '/app' })}>
+          onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOST })}>
           Sign out
         </MenuItem>
       </div>

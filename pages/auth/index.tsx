@@ -1,9 +1,13 @@
-import { AuthForm } from '@components/auth/authForm';
-import { VerificationConfirmation } from '@components/auth/verificationConfirmation';
 import { atomUserVerificationRequest } from '@states/users';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
+
+const VerificationConfirmation = dynamic(() =>
+  import('@components/auth/verificationConfirmation').then((mod) => mod.VerificationConfirmation),
+);
+const AuthForm = dynamic(() => import('@components/auth/authForm').then((mod) => mod.AuthForm));
 
 const Auth = () => {
   const isVerificationRequest = useRecoilValue(atomUserVerificationRequest);

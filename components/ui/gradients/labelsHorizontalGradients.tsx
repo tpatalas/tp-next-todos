@@ -3,9 +3,9 @@ import { Types } from '@lib/types';
 import { classNames } from '@states/utils';
 import { useHorizontalScrollPosition } from '@states/utils/hooks';
 import {
-  Fragment as GradientFragment,
-  Fragment as GradientLeftFragment,
-  Fragment as GradientRightFragment,
+    Fragment as GradientFragment,
+    Fragment as GradientLeftFragment,
+    Fragment as GradientRightFragment
 } from 'react';
 
 type Props = Pick<Types, 'scrollRef'> & Partial<{ position: GRADIENT_POSITION }>;
