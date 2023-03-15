@@ -35,10 +35,12 @@ export const TodoList = () => {
               <div className='flex h-full min-h-[300px] flex-col items-center justify-end'>
                 <Image
                   loader={nextImageLoader}
-                  width={300}
-                  height={100}
+                  width={0}
+                  height={0}
+                  style={{ width: '300px', height: 'auto' }}
                   src={image.path}
                   alt={image.alt}
+                  priority
                 />
               </div>
               <div className='mb-2 text-lg'>{image.title}</div>
