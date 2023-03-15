@@ -1,29 +1,34 @@
+import { atomQueryLabels } from '@states/labels/atomQueries';
+import { atomQueryTodoIds } from '@states/todos/atomQueries';
 import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import { RecoilValue, useRecoilCallback } from 'recoil';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { atomIDBUserSession } from '.';
 
 export const UserSessionEffect = () => {
   const { data: session } = useSession();
+  const stateSession = useRecoilValue(atomIDBUserSession);
 
   const clearIndexedDB = async () => {
     const indexedDBs = await indexedDB.databases();
     await Promise.all(indexedDBs.map((idb) => idb && deleteDB(idb.name as string)));
   };
 
-  const userSession = useRecoilCallback(({ set, snapshot }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-
+  const userSession = useRecoilCallback(({ set, reset }) => () => {
     if (session) {
-      !get(atomIDBUserSession) && set(atomIDBUserSession, true);
+      set(atomIDBUserSession, true);
       return;
     }
-    get(atomIDBUserSession) && set(atomIDBUserSession, false);
-    sessionStorage.clear();
-    localStorage.clear();
-    clearIndexedDB();
-    return;
+    if (session === null && session !== undefined) {
+      stateSession && reset(atomIDBUserSession);
+      reset(atomQueryTodoIds);
+      reset(atomQueryLabels);
+      localStorage.clear();
+      sessionStorage.clear();
+      clearIndexedDB();
+      return;
+    }
   });
 
   useEffect(() => {

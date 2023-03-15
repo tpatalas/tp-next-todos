@@ -1,10 +1,9 @@
-import { ERROR_TYPE, SPINNER, USER } from '@data/dataTypesConst';
-import { Types } from '@lib/types';
+import { SPINNER, USER } from '@data/dataTypesConst';
 import { atomLoadingSpinner } from '@states/misc';
 import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
-import { atomUserError, atomUser, atomUserVerificationRequest } from '.';
+import { atomUser, atomUserErrorMessage, atomUserVerificationRequest } from '.';
 
 export const useUserValueUpdate = () => {
   return useRecoilCallback(({ set, snapshot }) => (targetName: USER, content: string) => {
@@ -17,22 +16,18 @@ export const useUserValueUpdate = () => {
   });
 };
 
-export const useUserAuthFormSubmit = (isError: Types['isError']) => {
+export const useUserAuthFormSubmit = (isEmailInValidated: boolean) => {
   const user = useRecoilValue(atomUser);
-  const setServerError = useSetRecoilState(atomUserError(ERROR_TYPE['server']));
-  const setClientError = useSetRecoilState(atomUserError(ERROR_TYPE['client']));
-  const isServerError = useRecoilValue(atomUserError(ERROR_TYPE['server']));
-  const isClientError = useRecoilValue(atomUserError(ERROR_TYPE['client']));
+  const setClientErrorMessage = useSetRecoilState(atomUserErrorMessage);
   const setIsVerificationRequested = useSetRecoilState(atomUserVerificationRequest);
-  const setLoadingSpinner = useSetRecoilState(atomLoadingSpinner(SPINNER['authFrom']));
+  const setLoadingSpinner = useSetRecoilState(atomLoadingSpinner(SPINNER['authForm']));
 
   return async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isError) {
-      setClientError(true);
+    if (isEmailInValidated) {
+      setClientErrorMessage('Please enter a valid email address.');
       return;
     }
-    if (isClientError || isServerError) return;
 
     try {
       const userEmailSent = async () => {
@@ -49,7 +44,7 @@ export const useUserAuthFormSubmit = (isError: Types['isError']) => {
         return;
       }
     } catch (error) {
-      setServerError(true);
+      setClientErrorMessage('something went wrong. Please try again!');
     }
   };
 };
