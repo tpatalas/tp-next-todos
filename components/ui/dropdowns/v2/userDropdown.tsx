@@ -21,6 +21,7 @@ export const UserDropdown = () => {
             loader={userImage ? undefined : nextImageLoader}
             width={32}
             height={32}
+            priority
             className='rounded-full drop-shadow-lg'
             src={userImage ? userImage : 'user_avatar.webp'}
             alt='User avatar'
