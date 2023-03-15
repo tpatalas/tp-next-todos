@@ -68,7 +68,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                   className={classNames(
                     'mx-[0.12rem] flex cursor-pointer flex-row items-center justify-center rounded-lg py-[3px] pl-2 pr-1 text-sm text-gray-700',
                     label.color && label.color,
-                    'border border-slate-300 shadow-md shadow-slate-100 hover:shadow-slate-200',
+                    'bg-blue-100 bg-opacity-60 text-slate-600 shadow-sm hover:bg-opacity-70 hover:text-slate-800',
                   )}>
                   <PrefetchRouterButton
                     options={{

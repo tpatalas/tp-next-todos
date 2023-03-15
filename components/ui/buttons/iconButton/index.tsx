@@ -39,7 +39,7 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
               className: classNames(
                 options.size ?? 'h-5 w-5',
                 options.color ?? 'fill-gray-500',
-                !options.isDisabled && '[.group-button:hover_&]:fill-gray-700',
+                options.color ?? (!options.isDisabled && '[.group-button:hover_&]:fill-gray-700'),
               ),
             }}
           />
