@@ -74,16 +74,14 @@ export const STYLE_CALENDAR_COL_START = [
  **/
 // background color
 export const STYLE_COLORS = [
-  'text-orange-500',
-  'text-pink-500',
-  'text-amber-500',
-  'text-lime-500',
-  'text-green-500',
-  'text-teal-500',
-  'text-red-500',
-  'text-cyan-500',
-  'text-blue-500',
-  'text-indigo-500',
-  'text-purple-500',
-  'text-rose-500',
+  'text-pink-700 ring-pink-700',
+  'text-amber-700 ring-amber-700',
+  'text-green-700 ring-green-700',
+  'text-teal-700 ring-teal-700',
+  'text-red-700 ring-red-700',
+  'text-cyan-700 ring-cyan-700',
+  'text-blue-700 ring-blue-700',
+  'text-indigo-700 ring-indigo-700',
+  'text-purple-700 ring-purple-700',
+  'text-rose-700 ring-rose-700',
 ];
