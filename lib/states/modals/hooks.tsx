@@ -12,12 +12,12 @@ import { useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual } fr
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import {
-  atomConfirmModalDelete,
-  atomConfirmModalDiscard,
-  atomLabelModalOpen,
-  atomTodoModalMax,
-  atomTodoModalMini,
-  atomTodoModalOpen,
+    atomConfirmModalDelete,
+    atomConfirmModalDiscard,
+    atomLabelModalOpen,
+    atomTodoModalMax,
+    atomTodoModalMini,
+    atomTodoModalOpen
 } from '.';
 
 /**

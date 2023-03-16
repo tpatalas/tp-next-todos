@@ -98,9 +98,8 @@ export const useLabelRemoveItem = (_id: Labels['_id']) => {
 };
 
 export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
-  const updateDataLabels = useLabelUpdateDataItem();
+  const updateLabels = useLabelUpdateDataItem();
   const get = useGetWithRecoilCallback();
-  const { status } = useSession();
 
   const removeLabelItemTitleId = useRecoilCallback(({ snapshot, set }) => (labelId: Labels['_id']) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -131,7 +130,7 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
 
   return (labelId: Labels['_id']) => {
     removeLabelItemTitleId(labelId);
-    !get(atomCatch(CATCH.todoModal)) && status === 'authenticated' && updateDataLabels();
+    !get(atomCatch(CATCH.todoModal)) && updateLabels();
   };
 };
 

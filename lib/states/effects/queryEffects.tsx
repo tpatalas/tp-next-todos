@@ -15,6 +15,7 @@ export const queryEffect: TypesRefetchEffect =
     isRefetchingOnFocus,
     isRefetchingOnBlur,
     refetchInterval,
+    demoFunction,
   }) =>
   ({ setSelf, onSet, trigger }) => {
     if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
@@ -24,7 +25,15 @@ export const queryEffect: TypesRefetchEffect =
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
     const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
 
-    if (offSession) return;
+    if (offSession) {
+      if (typeof demoFunction === 'undefined') return;
+      const demoData = async () => {
+        const data = demoFunction && (await demoFunction());
+        return data as DefaultValue;
+      };
+      setSelf(demoData());
+      return;
+    }
 
     //concat indexedDB with data if data is in array
     const concatDataWithIndexedDB = async (data: unknown) => {
