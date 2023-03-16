@@ -2,7 +2,7 @@ const ContentSecurityPolicy = `
   default-src 'self'; connect-src 'self'; 
   child-src 'self' youtube.com;
   font-src 'self' ;
-  img-src 'self' data:;
+  img-src 'self' ${process.env.NEXT_PUBLIC_IMAGE_DOMAIN} data:;
   ${process.env.NODE_ENV !== 'production' ? `style-src 'self' 'unsafe-inline' 'unsafe-eval'` : `style-src 'self'`};
   ${
     process.env.NODE_ENV !== 'production'

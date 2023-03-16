@@ -1,7 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@data/dataOptions';
-import { BREAKPOINT } from '@data/dataTypesConst';
+import { BREAKPOINT, PATHNAME } from '@data/dataTypesConst';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { TodosCount } from '@layouts/layoutApp/layout/layoutFooter/footerSidebar/todosCount';
 import { Types } from '@lib/types';
@@ -22,7 +22,7 @@ const DeleteLabelConfirmModal = dynamic(() =>
 );
 
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
-  const slug = useNextQuery({ path: '/app/label' });
+  const slug = useNextQuery({ path: PATHNAME['label'] });
   const matchedSlug = slug === label._id;
   const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
   const setSideBarOpen = useSidebarOpen();
@@ -38,7 +38,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
           <PrefetchRouterButton
             options={{
               tooltip: label.name,
-              path: paths('/app/label/', label._id),
+              path: paths(PATHNAME['label'] + '/', label._id),
               className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
             }}
             onClick={() => !isBreakpointMd && setSideBarOpen()}>
