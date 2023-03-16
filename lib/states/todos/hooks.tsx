@@ -1,4 +1,4 @@
-import { NOTIFICATION, CATCH } from '@data/dataTypesConst';
+import { CATCH, NOTIFICATION } from '@data/dataTypesConst';
 import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { atomQueryLabels, atomSelectorLabels } from '@states/labels/atomQueries';
@@ -34,14 +34,7 @@ export const useTodoAdd = () => {
 
     set(atomQueryLabels, get(atomSelectorLabels));
     set(atomQueryTodoItem(get(atomTodoNew)._id), get(atomTodoNew));
-    set(atomQueryTodoIds, [
-      ...get(atomQueryTodoIds),
-      {
-        _id: get(atomTodoNew)._id,
-        completed: get(atomTodoNew).completed,
-        priorityRankScore: get(atomTodoNew).priorityRankScore,
-      },
-    ]);
+    set(atomQueryTodoIds, [...get(atomQueryTodoIds), { ...get(atomTodoNew) }]);
     status === 'authenticated' && createDataNewTodo(get(atomTodoNew));
     setNotification(NOTIFICATION['createdTodo']);
   });
@@ -71,8 +64,19 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
 
     set(atomQueryLabels, get(atomSelectorLabels));
     set(atomQueryTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
+    set(
+      atomQueryTodoIds,
+      get(atomQueryTodoIds).map((todo) => {
+        if (todo._id === todoId) {
+          return {
+            ...todo,
+            ...get(atomSelectorTodoItem(todoId)),
+          };
+        }
+        return todo;
+      }),
+    );
     status === 'authenticated' && updateDataTodo(todoId, get(atomSelectorTodoItem(todoId)));
-    set(atomQueryTodoIds, [...get(atomQueryTodoIds)]); // refetch: This will trigger re-Render the list.
     setNotification(NOTIFICATION['updatedTodo']);
 
     reset(atomSelectorTodoItem(todoId));
@@ -139,6 +143,7 @@ export const useTodoCompleteItem = (todoId: Todos['_id']) => {
   const updateCompletedDate = useTodoCompleteDate(todoId);
   const setNotification = useNotificationState();
   const get = useGetWithRecoilCallback();
+
   const updateQueryTodoItem = useRecoilCallback(({ set, snapshot }) => () => {
     const release = snapshot.retain();
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -151,11 +156,17 @@ export const useTodoCompleteItem = (todoId: Todos['_id']) => {
     setTimeout(() => {
       set(
         atomQueryTodoIds,
-        get(atomQueryTodoIds).filter((todo) => todo._id !== todoId),
+        get(atomQueryTodoIds).map((todo) => {
+          return {
+            ...todo,
+            completed: todo._id === todoId ? !todo.completed : todo.completed,
+          };
+        }),
       );
       release();
-    }, 200);
+    }, 300);
   });
+
   return () => {
     if (!get(atomNetworkStatusEffect)) {
       setNotification(NOTIFICATION['offline']);

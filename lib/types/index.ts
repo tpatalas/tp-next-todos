@@ -362,7 +362,8 @@ export interface TypesElement {
 export interface TypesEffects {
   // All Effect
   shouldGet: boolean;
-  shouldSet: boolean;
+  isSessionSetEnabled: boolean;
+  isSessionResetEnabled: boolean;
   // Refetch Effect
   queryKey: string;
   queryFunction<T>(): Promise<{ data: T }>;
@@ -410,10 +411,12 @@ export type TypesRefetchEffect = <T>({
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
 
 export type TypesSessionStorageEffect = <T>({
-  storeName,
   queryKey,
   shouldGet,
-}: Pick<Types, 'queryKey' | 'storeName'> & Partial<Pick<Types, 'shouldGet'>>) => AtomEffect<T | boolean>;
+  isSessionSetEnabled,
+  isSessionResetEnabled,
+}: Pick<Types, 'queryKey'> &
+  Partial<Pick<Types, 'shouldGet' | 'isSessionResetEnabled' | 'isSessionSetEnabled'>>) => AtomEffect<T | boolean>;
 
 export type TypesMediaQueryEffect = <T>({
   breakpoint,

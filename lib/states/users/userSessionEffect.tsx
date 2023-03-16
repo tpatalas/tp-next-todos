@@ -3,12 +3,14 @@ import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomQueryTodoIds } from '@states/todos/atomQueries';
 import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { atomIDBUserSession } from '.';
 
 export const UserSessionEffect = () => {
   const { data: session } = useSession();
+  const notInSession = session === null && session !== undefined;
+  const newOffSession = () => sessionStorage.setItem(STORAGE_KEY['session'], JSON.stringify(false));
 
   const clearIndexedDB = async () => {
     const indexedDBs = await indexedDB.databases();
@@ -21,9 +23,9 @@ export const UserSessionEffect = () => {
       set(atomIDBUserSession, true);
       return;
     }
-    if (session === null && session !== undefined) {
-      sessionStorage.setItem(STORAGE_KEY['demo'], JSON.stringify(true));
-      reset(atomIDBUserSession);
+    if (notInSession) {
+      newOffSession();
+      set(atomIDBUserSession, false);
       reset(atomQueryTodoIds);
       reset(atomQueryLabels);
       localStorage.clear();
@@ -32,9 +34,21 @@ export const UserSessionEffect = () => {
     }
   });
 
+  const setSession = useCallback(() => {
+    const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
+
+    if (notInSession) return !offSession && newOffSession();
+  }, [notInSession]);
+
   useEffect(() => {
     userSession();
+    window.addEventListener('storage', setSession);
+    return () => {
+      window.removeEventListener('storage', setSession);
+    };
+    // removed the userSession from the dependency as It will clear out in offSession data.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setSession]);
+
   return null;
 };
