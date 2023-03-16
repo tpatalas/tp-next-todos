@@ -121,6 +121,11 @@ export const DATA_IDB: TypesIDB[] = [
     store: IDB_STORE['settings'],
     currentVersion: IDB_VERSION['current'],
   },
+  {
+    dbName: IDB['session'],
+    store: IDB_STORE['session'],
+    currentVersion: IDB_VERSION['current'],
+  },
 ];
 
 export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [

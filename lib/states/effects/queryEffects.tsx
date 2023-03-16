@@ -22,6 +22,9 @@ export const queryEffect: TypesRefetchEffect =
     const isIdMapQueryKey = queryKey === IDB_KEY['labels'] || queryKey === IDB_KEY['todoIds'];
     const lastUpdateTime = isIdMapQueryKey && Number(JSON.parse(localStorage.getItem(STORAGE_KEY[queryKey]) || '0'));
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
+    const demoEnabled = sessionStorage.getItem(STORAGE_KEY['demo']);
+
+    if (demoEnabled) return;
 
     //concat indexedDB with data if data is in array
     const concatDataWithIndexedDB = async (data: unknown) => {

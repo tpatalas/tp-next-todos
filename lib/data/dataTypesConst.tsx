@@ -78,6 +78,7 @@ export const IDB = {
   todo: 'todo',
   idMap: 'idMap',
   user: 'user',
+  session: 'session',
   setting: 'setting',
 } as const;
 
@@ -86,6 +87,7 @@ export const IDB_STORE = {
   todoItems: 'todoItems',
   idMaps: 'idMaps',
   users: 'users',
+  session: 'session',
   settings: 'settings',
 } as const;
 
@@ -105,6 +107,7 @@ export const STORAGE_KEY = {
   [IDB_KEY['todoIds']]: 'last_update_todos',
   [IDB_KEY['labels']]: 'last_update_labels',
   session: 'session',
+  demo: 'demo',
 } as const;
 
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];
