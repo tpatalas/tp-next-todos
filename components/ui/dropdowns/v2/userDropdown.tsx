@@ -46,7 +46,7 @@ export const UserDropdown = () => {
             path: ICON_LOGOUT,
             tooltip: 'Sign out',
           }}
-          onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOST + '/app' })}>
+          onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOST })}>
           Sign out
         </MenuItem>
       </div>

@@ -1,7 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { optionsButtonLabelRemove, optionsDropdownComboBox } from '@data/dataOptions';
-import { CATCH, GRADIENT_POSITION, PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { CATCH, GRADIENT_POSITION, PATHNAME, PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
@@ -73,7 +73,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                   )}>
                   <PrefetchRouterButton
                     options={{
-                      path: paths('/app/label/', label._id),
+                      path: paths(PATHNAME['label'] + '/', label._id),
                       className: 'max-w-[5.3rem] truncate pr-1',
                       tooltip: `Go to ${label.name}`,
                       offset: [8, 15],
