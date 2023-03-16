@@ -1,4 +1,4 @@
-import { IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
+import { STORAGE_KEY } from '@data/dataTypesConst';
 import { sessionEffect } from '@effects/atomEffects';
 import { Users } from '@lib/types';
 import { atom } from 'recoil';
@@ -10,11 +10,12 @@ export const atomUser = atom<Users>({
 
 export const atomIDBUserSession = atom<boolean>({
   key: 'atomIDBUserSession',
-  default: false,
+  default: undefined,
   effects: [
     sessionEffect({
-      storeName: IDB_STORE['session'],
       queryKey: STORAGE_KEY['session'],
+      isSessionResetEnabled: true,
+      isSessionSetEnabled: false,
     }),
   ],
 });

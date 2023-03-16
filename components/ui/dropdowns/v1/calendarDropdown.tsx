@@ -73,6 +73,7 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
               menuWidth: 'sm:w-full',
               hoverBg: options.hoverBg,
               text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
+              isPortal: false,
             }}
             menuButtonContent={<HeaderContentsFragment>{renderDueDate}</HeaderContentsFragment>}>
             <div className='p-2'>

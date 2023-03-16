@@ -22,9 +22,9 @@ export const queryEffect: TypesRefetchEffect =
     const isIdMapQueryKey = queryKey === IDB_KEY['labels'] || queryKey === IDB_KEY['todoIds'];
     const lastUpdateTime = isIdMapQueryKey && Number(JSON.parse(localStorage.getItem(STORAGE_KEY[queryKey]) || '0'));
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
-    const demoEnabled = sessionStorage.getItem(STORAGE_KEY['demo']);
+    const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
 
-    if (demoEnabled) return;
+    if (offSession) return;
 
     //concat indexedDB with data if data is in array
     const concatDataWithIndexedDB = async (data: unknown) => {
@@ -35,19 +35,16 @@ export const queryEffect: TypesRefetchEffect =
       // filter the deleted item from the array of object
       const updatedIndexedDB =
         arrayIndexedDB && arrayIndexedDB.filter((idb) => arrayData && !arrayData.some((item) => item._id === idb._id));
-
       // filter data as newData
       const newData =
         arrayData &&
         arrayData.filter(
           (item) => updatedIndexedDB && !updatedIndexedDB.some((idb) => idb._id === item._id) && !item.deleted,
         );
-
       // filter data that is updated
       const updatedData =
         arrayData &&
         arrayData.filter((item) => updatedIndexedDB && updatedIndexedDB.some((idb) => idb._id === item._id));
-
       const finalData = async () => {
         // delete item: deleted from indexedDB
         // updated item: force refetch new item
@@ -66,9 +63,8 @@ export const queryEffect: TypesRefetchEffect =
       };
       return finalData();
     };
-
-    // initial fetch - every fetch will be saved to IndexedDB if `isIndexedDb`
-    const queryInitial = async () => {
+    // update Data to indexedDB and return the value
+    const dataUpdate = async () => {
       const { data } = await queryFunction();
       const newData = await concatDataWithIndexedDB(data);
       isIdMapQueryKey && set(storeName, queryKey + 'Temp', data);
@@ -76,6 +72,11 @@ export const queryEffect: TypesRefetchEffect =
       return newData as DefaultValue;
     };
 
+    // initial fetch - every fetch will be saved to IndexedDB if `isIndexedDb`
+    const queryInitial = async () => {
+      const data = await dataUpdate();
+      return data;
+    };
     //  Re-Sync * the MisMatched* dataSet if local and remote data do not match
     const querySyncData = async () => {
       // do not fetch if item is not updated
@@ -83,11 +84,8 @@ export const queryEffect: TypesRefetchEffect =
       const isQueryKeyInTemp = Array.isArray(indexedDB) && indexedDB.some((idb) => idb._id === queryKey);
       if (!isQueryKeyInTemp && !isIdMapQueryKey) return;
       // proceed normal fetch
-      const { data } = await queryFunction();
-      const newData = (await concatDataWithIndexedDB(data)) as DefaultValue;
-      isIdMapQueryKey && set(storeName, queryKey + 'Temp', data);
-      set(storeName, queryKey, newData);
-      setSelf(newData);
+      const data = await dataUpdate();
+      setSelf(data);
     };
 
     if (trigger === 'get') {

@@ -8,8 +8,8 @@ import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { atomLoadingSpinner } from '@states/misc';
 import { atomUser, atomUserErrorMessage } from '@states/users';
 import { ClientErrorMessageEffect } from '@states/users/clientErrorMessageEffect';
-import { DemoDeactivateEffect } from '@states/users/demoDeactivateEffect';
 import { useUserAuthFormSubmit, useUserValueUpdate } from '@states/users/hooks';
+import { SessionDeactivateEffect } from '@states/users/sessionDeactivateEffect';
 import { classNames, validateEmailFormat } from '@states/utils';
 import { Divider } from '@ui/dividers/divider';
 import { Fragment } from 'react';
@@ -27,7 +27,7 @@ export const AuthForm = () => {
 
   return (
     <Fragment>
-      <DemoDeactivateEffect />
+      <SessionDeactivateEffect />
       <ClientErrorMessageEffect />
       <div className='absolute right-0 left-0 top-[20%] bottom-[50%] m-auto h-fit w-full sm:top-[30%] sm:w-fit'>
         <section className='border-slate-150 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
