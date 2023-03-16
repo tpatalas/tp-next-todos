@@ -13,7 +13,7 @@ export const atomIDBUserSession = atom<boolean>({
   default: false,
   effects: [
     sessionEffect({
-      storeName: IDB_STORE['users'],
+      storeName: IDB_STORE['session'],
       queryKey: STORAGE_KEY['session'],
     }),
   ],
