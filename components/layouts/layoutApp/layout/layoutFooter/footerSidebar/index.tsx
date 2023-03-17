@@ -11,6 +11,7 @@ import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { atomDisableScroll, classNames } from '@states/utils';
 import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
 import { Backdrop } from '@ui/backdrops/backdrop';
+import { isChrome, isMobile } from 'react-device-detect';
 import {
   forwardRef,
   Fragment as CreateTodoFragment,
@@ -74,7 +75,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
             isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
           )}>
           <div className='flex flex-grow flex-col'>
-            <nav className='flex-1 space-y-1 pb-20'>
+            <nav className={classNames('flex-1 space-y-1', isMobile && isChrome ? 'pb-36' : 'pb-20')}>
               <FooterSidebarMenu />
               <LabelList />
             </nav>

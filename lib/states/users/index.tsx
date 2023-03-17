@@ -10,7 +10,7 @@ export const atomUser = atom<Users>({
 
 export const atomIDBUserSession = atom<boolean>({
   key: 'atomIDBUserSession',
-  default: undefined,
+  default: false,
   effects: [
     sessionEffect({
       queryKey: STORAGE_KEY['session'],
