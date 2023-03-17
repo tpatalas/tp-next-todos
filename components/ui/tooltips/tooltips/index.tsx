@@ -3,6 +3,7 @@ import { classNames } from '@states/utils';
 import { TypesTooltipAttributes, Types } from 'lib/types';
 import React, { Fragment as TooltipFragment, memo } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
+import { isMobile } from 'react-device-detect';
 
 type Props = { options: Partial<TypesTooltipAttributes & Pick<Types, 'container'>> } & Pick<Types, 'children'>;
 
@@ -35,13 +36,15 @@ export const Tooltip = memo(({ options, children }: Props) => {
                 'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
             )}>
             <span>{options.tooltip}</span>
-            <kbd
-              className={classNames(
-                options.kbd &&
-                  'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
-              )}>
-              {options.kbd}
-            </kbd>
+            {!isMobile && (
+              <kbd
+                className={classNames(
+                  options.kbd &&
+                    'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
+                )}>
+                {options.kbd}
+              </kbd>
+            )}
           </div>
         </Portal>
       )}

@@ -1,4 +1,5 @@
 import ObjectID from 'bson-objectid';
+import { isMacOs } from 'react-device-detect';
 
 export type CATCH = (typeof CATCH)[keyof typeof CATCH];
 export const CATCH = {
@@ -193,4 +194,13 @@ export type SPINNER = (typeof SPINNER)[keyof typeof SPINNER];
 export const SPINNER = {
   authForm: 'authForm',
   verificationConfirm: 'verificationConfirm',
+};
+
+export type MODIFIER_KBD = (typeof MODIFIER_KBD)[keyof typeof MODIFIER_KBD];
+export const MODIFIER_KBD = {
+  'modifier + E': isMacOs ? '⌘ + E' : 'ctrl + E',
+  'modifier + M': isMacOs ? '⌘ + M' : 'ctrl + M',
+  'modifier + Enter': isMacOs ? '⌘ + Enter' : 'ctrl + Enter',
+  'modifier + Escape': isMacOs ? '⌘ + Escape' : 'ctrl + Escape',
+  'modifier + Delete': isMacOs ? '⌘ + Delete' : 'ctrl + Delete',
 };
