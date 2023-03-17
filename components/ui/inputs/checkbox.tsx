@@ -1,3 +1,4 @@
+import { MODIFIER_KBD } from '@data/dataTypesConst';
 import { classNames } from '@states/utils';
 import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import { Types, TypesTodo } from 'lib/types';
@@ -25,7 +26,7 @@ export const CheckBox = ({
         checkedColor,
       )}
       tooltip={!todoItem.completed ? 'Complete' : 'Undo Complete'}
-      kbd='⌘ + Enter'
+      kbd={MODIFIER_KBD['modifier + Enter']}
       isChecked={isChecked}
       onChange={onChange}
       isDisabled={!conditionalDisable && !todoItem.completed}

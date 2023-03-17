@@ -10,8 +10,7 @@ import {
   TypesOptionsSvg,
 } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
-import { isMacOs } from 'react-device-detect';
-import { POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './dataTypesConst';
+import { MODIFIER_KBD, POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './dataTypesConst';
 import {
   ICON_CHEVRON_LEFT,
   ICON_CHEVRON_RIGHT,
@@ -33,10 +32,10 @@ import {
   ICON_WARNING,
 } from './materialSymbols';
 import {
+  STYLE_BUTTON_LARGE_BLUE,
   STYLE_BUTTON_NORMAL_BLUE,
   STYLE_BUTTON_NORMAL_RED,
   STYLE_BUTTON_NORMAL_WHITE,
-  STYLE_BUTTON_LARGE_BLUE,
   STYLE_HOVER_ENABLED_SLATE_DARK,
 } from './stylePreset';
 
@@ -163,14 +162,14 @@ export const optionsButtonConfirmModalCancel: TypesOptionsButton = {
 export const optionsButtonMiniModalMaximize: TypesOptionsButton = {
   path: ICON_MAXIMIZE,
   tooltip: 'Exit minimize',
-  kbd: isMacOs ? '⌘ M' : 'Ctrl M',
+  kbd: MODIFIER_KBD['modifier + M'],
   margin: '-mr-2 ml-2 -my-1',
 };
 
 export const optionsButtonMiniModalOpenFull: TypesOptionsButton = {
   path: ICON_OPEN_IN_FULL,
   tooltip: 'Expand',
-  kbd: isMacOs ? '⌘ E' : 'Ctrl E',
+  kbd: MODIFIER_KBD['modifier + E'],
   margin: '-mr-2 ml-2 -my-1',
 };
 
@@ -184,7 +183,7 @@ export const optionsButtonTodoModalAddTodo: TypesOptionsButton = {
 export const optionsButtonTodoModalMinimize: TypesOptionsButton = {
   path: ICON_MINIMIZE,
   tooltip: 'Minimize',
-  kbd: isMacOs ? '⌘ M' : 'Ctrl M',
+  kbd: MODIFIER_KBD['modifier + M'],
 };
 
 export const optionsButtonTodoModalClose: TypesOptionsButton = {

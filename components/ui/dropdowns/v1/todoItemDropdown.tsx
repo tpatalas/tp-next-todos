@@ -4,7 +4,7 @@ import {
   optionsPriorityDropdownImportant,
   optionsPriorityDropdownUrgent,
 } from '@data/dataOptions';
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { MODIFIER_KBD, PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useCalUpdateDataItem } from '@states/calendars/hooks';
@@ -70,7 +70,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
             shouldKeepOpeningOnClick: false,
             tooltip: 'Delete',
             path: ICON_DELETE,
-            kbd: '⌘ + Delete',
+            kbd: MODIFIER_KBD['modifier + Delete'],
           }}
           onClick={() => removeTodo()}>
           Delete

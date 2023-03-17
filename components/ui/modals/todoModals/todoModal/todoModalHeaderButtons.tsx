@@ -3,16 +3,15 @@ import {
   IconButton as ExpandReversibleIconButton,
   IconButton as MinimizeIconButton,
 } from '@buttons/iconButton';
-import { optionsButtonTodoModalMinimize, optionsButtonTodoModalClose } from '@data/dataOptions';
-import { BREAKPOINT } from '@data/dataTypesConst';
+import { optionsButtonTodoModalClose, optionsButtonTodoModalMinimize } from '@data/dataOptions';
+import { BREAKPOINT, MODIFIER_KBD } from '@data/dataTypesConst';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
 import { Types } from '@lib/types';
 import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMax } from '@states/modals';
-import { useTodoModalStateMinimize, useTodoModalStateExpand, useTodoModalStateClose } from '@states/modals/hooks';
-import { Fragment as ContainerFragment, Fragment as HeaderFragment, Fragment as HeaderButtonFragment } from 'react';
-import { isMacOs } from 'react-device-detect';
+import { useTodoModalStateClose, useTodoModalStateExpand, useTodoModalStateMinimize } from '@states/modals/hooks';
+import { Fragment as ContainerFragment, Fragment as HeaderButtonFragment, Fragment as HeaderFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
 type Props = Partial<Pick<Types, 'todo'>>;
@@ -46,7 +45,7 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
               options={{
                 path: !isTodoModalMax ? ICON_OPEN_IN_FULL : ICON_CLOSE_FULL_SCREEN,
                 tooltip: !isTodoModalMax ? 'Expand' : 'Exit expand',
-                kbd: isMacOs ? '⌘ E' : 'Ctrl E',
+                kbd: MODIFIER_KBD['modifier + E'],
               }}
             />
           </HeaderButtonFragment>
