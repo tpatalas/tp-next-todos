@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/auth',
-    signOut: '/app',
+    signOut: '/',
     error: '/auth',
   },
   adapter: MongoDBAdapter(clientPromise),

@@ -1,4 +1,3 @@
-import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesAtomEffect, TypesMediaQueryEffect, TypesSessionStorageEffect } from '@lib/types';
 
 /**
@@ -40,23 +39,22 @@ export const networkStatusEffect: TypesAtomEffect<boolean> = ({ setSelf }) => {
 };
 
 export const sessionEffect: TypesSessionStorageEffect =
-  ({ queryKey, shouldGet, storeName }) =>
+  ({ queryKey, shouldGet, isSessionSetEnabled, isSessionResetEnabled }) =>
   ({ onSet, resetSelf, setSelf, trigger }) => {
     const session = sessionStorage.getItem(queryKey);
+    const offSession = session && JSON.parse(session) ? false : true;
 
     if (trigger === 'get' && (shouldGet ?? true)) {
-      setSelf(get(storeName, queryKey).then((value) => (value != null ? value : session && JSON.parse(session))));
+      setSelf(offSession);
     }
 
     onSet((newValue, _, isReset) => {
       if (isReset) {
         resetSelf();
-        sessionStorage.removeItem(queryKey);
-        del(storeName, queryKey);
+        isSessionResetEnabled && sessionStorage.removeItem(queryKey);
         return;
       }
       setSelf(newValue);
-      sessionStorage.setItem(queryKey, JSON.stringify(newValue));
-      set(storeName, queryKey, newValue);
+      isSessionSetEnabled && sessionStorage.setItem(queryKey, JSON.stringify(newValue));
     });
   };

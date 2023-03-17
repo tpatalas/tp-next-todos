@@ -14,6 +14,7 @@ import { atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { atomCatch } from '@states/utils';
 import { useCompareToQueryLabels, useGetWithRecoilCallback } from '@states/utils/hooks';
 import ObjectID from 'bson-objectid';
+import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { atomLabelNew, atomSelectorLabelItem } from '.';
 import { atomQueryLabels, atomSelectorLabels } from './atomQueries';
@@ -37,6 +38,7 @@ export const useLabelValueUpdate = (label?: Types['label']) => {
 };
 
 export const useLabelAdd = () => {
+  const { status } = useSession();
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
@@ -45,7 +47,7 @@ export const useLabelAdd = () => {
     set(atomSelectorLabels, [...get(atomSelectorLabels), { ...get(atomLabelNew) }]);
     set(atomQueryLabels, [...get(atomQueryLabels), { ...get(atomLabelNew) }]);
 
-    createDataNewLabel(get(atomLabelNew));
+    status === 'authenticated' && createDataNewLabel(get(atomLabelNew));
     reset(atomLabelNew);
     reset(atomLabelModalOpen(undefined));
     setNotification(NOTIFICATION['createdLabel']);
@@ -54,6 +56,7 @@ export const useLabelAdd = () => {
 };
 
 export const useLabelUpdateItem = (_id: Labels['_id']) => {
+  const { status } = useSession();
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
@@ -65,7 +68,7 @@ export const useLabelUpdateItem = (_id: Labels['_id']) => {
     }));
 
     set(atomQueryLabels, updateLabels);
-    updateDataLabelItem(_id, get(atomSelectorLabelItem(_id)));
+    status === 'authenticated' && updateDataLabelItem(_id, get(atomSelectorLabelItem(_id)));
 
     reset(atomLabelModalOpen(_id));
     setNotification(NOTIFICATION['updatedLabel']);
@@ -74,6 +77,7 @@ export const useLabelUpdateItem = (_id: Labels['_id']) => {
 };
 
 export const useLabelRemoveItem = (_id: Labels['_id']) => {
+  const { status } = useSession();
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
@@ -87,14 +91,14 @@ export const useLabelRemoveItem = (_id: Labels['_id']) => {
 
     const removeLabel = get(atomSelectorLabels).filter((label) => label._id !== _id);
     set(atomQueryLabels, removeLabel);
-    deleteDataLabelItem(_id);
+    status === 'authenticated' && deleteDataLabelItem(_id);
     setNotification(NOTIFICATION['deleteLabel']);
     get(atomCatch(CATCH.labelModal)) && reset(atomCatch(CATCH.labelModal));
   });
 };
 
 export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
-  const updateDataLabels = useLabelUpdateDataItem();
+  const updateLabels = useLabelUpdateDataItem();
   const get = useGetWithRecoilCallback();
 
   const removeLabelItemTitleId = useRecoilCallback(({ snapshot, set }) => (labelId: Labels['_id']) => {
@@ -126,11 +130,12 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
 
   return (labelId: Labels['_id']) => {
     removeLabelItemTitleId(labelId);
-    !get(atomCatch(CATCH.todoModal)) && updateDataLabels();
+    !get(atomCatch(CATCH.todoModal)) && updateLabels();
   };
 };
 
 export const useLabelUpdateDataItem = () => {
+  const { status } = useSession();
   const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -139,7 +144,7 @@ export const useLabelUpdateDataItem = () => {
 
     set(atomQueryLabels, updatedLabels);
     if (filteredLabels.length === 0) return;
-    updateDataLabels(filteredLabels);
+    status === 'authenticated' && updateDataLabels(filteredLabels);
     reset(atomSelectorLabels);
   });
 };

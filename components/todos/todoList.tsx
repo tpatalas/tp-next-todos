@@ -19,7 +19,7 @@ export const TodoList = () => {
     <TodosFragment>
       <ul>
         {todoIdsReversed.length !== 0 ? (
-          <SmoothTransition>
+          <>
             {todoIdsReversed.map((todo, index) => (
               <li key={todo._id?.toString()}>
                 <Todo
@@ -28,17 +28,19 @@ export const TodoList = () => {
                 />
               </li>
             ))}
-          </SmoothTransition>
+          </>
         ) : (
           <SmoothTransition>
             <div className='mt-7 flex flex-col items-center justify-center'>
-              <div className='flex h-full min-h-[300px] flex-col items-center justify-end'>
+              <div className='flex h-full min-h-[300px] w-[300px] flex-col items-center justify-end'>
                 <Image
                   loader={nextImageLoader}
-                  width={300}
-                  height={100}
+                  width={0}
+                  height={0}
+                  style={{ width: 'auto', height: 'auto' }}
                   src={image.path}
                   alt={image.alt}
+                  priority
                 />
               </div>
               <div className='mb-2 text-lg'>{image.title}</div>

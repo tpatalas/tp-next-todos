@@ -25,7 +25,7 @@ import {
   RefObject,
 } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
-import { AtomEffect } from 'recoil';
+import { AtomEffect, DefaultValue } from 'recoil';
 import { Descendant } from 'slate';
 import { ReactEditor } from 'slate-react';
 
@@ -362,7 +362,9 @@ export interface TypesElement {
 export interface TypesEffects {
   // All Effect
   shouldGet: boolean;
-  shouldSet: boolean;
+  isSessionSetEnabled: boolean;
+  isSessionResetEnabled: boolean;
+  demoFunction(): unknown | DefaultValue;
   // Refetch Effect
   queryKey: string;
   queryFunction<T>(): Promise<{ data: T }>;
@@ -395,6 +397,7 @@ export type TypesRefetchEffect = <T>({
   isRefetchingOnFocus,
   isRefetchingOnBlur,
   refetchInterval,
+  demoFunction,
 }: Partial<
   Pick<
     Types,
@@ -405,15 +408,18 @@ export type TypesRefetchEffect = <T>({
     | 'isRefetchingOnBlur'
     | 'refetchInterval'
     | 'depQueryFunction'
+    | 'demoFunction'
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;
 
 export type TypesSessionStorageEffect = <T>({
-  storeName,
   queryKey,
   shouldGet,
-}: Pick<Types, 'queryKey' | 'storeName'> & Partial<Pick<Types, 'shouldGet'>>) => AtomEffect<T | boolean>;
+  isSessionSetEnabled,
+  isSessionResetEnabled,
+}: Pick<Types, 'queryKey'> &
+  Partial<Pick<Types, 'shouldGet' | 'isSessionResetEnabled' | 'isSessionSetEnabled'>>) => AtomEffect<T | boolean>;
 
 export type TypesMediaQueryEffect = <T>({
   breakpoint,

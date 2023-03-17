@@ -10,7 +10,7 @@ import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { atomFilterTodoIds } from '.';
 
 export const FilterTodoIdsEffect = () => {
-  const labelId = useNextQuery({ path: '/app/label' });
+  const labelId = useNextQuery({ path: PATHNAME['label'] });
   const { asPath } = useRouter();
   const labels = useRecoilValue(atomQueryLabels);
   const label_id = useRecoilValue(atomLabelQuerySlug);
@@ -47,7 +47,8 @@ export const FilterTodoIdsEffect = () => {
       set(atomPathnameImage, PATHNAME_IMAGE['completed']);
       return;
     }
-    if (asPath.match(new RegExp(PATHNAME['label']))) {
+    // catch any string after /label/
+    if (asPath.match(`^${PATHNAME['label']}\/.*$`)) {
       set(atomFilterTodoIds, 'label');
       set(atomLabelQuerySlug, labelId);
       set(atomHtmlTitleTag, `Label - ${label.name}`);

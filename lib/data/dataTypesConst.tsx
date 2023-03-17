@@ -78,6 +78,7 @@ export const IDB = {
   todo: 'todo',
   idMap: 'idMap',
   user: 'user',
+  session: 'session',
   setting: 'setting',
 } as const;
 
@@ -86,6 +87,7 @@ export const IDB_STORE = {
   todoItems: 'todoItems',
   idMaps: 'idMaps',
   users: 'users',
+  session: 'session',
   settings: 'settings',
 } as const;
 
@@ -133,12 +135,12 @@ export const FILTER_TODOIDS = {
 
 export type PATHNAME = (typeof PATHNAME)[keyof typeof PATHNAME];
 export const PATHNAME = {
-  app: '/app',
-  urgent: '/app/urgent',
-  important: '/app/important',
-  showAll: '/app/showall',
-  completed: '/app/completed',
-  label: '/app/label/(.*)$',
+  app: '/',
+  urgent: '/urgent',
+  important: '/important',
+  showAll: '/showall',
+  completed: '/completed',
+  label: '/label',
 } as const;
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];

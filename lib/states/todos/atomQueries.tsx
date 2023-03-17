@@ -1,6 +1,7 @@
+import { DATA_DEMO_TODOIDS } from '@data/dataDemo';
 import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
-import { getDataTodoIds, getDataTodoItem } from '@lib/queries/queryTodos';
+import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
 import { atom, atomFamily, selectorFamily } from 'recoil';
 
@@ -8,9 +9,10 @@ import { atom, atomFamily, selectorFamily } from 'recoil';
  * Query Todos
  * Defining `storeName` will automatically apply the predefined IndexedDB name.
  */
+
 export const atomQueryTodoIds = atom<TodoIds[]>({
   key: 'atomQueryTodoIds',
-  default: [],
+  default: DATA_DEMO_TODOIDS,
   effects: [
     queryEffect({
       storeName: IDB_STORE['idMaps'],
@@ -31,6 +33,7 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
       storeName: IDB_STORE['todoItems'],
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
+      demoFunction: () => getDemoTodoItem({ _id: todoId }),
       isRefetchingOnMutation: true,
       refetchDelayOnMutation: 800,
       isRefetchingOnFocus: true,
