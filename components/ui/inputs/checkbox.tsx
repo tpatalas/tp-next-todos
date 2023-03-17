@@ -2,6 +2,7 @@ import { classNames } from '@states/utils';
 import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import { Types, TypesTodo } from 'lib/types';
 import { Input } from './input';
+import { isMacOs, isMobile } from 'react-device-detect';
 
 type Props = Partial<Pick<Types, 'isChecked' | 'onChange' | 'className' | 'checkBoxColor' | 'checkedColor'>> &
   Pick<TypesTodo, 'todoItem'>;
@@ -14,6 +15,8 @@ export const CheckBox = ({
   onChange,
 }: Props) => {
   const conditionalDisable = useConditionCompareTodoItemsEqual(todoItem._id);
+  const isDeviceMac = isMacOs ? '⌘ + Enter' : 'ctrl + Enter';
+
   return (
     <Input
       name='checkbox'
@@ -25,7 +28,7 @@ export const CheckBox = ({
         checkedColor,
       )}
       tooltip={!todoItem.completed ? 'Complete' : 'Undo Complete'}
-      kbd='⌘ + Enter'
+      kbd={isMobile ? '' : isDeviceMac}
       isChecked={isChecked}
       onChange={onChange}
       isDisabled={!conditionalDisable && !todoItem.completed}

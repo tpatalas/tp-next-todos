@@ -12,7 +12,7 @@ import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMax } from '@states/modals';
 import { useTodoModalStateMinimize, useTodoModalStateExpand, useTodoModalStateClose } from '@states/modals/hooks';
 import { Fragment as ContainerFragment, Fragment as HeaderFragment, Fragment as HeaderButtonFragment } from 'react';
-import { isMacOs } from 'react-device-detect';
+import { isMacOs, isMobile } from 'react-device-detect';
 import { useRecoilValue } from 'recoil';
 
 type Props = Partial<Pick<Types, 'todo'>>;
@@ -23,6 +23,7 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
   const onBreakpointSm = useRecoilValue(atomMediaQuery(BREAKPOINT['sm']));
   const closeModal = useTodoModalStateClose(todo?._id);
+  const isDeviceMac = isMacOs ? '⌘ + E' : 'ctrl + E';
 
   return (
     <ContainerFragment>
@@ -46,7 +47,7 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
               options={{
                 path: !isTodoModalMax ? ICON_OPEN_IN_FULL : ICON_CLOSE_FULL_SCREEN,
                 tooltip: !isTodoModalMax ? 'Expand' : 'Exit expand',
-                kbd: isMacOs ? '⌘ E' : 'Ctrl E',
+                kbd: isMobile ? '' : isDeviceMac,
               }}
             />
           </HeaderButtonFragment>

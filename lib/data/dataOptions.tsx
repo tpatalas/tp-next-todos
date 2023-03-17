@@ -10,7 +10,7 @@ import {
   TypesOptionsSvg,
 } from '@lib/types/typesOptions';
 import { classNames } from '@states/utils';
-import { isMacOs } from 'react-device-detect';
+import { isMacOs, isMobile } from 'react-device-detect';
 import { POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './dataTypesConst';
 import {
   ICON_CHEVRON_LEFT,
@@ -159,18 +159,20 @@ export const optionsButtonConfirmModalCancel: TypesOptionsButton = {
   kbd: 'Escape',
 };
 
+const isDeviceMac = isMacOs ? '⌘ + E' : 'ctrl + E';
+
 // minimized Modal
 export const optionsButtonMiniModalMaximize: TypesOptionsButton = {
   path: ICON_MAXIMIZE,
   tooltip: 'Exit minimize',
-  kbd: isMacOs ? '⌘ M' : 'Ctrl M',
+  kbd: isMobile ? '' : isDeviceMac,
   margin: '-mr-2 ml-2 -my-1',
 };
 
 export const optionsButtonMiniModalOpenFull: TypesOptionsButton = {
   path: ICON_OPEN_IN_FULL,
   tooltip: 'Expand',
-  kbd: isMacOs ? '⌘ E' : 'Ctrl E',
+  kbd: isMobile ? '' : isDeviceMac,
   margin: '-mr-2 ml-2 -my-1',
 };
 
@@ -184,7 +186,7 @@ export const optionsButtonTodoModalAddTodo: TypesOptionsButton = {
 export const optionsButtonTodoModalMinimize: TypesOptionsButton = {
   path: ICON_MINIMIZE,
   tooltip: 'Minimize',
-  kbd: isMacOs ? '⌘ M' : 'Ctrl M',
+  kbd: isMobile ? '' : isDeviceMac,
 };
 
 export const optionsButtonTodoModalClose: TypesOptionsButton = {

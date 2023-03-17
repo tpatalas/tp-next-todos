@@ -17,6 +17,7 @@ import { useRecoilValue } from 'recoil';
 import { CalendarDropdown } from './calendarDropdown';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
+import { isMacOs, isMobile } from 'react-device-detect';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
 
@@ -25,6 +26,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
   const setPriority = typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);
   const todoItem = useRecoilValue(atomQueryTodoItem(todo?._id));
+  const isDeviceMac = isMacOs ? '⌘ + Delete' : 'ctrl + Delete';
 
   return (
     <Dropdown
@@ -70,7 +72,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
             shouldKeepOpeningOnClick: false,
             tooltip: 'Delete',
             path: ICON_DELETE,
-            kbd: '⌘ + Delete',
+            kbd: isMobile ? '' : isDeviceMac,
           }}
           onClick={() => removeTodo()}>
           Delete
