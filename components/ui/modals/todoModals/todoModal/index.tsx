@@ -84,12 +84,12 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
                 container={classNames(
                   isTodoModalMax
                     ? 'w-full max-w-[85%]'
-                    : 'max-w-[32rem] md:w-[78%] sm:w-[calc(70vw-2rem)] w-[calc(70vw-4rem)]',
+                    : 'max-w-[32rem] sm:w-[calc(100%-9rem)] xs:w-[calc(75vw-4rem)] 2xs:w-[calc(75vw-6rem)] w-[calc(75vw-7rem)]',
                 )}
               />
             </div>
           </div>
-          <div className='h-full w-full overflow-scroll '>
+          <div className='h-full w-full overflow-scroll'>
             <TodoEditors todo={todo} />
           </div>
           <div className='flex flex-row justify-end pt-4'>

@@ -19,7 +19,7 @@ export const TodoList = () => {
     <TodosFragment>
       <ul>
         {todoIdsReversed.length !== 0 ? (
-          <SmoothTransition>
+          <>
             {todoIdsReversed.map((todo, index) => (
               <li key={todo._id?.toString()}>
                 <Todo
@@ -28,7 +28,7 @@ export const TodoList = () => {
                 />
               </li>
             ))}
-          </SmoothTransition>
+          </>
         ) : (
           <SmoothTransition>
             <div className='mt-7 flex flex-col items-center justify-center'>
