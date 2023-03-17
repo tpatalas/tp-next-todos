@@ -1,4 +1,5 @@
 import { Button } from '@buttons/button';
+import { STORAGE_KEY } from '@data/dataTypesConst';
 import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import { UserDropdown } from '@dropdowns/v2/userDropdown';
 import { atomIDBUserSession } from '@states/users';
@@ -10,11 +11,13 @@ import { useRecoilValue } from 'recoil';
 
 export const HeaderUser = () => {
   const isSession = useRecoilValue(atomIDBUserSession);
+  const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
+  // add additional condition to prevent the flickering of user avatar
 
   return (
     <Fragment>
       <UserSessionEffect />
-      {isSession ? (
+      {!offSession && isSession ? (
         <UserDropdown />
       ) : (
         <Button
