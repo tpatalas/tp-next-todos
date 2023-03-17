@@ -32,12 +32,12 @@ export const TodoList = () => {
         ) : (
           <SmoothTransition>
             <div className='mt-7 flex flex-col items-center justify-center'>
-              <div className='flex h-full min-h-[300px] flex-col items-center justify-end'>
+              <div className='flex h-full min-h-[300px] w-[300px] flex-col items-center justify-end'>
                 <Image
                   loader={nextImageLoader}
                   width={0}
                   height={0}
-                  style={{ width: '300px', height: 'auto' }}
+                  style={{ width: 'auto', height: 'auto' }}
                   src={image.path}
                   alt={image.alt}
                   priority
