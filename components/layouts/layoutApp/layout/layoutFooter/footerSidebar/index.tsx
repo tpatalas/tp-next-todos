@@ -39,7 +39,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
       />
       <div
         ref={ref}
-        className='fixed left-0 top-0 z-20 h-full w-72 bg-white pl-2 pr-0 pt-3 md:top-[4.6rem] md:z-auto md:flex md:w-full md:max-w-[16.5rem] md:flex-col md:bg-transparent md:pt-0 md:pl-2 md:pr-0'>
+        className='fixed left-0 top-0 z-20 w-72 bg-white pl-2 pr-0 pt-3 md:top-[4.6rem] md:z-auto md:flex md:w-full md:max-w-[16.5rem] md:flex-col md:bg-transparent md:pt-0 md:pl-2 md:pr-0'>
         <LayoutLogoFragment>
           <div className='mb-4 mt-0 flex flex-row items-center justify-between pr-3 md:hidden'>
             <IconButton
@@ -71,11 +71,11 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
         </CreateTodoFragment>
         <div
           className={classNames(
-            'flex h-[calc(100vh-8.5rem)] w-full flex-grow flex-col bg-transparent pr-2',
+            'flex h-[calc(100vh-7.8rem)] w-full flex-grow flex-col bg-transparent pr-2 md:h-[calc(100vh-8.7rem)]',
             isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
           )}>
           <div className='flex flex-grow flex-col'>
-            <nav className={classNames('flex-1 space-y-1', isMobile && isChrome ? 'pb-36' : 'pb-20')}>
+            <nav className={classNames('flex-1 space-y-1', isMobile && isChrome ? 'pb-36' : 'pb-10')}>
               <FooterSidebarMenu />
               <LabelList />
             </nav>
