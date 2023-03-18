@@ -25,8 +25,8 @@ export const queryEffect: TypesRefetchEffect =
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
     const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
 
+    if (typeof demoFunction === 'undefined') return;
     if (offSession) {
-      if (typeof demoFunction === 'undefined') return;
       const demoData = async () => {
         const data = demoFunction && (await demoFunction());
         return data as DefaultValue;
