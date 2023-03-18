@@ -4,20 +4,20 @@ import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import { UserDropdown } from '@dropdowns/v2/userDropdown';
 import { atomIDBUserSession } from '@states/users';
 import { UserSessionEffect } from '@states/users/userSessionEffect';
-import { classNames } from '@states/utils';
+import { classNames, getSessionStorage } from '@states/utils';
 import { signIn } from 'next-auth/react';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
 export const HeaderUser = () => {
   const isSession = useRecoilValue(atomIDBUserSession);
-  const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
+  const session = getSessionStorage(STORAGE_KEY['session']);
   // add additional condition to prevent the flickering of user avatar
 
   return (
     <Fragment>
       <UserSessionEffect />
-      {!offSession && isSession ? (
+      {session && isSession ? (
         <UserDropdown />
       ) : (
         <Button

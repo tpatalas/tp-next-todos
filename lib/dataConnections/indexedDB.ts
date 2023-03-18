@@ -1,6 +1,7 @@
 import { DATA_IDB } from '@data/dataArrayOfObjects';
 import { IDB, IDB_VERSION, STORAGE_KEY } from '@data/dataTypesConst';
 import { Types, TypesIDB } from '@lib/types';
+import { getSessionStorage } from '@states/utils';
 import { deleteDB, openDB } from 'idb';
 
 // this will create new database per object store. This is easier to modify
@@ -10,9 +11,9 @@ const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVer
   const currentIDBName = idb && idb.dbName + 'v' + idb.currentVersion;
   const previousVersions = Array.from({ length: IDB_VERSION['current'] }, (_, i) => i);
   const oldIDBNames = previousVersions.map((version) => idb && idb.dbName + 'v' + version);
-  const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
+  const session = getSessionStorage(STORAGE_KEY['session']);
 
-  if (offSession) return;
+  if (!session) return;
 
   const db = await openDB(currentIDBName as IDB, dbVersion || 1, {
     // To auto upgrade indexedDB, update the IDB_VERSION's previous and current.

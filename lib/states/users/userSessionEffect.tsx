@@ -1,6 +1,7 @@
 import { STORAGE_KEY } from '@data/dataTypesConst';
 import { atomQueryLabels } from '@states/labels/atomQueries';
 import { atomQueryTodoIds } from '@states/todos/atomQueries';
+import { getSessionStorage, setSessionStorage } from '@states/utils';
 import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
 import { useCallback, useEffect } from 'react';
@@ -10,7 +11,6 @@ import { atomIDBUserSession } from '.';
 export const UserSessionEffect = () => {
   const { data: session } = useSession();
   const notInSession = session === null && session !== undefined;
-  const newOffSession = () => sessionStorage.setItem(STORAGE_KEY['session'], JSON.stringify(false));
 
   const clearIndexedDB = async () => {
     const indexedDBs = await indexedDB.databases();
@@ -21,10 +21,10 @@ export const UserSessionEffect = () => {
   const userSession = useRecoilCallback(({ set, reset }) => () => {
     if (session) {
       set(atomIDBUserSession, true);
-      return;
+      setSessionStorage(STORAGE_KEY['session'], true);
     }
     if (notInSession) {
-      newOffSession();
+      setSessionStorage(STORAGE_KEY['session'], false);
       set(atomIDBUserSession, false);
       reset(atomQueryTodoIds);
       reset(atomQueryLabels);
@@ -35,10 +35,15 @@ export const UserSessionEffect = () => {
   });
 
   const setSession = useCallback(() => {
-    const offSession = sessionStorage.getItem(STORAGE_KEY['session']);
+    const isSession = getSessionStorage(STORAGE_KEY['session']);
 
-    if (notInSession) return !offSession && newOffSession();
-  }, [notInSession]);
+    if (notInSession) {
+      !isSession && setSessionStorage(STORAGE_KEY['session'], false);
+      return;
+    }
+
+    if (session) return !isSession && setSessionStorage(STORAGE_KEY['session'], true);
+  }, [notInSession, session]);
 
   useEffect(() => {
     userSession();
