@@ -105,7 +105,7 @@ export const Dropdown = ({ menuButtonContent, menuContentOnClose, children, show
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',
                       options.menuItemsWidth ?? 'w-60',
-                      hasDropdownBoardStyle && 'rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5',
+                      hasDropdownBoardStyle && 'rounded-lg bg-slate-50 shadow-xl ring-1 ring-black ring-opacity-5',
                     )}
                     ref={setPopperElement}
                     style={styles.popper}

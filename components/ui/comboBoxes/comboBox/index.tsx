@@ -40,7 +40,7 @@ export const ComboBox = ({
                 className={classNames(
                   'relative w-full cursor-default overflow-hidden rounded-lg py-1 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 group-focus-within/comboBox:border-opacity-50 sm:text-sm',
                   hasComboBoxBoardStyle &&
-                    'border border-solid border-slate-200 bg-white shadow-xl shadow-slate-300/40',
+                    'border border-solid border-slate-200 bg-slate-50 shadow-xl shadow-slate-300/40',
                 )}>
                 <Combobox.Input
                   className='w-full border-none py-2 pl-4 pr-12 text-sm leading-5 text-gray-900 placeholder:text-gray-400 focus:ring-0'

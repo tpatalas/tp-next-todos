@@ -5,10 +5,7 @@ import { Fragment } from 'react';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'className'>>;
 
-export const ModalTransitionChild = ({
-  children,
-  className = 'p-5 sm:relative  sm:bottom-24',
-}: Props) => {
+export const ModalTransitionChild = ({ children, className = 'p-5 sm:relative  sm:bottom-24' }: Props) => {
   return (
     <Fragment>
       <Transition.Child
@@ -33,7 +30,7 @@ export const ModalTransitionChild = ({
             leaveTo='transform opacity-0 scale-95'>
             <Dialog.Panel
               className={classNames(
-                'flex w-full max-w-xl transform flex-col justify-between overflow-visible rounded-2xl bg-white text-left align-middle shadow-xl transition-all',
+                'flex w-full max-w-xl transform flex-col justify-between overflow-visible rounded-2xl bg-slate-50 text-left align-middle shadow-xl transition-all',
                 className,
               )}>
               {children}
