@@ -1,6 +1,8 @@
 import {
   BREAKPOINT,
   DURATION,
+  GRADIENT_POSITION,
+  GRADIENT_TYPE,
   IDB,
   IDB_STORE,
   IDB_VERSION,
@@ -251,6 +253,8 @@ export interface TypesUi {
   enterDuration: DURATION;
   leaveDuration: DURATION;
   isPortal: boolean;
+  gradientType: GRADIENT_TYPE;
+  gradientPosition: GRADIENT_POSITION;
 }
 
 export interface TypesLoadings {

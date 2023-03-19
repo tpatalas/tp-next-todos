@@ -1,8 +1,10 @@
+import { GRADIENT_POSITION, GRADIENT_TYPE } from '@data/dataTypesConst';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { selectorSidebarOpen } from '@states/layouts';
 import { SidebarMobileResetEffect } from '@states/layouts/sidebarMobileResetEffect';
 import { atomDisableScroll, classNames } from '@states/utils';
+import { GlobalVerticalGradient } from '@ui/gradients/globalVerticalGradient';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterSidebar } from './footerSidebar';
@@ -33,18 +35,24 @@ export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
         <FooterBodyFragment>
           <div
             className={classNames(
-              'relative flex w-full flex-row justify-between rounded-lg bg-transparent transition-all duration-200 ease-in-out sm:mr-3 sm:mb-3 sm:bg-white sm:shadow-md sm:shadow-slate-200',
+              'relative flex w-full flex-row justify-between rounded-xl bg-transparent transition-all duration-200 ease-in-out sm:mr-3 sm:mb-3 sm:shadow-lg sm:shadow-slate-300',
               isSidebarOpen ? 'md:ml-[266px]' : 'md:ml-3',
             )}>
+            <GlobalVerticalGradient
+              options={{ gradientType: GRADIENT_TYPE['single'], gradientPosition: GRADIENT_POSITION['top'] }}
+            />
             <main
               className={classNames(
-                'absolute mb-10 h-full w-full',
+                'absolute mb-10 h-full w-full rounded-xl border border-slate-50',
                 isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
               )}>
               <div className='flex w-full justify-center pt-2 pb-64 sm:pt-10 sm:pl-5 lg:justify-center lg:pl-10'>
                 {children}
               </div>
             </main>
+            <GlobalVerticalGradient
+              options={{ gradientType: GRADIENT_TYPE['double'], gradientPosition: GRADIENT_POSITION['bottom'] }}
+            />
           </div>
         </FooterBodyFragment>
       </div>

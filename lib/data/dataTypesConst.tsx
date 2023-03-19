@@ -166,12 +166,6 @@ export const DURATION = {
   1000: 'duration-1000',
 } as const;
 
-export type GRADIENT_POSITION = (typeof GRADIENT_POSITION)[keyof typeof GRADIENT_POSITION];
-export const GRADIENT_POSITION = {
-  left: 'left',
-  right: 'right',
-} as const;
-
 export type USER = (typeof USER)[keyof typeof USER];
 export const USER = {
   email: 'email',
@@ -204,3 +198,17 @@ export const MODIFIER_KBD = {
   'modifier + Escape': isMacOs ? '⌘ + Escape' : 'ctrl + Escape',
   'modifier + Delete': isMacOs ? '⌘ + Delete' : 'ctrl + Delete',
 };
+
+export type GRADIENT_TYPE = (typeof GRADIENT_TYPE)[keyof typeof GRADIENT_TYPE];
+export const GRADIENT_TYPE = {
+  single: 'single',
+  double: 'double',
+} as const;
+
+export type GRADIENT_POSITION = (typeof GRADIENT_POSITION)[keyof typeof GRADIENT_POSITION];
+export const GRADIENT_POSITION = {
+  left: 'left',
+  right: 'right',
+  top: 'top',
+  bottom: 'bottom',
+} as const;

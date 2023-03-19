@@ -18,7 +18,7 @@ export const PseudoIconButton = ({ options, menuButtonContent, onClick, children
         options={{
           className: classNames(
             options.className,
-            'group-pseudoButton border-gray-300 bg-transparent text-gray-500 hover:bg-white focus-visible:ring-blue-500 hover:text-gray-700',
+            'group-pseudoButton border-gray-300 bg-transparent text-gray-500 hover:bg-slate-50 focus-visible:ring-blue-500 hover:text-gray-700',
             menuButtonContent ? 'rounded-lg' : 'rounded-full',
             options.padding ?? 'p-2',
             options.margin ?? 'ml-px',
@@ -30,8 +30,7 @@ export const PseudoIconButton = ({ options, menuButtonContent, onClick, children
           kbd: options.kbd,
           offset: options.offset,
         }}
-        onClick={onClick}
-      >
+        onClick={onClick}>
         <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
