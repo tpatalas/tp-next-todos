@@ -34,6 +34,7 @@ within `local.env`.
   - [[Optional] Remove Image Domain enviornment variable substation if Image Domain is not provided](#optional-remove-image-domain-enviornment-variable-substation-if-image-domain-is-not-provided)
   - [Deploy](#deploy)
 - [Resources](#resources)
+- [License](#license)
 
 <!-- vim-markdown-toc -->
 
@@ -165,7 +166,7 @@ brew install --cask google-cloud-sdk
 
 2. Prepare the hostname and image domain (Optional).
 
-> If you do not provide image domain, `docker.sh` will skip setting it as environment variables.
+> If you do not provide image domain, `deploy.sh` will skip setting it as environment variables.
 
 #### Create secrets to Google Secret Manager
 
@@ -238,7 +239,7 @@ gcloud secrets versions add GITHUB_CLIENT_SECRET --data-file=secret-github
 
 1. Go to your cloned project root directory and create a file named `.env.local`.
 
-> The filename must be `.env.local` or else `docker.sh` will fail to deploy to Google Cloud Run.
+> The filename must be `.env.local` or else `deploy.sh` will fail to deploy to Google Cloud Run.
 
 2. Add the following contents to `.env.local`:
 
@@ -344,3 +345,7 @@ sh deploy.sh
 1. [Deploy Next.js App into Google Cloud Run(GCR) with Docker](<https://github.com/tpAtalas/tp-next-todos/wiki/Deploy-Next.js-App-into-Google-Cloud-Run(GCR)-with-Docker>)
 2. [Manage sensitive information to Google Cloud Secret Manager](https://github.com/tpAtalas/tp-next-todos/wiki/Manage-sensitive-information-to-Google-Cloud-Secret-Manager)
 3. [Troubleshooting Google Cloud Run](https://github.com/tpAtalas/tp-next-todos/wiki/Troubleshooting-Google-Cloud-Run)
+
+## License
+
+This project is licensed under the terms of the MIT License. See the [LICENSE](https://github.com/tpAtalas/tp-next-todos/blob/master/LICENSE) file for details.
