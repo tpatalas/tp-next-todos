@@ -12,14 +12,14 @@ export const LayoutLogo = () => {
             className: 'cursor-pointer',
           }}>
           <LogoFragment>
-            <div className='ml-2 flex w-full flex-row items-center justify-center px-2 text-2xl tracking-wider'>
+            <span className='flex w-full flex-row items-center justify-center px-2 text-2xl tracking-wider'>
               <span className='sr-only'>Logo</span>
               <div className='-space-y-[0.4rem] pr-3 text-sm font-bold tracking-widest'>
                 <div>LO</div>
                 <div>GO</div>
               </div>
               <div>TODO</div>
-            </div>
+            </span>
           </LogoFragment>
         </PrefetchRouterButton>
       </LogoContainerFragment>
