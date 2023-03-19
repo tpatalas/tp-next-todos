@@ -55,7 +55,7 @@ export const AuthForm = () => {
                 isDisabled: isError || isLoadingSpinner,
               }}>
               <LoadingSpinner spinnerId={SPINNER['authForm']} />
-              <div>Sign in with email</div>
+              <span>Sign in with email</span>
             </Button>
             <div className='mb-5' />
             <Divider margin='mb-5'>or</Divider>
