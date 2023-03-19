@@ -1,4 +1,4 @@
-import { CATCH } from '@data/dataTypesConst';
+import { CATCH, STORAGE_KEY } from '@data/dataTypesConst';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';
@@ -75,3 +75,10 @@ export const validateEmailFormat = (email: string) => {
   return emailFormat.test(email);
 };
 
+export const getSessionStorage = (queryKey: STORAGE_KEY) => {
+  const session = sessionStorage.getItem(queryKey);
+  return session && JSON.parse(session);
+};
+export const setSessionStorage = (queryKey: STORAGE_KEY, value: unknown) =>
+  sessionStorage.setItem(queryKey, JSON.stringify(value));
+export const delSessionStorage = (queryKey: STORAGE_KEY) => sessionStorage.removeItem(queryKey);

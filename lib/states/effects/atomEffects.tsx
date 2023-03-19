@@ -1,4 +1,6 @@
+import { STORAGE_KEY } from '@data/dataTypesConst';
 import { TypesAtomEffect, TypesMediaQueryEffect, TypesSessionStorageEffect } from '@lib/types';
+import { delSessionStorage, getSessionStorage, setSessionStorage } from '@states/utils';
 
 /**
  * Media Queries
@@ -41,20 +43,20 @@ export const networkStatusEffect: TypesAtomEffect<boolean> = ({ setSelf }) => {
 export const sessionEffect: TypesSessionStorageEffect =
   ({ queryKey, shouldGet, isSessionSetEnabled, isSessionResetEnabled }) =>
   ({ onSet, resetSelf, setSelf, trigger }) => {
-    const session = sessionStorage.getItem(queryKey);
-    const offSession = session && JSON.parse(session) ? false : true;
+    const storageKey = queryKey as STORAGE_KEY;
+    const session = getSessionStorage(storageKey);
 
     if (trigger === 'get' && (shouldGet ?? true)) {
-      setSelf(offSession);
+      setSelf(session);
     }
 
     onSet((newValue, _, isReset) => {
       if (isReset) {
         resetSelf();
-        isSessionResetEnabled && sessionStorage.removeItem(queryKey);
+        isSessionResetEnabled && delSessionStorage(storageKey);
         return;
       }
       setSelf(newValue);
-      isSessionSetEnabled && sessionStorage.setItem(queryKey, JSON.stringify(newValue));
+      isSessionSetEnabled && setSessionStorage(storageKey, newValue);
     });
   };
