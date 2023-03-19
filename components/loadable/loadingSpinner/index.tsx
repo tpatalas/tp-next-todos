@@ -6,7 +6,7 @@ export const LoadingSpinner = ({ spinnerId }: { spinnerId: SPINNER }) => {
   const onSpinner = useRecoilValue(atomLoadingSpinner(spinnerId));
 
   return (
-    <div className='inline-flex items-center justify-center gap-2 rounded border-none pr-3'>
+    <span className='inline-flex items-center justify-center gap-2 rounded border-none pr-3'>
       {onSpinner && (
         <svg
           role='status'
@@ -24,6 +24,6 @@ export const LoadingSpinner = ({ spinnerId }: { spinnerId: SPINNER }) => {
           />
         </svg>
       )}
-    </div>
+    </span>
   );
 };

@@ -24,7 +24,7 @@ export const AuthErrorMessage = ({ options }: Props) => {
   return (
     <span
       className={classNames(
-        'mt-1 ml-1 flex flex-row items-start',
+        'mt-1 flex flex-row items-start',
         clientErrorMessage ? 'mb-5 rounded-xl bg-red-100 p-2' : 'mb-0',
       )}>
       <span className='h-full pr-1'>
@@ -35,9 +35,9 @@ export const AuthErrorMessage = ({ options }: Props) => {
           }}
         />
       </span>
-      <p className={classNames('text-sm', clientErrorMessage && 'text-red-600')}>
+      <span className={classNames('text-sm', clientErrorMessage && 'text-red-600')}>
         {clientErrorMessage ? clientErrorMessage : options?.defaultMessage}
-      </p>
+      </span>
     </span>
   );
 };
