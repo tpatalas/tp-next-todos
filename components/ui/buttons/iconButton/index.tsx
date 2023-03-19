@@ -31,7 +31,7 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
           isDisabled: options.isDisabled,
         }}
         onClick={onClick}>
-        <div className='flex flex-row items-center justify-center'>
+        <span className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
             options={{
@@ -54,7 +54,7 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
               </span>
             )}
           </HeaderContentsFragment>
-        </div>
+        </span>
       </Button>
     </span>
   );

@@ -43,7 +43,7 @@ export const LabelComboBox = ({ todo }: Props) => {
             onClick={() => setFilter()}
           />
         }>
-        <Combobox.Options className='relative max-h-60 w-full overflow-auto bg-white py-1 text-base ring-0 ring-transparent focus:outline-none sm:text-sm'>
+        <Combobox.Options className='relative max-h-60 w-full overflow-auto bg-slate-50 py-1 text-base ring-0 ring-transparent focus:outline-none sm:text-sm'>
           {filteredLabels.length === 0 && query !== '' ? (
             <div className='relative cursor-default select-none py-2 px-4 text-gray-500'>Nothing found!</div>
           ) : (

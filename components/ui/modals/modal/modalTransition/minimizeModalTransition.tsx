@@ -23,7 +23,7 @@ export const MinimizeModalTransition = ({ children, show, options }: Props) => {
           options.positionY,
         )}>
         <div className={classNames('flex w-full flex-col items-center space-y-4', options.positionX)}>
-          <div className='pointer-events-auto w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5'>
+          <div className='pointer-events-auto w-full max-w-xs overflow-hidden rounded-lg bg-slate-50 shadow-lg ring-1 ring-black ring-opacity-5'>
             <div className={classNames(options.minimizedModalPadding ?? 'p-3.5')}>{children}</div>
           </div>
         </div>
