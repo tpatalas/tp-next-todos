@@ -9,7 +9,7 @@ export const Divider = ({ children, margin }: Props) => {
       <div
         className='absolute inset-0 flex items-center'
         aria-hidden='true'>
-        <div className='w-full border-t border-gray-200' />
+        <div className='w-full border-t border-gray-300' />
       </div>
       {children && (
         <div className='relative flex justify-center'>

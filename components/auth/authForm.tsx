@@ -30,9 +30,9 @@ export const AuthForm = () => {
       <SessionDeactivateEffect />
       <ClientErrorMessageEffect />
       <div className='absolute right-0 left-0 top-[20%] bottom-[50%] m-auto h-fit w-full sm:top-[30%] sm:w-fit'>
-        <section className='border-slate-150 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
+        <section className='border-slate-200 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
           <div className='mb-5 flex flex-col items-center justify-center'>
-            <h1 className='mb-4 flex flex-row items-center justify-center text-2xl text-slate-700'>Sign in</h1>
+            <h1 className='mb-3 flex flex-row items-center justify-center text-2xl text-slate-700'>Sign in</h1>
             <h2 className='flex flex-row items-center justify-center text-lg text-slate-600'>
               Use your email to sign in
             </h2>
