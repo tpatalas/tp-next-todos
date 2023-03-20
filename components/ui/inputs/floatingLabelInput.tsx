@@ -36,7 +36,7 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, Props>(
             <label
               htmlFor={options.name}
               className={classNames(
-                'absolute left-2.5 -top-2 block cursor-text select-none bg-slate-50 px-1 text-xs font-medium transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:left-2.5 peer-focus:-top-2 peer-focus:bg-slate-50 peer-focus:px-1 peer-focus:text-xs',
+                'absolute left-2.5 -top-2 block cursor-text select-none bg-slate-50 px-1 text-xs font-medium transition-all peer-placeholder-shown:top-[0.8rem] peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:left-2.5 peer-focus:-top-2 peer-focus:bg-slate-50 peer-focus:px-1 peer-focus:text-xs',
                 options.isError ? 'text-red-600 peer-focus:text-red-500' : 'text-gray-400 peer-focus:text-blue-500',
               )}>
               {options.placeholder}
