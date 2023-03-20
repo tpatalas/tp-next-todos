@@ -18,7 +18,7 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
       <div
         tabIndex={0}
         className={classNames(
-          'group/focuser mr-1 flex flex-row rounded-lg px-2 pt-4 pb-2 outline-none hover:bg-slate-100 focus:bg-blue-100 sm:px-5',
+          'group/focuser focus:bg-blue-90 mr-1 flex flex-row rounded-lg px-2 pt-4 pb-2 outline-none hover:bg-gray-100 focus:bg-blue-100 sm:px-5',
           'w-[calc(100vw-5rem)] max-w-3xl md:w-[calc(65vw-5rem)] ml:w-[calc(70vw-5rem)]',
           isMobile ? 'sm:w-[calc(100vw-13rem)]' : 'sm:w-[calc(100vw-7rem)]',
         )}

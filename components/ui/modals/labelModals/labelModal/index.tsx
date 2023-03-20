@@ -37,8 +37,7 @@ export const LabelModal = ({ label, footerButtons, children, menuButtonContent =
       <ModalTransitionRoot
         show={isLabelModalOpen}
         initialFocus={initialFocusInput}
-        onClose={() => closeModal()}
-      >
+        onClose={() => closeModal()}>
         <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
             <div className='flex w-full flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
@@ -55,7 +54,7 @@ export const LabelModal = ({ label, footerButtons, children, menuButtonContent =
           <div className='h-full w-full overflow-scroll pl-2 pr-3'>
             <input
               className={classNames(
-                'w-full rounded-lg border-0 py-1 pl-2 outline-none focus:ring-0 focus:ring-offset-0',
+                'w-full rounded-lg border-0 bg-transparent py-1 pl-2 outline-none focus:ring-0 focus:ring-offset-0',
               )}
               placeholder='Enter new label'
               type='text'
@@ -68,16 +67,14 @@ export const LabelModal = ({ label, footerButtons, children, menuButtonContent =
           <div className='flex flex-row justify-end pt-4'>
             <CancelButton
               options={optionsButtonTodoModalCancel}
-              onClick={() => closeModal()}
-            >
+              onClick={() => closeModal()}>
               Cancel
             </CancelButton>
             {footerButtons || (
               <DisableButton
                 isConditionalRendering={condition}
                 options={optionsButtonLabelModalAddLabel}
-                onClick={() => addLabel()}
-              >
+                onClick={() => addLabel()}>
                 Add Label
               </DisableButton>
             )}

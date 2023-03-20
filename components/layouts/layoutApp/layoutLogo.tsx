@@ -14,7 +14,7 @@ export const LayoutLogo = () => {
           <LogoFragment>
             <span className='flex w-full flex-row items-center justify-center px-2 text-2xl tracking-wider'>
               <span className='sr-only'>Logo</span>
-              <span className='-space-y-[0.4rem] pr-3 text-sm font-bold tracking-widest'>
+              <span className='flex flex-col -space-y-[0.4rem] pr-3 text-sm font-bold tracking-widest'>
                 <span>LO</span>
                 <span>GO</span>
               </span>

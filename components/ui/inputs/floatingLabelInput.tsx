@@ -26,10 +26,10 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, Props>(
               onFocus={onFocus}
               ref={ref}
               className={classNames(
-                'peer block w-full appearance-none rounded-xl border py-3 placeholder-transparent shadow-md shadow-slate-200 outline-none transition-all',
+                'peer block w-full appearance-none rounded-xl border bg-transparent py-3 placeholder-transparent shadow-md shadow-slate-200 outline-none transition-all',
                 options.isError
                   ? 'border-red-600 ring-0 focus:border-red-600 focus:ring-1 focus:ring-red-600'
-                  : 'border-slate-200 focus:border-blue-500',
+                  : 'border-slate-300 ring-slate-300 focus:border-blue-500',
                 options.padding,
               )}
             />

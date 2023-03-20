@@ -217,7 +217,7 @@ export const DATA_SVG_LOGO: TypesSvgLogo[] = [
     name: SVG_LOGO['google'],
     viewBox: '0 0 32 32',
     className:
-      'flex w-full flex-row items-center justify-center rounded-lg border border-slate-100 p-2 shadow-md shadow-slate-300 text-slate-800 transition-all hover:shadow-lg',
+      'flex w-full flex-row items-center justify-center rounded-lg border border-slate-150 p-2 shadow-md shadow-slate-300 text-slate-800 transition-all hover:shadow-lg',
     path: (
       <>
         <path

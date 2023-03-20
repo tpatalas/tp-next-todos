@@ -14,9 +14,9 @@ export const GlobalVerticalGradient = ({ options }: Props) => {
       {options.gradientType === GRADIENT_TYPE['single'] && (
         <div
           className={classNames(
-            'pointer-events-none absolute right-4 z-10 h-10 w-[calc(100%-1rem)] bg-gradient-to-b from-slate-50',
-            top && 'top-0',
-            bottom && 'bottom-0',
+            'pointer-events-none absolute right-5 z-10 h-10 w-[calc(100%-1.4rem)] rounded-xl border-none bg-gradient-to-b from-slate-50',
+            top && 'top-0 mt-[0.05rem]',
+            bottom && 'bottom-0 mb-[0.05rem]',
           )}
         />
       )}
@@ -24,14 +24,14 @@ export const GlobalVerticalGradient = ({ options }: Props) => {
         <div>
           <div
             className={classNames(
-              'pointer-events-none absolute right-4 h-40 w-[calc(100%-1rem)] bg-gradient-to-t from-slate-50',
+              'pointer-events-none absolute right-5 h-40 w-[calc(100%-1.4rem)] rounded-xl bg-gradient-to-t from-slate-50',
               top && 'top-0',
               bottom && 'bottom-0',
             )}
           />
           <div
             className={classNames(
-              'absolute right-4 h-20 w-[calc(100%-1rem)] bg-gradient-to-t from-slate-50',
+              'absolute right-5 h-20 w-[calc(100%-1.4rem)] rounded-xl bg-gradient-to-t from-slate-50',
               top && 'top-0',
               bottom && 'bottom-0',
             )}
