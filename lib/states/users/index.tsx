@@ -1,23 +1,9 @@
-import { STORAGE_KEY } from '@data/dataTypesConst';
-import { sessionEffect } from '@effects/atomEffects';
 import { Users } from '@lib/types';
 import { atom } from 'recoil';
 
 export const atomUser = atom<Users>({
   key: 'atomUser',
   default: { email: '', password: '' } as Users,
-});
-
-export const atomIDBUserSession = atom<boolean>({
-  key: 'atomIDBUserSession',
-  default: false,
-  effects: [
-    sessionEffect({
-      queryKey: STORAGE_KEY['session'],
-      isSessionResetEnabled: true,
-      isSessionSetEnabled: false,
-    }),
-  ],
 });
 
 export const atomUserErrorMessage = atom<string>({
@@ -28,4 +14,9 @@ export const atomUserErrorMessage = atom<string>({
 export const atomUserVerificationRequest = atom({
   key: 'atomUserVerificationRequest',
   default: false,
+});
+
+export const atomUserOffSession = atom({
+  key: 'atomUserOffSession',
+  // default must be empty to persist the pending state on session's loading state.
 });

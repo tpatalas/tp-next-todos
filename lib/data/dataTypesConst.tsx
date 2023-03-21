@@ -107,7 +107,7 @@ export type STORAGE_KEY = (typeof STORAGE_KEY)[keyof typeof STORAGE_KEY];
 export const STORAGE_KEY = {
   [IDB_KEY['todoIds']]: 'last_update_todos',
   [IDB_KEY['labels']]: 'last_update_labels',
-  session: 'session',
+  offSession: 'offSession',
 } as const;
 
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];

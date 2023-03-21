@@ -1,7 +1,8 @@
 import { IDB_KEY, IDB_KEY_STORE, IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesRefetchEffect } from '@lib/types';
-import { getSessionStorage, hasTimePast } from '@states/utils';
+import { atomUserOffSession } from '@states/users';
+import { hasTimePast } from '@states/utils';
 import { DefaultValue } from 'recoil';
 
 export const queryEffect: TypesRefetchEffect =
@@ -17,15 +18,15 @@ export const queryEffect: TypesRefetchEffect =
     refetchInterval,
     demoFunction,
   }) =>
-  ({ setSelf, onSet, trigger }) => {
+  ({ setSelf, onSet, trigger, getLoadable }) => {
     if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
     const onIndexedDB = isIndexedDBEnabled || typeof isIndexedDBEnabled === 'undefined';
     const isIdMapQueryKey = queryKey === IDB_KEY['labels'] || queryKey === IDB_KEY['todoIds'];
     const lastUpdateTime = isIdMapQueryKey && Number(JSON.parse(localStorage.getItem(STORAGE_KEY[queryKey]) || '0'));
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
-    const session = getSessionStorage(STORAGE_KEY['session']);
+    const offSession = getLoadable(atomUserOffSession).getValue();
 
-    if (!session) {
+    if (offSession) {
       if (typeof demoFunction === 'undefined') return;
       const demoData = async () => {
         const data = demoFunction && (await demoFunction());
