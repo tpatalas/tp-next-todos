@@ -11,9 +11,9 @@ const dbPromise = async (storeName: Types['storeName'], dbVersion?: Types['dbVer
   const currentIDBName = idb && idb.dbName + 'v' + idb.currentVersion;
   const previousVersions = Array.from({ length: IDB_VERSION['current'] }, (_, i) => i);
   const oldIDBNames = previousVersions.map((version) => idb && idb.dbName + 'v' + version);
-  const session = getSessionStorage(STORAGE_KEY['session']);
+  const offSession = getSessionStorage(STORAGE_KEY['offSession']);
 
-  if (!session) return;
+  if (offSession) return;
 
   const db = await openDB(currentIDBName as IDB, dbVersion || 1, {
     // To auto upgrade indexedDB, update the IDB_VERSION's previous and current.

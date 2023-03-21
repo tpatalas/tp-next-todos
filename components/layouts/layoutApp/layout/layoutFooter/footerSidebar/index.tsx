@@ -11,13 +11,13 @@ import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { atomDisableScroll, classNames } from '@states/utils';
 import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
 import { Backdrop } from '@ui/backdrops/backdrop';
-import { isChrome, isMobile } from 'react-device-detect';
 import {
-  forwardRef,
   Fragment as CreateTodoFragment,
   Fragment as FooterSidebarFragment,
   Fragment as LayoutLogoFragment,
+  forwardRef,
 } from 'react';
+import { isChrome, isMobile } from 'react-device-detect';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
 
