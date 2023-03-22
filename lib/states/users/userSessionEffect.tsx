@@ -1,32 +1,26 @@
 import { STORAGE_KEY } from '@data/dataTypesConst';
-import { delSessionStorage, getSessionStorage, setSessionStorage } from '@states/utils';
+import { delSessionStorage, setSessionStorage } from '@states/utils';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
-import { atomUserOffSession } from '.';
+import { atomUserSession } from '.';
 
 export const UserSessionEffect = () => {
-  const { status } = useSession();
+  const { data: session } = useSession();
 
-  const session = useRecoilCallback(({ set }) => () => {
-    if (status === 'unauthenticated') {
-      set(atomUserOffSession, true);
-      setSessionStorage(STORAGE_KEY['offSession'], true);
-      return;
-    }
-    if (status === 'authenticated') {
-      set(atomUserOffSession, false);
+  const sessionHandler = useRecoilCallback(({ set, reset }) => () => {
+    if (session) {
+      set(atomUserSession, true);
       delSessionStorage(STORAGE_KEY['offSession']);
       return;
     }
-    if (status === 'loading' && !getSessionStorage(STORAGE_KEY['offSession'])) {
-      set(atomUserOffSession, false);
-    }
+    reset(atomUserSession);
+    setSessionStorage(STORAGE_KEY['offSession'], true);
   });
 
   useEffect(() => {
-    session();
-  }, [session, status]);
+    sessionHandler();
+  }, [sessionHandler]);
 
   return null;
 };

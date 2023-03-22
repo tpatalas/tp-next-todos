@@ -16,7 +16,7 @@ export const atomUserVerificationRequest = atom({
   default: false,
 });
 
-export const atomUserOffSession = atom({
-  key: 'atomUserOffSession',
-  // default must be empty to persist the pending state on session's loading state.
+export const atomUserSession = atom({
+  key: 'atomUserSession',
+  default: false,
 });
