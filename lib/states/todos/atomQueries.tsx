@@ -12,7 +12,7 @@ import { atom, atomFamily, selectorFamily } from 'recoil';
 
 export const atomQueryTodoIds = atom<TodoIds[]>({
   key: 'atomQueryTodoIds',
-  default: DATA_DEMO_TODOIDS,
+  default: [],
   effects: [
     queryEffect({
       storeName: IDB_STORE['idMaps'],
@@ -24,6 +24,11 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
   ],
 });
 
+export const atomDemoTodoIds = atom<TodoIds[]>({
+  key: 'atomDemoTodoIds',
+  default: DATA_DEMO_TODOIDS,
+});
+
 export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
   key: 'atomQueryTodoItem',
   default: {} as Todos,
@@ -33,13 +38,25 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
       storeName: IDB_STORE['todoItems'],
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
-      demoFunction: () => getDemoTodoItem({ _id: todoId }),
       isRefetchingOnMutation: true,
       refetchDelayOnMutation: 800,
       isRefetchingOnFocus: true,
     }),
   ],
 });
+
+export const atomDemoTodoItem = atomFamily<Todos, Todos['_id']>({
+  key: 'atomDemoTodoItem',
+  default: {} as Todos,
+  effects: (todoId) => [
+    ({ setSelf }) => {
+      const demoFunction = async () => await getDemoTodoItem({ _id: todoId });
+      setSelf(demoFunction());
+    },
+  ],
+});
+
+
 
 /**
  * Derived Query Todos
