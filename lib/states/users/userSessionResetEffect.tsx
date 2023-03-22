@@ -20,8 +20,7 @@ export const UserSessionResetEffect = () => {
     if (offSession) {
       reset(selectorSessionTodoIds);
       reset(selectorSessionLabels);
-      localStorage.removeItem(STORAGE_KEY['labels']);
-      localStorage.removeItem(STORAGE_KEY['todoIds']);
+      localStorage.clear();
       clearIndexedDB();
       return;
     }
