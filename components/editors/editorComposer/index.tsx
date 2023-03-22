@@ -3,7 +3,7 @@ import { Types } from '@lib/types';
 import { EditorAutoFocusEffect } from '@states/editors/editorAutoFocusEffect';
 import { useEditorInitialValue, useEditorChangeHandler } from '@states/editors/hooks';
 import { useKeyWithEditor } from '@states/keybinds/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createEditor } from 'slate';
@@ -27,7 +27,7 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
   const completed =
-    typeof todo !== 'undefined' && useRecoilValue(atomQueryTodoItem(todo?._id)).completed;
+    typeof todo !== 'undefined' && useRecoilValue(selectorSessionTodoItem(todo?._id)).completed;
   const renderCustomElementWithProps = (props: RenderElementProps) =>
     renderCustomElement({
       titleName: titleName,

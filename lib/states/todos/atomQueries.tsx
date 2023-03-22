@@ -3,7 +3,8 @@ import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
-import { atom, atomFamily, selectorFamily } from 'recoil';
+import { atomUserSession } from '@states/users';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**
  * Query Todos
@@ -29,6 +30,18 @@ export const atomDemoTodoIds = atom<TodoIds[]>({
   default: DATA_DEMO_TODOIDS,
 });
 
+export const selectorSessionTodoIds = selector<TodoIds[]>({
+  key: 'selectorSessionTodoIds',
+  get: ({ get }) => {
+    const session = get(atomUserSession);
+    return session ? get(atomQueryTodoIds) : get(atomDemoTodoIds);
+  },
+  set: ({ get, set }, newValue) => {
+    const session = get(atomUserSession);
+    return session ? set(atomQueryTodoIds, newValue) : set(atomDemoTodoIds, newValue);
+  },
+});
+
 export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
   key: 'atomQueryTodoItem',
   default: {} as Todos,
@@ -50,13 +63,27 @@ export const atomDemoTodoItem = atomFamily<Todos, Todos['_id']>({
   default: {} as Todos,
   effects: (todoId) => [
     ({ setSelf }) => {
-      const demoFunction = async () => await getDemoTodoItem({ _id: todoId });
+      const demoFunction = () => getDemoTodoItem({ _id: todoId });
       setSelf(demoFunction());
     },
   ],
 });
 
-
+export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
+  key: 'selectorSessionTodoItem',
+  get:
+    (todoId) =>
+    ({ get }) => {
+      const session = get(atomUserSession);
+      return session ? get(atomQueryTodoItem(todoId)) : get(atomDemoTodoItem(todoId));
+    },
+  set:
+    (todoId) =>
+    ({ get, set }, newValue) => {
+      const session = get(atomUserSession);
+      return session ? set(atomQueryTodoItem(todoId), newValue) : set(atomDemoTodoItem(todoId), newValue);
+    },
+});
 
 /**
  * Derived Query Todos
@@ -68,6 +95,6 @@ export const atomSelectorTodoItem = atomFamily<Todos, Todos['_id']>({
     get:
       (todoId) =>
       ({ get }) =>
-        get(atomQueryTodoItem(todoId))!,
+        get(selectorSessionTodoItem(todoId))!,
   }),
 }); // Overwrite atomQueryTodoItem to prevent unnecessary re-rendering.

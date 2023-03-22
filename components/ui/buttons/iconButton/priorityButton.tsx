@@ -5,7 +5,7 @@ import { ICON_FLAG, ICON_FLAG_FILL, ICON_LABEL_IMPORTANT, ICON_LABEL_IMPORTANT_F
 import { Types } from '@lib/types';
 import { TypesOptionsPriority } from '@lib/types/typesOptions';
 import { atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { classNames } from '@states/utils';
 import { Fragment, Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
@@ -38,7 +38,7 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
   );
 
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo?._id)).getValue().completed;
+    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed;
   });
 
   return (

@@ -10,7 +10,7 @@ import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useCalUpdateDataItem } from '@states/calendars/hooks';
 import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorities/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useTodoRemoveItem } from '@states/todos/hooks';
 import { Types } from 'lib/types';
 import { useRecoilValue } from 'recoil';
@@ -24,7 +24,7 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
   const removeTodo = useTodoRemoveItem(todo?._id);
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
   const setPriority = typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);
-  const todoItem = useRecoilValue(atomQueryTodoItem(todo?._id));
+  const todoItem = useRecoilValue(selectorSessionTodoItem(todo?._id));
 
   return (
     <Dropdown

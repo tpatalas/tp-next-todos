@@ -4,7 +4,7 @@ import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { usePriorityUpdate } from '@states/priorities/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useRecoilCallback } from 'recoil';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
@@ -12,7 +12,7 @@ type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
 export const TodoModalHeaderContents = ({ todo, children }: Props) => {
   const setPriority = usePriorityUpdate(todo?._id);
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo._id)).getValue().completed;
+    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed;
   });
   const disabledStyle = isTodoCompleted() ? 'cursor-not-allowed opacity-50 select-none' : '';
   const conditionalHeaderDescription = isTodoCompleted() ? 'Completed todo' : 'Update todo';

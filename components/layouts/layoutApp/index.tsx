@@ -19,7 +19,6 @@ const WindowBeforeunloadEffect = dynamic(() =>
   import('@states/misc/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
 const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
-const UserSessionEffect = dynamic(() => import('@states/users/userSessionEffect').then((mod) => mod.UserSessionEffect));
 
 type Props = Pick<Types, 'children'>;
 
@@ -29,7 +28,6 @@ export const LayoutApp = ({ children }: Props) => {
 
   return (
     <LayoutAppFragment>
-      <UserSessionEffect />
       <Head>
         <title>{'My Todo App: ' + slug}</title>
       </Head>
