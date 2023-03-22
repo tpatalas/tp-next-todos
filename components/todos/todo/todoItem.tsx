@@ -6,7 +6,7 @@ import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { selectorSelectedQueryLabels } from '@states/labels';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useTodoCompleteItem } from '@states/todos/hooks';
 import { atomCatch, classNames } from '@states/utils';
 import { format } from 'date-fns';
@@ -18,7 +18,7 @@ type Props = Pick<TypesTodo, 'todo'>;
 export const TodoItem = ({ todo }: Props) => {
   const openModal = useTodoModalStateOpen(todo._id);
   const completeTodo = useTodoCompleteItem(todo._id);
-  const todoItem = useRecoilValue(atomQueryTodoItem(todo._id));
+  const todoItem = useRecoilValue(selectorSessionTodoItem(todo._id));
   const important = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
   const urgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
   const selectedQueryLabels = useRecoilValue(selectorSelectedQueryLabels(todo._id));

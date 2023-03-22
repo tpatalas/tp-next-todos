@@ -2,7 +2,7 @@ import { Labels, Todos } from '@lib/types';
 import { atomComboBoxQuery, atomFilterSelected } from '@states/comboBoxes';
 import { atomTodoNew } from '@states/todos';
 import { atom, atomFamily, selectorFamily } from 'recoil';
-import { atomQueryLabels, atomSelectorLabels } from './atomQueries';
+import { selectorSessionLabels, atomSelectorLabels } from './atomQueries';
 
 /*
  * Atom
@@ -25,7 +25,7 @@ export const atomSelectorLabelItem = atomFamily<Labels, Labels['_id']>({
     get:
       (label_id) =>
       ({ get }) =>
-        get(atomQueryLabels).find((label) => label._id === label_id) || ({} as Labels),
+        get(selectorSessionLabels).find((label) => label._id === label_id) || ({} as Labels),
   }),
 });
 
@@ -56,7 +56,7 @@ export const selectorSelectedQueryLabels = selectorFamily<Labels[], Todos['_id']
     (_id) =>
     ({ get }) => {
       const todoId = _id ? _id! : get(atomTodoNew)._id!;
-      return get(atomQueryLabels).filter((label) => label.title_id && label.title_id.includes(todoId));
+      return get(selectorSessionLabels).filter((label) => label.title_id && label.title_id.includes(todoId));
     },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',

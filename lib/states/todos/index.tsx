@@ -1,10 +1,10 @@
 import { PATHNAME, PRIORITY_LEVEL, OBJECT_ID } from '@data/dataTypesConst';
 import { Labels, TodoIds, Todos, Types } from '@lib/types';
 import { atomLabelQuerySlug } from '@states/labels';
-import { atomQueryLabels } from '@states/labels/atomQueries';
+import { selectorSessionLabels } from '@states/labels/atomQueries';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, selector, selectorFamily } from 'recoil';
-import { atomQueryTodoIds, atomSelectorTodoItem } from './atomQueries';
+import { selectorSessionTodoIds, atomSelectorTodoItem } from './atomQueries';
 
 /**
  * atoms
@@ -58,7 +58,7 @@ export const selectorFilterTodoIds = selector({
       case 'label':
         return get(selectorFilterTodoIdsByPathname(PATHNAME['label']));
       default:
-        return get(atomQueryTodoIds).filter((todo) => !todo.completed);
+        return get(selectorSessionTodoIds).filter((todo) => !todo.completed);
     }
   },
   cachePolicy_UNSTABLE: {
@@ -75,22 +75,22 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATHNAM
         case PATHNAME['app']:
           return get(selectorFilterPriorityRankScore);
         case PATHNAME['urgent']:
-          return get(atomQueryTodoIds).filter(
+          return get(selectorSessionTodoIds).filter(
             (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'],
           );
         case PATHNAME['important']:
-          return get(atomQueryTodoIds).filter(
+          return get(selectorSessionTodoIds).filter(
             (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'],
           );
         case PATHNAME['showAll']:
-          return get(atomQueryTodoIds).filter((todo) => !todo.completed);
+          return get(selectorSessionTodoIds).filter((todo) => !todo.completed);
         case PATHNAME['completed']:
-          return get(atomQueryTodoIds).filter((todo) => todo.completed);
+          return get(selectorSessionTodoIds).filter((todo) => todo.completed);
         case PATHNAME['label']:
-          const titleIdsByCurrentLabel = get(atomQueryLabels).filter(
+          const titleIdsByCurrentLabel = get(selectorSessionLabels).filter(
             (label) => label._id === get(atomLabelQuerySlug),
           )[0]?.title_id;
-          return get(atomQueryTodoIds).filter((todo) => {
+          return get(selectorSessionTodoIds).filter((todo) => {
             const todoId = todo._id as OBJECT_ID;
             return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
           });
@@ -106,8 +106,8 @@ export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TodoIds[], Lab
   get:
     (labelId) =>
     ({ get }) => {
-      const titleIdsByCurrentLabel = get(atomQueryLabels).filter((label) => label._id === labelId)[0]?.title_id;
-      return get(atomQueryTodoIds).filter((todo) => {
+      const titleIdsByCurrentLabel = get(selectorSessionLabels).filter((label) => label._id === labelId)[0]?.title_id;
+      return get(selectorSessionTodoIds).filter((todo) => {
         const todoId = todo._id as OBJECT_ID;
         return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
       });
@@ -125,9 +125,9 @@ export const selectorTodosCount = selectorFamily<
   get:
     ({ labelId, pathname }) =>
     ({ get }) => {
-      const labels = get(atomQueryLabels);
+      const labels = get(selectorSessionLabels);
       if (labelId) {
-        const todos = get(atomQueryTodoIds);
+        const todos = get(selectorSessionTodoIds);
         const titleIds = labels.filter((item) => item._id === labelId)[0]?.title_id;
         const todoIds = todos.filter((todo) => !todo.completed && titleIds && titleIds.includes(todo._id as OBJECT_ID));
         return todoIds.length;

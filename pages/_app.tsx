@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import { ReactElement, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
-import dynamic from 'next/dynamic';
 
 const UserSessionEffect = dynamic(() => import('@states/users/userSessionEffect').then((mod) => mod.UserSessionEffect));
 
