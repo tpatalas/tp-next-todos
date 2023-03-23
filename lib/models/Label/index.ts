@@ -25,7 +25,6 @@ const LabelSchema = new mongoose.Schema({
   ],
   update: {
     type: Number,
-    default: Date.now,
     required: false,
   },
   deleted: {
@@ -37,8 +36,12 @@ const LabelSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: false,
   },
+  expireAt: {
+    type: Date,
+  },
 });
 LabelSchema.index({ deleted: 1, update: 1, title_id: 1, user_id: -1 }, { unique: true });
 LabelSchema.index({ name: 'text' });
+LabelSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 export default mongoose.models['Labels'] || mongoose.model('Labels', LabelSchema);

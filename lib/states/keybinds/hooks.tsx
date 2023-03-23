@@ -13,7 +13,7 @@ import {
   useTodoModalStateMinimize,
   useTodoModalStateMaximize,
 } from '@states/modals/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from '@states/todos/hooks';
 import { atomCatch } from '@states/utils';
 import { useConditionCheckLabelTitleEmpty } from '@states/utils/hooks';
@@ -69,7 +69,7 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
         openModal();
         break;
       case event.key === 'Escape':
-        if (get(atomQueryTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
+        if (get(selectorSessionTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
         event.preventDefault();
         !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
         reset(atomCurrentFocus);

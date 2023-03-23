@@ -2,7 +2,7 @@ import { FOCUS } from '@data/dataTypesConst';
 import { Todos, Types } from '@lib/types';
 import { atomTodoModalMini } from '@states/modals';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { atomOnFocus, atomCurrentFocus } from '.';
 
@@ -16,7 +16,7 @@ export const useFocusState = (_id: Todos['_id']) => {
 
     switch (state) {
       case FOCUS['openTodoModalOnFocus']:
-        !get(atomQueryTodoItem(_id))?.completed && openModal();
+        !get(selectorSessionTodoItem(_id))?.completed && openModal();
         break;
       case FOCUS['returnOnNoFocus']:
         if (!get(atomOnFocus)) return;

@@ -12,7 +12,7 @@ import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffec
 import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { atomTodoModalMax, atomTodoModalOpen } from '@states/modals';
 import { useTodoModalStateClose } from '@states/modals/hooks';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useTodoAdd } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCheckTodoTitleEmpty } from '@states/utils/hooks';
@@ -36,7 +36,7 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
   const addTodo = useTodoAdd();
   const condition = useConditionCheckTodoTitleEmpty();
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo._id)).getValue().completed;
+    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed;
   });
 
   return (

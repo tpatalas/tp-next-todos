@@ -2,7 +2,7 @@ import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { atomTodoNew } from '@states/todos';
-import { atomQueryTodoIds, atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoIds, selectorSessionTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { atomPriority, selectorPriorityRankScore } from '.';
@@ -67,18 +67,18 @@ export const usePriorityUpdateData = (todoId: Todos['_id']) => {
   const updatePriorityDataItem = useRecoilCallback(({ snapshot, set, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomQueryTodoItem(todoId), {
-      ...get(atomQueryTodoItem(todoId)),
+    set(selectorSessionTodoItem(todoId), {
+      ...get(selectorSessionTodoItem(todoId)),
       priorityLevel: get(atomSelectorTodoItem(todoId)).priorityLevel,
       priorityRankScore: get(atomSelectorTodoItem(todoId)).priorityRankScore,
     });
 
     set(
-      atomQueryTodoIds,
-      get(atomQueryTodoIds).map((todo) => {
+      selectorSessionTodoIds,
+      get(selectorSessionTodoIds).map((todo) => {
         return {
           ...todo,
-          priorityLevel: todo._id === todoId ? get(atomQueryTodoItem(todoId)).priorityLevel : todo.priorityLevel,
+          priorityLevel: todo._id === todoId ? get(selectorSessionTodoItem(todoId)).priorityLevel : todo.priorityLevel,
         };
       }),
     );

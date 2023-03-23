@@ -1,7 +1,7 @@
 import { CATCH, NOTIFICATION } from '@data/dataTypesConst';
 import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import { atomQueryLabels, atomSelectorLabels } from '@states/labels/atomQueries';
+import { selectorSessionLabels, atomSelectorLabels } from '@states/labels/atomQueries';
 import { atomNetworkStatusEffect } from '@states/misc';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useTodoModalStateReset } from '@states/modals/hooks';
@@ -16,7 +16,7 @@ import {
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import { atomTodoNew } from '.';
-import { atomQueryTodoIds, atomQueryTodoItem, atomSelectorTodoItem } from './atomQueries';
+import { selectorSessionTodoIds, selectorSessionTodoItem, atomSelectorTodoItem } from './atomQueries';
 
 /**
  * Hooks
@@ -32,9 +32,9 @@ export const useTodoAdd = () => {
   const updateQueryTodoItem = useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomQueryLabels, get(atomSelectorLabels));
-    set(atomQueryTodoItem(get(atomTodoNew)._id), get(atomTodoNew));
-    set(atomQueryTodoIds, [...get(atomQueryTodoIds), { ...get(atomTodoNew) }]);
+    set(selectorSessionLabels, get(atomSelectorLabels));
+    set(selectorSessionTodoItem(get(atomTodoNew)._id), get(atomTodoNew));
+    set(selectorSessionTodoIds, [...get(selectorSessionTodoIds), { ...get(atomTodoNew) }]);
     status === 'authenticated' && createDataNewTodo(get(atomTodoNew));
     setNotification(NOTIFICATION['createdTodo']);
   });
@@ -62,11 +62,11 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
   const updateQueryTodoItem = useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomQueryLabels, get(atomSelectorLabels));
-    set(atomQueryTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
+    set(selectorSessionLabels, get(atomSelectorLabels));
+    set(selectorSessionTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
     set(
-      atomQueryTodoIds,
-      get(atomQueryTodoIds).map((todo) => {
+      selectorSessionTodoIds,
+      get(selectorSessionTodoIds).map((todo) => {
         if (todo._id === todoId) {
           return {
             ...todo,
@@ -108,12 +108,12 @@ export const useTodoRemoveItem = (todoId: Todos['_id']) => {
       return;
     }
     set(
-      atomQueryTodoIds,
-      get(atomQueryTodoIds).filter((todo) => todo._id !== todoId),
+      selectorSessionTodoIds,
+      get(selectorSessionTodoIds).filter((todo) => todo._id !== todoId),
     );
     status === 'authenticated' && deleteDataTodo(todoId);
     setNotification(NOTIFICATION['deleteTodo']);
-    reset(atomQueryTodoItem(todoId));
+    reset(selectorSessionTodoItem(todoId));
     get(atomCatch(CATCH.todoModal)) && reset(atomCatch(CATCH.todoModal));
   });
 
@@ -131,9 +131,9 @@ export const useTodoCompleteDate = (todoId: Todos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomQueryTodoItem(todoId), {
-      ...get(atomQueryTodoItem(todoId)),
-      completedDate: get(atomQueryTodoItem(todoId)).completed ? new Date() : null,
+    set(selectorSessionTodoItem(todoId), {
+      ...get(selectorSessionTodoItem(todoId)),
+      completedDate: get(selectorSessionTodoItem(todoId)).completed ? new Date() : null,
     });
   });
 };
@@ -148,15 +148,15 @@ export const useTodoCompleteItem = (todoId: Todos['_id']) => {
     const release = snapshot.retain();
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomQueryTodoItem(todoId), {
-      ...get(atomQueryTodoItem(todoId)),
-      completed: !get(atomQueryTodoItem(todoId)).completed,
+    set(selectorSessionTodoItem(todoId), {
+      ...get(selectorSessionTodoItem(todoId)),
+      completed: !get(selectorSessionTodoItem(todoId)).completed,
     });
 
     setTimeout(() => {
       set(
-        atomQueryTodoIds,
-        get(atomQueryTodoIds).map((todo) => {
+        selectorSessionTodoIds,
+        get(selectorSessionTodoIds).map((todo) => {
           return {
             ...todo,
             completed: todo._id === todoId ? !todo.completed : todo.completed,
@@ -175,9 +175,13 @@ export const useTodoCompleteItem = (todoId: Todos['_id']) => {
     updateQueryTodoItem();
     updateCompletedDate();
     status === 'authenticated' &&
-      completeDataTodo(todoId, get(atomQueryTodoItem(todoId)).completed, get(atomQueryTodoItem(todoId)).completedDate);
+      completeDataTodo(
+        todoId,
+        get(selectorSessionTodoItem(todoId)).completed,
+        get(selectorSessionTodoItem(todoId)).completedDate,
+      );
 
-    get(atomQueryTodoItem(todoId)).completed
+    get(selectorSessionTodoItem(todoId)).completed
       ? setNotification(NOTIFICATION['completeTodo'])
       : setNotification(NOTIFICATION['unCompleteTodo']);
   };

@@ -1,7 +1,6 @@
 import { IDB_KEY, IDB_KEY_STORE, IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesRefetchEffect } from '@lib/types';
-import { atomUserOffSession } from '@states/users';
 import { hasTimePast } from '@states/utils';
 import { DefaultValue } from 'recoil';
 
@@ -16,25 +15,13 @@ export const queryEffect: TypesRefetchEffect =
     isRefetchingOnFocus,
     isRefetchingOnBlur,
     refetchInterval,
-    demoFunction,
   }) =>
-  ({ setSelf, onSet, trigger, getLoadable }) => {
+  ({ setSelf, onSet, trigger }) => {
     if (typeof window === 'undefined' || typeof queryFunction === 'undefined') return;
     const onIndexedDB = isIndexedDBEnabled || typeof isIndexedDBEnabled === 'undefined';
     const isIdMapQueryKey = queryKey === IDB_KEY['labels'] || queryKey === IDB_KEY['todoIds'];
     const lastUpdateTime = isIdMapQueryKey && Number(JSON.parse(localStorage.getItem(STORAGE_KEY[queryKey]) || '0'));
     const hasFiveMinTimePast = lastUpdateTime && hasTimePast(lastUpdateTime); // 5 min is default time. You can number as argument for custom time. ex)  hasTimePast(lastUpdateTime, 20) 20 min custom time
-    const offSession = getLoadable(atomUserOffSession).getValue();
-
-    if (offSession) {
-      if (typeof demoFunction === 'undefined') return;
-      const demoData = async () => {
-        const data = demoFunction && (await demoFunction());
-        return data as DefaultValue;
-      };
-      setSelf(demoData());
-      return;
-    }
 
     //concat indexedDB with data if data is in array
     const concatDataWithIndexedDB = async (data: unknown) => {

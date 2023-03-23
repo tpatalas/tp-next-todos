@@ -11,7 +11,7 @@ import { Menu } from '@headlessui/react';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useCalResetDateAll, useCalResetDateItemOnly, useCalResetDayUpdater } from '@states/calendars/hooks';
 import { atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { classNames } from '@states/utils';
 import { Calendar } from '@ui/calendars/calendar';
 import { format } from 'date-fns';
@@ -31,7 +31,7 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
   const noDaySelected = todoItem.dueDate == null;
   const renderDueDate = noDaySelected ? 'Due date' : format(new Date(todoItem.dueDate as Date), 'MMM dd, yy');
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo?._id)).getValue().completed;
+    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed;
   });
 
   return (

@@ -1,7 +1,7 @@
 import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Todos } from '@lib/types';
 import { selectorDynamicTodoItem } from '@states/todos';
-import { atomQueryTodoIds } from '@states/todos/atomQueries';
+import { selectorSessionTodoIds } from '@states/todos/atomQueries';
 import { subDays, differenceInDays } from 'date-fns';
 import { atomFamily, selectorFamily, selector } from 'recoil';
 
@@ -37,13 +37,13 @@ export const selectorFilterPriorityRankScore = selector({
   key: 'selectorFilterPriorityRankScore',
   get: ({ get }) => {
     const taskCapacity = get(selectorTaskCompleteCapacity);
-    const prsUrgentFiltered = get(atomQueryTodoIds).filter(
+    const prsUrgentFiltered = get(selectorSessionTodoIds).filter(
       (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['urgent'],
     );
-    const prsImportantFiltered = get(atomQueryTodoIds).filter(
+    const prsImportantFiltered = get(selectorSessionTodoIds).filter(
       (todo) => !todo.completed && todo.priorityLevel === PRIORITY_LEVEL['important'],
     );
-    const prsNormalFiltered = get(atomQueryTodoIds).filter(
+    const prsNormalFiltered = get(selectorSessionTodoIds).filter(
       (todo) =>
         !todo.completed &&
         todo.priorityLevel !== PRIORITY_LEVEL['urgent'] &&
@@ -90,7 +90,7 @@ export const selectorTaskCompleteCapacity = selector({
   key: 'selectorTaskCompleteCapacity',
   get: ({ get }) => {
     const fiveDaysFromToday = subDays(new Date(), 5);
-    const todoIdsCompletedLastFiveDays = get(atomQueryTodoIds).filter((todo) => {
+    const todoIdsCompletedLastFiveDays = get(selectorSessionTodoIds).filter((todo) => {
       const fiveDaysFromTodayCompleted = new Date(todo.completedDate!) > fiveDaysFromToday;
       return todo.completed && fiveDaysFromTodayCompleted;
     });
@@ -110,7 +110,7 @@ export const selectorPrsDueDate = selectorFamily<number, Todos['_id']>({
       const taskCapacityPerDay = get(selectorTaskCompleteCapacity);
       const todoItem = get(selectorDynamicTodoItem(todoId));
       const priority = get(selectorDynamicPriority(todoId)) as PRIORITY_LEVEL;
-      const totalUncompletedTodos = get(atomQueryTodoIds).filter((todo) => !todo.completed).length;
+      const totalUncompletedTodos = get(selectorSessionTodoIds).filter((todo) => !todo.completed).length;
       const dueDate = todoItem.dueDate != null && todoItem.dueDate;
       const daysToDueDate = differenceInDays(new Date(dueDate as Date), new Date()) + 1;
       const overDueFactor = Math.abs(daysToDueDate) * 200;

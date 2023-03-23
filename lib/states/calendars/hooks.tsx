@@ -4,7 +4,7 @@ import { Todos } from '@lib/types';
 import { useNotificationState } from '@states/notifications/hooks';
 import { usePriorityRankScore } from '@states/priorities/hooks';
 import { atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import { useGetWithRecoilCallback } from '@states/utils/hooks';
 import {
   parse,
@@ -141,7 +141,7 @@ export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
   const setNotification = useNotificationState();
   const updateCalQueryItem = useRecoilCallback(({ snapshot, set, reset }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    set(atomQueryTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
+    set(selectorSessionTodoItem(todoId), get(atomSelectorTodoItem(todoId)));
 
     status === 'authenticated' &&
       updateDataCalendarTodo(
@@ -155,7 +155,7 @@ export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
   return () => {
     updateCalItem();
     updatePriorityRankScore();
-    if (equal(get(atomQueryTodoItem(todoId)).dueDate, get(atomSelectorTodoItem(todoId)).dueDate)) return;
+    if (equal(get(selectorSessionTodoItem(todoId)).dueDate, get(atomSelectorTodoItem(todoId)).dueDate)) return;
     get(atomSelectorTodoItem(todoId)).dueDate
       ? setNotification(NOTIFICATION['updatedDueDate'])
       : setNotification(NOTIFICATION['removedDueDate']);
