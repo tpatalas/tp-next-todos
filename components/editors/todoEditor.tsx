@@ -1,5 +1,5 @@
 import { Types } from '@lib/types';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { classNames } from '@states/utils';
 import dynamic from 'next/dynamic';
 import { useRecoilCallback } from 'recoil';
@@ -10,7 +10,7 @@ const EditorComposer = dynamic(() => import('./editorComposer').then((mod) => mo
 
 export const TodoEditors = ({ todo }: Props) => {
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo._id)).getValue().completed;
+    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed;
   });
 
   return (

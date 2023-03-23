@@ -6,7 +6,7 @@ import { Types } from '@lib/types';
 import { KeysWithItemModalEffect } from '@states/keybinds/KeysWithItemModalEffect';
 import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
 import { atomPriority } from '@states/priorities';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useTodoCompleteItem, useTodoUpdateItem } from '@states/todos/hooks';
 import { classNames } from '@states/utils';
 import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
@@ -18,7 +18,7 @@ const TodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod
 export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
   const updateTodo = useTodoUpdateItem(todo._id);
   const completeTodo = useTodoCompleteItem(todo._id);
-  const todoItem = useRecoilValue(atomQueryTodoItem(todo._id));
+  const todoItem = useRecoilValue(selectorSessionTodoItem(todo._id));
   const currentPriority = useRecoilValue(atomPriority(todo._id));
   const condition = useConditionCompareTodoItemsEqual(todo._id);
 
@@ -46,13 +46,11 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
           <DisableButton
             options={optionsButtonItemModalUpdate}
             isConditionalRendering={condition}
-            onClick={() => updateTodo()}
-          >
+            onClick={() => updateTodo()}>
             Update
           </DisableButton>
         </FooterButtonsFragment>
-      }
-    >
+      }>
       <KeysWithTodoModalEffect todo={todo} />
       <KeysWithItemModalEffect todo={todo} />
     </TodoModal>

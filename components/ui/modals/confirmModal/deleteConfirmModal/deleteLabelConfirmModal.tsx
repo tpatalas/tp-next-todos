@@ -1,5 +1,5 @@
 import { Labels, Types } from '@lib/types';
-import { atomQueryLabels } from '@states/labels/atomQueries';
+import { selectorSessionLabels } from '@states/labels/atomQueries';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useLabelModalConfirmStateDelete } from '@states/modals/hooks';
 import dynamic from 'next/dynamic';
@@ -13,7 +13,7 @@ type Props = Pick<Types, 'label'>;
 export const DeleteLabelConfirmModal = ({ label }: Props) => {
   const deleteConfirmModal = useLabelModalConfirmStateDelete(label._id);
   const isConfirmModalOpen = useRecoilValue(atomConfirmModalDelete(label._id));
-  const labelItem = useRecoilValue(atomQueryLabels).find((item) => item._id === label._id) || ({} as Labels);
+  const labelItem = useRecoilValue(selectorSessionLabels).find((item) => item._id === label._id) || ({} as Labels);
 
   return (
     <Fragment>

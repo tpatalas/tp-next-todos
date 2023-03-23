@@ -27,7 +27,7 @@ import {
   RefObject,
 } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
-import { AtomEffect, DefaultValue } from 'recoil';
+import { AtomEffect } from 'recoil';
 import { Descendant } from 'slate';
 import { ReactEditor } from 'slate-react';
 
@@ -368,7 +368,6 @@ export interface TypesEffects {
   shouldGet: boolean;
   isSessionSetEnabled: boolean;
   isSessionResetEnabled: boolean;
-  demoFunction(): unknown | DefaultValue;
   // Refetch Effect
   queryKey: string;
   queryFunction<T>(): Promise<{ data: T }>;
@@ -401,7 +400,6 @@ export type TypesRefetchEffect = <T>({
   isRefetchingOnFocus,
   isRefetchingOnBlur,
   refetchInterval,
-  demoFunction,
 }: Partial<
   Pick<
     Types,
@@ -412,7 +410,6 @@ export type TypesRefetchEffect = <T>({
     | 'isRefetchingOnBlur'
     | 'refetchInterval'
     | 'depQueryFunction'
-    | 'demoFunction'
   >
 > &
   Pick<Types, 'queryFunction' | 'queryKey' | 'storeName'>) => AtomEffect<T>;

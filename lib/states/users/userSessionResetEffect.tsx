@@ -1,6 +1,6 @@
 import { STORAGE_KEY } from '@data/dataTypesConst';
-import { atomQueryLabels } from '@states/labels/atomQueries';
-import { atomQueryTodoIds } from '@states/todos/atomQueries';
+import { selectorSessionLabels } from '@states/labels/atomQueries';
+import { selectorSessionTodoIds } from '@states/todos/atomQueries';
 import { getSessionStorage, setSessionStorage } from '@states/utils';
 import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
@@ -18,10 +18,9 @@ export const UserSessionResetEffect = () => {
 
   const userSession = useRecoilCallback(({ reset }) => () => {
     if (offSession) {
-      reset(atomQueryTodoIds);
-      reset(atomQueryLabels);
-      localStorage.removeItem(STORAGE_KEY['labels']);
-      localStorage.removeItem(STORAGE_KEY['todoIds']);
+      reset(selectorSessionTodoIds);
+      reset(selectorSessionLabels);
+      localStorage.clear();
       clearIndexedDB();
       return;
     }

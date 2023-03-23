@@ -1,9 +1,9 @@
 import { Labels, Todos } from '@lib/types';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
-import { atomQueryLabels } from '@states/labels/atomQueries';
+import { selectorSessionLabels } from '@states/labels/atomQueries';
 import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
 import { RefObject, useEffect, useMemo, useState } from 'react';
@@ -41,7 +41,7 @@ export const useConditionCheckLabelTitleEmpty = () => {
 
 export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
   if (typeof _id === 'undefined') return;
-  const todoItem = useRecoilValue(atomQueryTodoItem(_id));
+  const todoItem = useRecoilValue(selectorSessionTodoItem(_id));
   const selectorTodoItem = useRecoilValue(atomSelectorTodoItem(_id));
   const todoItemCompletedEqual = equal(todoItem.completed, selectorTodoItem.completed);
   // Disable update button if completed
@@ -50,7 +50,7 @@ export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
 
 export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
   if (typeof _id === 'undefined') return;
-  const labels = useRecoilValue(atomQueryLabels);
+  const labels = useRecoilValue(selectorSessionLabels);
   const labelItem = labels.find((label) => label._id === _id) || ({} as Labels);
   const labelItemCompare = useRecoilValue(atomSelectorLabelItem(_id));
   return equal(labelItem, labelItemCompare);
@@ -117,7 +117,7 @@ export const useCompareToQueryLabels = () => {
   return useRecoilCallback(({ snapshot }) => (compare: Labels[]) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     return compare.filter((label) => {
-      return !get(atomQueryLabels).find((queryLabel) => equal(label, queryLabel));
+      return !get(selectorSessionLabels).find((queryLabel) => equal(label, queryLabel));
     });
   });
 };

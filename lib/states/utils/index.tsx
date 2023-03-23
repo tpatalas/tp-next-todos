@@ -76,9 +76,9 @@ export const validateEmailFormat = (email: string) => {
 };
 
 export const getSessionStorage = (queryKey: STORAGE_KEY) => {
-  const session = localStorage.getItem(queryKey);
+  const session = sessionStorage.getItem(queryKey);
   return session && JSON.parse(session);
 };
 export const setSessionStorage = (queryKey: STORAGE_KEY, value: unknown) =>
-  localStorage.setItem(queryKey, JSON.stringify(value));
-export const delSessionStorage = (queryKey: STORAGE_KEY) => localStorage.removeItem(queryKey);
+  sessionStorage.setItem(queryKey, JSON.stringify(value));
+export const delSessionStorage = (queryKey: STORAGE_KEY) => sessionStorage.removeItem(queryKey);

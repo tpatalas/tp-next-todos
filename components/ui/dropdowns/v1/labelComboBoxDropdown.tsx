@@ -7,7 +7,7 @@ import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
 import { useTodoModalStateClose } from '@states/modals/hooks';
 import { atomTodoNew } from '@states/todos';
-import { atomQueryTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { classNames, paths } from '@states/utils';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
 import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
@@ -23,9 +23,9 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
   const scrollRef = useRef<HTMLDivElement>(null);
   const selectedLabels = selectedQueryLabels ? selectedQueryLabels : useRecoilValue(selectorSelectedLabels(todo?._id));
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(atomQueryTodoItem(todo?._id)).getValue().completed;
+    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed;
   });
-  const todoItem = useRecoilValue(typeof todo !== 'undefined' ? atomQueryTodoItem(todo?._id) : atomTodoNew);
+  const todoItem = useRecoilValue(typeof todo !== 'undefined' ? selectorSessionTodoItem(todo?._id) : atomTodoNew);
   const important = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
   const urgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
   const priority = important || urgent;

@@ -3,7 +3,8 @@ import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { TodoIds, Todos } from '@lib/types';
-import { atom, atomFamily, selectorFamily } from 'recoil';
+import { atomUserSession } from '@states/users';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**
  * Query Todos
@@ -12,7 +13,7 @@ import { atom, atomFamily, selectorFamily } from 'recoil';
 
 export const atomQueryTodoIds = atom<TodoIds[]>({
   key: 'atomQueryTodoIds',
-  default: DATA_DEMO_TODOIDS,
+  default: [],
   effects: [
     queryEffect({
       storeName: IDB_STORE['idMaps'],
@@ -24,6 +25,23 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
   ],
 });
 
+export const atomDemoTodoIds = atom<TodoIds[]>({
+  key: 'atomDemoTodoIds',
+  default: DATA_DEMO_TODOIDS,
+});
+
+export const selectorSessionTodoIds = selector<TodoIds[]>({
+  key: 'selectorSessionTodoIds',
+  get: ({ get }) => {
+    const session = get(atomUserSession);
+    return session ? get(atomQueryTodoIds) : get(atomDemoTodoIds);
+  },
+  set: ({ get, set }, newValue) => {
+    const session = get(atomUserSession);
+    return session ? set(atomQueryTodoIds, newValue) : set(atomDemoTodoIds, newValue);
+  },
+});
+
 export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
   key: 'atomQueryTodoItem',
   default: {} as Todos,
@@ -33,12 +51,38 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
       storeName: IDB_STORE['todoItems'],
       queryKey: todoId!.toString(),
       queryFunction: () => getDataTodoItem({ _id: todoId }),
-      demoFunction: () => getDemoTodoItem({ _id: todoId }),
       isRefetchingOnMutation: true,
       refetchDelayOnMutation: 800,
       isRefetchingOnFocus: true,
     }),
   ],
+});
+
+export const atomDemoTodoItem = atomFamily<Todos, Todos['_id']>({
+  key: 'atomDemoTodoItem',
+  default: {} as Todos,
+  effects: (todoId) => [
+    ({ setSelf }) => {
+      const demoFunction = () => getDemoTodoItem({ _id: todoId });
+      setSelf(demoFunction());
+    },
+  ],
+});
+
+export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
+  key: 'selectorSessionTodoItem',
+  get:
+    (todoId) =>
+    ({ get }) => {
+      const session = get(atomUserSession);
+      return session ? get(atomQueryTodoItem(todoId)) : get(atomDemoTodoItem(todoId));
+    },
+  set:
+    (todoId) =>
+    ({ get, set }, newValue) => {
+      const session = get(atomUserSession);
+      return session ? set(atomQueryTodoItem(todoId), newValue) : set(atomDemoTodoItem(todoId), newValue);
+    },
 });
 
 /**
@@ -51,6 +95,6 @@ export const atomSelectorTodoItem = atomFamily<Todos, Todos['_id']>({
     get:
       (todoId) =>
       ({ get }) =>
-        get(atomQueryTodoItem(todoId))!,
+        get(selectorSessionTodoItem(todoId))!,
   }),
 }); // Overwrite atomQueryTodoItem to prevent unnecessary re-rendering.

@@ -1,7 +1,7 @@
 import { PATHNAME, PATHNAME_IMAGE } from '@data/dataTypesConst';
 import { Labels } from '@lib/types';
 import { atomLabelQuerySlug } from '@states/labels';
-import { atomQueryLabels } from '@states/labels/atomQueries';
+import { selectorSessionLabels } from '@states/labels/atomQueries';
 import { atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useNextQuery } from '@states/utils/hooks';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ import { atomFilterTodoIds } from '.';
 export const FilterTodoIdsEffect = () => {
   const labelId = useNextQuery({ path: PATHNAME['label'] });
   const { asPath } = useRouter();
-  const labels = useRecoilValue(atomQueryLabels);
+  const labels = useRecoilValue(selectorSessionLabels);
   const label_id = useRecoilValue(atomLabelQuerySlug);
   const label = labels.find((label) => label._id === label_id) || ({} as Labels);
 
