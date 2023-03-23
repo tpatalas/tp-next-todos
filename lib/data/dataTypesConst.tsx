@@ -136,12 +136,12 @@ export const FILTER_TODOIDS = {
 
 export type PATHNAME = (typeof PATHNAME)[keyof typeof PATHNAME];
 export const PATHNAME = {
-  app: '/',
-  urgent: '/urgent',
-  important: '/important',
-  showAll: '/showall',
-  completed: '/completed',
-  label: '/label',
+  app: '/app',
+  urgent: '/app/urgent',
+  important: '/app/important',
+  showAll: '/app/showall',
+  completed: '/app/completed',
+  label: '/app/label',
 } as const;
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
