@@ -7,12 +7,14 @@ export async function middleware(req: NextRequest) {
   switch (req.nextUrl.pathname) {
     case '/auth':
       if (token) {
-        return NextResponse.redirect(new URL('/', req.url));
+        return NextResponse.redirect(new URL('/app', req.url));
       }
       break;
+    case '/':
+      return NextResponse.redirect(new URL('/app', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/auth'],
+  matcher: ['/', '/auth'],
 };
