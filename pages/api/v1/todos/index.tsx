@@ -26,6 +26,8 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       query.update = { $gt: Number(lastUpdate) };
       if (Number(lastUpdate) === 0) query.deleted = { $ne: true };
 
