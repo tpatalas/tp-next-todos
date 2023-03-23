@@ -18,5 +18,4 @@ export const atomUserVerificationRequest = atom({
 
 export const atomUserSession = atom({
   key: 'atomUserSession',
-  default: false,
 });

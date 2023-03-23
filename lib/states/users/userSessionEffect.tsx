@@ -7,15 +7,20 @@ import { atomUserSession } from '.';
 
 export const UserSessionEffect = () => {
   const { data: session } = useSession();
+  const offSession = session === null && typeof session !== 'undefined';
 
-  const sessionHandler = useRecoilCallback(({ set, reset }) => () => {
+  const sessionHandler = useRecoilCallback(({ set }) => async () => {
+    if (typeof session === 'undefined') return;
+    if (offSession) {
+      set(atomUserSession, false);
+      setSessionStorage(STORAGE_KEY['offSession'], true);
+      return;
+    }
     if (session) {
       set(atomUserSession, true);
       delSessionStorage(STORAGE_KEY['offSession']);
       return;
     }
-    reset(atomUserSession);
-    setSessionStorage(STORAGE_KEY['offSession'], true);
   });
 
   useEffect(() => {
