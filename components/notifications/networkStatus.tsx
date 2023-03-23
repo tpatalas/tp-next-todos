@@ -1,5 +1,6 @@
 import { Button as NetworkStatusReadOnlyButton } from '@buttons/button';
-import { optionsButtonNetworkStatus, optionsSvgNetworkStatus } from '@data/dataOptions';
+import { optionsButtonNetworkStatus } from '@options/button';
+import { optionsSvgNetworkStatus } from '@options/svg';
 import { atomNetworkStatusEffect } from '@states/misc';
 import dynamic from 'next/dynamic';
 import { Fragment as NetworkStatusFragment } from 'react';

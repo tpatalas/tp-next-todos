@@ -1,10 +1,10 @@
 import { DisableButton } from '@buttons/disableButton';
-import { optionsButtonItemModalUpdate } from '@data/dataOptions';
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
+import { KeysWithItemModalEffect } from '@lib/stateLogics/effects/keybindings/KeysWithItemModalEffect';
+import { KeysWithTodoModalEffect } from '@lib/stateLogics/effects/keybindings/keysWithTodoModalEffect';
 import { Types } from '@lib/types';
-import { KeysWithItemModalEffect } from '@states/keybinds/KeysWithItemModalEffect';
-import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
+import { optionsButtonItemModalUpdate } from '@options/button';
 import { atomPriority } from '@states/priorities';
 import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useTodoCompleteItem, useTodoUpdateItem } from '@states/todos/hooks';

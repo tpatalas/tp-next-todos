@@ -1,5 +1,5 @@
-import { DATA_SVG_LOGO } from '@data/dataArrayOfObjects/dataSVGLogo';
-import { SVG_LOGO } from '@data/dataTypesConst';
+import { DATA_SVG_LOGO } from '@collections/svgLogo';
+import { SVG_LOGO } from '@constAssertions/data';
 import { TypesOptionsSvg } from '@lib/types/typesOptions';
 
 type Props = { options: TypesOptionsSvg } & { svgLogo: SVG_LOGO };

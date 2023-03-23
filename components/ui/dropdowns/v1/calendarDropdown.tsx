@@ -1,11 +1,6 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import {
-  optionsButtonCalendarCancel,
-  optionsButtonCalendarConfirm,
-  optionsButtonCalendarResetDate,
-} from '@data/dataOptions';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
@@ -19,6 +14,11 @@ import { Types } from 'lib/types';
 import { Fragment, Fragment as HeaderContentsFragment } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
+import {
+  optionsButtonCalendarResetDate,
+  optionsButtonCalendarCancel,
+  optionsButtonCalendarConfirm,
+} from '@options/button';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClickConfirm'>;
 

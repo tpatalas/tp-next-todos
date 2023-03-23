@@ -1,4 +1,4 @@
-import { CATCH, FOCUS } from '@data/dataTypesConst';
+import { CATCH, FOCUS } from '@constAssertions/misc';
 import { Types } from '@lib/types';
 import { atomCurrentFocus, atomOnBlur } from '@states/focus';
 import { useFocusState } from '@states/focus/hooks';

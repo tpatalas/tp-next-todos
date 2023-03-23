@@ -1,5 +1,5 @@
-import { BREAKPOINT } from '@data/dataTypesConst';
-import { mediaQueryEffect } from '@effects/atomEffects';
+import { BREAKPOINT } from '@constAssertions/ui';
+import { mediaQueryEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
 import { atomMediaQuery } from '@states/misc';
 import { atom, selector } from 'recoil';
 

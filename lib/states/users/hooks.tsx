@@ -1,9 +1,10 @@
-import { SPINNER, USER } from '@data/dataTypesConst';
 import { atomLoadingSpinner } from '@states/misc';
 import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { atomUser, atomUserErrorMessage, atomUserVerificationRequest } from '.';
+import { USER } from '@constAssertions/misc';
+import { SPINNER } from '@constAssertions/ui';
 
 export const useUserValueUpdate = () => {
   return useRecoilCallback(({ set, snapshot }) => (targetName: USER, content: string) => {

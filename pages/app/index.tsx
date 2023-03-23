@@ -7,7 +7,7 @@ const TodoList = dynamic(() => import('components/todos/todoList').then((mod) =>
   ssr: false,
 });
 const FilterTodoIdsEffect = dynamic(() =>
-  import('@states/todos/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
+  import('@lib/stateLogics/effects/data/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
 );
 const LoadingTodos = dynamic(() =>
   import('@components/loadable/loadingStates/loadingTodos').then((mod) => mod.LoadingTodos),

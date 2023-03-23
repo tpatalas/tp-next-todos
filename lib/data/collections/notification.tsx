@@ -1,6 +1,13 @@
-import { NOTIFICATION } from "@data/dataTypesConst";
-import { ICON_TASK_ALT, ICON_INFO, ICON_DELETE, ICON_EVENT_AVAILABLE, ICON_EVENT_BUSY, ICON_ERROR } from "@data/materialSymbols";
-import { TypesNotification } from "@lib/types";
+import { NOTIFICATION } from '@constAssertions/ui';
+import {
+  ICON_TASK_ALT,
+  ICON_INFO,
+  ICON_DELETE,
+  ICON_EVENT_AVAILABLE,
+  ICON_EVENT_BUSY,
+  ICON_ERROR,
+} from '@data/materialSymbols';
+import { TypesNotification } from '@lib/types';
 
 export const DATA_NOTIFICATION: TypesNotification[] = [
   {

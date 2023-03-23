@@ -1,4 +1,3 @@
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { atomTodoNew } from '@states/todos';
@@ -6,6 +5,7 @@ import { selectorSessionTodoIds, selectorSessionTodoItem, atomSelectorTodoItem }
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { atomPriority, selectorPriorityRankScore } from '.';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 
 /**
  * Hooks

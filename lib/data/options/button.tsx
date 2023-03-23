@@ -1,84 +1,27 @@
-import { LoadingSkeletonLabels } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels';
-import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
-import {
-  TypesOptionsButton,
-  TypesOptionsDropdown,
-  TypesOptionsFloatingLabelInput,
-  TypesOptionsLoadingState,
-  TypesOptionsMinimizedModalTransition,
-  TypesOptionsPriority,
-  TypesOptionsSvg,
-} from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
-import { MODIFIER_KBD, POSITION_X, POSITION_Y, PRIORITY_LEVEL } from './dataTypesConst';
+import { MODIFIER_KBD } from '@constAssertions/misc';
 import {
   ICON_CHEVRON_LEFT,
   ICON_CHEVRON_RIGHT,
   ICON_CLOSE,
   ICON_DELETE,
-  ICON_EVENT_AVAILABLE_FILL,
-  ICON_FLAG_FILL,
   ICON_LABEL,
   ICON_LABEL_FILL,
-  ICON_LABEL_IMPORTANT_FILL,
   ICON_MAXIMIZE,
   ICON_MENU,
   ICON_MINIMIZE,
-  ICON_MORE_VERT,
   ICON_NEW_LABEL,
   ICON_OPEN_IN_FULL,
-  ICON_REPORT,
   ICON_UNFOLD_MORE,
-  ICON_WARNING,
-} from './materialSymbols';
+} from '@data/materialSymbols';
 import {
   STYLE_BUTTON_LARGE_BLUE,
   STYLE_BUTTON_NORMAL_BLUE,
   STYLE_BUTTON_NORMAL_RED,
   STYLE_BUTTON_NORMAL_WHITE,
   STYLE_HOVER_ENABLED_SLATE_DARK,
-} from './stylePreset';
-
-/**
- * * TypesOptionsSvg
- */
-// network status
-export const optionsSvgNetworkStatus: TypesOptionsSvg = {
-  path: ICON_WARNING,
-  className: 'h-4 w-4 fill-red-500',
-};
-
-// priority
-export const optionsSvgPriorityUrgent: TypesOptionsSvg = {
-  path: ICON_FLAG_FILL,
-  className: 'h-4 w-4 fill-red-600',
-};
-
-export const optionsSvgPriorityImportant: TypesOptionsSvg = {
-  path: ICON_LABEL_IMPORTANT_FILL,
-  className: 'h-4 w-4 fill-yellow-500',
-};
-
-// calendar
-export const optionsSvgCalendarDueDate: TypesOptionsSvg = {
-  path: ICON_EVENT_AVAILABLE_FILL,
-  className: 'h-4 w-4 fill-blue-500',
-};
-
-// confirmModal
-export const optionsSvgConfirmModalHeaderIcon: TypesOptionsSvg = {
-  path: ICON_REPORT,
-  className: 'h-10 w-10 fill-red-600',
-};
-
-export const optionsSvgConfirmModalDelete: TypesOptionsSvg = {
-  path: ICON_DELETE,
-  className: 'h-10 w-10 fill-red-600',
-};
-
-/**
- * * TypesOptionsButton
- */
+} from '@data/stylePreset';
+import { TypesOptionsButton } from '@lib/types/typesOptions';
+import { classNames } from '@states/utils';
 
 // global
 export const optionsButtonGlobalClose: TypesOptionsButton = {
@@ -254,135 +197,4 @@ export const optionsButtonComboBoxToggle: TypesOptionsButton = {
   padding: 'p-1',
   color: 'fill-gray-400',
   tooltip: 'Open/close a list',
-};
-
-/**
- * * TypesOptionsPriority
- */
-
-// todoModal
-export const optionsPriorityTodoModalImportant: TypesOptionsPriority = {
-  priorityLevel: PRIORITY_LEVEL['important'],
-  isInitiallyVisible: false,
-  margin: '-ml-1',
-  borderRadius: 'rounded-full focus-visible:rounded-full',
-  hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
-};
-
-export const optionsPriorityTodoModalUrgent: TypesOptionsPriority = {
-  priorityLevel: PRIORITY_LEVEL['urgent'],
-  isInitiallyVisible: false,
-  margin: '-ml-1 mr-1',
-  borderRadius: 'rounded-full focus-visible:rounded-full',
-  hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
-};
-
-// dropdown
-export const optionsPriorityDropdownImportant: TypesOptionsPriority = {
-  priorityLevel: PRIORITY_LEVEL['important'],
-  isInitiallyVisible: true,
-  priorityImportant: 'Mark as normal',
-  priorityNormal: 'Mark as important',
-  padding: 'px-4 py-2',
-  container: 'w-full',
-  width: 'w-full',
-  display: 'flex flex-row',
-};
-
-export const optionsPriorityDropdownUrgent: TypesOptionsPriority = {
-  priorityLevel: PRIORITY_LEVEL['urgent'],
-  isInitiallyVisible: true,
-  priorityUrgent: 'Mark as normal',
-  priorityNormal: 'Mark as urgent',
-  padding: 'px-4 py-2',
-  container: 'w-full',
-  width: 'w-full',
-  display: 'flex flex-row',
-};
-
-/**
- * * TypesOptionsDropdown
- */
-// calendar
-export const optionsDropdownCalendar: TypesOptionsDropdown = {
-  borderRadius: classNames('rounded-lg focus-visible:rounded-lg'),
-  padding: 'px-4 py-2',
-  menuWidth: 'w-full',
-  tooltip: 'Due date',
-  hoverBg: 'bg-transparent',
-};
-
-// combobox
-export const optionsDropdownComboBox: TypesOptionsDropdown = {
-  path: ICON_NEW_LABEL,
-  tooltip: 'Add label',
-  hasDivider: false,
-  menuItemsWidth: 'w-72',
-  isPortal: true,
-  borderRadius: 'rounded-lg',
-};
-// labels
-export const optionsDropdownLabelItem: TypesOptionsDropdown = {
-  tooltip: 'Menu',
-  path: ICON_MORE_VERT,
-  padding: 'p-[0.3rem]',
-  color: 'fill-gray-500 group-hover:fill-gray-700',
-  isPortal: true,
-};
-
-/**
- * * TypesOptionsMinimizedModalTransition
- */
-// notification
-export const optionsNotification: TypesOptionsMinimizedModalTransition = {
-  positionX: POSITION_X['left'],
-  positionY: POSITION_Y['bottom'],
-};
-
-export const optionsMinimizedModal: TypesOptionsMinimizedModalTransition = {
-  positionX: POSITION_X['right'],
-  positionY: POSITION_Y['bottom'],
-};
-
-/*
- * TypesOptionsLoadingState
- **/
-// loadingState
-export const optionsLoadingTodos: TypesOptionsLoadingState = {
-  loadingSkeleton: <LoadingSkeletonTodos />,
-  repeatingCount: 10,
-  margin: 'ml-4 sm:ml-1 mt-5',
-  space: 'space-y-10',
-};
-
-export const optionsLoadingLabels: TypesOptionsLoadingState = {
-  loadingSkeleton: <LoadingSkeletonLabels />,
-  repeatingCount: 10,
-  margin: 'ml-4',
-  space: 'space-y-4',
-};
-
-export const optionsFloatingLabelsEmail = (isError: boolean): TypesOptionsFloatingLabelInput => {
-  return {
-    name: 'email',
-    inputType: 'email',
-    autoComplete: 'email',
-    placeholder: 'Email address',
-    required: true,
-    isError: isError,
-  };
-};
-
-export const optionsFloatingLabelPassword = (
-  isPasswordShown: boolean,
-  isError: boolean,
-): TypesOptionsFloatingLabelInput => {
-  return {
-    name: 'password',
-    inputType: isPasswordShown ? 'text' : 'password',
-    placeholder: 'Password',
-    required: true,
-    padding: 'pr-14',
-    isError: isError,
-  };
 };

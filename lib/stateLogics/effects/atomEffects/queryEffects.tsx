@@ -1,4 +1,4 @@
-import { IDB_KEY, IDB_KEY_STORE, IDB_STORE, STORAGE_KEY } from '@data/dataTypesConst';
+import { IDB_KEY, STORAGE_KEY, IDB_KEY_STORE, IDB_STORE } from '@constAssertions/storage';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesRefetchEffect } from '@lib/types';
 import { hasTimePast } from '@states/utils';

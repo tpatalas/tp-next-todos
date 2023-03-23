@@ -1,4 +1,4 @@
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { Todos } from '@lib/types';
 import { selectorDynamicTodoItem } from '@states/todos';
 import { selectorSessionTodoIds } from '@states/todos/atomQueries';

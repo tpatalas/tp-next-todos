@@ -1,4 +1,3 @@
-import { CATCH } from '@data/dataTypesConst';
 import { Labels, Todos } from '@lib/types';
 import { useCalResetDateItemOnly } from '@states/calendars/hooks';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
@@ -12,13 +11,14 @@ import { useConditionCheckTodoTitleEmpty, useConditionCompareTodoItemsEqual } fr
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import {
-    atomConfirmModalDelete,
-    atomConfirmModalDiscard,
-    atomLabelModalOpen,
-    atomTodoModalMax,
-    atomTodoModalMini,
-    atomTodoModalOpen
+  atomConfirmModalDelete,
+  atomConfirmModalDiscard,
+  atomLabelModalOpen,
+  atomTodoModalMax,
+  atomTodoModalMini,
+  atomTodoModalOpen,
 } from '.';
+import { CATCH } from '@constAssertions/misc';
 
 /**
  * Hooks

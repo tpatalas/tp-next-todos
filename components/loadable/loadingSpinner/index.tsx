@@ -1,4 +1,4 @@
-import { SPINNER } from '@data/dataTypesConst';
+import { SPINNER } from '@constAssertions/ui';
 import { atomLoadingSpinner } from '@states/misc';
 import { useRecoilValue } from 'recoil';
 

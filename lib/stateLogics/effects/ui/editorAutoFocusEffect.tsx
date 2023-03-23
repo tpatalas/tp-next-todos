@@ -1,4 +1,5 @@
-import { PATHNAME, CATCH } from '@data/dataTypesConst';
+import { PATHNAME } from '@constAssertions/data';
+import { CATCH } from '@constAssertions/misc';
 import { CustomEditor } from '@lib/types/typesSlate';
 import { atomCatch } from '@states/utils';
 import { Types } from 'lib/types';

@@ -1,6 +1,6 @@
+import { KeysWithNavigationEffect } from '@lib/stateLogics/effects/keybindings/KeysWithNavigateEffect';
 import { useFocusOnClick } from '@states/focus/hooks';
 import { useKeyWithFocus } from '@states/keybinds/hooks';
-import { KeysWithNavigationEffect } from '@states/keybinds/KeysWithNavigateEffect';
 import { classNames } from '@states/utils';
 import { Types, TypesTodo } from 'lib/types';
 import { Fragment as FocuserFragment, useRef } from 'react';

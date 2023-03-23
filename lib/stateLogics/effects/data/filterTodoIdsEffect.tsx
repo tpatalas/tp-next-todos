@@ -1,4 +1,3 @@
-import { PATHNAME, PATHNAME_IMAGE } from '@data/dataTypesConst';
 import { Labels } from '@lib/types';
 import { atomLabelQuerySlug } from '@states/labels';
 import { selectorSessionLabels } from '@states/labels/atomQueries';
@@ -7,7 +6,8 @@ import { useNextQuery } from '@states/utils/hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
-import { atomFilterTodoIds } from '.';
+import { atomFilterTodoIds } from '@states/todos';
+import { PATHNAME, PATHNAME_IMAGE } from '@constAssertions/data';
 
 export const FilterTodoIdsEffect = () => {
   const labelId = useNextQuery({ path: PATHNAME['label'] });

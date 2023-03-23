@@ -1,6 +1,6 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { ICON_FLAG, ICON_FLAG_FILL, ICON_LABEL_IMPORTANT, ICON_LABEL_IMPORTANT_FILL } from '@data/materialSymbols';
 import { Types } from '@lib/types';
 import { TypesOptionsPriority } from '@lib/types/typesOptions';

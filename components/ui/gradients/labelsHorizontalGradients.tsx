@@ -1,4 +1,4 @@
-import { GRADIENT_POSITION } from '@data/dataTypesConst';
+import { GRADIENT_POSITION } from '@constAssertions/ui';
 import { Types } from '@lib/types';
 import { classNames } from '@states/utils';
 import { useHorizontalScrollPosition } from '@states/utils/hooks';

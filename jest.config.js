@@ -20,7 +20,10 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // remove if jest.setup.js is deleted
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
-    '^@atomQueries/(.*)$': ['<rootDir>/lib/states/atomQuries/$1'],
+    '^@collections/(.*)$': ['<rootDir>/lib/data/collections/$1'],
+    '^@constAssertions/(.*)$': ['<rootDir>/lib/data/constAssertions/$1'],
+    '^@options/(.*)$': ['<rootDir>/lib/data/options/$1'],
+
     '^@effects/(.*)$': ['<rootDir>/lib/states/effects/$1'],
     '^@states/(.*)$': ['<rootDir>/lib/states/$1'],
     '^@data/(.*)$': ['<rootDir>/lib/data/$1'],

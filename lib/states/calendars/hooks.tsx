@@ -1,4 +1,3 @@
-import { CALENDAR, NOTIFICATION } from '@data/dataTypesConst';
 import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { useNotificationState } from '@states/notifications/hooks';
@@ -22,6 +21,8 @@ import equal from 'fast-deep-equal/react';
 import { useSession } from 'next-auth/react';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { atomCurrentMonth, atomDayPickerUpdater, atomDayPicker } from '.';
+import { CALENDAR } from '@constAssertions/misc';
+import { NOTIFICATION } from '@constAssertions/ui';
 
 /**
  * Hooks

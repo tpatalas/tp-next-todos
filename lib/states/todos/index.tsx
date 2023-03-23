@@ -1,10 +1,11 @@
-import { PATHNAME, PRIORITY_LEVEL, OBJECT_ID } from '@data/dataTypesConst';
 import { Labels, TodoIds, Todos, Types } from '@lib/types';
 import { atomLabelQuerySlug } from '@states/labels';
 import { selectorSessionLabels } from '@states/labels/atomQueries';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, selector, selectorFamily } from 'recoil';
 import { selectorSessionTodoIds, atomSelectorTodoItem } from './atomQueries';
+import { PATHNAME, OBJECT_ID } from '@constAssertions/data';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 
 /**
  * atoms
