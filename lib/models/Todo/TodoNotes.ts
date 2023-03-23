@@ -30,7 +30,6 @@ const TodoNoteSchema = new mongoose.Schema({
 });
 
 TodoNoteSchema.index({ deleted: 1, update: 1, title_id: 1, user_id: -1 }, { unique: true });
-TodoNoteSchema.index({ note: 'text' });
 TodoNoteSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 export default mongoose.models['Todo-Notes'] || mongoose.model('Todo-Notes', TodoNoteSchema);
