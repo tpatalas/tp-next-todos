@@ -1,9 +1,10 @@
-import { CATCH, BREAKPOINT } from '@data/dataTypesConst';
 import { atomMediaQuery } from '@states/misc';
 import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
-import { atomSidebarOpenMobile } from '.';
+import { atomSidebarOpenMobile } from '@states/layouts';
+import { CATCH } from '@constAssertions/misc';
+import { BREAKPOINT } from '@constAssertions/ui';
 
 export const SidebarMobileResetEffect = () => {
   const isTodoModalOpen = useRecoilValue(atomCatch(CATCH['todoModal']) || CATCH['confirmModal']);

@@ -1,11 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
-import {
-  optionsButtonTodoModalClose,
-  optionsButtonTodoModalCancel,
-  optionsButtonLabelModalAddLabel,
-} from '@data/dataOptions';
-import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
 import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { useLabelValueUpdate, useLabelAdd } from '@states/labels/hooks';
 import { atomLabelModalOpen } from '@states/modals';
@@ -19,6 +13,12 @@ import { Button as CancelButton } from '../../../buttons/button';
 import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
+import { KeysWithLabelModalEffect } from '@lib/stateLogics/effects/keybindings/KeysWithLabelModalEffect';
+import {
+  optionsButtonTodoModalClose,
+  optionsButtonTodoModalCancel,
+  optionsButtonLabelModalAddLabel,
+} from '@options/button';
 
 type Props = Partial<Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
 

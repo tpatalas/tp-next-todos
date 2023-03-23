@@ -1,8 +1,8 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
-import { optionsPriorityTodoModalImportant, optionsPriorityTodoModalUrgent } from '@data/dataOptions';
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
+import { optionsPriorityTodoModalImportant, optionsPriorityTodoModalUrgent } from '@options/dropdown';
 import { usePriorityUpdate } from '@states/priorities/hooks';
 import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import { useRecoilCallback } from 'recoil';

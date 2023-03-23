@@ -1,4 +1,5 @@
-import { CATCH, STORAGE_KEY } from '@data/dataTypesConst';
+import { CATCH } from '@constAssertions/misc';
+import { STORAGE_KEY } from '@constAssertions/storage';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';

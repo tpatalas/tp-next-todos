@@ -1,4 +1,4 @@
-import { CATCH } from '@data/dataTypesConst';
+import { CATCH } from '@constAssertions/misc';
 import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';

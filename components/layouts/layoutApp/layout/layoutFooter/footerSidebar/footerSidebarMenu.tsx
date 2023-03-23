@@ -1,6 +1,5 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { BREAKPOINT } from '@data/dataTypesConst';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { atomMediaQuery } from '@states/misc';
@@ -9,7 +8,8 @@ import { useRouter } from 'next/router';
 import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
 import { useRecoilValue } from 'recoil';
 import { TodosCount } from './todosCount';
-import { DATA_SIDEBAR_MENU } from '@data/dataArrayOfObjects/dataSidebarMenu';
+import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
+import { BREAKPOINT } from '@constAssertions/ui';
 
 export const FooterSidebarMenu = () => {
   const router = useRouter();

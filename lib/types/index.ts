@@ -1,21 +1,16 @@
+import { OBJECT_ID, PATHNAME, PATHNAME_IMAGE, SVG_LOGO } from '@constAssertions/data';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
+import { IDB, IDB_STORE, IDB_VERSION } from '@constAssertions/storage';
 import {
-  BREAKPOINT,
-  DURATION,
-  GRADIENT_POSITION,
-  GRADIENT_TYPE,
-  IDB,
-  IDB_STORE,
-  IDB_VERSION,
   NOTIFICATION,
-  OBJECT_ID,
-  PATHNAME,
-  PATHNAME_IMAGE,
+  DURATION,
+  GRADIENT_TYPE,
+  GRADIENT_POSITION,
+  VIEWBOX,
   POSITION_X,
   POSITION_Y,
-  PRIORITY_LEVEL,
-  SVG_LOGO,
-  VIEWBOX,
-} from '@data/dataTypesConst';
+  BREAKPOINT,
+} from '@constAssertions/ui';
 import { Placement } from '@popperjs/core';
 import {
   ChangeEventHandler,

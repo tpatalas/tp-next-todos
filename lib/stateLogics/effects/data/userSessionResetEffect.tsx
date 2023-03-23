@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from '@data/dataTypesConst';
+import { STORAGE_KEY } from '@constAssertions/storage';
 import { selectorSessionLabels } from '@states/labels/atomQueries';
 import { selectorSessionTodoIds } from '@states/todos/atomQueries';
 import { getSessionStorage, setSessionStorage } from '@states/utils';

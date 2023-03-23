@@ -1,4 +1,4 @@
-import { SVG_LOGO } from '@data/dataTypesConst';
+import { SVG_LOGO } from '@constAssertions/data';
 import { TypesSvgLogo } from '@lib/types';
 
 export const DATA_SVG_LOGO: TypesSvgLogo[] = [

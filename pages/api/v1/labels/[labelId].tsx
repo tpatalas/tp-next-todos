@@ -1,4 +1,3 @@
-import { OBJECT_ID, RETENTION } from '@data/dataTypesConst';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { Labels } from '@lib/types';
@@ -6,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import { retentionPolicy } from '@states/utils';
+import { OBJECT_ID, RETENTION } from '@constAssertions/data';
 
 const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();

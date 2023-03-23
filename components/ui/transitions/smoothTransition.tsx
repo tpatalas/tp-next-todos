@@ -1,4 +1,4 @@
-import { DURATION } from '@data/dataTypesConst';
+import { DURATION } from '@constAssertions/ui';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@states/utils';

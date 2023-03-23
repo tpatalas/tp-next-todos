@@ -1,4 +1,3 @@
-import { OBJECT_ID, RETENTION, SCHEMA_TODO } from '@data/dataTypesConst';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
@@ -10,6 +9,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import { retentionPolicy } from '@states/utils';
+import { OBJECT_ID, SCHEMA_TODO, RETENTION } from '@constAssertions/data';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();

@@ -1,19 +1,20 @@
 import { Button } from '@buttons/button';
 import { SvgLogoButton } from '@buttons/button/svgLogoButton';
 import { LoadingSpinner } from '@components/loadable/loadingSpinner';
-import { optionsFloatingLabelsEmail } from '@data/dataOptions';
-import { SPINNER, USER } from '@data/dataTypesConst';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { atomLoadingSpinner } from '@states/misc';
 import { atomUser, atomUserErrorMessage } from '@states/users';
-import { ClientErrorMessageEffect } from '@states/users/clientErrorMessageEffect';
 import { useUserAuthFormSubmit, useUserValueUpdate } from '@states/users/hooks';
 import { classNames, validateEmailFormat } from '@states/utils';
 import { Divider } from '@ui/dividers/divider';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { AuthErrorMessage } from './authErrorMessage';
+import { ClientErrorMessageEffect } from '@lib/stateLogics/effects/misc/clientErrorMessageEffect';
+import { USER } from '@constAssertions/misc';
+import { SPINNER } from '@constAssertions/ui';
+import { optionsFloatingLabelsEmail } from '@options/loadingState';
 
 export const AuthForm = () => {
   const clientErrorMessage = useRecoilValue(atomUserErrorMessage);

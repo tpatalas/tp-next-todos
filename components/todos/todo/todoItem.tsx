@@ -1,9 +1,9 @@
 import { SvgIcon } from '@components/icons/svgIcon';
-import { optionsSvgPriorityUrgent, optionsSvgPriorityImportant, optionsSvgCalendarDueDate } from '@data/dataOptions';
-import { PRIORITY_LEVEL, CATCH } from '@data/dataTypesConst';
+import { PRIORITY_LEVEL, CATCH } from '@constAssertions/misc';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
+import { optionsSvgPriorityUrgent, optionsSvgPriorityImportant, optionsSvgCalendarDueDate } from '@options/svg';
 import { selectorSelectedQueryLabels } from '@states/labels';
 import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { selectorSessionTodoItem } from '@states/todos/atomQueries';

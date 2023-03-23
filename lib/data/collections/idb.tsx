@@ -1,4 +1,4 @@
-import { IDB, IDB_STORE, IDB_VERSION } from '@data/dataTypesConst';
+import { IDB, IDB_STORE, IDB_VERSION } from '@constAssertions/storage';
 import { TypesIDB } from '@lib/types';
 
 export const DATA_IDB: TypesIDB[] = [

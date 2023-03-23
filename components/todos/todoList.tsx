@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
-import { DATA_PATHNAME_IMAGE } from '@data/dataArrayOfObjects/dataPathnameImage';
+import { DATA_PATHNAME_IMAGE } from '@collections/pathnameImage';
 
 export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);

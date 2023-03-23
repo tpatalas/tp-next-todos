@@ -1,6 +1,6 @@
-import { NOTIFICATION } from '@data/dataTypesConst';
 import { useRecoilCallback } from 'recoil';
 import { atomNotificationCounter, atomNotificationID, atomNotificationOpen } from '.';
+import { NOTIFICATION } from '@constAssertions/ui';
 
 /*
  * Hooks

@@ -1,4 +1,4 @@
-import { PATHNAME } from '@data/dataTypesConst';
+import { PATHNAME } from '@constAssertions/data';
 import {
   ICON_HOME,
   ICON_HOME_FILL,

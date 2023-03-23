@@ -1,4 +1,4 @@
-import { GRADIENT_POSITION, GRADIENT_TYPE } from '@data/dataTypesConst';
+import { GRADIENT_POSITION, GRADIENT_TYPE } from '@constAssertions/ui';
 import { Types } from '@lib/types';
 import { classNames } from '@states/utils';
 import { Fragment } from 'react';

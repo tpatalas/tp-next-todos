@@ -1,5 +1,6 @@
-import { BREAKPOINT, PATHNAME_IMAGE, SPINNER } from '@data/dataTypesConst';
-import { mediaQueryEffect, networkStatusEffect } from '@effects/atomEffects';
+import { PATHNAME_IMAGE } from '@constAssertions/data';
+import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
+import { mediaQueryEffect, networkStatusEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*

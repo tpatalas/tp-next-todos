@@ -2,7 +2,6 @@ import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LabelList } from '@components/labels/labelList';
-import { optionsButtonCreateTodo, optionsButtonSidebarToggle } from '@data/dataOptions';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile } from '@states/layouts';
@@ -20,6 +19,7 @@ import {
 import { isChrome, isMobile } from 'react-device-detect';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
+import { optionsButtonSidebarToggle, optionsButtonCreateTodo } from '@options/button';
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);

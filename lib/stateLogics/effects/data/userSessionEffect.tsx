@@ -1,9 +1,9 @@
-import { STORAGE_KEY } from '@data/dataTypesConst';
 import { delSessionStorage, setSessionStorage } from '@states/utils';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
-import { atomUserSession } from '.';
+import { atomUserSession } from '@states/users';
+import { STORAGE_KEY } from '@constAssertions/storage';
 
 export const UserSessionEffect = () => {
   const { data: session } = useSession();

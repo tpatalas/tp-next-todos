@@ -1,10 +1,10 @@
-import { CATCH } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { useLabelUpdateDataItem } from '@states/labels/hooks';
 import { atomCatch } from '@states/utils';
 import { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { atomFilterSelected } from '.';
+import { atomFilterSelected } from '@states/comboBoxes';
+import { CATCH } from '@constAssertions/misc';
 
 type Props = Partial<Pick<Types, 'todo'>>;
 
