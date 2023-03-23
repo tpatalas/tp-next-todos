@@ -1,4 +1,4 @@
-import { DATA_IDB } from '@data/dataArrayOfObjects';
+import { DATA_IDB } from '@data/dataArrayOfObjects/dataIDB';
 import { IDB, IDB_VERSION, STORAGE_KEY } from '@data/dataTypesConst';
 import { Types, TypesIDB } from '@lib/types';
 import { getSessionStorage } from '@states/utils';

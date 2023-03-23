@@ -1,4 +1,4 @@
-import { DATA_NOTIFICATION } from '@data/dataArrayOfObjects';
+import { DATA_NOTIFICATION } from '@data/dataArrayOfObjects/dataNotification';
 import { TypesNotification } from '@lib/types';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 

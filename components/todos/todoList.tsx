@@ -1,4 +1,3 @@
-import { DATA_PATHNAME_IMAGE } from '@data/dataArrayOfObjects';
 import { TypesPathnameImage } from '@lib/types';
 import { atomPathnameImage } from '@states/misc';
 import { selectorFilterTodoIds } from '@states/todos';
@@ -8,6 +7,7 @@ import Image from 'next/image';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
+import { DATA_PATHNAME_IMAGE } from '@data/dataArrayOfObjects/dataPathnameImage';
 
 export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);

@@ -1,5 +1,5 @@
 import { SvgIcon } from '@components/icons/svgIcon';
-import { DATA_NEXTAUTH_ERROR } from '@data/dataArrayOfObjects';
+import { DATA_NEXTAUTH_ERROR } from '@data/dataArrayOfObjects/dataNextAuthError';
 import { ICON_ERROR_FILL } from '@data/materialSymbols';
 import { TypesOptionsAuthErrorMessage } from '@lib/types/typesOptions';
 import { atomUserErrorMessage } from '@states/users';
