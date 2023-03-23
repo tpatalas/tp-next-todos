@@ -1,4 +1,4 @@
-import { OBJECT_ID, SCHEMA_TODO } from '@data/dataTypesConst';
+import { OBJECT_ID, RETENTION, SCHEMA_TODO } from '@data/dataTypesConst';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
+import { retentionPolicy } from '@states/utils';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
@@ -152,12 +153,20 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
       sessionDelete.startTransaction();
       const deleteItem = await TodoItem.findOneAndUpdate(
         filter(SCHEMA_TODO['todoItem']),
-        { deleted: true, update: Date.now() },
+        {
+          deleted: true,
+          update: Date.now(),
+          expireAt: retentionPolicy({ day: RETENTION['7'] }),
+        },
         { session: sessionDelete, new: true, runValidators: true },
       );
       const deleteNote = await TodoNote.findOneAndUpdate(
         filter(SCHEMA_TODO['todoNote']),
-        { update: Date.now(), deleted: true },
+        {
+          update: Date.now(),
+          deleted: true,
+          expireAt: retentionPolicy({ day: RETENTION['7'] }),
+        },
         { session: sessionDelete, new: true, runValidators: true },
       );
 

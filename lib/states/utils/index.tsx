@@ -82,3 +82,12 @@ export const getSessionStorage = (queryKey: STORAGE_KEY) => {
 export const setSessionStorage = (queryKey: STORAGE_KEY, value: unknown) =>
   sessionStorage.setItem(queryKey, JSON.stringify(value));
 export const delSessionStorage = (queryKey: STORAGE_KEY) => sessionStorage.removeItem(queryKey);
+
+export const retentionPolicy = ({ day }: { day: number }) => {
+  //set 0 to set to 5 second as immediate action or set day to set day
+  const now = (time?: number) => new Date(Date.now() + 1000 * (time ?? 5));
+  if (day === 0) {
+    return now();
+  }
+  return now(60 * 60 * 24 * day);
+};

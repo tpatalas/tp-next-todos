@@ -212,3 +212,8 @@ export const GRADIENT_POSITION = {
   top: 'top',
   bottom: 'bottom',
 } as const;
+
+export type RETENTION = (typeof RETENTION)[keyof typeof RETENTION];
+export const RETENTION = {
+  7: 7,
+};
