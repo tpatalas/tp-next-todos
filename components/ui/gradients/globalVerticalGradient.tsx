@@ -2,6 +2,7 @@ import { GRADIENT_POSITION, GRADIENT_TYPE } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { classNames } from '@states/utils';
 import { Fragment } from 'react';
+import { isMobile } from 'react-device-detect';
 
 type Props = { options: Pick<Types, 'gradientType' | 'gradientPosition'> };
 
@@ -14,7 +15,8 @@ export const GlobalVerticalGradient = ({ options }: Props) => {
       {options.gradientType === GRADIENT_TYPE['single'] && (
         <div
           className={classNames(
-            'pointer-events-none absolute right-5 z-10 h-10 w-[calc(100%-1.4rem)] rounded-xl border-none bg-gradient-to-b from-slate-50',
+            'pointer-events-none absolute right-5 z-10 w-[calc(100%-1.4rem)] rounded-xl border-none bg-gradient-to-b from-slate-50',
+            isMobile ? 'h-5' : 'h-10',
             top && 'top-0 mt-[0.05rem]',
             bottom && 'bottom-0 mb-[0.05rem]',
           )}

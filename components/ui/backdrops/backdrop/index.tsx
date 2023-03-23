@@ -32,14 +32,13 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => 
           enterTo='opacity-100'
           leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-200')}
           leaveFrom='opacity-100'
-          leaveTo='opacity-0'
-        >
+          leaveTo='opacity-0'>
           <div
             tabIndex={-1}
             className={classNames(
               'fixed inset-0',
               options.color ?? 'bg-gray-500 bg-opacity-20',
-              options.zIndex ?? 'z-10',
+              options.zIndex ?? 'z-20',
             )}
             aria-hidden='true'
             onClick={onClick}
