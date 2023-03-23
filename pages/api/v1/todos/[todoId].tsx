@@ -35,6 +35,8 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       try {
         const getItem = await TodoItem.aggregate(aggregatedTodoItem({ todoId: queriedTodoId, userId: userId })).then(
           (data: Todos[]) => data[0],
