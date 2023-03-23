@@ -25,6 +25,8 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
+      if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
+
       try {
         const getLabelById = await Label.findOne(query);
         if (!getLabelById) return res.status(400).json({ success: false });
