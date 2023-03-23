@@ -1,4 +1,4 @@
-import { DATA_SVG_LOGO } from '@data/dataArrayOfObjects';
+import { DATA_SVG_LOGO } from '@data/dataArrayOfObjects/dataSVGLogo';
 import { SVG_LOGO } from '@data/dataTypesConst';
 import { TypesOptionsSvg } from '@lib/types/typesOptions';
 

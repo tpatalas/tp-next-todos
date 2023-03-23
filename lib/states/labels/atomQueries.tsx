@@ -1,4 +1,4 @@
-import { DATA_DEMO_LABELS } from '@data/dataDemo';
+import { DATA_DEMO_LABELS } from '@data/dataArrayOfObjects/dataDemo';
 import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
 import { queryEffect } from '@effects/queryEffects';
 import { getDataLabels } from '@lib/queries/queryLabels';

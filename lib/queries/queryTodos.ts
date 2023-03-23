@@ -1,4 +1,4 @@
-import { DATA_DEMO } from '@data/dataDemo';
+import { DATA_DEMO } from '@data/dataArrayOfObjects/dataDemo';
 import { STORAGE_KEY } from '@data/dataTypesConst';
 import { Todos, Types } from '@lib/types';
 import { fetchWithRetry, queries } from '@states/utils';
