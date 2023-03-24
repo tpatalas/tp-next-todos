@@ -1,7 +1,7 @@
 import { IDB_KEY, STORAGE_KEY, IDB_KEY_STORE, IDB_STORE } from '@constAssertions/storage';
 import { del, get, set } from '@lib/dataConnections/indexedDB';
 import { TypesRefetchEffect } from '@lib/types';
-import { hasTimePast } from '@states/utils';
+import { hasTimePast } from '@stateLogics/utils';
 import { DefaultValue } from 'recoil';
 
 export const queryEffect: TypesRefetchEffect =

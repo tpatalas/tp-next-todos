@@ -1,5 +1,5 @@
 import { IconButton } from '@buttons/iconButton';
-import { NotificationResetEffect } from '@lib/stateLogics/effects/misc/notificationResetEffect';
+import { NotificationResetEffect } from '@effects/notificationResetEffect';
 import { MinimizeModalTransition } from '@modals/modal/modalTransition/minimizeModalTransition';
 import { optionsButtonGlobalClose } from '@options/button';
 import { optionsNotification } from '@options/misc';

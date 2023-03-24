@@ -1,5 +1,5 @@
-import { TypesOptionsLoadingState } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { TypesOptionsLoadingState } from '@lib/types/options';
+import { classNames } from '@stateLogics/utils';
 import { Fragment, useEffect, useState } from 'react';
 
 export const LoadingState = ({ options }: { options: TypesOptionsLoadingState }) => {

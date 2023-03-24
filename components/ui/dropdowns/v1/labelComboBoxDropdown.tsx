@@ -2,11 +2,6 @@ import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
-import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
-import { useTodoModalStateClose } from '@states/modals/hooks';
-import { atomTodoNew } from '@states/todos';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
-import { classNames, paths } from '@states/utils';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
 import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
@@ -17,6 +12,11 @@ import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { GRADIENT_POSITION } from '@constAssertions/ui';
 import { optionsButtonLabelRemove } from '@options/button';
 import { optionsDropdownComboBox } from '@options/misc';
+import { useLabelRemoveItemTitleId } from '@hooks/labels';
+import { useTodoModalStateClose } from '@hooks/modals';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
+import { atomTodoNew } from '@states/todos';
+import { classNames, paths } from '@stateLogics/utils';
 
 type Props = Partial<Pick<Types, 'selectedQueryLabels' | 'container' | 'todo'>>;
 

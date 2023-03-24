@@ -1,6 +1,6 @@
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
-import { TypesOptionsPriority } from '@lib/types/typesOptions';
+import { TypesOptionsPriority } from '@lib/types/options';
 
 // todoModal
 export const optionsPriorityTodoModalImportant: TypesOptionsPriority = {

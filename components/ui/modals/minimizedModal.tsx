@@ -5,13 +5,11 @@ import {
 } from '@buttons/iconButton';
 import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMini } from '@states/modals';
-import { useTodoModalStateClose, useTodoModalStateMaximize, useTodoModalStateExitMinimize } from '@states/modals/hooks';
 import { atomTodoNew } from '@states/todos';
 import { TypesTodo } from 'lib/types';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { MinimizeModalTransition } from './modal/modalTransition/minimizeModalTransition';
-import { ModalStateOnBreakpointEffect } from '@lib/stateLogics/effects/ui/modalStateOnBreakpointEffect';
 import { BREAKPOINT } from '@constAssertions/ui';
 import {
   optionsButtonMiniModalMaximize,
@@ -19,6 +17,8 @@ import {
   optionsButtonGlobalClose,
 } from '@options/button';
 import { optionsMinimizedModal } from '@options/misc';
+import { ModalStateOnBreakpointEffect } from '@effects/modalStateOnBreakpointEffect';
+import { useTodoModalStateClose, useTodoModalStateMaximize, useTodoModalStateExitMinimize } from '@hooks/modals';
 
 type Props = Partial<Pick<TypesTodo, 'todo'>>;
 

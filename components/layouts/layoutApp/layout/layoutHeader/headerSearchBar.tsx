@@ -1,8 +1,8 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_SEARCH, ICON_CLOSE } from '@data/materialSymbols';
+import { classNames } from '@stateLogics/utils';
 import { atomSearchInput } from '@states/layouts';
-import { classNames } from '@states/utils';
 import { Fragment as ResetSearchFragment, Fragment as SearchBarFragment } from 'react';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 

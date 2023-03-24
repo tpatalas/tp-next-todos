@@ -1,11 +1,11 @@
 import { Button as ConfirmButton } from '@buttons/button';
+import { useTodoModalConfirmStateDiscard } from '@hooks/modals';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
 import { optionsButtonConfirmModalDiscard } from '@options/button';
 import { optionsSvgConfirmModalHeaderIcon } from '@options/svg';
 import { atomConfirmModalDiscard } from '@states/modals';
-import { useTodoModalConfirmStateDiscard } from '@states/modals/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment as DiscardHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';

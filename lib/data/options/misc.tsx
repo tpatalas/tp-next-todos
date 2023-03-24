@@ -1,7 +1,7 @@
 import { POSITION_X, POSITION_Y } from '@constAssertions/ui';
 import { ICON_MORE_VERT, ICON_NEW_LABEL } from '@data/materialSymbols';
-import { TypesOptionsDropdown, TypesOptionsMinimizedModalTransition } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { TypesOptionsDropdown, TypesOptionsMinimizedModalTransition } from '@lib/types/options';
+import { classNames } from '@stateLogics/utils';
 
 /**
  * TypesOptionsDropdown

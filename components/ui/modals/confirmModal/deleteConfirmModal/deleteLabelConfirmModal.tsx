@@ -1,7 +1,7 @@
+import { useLabelModalConfirmStateDelete } from '@hooks/modals';
 import { Labels, Types } from '@lib/types';
-import { selectorSessionLabels } from '@states/labels/atomQueries';
+import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { atomConfirmModalDelete } from '@states/modals';
-import { useLabelModalConfirmStateDelete } from '@states/modals/hooks';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';

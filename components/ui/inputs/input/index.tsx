@@ -1,5 +1,5 @@
 import { STYLE_BUTTON_KEY_ONLY_RING } from '@data/stylePreset';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { Types, TypesElement, TypesInputAttributes } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';

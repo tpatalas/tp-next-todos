@@ -1,13 +1,13 @@
 import { TypesPathnameImage } from '@lib/types';
 import { atomPathnameImage } from '@states/misc';
 import { selectorFilterTodoIds } from '@states/todos';
-import { nextImageLoader } from '@states/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import Image from 'next/image';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
 import { DATA_PATHNAME_IMAGE } from '@collections/pathnameImage';
+import { nextImageLoader } from '@stateLogics/utils';
 
 export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);

@@ -1,6 +1,6 @@
-import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { Types } from 'lib/types';
 import { Button } from './button';
+import { TypesOptionsButton } from '@lib/types/options';
 
 type Props = { options: TypesOptionsButton } & Partial<
   Pick<Types, 'className' | 'onClick' | 'isConditionalRendering' | 'children'>

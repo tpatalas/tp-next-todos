@@ -1,8 +1,6 @@
 import { STYLE_HOVER_SLATE_DARK } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
-import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { atomOnBlur } from '@states/focus';
-import { classNames } from '@states/utils';
 import { SvgIcon } from 'components/icons/svgIcon';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
@@ -10,7 +8,9 @@ import { Fragment, Fragment as MenuFragment, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
-import { DisableScrollEffect } from '@lib/stateLogics/effects/ui/disableScrollEffect';
+import { DisableScrollEffect } from '@effects/disableScrollEffect';
+import { classNames } from '@stateLogics/utils';
+import { TypesOptionsDropdown } from '@lib/types/options';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
 type Props = { options: TypesOptionsDropdown } & Partial<

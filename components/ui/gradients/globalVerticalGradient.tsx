@@ -1,6 +1,6 @@
 import { GRADIENT_POSITION, GRADIENT_TYPE } from '@constAssertions/ui';
 import { Types } from '@lib/types';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { Fragment } from 'react';
 import { isMobile } from 'react-device-detect';
 

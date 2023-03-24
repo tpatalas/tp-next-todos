@@ -4,8 +4,8 @@ import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
-import { retentionPolicy, sanitize, sanitizeObject } from '@states/utils';
 import { OBJECT_ID, RETENTION } from '@constAssertions/data';
+import { sanitize, sanitizeObject, retentionPolicy } from '@stateLogics/utils';
 
 const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();

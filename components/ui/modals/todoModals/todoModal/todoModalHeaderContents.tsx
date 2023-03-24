@@ -1,10 +1,10 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
+import { usePriorityUpdate } from '@hooks/priorities';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { optionsPriorityTodoModalImportant, optionsPriorityTodoModalUrgent } from '@options/dropdown';
-import { usePriorityUpdate } from '@states/priorities/hooks';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { useRecoilCallback } from 'recoil';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;

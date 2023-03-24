@@ -1,11 +1,8 @@
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { Types } from 'lib/types';
 import { RenderElementProps, RenderPlaceholderProps } from 'slate-react';
 
-const PlaceHolderElement = ({
-  attributes,
-  ...props
-}: RenderPlaceholderProps & Partial<Pick<Types, 'className'>>) => {
+const PlaceHolderElement = ({ attributes, ...props }: RenderPlaceholderProps & Partial<Pick<Types, 'className'>>) => {
   return (
     <div
       {...attributes}
@@ -15,10 +12,7 @@ const PlaceHolderElement = ({
   );
 };
 
-const CodeElement = ({
-  attributes,
-  ...props
-}: RenderElementProps & Partial<Pick<Types, 'className'>>) => {
+const CodeElement = ({ attributes, ...props }: RenderElementProps & Partial<Pick<Types, 'className'>>) => {
   return (
     <pre
       {...attributes}
@@ -28,10 +22,7 @@ const CodeElement = ({
   );
 };
 
-const DefaultElement = ({
-  attributes,
-  ...props
-}: RenderElementProps & Partial<Pick<Types, 'className'>>) => {
+const DefaultElement = ({ attributes, ...props }: RenderElementProps & Partial<Pick<Types, 'className'>>) => {
   return (
     <div
       {...attributes}
@@ -44,9 +35,7 @@ const DefaultElement = ({
 /**
  * Slate Editor Renderer
  */
-export const renderPlaceholder = ({
-  ...props
-}: RenderPlaceholderProps & Partial<Pick<Types, 'titleName'>>) => {
+export const renderPlaceholder = ({ ...props }: RenderPlaceholderProps & Partial<Pick<Types, 'titleName'>>) => {
   return (
     <PlaceHolderElement
       {...props}
