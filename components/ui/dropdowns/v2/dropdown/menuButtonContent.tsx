@@ -1,6 +1,6 @@
 import { Types } from '@lib/types';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 
 type Props = { options: TypesOptionsDropdown } & Pick<Types, 'children'>;
 

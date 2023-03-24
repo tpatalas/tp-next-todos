@@ -1,7 +1,7 @@
+import { useTodoModalConfirmStateDelete } from '@hooks/modals';
 import { Types } from '@lib/types';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomConfirmModalDelete } from '@states/modals';
-import { useTodoModalConfirmStateDelete } from '@states/modals/hooks';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';

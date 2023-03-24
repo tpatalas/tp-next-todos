@@ -3,8 +3,8 @@ import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
+import { classNames } from '@stateLogics/utils';
 import { selectorActiveMenuItem } from '@states/misc';
-import { classNames } from '@states/utils';
 import { Tooltip } from '@tooltips/tooltips';
 import { useRecoilValue } from 'recoil';
 

@@ -1,9 +1,9 @@
+import { ComboBoxResetQueryEffect } from '@effects/comboBoxResetQueryEffect';
 import { Combobox, Transition } from '@headlessui/react';
-import { ComboBoxResetQueryEffect } from '@lib/stateLogics/effects/ui/comboBoxResetQueryEffect';
 import { Types } from '@lib/types';
 import { optionsButtonComboBoxToggle } from '@options/button';
+import { classNames } from '@stateLogics/utils';
 import { atomComboBoxQuery } from '@states/comboBoxes';
-import { classNames } from '@states/utils';
 import { PseudoIconButton } from '@ui/pseudoButtons/pseudoIconButton';
 import { Fragment as ComboBoxFragment } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';

@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { Types } from 'lib/types';
 import { Fragment } from 'react';
 

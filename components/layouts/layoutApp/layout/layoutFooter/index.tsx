@@ -1,13 +1,13 @@
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { selectorSidebarOpen } from '@states/layouts';
-import { atomDisableScroll, classNames } from '@states/utils';
 import { GlobalVerticalGradient } from '@ui/gradients/globalVerticalGradient';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterSidebar } from './footerSidebar';
-import { SidebarMobileResetEffect } from '@lib/stateLogics/effects/ui/sidebarMobileResetEffect';
 import { GRADIENT_TYPE, GRADIENT_POSITION } from '@constAssertions/ui';
+import { SidebarMobileResetEffect } from '@effects/sidebarMobileResetEffect';
+import { atomDisableScroll, classNames } from '@stateLogics/utils';
 
 export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
   const isSidebarOpen = useRecoilValue(selectorSidebarOpen);

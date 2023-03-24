@@ -1,8 +1,8 @@
-import { classNames } from '@states/utils';
-import { useConditionCompareTodoItemsEqual } from '@states/utils/hooks';
 import { Types, TypesTodo } from 'lib/types';
 import { Input } from './input';
 import { MODIFIER_KBD } from '@constAssertions/misc';
+import { useConditionCompareTodoItemsEqual } from '@hooks/misc';
+import { classNames } from '@stateLogics/utils';
 
 type Props = Partial<Pick<Types, 'isChecked' | 'onChange' | 'className' | 'checkBoxColor' | 'checkedColor'>> &
   Pick<TypesTodo, 'todoItem'>;

@@ -1,6 +1,6 @@
 import { Types } from '@lib/types';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import dynamic from 'next/dynamic';
 import { useRecoilCallback } from 'recoil';
 

@@ -1,6 +1,6 @@
 import { Types } from '@lib/types';
 import { TypesOptionsFloatingLabelInput } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { forwardRef, Fragment } from 'react';
 
 type Props = { options: TypesOptionsFloatingLabelInput } & Partial<

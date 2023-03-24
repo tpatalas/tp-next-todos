@@ -1,7 +1,7 @@
 import { CATCH } from '@constAssertions/misc';
 import { Types } from '@lib/types';
+import { atomCatch } from '@stateLogics/utils';
 import { atomHtmlTitleTag } from '@states/misc';
-import { atomCatch } from '@states/utils';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import {
@@ -16,7 +16,7 @@ const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod)
 const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
 const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal));
 const WindowBeforeunloadEffect = dynamic(() =>
-  import('@lib/stateLogics/effects/ui/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
+  import('@effects/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
 const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
 

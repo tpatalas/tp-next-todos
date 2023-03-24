@@ -5,16 +5,16 @@ import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { atomLoadingSpinner } from '@states/misc';
 import { atomUser, atomUserErrorMessage } from '@states/users';
-import { useUserAuthFormSubmit, useUserValueUpdate } from '@states/users/hooks';
-import { classNames, validateEmailFormat } from '@states/utils';
 import { Divider } from '@ui/dividers/divider';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { AuthErrorMessage } from './authErrorMessage';
-import { ClientErrorMessageEffect } from '@lib/stateLogics/effects/misc/clientErrorMessageEffect';
 import { USER } from '@constAssertions/misc';
 import { SPINNER } from '@constAssertions/ui';
 import { optionsFloatingLabelsEmail } from '@options/loadingState';
+import { ClientErrorMessageEffect } from '@effects/clientErrorMessageEffect';
+import { useUserValueUpdate, useUserAuthFormSubmit } from '@hooks/users';
+import { validateEmailFormat, classNames } from '@stateLogics/utils';
 
 export const AuthForm = () => {
   const clientErrorMessage = useRecoilValue(atomUserErrorMessage);

@@ -1,12 +1,12 @@
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/v1/dropdown/dropdownMenuItem';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
-import { useTodoModalStateOpen } from '@states/modals/hooks';
 import { TypesTodo } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';
 import { TodoItem } from './todoItem';
 import { TodoItemFocuser } from './todoItemFocuser';
+import { useTodoModalStateOpen } from '@hooks/modals';
 
 const DeleteTodoConfirmModal = dynamic(() =>
   import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then((mod) => mod.DeleteTodoConfirmModal),

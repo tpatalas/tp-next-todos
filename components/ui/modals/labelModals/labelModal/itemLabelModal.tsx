@@ -1,11 +1,11 @@
 import { DisableButton } from '@buttons/disableButton';
 import { Types } from '@lib/types';
-import { useLabelUpdateItem } from '@states/labels/hooks';
-import { useConditionCompareLabelItemsEqual } from '@states/utils/hooks';
 import { Fragment } from 'react';
 import { LabelModal } from '.';
-import { KeysWithLabelModalEffect } from '@lib/stateLogics/effects/keybindings/KeysWithLabelModalEffect';
 import { optionsButtonLabelModalUpdateLabel } from '@options/button';
+import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
+import { useLabelUpdateItem } from '@hooks/labels';
+import { useConditionCompareLabelItemsEqual } from '@hooks/misc';
 
 export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
   const updateLabel = useLabelUpdateItem(label._id);

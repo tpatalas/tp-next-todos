@@ -1,9 +1,9 @@
 import { Portal } from '@headlessui/react';
-import { classNames } from '@states/utils';
 import { TypesTooltipAttributes, Types } from 'lib/types';
 import React, { Fragment as TooltipFragment, memo } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { isMobile } from 'react-device-detect';
+import { classNames } from '@stateLogics/utils';
 
 type Props = { options: Partial<TypesTooltipAttributes & Pick<Types, 'container'>> } & Pick<Types, 'children'>;
 

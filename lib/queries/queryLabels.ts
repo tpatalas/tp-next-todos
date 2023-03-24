@@ -1,6 +1,6 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { Labels } from '@lib/types';
-import { fetchWithRetry, queries } from '@states/utils';
+import { fetchWithRetry, queries } from '@stateLogics/utils';
 
 const apiLabels = process.env.NEXT_PUBLIC_API_ENDPOINT_LABELS as string;
 

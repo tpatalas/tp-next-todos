@@ -1,7 +1,7 @@
 import { DATA_IDB } from '@collections/idb';
 import { IDB_VERSION, STORAGE_KEY, IDB } from '@constAssertions/storage';
 import { Types, TypesIDB } from '@lib/types';
-import { getSessionStorage } from '@states/utils';
+import { getSessionStorage } from '@stateLogics/utils';
 import { deleteDB, openDB } from 'idb';
 
 // this will create new database per object store. This is easier to modify

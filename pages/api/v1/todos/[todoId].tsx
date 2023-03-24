@@ -8,9 +8,9 @@ import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
-import { retentionPolicy, sanitize } from '@states/utils';
 import { OBJECT_ID, SCHEMA_TODO, RETENTION } from '@constAssertions/data';
 import { sanitizedUserLabels, sanitizedUserTodoItem, sanitizedUserTodoNote } from '@lib/sanitizers/sanitizedTodos';
+import { sanitize, retentionPolicy } from '@stateLogics/utils';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();

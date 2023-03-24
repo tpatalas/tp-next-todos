@@ -1,19 +1,19 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
-import { useCalUpdateDataItem } from '@states/calendars/hooks';
-import { usePriorityUpdate, usePriorityUpdateData } from '@states/priorities/hooks';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
-import { useTodoRemoveItem } from '@states/todos/hooks';
 import { Types } from 'lib/types';
 import { useRecoilValue } from 'recoil';
 import { CalendarDropdown } from './calendarDropdown';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
-import { ActiveDropdownMenuItemEffect } from '@lib/stateLogics/effects/ui/activeDropdownMenuItemEffect';
 import { PRIORITY_LEVEL, MODIFIER_KBD } from '@constAssertions/misc';
 import { optionsPriorityDropdownUrgent, optionsPriorityDropdownImportant } from '@options/dropdown';
 import { optionsDropdownCalendar } from '@options/misc';
+import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
+import { useCalUpdateDataItem } from '@hooks/calendar';
+import { usePriorityUpdate, usePriorityUpdateData } from '@hooks/priorities';
+import { useTodoRemoveItem } from '@hooks/todos';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
 
