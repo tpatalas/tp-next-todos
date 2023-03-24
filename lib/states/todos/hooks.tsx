@@ -1,4 +1,3 @@
-import { CATCH, NOTIFICATION } from '@data/dataTypesConst';
 import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { selectorSessionLabels, atomSelectorLabels } from '@states/labels/atomQueries';
@@ -17,6 +16,8 @@ import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import { atomTodoNew } from '.';
 import { selectorSessionTodoIds, selectorSessionTodoItem, atomSelectorTodoItem } from './atomQueries';
+import { CATCH } from '@constAssertions/misc';
+import { NOTIFICATION } from '@constAssertions/ui';
 
 /**
  * Hooks

@@ -1,4 +1,4 @@
-import { VIEWBOX } from '@data/dataTypesConst';
+import { VIEWBOX } from '@constAssertions/ui';
 import { TypesOptionsSvg } from '@lib/types/typesOptions';
 import { memo } from 'react';
 

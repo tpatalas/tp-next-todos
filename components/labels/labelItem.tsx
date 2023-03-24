@@ -1,10 +1,11 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@data/dataOptions';
-import { BREAKPOINT, PATHNAME } from '@data/dataTypesConst';
+import { PATHNAME } from '@constAssertions/data';
+import { BREAKPOINT } from '@constAssertions/ui';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { TodosCount } from '@layouts/layoutApp/layout/layoutFooter/footerSidebar/todosCount';
 import { Types } from '@lib/types';
+import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { useSidebarOpen } from '@states/layouts/hooks';
 import { atomMediaQuery } from '@states/misc';
 import { classNames, paths } from '@states/utils';

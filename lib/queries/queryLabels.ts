@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from '@data/dataTypesConst';
+import { STORAGE_KEY } from '@constAssertions/storage';
 import { Labels } from '@lib/types';
 import { fetchWithRetry, queries } from '@states/utils';
 

@@ -1,8 +1,9 @@
 import { Button as ConfirmButton } from '@buttons/button';
-import { optionsSvgConfirmModalHeaderIcon, optionsButtonConfirmModalDiscard } from '@data/dataOptions';
 import { Types } from '@lib/types';
 import { HeaderDescription } from '@modals/modal/modalHeaders/headerDescription';
 import { HeaderTitle } from '@modals/modal/modalHeaders/headerTitle';
+import { optionsButtonConfirmModalDiscard } from '@options/button';
+import { optionsSvgConfirmModalHeaderIcon } from '@options/svg';
 import { atomConfirmModalDiscard } from '@states/modals';
 import { useTodoModalConfirmStateDiscard } from '@states/modals/hooks';
 import dynamic from 'next/dynamic';
@@ -34,8 +35,7 @@ export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
         <ConfirmButton
           options={optionsButtonConfirmModalDiscard}
           onClick={() => discardConfirmModal()}
-          ref={initialFocusButton}
-        >
+          ref={initialFocusButton}>
           Discard
         </ConfirmButton>
       }

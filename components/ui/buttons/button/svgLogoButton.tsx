@@ -1,9 +1,9 @@
-import { DATA_SVG_LOGO } from '@data/dataArrayOfObjects';
 import { TypesSvgLogo } from '@lib/types';
 import { TypesOptionsSvg } from '@lib/types/typesOptions';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next-router-mock';
 import { Button } from '.';
+import { DATA_SVG_LOGO } from '@collections/svgLogo';
 
 type Props = { options?: TypesOptionsSvg };
 

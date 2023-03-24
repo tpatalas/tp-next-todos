@@ -20,7 +20,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
   } = req;
 
   const data: Todos = body;
-  const query: Partial<Todos> = {
+  const filter: Partial<Todos> = {
     user_id: userId,
   };
 
@@ -28,11 +28,11 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
-      query.update = { $gt: Number(lastUpdate) };
-      if (Number(lastUpdate) === 0) query.deleted = { $ne: true };
+      filter.update = { $gt: Number(lastUpdate) };
+      if (Number(lastUpdate) === 0) filter.deleted = { $ne: true };
 
       try {
-        const getTodo = await TodoItem.find(query)
+        const getTodo = await TodoItem.find(filter)
           .select({
             _id: 1,
             priorityLevel: 1,

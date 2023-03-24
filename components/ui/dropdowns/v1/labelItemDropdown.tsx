@@ -1,12 +1,12 @@
-import { optionsDropdownLabelItem } from '@data/dataOptions';
 import { ICON_DELETE, ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { useLabelRemoveItem } from '@states/labels/hooks';
-import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { Types } from 'lib/types';
 import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
+import { ActiveDropdownMenuItemEffect } from '@lib/stateLogics/effects/ui/activeDropdownMenuItemEffect';
+import { optionsDropdownLabelItem } from '@options/misc';
 
 type Props = { options: TypesOptionsDropdown } & Pick<Types, 'label'> & Partial<Pick<Types, 'menuContentOnClose'>>;
 

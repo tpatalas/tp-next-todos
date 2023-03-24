@@ -1,4 +1,3 @@
-import { NOTIFICATION, CATCH } from '@data/dataTypesConst';
 import { STYLE_COLORS } from '@data/stylePreset';
 import {
   createDataNewLabel,
@@ -15,9 +14,15 @@ import { atomCatch } from '@states/utils';
 import { useCompareToQueryLabels, useGetWithRecoilCallback } from '@states/utils/hooks';
 import ObjectID from 'bson-objectid';
 import { useSession } from 'next-auth/react';
-import { RecoilValue, useRecoilCallback } from 'recoil';
-import { atomLabelNew, atomSelectorLabelItem } from '.';
-import { selectorSessionLabels, atomSelectorLabels } from './atomQueries';
+import { RecoilValue, useRecoilCallback, useRecoilValue, useResetRecoilState } from 'recoil';
+import { atomLabelNew, atomSelectorLabelItem, selectorSelectedLabels } from '.';
+import { atomSelectorLabels, selectorSessionLabels } from './atomQueries';
+import { ICON_FILTER_LIST_OFF, ICON_FILTER_LIST } from '@data/materialSymbols';
+import { TypesOptionsButton } from '@lib/types/typesOptions';
+import { atomFilterSelected } from '@states/comboBoxes';
+import { useEffect } from 'react';
+import { CATCH } from '@constAssertions/misc';
+import { NOTIFICATION } from '@constAssertions/ui';
 
 /**
  * Hooks
@@ -191,4 +196,23 @@ export const useLabelChangeHandler = (_id: Todos['_id']) => {
           labelItem: filteredLabelsUpdatedChanges,
         });
   });
+};
+
+export const useDataButtonComboboxFilterLabel = (_id: Todos['_id']): TypesOptionsButton => {
+  const isFilterOn = useRecoilValue(atomFilterSelected(_id));
+  const resetFilter = useResetRecoilState(atomFilterSelected(_id));
+  const selectedLabels = useRecoilValue(selectorSelectedLabels(_id));
+
+  useEffect(() => {
+    if (selectedLabels.length === 0 && isFilterOn) return resetFilter();
+  }, [resetFilter, isFilterOn, selectedLabels]);
+
+  const options = {
+    path: isFilterOn ? ICON_FILTER_LIST_OFF : ICON_FILTER_LIST,
+    color: 'fill-gray-400',
+    padding: 'p-1',
+    isDisabled: selectedLabels.length === 0 && true,
+    tooltip: isFilterOn ? 'show all labels' : 'show selected labels',
+  };
+  return options;
 };

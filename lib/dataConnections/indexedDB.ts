@@ -1,5 +1,5 @@
-import { DATA_IDB } from '@data/dataArrayOfObjects';
-import { IDB, IDB_VERSION, STORAGE_KEY } from '@data/dataTypesConst';
+import { DATA_IDB } from '@collections/idb';
+import { IDB_VERSION, STORAGE_KEY, IDB } from '@constAssertions/storage';
 import { Types, TypesIDB } from '@lib/types';
 import { getSessionStorage } from '@states/utils';
 import { deleteDB, openDB } from 'idb';

@@ -1,6 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
-import { optionsButtonTodoModalAddTodo, optionsButtonTodoModalCancel } from '@data/dataOptions';
 import { CalendarDropdown } from '@dropdowns/v1/calendarDropdown';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { DeleteTodoConfirmModal } from '@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal';
@@ -8,8 +7,6 @@ import { DiscardConfirmModal } from '@modals/confirmModal/discardConfirmModal';
 import { LabelModal } from '@modals/labelModals/labelModal';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
 import { useCalUpdateItem } from '@states/calendars/hooks';
-import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
-import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { atomTodoModalMax, atomTodoModalOpen } from '@states/modals';
 import { useTodoModalStateClose } from '@states/modals/hooks';
 import { selectorSessionTodoItem } from '@states/todos/atomQueries';
@@ -24,6 +21,9 @@ import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 import { TodoModalHeaderContents } from './todoModalHeaderContents';
+import { KeysWithTodoModalEffect } from '@lib/stateLogics/effects/keybindings/keysWithTodoModalEffect';
+import { DisableScrollEffect } from '@lib/stateLogics/effects/ui/disableScrollEffect';
+import { optionsButtonTodoModalCancel, optionsButtonTodoModalAddTodo } from '@options/button';
 
 type Props = Partial<Pick<Types, 'todo' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
 

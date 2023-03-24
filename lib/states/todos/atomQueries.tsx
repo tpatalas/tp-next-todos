@@ -1,7 +1,7 @@
-import { DATA_DEMO_TODOIDS } from '@data/dataDemo';
-import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
-import { queryEffect } from '@effects/queryEffects';
+import { DATA_DEMO_TODOIDS } from '@collections/demo';
+import { IDB_STORE, IDB_KEY } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
+import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { TodoIds, Todos } from '@lib/types';
 import { atomUserSession } from '@states/users';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';

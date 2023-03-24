@@ -2,8 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@collections/*": ["lib/data/collections/*"],
+      "@constAssertions/*": ["lib/data/constAssertions/*"],
+      "@options/*": ["lib/data/options/*"],
+
       "@effects/*": ["lib/states/effects/*"],
-      "@atomQueries/*": ["lib/states/atomQueries/*"],
       "@states/*": ["lib/states/*"],
       "@data/*": ["lib/data/*"],
       "@lib/*": ["lib/*"],

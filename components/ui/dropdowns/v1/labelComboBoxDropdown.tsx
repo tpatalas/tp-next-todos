@@ -1,7 +1,5 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
-import { optionsButtonLabelRemove, optionsDropdownComboBox } from '@data/dataOptions';
-import { GRADIENT_POSITION, PATHNAME, PRIORITY_LEVEL } from '@data/dataTypesConst';
 import { Types } from '@lib/types';
 import { selectorSelectedLabels } from '@states/labels';
 import { useLabelRemoveItemTitleId } from '@states/labels/hooks';
@@ -14,6 +12,11 @@ import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradien
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
+import { PATHNAME } from '@constAssertions/data';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
+import { GRADIENT_POSITION } from '@constAssertions/ui';
+import { optionsButtonLabelRemove } from '@options/button';
+import { optionsDropdownComboBox } from '@options/misc';
 
 type Props = Partial<Pick<Types, 'selectedQueryLabels' | 'container' | 'todo'>>;
 

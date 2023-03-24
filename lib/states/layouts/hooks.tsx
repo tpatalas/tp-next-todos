@@ -1,7 +1,7 @@
-import { BREAKPOINT } from '@data/dataTypesConst';
 import { atomMediaQuery } from '@states/misc';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { atomSidebarOpenMobile, atomSidebarOpenSetting } from '.';
+import { BREAKPOINT } from '@constAssertions/ui';
 
 /**
  * Hooks

@@ -1,7 +1,9 @@
-import { CATCH, STORAGE_KEY } from '@data/dataTypesConst';
+import { CATCH } from '@constAssertions/misc';
+import { STORAGE_KEY } from '@constAssertions/storage';
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { atom, atomFamily, RecoilRoot } from 'recoil';
+import validator from 'validator';
 
 /**
  * Atoms
@@ -90,4 +92,13 @@ export const retentionPolicy = ({ day }: { day: number }) => {
     return now();
   }
   return now(60 * 60 * 24 * day);
+};
+
+export const sanitize = (data: string) => data && validator.escape(validator.trim(data));
+
+export const sanitizeObject = (obj: object) => {
+  const sanitizedEntries = Object.entries(obj).map(([key, value]) => {
+    return [key, typeof value === 'string' ? sanitize(value as string) : value];
+  });
+  return Object.fromEntries(sanitizedEntries) as typeof obj;
 };

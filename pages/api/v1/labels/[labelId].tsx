@@ -1,11 +1,11 @@
-import { OBJECT_ID, RETENTION } from '@data/dataTypesConst';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
-import { retentionPolicy } from '@states/utils';
+import { retentionPolicy, sanitize, sanitizeObject } from '@states/utils';
+import { OBJECT_ID, RETENTION } from '@constAssertions/data';
 
 const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
@@ -17,10 +17,14 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
     body,
     query: { labelId },
   } = req;
+
   const data: Labels = body;
 
-  const query: Partial<Labels> = {
-    _id: labelId as OBJECT_ID,
+  const sanitizedLabelId = labelId ? sanitize(labelId as string) : undefined;
+  const sanitizedData = sanitizeObject(data) as Labels;
+
+  const filter: Partial<Labels> = {
+    _id: sanitizedLabelId as OBJECT_ID,
     user_id: userId,
   };
 
@@ -29,7 +33,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
       try {
-        const getLabelById = await Label.findOne(query);
+        const getLabelById = await Label.findOne(filter);
         if (!getLabelById) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: getLabelById });
       } catch (error) {
@@ -41,8 +45,8 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
 
       try {
         const updateLabelById = await Label.findByIdAndUpdate(
-          labelId,
-          { ...data, update: Date.now() },
+          sanitizedLabelId,
+          { ...sanitizedData, update: Date.now() },
           { upsert: true, new: true, runValidators: true },
         );
         if (!updateLabelById) return res.status(400).json({ success: false });
@@ -56,7 +60,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
 
       try {
         const deleteLabelById = await Label.findByIdAndUpdate(
-          labelId,
+          sanitizedLabelId,
           {
             // later deleted value can be passed through DELETE request with body to create the trashcan.
             // example:

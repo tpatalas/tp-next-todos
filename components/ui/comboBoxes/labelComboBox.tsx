@@ -1,21 +1,20 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { useDataButtonComboboxFilterLabel } from '@data/dataObjectsHooks';
 import { ICON_CHECK_BOX_FILL, ICON_CHECK_BOX_OUTLINE_BLANK } from '@data/materialSymbols';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Combobox } from '@headlessui/react';
 import { Labels, Types } from '@lib/types';
 import { atomComboBoxQuery } from '@states/comboBoxes';
-import { ComboBoxSelectedLabelsEffect } from '@states/comboBoxes/comboBoxSelectedLabelsEffect';
 import { useSetFilterLabels } from '@states/comboBoxes/hooks';
 import { selectorComboBoxFilteredLabels, selectorSelectedLabels } from '@states/labels';
-import { useLabelChangeHandler } from '@states/labels/hooks';
+import { useDataButtonComboboxFilterLabel, useLabelChangeHandler } from '@states/labels/hooks';
 import { useLabelModalStateOpen } from '@states/modals/hooks';
 import { classNames } from '@states/utils';
 import { Fragment as LabelComboBoxFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { ComboBox } from './comboBox';
 import { ComboBoxNewItemButton } from './comboBox/comboBoxNewItemButton';
+import { ComboBoxSelectedLabelsEffect } from '@lib/stateLogics/effects/ui/comboBoxSelectedLabelsEffect';
 
 type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels'>>;
 

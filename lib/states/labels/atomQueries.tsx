@@ -1,7 +1,7 @@
-import { DATA_DEMO_LABELS } from '@data/dataDemo';
-import { IDB_KEY, IDB_STORE } from '@data/dataTypesConst';
-import { queryEffect } from '@effects/queryEffects';
+import { DATA_DEMO_LABELS } from '@collections/demo';
+import { IDB_STORE, IDB_KEY } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
+import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { Labels } from '@lib/types';
 import { atomUserSession } from '@states/users';
 import { atom, selector } from 'recoil';
