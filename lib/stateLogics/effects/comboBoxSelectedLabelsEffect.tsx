@@ -4,7 +4,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { atomFilterSelected } from '@states/comboBoxes';
 import { CATCH } from '@constAssertions/misc';
 import { useLabelUpdateDataItem } from '@hooks/labels';
-import { atomCatch } from '@stateLogics/utils';
+import { atomCatch } from '@states/misc';
 
 type Props = Partial<Pick<Types, 'todo'>>;
 

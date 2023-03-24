@@ -2,7 +2,7 @@ import { Button } from '@buttons/button';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { Types } from '@lib/types';
-import { TypesOptionsButton } from '@lib/types/typesOptions';
+import { TypesOptionsButton } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { Fragment as HeaderContentsFragment } from 'react';
 

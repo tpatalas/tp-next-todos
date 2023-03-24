@@ -1,7 +1,7 @@
 import { ConditionalPortal } from '@dropdowns/v1/dropdown/conditionalPortal';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { TypesOptionsBackdrop } from '@lib/types/typesOptions';
+import { TypesOptionsBackdrop } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { Fragment as BackdropFragment, Fragment, useEffect, useRef, useState } from 'react';
 

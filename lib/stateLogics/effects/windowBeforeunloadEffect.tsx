@@ -1,5 +1,5 @@
 import { CATCH } from '@constAssertions/misc';
-import { atomCatch } from '@stateLogics/utils';
+import { atomCatch } from '@states/misc';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 

@@ -2,7 +2,7 @@ import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Menu } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { TypesOptionsDropdown } from '@lib/types/typesOptions';
+import { TypesOptionsDropdown } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { selectorActiveMenuItem } from '@states/misc';
 import { Tooltip } from '@tooltips/tooltips';

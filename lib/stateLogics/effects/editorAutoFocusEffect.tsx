@@ -1,7 +1,7 @@
 import { PATHNAME } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
-import { CustomEditor } from '@lib/types/typesSlate';
-import { atomCatch } from '@stateLogics/utils';
+import { CustomEditor } from '@lib/types/misc/slate';
+import { atomCatch } from '@states/misc';
 import { Types } from 'lib/types';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

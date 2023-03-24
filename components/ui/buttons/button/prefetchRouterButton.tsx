@@ -1,8 +1,8 @@
 import { Types } from '@lib/types';
-import { TypesOptionsPrefetchRouterButton } from '@lib/types/typesOptions';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect } from 'react';
 import { Button } from '.';
+import { TypesOptionsPrefetchRouterButton } from '@lib/types/options';
 
 type Props = { options: TypesOptionsPrefetchRouterButton } & Pick<Types, 'children'> & Partial<Pick<Types, 'onClick'>>;
 

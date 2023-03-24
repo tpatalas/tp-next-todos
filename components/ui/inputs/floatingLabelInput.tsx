@@ -1,5 +1,5 @@
 import { Types } from '@lib/types';
-import { TypesOptionsFloatingLabelInput } from '@lib/types/typesOptions';
+import { TypesOptionsFloatingLabelInput } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { forwardRef, Fragment } from 'react';
 

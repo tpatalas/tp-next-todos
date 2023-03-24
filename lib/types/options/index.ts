@@ -1,4 +1,5 @@
-import { Types, TypesElement, TypesStyleAttributes, TypesSvgIconAttributes } from '.';
+import { Types } from '..';
+import { TypesSvgIconAttributes, TypesElement, TypesStyleAttributes } from '../bases/ui';
 
 export type TypesOptionsSvg = Partial<
   Pick<TypesSvgIconAttributes, 'height' | 'width' | 'viewBox' | 'path' | 'isAriaHidden'> & Pick<Types, 'className'>

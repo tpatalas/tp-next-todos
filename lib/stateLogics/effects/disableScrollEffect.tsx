@@ -1,4 +1,4 @@
-import { atomDisableScroll } from '@stateLogics/utils';
+import { atomDisableScroll } from '@states/misc';
 import { useEffect } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 

@@ -1,5 +1,5 @@
 import { VIEWBOX } from '@constAssertions/ui';
-import { TypesOptionsSvg } from '@lib/types/typesOptions';
+import { TypesOptionsSvg } from '@lib/types/options';
 import { memo } from 'react';
 
 type Props = { options: TypesOptionsSvg };

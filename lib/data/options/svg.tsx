@@ -6,7 +6,7 @@ import {
   ICON_REPORT,
   ICON_DELETE,
 } from '@data/materialSymbols';
-import { TypesOptionsSvg } from '@lib/types/typesOptions';
+import { TypesOptionsSvg } from '@lib/types/options';
 
 // network status
 export const optionsSvgNetworkStatus: TypesOptionsSvg = {

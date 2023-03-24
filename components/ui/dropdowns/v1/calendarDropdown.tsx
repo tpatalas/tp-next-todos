@@ -3,7 +3,6 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
-import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { atomTodoNew } from '@states/todos';
 import { format } from 'date-fns';
 import { Types } from 'lib/types';
@@ -19,6 +18,7 @@ import { useCalResetDayUpdater, useCalResetDateItemOnly, useCalResetDateAll } fr
 import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { Calendar } from '@ui/calendars/calendar';
 import { classNames } from '@stateLogics/utils';
+import { TypesOptionsDropdown } from '@lib/types/options';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClickConfirm'>;
 

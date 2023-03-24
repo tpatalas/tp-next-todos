@@ -8,7 +8,6 @@ import {
 import { Labels, Todos, Types } from '@lib/types';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
 import { ICON_FILTER_LIST_OFF, ICON_FILTER_LIST } from '@data/materialSymbols';
-import { TypesOptionsButton } from '@lib/types/typesOptions';
 import { atomFilterSelected } from '@states/comboBoxes';
 import { useEffect } from 'react';
 import { CATCH } from '@constAssertions/misc';
@@ -22,7 +21,8 @@ import { useSession } from 'next-auth/react';
 import { useRecoilCallback, RecoilValue, useRecoilValue, useResetRecoilState } from 'recoil';
 import { useGetWithRecoilCallback, useCompareToQueryLabels } from './misc';
 import { useNotificationState } from './notifications';
-import { atomCatch } from '@stateLogics/utils';
+import { TypesOptionsButton } from '@lib/types/options';
+import { atomCatch } from '@states/misc';
 
 /**
  * Hooks

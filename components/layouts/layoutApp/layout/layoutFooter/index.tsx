@@ -7,7 +7,8 @@ import { useRecoilValue } from 'recoil';
 import { FooterSidebar } from './footerSidebar';
 import { GRADIENT_TYPE, GRADIENT_POSITION } from '@constAssertions/ui';
 import { SidebarMobileResetEffect } from '@effects/sidebarMobileResetEffect';
-import { atomDisableScroll, classNames } from '@stateLogics/utils';
+import { classNames } from '@stateLogics/utils';
+import { atomDisableScroll } from '@states/misc';
 
 export const LayoutFooter = ({ children }: Pick<Types, 'children'>) => {
   const isSidebarOpen = useRecoilValue(selectorSidebarOpen);

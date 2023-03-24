@@ -1,4 +1,4 @@
-import { TypesOptionsPseudoButton } from '@lib/types/typesOptions';
+import { TypesOptionsPseudoButton } from '@lib/types/options';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { forwardRef, useState } from 'react';

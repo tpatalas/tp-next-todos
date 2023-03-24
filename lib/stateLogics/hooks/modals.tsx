@@ -18,7 +18,7 @@ import {
   atomTodoModalMax,
   atomLabelModalOpen,
 } from '@states/modals';
-import { atomCatch } from '@stateLogics/utils';
+import { atomCatch } from '@states/misc';
 
 /**
  * Hooks

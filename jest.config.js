@@ -28,7 +28,6 @@ const customJestConfig = {
     '^@states/(.*)$': ['<rootDir>/lib/stateLogics/states/$1'],
     '^@stateLogics/(.*)$': ['<rootDir>/lib/stateLogics/$1'],
     '^@data/(.*)$': ['<rootDir>/lib/data/$1'],
-    '^@types/(.*)$': ['<rootDir>/lib/types/$1'],
     '^@lib/(.*)$': ['<rootDir>/lib/$1'],
     '^@layouts/(.*)$': ['<rootDir>/components/layouts/$1'],
     '^@buttons/(.*)$': ['<rootDir>/components/ui/buttons/$1'],

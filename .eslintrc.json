@@ -30,6 +30,12 @@
     "testing-library/no-await-sync-query": "error",
     "testing-library/no-debugging-utils": "warn",
     "testing-library/no-dom-import": "off",
-    "testing-library/no-render-in-setup": "off"
+    "testing-library/no-render-in-setup": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@lib/types/bases/*"]
+      }
+    ]
   }
 }
