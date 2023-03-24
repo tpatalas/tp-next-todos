@@ -21,7 +21,7 @@ import {
   STYLE_HOVER_ENABLED_SLATE_DARK,
 } from '@data/stylePreset';
 import { TypesOptionsButton } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 
 // global
 export const optionsButtonGlobalClose: TypesOptionsButton = {

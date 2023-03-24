@@ -1,6 +1,5 @@
 import { IconButton } from '@buttons/iconButton';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
-import { useSidebarOpen } from '@states/layouts/hooks';
 import dynamic from 'next/dynamic';
 import {
   Fragment as LayoutHeaderFragment,
@@ -12,6 +11,7 @@ import {
 } from 'react';
 import { HeaderSearchBar } from './headerSearchBar';
 import { optionsButtonSidebarToggle } from '@options/button';
+import { useSidebarOpen } from '@hooks/layouts';
 
 const HeaderUser = dynamic(() => import('./headerUser').then((mod) => mod.HeaderUser), { ssr: false });
 

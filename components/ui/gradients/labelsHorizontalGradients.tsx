@@ -1,7 +1,7 @@
 import { GRADIENT_POSITION } from '@constAssertions/ui';
+import { useHorizontalScrollPosition } from '@hooks/misc';
 import { Types } from '@lib/types';
-import { classNames } from '@states/utils';
-import { useHorizontalScrollPosition } from '@states/utils/hooks';
+import { classNames } from '@stateLogics/utils';
 import {
   Fragment as GradientFragment,
   Fragment as GradientLeftFragment,

@@ -1,9 +1,9 @@
 import { ConditionalPortal } from '@dropdowns/v1/dropdown/conditionalPortal';
+import { DisableScrollEffect } from '@effects/disableScrollEffect';
 import { Menu, Transition } from '@headlessui/react';
-import { DisableScrollEffect } from '@lib/stateLogics/effects/ui/disableScrollEffect';
 import { Types } from '@lib/types';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
 

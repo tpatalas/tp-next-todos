@@ -1,9 +1,9 @@
+import { EditorAutoFocusEffect } from '@effects/editorAutoFocusEffect';
+import { useEditorInitialValue, useEditorChangeHandler } from '@hooks/editors';
+import { useKeyWithEditor } from '@hooks/keybindings';
 import { renderPlaceholder, renderCustomElement } from '@lib/editors';
-import { EditorAutoFocusEffect } from '@lib/stateLogics/effects/ui/editorAutoFocusEffect';
 import { Types } from '@lib/types';
-import { useEditorInitialValue, useEditorChangeHandler } from '@states/editors/hooks';
-import { useKeyWithEditor } from '@states/keybinds/hooks';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createEditor } from 'slate';

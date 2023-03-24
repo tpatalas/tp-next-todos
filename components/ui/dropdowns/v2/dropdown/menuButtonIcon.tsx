@@ -1,6 +1,6 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import { TypesOptionsDropdown } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 import { Fragment } from 'react';
 
 type Props = { options: TypesOptionsDropdown };

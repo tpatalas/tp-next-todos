@@ -1,14 +1,14 @@
 import { SvgIcon } from '@components/icons/svgIcon';
 import { PRIORITY_LEVEL, CATCH } from '@constAssertions/misc';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
+import { useTodoModalStateOpen } from '@hooks/modals';
+import { useTodoCompleteItem } from '@hooks/todos';
 import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
 import { optionsSvgPriorityUrgent, optionsSvgPriorityImportant, optionsSvgCalendarDueDate } from '@options/svg';
+import { atomCatch, classNames } from '@stateLogics/utils';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { selectorSelectedQueryLabels } from '@states/labels';
-import { useTodoModalStateOpen } from '@states/modals/hooks';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
-import { useTodoCompleteItem } from '@states/todos/hooks';
-import { atomCatch, classNames } from '@states/utils';
 import { format } from 'date-fns';
 import { Fragment as CheckBoxFragment, Fragment as TodoItemFragment } from 'react';
 import { useRecoilValue } from 'recoil';
