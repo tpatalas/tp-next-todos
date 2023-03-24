@@ -19,7 +19,8 @@ import { optionsButtonSidebarToggle, optionsButtonCreateTodo } from '@options/bu
 import { useSidebarOpen } from '@hooks/layouts';
 import { useConditionCheckCreateModalOpen } from '@hooks/misc';
 import { useTodoModalStateOpen } from '@hooks/modals';
-import { atomDisableScroll, classNames } from '@stateLogics/utils';
+import { classNames } from '@stateLogics/utils';
+import { atomDisableScroll } from '@states/misc';
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);

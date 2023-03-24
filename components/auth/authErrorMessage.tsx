@@ -2,7 +2,7 @@ import { DATA_NEXTAUTH_ERROR } from '@collections/nextAuthError';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_ERROR_FILL } from '@data/materialSymbols';
 import { useNextQuery } from '@hooks/misc';
-import { TypesOptionsAuthErrorMessage } from '@lib/types/typesOptions';
+import { TypesOptionsAuthErrorMessage } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { atomUserErrorMessage } from '@states/users';
 import { useEffect } from 'react';

@@ -1,6 +1,5 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
 import { ICON_DELETE, ICON_MORE_VERT } from '@data/materialSymbols';
-import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { Types } from 'lib/types';
 import { useRecoilValue } from 'recoil';
 import { CalendarDropdown } from './calendarDropdown';
@@ -14,6 +13,7 @@ import { useCalUpdateDataItem } from '@hooks/calendar';
 import { usePriorityUpdate, usePriorityUpdateData } from '@hooks/priorities';
 import { useTodoRemoveItem } from '@hooks/todos';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
+import { TypesOptionsDropdown } from '@lib/types/options';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
 

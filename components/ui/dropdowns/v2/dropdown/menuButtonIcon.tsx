@@ -1,5 +1,5 @@
 import { SvgIcon } from '@components/icons/svgIcon';
-import { TypesOptionsDropdown } from '@lib/types/typesOptions';
+import { TypesOptionsDropdown } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { Fragment } from 'react';
 

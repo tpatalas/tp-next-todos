@@ -1,4 +1,4 @@
-import { TypesOptionsLoadingState } from '@lib/types/typesOptions';
+import { TypesOptionsLoadingState } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { Fragment, useEffect, useState } from 'react';
 

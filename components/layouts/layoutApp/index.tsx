@@ -1,7 +1,6 @@
 import { CATCH } from '@constAssertions/misc';
 import { Types } from '@lib/types';
-import { atomCatch } from '@stateLogics/utils';
-import { atomHtmlTitleTag } from '@states/misc';
+import { atomCatch, atomHtmlTitleTag } from '@states/misc';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import {

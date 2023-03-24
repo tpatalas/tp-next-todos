@@ -1,4 +1,5 @@
 import { PATHNAME_IMAGE } from '@constAssertions/data';
+import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
 import { mediaQueryEffect, networkStatusEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
 import { atom, atomFamily, selector } from 'recoil';
@@ -6,6 +7,16 @@ import { atom, atomFamily, selector } from 'recoil';
 /*
  * Atoms
  * */
+
+export const atomCatch = atomFamily<boolean, CATCH>({
+  key: 'atomCatch',
+  default: false,
+});
+
+export const atomDisableScroll = atom<boolean>({
+  key: 'atomDisableScroll',
+  default: false,
+});
 
 // Media Queries
 export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({

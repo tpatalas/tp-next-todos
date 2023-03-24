@@ -1,9 +1,8 @@
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Todos, Types, Labels } from '@lib/types';
-import { CustomEditor } from '@lib/types/typesSlate';
 import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';
-import { atomMediaQuery } from '@states/misc';
+import { atomCatch, atomMediaQuery } from '@states/misc';
 import { atomTodoModalOpen, atomTodoModalMini, atomLabelModalOpen, atomConfirmModalDiscard } from '@states/modals';
 import { isMacOs, isMobile } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
@@ -19,7 +18,7 @@ import {
   useTodoModalStateMaximize,
 } from './modals';
 import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from './todos';
-import { atomCatch } from '@stateLogics/utils';
+import { CustomEditor } from '@lib/types/misc/slate';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);

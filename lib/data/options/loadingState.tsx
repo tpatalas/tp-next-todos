@@ -1,6 +1,6 @@
-import { LoadingSkeletonLabels } from "@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels";
-import { LoadingSkeletonTodos } from "@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos";
-import { TypesOptionsLoadingState, TypesOptionsFloatingLabelInput } from "@lib/types/typesOptions";
+import { LoadingSkeletonLabels } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels';
+import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
+import { TypesOptionsLoadingState, TypesOptionsFloatingLabelInput } from '@lib/types/options';
 
 // loadingState
 export const optionsLoadingTodos: TypesOptionsLoadingState = {
@@ -41,4 +41,3 @@ export const optionsFloatingLabelPassword = (
     isError: isError,
   };
 };
-

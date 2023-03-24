@@ -1,13 +1,13 @@
 import { Button } from '@buttons/button';
 import { STYLE_HOVER_SLATE_DARK } from '@data/stylePreset';
 import { Menu } from '@headlessui/react';
-import { TypesOptionsDropdown } from '@lib/types/typesOptions';
 import { atomOnBlur } from '@states/focus';
 import { Types } from 'lib/types';
 import { Fragment, Fragment as MenuFragment, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MenuItems } from './menuItems';
 import { classNames } from '@stateLogics/utils';
+import { TypesOptionsDropdown } from '@lib/types/options';
 
 type Props = { options: TypesOptionsDropdown } & Pick<Types, 'children'> &
   Partial<Pick<Types, 'menuButtonContent' | 'menuContentOnClose' | 'menuButtonIcon'>>;

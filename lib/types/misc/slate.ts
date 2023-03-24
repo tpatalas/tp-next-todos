@@ -6,12 +6,9 @@ import { BaseEditor } from 'slate';
 import { HistoryEditor } from 'slate-history';
 import { ReactEditor } from 'slate-react';
 
-type ElementTypes =
-  | { type: 'paragraph'; children: CustomText[] }
-  | { type: 'code'; children: CustomText[] };
+type ElementTypes = { type: 'paragraph'; children: CustomText[] } | { type: 'code'; children: CustomText[] };
 
-type CustomElement = Pick<ElementTypes, 'children'> &
-  Partial<Pick<ElementTypes, 'type'>>;
+type CustomElement = Pick<ElementTypes, 'children'> & Partial<Pick<ElementTypes, 'type'>>;
 
 type CustomText = { text: string };
 
