@@ -17,12 +17,10 @@ const LabelSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  title_id: [
-    {
-      type: mongoose.Types.ObjectId,
-      required: false,
-    },
-  ],
+  title_id: {
+    type: [mongoose.Types.ObjectId],
+    required: false,
+  },
   update: {
     type: Number,
     required: false,

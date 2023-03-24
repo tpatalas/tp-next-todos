@@ -18,10 +18,10 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
     query: { labelId },
   } = req;
 
-  const data: Labels = body;
+  const dataPatch: Labels = body;
 
+  const sanitizedData = sanitizeObject(dataPatch) as Labels;
   const sanitizedLabelId = labelId ? sanitize(labelId as string) : undefined;
-  const sanitizedData = sanitizeObject(data) as Labels;
 
   const filter: Partial<Labels> = {
     _id: sanitizedLabelId as OBJECT_ID,
@@ -40,7 +40,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'PUT':
+    case 'PATCH':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
       try {

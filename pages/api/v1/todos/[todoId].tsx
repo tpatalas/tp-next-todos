@@ -1,16 +1,16 @@
+import { OBJECT_ID, RETENTION, SCHEMA_TODO } from '@constAssertions/data';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
-import { Labels, Todos } from '@lib/types';
+import { sanitizedUserLabels, sanitizedUserTodoItem, sanitizedUserTodoNote } from '@lib/sanitizers/sanitizedSchemas';
+import { Todos } from '@lib/types';
+import { retentionPolicy, sanitize } from '@stateLogics/utils';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
-import { OBJECT_ID, SCHEMA_TODO, RETENTION } from '@constAssertions/data';
-import { sanitizedUserLabels, sanitizedUserTodoItem, sanitizedUserTodoNote } from '@lib/sanitizers/sanitizedTodos';
-import { sanitize, retentionPolicy } from '@stateLogics/utils';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
@@ -39,7 +39,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const sanitizedTodoItem = sanitizedUserTodoItem(data);
   const sanitizedTodoNote = sanitizedUserTodoNote(data);
-  const sanitizedLabels = sanitizedUserLabels(data);
+  const sanitizedLabels = sanitizedUserLabels(data.labelItem);
 
   switch (method) {
     case 'GET':
@@ -82,29 +82,27 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
             runValidators: true,
           }));
 
-        const updatedLabel =
-          sanitizedLabels &&
-          (await Promise.all(
-            sanitizedLabels.map(async (label: Labels) => {
-              const updatedLabel = { ...label, update: Date.now() };
-              return await Label.updateMany(
-                { _id: label._id },
-                { $set: updatedLabel },
-                {
-                  session: sessionPut,
-                  upsert: true,
-                  new: true,
-                  runValidators: true,
-                },
-              );
-            }),
-          ));
+        const sanitizedUpdateLabel = sanitizedLabels.map((label) => {
+          return {
+            ...label,
+            update: Date.now(),
+          };
+        });
 
-        const updatedTodo = await Promise.all([updatedTodoItem, updatedTodoNote, updatedLabel]).then(
-          ([updatedTodoItem, updatedTodoNote, updatedLabel]) => ({
+        const updatedLabelPromises = sanitizedUpdateLabel.map((label) =>
+          Label.updateMany(
+            { _id: label._id },
+            { $set: label },
+            { session: sessionPut, upsert: true, runValidators: true },
+          ),
+        );
+        const updatedLabelPromised = await Promise.all(updatedLabelPromises);
+
+        const updatedTodo = await Promise.all([updatedTodoItem, updatedTodoNote, updatedLabelPromised]).then(
+          ([updatedTodoItem, updatedTodoNote, updatedLabelPromised]) => ({
             updatedTodoItem,
             updatedTodoNote,
-            updatedLabel,
+            updatedLabel: updatedLabelPromised,
           }),
         );
         await sessionPut.commitTransaction();
