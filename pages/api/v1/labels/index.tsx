@@ -18,7 +18,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data: Labels = body;
 
-  const query: Partial<Labels> = {
+  const filter: Partial<Labels> = {
     user_id: userId,
   };
 
@@ -26,11 +26,11 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
-      query.update = { $gt: Number(lastUpdate) };
-      if (Number(lastUpdate) === 0) query.deleted = { $ne: true };
+      filter.update = { $gt: Number(lastUpdate) };
+      if (Number(lastUpdate) === 0) filter.deleted = { $ne: true };
 
       try {
-        const getLabels = await Label.find(query)
+        const getLabels = await Label.find(filter)
           .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1, deleted: 1 })
           .lean();
         getLabels.length === 0
