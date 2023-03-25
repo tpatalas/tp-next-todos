@@ -22,10 +22,10 @@ export const sanitizedUserTodoNote = (data: Todos) => {
   };
 };
 
-export const sanitizedUserLabels = (data: Todos) => {
+export const sanitizedUserLabels = (data: Todos['labelItem'] | Labels[]) => {
   return (
-    data.labelItem &&
-    (data.labelItem.map((labelItem) => {
+    data &&
+    (data.map((labelItem) => {
       const sanitizedLabelItem = sanitizeObject(labelItem);
       const sanitizedTitleIds = labelItem.title_id?.map((id) => sanitize(id as string)) as OBJECT_ID[];
       return {
