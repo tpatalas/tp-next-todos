@@ -3,14 +3,15 @@ import {
   IconButton as ExpandReversibleIconButton,
   IconButton as MinimizeIconButton,
 } from '@buttons/iconButton';
-import { optionsButtonTodoModalClose, optionsButtonTodoModalMinimize } from '@data/dataOptions';
-import { BREAKPOINT, MODIFIER_KBD } from '@data/dataTypesConst';
+import { MODIFIER_KBD } from '@constAssertions/misc';
+import { BREAKPOINT } from '@constAssertions/ui';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
+import { useTodoModalStateMinimize, useTodoModalStateExpand, useTodoModalStateClose } from '@hooks/modals';
 import { Types } from '@lib/types';
+import { optionsButtonTodoModalMinimize, optionsButtonTodoModalClose } from '@options/button';
 import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMax } from '@states/modals';
-import { useTodoModalStateClose, useTodoModalStateExpand, useTodoModalStateMinimize } from '@states/modals/hooks';
 import { Fragment as ContainerFragment, Fragment as HeaderButtonFragment, Fragment as HeaderFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 

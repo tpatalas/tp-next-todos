@@ -1,8 +1,8 @@
-import { optionsLoadingLabels } from '@data/dataOptions';
-import { DURATION } from '@data/dataTypesConst';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { Fragment } from 'react';
 import { LoadingState } from '.';
+import { DURATION } from '@constAssertions/ui';
+import { optionsLoadingLabels } from '@options/loadingState';
 
 export const LoadingLabels = () => {
   return (

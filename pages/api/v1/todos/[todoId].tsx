@@ -1,15 +1,16 @@
-import { OBJECT_ID, RETENTION, SCHEMA_TODO } from '@data/dataTypesConst';
+import { OBJECT_ID, RETENTION, SCHEMA_TODO } from '@constAssertions/data';
 import { aggregatedTodoItem } from '@lib/dataConnections/aggregationPipeline';
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import TodoItem from '@lib/models/Todo/TodoItems';
 import TodoNote from '@lib/models/Todo/TodoNotes';
-import { Labels, Todos } from '@lib/types';
+import { sanitizedUserLabels, sanitizedUserTodoItem, sanitizedUserTodoNote } from '@lib/sanitizers/sanitizedSchemas';
+import { Todos } from '@lib/types';
+import { retentionPolicy, sanitize } from '@stateLogics/utils';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
-import { retentionPolicy } from '@states/utils';
 
 const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
   await databaseConnect();
@@ -22,8 +23,10 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
     query: { todoId },
   } = req;
 
+  const sanitizedTodoId = todoId ? sanitize(todoId as string) : undefined;
+
   const data: Todos = body;
-  const queriedTodoId = todoId as OBJECT_ID;
+  const queriedTodoId = sanitizedTodoId as OBJECT_ID;
 
   const filter = (type: SCHEMA_TODO) => {
     const query: Partial<Todos> = {
@@ -33,6 +36,10 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
     type === SCHEMA_TODO['todoNote'] && (query.title_id = queriedTodoId);
     return query;
   };
+
+  const sanitizedTodoItem = sanitizedUserTodoItem(data);
+  const sanitizedTodoNote = sanitizedUserTodoNote(data);
+  const sanitizedLabels = sanitizedUserLabels(data.labelItem);
 
   switch (method) {
     case 'GET':
@@ -58,60 +65,44 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
 
       sessionPut.startTransaction();
 
-      const todoItem = {
-        title: data.title,
-        completed: data.completed,
-        completedDate: data.completedDate,
-        dueDate: data.dueDate,
-        createdDate: data.createdDate,
-        priorityLevel: data.priorityLevel,
-        priorityRankScore: data.priorityRankScore,
-        update: Date.now(),
-      };
-
-      const todoNote = {
-        note: data.note,
-        update: Date.now(),
-      };
-
       try {
-        const updatedTodoItem = await TodoItem.findOneAndUpdate(filter(SCHEMA_TODO['todoItem']), todoItem, {
+        const updatedTodoItem = await TodoItem.findOneAndUpdate(filter(SCHEMA_TODO['todoItem']), sanitizedTodoItem, {
           session: sessionPut,
           upsert: true,
           new: true,
           runValidators: true,
         });
 
-        const updatedTodoNote = await TodoNote.findOneAndUpdate(filter(SCHEMA_TODO['todoNote']), todoNote, {
-          session: sessionPut,
-          upsert: true,
-          new: true,
-          runValidators: true,
+        const updatedTodoNote =
+          sanitizedTodoNote &&
+          (await TodoNote.findOneAndUpdate(filter(SCHEMA_TODO['todoNote']), sanitizedTodoNote, {
+            session: sessionPut,
+            upsert: true,
+            new: true,
+            runValidators: true,
+          }));
+
+        const sanitizedUpdateLabel = sanitizedLabels.map((label) => {
+          return {
+            ...label,
+            update: Date.now(),
+          };
         });
 
-        const updatedLabel =
-          data.labelItem &&
-          (await Promise.all(
-            data.labelItem.map(async (label: Labels) => {
-              const updatedLabel = { ...label, update: Date.now() };
-              return await Label.updateMany(
-                { _id: label._id },
-                { $set: updatedLabel },
-                {
-                  session: sessionPut,
-                  upsert: true,
-                  new: true,
-                  runValidators: true,
-                },
-              );
-            }),
-          ));
+        const updatedLabelPromises = sanitizedUpdateLabel.map((label) =>
+          Label.updateMany(
+            { _id: label._id },
+            { $set: label },
+            { session: sessionPut, upsert: true, runValidators: true },
+          ),
+        );
+        const updatedLabelPromised = await Promise.all(updatedLabelPromises);
 
-        const updatedTodo = await Promise.all([updatedTodoItem, updatedTodoNote, updatedLabel]).then(
-          ([updatedTodoItem, updatedTodoNote, updatedLabel]) => ({
+        const updatedTodo = await Promise.all([updatedTodoItem, updatedTodoNote, updatedLabelPromised]).then(
+          ([updatedTodoItem, updatedTodoNote, updatedLabelPromised]) => ({
             updatedTodoItem,
             updatedTodoNote,
-            updatedLabel,
+            updatedLabel: updatedLabelPromised,
           }),
         );
         await sessionPut.commitTransaction();
@@ -127,10 +118,16 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'PATCH':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
+      const sanitizedData = {
+        ...sanitizedTodoItem,
+        ...sanitizedTodoNote,
+        labelItem: sanitizedLabels,
+      };
+
       try {
         const updateItem = await TodoItem.findOneAndUpdate(
           filter(SCHEMA_TODO['todoItem']),
-          { ...data, update: Date.now() },
+          { ...sanitizedData, update: Date.now() },
           {
             new: true,
             runValidators: true,

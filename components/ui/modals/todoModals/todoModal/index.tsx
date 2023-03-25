@@ -1,21 +1,12 @@
 import { DisableButton } from '@buttons/disableButton';
 import { TodoEditors } from '@components/editors/todoEditor';
-import { optionsButtonTodoModalAddTodo, optionsButtonTodoModalCancel } from '@data/dataOptions';
 import { CalendarDropdown } from '@dropdowns/v1/calendarDropdown';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { DeleteTodoConfirmModal } from '@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal';
 import { DiscardConfirmModal } from '@modals/confirmModal/discardConfirmModal';
 import { LabelModal } from '@modals/labelModals/labelModal';
 import { TodoModalHeaderButtons } from '@modals/todoModals/todoModal/todoModalHeaderButtons';
-import { useCalUpdateItem } from '@states/calendars/hooks';
-import { KeysWithTodoModalEffect } from '@states/keybinds/keysWithTodoModalEffect';
-import { DisableScrollEffect } from '@states/misc/disableScrollEffect';
 import { atomTodoModalMax, atomTodoModalOpen } from '@states/modals';
-import { useTodoModalStateClose } from '@states/modals/hooks';
-import { selectorSessionTodoItem } from '@states/todos/atomQueries';
-import { useTodoAdd } from '@states/todos/hooks';
-import { classNames } from '@states/utils';
-import { useConditionCheckTodoTitleEmpty } from '@states/utils/hooks';
 import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
@@ -24,6 +15,15 @@ import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 import { TodoModalHeaderContents } from './todoModalHeaderContents';
+import { optionsButtonTodoModalCancel, optionsButtonTodoModalAddTodo } from '@options/button';
+import { useCalUpdateItem } from '@hooks/calendar';
+import { useConditionCheckTodoTitleEmpty } from '@hooks/misc';
+import { useTodoModalStateClose } from '@hooks/modals';
+import { useTodoAdd } from '@hooks/todos';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
+import { DisableScrollEffect } from '@effects/disableScrollEffect';
+import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
+import { classNames } from '@stateLogics/utils';
 
 type Props = Partial<Pick<Types, 'todo' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
 

@@ -1,4 +1,4 @@
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 
 /**
  * Button

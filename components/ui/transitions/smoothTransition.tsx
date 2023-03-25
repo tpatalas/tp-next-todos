@@ -1,7 +1,7 @@
-import { DURATION } from '@data/dataTypesConst';
+import { DURATION } from '@constAssertions/ui';
 import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 
 type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'enterDuration' | 'leaveDuration'>>;
 

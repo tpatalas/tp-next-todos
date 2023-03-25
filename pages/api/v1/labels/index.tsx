@@ -1,5 +1,6 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
+import { sanitizedUserLabels } from '@lib/sanitizers/sanitizedSchemas';
 import { Labels } from '@lib/types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
@@ -16,9 +17,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
     query: { update: lastUpdate },
   } = req;
 
-  const data: Labels = body;
-
-  const query: Partial<Labels> = {
+  const filter: Partial<Labels> = {
     user_id: userId,
   };
 
@@ -26,11 +25,11 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
-      query.update = { $gt: Number(lastUpdate) };
-      if (Number(lastUpdate) === 0) query.deleted = { $ne: true };
+      filter.update = { $gt: Number(lastUpdate) };
+      if (Number(lastUpdate) === 0) filter.deleted = { $ne: true };
 
       try {
-        const getLabels = await Label.find(query)
+        const getLabels = await Label.find(filter)
           .select({ _id: 1, name: 1, parent_id: 1, title_id: 1, color: 1, deleted: 1 })
           .lean();
         getLabels.length === 0
@@ -43,7 +42,9 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
-      const { _id, parent_id, title_id, name, color } = data;
+      const dataPost: Labels = body;
+
+      const { _id, parent_id, title_id, name, color } = dataPost;
       const labelItem = { _id, parent_id, title_id, name, color, update: Date.now(), user_id: userId };
       try {
         const createLabel = await Label.create(labelItem);
@@ -55,27 +56,27 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'PUT':
       if (!session) return res.status(401).json({ success: false, message: 'unauthorized access' });
 
-      const arrayObjectData: Labels[] = body;
+      const dataPut: Labels[] = body;
+      const sanitizedLabels = sanitizedUserLabels(dataPut);
+
       try {
-        const updateLabel = await Promise.all(
-          arrayObjectData.map(async (label: Labels) => {
-            const updatedLabel = {
-              ...label,
-              update: Date.now(),
-            };
-            return await Label.updateMany(
-              { _id: label._id },
-              { $set: updatedLabel },
-              { upsert: true, new: true, runValidators: true },
-            );
-          }),
+        const sanitizedUpdateLabel = sanitizedLabels.map((label) => {
+          return {
+            ...label,
+            update: Date.now(),
+          };
+        });
+
+        const updateLabel = sanitizedUpdateLabel.map((label) =>
+          Label.updateMany({ _id: label._id }, { $set: label }, { upsert: true, runValidators: true }),
         );
-        if (!updateLabel) return res.status(400).json({ success: false });
-        res.status(200).json({ success: true, data: updateLabel });
+
+        const updatedLabel = await Promise.all(updateLabel);
+
+        res.status(200).json({ success: true, data: updatedLabel });
       } catch (error) {
         res.status(400).json({ success: false });
       }
-
       break;
     default:
       res.status(400).json({ success: false });

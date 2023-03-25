@@ -1,12 +1,12 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LoadingSpinner } from '@components/loadable/loadingSpinner';
-import { SPINNER } from '@data/dataTypesConst';
+import { SPINNER } from '@constAssertions/ui';
 import { ICON_MARK_EMAIL_READ } from '@data/materialSymbols';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
+import { classNames } from '@stateLogics/utils';
 import { atomLoadingSpinner } from '@states/misc';
 import { atomUser } from '@states/users';
-import { classNames } from '@states/utils';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 export const VerificationConfirmation = () => {

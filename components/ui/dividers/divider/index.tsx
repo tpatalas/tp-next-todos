@@ -1,5 +1,5 @@
 import { Types } from '@lib/types';
-import { classNames } from '@states/utils';
+import { classNames } from '@stateLogics/utils';
 
 type Props = Partial<Pick<Types, 'children' | 'margin'>>;
 

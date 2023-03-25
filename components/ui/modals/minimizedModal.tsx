@@ -3,22 +3,22 @@ import {
   IconButton as MaxIconButton,
   IconButton as OpenFullIconButton,
 } from '@buttons/iconButton';
-import {
-  optionsMinimizedModal,
-  optionsButtonMiniModalMaximize,
-  optionsButtonMiniModalOpenFull,
-  optionsButtonGlobalClose,
-} from '@data/dataOptions';
-import { BREAKPOINT } from '@data/dataTypesConst';
 import { atomMediaQuery } from '@states/misc';
 import { atomTodoModalMini } from '@states/modals';
-import { useTodoModalStateClose, useTodoModalStateMaximize, useTodoModalStateExitMinimize } from '@states/modals/hooks';
-import { ModalStateOnBreakpointEffect } from '@states/modals/modalStateOnBreakpointEffect';
 import { atomTodoNew } from '@states/todos';
 import { TypesTodo } from 'lib/types';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { MinimizeModalTransition } from './modal/modalTransition/minimizeModalTransition';
+import { BREAKPOINT } from '@constAssertions/ui';
+import {
+  optionsButtonMiniModalMaximize,
+  optionsButtonMiniModalOpenFull,
+  optionsButtonGlobalClose,
+} from '@options/button';
+import { optionsMinimizedModal } from '@options/misc';
+import { ModalStateOnBreakpointEffect } from '@effects/modalStateOnBreakpointEffect';
+import { useTodoModalStateClose, useTodoModalStateMaximize, useTodoModalStateExitMinimize } from '@hooks/modals';
 
 type Props = Partial<Pick<TypesTodo, 'todo'>>;
 

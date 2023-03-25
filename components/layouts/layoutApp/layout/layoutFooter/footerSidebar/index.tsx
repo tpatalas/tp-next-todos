@@ -2,14 +2,9 @@ import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LabelList } from '@components/labels/labelList';
-import { optionsButtonCreateTodo, optionsButtonSidebarToggle } from '@data/dataOptions';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile } from '@states/layouts';
-import { useSidebarOpen } from '@states/layouts/hooks';
-import { useTodoModalStateOpen } from '@states/modals/hooks';
-import { atomDisableScroll, classNames } from '@states/utils';
-import { useConditionCheckCreateModalOpen } from '@states/utils/hooks';
 import { Backdrop } from '@ui/backdrops/backdrop';
 import {
   Fragment as CreateTodoFragment,
@@ -20,6 +15,12 @@ import {
 import { isChrome, isMobile } from 'react-device-detect';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { FooterSidebarMenu } from './footerSidebarMenu';
+import { optionsButtonSidebarToggle, optionsButtonCreateTodo } from '@options/button';
+import { useSidebarOpen } from '@hooks/layouts';
+import { useConditionCheckCreateModalOpen } from '@hooks/misc';
+import { useTodoModalStateOpen } from '@hooks/modals';
+import { classNames } from '@stateLogics/utils';
+import { atomDisableScroll } from '@states/misc';
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);

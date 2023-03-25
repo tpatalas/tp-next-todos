@@ -1,8 +1,9 @@
 import { IconButton } from '@buttons/iconButton';
-import { optionsNotification, optionsButtonGlobalClose } from '@data/dataOptions';
+import { NotificationResetEffect } from '@effects/notificationResetEffect';
 import { MinimizeModalTransition } from '@modals/modal/modalTransition/minimizeModalTransition';
+import { optionsButtonGlobalClose } from '@options/button';
+import { optionsNotification } from '@options/misc';
 import { selectorNotificationState, atomNotificationOpen } from '@states/notifications';
-import { NotificationResetEffect } from '@states/notifications/notificationResetEffect';
 import { TypesNotification } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as NotificationFragment } from 'react';

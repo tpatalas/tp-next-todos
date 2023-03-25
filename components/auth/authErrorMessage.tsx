@@ -1,10 +1,10 @@
+import { DATA_NEXTAUTH_ERROR } from '@collections/nextAuthError';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { DATA_NEXTAUTH_ERROR } from '@data/dataArrayOfObjects';
 import { ICON_ERROR_FILL } from '@data/materialSymbols';
-import { TypesOptionsAuthErrorMessage } from '@lib/types/typesOptions';
+import { useNextQuery } from '@hooks/misc';
+import { TypesOptionsAuthErrorMessage } from '@lib/types/options';
+import { classNames } from '@stateLogics/utils';
 import { atomUserErrorMessage } from '@states/users';
-import { classNames } from '@states/utils';
-import { useNextQuery } from '@states/utils/hooks';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 

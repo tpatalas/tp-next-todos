@@ -2,10 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@effects/*": ["lib/states/effects/*"],
-      "@atomQueries/*": ["lib/states/atomQueries/*"],
-      "@states/*": ["lib/states/*"],
+      "@collections/*": ["lib/data/collections/*"],
+      "@constAssertions/*": ["lib/data/constAssertions/*"],
+      "@options/*": ["lib/data/options/*"],
+      "@effects/*": ["lib/stateLogics/effects/*"],
+      "@hooks/*": ["lib/stateLogics/hooks/*"],
+      "@states/*": ["lib/stateLogics/states/*"],
       "@data/*": ["lib/data/*"],
+      "@stateLogics/*": ["lib/stateLogics/*"],
       "@lib/*": ["lib/*"],
       "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],

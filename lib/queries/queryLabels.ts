@@ -1,6 +1,6 @@
-import { STORAGE_KEY } from '@data/dataTypesConst';
+import { STORAGE_KEY } from '@constAssertions/storage';
 import { Labels } from '@lib/types';
-import { fetchWithRetry, queries } from '@states/utils';
+import { fetchWithRetry, queries } from '@stateLogics/utils';
 
 const apiLabels = process.env.NEXT_PUBLIC_API_ENDPOINT_LABELS as string;
 
@@ -42,7 +42,7 @@ export const updateDataLabels = async (data: Labels[]) => {
 
 export const updateDataLabelItem = async (_id: Labels['_id'], data: Labels) => {
   const response = await fetchWithRetry(`${apiLabels}/${_id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });

@@ -1,7 +1,7 @@
-import { useFocusOnClick } from '@states/focus/hooks';
-import { useKeyWithFocus } from '@states/keybinds/hooks';
-import { KeysWithNavigationEffect } from '@states/keybinds/KeysWithNavigateEffect';
-import { classNames } from '@states/utils';
+import { KeysWithNavigationEffect } from '@effects/KeysWithNavigateEffect';
+import { useFocusOnClick } from '@hooks/focus';
+import { useKeyWithFocus } from '@hooks/keybindings';
+import { classNames } from '@stateLogics/utils';
 import { Types, TypesTodo } from 'lib/types';
 import { Fragment as FocuserFragment, useRef } from 'react';
 import { isMobile } from 'react-device-detect';

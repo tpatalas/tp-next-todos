@@ -20,11 +20,14 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // remove if jest.setup.js is deleted
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
-    '^@atomQueries/(.*)$': ['<rootDir>/lib/states/atomQuries/$1'],
-    '^@effects/(.*)$': ['<rootDir>/lib/states/effects/$1'],
-    '^@states/(.*)$': ['<rootDir>/lib/states/$1'],
+    '^@collections/(.*)$': ['<rootDir>/lib/data/collections/$1'],
+    '^@constAssertions/(.*)$': ['<rootDir>/lib/data/constAssertions/$1'],
+    '^@options/(.*)$': ['<rootDir>/lib/data/options/$1'],
+    '^@effects/(.*)$': ['<rootDir>/lib/stateLogics/effects/$1'],
+    '^@hooks/(.*)$': ['<rootDir>/lib/stateLogics/hooks/$1'],
+    '^@states/(.*)$': ['<rootDir>/lib/stateLogics/states/$1'],
+    '^@stateLogics/(.*)$': ['<rootDir>/lib/stateLogics/$1'],
     '^@data/(.*)$': ['<rootDir>/lib/data/$1'],
-    '^@types/(.*)$': ['<rootDir>/lib/types/$1'],
     '^@lib/(.*)$': ['<rootDir>/lib/$1'],
     '^@layouts/(.*)$': ['<rootDir>/components/layouts/$1'],
     '^@buttons/(.*)$': ['<rootDir>/components/ui/buttons/$1'],

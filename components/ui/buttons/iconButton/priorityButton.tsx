@@ -1,12 +1,12 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { PRIORITY_LEVEL } from '@data/dataTypesConst';
+import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { ICON_FLAG, ICON_FLAG_FILL, ICON_LABEL_IMPORTANT, ICON_LABEL_IMPORTANT_FILL } from '@data/materialSymbols';
 import { Types } from '@lib/types';
-import { TypesOptionsPriority } from '@lib/types/typesOptions';
+import { TypesOptionsPriority } from '@lib/types/options';
+import { classNames } from '@stateLogics/utils';
+import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomTodoNew } from '@states/todos';
-import { selectorSessionTodoItem, atomSelectorTodoItem } from '@states/todos/atomQueries';
-import { classNames } from '@states/utils';
 import { Fragment, Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 

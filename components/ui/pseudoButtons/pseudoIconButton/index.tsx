@@ -1,6 +1,6 @@
 import { Types } from '@lib/types';
-import { TypesOptionsButton } from '@lib/types/typesOptions';
-import { classNames } from '@states/utils';
+import { TypesOptionsButton } from '@lib/types/options';
+import { classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
 import { Fragment as HeaderContentsFragment } from 'react';
 

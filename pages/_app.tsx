@@ -6,7 +6,7 @@ import { ReactElement, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
 
-const UserSessionEffect = dynamic(() => import('@states/users/userSessionEffect').then((mod) => mod.UserSessionEffect));
+const UserSessionEffect = dynamic(() => import('@effects/userSessionEffect').then((mod) => mod.UserSessionEffect));
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

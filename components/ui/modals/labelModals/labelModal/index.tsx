@@ -1,24 +1,24 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
+import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
+import { atomLabelModalOpen } from '@states/modals';
+import { Types } from 'lib/types';
+import { Fragment as LabelModalFragment, useRef } from 'react';
+import { useRecoilValue } from 'recoil';
 import {
   optionsButtonTodoModalClose,
   optionsButtonTodoModalCancel,
   optionsButtonLabelModalAddLabel,
-} from '@data/dataOptions';
-import { KeysWithLabelModalEffect } from '@states/keybinds/KeysWithLabelModalEffect';
-import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
-import { useLabelValueUpdate, useLabelAdd } from '@states/labels/hooks';
-import { atomLabelModalOpen } from '@states/modals';
-import { useLabelModalStateClose } from '@states/modals/hooks';
-import { classNames } from '@states/utils';
-import { useConditionCheckLabelTitleEmpty } from '@states/utils/hooks';
-import { Types } from 'lib/types';
-import { Fragment as LabelModalFragment, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
-import { Button as CancelButton } from '../../../buttons/button';
-import { Divider as PlainLineDivider } from '../../../dividers/divider';
-import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
-import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
+} from '@options/button';
+import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
+import { useLabelValueUpdate, useLabelAdd } from '@hooks/labels';
+import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
+import { useLabelModalStateClose } from '@hooks/modals';
+import { ModalTransitionChild } from '@modals/modal/modalTransition/modalTransitionChild';
+import { ModalTransitionRoot } from '@modals/modal/modalTransition/modalTransitionRoot';
+import { Divider } from '@ui/dividers/divider';
+import { Button } from '@buttons/button';
+import { classNames } from '@stateLogics/utils';
 
 type Props = Partial<Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
 
@@ -48,7 +48,7 @@ export const LabelModal = ({ label, footerButtons, children, menuButtonContent =
               />
             </div>
             <div className='hidden sm:mb-3 sm:block'>
-              <PlainLineDivider />
+              <Divider />
             </div>
           </div>
           <div className='h-full w-full overflow-scroll pl-2 pr-3'>
@@ -65,11 +65,11 @@ export const LabelModal = ({ label, footerButtons, children, menuButtonContent =
             />
           </div>
           <div className='flex flex-row justify-end pt-4'>
-            <CancelButton
+            <Button
               options={optionsButtonTodoModalCancel}
               onClick={() => closeModal()}>
               Cancel
-            </CancelButton>
+            </Button>
             {footerButtons || (
               <DisableButton
                 isConditionalRendering={condition}

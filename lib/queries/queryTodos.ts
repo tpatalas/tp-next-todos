@@ -1,7 +1,7 @@
-import { DATA_DEMO } from '@data/dataDemo';
-import { STORAGE_KEY } from '@data/dataTypesConst';
+import { DATA_DEMO } from '@collections/demo';
+import { STORAGE_KEY } from '@constAssertions/storage';
 import { Todos, Types } from '@lib/types';
-import { fetchWithRetry, queries } from '@states/utils';
+import { fetchWithRetry, queries } from '@stateLogics/utils';
 
 const apiTodos = process.env.NEXT_PUBLIC_API_ENDPOINT_TODOS as string;
 

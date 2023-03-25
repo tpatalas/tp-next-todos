@@ -1,10 +1,10 @@
 import { ICON_LOGOUT, ICON_SETTINGS } from '@data/materialSymbols';
-import { ActiveDropdownMenuItemEffect } from '@states/misc/activeDropdownMenuItemEffect';
-import { nextImageLoader } from '@states/utils';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import { Dropdown } from './dropdown';
+import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
+import { nextImageLoader } from '@stateLogics/utils';
 import { MenuItem } from './dropdown/menuItem';
 
 export const UserDropdown = () => {
