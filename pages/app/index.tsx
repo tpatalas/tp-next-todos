@@ -1,5 +1,5 @@
 import { ErrorState } from '@components/loadable/errorState';
-import { LayoutApp } from '@layouts/layoutApp';
+import { LayoutApp } from '@layouts/app';
 import dynamic from 'next/dynamic';
 import { Fragment as AppFragment, ReactElement, Suspense } from 'react';
 

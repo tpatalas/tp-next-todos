@@ -1,6 +1,6 @@
-import { LayoutHeader } from '@layouts/layoutApp/layout/layoutHeader';
 import { renderWithRecoilRoot } from '@stateLogics/utils';
 import { screen } from '@testing-library/react';
+import { LayoutHeader } from '..';
 
 describe('LayoutHeader', () => {
   renderWithRecoilRoot(<LayoutHeader />);

@@ -6,7 +6,7 @@ import { atomSearchInput } from '@states/layouts';
 import { Fragment as ResetSearchFragment, Fragment as SearchBarFragment } from 'react';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
-export const HeaderSearchBar = () => {
+export const SearchBar = () => {
   const setSearchInput = useSetRecoilState(atomSearchInput);
   const searchInputValue = useRecoilValue(atomSearchInput);
   const resetSearchInput = useResetRecoilState(atomSearchInput);
