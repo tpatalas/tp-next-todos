@@ -10,11 +10,9 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL('/app', req.url));
       }
       break;
-    case '/':
-      return NextResponse.redirect(new URL('/app', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/', '/auth'],
+  matcher: ['/auth'],
 };
