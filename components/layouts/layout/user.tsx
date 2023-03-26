@@ -9,7 +9,7 @@ import { signIn } from 'next-auth/react';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-export const HeaderUser = () => {
+export const User = () => {
   const isSession = useRecoilValue(atomUserSession);
   const session = getSessionStorage(STORAGE_KEY['offSession']);
 

@@ -1,4 +1,4 @@
-import { LayoutApp } from '@layouts/layoutApp';
+import { LayoutApp } from '@layouts/app';
 import { ReactElement } from 'react';
 
 const Label = () => {

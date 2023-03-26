@@ -3,7 +3,6 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LabelList } from '@components/labels/labelList';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
-import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import { atomSidebarOpenMobile } from '@states/layouts';
 import { Backdrop } from '@ui/backdrops/backdrop';
 import {
@@ -21,6 +20,7 @@ import { useConditionCheckCreateModalOpen } from '@hooks/misc';
 import { useTodoModalStateOpen } from '@hooks/modals';
 import { classNames } from '@stateLogics/utils';
 import { atomDisableScroll } from '@states/misc';
+import { Logo } from '@layouts/layout/logo';
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
@@ -48,7 +48,7 @@ export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
               onClick={() => setSidebarOpen()}
             />
             <div className='mr-10 flex w-full justify-center'>
-              <LayoutLogo />
+              <Logo />
             </div>
           </div>
         </LayoutLogoFragment>
