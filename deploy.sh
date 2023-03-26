@@ -66,4 +66,6 @@ for env_var_name in "${secret_env_vars[@]}"; do
   SECRET_FLAG="$SECRET_FLAG --update-secrets $env_var_name=$secret_name:latest"
 done
 
-gcloud_run_deploy $VPC_FLAG $SECRET_FLAG
+gcloud_run_deploy 
+
+
