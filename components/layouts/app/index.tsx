@@ -8,8 +8,10 @@ import {
   Fragment as HeaderFragment,
   Fragment as LayoutAppFragment,
   Fragment as ModalActionsFragment,
+  Suspense,
 } from 'react';
 import { useRecoilValue } from 'recoil';
+import { LayoutHeader } from './layoutHeader';
 const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
 const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
@@ -17,7 +19,9 @@ const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((
 const WindowBeforeunloadEffect = dynamic(() =>
   import('@effects/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
-const Layout = dynamic(() => import('./layout').then((mod) => mod.Layout));
+const LayoutFooter = dynamic(() => import('./layoutFooter').then((mod) => mod.LayoutFooter), {
+  ssr: false,
+});
 
 type Props = Pick<Types, 'children'>;
 
@@ -31,7 +35,12 @@ export const LayoutApp = ({ children }: Props) => {
         <title>{'My Todo App: ' + slug}</title>
       </Head>
       <HeaderFragment>
-        <Layout>{children}</Layout>
+        <div className='flex h-screen flex-col'>
+          <LayoutHeader />
+          <Suspense>
+            <LayoutFooter>{children}</LayoutFooter>
+          </Suspense>
+        </div>
       </HeaderFragment>
       <FooterFragment>
         <Notification />
