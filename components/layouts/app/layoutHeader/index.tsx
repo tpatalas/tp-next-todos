@@ -1,5 +1,4 @@
 import { IconButton } from '@buttons/iconButton';
-import { LayoutLogo } from '@layouts/layoutApp/layoutLogo';
 import dynamic from 'next/dynamic';
 import {
   Fragment as LayoutHeaderFragment,
@@ -9,11 +8,12 @@ import {
   Fragment as SidebarButtonFragment,
   Suspense,
 } from 'react';
-import { HeaderSearchBar } from './headerSearchBar';
 import { optionsButtonSidebarToggle } from '@options/button';
 import { useSidebarOpen } from '@hooks/layouts';
+import { Logo } from '@layouts/layout/logo';
+import { SearchBar } from '@layouts/layout/searchBar';
 
-const HeaderUser = dynamic(() => import('./headerUser').then((mod) => mod.HeaderUser), { ssr: false });
+const User = dynamic(() => import('@layouts/layout/user').then((mod) => mod.User), { ssr: false });
 
 export const LayoutHeader = () => {
   const setSidebarOpen = useSidebarOpen();
@@ -32,17 +32,17 @@ export const LayoutHeader = () => {
             </SidebarButtonFragment>
             <LogoFragment>
               <div className='hidden w-full flex-row justify-start pl-4 md:flex'>
-                <LayoutLogo />
+                <Logo />
               </div>
             </LogoFragment>
           </div>
         </LeftSideFragment>
         <RightSidebarFragment>
           <div className='flex flex-1 pl-2 pr-3'>
-            <HeaderSearchBar />
+            <SearchBar />
             <div className='ml-4 flex min-w-[2rem] items-center md:ml-6'>
               <Suspense>
-                <HeaderUser />
+                <User />
               </Suspense>
             </div>
           </div>
