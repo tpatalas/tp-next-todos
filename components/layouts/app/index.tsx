@@ -1,17 +1,19 @@
 import { CATCH } from '@constAssertions/misc';
+import { LayoutHeader } from '@layouts/layoutHeader';
+import { SearchBar } from '@layouts/layoutHeader/searchBar';
+import { SidebarButton } from '@layouts/layoutHeader/sidebarButton';
 import { Types } from '@lib/types';
 import { atomCatch, atomHtmlTitleTag } from '@states/misc';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import {
-  Fragment as FooterFragment,
-  Fragment as HeaderFragment,
-  Fragment as LayoutAppFragment,
-  Fragment as ModalActionsFragment,
-  Suspense,
+    Fragment as FooterFragment,
+    Fragment as HeaderFragment,
+    Fragment as LayoutAppFragment,
+    Fragment as ModalActionsFragment,
+    Suspense,
 } from 'react';
 import { useRecoilValue } from 'recoil';
-import { LayoutHeader } from './layoutHeader';
 const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
 const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
@@ -22,6 +24,7 @@ const WindowBeforeunloadEffect = dynamic(() =>
 const LayoutFooter = dynamic(() => import('./layoutFooter').then((mod) => mod.LayoutFooter), {
   ssr: false,
 });
+const User = dynamic(() => import('@layouts/layoutHeader/user').then((mod) => mod.User), { ssr: false });
 
 type Props = Pick<Types, 'children'>;
 
@@ -36,7 +39,12 @@ export const LayoutApp = ({ children }: Props) => {
       </Head>
       <HeaderFragment>
         <div className='flex h-screen flex-col'>
-          <LayoutHeader />
+          <LayoutHeader sidebarButton={<SidebarButton />}>
+            <SearchBar />
+            <Suspense>
+              <User />
+            </Suspense>
+          </LayoutHeader>
           <Suspense>
             <LayoutFooter>{children}</LayoutFooter>
           </Suspense>

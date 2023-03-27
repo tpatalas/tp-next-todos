@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
 import { renderWithRecoilRoot } from '@stateLogics/utils';
-import { Logo } from '@layouts/layout/logo';
+import { Logo } from '@layouts/layoutHeader/logo';
 
 describe('Logo', () => {
   renderWithRecoilRoot(<Logo />);
