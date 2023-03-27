@@ -52,7 +52,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!updateLabelById) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: updateLabelById });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
     case 'DELETE':
@@ -78,7 +78,7 @@ const LabelById = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!deleteLabelById) return res.status(400).json({ success: false });
         res.status(200).json({ success: true, data: deleteLabelById });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
     default:

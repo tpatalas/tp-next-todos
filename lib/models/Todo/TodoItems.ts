@@ -55,7 +55,7 @@ const TodoItemSchema = new mongoose.Schema({
     type: Date,
   },
 });
-TodoItemSchema.index({ deleted: 1, update: 1, user_id: -1 }, { unique: true });
+TodoItemSchema.index({ deleted: 1, user_id: -1 }, { unique: true });
 TodoItemSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 export default mongoose.models['Todo-Items'] || mongoose.model('Todo-Items', TodoItemSchema);

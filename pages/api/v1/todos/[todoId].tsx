@@ -55,7 +55,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         }
         res.status(200).json({ success: true, data: getItem });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
     case 'PUT':
@@ -109,7 +109,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).json({ success: true, data: updatedTodo });
       } catch (error) {
         await sessionPut.abortTransaction();
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       } finally {
         sessionPut.endSession();
       }
@@ -138,7 +138,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         }
         res.status(200).json({ success: true, data: updateItem });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
 
@@ -176,7 +176,7 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).json({ success: true, data: deletedTodo });
       } catch (error) {
         await sessionDelete.abortTransaction();
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       } finally {
         sessionDelete.endSession();
       }

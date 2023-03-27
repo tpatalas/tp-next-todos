@@ -47,7 +47,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
           ? res.status(200).json({ success: true, data: getTodo }) // Don't update the client if there is update value. getTodo will return [] empty array
           : res.status(200).json({ success: true, update: Date.now().toString(), data: getTodo });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
 
@@ -103,7 +103,7 @@ const Todos = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(201).json({ success: true, data: data });
       } catch (error) {
         await sessionPost.abortTransaction();
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       } finally {
         sessionPost.endSession();
       }
