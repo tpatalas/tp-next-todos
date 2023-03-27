@@ -6,9 +6,7 @@ import { useRecoilValue } from 'recoil';
 type Props = Partial<Pick<Types, 'label' | 'pathname'>>;
 
 export const TodosCount = ({ pathname, label }: Props) => {
-  const todosCount = useRecoilValue(
-    selectorTodosCount({ pathname: pathname, labelId: label?._id }),
-  );
+  const todosCount = useRecoilValue(selectorTodosCount({ pathname: pathname, labelId: label?._id }));
 
   return <Fragment>{todosCount > 0 ? todosCount : undefined}</Fragment>;
 };

@@ -6,7 +6,7 @@ export const DATA_SVG_LOGO: TypesSvgLogo[] = [
     name: SVG_LOGO['google'],
     viewBox: '0 0 32 32',
     className:
-      'flex w-full flex-row items-center justify-center rounded-lg border border-slate-150 p-2 shadow-md shadow-slate-300 text-slate-800 transition-all hover:shadow-lg',
+      'tracking-wide flex w-full flex-row items-center justify-center rounded-lg border border-slate-150 p-2 shadow-md shadow-slate-300 text-slate-800 transition-all hover:shadow-lg',
     path: (
       <>
         <path
@@ -43,7 +43,7 @@ export const DATA_SVG_LOGO: TypesSvgLogo[] = [
   {
     name: SVG_LOGO['github'],
     className:
-      'flex w-full flex-row items-center justify-center rounded-lg border border-slate-800 p-2 bg-gray-800 shadow-lg shadow-slate-500 hover:shadow-slate-600 transition-all text-white',
+      'flex w-full tracking-wide flex-row items-center justify-center rounded-lg border border-slate-800 p-2 bg-gray-800 shadow-lg shadow-slate-500 hover:shadow-slate-600 transition-all text-white',
     viewBox: '0 0 24 24',
     path: (
       <>

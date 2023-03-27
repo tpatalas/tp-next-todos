@@ -7,7 +7,7 @@ import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradien
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Dropdown } from './dropdown';
-import { PATHNAME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { GRADIENT_POSITION } from '@constAssertions/ui';
 import { optionsButtonLabelRemove } from '@options/button';
@@ -73,7 +73,7 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                   )}>
                   <PrefetchRouterButton
                     options={{
-                      path: paths(PATHNAME['label'] + '/', label._id),
+                      path: paths(PATH_APP['label'] + '/', label._id),
                       className: 'max-w-[5.3rem] truncate pr-1',
                       tooltip: `Go to ${label.name}`,
                       offset: [8, 15],

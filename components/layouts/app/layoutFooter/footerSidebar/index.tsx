@@ -20,7 +20,7 @@ import { useConditionCheckCreateModalOpen } from '@hooks/misc';
 import { useTodoModalStateOpen } from '@hooks/modals';
 import { classNames } from '@stateLogics/utils';
 import { atomDisableScroll } from '@states/misc';
-import { Logo } from '@layouts/layout/logo';
+import { Logo } from '@layouts/layoutHeader/logo';
 
 export const FooterSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
