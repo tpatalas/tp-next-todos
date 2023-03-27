@@ -1,4 +1,4 @@
-import { PATHNAME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { CustomEditor } from '@lib/types/misc/slate';
 import { atomCatch } from '@states/misc';
@@ -17,7 +17,7 @@ export const EditorAutoFocusEffect = ({
   editor: CustomEditor;
 }) => {
   const router = useRouter();
-  const completedPath = router.asPath === PATHNAME['completed'];
+  const completedPath = router.asPath === PATH_APP['completed'];
   const isCatchConfirmModal = useRecoilValue(atomCatch(CATCH.confirmModal));
 
   useEffect(() => {

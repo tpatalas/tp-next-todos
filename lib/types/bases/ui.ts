@@ -25,6 +25,7 @@ export type CollectTypesUi = TypesReactChildren &
 
 export interface TypesReactChildren {
   children: ReactNode;
+  sidebarButton: Types['children'];
   checkBox: Types['children'];
   footerButtons: Types['children'];
   headerButtons: Types['children'];

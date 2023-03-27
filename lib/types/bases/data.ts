@@ -1,4 +1,4 @@
-import { PATHNAME, PATHNAME_IMAGE, SVG_LOGO } from '@constAssertions/data';
+import { PATH_APP, PATHNAME_IMAGE, SVG_LOGO } from '@constAssertions/data';
 import { IDB, IDB_STORE, IDB_VERSION } from '@constAssertions/storage';
 import { NOTIFICATION } from '@constAssertions/ui';
 import { ReactElement } from 'react';
@@ -31,7 +31,7 @@ export interface TypesSidebarMenu {
   icon: string;
   iconActive: string;
   iconColor: string;
-  path: PATHNAME;
+  path: PATH_APP;
 }
 export interface TypesPathnameImage {
   path: PATHNAME_IMAGE;
