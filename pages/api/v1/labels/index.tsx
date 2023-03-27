@@ -36,7 +36,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
           ? res.status(200).json({ success: true, data: getLabels }) // Don't update the client if there is update value. getTodo will return [] empty array
           : res.status(200).json({ success: true, update: Date.now().toString(), data: getLabels });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
     case 'POST':
@@ -50,7 +50,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
         const createLabel = await Label.create(labelItem);
         res.status(201).json({ success: true, data: createLabel });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
     case 'PUT':
@@ -75,7 +75,7 @@ const Labels = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(200).json({ success: true, data: updatedLabel });
       } catch (error) {
-        res.status(400).json({ success: false });
+        error instanceof Error && res.status(400).json({ success: false, message: error.message });
       }
       break;
     default:
