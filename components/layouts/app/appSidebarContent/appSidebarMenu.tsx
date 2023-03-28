@@ -4,14 +4,14 @@ import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { useRouter } from 'next/router';
 import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
 import { useRecoilValue } from 'recoil';
-import { TodosCount } from './todosCount';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { useSidebarOpen } from '@hooks/layouts';
 import { atomMediaQuery } from '@states/misc';
 import { classNames } from '@stateLogics/utils';
+import { TodosCount } from '../todosCount';
 
-export const FooterSidebarMenu = () => {
+export const AppSidebarMenu = () => {
   const router = useRouter();
   const setSidebarOpen = useSidebarOpen();
   const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
