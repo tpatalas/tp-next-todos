@@ -4,14 +4,12 @@ import { TypesAtomEffect, TypesMediaQueryEffect } from '@lib/types';
  * Media Queries
  */
 export const mediaQueryEffect: TypesMediaQueryEffect =
-  ({ breakpoint, isStateOverBreakpoint, isStateUnderBreakpoint }) =>
+  ({ breakpoint }) =>
   ({ setSelf }) => {
     if (typeof window === 'undefined') return;
     const windowMediaQueries = () => {
-      if (window.innerWidth >= breakpoint && typeof isStateOverBreakpoint !== 'undefined')
-        return setSelf(isStateOverBreakpoint);
-      if (window.innerWidth <= breakpoint && typeof isStateUnderBreakpoint !== 'undefined')
-        return setSelf(isStateUnderBreakpoint);
+      if (window.innerWidth >= breakpoint) return setSelf(true);
+      setSelf(false);
     };
 
     windowMediaQueries();
