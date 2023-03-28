@@ -22,13 +22,7 @@ export const atomDisableScroll = atom<boolean>({
 export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({
   key: 'atomMediaQuery',
   default: false,
-  effects: (breakpoint) => [
-    mediaQueryEffect({
-      breakpoint: breakpoint,
-      isStateOverBreakpoint: true,
-      isStateUnderBreakpoint: false,
-    }),
-  ],
+  effects: (breakpoint) => [mediaQueryEffect({ breakpoint: breakpoint })],
 });
 
 // Network

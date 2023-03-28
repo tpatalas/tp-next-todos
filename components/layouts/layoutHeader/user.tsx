@@ -14,7 +14,7 @@ export const User = () => {
   return (
     <Fragment>
       <UserSessionResetEffect />
-      <div className='ml-4 flex min-w-[2rem] items-center sm:pr-5 md:ml-6'>
+      <div className='ml-4 flex min-w-[2rem] items-center md:ml-6'>
         {!offSession && isSession ? <UserDropdown /> : <SignInButton />}
       </div>
     </Fragment>

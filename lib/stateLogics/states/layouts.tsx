@@ -9,13 +9,7 @@ import { atom, selector } from 'recoil';
 export const atomSidebarOpen = atom({
   key: 'atomSidebarOpen',
   default: true,
-  effects: [
-    mediaQueryEffect({
-      breakpoint: BREAKPOINT['md'],
-      isStateUnderBreakpoint: false,
-      isStateOverBreakpoint: true,
-    }),
-  ],
+  effects: [mediaQueryEffect({ breakpoint: BREAKPOINT['md'] })],
 });
 
 export const atomSidebarOpenMobile = atom({
