@@ -23,8 +23,6 @@ export const LayoutFooter = ({ options, children, footerSidebar }: Props) => {
           <Transition.Child
             appear={true}
             as={Fragment}
-            enter={classNames('transition transform ease-in-out', options?.enterDuration ?? 'duration-350')}
-            enterFrom={classNames('transform opacity-0', options?.transitionFrom ?? '-translate-x-24')}
             enterTo={classNames('transform opacity-100', options?.transitionTo ?? 'translate-x-0')}
             leave={classNames('transition ease-in-out', options?.leaveDuration ?? 'duration-350')}
             leaveFrom={classNames('transform opacity-100', options?.transitionTo ?? 'translate-x-0')}

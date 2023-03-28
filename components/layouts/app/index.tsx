@@ -16,6 +16,7 @@ import {
 } from 'react';
 import { useRecoilValue } from 'recoil';
 import { AppSidebarContent } from './appSidebarContent';
+import { SidebarInitialEffect } from '@effects/sidebarInitialEffect';
 const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
 const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
@@ -55,6 +56,7 @@ export const LayoutApp = ({ children }: Props) => {
         </div>
       </HeaderFragment>
       <FooterFragment>
+        <SidebarInitialEffect />
         <Notification />
         <WindowBeforeunloadEffect />
         <ModalActionsFragment>

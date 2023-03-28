@@ -1,15 +1,13 @@
 import { BREAKPOINT } from '@constAssertions/ui';
-import { mediaQueryEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
 import { atomMediaQuery } from '@states/misc';
 import { atom, selector } from 'recoil';
 
 /**
  * Atoms
  **/
-export const atomSidebarOpen = atom({
-  key: 'atomSidebarOpen',
-  default: true,
-  effects: [mediaQueryEffect({ breakpoint: BREAKPOINT['md'] })],
+export const atomSidebarInitialOpen = atom({
+  key: 'atomSidebarInitialOpen',
+  default: false,
 });
 
 export const atomSidebarOpenMobile = atom({
@@ -35,7 +33,7 @@ export const selectorSidebarOpen = selector({
   get: ({ get }) => {
     const breakpointMedium = get(atomMediaQuery(BREAKPOINT['md']));
     if (get(atomSidebarOpenSetting) && breakpointMedium) return get(atomSidebarOpenSetting) ? false : true;
-    return breakpointMedium ? get(atomSidebarOpen) : get(atomSidebarOpenMobile);
+    return breakpointMedium ? get(atomSidebarInitialOpen) : get(atomSidebarOpenMobile);
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
