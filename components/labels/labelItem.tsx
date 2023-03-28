@@ -5,7 +5,7 @@ import { BREAKPOINT } from '@constAssertions/ui';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { useSidebarOpen } from '@hooks/layouts';
 import { useNextQuery } from '@hooks/misc';
-import { TodosCount } from '@layouts/app/layoutFooter/footerSidebar/todosCount';
+import { TodosCount } from '@layouts/app/todosCount';
 import { Types } from '@lib/types';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { classNames, paths } from '@stateLogics/utils';

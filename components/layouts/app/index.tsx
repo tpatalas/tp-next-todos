@@ -1,4 +1,5 @@
 import { CATCH } from '@constAssertions/misc';
+import { FooterBody } from '@layouts/layoutFooter/footerBody';
 import { LayoutHeader } from '@layouts/layoutHeader';
 import { SearchBar } from '@layouts/layoutHeader/searchBar';
 import { SidebarButton } from '@layouts/layoutHeader/sidebarButton';
@@ -7,13 +8,14 @@ import { atomCatch, atomHtmlTitleTag } from '@states/misc';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import {
-    Fragment as FooterFragment,
-    Fragment as HeaderFragment,
-    Fragment as LayoutAppFragment,
-    Fragment as ModalActionsFragment,
-    Suspense,
+  Fragment as FooterFragment,
+  Fragment as HeaderFragment,
+  Fragment as LayoutAppFragment,
+  Fragment as ModalActionsFragment,
+  Suspense,
 } from 'react';
 import { useRecoilValue } from 'recoil';
+import { AppSidebarContent } from './appSidebarContent';
 const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
 const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
@@ -21,7 +23,7 @@ const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((
 const WindowBeforeunloadEffect = dynamic(() =>
   import('@effects/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
-const LayoutFooter = dynamic(() => import('./layoutFooter').then((mod) => mod.LayoutFooter), {
+const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter), {
   ssr: false,
 });
 const User = dynamic(() => import('@layouts/layoutHeader/user').then((mod) => mod.User), { ssr: false });
@@ -46,7 +48,9 @@ export const LayoutApp = ({ children }: Props) => {
             </Suspense>
           </LayoutHeader>
           <Suspense>
-            <LayoutFooter>{children}</LayoutFooter>
+            <LayoutFooter footerSidebar={<AppSidebarContent />}>
+              <FooterBody>{children}</FooterBody>
+            </LayoutFooter>
           </Suspense>
         </div>
       </HeaderFragment>
