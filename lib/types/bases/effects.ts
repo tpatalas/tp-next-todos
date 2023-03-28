@@ -23,8 +23,6 @@ export interface TypesEffects {
   refetchInterval: number;
   // MediaQuery Effect
   breakpoint: BREAKPOINT;
-  isStateUnderBreakpoint: boolean;
-  isStateOverBreakpoint: boolean;
 }
 /**
  * Types Atom Effects - Recoil
@@ -64,13 +62,7 @@ export type TypesSessionStorageEffect = <T>({
 }: Pick<Types, 'queryKey'> &
   Partial<Pick<Types, 'shouldGet' | 'isSessionResetEnabled' | 'isSessionSetEnabled'>>) => AtomEffect<T | boolean>;
 
-export type TypesMediaQueryEffect = <T>({
-  breakpoint,
-  isStateUnderBreakpoint,
-  isStateOverBreakpoint,
-}: Pick<Types, 'breakpoint'> & Partial<Pick<Types, 'isStateUnderBreakpoint' | 'isStateOverBreakpoint'>>) => AtomEffect<
-  T | boolean
->;
+export type TypesMediaQueryEffect = <T>({ breakpoint }: Pick<Types, 'breakpoint'>) => AtomEffect<T | boolean>;
 
 export type TypesAtomEffect<T> = AtomEffect<T>;
 export type TypesAtomEffectWithParam<T, P> = (key: P) => AtomEffect<T>;

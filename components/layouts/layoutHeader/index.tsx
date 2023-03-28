@@ -26,7 +26,7 @@ export const LayoutHeader = ({ sidebarButton, children }: Props) => {
           </div>
         </LeftSideFragment>
         <RightSidebarFragment>
-          <div className='flex flex-1 flex-row items-center justify-end pl-2'>{children}</div>
+          <div className='flex flex-1 flex-row items-center justify-end pl-2 mr-3'>{children}</div>
         </RightSidebarFragment>
       </div>
     </LayoutHeaderFragment>
