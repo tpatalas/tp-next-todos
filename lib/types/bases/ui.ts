@@ -25,10 +25,8 @@ export type CollectTypesUi = TypesReactChildren &
 
 export interface TypesReactChildren {
   children: ReactNode;
-  sidebarButton: Types['children'];
   checkBox: Types['children'];
   footerButtons: Types['children'];
-  footerSidebar: Types['children'];
   headerButtons: Types['children'];
   headerIcons: Types['children'];
   nestedModal: Types['children'];
@@ -54,8 +52,6 @@ export interface TypesUi {
   isConditionalRendering: boolean;
   enterDuration: DURATION;
   leaveDuration: DURATION;
-  transitionFrom: string;
-  transitionTo: string;
   isPortal: boolean;
   gradientType: GRADIENT_TYPE;
   gradientPosition: GRADIENT_POSITION;
@@ -160,6 +156,7 @@ export interface TypesElement {
   onKeyDown: KeyboardEventHandler<HTMLElement>;
   positionX: POSITION_X;
   positionY: POSITION_Y;
+  layoutType: 'app' | 'homeVertical' | 'homeHorizontal';
   minimizedModalPadding: string;
   isNoValidate: boolean;
   isAriaHidden: boolean;

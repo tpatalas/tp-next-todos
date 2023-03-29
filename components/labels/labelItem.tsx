@@ -3,7 +3,7 @@ import { SvgIcon } from '@components/icons/svgIcon';
 import { PATH_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
-import { useSidebarOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@hooks/layouts';
 import { useNextQuery } from '@hooks/misc';
 import { TodosCount } from '@layouts/app/todosCount';
 import { Types } from '@lib/types';
@@ -26,7 +26,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
   const slug = useNextQuery({ path: PATH_APP['label'] });
   const matchedSlug = slug === label._id;
   const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
-  const setSideBarOpen = useSidebarOpen();
+  const setNavigationOpen = useNavigationOpen();
 
   return (
     <Fragment>
@@ -42,7 +42,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
               path: paths(PATH_APP['label'] + '/', label._id),
               className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
             }}
-            onClick={() => !isBreakpointMd && setSideBarOpen()}>
+            onClick={() => !isBreakpointMd && setNavigationOpen()}>
             <div className='flex w-full flex-row  py-2 px-2'>
               {matchedSlug ? (
                 <SvgIcon options={optionsButtonLabelRouteMatched} />

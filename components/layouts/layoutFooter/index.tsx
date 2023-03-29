@@ -1,18 +1,20 @@
-import { SidebarMobileResetEffect } from '@effects/sidebarMobileResetEffect';
+import { NavigationMobileResetEffect } from '@effects/navigationMobileResetEffect';
 import { Transition } from '@headlessui/react';
+import { AppNavigation } from '@layouts/app/appNavigation';
+import { HomeNavigation } from '@layouts/home/homeNavigation';
 import { FooterSidebar } from '@layouts/layoutFooter/footerSidebar';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { selectorSidebarOpen } from '@states/layouts';
+import { selectorNavigationOpen } from '@states/layouts';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-type Props = {
-  options?: Partial<Pick<Types, 'transitionFrom' | 'transitionTo' | 'enterDuration' | 'leaveDuration'>>;
-} & Pick<Types, 'children' | 'footerSidebar'>;
+type Props = Pick<Types, 'layoutType'> & Partial<Pick<Types, 'children'>>;
 
-export const LayoutFooter = ({ options, children, footerSidebar }: Props) => {
-  const isSidebarOpen = useRecoilValue(selectorSidebarOpen);
+export const LayoutFooter = ({ children, layoutType }: Props) => {
+  const isSidebarOpen = useRecoilValue(selectorNavigationOpen);
+  const layoutApp = layoutType === 'app';
+  const layoutHomeVertical = layoutType === 'homeVertical';
 
   return (
     <LayoutFooterFragment>
@@ -23,13 +25,34 @@ export const LayoutFooter = ({ options, children, footerSidebar }: Props) => {
           <Transition.Child
             appear={true}
             as={Fragment}
-            enterTo={classNames('transform opacity-100', options?.transitionTo ?? 'translate-x-0')}
-            leave={classNames('transition ease-in-out', options?.leaveDuration ?? 'duration-350')}
-            leaveFrom={classNames('transform opacity-100', options?.transitionTo ?? 'translate-x-0')}
-            leaveTo={classNames('transform opacity-0', options?.transitionFrom ?? '-translate-x-24')}>
-            <FooterSidebar>{footerSidebar}</FooterSidebar>
+            enter='transition transform ease-in-out duration-350'
+            enterFrom={classNames(
+              'transform opacity-0',
+              layoutApp && '-translate-x-24',
+              layoutHomeVertical && '-translate-y-24',
+            )}
+            enterTo={classNames(
+              'transform opacity-100',
+              layoutApp && 'translate-x-0',
+              layoutHomeVertical && 'translate-y-0',
+            )}
+            leave='transition ease-in-out duration-350'
+            leaveFrom={classNames(
+              'transform opacity-100',
+              layoutApp && 'translate-x-0',
+              layoutHomeVertical && 'translate-y-0',
+            )}
+            leaveTo={classNames(
+              'transform opacity-0',
+              layoutApp && '-translate-x-24',
+              layoutHomeVertical && '-translate-y-24',
+            )}>
+            <FooterSidebar layoutType={layoutType}>
+              {layoutApp && <AppNavigation />}
+              {layoutHomeVertical && <HomeNavigation layoutType={layoutType} />}
+            </FooterSidebar>
           </Transition.Child>
-          <SidebarMobileResetEffect />
+          <NavigationMobileResetEffect />
         </Transition.Root>
         <FooterBodyFragment>{children}</FooterBodyFragment>
       </div>

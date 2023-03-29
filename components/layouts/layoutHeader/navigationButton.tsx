@@ -1,15 +1,15 @@
 import { IconButton } from '@buttons/iconButton';
-import { useSidebarOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@hooks/layouts';
 import { optionsButtonSidebarToggle } from '@options/button';
 
-export const SidebarButton = () => {
-  const setSidebarOpen = useSidebarOpen();
+export const NavigationButton = () => {
+  const setNavigationOpen = useNavigationOpen();
 
   return (
     <>
       <IconButton
         options={optionsButtonSidebarToggle}
-        onClick={() => setSidebarOpen()}
+        onClick={() => setNavigationOpen()}
       />
       <span className='sr-only'>Open sidebar</span>
     </>
