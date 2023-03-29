@@ -13,12 +13,17 @@ import { NavigationButton } from './navigationButton';
 type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;
 
 export const LayoutHeader = ({ children, layoutType }: Props) => {
-  const layoutHome = layoutType === 'homeHorizontal';
+  const layoutHome = layoutType === 'home';
   const layoutApp = layoutType === 'app';
 
   return (
     <LayoutHeaderFragment>
-      <div className='sticky top-1 z-10 flex max-h-[4rem] min-h-[4rem] flex-row items-center justify-between bg-transparent sm:mb-2'>
+      <div
+        className={classNames(
+          'sticky flex max-h-[4rem] min-h-[4rem] flex-row items-center justify-between ml:top-1 ml:mb-2',
+          layoutHome && 'z-50 bg-slate-50',
+          layoutApp && 'bg-transparent',
+        )}>
         <LeftSideFragment>
           <div className='flex flex-row items-center justify-between pl-3 md:w-full md:max-w-3xs'>
             <NavigationButtonFragment>{layoutApp && <NavigationButton />}</NavigationButtonFragment>

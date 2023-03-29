@@ -156,7 +156,7 @@ export interface TypesElement {
   onKeyDown: KeyboardEventHandler<HTMLElement>;
   positionX: POSITION_X;
   positionY: POSITION_Y;
-  layoutType: 'app' | 'homeVertical' | 'homeHorizontal';
+  layoutType: 'app' | 'home';
   minimizedModalPadding: string;
   isNoValidate: boolean;
   isAriaHidden: boolean;
