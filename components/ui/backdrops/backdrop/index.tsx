@@ -27,10 +27,10 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => 
           show={show ?? isShow}
           as={Fragment}
           appear={true}
-          enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-200')}
+          enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-500')}
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-200')}
+          leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-100')}
           leaveFrom='opacity-100'
           leaveTo='opacity-0'>
           <div

@@ -11,22 +11,20 @@ type Props = Pick<Types, 'layoutType'>;
 
 export const HomeNavigation = ({ layoutType }: Props) => {
   const layoutApp = layoutType === 'app';
-  const layoutHomeVertical = layoutType === 'homeVertical';
-  const layoutHomeHorizontal = layoutType === 'homeHorizontal';
+  const layoutHome = layoutType === 'home';
 
   return (
     <ul
       className={classNames(
         'flex text-base tracking-wide text-slate-800',
-        (layoutApp || layoutHomeHorizontal) && 'flex-row items-center space-x-10 pr-3 sm:pr-8',
-        layoutHomeVertical && 'flex-col space-y-5 ml:hidden',
+        layoutApp && 'flex-row items-center space-x-10 pr-3 sm:pr-8',
+        layoutHome &&
+          'flex-col bg-slate-50 max-ml:space-y-5 max-ml:rounded-b-xl max-ml:px-5 max-ml:pt-[7rem] max-ml:pb-5 ml:flex ml:flex-row ml:items-center ml:space-x-10 ml:pr-3',
       )}>
       {DATA_HOME.map((path) => (
-        <>
-          <li key={path.name}>
-            <Link href={path.path}>{path.name}</Link>
-          </li>
-        </>
+        <li key={path.name}>
+          <Link href={path.path}>{path.name}</Link>
+        </li>
       ))}
       <div className='pl-5'>
         <SignInButton />

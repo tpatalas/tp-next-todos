@@ -16,14 +16,14 @@ export const LayoutHome = ({ children }: Props) => {
       <Head>
         <title>Home</title>
       </Head>
-      <LayoutHeader layoutType='homeHorizontal'>
-        <HomeNavigation layoutType='homeHorizontal' />
+      <LayoutHeader layoutType='home'>
+        <HomeNavigation layoutType='home' />
       </LayoutHeader>
-      <LayoutFooter layoutType='homeVertical' />
+      <LayoutFooter layoutType='home' />
       {children}
       <EffectFragment>
-        <NavigationInitialEffect layoutType='homeHorizontal' />
-        <LayoutTypeEffect layoutType='homeHorizontal' />
+        <NavigationInitialEffect layoutType='home' />
+        <LayoutTypeEffect layoutType='home' />
       </EffectFragment>
     </LayoutFragment>
   );

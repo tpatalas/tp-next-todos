@@ -8,12 +8,12 @@ import { useRecoilCallback } from 'recoil';
 
 type Props = Pick<Types, 'children' | 'layoutType'>;
 
-export const FooterSidebar = forwardRef<HTMLDivElement, Props>(({ layoutType, children }: Props, ref) => {
+export const FooterNavigation = forwardRef<HTMLDivElement, Props>(({ layoutType, children }: Props, ref) => {
   const setNavigationOpen = useNavigationOpen();
   const isSidebarMobileOpen = useRecoilCallback(({ snapshot }) => () => {
     return snapshot.getLoadable(atomNavigationOpenMobile(layoutType)).getValue();
   });
-  const layoutHome = layoutType === 'homeVertical';
+  const layoutHome = layoutType === 'home';
   const layoutApp = layoutType === 'app';
 
   return (
@@ -26,10 +26,10 @@ export const FooterSidebar = forwardRef<HTMLDivElement, Props>(({ layoutType, ch
       <div
         ref={ref}
         className={classNames(
-          'fixed z-30 md:z-auto',
+          'fixed z-30 ml:z-auto',
           layoutApp &&
             'left-0 top-0 w-72 bg-slate-50 pl-2 pr-0 pt-3 md:top-[4.6rem] md:flex md:w-full md:max-w-[16.5rem] md:flex-col md:bg-transparent md:pt-0 md:pl-2 md:pr-0',
-          layoutHome && 'w-full',
+          layoutHome && 'top-[0rem] w-full',
         )}>
         {children}
       </div>
@@ -37,4 +37,4 @@ export const FooterSidebar = forwardRef<HTMLDivElement, Props>(({ layoutType, ch
   );
 });
 
-FooterSidebar.displayName = 'FooterSidebar';
+FooterNavigation.displayName = 'FooterNavigation';
