@@ -3,7 +3,7 @@ import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { LabelList } from '@components/labels/labelList';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
-import { useSidebarOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@hooks/layouts';
 import { useConditionCheckCreateModalOpen } from '@hooks/misc';
 import { useTodoModalStateOpen } from '@hooks/modals';
 import { Logo } from '@layouts/layoutHeader/logo';
@@ -15,10 +15,10 @@ import { isChrome, isMobile } from 'react-device-detect';
 import { useRecoilValue } from 'recoil';
 import { AppSidebarMenu } from './appSidebarMenu';
 
-export const AppSidebarContent = () => {
+export const AppNavigation = () => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
   const openModal = useTodoModalStateOpen(undefined);
-  const setSidebarOpen = useSidebarOpen();
+  const setSidebarOpen = useNavigationOpen();
   const condition = useConditionCheckCreateModalOpen();
 
   return (
