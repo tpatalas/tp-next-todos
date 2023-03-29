@@ -6,14 +6,14 @@ import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } f
 import { useRecoilValue } from 'recoil';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { useSidebarOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@hooks/layouts';
 import { atomMediaQuery } from '@states/misc';
 import { classNames } from '@stateLogics/utils';
 import { TodosCount } from '../todosCount';
 
 export const AppSidebarMenu = () => {
   const router = useRouter();
-  const setSidebarOpen = useSidebarOpen();
+  const setSidebarOpen = useNavigationOpen();
   const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
 
   return (
