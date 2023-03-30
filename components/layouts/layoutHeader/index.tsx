@@ -2,11 +2,11 @@ import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
 import {
-    Fragment as LayoutHeaderFragment,
-    Fragment as LeftSideFragment,
-    Fragment as LogoFragment,
-    Fragment as NavigationButtonFragment,
-    Fragment as RightNavigationFragment,
+  Fragment as LayoutHeaderFragment,
+  Fragment as LeftSideFragment,
+  Fragment as LogoFragment,
+  Fragment as NavigationButtonFragment,
+  Fragment as RightNavigationFragment,
 } from 'react';
 import { Logo } from './logo';
 import { NavigationButton } from './navigationButton';

@@ -1,7 +1,10 @@
-import { PATHNAME_IMAGE } from '@constAssertions/data';
+import { PATHNAME_IMAGE, PATH_APP, PATH_HOME } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
-import { mediaQueryEffect, networkStatusEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
+import {
+  mediaQueryEffect,
+  networkStatusEffect,
+} from '@lib/stateLogics/effects/atomEffects/atomEffects';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*
@@ -51,6 +54,11 @@ export const atomActiveMenuItem = atomFamily<boolean, string | null>({
 export const atomHtmlTitleTag = atom<string>({
   key: 'atomHtmlTitleTag',
   default: '',
+});
+
+export const atomPathname = atom<PATH_APP | PATH_HOME>({
+  key: 'atomPathname',
+  default: '/',
 });
 
 export const atomPathnameImage = atom<PATHNAME_IMAGE>({
