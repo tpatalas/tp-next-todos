@@ -36,7 +36,7 @@ export const PATH_HOME = {
   features: '/features',
   implementations: '/implementations',
   pricing: 'pricing',
-  demo: '/demo ',
+  demo: '/demo',
 } as const;
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];

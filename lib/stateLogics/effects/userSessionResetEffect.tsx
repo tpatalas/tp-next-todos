@@ -27,10 +27,10 @@ export const UserSessionResetEffect = () => {
   });
 
   const setSession = useCallback(() => {
-    const isOffSessionSTorage = getSessionStorage(STORAGE_KEY['offSession']);
+    const isOffSessionStorage = getSessionStorage(STORAGE_KEY['offSession']);
 
     if (offSession) {
-      !isOffSessionSTorage && setSessionStorage(STORAGE_KEY['offSession'], true);
+      !isOffSessionStorage && setSessionStorage(STORAGE_KEY['offSession'], true);
       return;
     }
   }, [offSession]);

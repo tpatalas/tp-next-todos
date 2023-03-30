@@ -29,7 +29,9 @@ export const renderWithRecoilRoot = (ui: ReactElement, options?: Omit<RenderOpti
   render(ui, { wrapper: RecoilRootProvider, ...options });
 
 export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) => {
+  const offSession = getSessionStorage(STORAGE_KEY['offSession']);
   let response;
+  if (offSession) throw response;
   for (let i = 0; i < retryCount; i++) {
     try {
       response = await fetch(url, options);
@@ -53,7 +55,15 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
   return difference > checkingTime;
 };
 
-export const nextImageLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
+export const nextImageLoader = ({
+  src,
+  width,
+  quality,
+}: {
+  src: string;
+  width: number;
+  quality?: number;
+}) => {
   return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality || 75}`;
 };
 

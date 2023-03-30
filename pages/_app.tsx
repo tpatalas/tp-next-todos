@@ -1,12 +1,14 @@
 import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import { ReactElement, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
+import dynamic from 'next/dynamic';
 
-const UserSessionEffect = dynamic(() => import('@effects/userSessionEffect').then((mod) => mod.UserSessionEffect));
+const UserSessionEffect = dynamic(() =>
+  import('@effects/userSessionEffect').then((mod) => mod.UserSessionEffect),
+);
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
