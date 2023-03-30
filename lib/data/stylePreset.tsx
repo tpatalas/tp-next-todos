@@ -33,17 +33,34 @@ export const STYLE_BUTTON_NORMAL_BLUE = classNames(
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_BLUE,
 );
-export const STYLE_BUTTON_LARGE_BLUE = classNames(STYLE_BUTTON_BASE, STYLE_BUTTON_SIZE_LARGE, STYLE_BUTTON_COLOR_BLUE);
-export const STYLE_BUTTON_FULL_BLUE = classNames(STYLE_BUTTON_BASE, STYLE_BUTTON_SIZE_FULL, STYLE_BUTTON_COLOR_BLUE);
+export const STYLE_BUTTON_LARGE_BLUE = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_LARGE,
+  STYLE_BUTTON_COLOR_BLUE,
+);
+export const STYLE_BUTTON_FULL_BLUE = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_FULL,
+  STYLE_BUTTON_COLOR_BLUE,
+);
 //black
 export const STYLE_BUTTON_NORMAL_BLACK = classNames(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_BLACK,
 );
+export const STYLE_BUTTON_FULL_BLACK = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_FULL,
+  STYLE_BUTTON_COLOR_BLACK,
+);
 
 // red
-export const STYLE_BUTTON_NORMAL_RED = classNames(STYLE_BUTTON_BASE, STYLE_BUTTON_SIZE_NORMAL, STYLE_BUTTON_COLOR_RED);
+export const STYLE_BUTTON_NORMAL_RED = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_NORMAL,
+  STYLE_BUTTON_COLOR_RED,
+);
 // gray
 export const STYLE_BUTTON_NORMAL_GRAY = classNames(
   STYLE_BUTTON_BASE,
@@ -63,8 +80,10 @@ export const STYLE_BUTTON_KEY_ONLY_RING =
  **/
 export const STYLE_HOVER_SLATE_DARK = 'hover:bg-slate-900 hover:bg-opacity-10';
 export const STYLE_HOVER_SLATE_LIGHT = 'hover:bg-slate-600 hover:bg-opacity-10';
-export const STYLE_HOVER_ENABLED_SLATE_DARK = 'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
-export const STYLE_HOVER_ENABLED_SLATE_LIGHT = 'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_DARK =
+  'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_LIGHT =
+  'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
 /**
  * Calendar
  */
