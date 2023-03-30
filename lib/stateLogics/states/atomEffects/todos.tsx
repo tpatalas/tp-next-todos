@@ -1,9 +1,10 @@
 import { DATA_DEMO_TODOIDS } from '@collections/demo';
-import { IDB_STORE, IDB_KEY } from '@constAssertions/storage';
+import { PATH_HOME } from '@constAssertions/data';
+import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { TodoIds, Todos } from '@lib/types';
-import { atomUserSession } from '@states/users';
+import { atomPathname } from '@states/misc';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**
@@ -33,12 +34,14 @@ export const atomDemoTodoIds = atom<TodoIds[]>({
 export const selectorSessionTodoIds = selector<TodoIds[]>({
   key: 'selectorSessionTodoIds',
   get: ({ get }) => {
-    const session = get(atomUserSession);
-    return session ? get(atomQueryTodoIds) : get(atomDemoTodoIds);
+    const pathname = get(atomPathname);
+    return pathname === PATH_HOME['demo'] ? get(atomDemoTodoIds) : get(atomQueryTodoIds);
   },
   set: ({ get, set }, newValue) => {
-    const session = get(atomUserSession);
-    return session ? set(atomQueryTodoIds, newValue) : set(atomDemoTodoIds, newValue);
+    const pathname = get(atomPathname);
+    return pathname === PATH_HOME['demo']
+      ? set(atomDemoTodoIds, newValue)
+      : set(atomQueryTodoIds, newValue);
   },
 });
 
@@ -74,14 +77,18 @@ export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
   get:
     (todoId) =>
     ({ get }) => {
-      const session = get(atomUserSession);
-      return session ? get(atomQueryTodoItem(todoId)) : get(atomDemoTodoItem(todoId));
+      const pathName = get(atomPathname);
+      return pathName === PATH_HOME['demo']
+        ? get(atomDemoTodoItem(todoId))
+        : get(atomQueryTodoItem(todoId));
     },
   set:
     (todoId) =>
     ({ get, set }, newValue) => {
-      const session = get(atomUserSession);
-      return session ? set(atomQueryTodoItem(todoId), newValue) : set(atomDemoTodoItem(todoId), newValue);
+      const pathName = get(atomPathname);
+      return pathName === PATH_HOME['demo']
+        ? set(atomDemoTodoItem(todoId), newValue)
+        : set(atomQueryTodoItem(todoId), newValue);
     },
 });
 

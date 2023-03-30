@@ -1,9 +1,6 @@
 import { CATCH } from '@constAssertions/misc';
 import { LayoutTypeEffect } from '@effects/layoutTypeEffect';
 import { NavigationInitialEffect } from '@effects/navigationInitialEffect';
-import { FooterBody } from '@layouts/layoutFooter/footerBody';
-import { LayoutHeader } from '@layouts/layoutHeader';
-import { SearchBar } from '@layouts/layoutHeader/searchBar';
 import { Types } from '@lib/types';
 import { atomCatch, atomHtmlTitleTag } from '@states/misc';
 import dynamic from 'next/dynamic';
@@ -16,17 +13,35 @@ import {
   Suspense,
 } from 'react';
 import { useRecoilValue } from 'recoil';
-const CreateTodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
-const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
-const Notification = dynamic(() => import('components/notifications/notification').then((mod) => mod.Notification));
-const LabelModal = dynamic(() => import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal));
+const CreateTodoModal = dynamic(() =>
+  import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
+);
+const MinimizedModal = dynamic(() =>
+  import('@modals/minimizedModal').then((mod) => mod.MinimizedModal),
+);
+const Notification = dynamic(() =>
+  import('components/notifications/notification').then((mod) => mod.Notification),
+);
+const LabelModal = dynamic(() =>
+  import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
+);
 const WindowBeforeunloadEffect = dynamic(() =>
   import('@effects/windowBeforeunloadEffect').then((mod) => mod.WindowBeforeunloadEffect),
 );
-const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter), {
+const FooterBody = dynamic(() =>
+  import('@layouts/layoutFooter/footerBody').then((mod) => mod.FooterBody),
+);
+const LayoutHeader = dynamic(() => import('@layouts/layoutHeader').then((mod) => mod.LayoutHeader));
+const SearchBar = dynamic(() =>
+  import('@layouts/layoutHeader/searchBar').then((mod) => mod.SearchBar),
+);
+const LayoutFooter = dynamic(
+  () => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter),
+  { ssr: false },
+);
+const User = dynamic(() => import('@layouts/layoutHeader/user').then((mod) => mod.User), {
   ssr: false,
 });
-const User = dynamic(() => import('@layouts/layoutHeader/user').then((mod) => mod.User), { ssr: false });
 
 type Props = Pick<Types, 'children'>;
 
@@ -47,11 +62,9 @@ export const LayoutApp = ({ children }: Props) => {
               <User />
             </Suspense>
           </LayoutHeader>
-          <Suspense>
-            <LayoutFooter layoutType='app'>
-              <FooterBody>{children}</FooterBody>
-            </LayoutFooter>
-          </Suspense>
+          <LayoutFooter layoutType='app'>
+            <FooterBody>{children}</FooterBody>
+          </LayoutFooter>
         </div>
       </HeaderFragment>
       <EffectFragment>

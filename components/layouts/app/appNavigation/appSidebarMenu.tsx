@@ -2,14 +2,20 @@ import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { useRouter } from 'next/router';
-import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
+import {
+  Fragment as FooterSidebarMenuFragment,
+  Suspense,
+  Fragment as TotalNumberTodos,
+} from 'react';
 import { useRecoilValue } from 'recoil';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { useNavigationOpen } from '@hooks/layouts';
 import { atomMediaQuery } from '@states/misc';
 import { classNames } from '@stateLogics/utils';
-import { TodosCount } from '../todosCount';
+import dynamic from 'next/dynamic';
+
+const TodosCount = dynamic(() => import('@layouts/app/todosCount').then((mod) => mod.TodosCount));
 
 export const AppSidebarMenu = () => {
   const router = useRouter();
@@ -46,7 +52,9 @@ export const AppSidebarMenu = () => {
               {item.name}
               <TotalNumberTodos>
                 <span className='absolute right-[0.87rem] top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400'>
-                  <TodosCount pathname={item.path} />
+                  <Suspense>
+                    <TodosCount pathname={item.path} />
+                  </Suspense>
                 </span>
               </TotalNumberTodos>
             </PrefetchRouterButton>

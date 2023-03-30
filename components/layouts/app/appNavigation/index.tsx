@@ -1,7 +1,6 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { LabelList } from '@components/labels/labelList';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { useNavigationOpen } from '@hooks/layouts';
 import { useConditionCheckCreateModalOpen } from '@hooks/misc';
@@ -10,10 +9,17 @@ import { Logo } from '@layouts/layoutHeader/logo';
 import { optionsButtonCreateTodo, optionsButtonSidebarToggle } from '@options/button';
 import { classNames } from '@stateLogics/utils';
 import { atomDisableScroll } from '@states/misc';
-import { Fragment as CreateTodoFragment, Fragment as LayoutLogoFragment } from 'react';
+import { Fragment as CreateTodoFragment, Fragment as LayoutLogoFragment, Suspense } from 'react';
 import { isChrome, isMobile } from 'react-device-detect';
 import { useRecoilValue } from 'recoil';
 import { AppSidebarMenu } from './appSidebarMenu';
+import dynamic from 'next/dynamic';
+import { LoadingLabels } from '@components/loadable/loadingStates/loadingLabels';
+
+const LabelList = dynamic(
+  () => import('@components/labels/labelList').then((mod) => mod.LabelList),
+  { ssr: false },
+);
 
 export const AppNavigation = () => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
@@ -60,7 +66,9 @@ export const AppNavigation = () => {
         <div className='flex flex-grow flex-col'>
           <nav className={classNames('flex-1 space-y-1', isMobile && isChrome ? 'pb-36' : 'pb-10')}>
             <AppSidebarMenu />
-            <LabelList />
+            <Suspense fallback={<LoadingLabels />}>
+              <LabelList />
+            </Suspense>
           </nav>
         </div>
       </div>

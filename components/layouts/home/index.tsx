@@ -1,10 +1,14 @@
 import { LayoutTypeEffect } from '@effects/layoutTypeEffect';
 import { NavigationInitialEffect } from '@effects/navigationInitialEffect';
-import { LayoutFooter } from '@layouts/layoutFooter';
-import { LayoutHeader } from '@layouts/layoutHeader';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment as EffectFragment, Fragment as LayoutFragment, ReactNode } from 'react';
-import { HomeNavigation } from './homeNavigation';
+
+const HomeNavigation = dynamic(() => import('./homeNavigation').then((mod) => mod.HomeNavigation));
+
+const LayoutHeader = dynamic(() => import('@layouts/layoutHeader').then((mod) => mod.LayoutHeader));
+
+const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter));
 
 type Props = {
   children: ReactNode;
