@@ -1,4 +1,4 @@
-import { PATHNAME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import {
   ICON_HOME,
   ICON_HOME_FILL,
@@ -18,7 +18,7 @@ export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [
     icon: ICON_HOME,
     iconActive: ICON_HOME_FILL,
     iconColor: 'fill-blue-600',
-    path: PATHNAME['app'],
+    path: PATH_APP['app'],
   },
   {
     name: 'Urgent',
@@ -26,7 +26,7 @@ export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [
     icon: ICON_FLAG,
     iconActive: ICON_FLAG_FILL,
     iconColor: 'fill-red-600',
-    path: PATHNAME['urgent'],
+    path: PATH_APP['urgent'],
   },
   {
     name: 'Important',
@@ -34,7 +34,7 @@ export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [
     icon: ICON_LABEL_IMPORTANT,
     iconActive: ICON_LABEL_IMPORTANT_FILL,
     iconColor: 'fill-yellow-500',
-    path: PATHNAME['important'],
+    path: PATH_APP['important'],
   },
   {
     name: 'Show All',
@@ -42,7 +42,7 @@ export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [
     icon: ICON_LIST,
     iconActive: ICON_LIST,
     iconColor: 'fill-purple-600',
-    path: PATHNAME['showAll'],
+    path: PATH_APP['showAll'],
   },
   {
     name: 'Completed',
@@ -50,6 +50,6 @@ export const DATA_SIDEBAR_MENU: TypesSidebarMenu[] = [
     icon: ICON_DONE_ALL,
     iconActive: ICON_DONE_ALL,
     iconColor: 'fill-green-600',
-    path: PATHNAME['completed'],
+    path: PATH_APP['completed'],
   },
 ];

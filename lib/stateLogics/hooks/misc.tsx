@@ -1,4 +1,4 @@
-import { PATHNAME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import { Labels, Todos } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoItem, atomSelectorTodoItem } from '@states/atomEffects/todos';
@@ -12,22 +12,22 @@ import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'rec
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();
-  const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['app']));
-  const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['urgent']));
-  const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['important']));
-  const showAll = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['showAll']));
-  const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATHNAME['completed']));
+  const app = useRecoilValue(selectorFilterTodoIdsByPathname(PATH_APP['app']));
+  const urgent = useRecoilValue(selectorFilterTodoIdsByPathname(PATH_APP['urgent']));
+  const important = useRecoilValue(selectorFilterTodoIdsByPathname(PATH_APP['important']));
+  const showAll = useRecoilValue(selectorFilterTodoIdsByPathname(PATH_APP['showAll']));
+  const completed = useRecoilValue(selectorFilterTodoIdsByPathname(PATH_APP['completed']));
 
   switch (router.asPath) {
-    case PATHNAME['app']:
+    case PATH_APP['app']:
       return app;
-    case PATHNAME['urgent']:
+    case PATH_APP['urgent']:
       return urgent;
-    case PATHNAME['important']:
+    case PATH_APP['important']:
       return important;
-    case PATHNAME['showAll']:
+    case PATH_APP['showAll']:
       return showAll;
-    case PATHNAME['completed']:
+    case PATH_APP['completed']:
       return completed;
     default:
       return app;

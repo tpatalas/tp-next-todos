@@ -10,7 +10,6 @@ import {
   optionsButtonTodoModalCancel,
   optionsButtonLabelModalAddLabel,
 } from '@options/button';
-import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { useLabelValueUpdate, useLabelAdd } from '@hooks/labels';
 import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
 import { useLabelModalStateClose } from '@hooks/modals';
@@ -19,6 +18,7 @@ import { ModalTransitionRoot } from '@modals/modal/modalTransition/modalTransiti
 import { Divider } from '@ui/dividers/divider';
 import { Button } from '@buttons/button';
 import { classNames } from '@stateLogics/utils';
+import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
 
 type Props = Partial<Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
 

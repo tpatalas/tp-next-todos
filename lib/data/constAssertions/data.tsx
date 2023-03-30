@@ -20,14 +20,23 @@ export const FILTER_TODOIDS = {
   completed: 'completed',
 } as const;
 
-export type PATHNAME = (typeof PATHNAME)[keyof typeof PATHNAME];
-export const PATHNAME = {
+export type PATH_APP = (typeof PATH_APP)[keyof typeof PATH_APP];
+export const PATH_APP = {
   app: '/app',
   urgent: '/app/urgent',
   important: '/app/important',
   showAll: '/app/showall',
   completed: '/app/completed',
   label: '/app/label',
+} as const;
+
+export type PATH_HOME = (typeof PATH_HOME)[keyof typeof PATH_HOME];
+export const PATH_HOME = {
+  home: '/',
+  features: '/features',
+  implementations: '/implementations',
+  pricing: 'pricing',
+  demo: '/demo ',
 } as const;
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];

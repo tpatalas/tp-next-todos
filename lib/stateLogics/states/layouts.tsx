@@ -1,30 +1,23 @@
 import { BREAKPOINT } from '@constAssertions/ui';
-import { mediaQueryEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
+import { Types } from '@lib/types';
 import { atomMediaQuery } from '@states/misc';
-import { atom, selector } from 'recoil';
+import { atom, atomFamily, selector } from 'recoil';
 
 /**
  * Atoms
  **/
-export const atomSidebarOpen = atom({
-  key: 'atomSidebarOpen',
-  default: true,
-  effects: [
-    mediaQueryEffect({
-      breakpoint: BREAKPOINT['md'],
-      isStateUnderBreakpoint: false,
-      isStateOverBreakpoint: true,
-    }),
-  ],
-});
-
-export const atomSidebarOpenMobile = atom({
-  key: 'atomSidebarOpenMobile',
+export const atomNavigationInitialOpen = atomFamily<boolean, Types['layoutType']>({
+  key: 'atomNavigationInitialOpen',
   default: false,
 });
 
-export const atomSidebarOpenSetting = atom({
-  key: 'atomSidebarOpenSetting',
+export const atomNavigationOpenMobile = atomFamily<boolean, Types['layoutType']>({
+  key: 'atomNavigationOpenMobile',
+  default: false,
+});
+
+export const atomNavigationOpenSetting = atomFamily<boolean, Types['layoutType']>({
+  key: 'atomNavigationOpenSetting',
   default: false,
 });
 
@@ -33,15 +26,23 @@ export const atomSearchInput = atom({
   default: '',
 });
 
+export const atomLayoutType = atom<Types['layoutType']>({
+  key: 'atomLayoutType',
+  default: 'app',
+});
+
 /**
  * Selector
  **/
-export const selectorSidebarOpen = selector({
-  key: 'selectorSidebarOpen',
+export const selectorNavigationOpen = selector({
+  key: 'selectorNavigationOpen',
   get: ({ get }) => {
-    const breakpointMedium = get(atomMediaQuery(BREAKPOINT['md']));
-    if (get(atomSidebarOpenSetting) && breakpointMedium) return get(atomSidebarOpenSetting) ? false : true;
-    return breakpointMedium ? get(atomSidebarOpen) : get(atomSidebarOpenMobile);
+    const layoutType = get(atomLayoutType);
+    const breakpointMedium =
+      layoutType === 'app' ? get(atomMediaQuery(BREAKPOINT['md'])) : get(atomMediaQuery(BREAKPOINT['ml']));
+    if (get(atomNavigationOpenSetting(layoutType)) && breakpointMedium)
+      return get(atomNavigationOpenSetting(layoutType)) ? false : true;
+    return breakpointMedium ? get(atomNavigationInitialOpen(layoutType)) : get(atomNavigationOpenMobile(layoutType));
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',

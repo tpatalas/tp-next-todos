@@ -1,10 +1,10 @@
 import { fireEvent, screen } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
-import { LayoutLogo } from '../layoutLogo';
 import { renderWithRecoilRoot } from '@stateLogics/utils';
+import { Logo } from '@layouts/layoutHeader/logo';
 
-describe('LayoutLogo', () => {
-  renderWithRecoilRoot(<LayoutLogo />);
+describe('Logo', () => {
+  renderWithRecoilRoot(<Logo />);
 
   let logoComponent: HTMLElement;
 

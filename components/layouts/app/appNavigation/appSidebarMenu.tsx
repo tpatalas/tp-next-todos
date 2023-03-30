@@ -4,16 +4,16 @@ import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { useRouter } from 'next/router';
 import { Fragment as FooterSidebarMenuFragment, Fragment as TotalNumberTodos } from 'react';
 import { useRecoilValue } from 'recoil';
-import { TodosCount } from './todosCount';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { useSidebarOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@hooks/layouts';
 import { atomMediaQuery } from '@states/misc';
 import { classNames } from '@stateLogics/utils';
+import { TodosCount } from '../todosCount';
 
-export const FooterSidebarMenu = () => {
+export const AppSidebarMenu = () => {
   const router = useRouter();
-  const setSidebarOpen = useSidebarOpen();
+  const setSidebarOpen = useNavigationOpen();
   const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
 
   return (
@@ -31,7 +31,7 @@ export const FooterSidebarMenu = () => {
                   router.asPath === item.path
                     ? 'cursor-default bg-blue-100 font-semibold text-gray-900 text-opacity-80'
                     : `font-medium text-gray-600 hover:text-gray-900 ${STYLE_HOVER_SLATE_LIGHT}`,
-                  'group flex w-full items-center rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-0 focus:ring-offset-0',
+                  'group flex w-full items-center rounded-lg px-2 py-2 tracking-wide my-[0.1px] text-sm focus:outline-none focus:ring-0 focus:ring-offset-0',
                 ),
               }}
               onClick={() => !isBreakpointMd && setSidebarOpen()}>
