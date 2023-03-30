@@ -1,14 +1,19 @@
 import { Types } from '@lib/types';
+import { classNames } from '@stateLogics/utils';
+import dynamic from 'next/dynamic';
 import {
-  Fragment as LayoutHeaderFragment,
-  Fragment as LeftSideFragment,
-  Fragment as LogoFragment,
-  Fragment as RightNavigationFragment,
-  Fragment as NavigationButtonFragment,
+    Fragment as LayoutHeaderFragment,
+    Fragment as LeftSideFragment,
+    Fragment as LogoFragment,
+    Fragment as NavigationButtonFragment,
+    Fragment as RightNavigationFragment,
 } from 'react';
 import { Logo } from './logo';
-import { classNames } from '@stateLogics/utils';
 import { NavigationButton } from './navigationButton';
+
+const UserSessionResetEffect = dynamic(() =>
+  import('@effects/userSessionResetEffect').then((mod) => mod.UserSessionResetEffect),
+);
 
 type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;
 
@@ -47,6 +52,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
           </NavigationButtonFragment>
         </RightNavigationFragment>
       </div>
+      <UserSessionResetEffect />
     </LayoutHeaderFragment>
   );
 };
