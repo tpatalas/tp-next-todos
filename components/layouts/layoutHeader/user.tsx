@@ -6,14 +6,17 @@ import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { SignInButton } from './signInButton';
 import { Types } from '@lib/types';
+import { useNextQuery } from '@hooks/misc';
 
 export const User = () => {
   const offSession = getSessionStorage(STORAGE_KEY['offSession']);
   const router = useRouter();
   const pathname = router.pathname as Types['pathname'];
+  const appSlug = useNextQuery({ path: PATH_APP['app'] });
 
   const pathNameDemo = !!offSession && pathname === PATH_HOME['demo'];
-  const pathNameApp = !offSession && pathname === PATH_APP['app'];
+  const pathNameApp = !offSession && appSlug ;
+  // slug;
 
   return (
     <Fragment>

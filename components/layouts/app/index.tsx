@@ -52,7 +52,7 @@ export const LayoutApp = ({ children }: Props) => {
   return (
     <LayoutAppFragment>
       <Head>
-        <title>{'My Todo App: ' + slug}</title>
+        <title>{'My Todo App - ' + slug}</title>
       </Head>
       <HeaderFragment>
         <div className='flex h-screen flex-col'>

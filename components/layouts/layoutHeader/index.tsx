@@ -30,10 +30,15 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
           layoutApp && 'bg-transparent',
         )}>
         <LeftSideFragment>
-          <div className='flex flex-row items-center justify-between pl-3 md:w-full md:max-w-3xs'>
+          <div
+            className={classNames(
+              'flex flex-row items-center justify-between pl-3 md:w-full',
+              layoutApp && 'md:max-w-[16rem]',
+              layoutHome && 'md:max-w-[12rem]',
+            )}>
             <NavigationButtonFragment>{layoutApp && <NavigationButton />}</NavigationButtonFragment>
             <LogoFragment>
-              <div className={classNames('flex w-full flex-row justify-start pl-4')}>
+              <div className={classNames('flex w-full flex-row justify-start')}>
                 <Logo />
               </div>
             </LogoFragment>
@@ -43,12 +48,12 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
           <div
             className={classNames(
               layoutApp && 'mr-3 flex flex-1 flex-row items-center justify-end pl-2',
-              layoutHome && 'hidden ml:flex',
+              layoutHome && 'hidden ml:mr-8 ml:flex',
             )}>
             {children}
           </div>
           <NavigationButtonFragment>
-            <div className='pr-3 ml:hidden ml:pr-0'>{layoutHome && <NavigationButton />}</div>
+            <div className='pr-6 ml:hidden ml:pr-0'>{layoutHome && <NavigationButton />}</div>
           </NavigationButtonFragment>
         </RightNavigationFragment>
       </div>

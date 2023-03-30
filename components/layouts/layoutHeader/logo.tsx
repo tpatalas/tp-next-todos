@@ -1,4 +1,5 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
+import { SvgLogo } from '@components/icons/svgLogo';
 import { NetworkStatus } from '@components/notifications/networkStatus';
 import { Fragment as LogoContainerFragment, Fragment as LogoFragment } from 'react';
 
@@ -12,13 +13,8 @@ export const Logo = () => {
             className: 'cursor-pointer',
           }}>
           <LogoFragment>
-            <span className='flex w-full flex-row items-center justify-center px-2 text-2xl tracking-wider'>
-              <span className='sr-only'>Logo</span>
-              <span className='flex flex-col -space-y-[0.4rem] pr-3 text-sm font-bold tracking-widest'>
-                <span>LO</span>
-                <span>GO</span>
-              </span>
-              <span>TODO</span>
+            <span className='flex w-full flex-row items-center justify-center'>
+              <SvgLogo type='MainWhite' />
             </span>
           </LogoFragment>
         </PrefetchRouterButton>

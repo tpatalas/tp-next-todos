@@ -1,4 +1,4 @@
-import { PATH_APP, PATHNAME_IMAGE, SVG_LOGO } from '@constAssertions/data';
+import { PATH_APP, PATHNAME_IMAGE } from '@constAssertions/data';
 import { IDB, IDB_STORE, IDB_VERSION } from '@constAssertions/storage';
 import { NOTIFICATION } from '@constAssertions/ui';
 import { ReactElement } from 'react';
@@ -40,9 +40,12 @@ export interface TypesPathnameImage {
   description: string;
 }
 
-export interface TypesSvgLogo {
-  name: SVG_LOGO;
-  className: Types['className'];
+export interface TypesSvgLogos {
+  name: 'Google' | 'GitHub' | 'MainWhite';
+  className?: Types['className'];
+  isAriaHidden?: boolean;
+  height: string;
+  width: string;
   viewBox: string;
   path: ReactElement;
 }

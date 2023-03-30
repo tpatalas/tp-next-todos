@@ -26,7 +26,7 @@ export const HomeNavigation = ({ layoutType }: Props) => {
         <li key={path.name}>
           <Link
             href={path.path}
-            className='block w-full rounded-lg px-5 py-3 transition-all hover:bg-slate-900 hover:bg-opacity-10 hover:font-semibold'>
+            className='block w-full rounded-lg transition-all hover:bg-slate-900 hover:bg-opacity-10 max-ml:px-5 max-ml:py-3 ml:px-3 ml:py-2'>
             {path.name}
           </Link>
         </li>
