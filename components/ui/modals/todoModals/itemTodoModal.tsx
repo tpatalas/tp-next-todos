@@ -1,6 +1,6 @@
 import { DisableButton } from '@buttons/disableButton';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { KeysWithItemModalEffect } from '@effects/KeysWithItemModalEffect';
+import { KeysWithItemModalEffect } from '@effects/keysWithItemModalEffect';
 import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
 import { useConditionCompareTodoItemsEqual } from '@hooks/misc';
 import { useTodoUpdateItem, useTodoCompleteItem } from '@hooks/todos';
