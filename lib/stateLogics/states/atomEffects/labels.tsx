@@ -1,5 +1,5 @@
 import { DATA_DEMO_LABELS } from '@collections/demo';
-import { PATH_HOME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
@@ -32,13 +32,13 @@ export const selectorSessionLabels = selector<Labels[]>({
   key: 'selectorSessionLabels',
   get: ({ get }) => {
     const pathname = get(atomPathname);
-    return pathname === PATH_HOME['demo'] ? get(atomDemoLabels) : get(atomQueryLabels);
+    return pathname === PATH_APP['app'] ? get(atomQueryLabels) : get(atomDemoLabels);
   },
   set: ({ get, set }, newValue) => {
     const pathname = get(atomPathname);
-    return pathname === PATH_HOME['demo']
-      ? set(atomDemoLabels, newValue)
-      : set(atomQueryLabels, newValue);
+    return pathname === PATH_APP['app']
+      ? set(atomQueryLabels, newValue)
+      : set(atomDemoLabels, newValue);
   },
 });
 
