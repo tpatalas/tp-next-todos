@@ -10,7 +10,7 @@ import {
   optionsButtonTodoModalCancel,
   optionsButtonLabelModalAddLabel,
 } from '@options/button';
-import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
+import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
 import { useLabelValueUpdate, useLabelAdd } from '@hooks/labels';
 import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
 import { useLabelModalStateClose } from '@hooks/modals';
