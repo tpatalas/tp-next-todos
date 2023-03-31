@@ -1,5 +1,5 @@
 import { DATA_DEMO_TODOIDS } from '@collections/demo';
-import { PATH_HOME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
@@ -35,13 +35,13 @@ export const selectorSessionTodoIds = selector<TodoIds[]>({
   key: 'selectorSessionTodoIds',
   get: ({ get }) => {
     const pathname = get(atomPathname);
-    return pathname === PATH_HOME['demo'] ? get(atomDemoTodoIds) : get(atomQueryTodoIds);
+    return pathname === PATH_APP['app'] ? get(atomQueryTodoIds) : get(atomDemoTodoIds);
   },
   set: ({ get, set }, newValue) => {
     const pathname = get(atomPathname);
-    return pathname === PATH_HOME['demo']
-      ? set(atomDemoTodoIds, newValue)
-      : set(atomQueryTodoIds, newValue);
+    return pathname === PATH_APP['app']
+      ? set(atomQueryTodoIds, newValue)
+      : set(atomDemoTodoIds, newValue);
   },
 });
 
@@ -78,17 +78,17 @@ export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
     (todoId) =>
     ({ get }) => {
       const pathName = get(atomPathname);
-      return pathName === PATH_HOME['demo']
-        ? get(atomDemoTodoItem(todoId))
-        : get(atomQueryTodoItem(todoId));
+      return pathName === PATH_APP['app']
+        ? get(atomQueryTodoItem(todoId))
+        : get(atomDemoTodoItem(todoId));
     },
   set:
     (todoId) =>
     ({ get, set }, newValue) => {
       const pathName = get(atomPathname);
-      return pathName === PATH_HOME['demo']
-        ? set(atomDemoTodoItem(todoId), newValue)
-        : set(atomQueryTodoItem(todoId), newValue);
+      return pathName === PATH_APP['app']
+        ? set(atomQueryTodoItem(todoId), newValue)
+        : set(atomDemoTodoItem(todoId), newValue);
     },
 });
 
