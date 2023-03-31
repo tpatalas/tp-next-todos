@@ -79,7 +79,13 @@ export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
 };
 
 // recoil test observer: required to observe state change on unit test
-export const RecoilObserver = <T,>({ node, onChange }: { node: RecoilState<T>; onChange: (value: T) => void }) => {
+export const RecoilObserver = <T,>({
+  node,
+  onChange,
+}: {
+  node: RecoilState<T>;
+  onChange: (value: T) => void;
+}) => {
   const value = useRecoilValue(node);
   useEffect(() => onChange(value), [onChange, value]);
   return null;
@@ -93,10 +99,14 @@ export const useNextQuery = ({ path, key }: { path?: string; key?: string }) => 
   const pathOrKey = (pathRegex || keyRegex) as string;
 
   const value = useMemo(() => {
+    if (path && router.pathname === path) {
+      return path;
+    }
+
     const match = router.asPath.match(new RegExp(pathOrKey));
     if (!match) return undefined;
     return decodeURIComponent(match[1]);
-  }, [pathOrKey, router.asPath]);
+  }, [path, pathOrKey, router.asPath, router.pathname]);
 
   return value;
 };

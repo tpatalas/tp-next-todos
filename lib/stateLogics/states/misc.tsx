@@ -1,10 +1,11 @@
-import { PATHNAME_IMAGE, PATH_APP, PATH_HOME } from '@constAssertions/data';
+import { PATHNAME_IMAGE } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
 import {
   mediaQueryEffect,
   networkStatusEffect,
 } from '@lib/stateLogics/effects/atomEffects/atomEffects';
+import { Types } from '@lib/types';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*
@@ -56,14 +57,14 @@ export const atomHtmlTitleTag = atom<string>({
   default: '',
 });
 
-export const atomPathname = atom<PATH_APP | PATH_HOME>({
+export const atomPathname = atom<Types['pathname']>({
   key: 'atomPathname',
   default: '/',
 });
 
 export const atomPathnameImage = atom<PATHNAME_IMAGE>({
   key: 'atomPathnameImage',
-  default: PATHNAME_IMAGE['app'],
+  default: PATHNAME_IMAGE['focus'],
 });
 
 export const atomLoadingSpinner = atomFamily<boolean, SPINNER>({

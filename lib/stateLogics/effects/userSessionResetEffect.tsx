@@ -1,3 +1,4 @@
+import { DATA_IDB } from '@collections/idb';
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { getSessionStorage, setSessionStorage } from '@stateLogics/utils';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
@@ -12,8 +13,12 @@ export const UserSessionResetEffect = () => {
   const offSession = session === null && session !== undefined;
 
   const clearIndexedDB = async () => {
-    const indexedDBs = await indexedDB.databases();
-    await Promise.all(indexedDBs.map((idb) => idb && deleteDB(idb.name as string)));
+    await Promise.all(
+      DATA_IDB.map((idb) => {
+        const currentIDBName = idb && idb.dbName + 'v' + idb.currentVersion;
+        return deleteDB(currentIDBName);
+      }),
+    );
   };
 
   const userSession = useRecoilCallback(({ reset }) => () => {
