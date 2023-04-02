@@ -5,7 +5,6 @@ import {
   mediaQueryEffect,
   networkStatusEffect,
 } from '@lib/stateLogics/effects/atomEffects/atomEffects';
-import { Types } from '@lib/types';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*
@@ -57,11 +56,6 @@ export const atomHtmlTitleTag = atom<string>({
   default: '',
 });
 
-export const atomPathname = atom<Types['pathname']>({
-  key: 'atomPathname',
-  default: '/',
-});
-
 export const atomPathnameImage = atom<PATHNAME_IMAGE>({
   key: 'atomPathnameImage',
   default: PATHNAME_IMAGE['focus'],
@@ -70,6 +64,11 @@ export const atomPathnameImage = atom<PATHNAME_IMAGE>({
 export const atomLoadingSpinner = atomFamily<boolean, SPINNER>({
   key: 'atomLoadingSpinner',
   default: false,
+});
+
+export const atomFilterEffect = atom({
+  key: 'atomFilterEffect',
+  default: 'focus',
 });
 
 /**
