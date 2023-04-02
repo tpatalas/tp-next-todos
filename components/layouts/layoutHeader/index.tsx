@@ -15,6 +15,10 @@ const UserSessionResetEffect = dynamic(() =>
   import('@effects/userSessionResetEffect').then((mod) => mod.UserSessionResetEffect),
 );
 
+const UserSessionEffect = dynamic(() =>
+  import('@effects/userSessionEffect').then((mod) => mod.UserSessionEffect),
+);
+
 type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;
 
 export const LayoutHeader = ({ children, layoutType }: Props) => {
@@ -57,6 +61,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
           </NavigationButtonFragment>
         </RightNavigationFragment>
       </div>
+      <UserSessionEffect />
       <UserSessionResetEffect />
     </LayoutHeaderFragment>
   );
