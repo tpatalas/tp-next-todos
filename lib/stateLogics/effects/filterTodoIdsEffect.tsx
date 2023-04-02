@@ -1,4 +1,4 @@
-import { PATHNAME_IMAGE, PATH_APP, PATH_DEMO } from '@constAssertions/data';
+import { PATHNAME_IMAGE, PATH_APP } from '@constAssertions/data';
 import { useNextQuery } from '@hooks/misc';
 import { Labels } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
@@ -18,31 +18,31 @@ export const FilterTodoIdsEffect = () => {
   const appLabel = useNextQuery({ path: PATH_APP['label'] });
 
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
-    if (asPath === PATH_APP['app'] || asPath === PATH_DEMO['app']) {
+    if (asPath === PATH_APP['app']) {
       set(atomFilterTodoIds, 'focus');
       set(atomHtmlTitleTag, "Today's Focus");
       set(atomPathnameImage, PATHNAME_IMAGE['focus']);
       return;
     }
-    if (asPath === PATH_APP['urgent'] || asPath === PATH_DEMO['urgent']) {
+    if (asPath === PATH_APP['urgent']) {
       set(atomFilterTodoIds, 'urgent');
       set(atomHtmlTitleTag, 'Priority | Urgent');
       set(atomPathnameImage, PATHNAME_IMAGE['urgent']);
       return;
     }
-    if (asPath === PATH_APP['important'] || asPath === PATH_DEMO['important']) {
+    if (asPath === PATH_APP['important']) {
       set(atomFilterTodoIds, 'important');
       set(atomHtmlTitleTag, 'Priority | Important');
       set(atomPathnameImage, PATHNAME_IMAGE['important']);
       return;
     }
-    if (asPath === PATH_APP['showAll'] || asPath === PATH_DEMO['showAll']) {
+    if (asPath === PATH_APP['showAll']) {
       set(atomFilterTodoIds, 'showAll');
       set(atomHtmlTitleTag, 'All Todos');
       set(atomPathnameImage, PATHNAME_IMAGE['showAll']);
       return;
     }
-    if (asPath === PATH_APP['completed'] || asPath === PATH_DEMO['completed']) {
+    if (asPath === PATH_APP['completed']) {
       set(atomFilterTodoIds, 'completed');
       set(atomHtmlTitleTag, 'Task Completed Todos');
       set(atomPathnameImage, PATHNAME_IMAGE['completed']);

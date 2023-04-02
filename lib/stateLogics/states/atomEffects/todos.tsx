@@ -1,10 +1,9 @@
 import { DATA_DEMO_TODOIDS } from '@collections/demo';
-import { PATH_APP } from '@constAssertions/data';
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { TodoIds, Todos } from '@lib/types';
-import { atomPathname } from '@states/misc';
+import { atomUserSession } from '@states/users';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**
@@ -34,14 +33,12 @@ export const atomDemoTodoIds = atom<TodoIds[]>({
 export const selectorSessionTodoIds = selector<TodoIds[]>({
   key: 'selectorSessionTodoIds',
   get: ({ get }) => {
-    const pathname = get(atomPathname);
-    return pathname === PATH_APP['app'] ? get(atomQueryTodoIds) : get(atomDemoTodoIds);
+    const session = get(atomUserSession);
+    return session ? get(atomQueryTodoIds) : get(atomDemoTodoIds);
   },
   set: ({ get, set }, newValue) => {
-    const pathname = get(atomPathname);
-    return pathname === PATH_APP['app']
-      ? set(atomQueryTodoIds, newValue)
-      : set(atomDemoTodoIds, newValue);
+    const session = get(atomUserSession);
+    return session ? set(atomQueryTodoIds, newValue) : set(atomDemoTodoIds, newValue);
   },
 });
 
@@ -77,16 +74,14 @@ export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
   get:
     (todoId) =>
     ({ get }) => {
-      const pathName = get(atomPathname);
-      return pathName === PATH_APP['app']
-        ? get(atomQueryTodoItem(todoId))
-        : get(atomDemoTodoItem(todoId));
+      const session = get(atomUserSession);
+      return session ? get(atomQueryTodoItem(todoId)) : get(atomDemoTodoItem(todoId));
     },
   set:
     (todoId) =>
     ({ get, set }, newValue) => {
-      const pathName = get(atomPathname);
-      return pathName === PATH_APP['app']
+      const session = get(atomUserSession);
+      return session
         ? set(atomQueryTodoItem(todoId), newValue)
         : set(atomDemoTodoItem(todoId), newValue);
     },
