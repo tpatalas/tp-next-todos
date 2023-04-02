@@ -7,12 +7,20 @@ import { MODIFIER_KBD } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
-import { useTodoModalStateMinimize, useTodoModalStateExpand, useTodoModalStateClose } from '@hooks/modals';
+import {
+  useTodoModalStateMinimize,
+  useTodoModalStateExpand,
+  useTodoModalStateClose,
+} from '@hooks/modals';
 import { Types } from '@lib/types';
 import { optionsButtonTodoModalMinimize, optionsButtonTodoModalClose } from '@options/button';
-import { atomMediaQuery } from '@states/misc';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomTodoModalMax } from '@states/modals';
-import { Fragment as ContainerFragment, Fragment as HeaderButtonFragment, Fragment as HeaderFragment } from 'react';
+import {
+  Fragment as ContainerFragment,
+  Fragment as HeaderButtonFragment,
+  Fragment as HeaderFragment,
+} from 'react';
 import { useRecoilValue } from 'recoil';
 
 type Props = Partial<Pick<Types, 'todo'>>;
@@ -21,7 +29,7 @@ export const TodoModalHeaderButtons = ({ todo }: Props) => {
   const minimizeModal = useTodoModalStateMinimize(todo?._id);
   const expandModal = useTodoModalStateExpand(todo?._id);
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
-  const onBreakpointSm = useRecoilValue(atomMediaQuery(BREAKPOINT['sm']));
+  const onBreakpointSm = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['sm']));
   const closeModal = useTodoModalStateClose(todo?._id);
 
   return (

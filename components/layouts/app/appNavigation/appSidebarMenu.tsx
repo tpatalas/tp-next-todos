@@ -11,16 +11,16 @@ import { useRecoilValue } from 'recoil';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { useNavigationOpen } from '@hooks/layouts';
-import { atomMediaQuery } from '@states/misc';
 import { classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 
 const TodosCount = dynamic(() => import('@layouts/app/todosCount').then((mod) => mod.TodosCount));
 
 export const AppSidebarMenu = () => {
   const router = useRouter();
   const setSidebarOpen = useNavigationOpen();
-  const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
+  const isBreakpointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
 
   return (
     <FooterSidebarMenuFragment>

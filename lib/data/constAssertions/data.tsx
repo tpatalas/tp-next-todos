@@ -30,34 +30,25 @@ export const PATH_APP = {
   label: '/app/label',
 } as const;
 
-export type PATH_DEMO = (typeof PATH_DEMO)[keyof typeof PATH_DEMO];
-export const PATH_DEMO = {
-  app: '/demo',
-  urgent: '/demo/urgent',
-  important: '/demo/important',
-  showAll: '/demo/showall',
-  completed: '/demo/completed',
-  label: '/demo/label',
-} as const;
-
 export type PATH_HOME = (typeof PATH_HOME)[keyof typeof PATH_HOME];
 export const PATH_HOME = {
   home: '/',
+  demo: '/app',
   features: '/features',
   implementations: '/implementations',
-  pricing: 'pricing',
-  demo: '/demo',
+  pricing: '/pricing',
+  contact: '/contact',
   auth: '/auth',
 } as const;
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
 export const PATHNAME_IMAGE = {
-  focus: 'focus.webp',
-  urgent: 'urgent.webp',
-  important: 'important.webp',
-  showAll: 'showall.webp',
-  completed: 'completed.webp',
-  label: 'label.webp',
+  focus: 'app-focus.webp',
+  urgent: 'app-urgent.webp',
+  important: 'app-important.webp',
+  showAll: 'app-showall.webp',
+  completed: 'app-completed.webp',
+  label: 'app-label.webp',
 } as const;
 
 export type RETENTION = (typeof RETENTION)[keyof typeof RETENTION];
