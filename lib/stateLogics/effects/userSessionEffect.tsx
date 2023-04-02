@@ -2,7 +2,7 @@ import { PATH_HOME } from '@constAssertions/data';
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { Types } from '@lib/types';
 import { delSessionStorage, getSessionStorage, setSessionStorage } from '@stateLogics/utils';
-import { atomPathname } from '@states/misc';
+import { atomUserSession } from '@states/users';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -15,18 +15,18 @@ export const UserSessionEffect = () => {
   const pathname = router.pathname as Types['pathname'];
 
   const sessionHandler = useRecoilCallback(({ set }) => () => {
-    set(atomPathname, pathname);
-
     if (pathname === PATH_HOME['auth']) {
       !!getSessionStorage(STORAGE_KEY['offSession']) &&
         delSessionStorage(STORAGE_KEY['offSession']);
       return;
     }
     if (offSession) {
+      set(atomUserSession, false);
       setSessionStorage(STORAGE_KEY['offSession'], true);
       return;
     }
     if (session) {
+      set(atomUserSession, true);
       delSessionStorage(STORAGE_KEY['offSession']);
       return;
     }
