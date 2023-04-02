@@ -14,41 +14,22 @@ export const FilterTodoIdsEffect = () => {
   const labels = useRecoilValue(selectorSessionLabels);
   const label_id = useRecoilValue(atomLabelQuerySlug);
   const label = labels.find((label) => label._id === label_id) || ({} as Labels);
-  const demoLabel = useNextQuery({ path: PATH_APP['label'] });
   const appLabel = useNextQuery({ path: PATH_APP['label'] });
+  const path = (key: keyof typeof PATH_APP) => asPath === PATH_APP[key];
 
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
-    if (asPath === PATH_APP['app']) {
-      set(atomFilterTodoIds, 'focus');
-      set(atomHtmlTitleTag, "Today's Focus");
-      set(atomPathnameImage, PATHNAME_IMAGE['focus']);
-      return;
-    }
-    if (asPath === PATH_APP['urgent']) {
-      set(atomFilterTodoIds, 'urgent');
-      set(atomHtmlTitleTag, 'Priority | Urgent');
-      set(atomPathnameImage, PATHNAME_IMAGE['urgent']);
-      return;
-    }
-    if (asPath === PATH_APP['important']) {
-      set(atomFilterTodoIds, 'important');
-      set(atomHtmlTitleTag, 'Priority | Important');
-      set(atomPathnameImage, PATHNAME_IMAGE['important']);
-      return;
-    }
-    if (asPath === PATH_APP['showAll']) {
-      set(atomFilterTodoIds, 'showAll');
-      set(atomHtmlTitleTag, 'All Todos');
-      set(atomPathnameImage, PATHNAME_IMAGE['showAll']);
-      return;
-    }
-    if (asPath === PATH_APP['completed']) {
-      set(atomFilterTodoIds, 'completed');
-      set(atomHtmlTitleTag, 'Task Completed Todos');
-      set(atomPathnameImage, PATHNAME_IMAGE['completed']);
-      return;
-    }
-    if (appLabel || demoLabel) {
+    const setState = (key: keyof typeof PATHNAME_IMAGE, htmlTitle: string) => {
+      set(atomFilterTodoIds, key);
+      set(atomHtmlTitleTag, htmlTitle);
+      set(atomPathnameImage, PATHNAME_IMAGE[key]);
+    };
+
+    if (path('app')) return setState('focus', "Today's Focus");
+    if (path('urgent')) return setState('urgent', 'Priority | Urgent');
+    if (path('important')) return setState('important', 'Priority | Important');
+    if (path('showAll')) return setState('showAll', 'All Todos');
+    if (path('completed')) return setState('completed', 'Task Completed Todos');
+    if (appLabel) {
       set(atomFilterTodoIds, 'label');
       set(atomLabelQuerySlug, appLabel);
       set(atomHtmlTitleTag, `Label - ${label.name}`);
