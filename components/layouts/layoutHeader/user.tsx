@@ -1,28 +1,22 @@
-import { PATH_APP, PATH_HOME } from '@constAssertions/data';
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { UserDropdown } from '@dropdowns/v2/userDropdown';
 import { getSessionStorage } from '@stateLogics/utils';
-import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 import { SignInButton } from './signInButton';
-import { Types } from '@lib/types';
-import { useNextQuery } from '@hooks/misc';
 
 export const User = () => {
   const offSession = getSessionStorage(STORAGE_KEY['offSession']);
-  const router = useRouter();
-  const pathname = router.pathname as Types['pathname'];
-  const appSlug = useNextQuery({ path: PATH_APP['app'] });
+  const { data: session } = useSession();
 
-  const pathNameDemo = !!offSession && pathname === PATH_HOME['demo'];
-  const pathNameApp = !offSession && appSlug ;
-  // slug;
+  const userSession = !offSession && !!session;
+  const userOffSession = !!offSession && !session;
 
   return (
     <Fragment>
       <div className='ml-4 flex min-w-[2rem] items-center md:ml-6'>
-        {pathNameDemo && <SignInButton />}
-        {pathNameApp && <UserDropdown />}
+        {userOffSession && <SignInButton />}
+        {userSession && <UserDropdown />}
       </div>
     </Fragment>
   );
