@@ -1,9 +1,9 @@
-import { atomMediaQuery } from '@states/misc';
 import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { atomTodoModalOpen, atomTodoModalMini } from '@states/modals';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { useGetWithRecoilCallback } from '@hooks/misc';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 
 export const ModalStateOnBreakpointEffect = () => {
   const get = useGetWithRecoilCallback();
@@ -13,7 +13,7 @@ export const ModalStateOnBreakpointEffect = () => {
   });
 
   useEffect(() => {
-    !get(atomMediaQuery(BREAKPOINT['sm'])) && setTodoModal();
+    !get(atomEffectMediaQuery(BREAKPOINT['sm'])) && setTodoModal();
   }, [get, setTodoModal]);
 
   return null;

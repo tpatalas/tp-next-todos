@@ -1,6 +1,10 @@
-import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
+import {
+  completeDataTodo,
+  createDataNewTodo,
+  deleteDataTodo,
+  updateDataTodo,
+} from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
-import { atomCatch, atomNetworkStatusEffect } from '@states/misc';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
@@ -10,9 +14,19 @@ import { selectorSessionLabels, atomSelectorLabels } from '@states/atomEffects/l
 import { useTodoModalStateReset } from './modals';
 import { useNotificationState } from './notifications';
 import { usePriorityRankScore } from './priorities';
-import { selectorSessionTodoItem, selectorSessionTodoIds, atomSelectorTodoItem } from '@states/atomEffects/todos';
+import {
+  selectorSessionTodoItem,
+  selectorSessionTodoIds,
+  atomSelectorTodoItem,
+} from '@states/atomEffects/todos';
 import { atomTodoNew } from '@states/todos';
-import { useConditionCheckTodoTitleEmpty, useGetWithRecoilCallback, useConditionCompareTodoItemsEqual } from './misc';
+import {
+  useConditionCheckTodoTitleEmpty,
+  useGetWithRecoilCallback,
+  useConditionCompareTodoItemsEqual,
+} from './misc';
+import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
+import { atomCatch } from '@states/misc';
 
 /**
  * Hooks
@@ -36,7 +50,7 @@ export const useTodoAdd = () => {
   });
 
   return () => {
-    if (!get(atomNetworkStatusEffect)) {
+    if (!get(atomEffectNetworkStatus)) {
       setNotification(NOTIFICATION['offline']);
       return;
     }
@@ -80,7 +94,7 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
   });
 
   return () => {
-    if (!get(atomNetworkStatusEffect)) {
+    if (!get(atomEffectNetworkStatus)) {
       setNotification(NOTIFICATION['offline']);
       return;
     }
@@ -114,7 +128,7 @@ export const useTodoRemoveItem = (todoId: Todos['_id']) => {
   });
 
   return () => {
-    if (!get(atomNetworkStatusEffect)) {
+    if (!get(atomEffectNetworkStatus)) {
       setNotification(NOTIFICATION['offline']);
       return;
     }
@@ -164,7 +178,7 @@ export const useTodoCompleteItem = (todoId: Todos['_id']) => {
   });
 
   return () => {
-    if (!get(atomNetworkStatusEffect)) {
+    if (!get(atomEffectNetworkStatus)) {
       setNotification(NOTIFICATION['offline']);
       return;
     }

@@ -1,4 +1,4 @@
-import { PATH_APP, PATH_DEMO, PATH_HOME } from '@constAssertions/data';
+import { PATH_APP, PATH_HOME } from '@constAssertions/data';
 import { RefObject } from 'react';
 import { Descendant } from 'slate';
 import { ReactEditor } from 'slate-react';
@@ -16,7 +16,7 @@ export interface TypesEditor {
 
 export interface TypesRouter {
   path: string;
-  pathname: PATH_APP | PATH_HOME | PATH_DEMO;
+  pathname: PATH_APP | PATH_HOME;
   isPrefetchingOnHover: boolean;
 }
 

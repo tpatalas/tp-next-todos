@@ -15,7 +15,7 @@ const Auth = () => {
   return (
     <Fragment>
       <Head>
-        <title>My Todo App: Sign in</title>
+        <title>Todos - Sign in</title>
       </Head>
       {!isVerificationRequest ? <AuthForm /> : <VerificationConfirmation />}
     </Fragment>
