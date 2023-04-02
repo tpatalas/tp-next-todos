@@ -21,14 +21,23 @@ import { Button } from '@buttons/button';
 import { classNames } from '@stateLogics/utils';
 import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
 
-type Props = Partial<Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
+type Props = Partial<
+  Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
+>;
 
-export const LabelModal = ({ label, footerButtons, children, menuButtonContent = 'Create new label' }: Props) => {
+export const LabelModal = ({
+  label,
+  footerButtons,
+  children,
+  menuButtonContent = 'Create new label',
+}: Props) => {
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
   const closeModal = useLabelModalStateClose(label?._id);
   const initialFocusInput = useRef<HTMLInputElement>(null);
   const labelItem =
-    typeof label === 'undefined' ? useRecoilValue(atomLabelNew) : useRecoilValue(atomSelectorLabelItem(label._id));
+    typeof label === 'undefined'
+      ? useRecoilValue(atomLabelNew)
+      : useRecoilValue(atomSelectorLabelItem(label._id));
   const updateLabelItem = useLabelValueUpdate(label);
   const addLabel = useLabelAdd();
   const condition = useConditionCheckLabelTitleEmpty();
