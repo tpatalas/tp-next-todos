@@ -5,7 +5,7 @@ module.exports = {
   tabWidth: 2,
   semi: true,
   printWidth: 100,
-  tailwindConfig: './tailwind.config.js',
+  tailwindConfig: './tailwind.config.ts',
   singleAttributePerLine: true,
   trailingComma: 'all',
   bracketSpacing: true,

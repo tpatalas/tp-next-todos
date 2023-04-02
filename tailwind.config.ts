@@ -1,6 +1,7 @@
-module.exports = {
+import type { Config } from 'tailwindcss';
+
+export default {
   mode: 'jit',
-  // 1.4.1 Purge
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -8,8 +9,8 @@ module.exports = {
     './util/**/*.{js,ts,jsx,tsx}',
     './models/**/*.{js,ts,jsx,tsx}',
   ],
-  //1.4.2 DarkMode
   darkMode: 'class', // or 'media' or 'class' or false
+
   theme: {
     screens: {
       // => @media (min-width: 640px) { ... }
@@ -83,7 +84,6 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/line-clamp'),
     require('@headlessui/tailwindcss'),
   ],
-};
+} satisfies Config;
