@@ -1,10 +1,9 @@
 import { DATA_DEMO_LABELS } from '@collections/demo';
-import { PATH_APP } from '@constAssertions/data';
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { Labels } from '@lib/types';
-import { atomPathname } from '@states/misc';
+import { atomUserSession } from '@states/users';
 import { atom, selector } from 'recoil';
 
 /**
@@ -31,14 +30,12 @@ export const atomDemoLabels = atom<Labels[]>({
 export const selectorSessionLabels = selector<Labels[]>({
   key: 'selectorSessionLabels',
   get: ({ get }) => {
-    const pathname = get(atomPathname);
-    return pathname === PATH_APP['app'] ? get(atomQueryLabels) : get(atomDemoLabels);
+    const session = get(atomUserSession);
+    return session ? get(atomQueryLabels) : get(atomDemoLabels);
   },
   set: ({ get, set }, newValue) => {
-    const pathname = get(atomPathname);
-    return pathname === PATH_APP['app']
-      ? set(atomQueryLabels, newValue)
-      : set(atomDemoLabels, newValue);
+    const session = get(atomUserSession);
+    return session ? set(atomQueryLabels, newValue) : set(atomDemoLabels, newValue);
   },
 });
 

@@ -6,6 +6,7 @@ import { Types } from '..';
 export type CollectTypesEffects = TypesEffects;
 
 export interface TypesEffects {
+  effects: (() => void)[];
   // All Effect
   shouldGet: boolean;
   isSessionSetEnabled: boolean;
@@ -60,9 +61,13 @@ export type TypesSessionStorageEffect = <T>({
   isSessionSetEnabled,
   isSessionResetEnabled,
 }: Pick<Types, 'queryKey'> &
-  Partial<Pick<Types, 'shouldGet' | 'isSessionResetEnabled' | 'isSessionSetEnabled'>>) => AtomEffect<T | boolean>;
+  Partial<
+    Pick<Types, 'shouldGet' | 'isSessionResetEnabled' | 'isSessionSetEnabled'>
+  >) => AtomEffect<T | boolean>;
 
-export type TypesMediaQueryEffect = <T>({ breakpoint }: Pick<Types, 'breakpoint'>) => AtomEffect<T | boolean>;
+export type TypesMediaQueryEffect = <T>({
+  breakpoint,
+}: Pick<Types, 'breakpoint'>) => AtomEffect<T | boolean>;
 
 export type TypesAtomEffect<T> = AtomEffect<T>;
 export type TypesAtomEffectWithParam<T, P> = (key: P) => AtomEffect<T>;
