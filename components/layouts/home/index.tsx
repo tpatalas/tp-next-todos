@@ -1,8 +1,10 @@
 import { LayoutTypeEffect } from '@effects/layoutTypeEffect';
 import { NavigationInitialEffect } from '@effects/navigationInitialEffect';
+import { atomHtmlTitleTag } from '@states/misc';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment as EffectFragment, Fragment as LayoutFragment, ReactNode } from 'react';
+import { useRecoilValue } from 'recoil';
 
 const HomeNavigation = dynamic(() => import('./homeNavigation').then((mod) => mod.HomeNavigation));
 
@@ -10,15 +12,22 @@ const LayoutHeader = dynamic(() => import('@layouts/layoutHeader').then((mod) =>
 
 const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter));
 
+const FilterPathHomeEffect = dynamic(
+  () => import('@effects/filters/filterPathHomeEffect').then((mod) => mod.FilterPathHomeEffect),
+  { ssr: false },
+);
+
 type Props = {
   children: ReactNode;
 };
 
 export const LayoutHome = ({ children }: Props) => {
+  const slug = useRecoilValue(atomHtmlTitleTag);
+
   return (
     <LayoutFragment>
       <Head>
-        <title>Home</title>
+        <title>{slug ? 'Todos - ' + slug : ''}</title>
       </Head>
       <LayoutHeader layoutType='home'>
         <HomeNavigation layoutType='home' />
@@ -26,6 +35,7 @@ export const LayoutHome = ({ children }: Props) => {
       <LayoutFooter layoutType='home' />
       {children}
       <EffectFragment>
+        <FilterPathHomeEffect />
         <NavigationInitialEffect layoutType='home' />
         <LayoutTypeEffect layoutType='home' />
       </EffectFragment>
