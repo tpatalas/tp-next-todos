@@ -1,10 +1,20 @@
+import { PATH_HOME } from '@constAssertions/data';
+import { USER } from '@constAssertions/misc';
+import { STORAGE_KEY } from '@constAssertions/storage';
+import { SPINNER } from '@constAssertions/ui';
+import { Types } from '@lib/types';
+import { delSessionStorage, getSessionStorage, setSessionStorage } from '@stateLogics/utils';
 import { atomLoadingSpinner } from '@states/misc';
-import { signIn } from 'next-auth/react';
+import {
+    atomUser,
+    atomUserErrorMessage,
+    atomUserSession,
+    atomUserVerificationRequest,
+} from '@states/users';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next-router-mock';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
-import { USER } from '@constAssertions/misc';
-import { SPINNER } from '@constAssertions/ui';
-import { atomUser, atomUserErrorMessage, atomUserVerificationRequest } from '@states/users';
 
 export const useUserValueUpdate = () => {
   return useRecoilCallback(({ set, snapshot }) => (targetName: USER, content: string) => {
@@ -49,3 +59,31 @@ export const useUserAuthFormSubmit = (isEmailInValidated: boolean) => {
     }
   };
 };
+
+export const useUserSession = () => {
+  const { data: session } = useSession();
+  const offSession = session === null && typeof session !== 'undefined';
+  const router = useRouter();
+  const pathname = router.pathname as Types['pathname'];
+
+  return useRecoilCallback(({ set }) => () => {
+    if (pathname === PATH_HOME['auth']) {
+      !!getSessionStorage(STORAGE_KEY['offSession']) &&
+        delSessionStorage(STORAGE_KEY['offSession']);
+      return;
+    }
+    if (offSession) {
+      set(atomUserSession, false);
+      setSessionStorage(STORAGE_KEY['offSession'], true);
+      return;
+    }
+    if (session) {
+      set(atomUserSession, true);
+      delSessionStorage(STORAGE_KEY['offSession']);
+      return;
+    }
+  });
+};
+
+
+
