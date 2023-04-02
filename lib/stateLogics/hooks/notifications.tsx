@@ -1,10 +1,12 @@
-import { useRecoilCallback } from 'recoil';
 import { NOTIFICATION } from '@constAssertions/ui';
-import { atomNotificationCounter, atomNotificationID, atomNotificationOpen } from '@states/notifications';
-
-/*
- * Hooks
- * */
+import { validateEmailFormat } from '@stateLogics/utils';
+import {
+  atomNotificationCounter,
+  atomNotificationID,
+  atomNotificationOpen,
+} from '@states/notifications';
+import { atomUser, atomUserErrorMessage } from '@states/users';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 export const useNotificationState = () => {
   const notification = useRecoilCallback(({ set, snapshot }) => (NotificationID: NOTIFICATION) => {
@@ -15,4 +17,13 @@ export const useNotificationState = () => {
     set(atomNotificationOpen, true);
   });
   return notification;
+};
+
+export const useClientErrorMessage = () => {
+  const user = useRecoilValue(atomUser);
+  const isEmailInValidated = !validateEmailFormat(user.email);
+
+  return useRecoilCallback(({ reset }) => () => {
+    !isEmailInValidated && reset(atomUserErrorMessage);
+  });
 };
