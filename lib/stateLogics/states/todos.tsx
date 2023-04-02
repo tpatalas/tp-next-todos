@@ -6,6 +6,7 @@ import { PATH_APP, OBJECT_ID } from '@constAssertions/data';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { selectorSessionLabels } from './atomEffects/labels';
 import { atomSelectorTodoItem, selectorSessionTodoIds } from './atomEffects/todos';
+import { atomFilterEffect } from './misc';
 
 /**
  * atoms
@@ -33,18 +34,13 @@ export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
   },
 });
 
-export const atomFilterTodoIds = atom({
-  key: 'atomFilterTodoIds',
-  default: 'focus',
-});
-
 /**
  * selectors
  */
 export const selectorFilterTodoIds = selector({
   key: 'SelectorFilterTodoIds',
   get: ({ get }) => {
-    const filter = get(atomFilterTodoIds);
+    const filter = get(atomFilterEffect);
     switch (filter) {
       case 'focus':
         return get(selectorFilterTodoIdsByPathname(PATH_APP['app']));
@@ -93,7 +89,9 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATH_AP
           )[0]?.title_id;
           return get(selectorSessionTodoIds).filter((todo) => {
             const todoId = todo._id as OBJECT_ID;
-            return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
+            return (
+              !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId)
+            );
           });
       }
     },
@@ -107,7 +105,9 @@ export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TodoIds[], Lab
   get:
     (labelId) =>
     ({ get }) => {
-      const titleIdsByCurrentLabel = get(selectorSessionLabels).filter((label) => label._id === labelId)[0]?.title_id;
+      const titleIdsByCurrentLabel = get(selectorSessionLabels).filter(
+        (label) => label._id === labelId,
+      )[0]?.title_id;
       return get(selectorSessionTodoIds).filter((todo) => {
         const todoId = todo._id as OBJECT_ID;
         return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
@@ -130,7 +130,9 @@ export const selectorTodosCount = selectorFamily<
       if (labelId) {
         const todos = get(selectorSessionTodoIds);
         const titleIds = labels.filter((item) => item._id === labelId)[0]?.title_id;
-        const todoIds = todos.filter((todo) => !todo.completed && titleIds && titleIds.includes(todo._id as OBJECT_ID));
+        const todoIds = todos.filter(
+          (todo) => !todo.completed && titleIds && titleIds.includes(todo._id as OBJECT_ID),
+        );
         return todoIds.length;
       }
       const todoIdsPathname = get(selectorFilterTodoIdsByPathname(pathname as PATH_APP));

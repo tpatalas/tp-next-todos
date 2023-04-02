@@ -23,7 +23,7 @@ export const UserDropdown = () => {
             height={32}
             priority
             className='rounded-full drop-shadow-lg'
-            src={userImage ? userImage : 'user_avatar.webp'}
+            src={userImage ? userImage : 'app-user-avatar.webp'}
             alt='User avatar'
           />
         </Fragment>
