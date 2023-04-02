@@ -1,3 +1,6 @@
+import { LayoutHome } from "@layouts/home";
+import { ReactElement } from "react";
+
 const Pricing = () => {
   return (
     <>
@@ -5,5 +8,10 @@ const Pricing = () => {
     </>
   );
 };
+
+Pricing.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutHome>{page}</LayoutHome>;
+};
+
 
 export default Pricing;
