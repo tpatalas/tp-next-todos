@@ -5,7 +5,6 @@ import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { atomLoadingSpinner } from '@states/misc';
 import { atomUser, atomUserErrorMessage } from '@states/users';
-import { Divider } from '@ui/dividers/divider';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { AuthErrorMessage } from './authErrorMessage';
@@ -15,6 +14,7 @@ import { optionsFloatingLabelsEmail } from '@options/loadingState';
 import { useUserValueUpdate, useUserAuthFormSubmit } from '@hooks/users';
 import { validateEmailFormat, classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
+import { DividerX } from '@ui/dividers/dividerX';
 
 const ClientErrorMessageEffect = dynamic(() =>
   import('@effects/clientErrorMessageEffect').then((mod) => mod.ClientErrorMessageEffect),
@@ -31,7 +31,7 @@ export const AuthForm = () => {
 
   return (
     <Fragment>
-      <div className='absolute right-0 left-0 top-[20%] bottom-[50%] m-auto h-fit w-full sm:top-[30%] sm:w-fit'>
+      <div className='absolute bottom-[50%] left-0 right-0 top-[20%] m-auto h-fit w-full sm:top-[30%] sm:w-fit'>
         <section className='border-slate-200 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
           <div className='mb-5 flex flex-col items-center justify-center'>
             <h1 className='mb-3 flex flex-row items-center justify-center text-2xl text-slate-700'>
@@ -65,7 +65,7 @@ export const AuthForm = () => {
               <span>Sign in with email</span>
             </Button>
             <div className='mb-5' />
-            <Divider margin='mb-5'>or</Divider>
+            <DividerX options={{ margin: 'mb-5' }}>or</DividerX>
             <SvgLogoButton />
           </form>
         </section>

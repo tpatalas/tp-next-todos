@@ -73,21 +73,23 @@ const TodosById = async (req: NextApiRequest, res: NextApiResponse) => {
           runValidators: true,
         });
 
-        const updatedTodoNote =
-          sanitizedTodoNote &&
-          (await TodoNote.findOneAndUpdate(filter(SCHEMA_TODO['todoNote']), sanitizedTodoNote, {
-            session: sessionPut,
-            upsert: true,
-            new: true,
-            runValidators: true,
-          }));
+        const updatedTodoNote = sanitizedTodoNote
+          ? await TodoNote.findOneAndUpdate(filter(SCHEMA_TODO['todoNote']), sanitizedTodoNote, {
+              session: sessionPut,
+              upsert: true,
+              new: true,
+              runValidators: true,
+            })
+          : [];
 
-        const sanitizedUpdateLabel = sanitizedLabels.map((label) => {
-          return {
-            ...label,
-            update: Date.now(),
-          };
-        });
+        const sanitizedUpdateLabel = sanitizedLabels
+          ? sanitizedLabels.map((label) => {
+              return {
+                ...label,
+                update: Date.now(),
+              };
+            })
+          : [];
 
         const updatedLabelPromises = sanitizedUpdateLabel.map((label) =>
           Label.updateMany(
