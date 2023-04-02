@@ -58,6 +58,12 @@ export const PATHNAME_IMAGE = {
   showAll: 'showall.webp',
   completed: 'completed.webp',
   label: 'label.webp',
+  app: 'app-focus.webp',
+  urgent: 'app-urgent.webp',
+  important: 'app-important.webp',
+  showAll: 'app-showall.webp',
+  completed: 'app-completed.webp',
+  label: 'app-label.webp',
 } as const;
 
 export type RETENTION = (typeof RETENTION)[keyof typeof RETENTION];
