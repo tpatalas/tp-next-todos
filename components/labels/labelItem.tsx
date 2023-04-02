@@ -8,7 +8,7 @@ import { useNextQuery } from '@hooks/misc';
 import { Types } from '@lib/types';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { classNames, paths } from '@stateLogics/utils';
-import { atomMediaQuery } from '@states/misc';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import dynamic from 'next/dynamic';
 import { Fragment, Fragment as LabelModalFragment, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -30,7 +30,7 @@ const DeleteLabelConfirmModal = dynamic(() =>
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
   const slug = useNextQuery({ path: PATH_APP['label'] });
   const matchedSlug = slug === label._id;
-  const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
+  const isBreakpointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
   const setNavigationOpen = useNavigationOpen();
 
   return (
@@ -50,7 +50,7 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
               className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
             }}
             onClick={() => !isBreakpointMd && setNavigationOpen()}>
-            <div className='flex w-full flex-row  py-2 px-2'>
+            <div className='flex w-full flex-row  px-2 py-2'>
               {matchedSlug ? (
                 <SvgIcon options={optionsButtonLabelRouteMatched} />
               ) : (

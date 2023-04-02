@@ -6,20 +6,18 @@ import { Fragment, ReactElement, Suspense } from 'react';
 const TodoList = dynamic(() => import('components/todos/todoList').then((mod) => mod.TodoList), {
   ssr: false,
 });
-const FilterTodoIdsEffect = dynamic(() =>
-  import('@effects/filterTodoIdsEffect').then((mod) => mod.FilterTodoIdsEffect),
-);
 const LoadingTodos = dynamic(() =>
   import('@components/loadable/loadingStates/loadingTodos').then((mod) => mod.LoadingTodos),
 );
-const ErrorBoundary = dynamic(() => import('react-error-boundary').then((mod) => mod.ErrorBoundary));
+const ErrorBoundary = dynamic(() =>
+  import('react-error-boundary').then((mod) => mod.ErrorBoundary),
+);
 
 const LabelById = () => {
   return (
     <Fragment>
       <ErrorBoundary fallback={<ErrorState />}>
         <Suspense fallback={<LoadingTodos />}>
-          <FilterTodoIdsEffect />
           <TodoList />
         </Suspense>
       </ErrorBoundary>

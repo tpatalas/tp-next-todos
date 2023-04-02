@@ -1,7 +1,7 @@
 import { Button as NetworkStatusReadOnlyButton } from '@buttons/button';
 import { optionsButtonNetworkStatus } from '@options/button';
 import { optionsSvgNetworkStatus } from '@options/svg';
-import { atomNetworkStatusEffect } from '@states/misc';
+import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
 import dynamic from 'next/dynamic';
 import { Fragment as NetworkStatusFragment } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -9,7 +9,7 @@ import { useRecoilValue } from 'recoil';
 const SvgIcon = dynamic(() => import('components/icons/svgIcon').then((mod) => mod.SvgIcon));
 
 export const NetworkStatus = () => {
-  const isOnline = useRecoilValue(atomNetworkStatusEffect);
+  const isOnline = useRecoilValue(atomEffectNetworkStatus);
 
   return (
     <NetworkStatusFragment>
