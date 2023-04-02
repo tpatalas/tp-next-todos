@@ -2,10 +2,9 @@ import { PATHNAME_IMAGE } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
 import {
-  mediaQueryEffect,
-  networkStatusEffect,
+    mediaQueryEffect,
+    networkStatusEffect,
 } from '@lib/stateLogics/effects/atomEffects/atomEffects';
-import { Types } from '@lib/types';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*
@@ -55,11 +54,6 @@ export const atomActiveMenuItem = atomFamily<boolean, string | null>({
 export const atomHtmlTitleTag = atom<string>({
   key: 'atomHtmlTitleTag',
   default: '',
-});
-
-export const atomPathname = atom<Types['pathname']>({
-  key: 'atomPathname',
-  default: '/',
 });
 
 export const atomPathnameImage = atom<PATHNAME_IMAGE>({
