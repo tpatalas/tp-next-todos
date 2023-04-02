@@ -11,7 +11,6 @@ import { Types } from 'lib/types';
 import { Fragment as TodoModalFragment, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Button as CancelButton } from '../../../buttons/button';
-import { Divider as PlainLineDivider } from '../../../dividers/divider';
 import { ModalTransitionChild } from '../../modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '../../modal/modalTransition/modalTransitionRoot';
 import { TodoModalHeaderContents } from './todoModalHeaderContents';
@@ -24,10 +23,19 @@ import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { DisableScrollEffect } from '@effects/disableScrollEffect';
 import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
 import { classNames } from '@stateLogics/utils';
+import { DividerX } from '@ui/dividers/dividerX';
 
-type Props = Partial<Pick<Types, 'todo' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>>;
+type Props = Partial<
+  Pick<Types, 'todo' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
+>;
 
-export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButtons, children }: Props) => {
+export const TodoModal = ({
+  todo,
+  menuButtonContent,
+  headerButtons,
+  footerButtons,
+  children,
+}: Props) => {
   const isTodoModalOpen = useRecoilValue(atomTodoModalOpen(todo?._id));
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
   const closeModal = useTodoModalStateClose(todo?._id);
@@ -36,7 +44,10 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
   const addTodo = useTodoAdd();
   const condition = useConditionCheckTodoTitleEmpty();
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed;
+    return (
+      typeof todo !== 'undefined' &&
+      snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed
+    );
   });
 
   return (
@@ -51,7 +62,7 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
         {typeof todo !== 'undefined' && <DeleteTodoConfirmModal todo={todo} />}
         <ModalTransitionChild
           className={classNames(
-            'h-[28rem] px-4 pt-2 pb-7 sm:relative',
+            'h-[28rem] px-4 pb-7 pt-2 sm:relative',
             isTodoModalMax
               ? 'sm:bottom-0 sm:h-full sm:max-h-[90vh] sm:max-w-[90vw] xl:max-w-6xl'
               : 'sm:max-h-[28rem] sm:max-w-2xl md:bottom-[calc(23vh-6rem)]',
@@ -67,7 +78,7 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
               </div>
             </div>
             <div className='hidden sm:mb-2 sm:block'>
-              <PlainLineDivider />
+              <DividerX />
             </div>
             <div className='flex flex-row items-center sm:m-1 '>
               <CalendarDropdown
