@@ -2,8 +2,12 @@ import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Todos, Types, Labels } from '@lib/types';
 import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';
-import { atomCatch, atomMediaQuery } from '@states/misc';
-import { atomTodoModalOpen, atomTodoModalMini, atomLabelModalOpen, atomConfirmModalDiscard } from '@states/modals';
+import {
+  atomTodoModalOpen,
+  atomTodoModalMini,
+  atomLabelModalOpen,
+  atomConfirmModalDiscard,
+} from '@states/modals';
 import { isMacOs, isMobile } from 'react-device-detect';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { Transforms } from 'slate';
@@ -19,6 +23,8 @@ import {
 } from './modals';
 import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from './todos';
 import { CustomEditor } from '@lib/types/misc/slate';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
+import { atomCatch } from '@states/misc';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
@@ -48,38 +54,45 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
   const openModal = useTodoModalStateOpen(_id);
   const removeTodo = useTodoRemoveItem(_id);
-  const focusKeyHandler = useRecoilCallback(({ set, reset, snapshot }) => (event: React.KeyboardEvent) => {
-    const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+  const focusKeyHandler = useRecoilCallback(
+    ({ set, reset, snapshot }) =>
+      (event: React.KeyboardEvent) => {
+        const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
+        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    if (!get(atomOnFocus) || isMobile) return;
+        if (!get(atomOnFocus) || isMobile) return;
 
-    switch (true) {
-      case metaCtrlKey && event.key === 'Enter':
-        event.preventDefault();
-        completeTodo();
-        break;
-      case metaCtrlKey && event.key === 'Backspace':
-        event.preventDefault();
-        removeTodo();
-        break;
-      case event.key === 'Enter':
-        event.preventDefault();
-        openModal();
-        break;
-      case event.key === 'Escape':
-        if (get(selectorSessionTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
-        event.preventDefault();
-        !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
-        reset(atomCurrentFocus);
-        set(atomOnBlur, true);
-        break;
-    }
-  });
+        switch (true) {
+          case metaCtrlKey && event.key === 'Enter':
+            event.preventDefault();
+            completeTodo();
+            break;
+          case metaCtrlKey && event.key === 'Backspace':
+            event.preventDefault();
+            removeTodo();
+            break;
+          case event.key === 'Enter':
+            event.preventDefault();
+            openModal();
+            break;
+          case event.key === 'Escape':
+            if (get(selectorSessionTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
+            event.preventDefault();
+            !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
+            reset(atomCurrentFocus);
+            set(atomOnBlur, true);
+            break;
+        }
+      },
+  );
   return focusKeyHandler;
 };
 
-export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'], editor: CustomEditor) => {
+export const useKeyWithEditor = (
+  titleName: Types['titleName'],
+  _id: Todos['_id'],
+  editor: CustomEditor,
+) => {
   const addTodo = useTodoAdd();
   const updateTodo = useTodoUpdateItem(_id);
   const editorKeyHandler = useRecoilCallback(() => (event: React.KeyboardEvent) => {
@@ -158,7 +171,9 @@ export const useKeyWithNavigate = () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     const catchModals =
-      get(atomCatch(CATCH.todoModal)) || get(atomCatch(CATCH.confirmModal)) || get(atomCatch(CATCH.labelModal));
+      get(atomCatch(CATCH.todoModal)) ||
+      get(atomCatch(CATCH.confirmModal)) ||
+      get(atomCatch(CATCH.labelModal));
     if (catchModals || isMobile) return;
 
     switch (event.key) {
@@ -166,7 +181,9 @@ export const useKeyWithNavigate = () => {
         event.preventDefault();
         set(
           atomCurrentFocus,
-          get(atomCurrentFocus) === filteredTodoIds.length - 1 ? filteredTodoIds.length - 1 : get(atomCurrentFocus) + 1,
+          get(atomCurrentFocus) === filteredTodoIds.length - 1
+            ? filteredTodoIds.length - 1
+            : get(atomCurrentFocus) + 1,
         );
         !get(atomOnFocus) && set(atomOnFocus, true);
         break;
@@ -210,7 +227,7 @@ export const useKeyWithTodoModal = (_id: Todos['_id']) => {
           return;
         typeof _id === 'undefined' && openModal();
         break;
-      case !get(atomMediaQuery(BREAKPOINT['sm'])) || get(atomConfirmModalDiscard(_id)):
+      case !get(atomEffectMediaQuery(BREAKPOINT['sm'])) || get(atomConfirmModalDiscard(_id)):
         break;
       case metaCtrlKey && event.key === 'm':
         event.preventDefault();
