@@ -42,6 +42,10 @@ const LayoutFooter = dynamic(
 const User = dynamic(() => import('@layouts/layoutHeader/user').then((mod) => mod.User), {
   ssr: false,
 });
+const FilterPathAppEffect = dynamic(
+  () => import('@effects/filters/filterPathAppEffect').then((mod) => mod.FilterPathAppEffect),
+  { ssr: false },
+);
 
 type Props = Pick<Types, 'children'>;
 
@@ -52,7 +56,7 @@ export const LayoutApp = ({ children }: Props) => {
   return (
     <LayoutAppFragment>
       <Head>
-        <title>{'My Todo App - ' + slug}</title>
+        <title>{slug ? 'Todos - ' + slug : ''}</title>
       </Head>
       <HeaderFragment>
         <div className='flex h-screen flex-col'>
@@ -68,6 +72,7 @@ export const LayoutApp = ({ children }: Props) => {
         </div>
       </HeaderFragment>
       <EffectFragment>
+        <FilterPathAppEffect />
         <LayoutTypeEffect layoutType='app' />
         <NavigationInitialEffect layoutType='app' />
         <Notification />
