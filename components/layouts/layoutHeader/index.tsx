@@ -29,7 +29,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
     <LayoutHeaderFragment>
       <div
         className={classNames(
-          'sticky flex max-h-[4rem] min-h-[4rem] flex-row items-center justify-between ml:top-1 ml:mb-2',
+          'sticky top-0 flex max-h-[4rem] min-h-[4rem] flex-row items-center justify-between ml:mb-2',
           layoutHome && 'z-50 bg-slate-50',
           layoutApp && 'bg-transparent',
         )}>
