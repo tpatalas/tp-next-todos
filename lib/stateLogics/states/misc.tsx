@@ -1,4 +1,4 @@
-import { PATHNAME_IMAGE } from '@constAssertions/data';
+import { PATH_IMAGE_APP } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
 import {
@@ -56,9 +56,9 @@ export const atomHtmlTitleTag = atom<string>({
   default: '',
 });
 
-export const atomPathnameImage = atom<PATHNAME_IMAGE>({
+export const atomPathnameImage = atom<PATH_IMAGE_APP>({
   key: 'atomPathnameImage',
-  default: PATHNAME_IMAGE['focus'],
+  default: PATH_IMAGE_APP['focus'],
 });
 
 export const atomLoadingSpinner = atomFamily<boolean, SPINNER>({
