@@ -1,10 +1,13 @@
 import { LayoutHome } from '@layouts/home';
+import dynamic from 'next/dynamic';
 import { Fragment, ReactElement } from 'react';
+
+const Hero = dynamic(() => import('@components/sections/hero').then((mod) => mod.Hero));
 
 const Home = () => {
   return (
     <Fragment>
-      <div>Home</div>
+      <Hero />
     </Fragment>
   );
 };
