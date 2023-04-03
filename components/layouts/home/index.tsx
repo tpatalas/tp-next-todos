@@ -1,9 +1,9 @@
-import { LayoutTypeEffect } from '@effects/layoutTypeEffect';
+import { LayoutTypeEffect } from '@effects/layouts/layoutTypeEffect';
 import { NavigationInitialEffect } from '@effects/navigationInitialEffect';
 import { atomHtmlTitleTag } from '@states/misc';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { Fragment as EffectFragment, Fragment as LayoutFragment, ReactNode } from 'react';
+import { Fragment as EffectFragment, Fragment as LayoutFragment, ReactNode, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const HomeNavigation = dynamic(() => import('./homeNavigation').then((mod) => mod.HomeNavigation));
@@ -35,7 +35,9 @@ export const LayoutHome = ({ children }: Props) => {
       <LayoutFooter layoutType='home' />
       {children}
       <EffectFragment>
-        <FilterPathHomeEffect />
+        <Suspense>
+          <FilterPathHomeEffect />
+        </Suspense>
         <NavigationInitialEffect layoutType='home' />
         <LayoutTypeEffect layoutType='home' />
       </EffectFragment>

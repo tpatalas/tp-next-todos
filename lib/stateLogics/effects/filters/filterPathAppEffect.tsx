@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { PATHNAME_IMAGE, PATH_APP } from '@constAssertions/data';
+import { PATH_IMAGE_APP, PATH_APP } from '@constAssertions/data';
 import { useNextQuery } from '@hooks/misc';
 import { Labels } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
@@ -18,10 +18,10 @@ export const FilterPathAppEffect = () => {
   const path = (key: keyof typeof PATH_APP) => asPath === PATH_APP[key];
 
   const filterPathAppHandler = useRecoilCallback(({ set }) => () => {
-    const setState = (key: keyof typeof PATHNAME_IMAGE, htmlTitle: string) => {
+    const setState = (key: keyof typeof PATH_IMAGE_APP, htmlTitle: string) => {
       set(atomFilterEffect, key);
       set(atomHtmlTitleTag, htmlTitle);
-      set(atomPathnameImage, PATHNAME_IMAGE[key]);
+      set(atomPathnameImage, PATH_IMAGE_APP[key]);
     };
 
     if (path('app')) return setState('focus', "Today's Focus");
@@ -33,7 +33,7 @@ export const FilterPathAppEffect = () => {
       set(atomFilterEffect, 'label');
       set(atomLabelQuerySlug, appLabel);
       set(atomHtmlTitleTag, `Label | ${label.name}`);
-      set(atomPathnameImage, PATHNAME_IMAGE['label']);
+      set(atomPathnameImage, PATH_IMAGE_APP['label']);
       return;
     }
   });
