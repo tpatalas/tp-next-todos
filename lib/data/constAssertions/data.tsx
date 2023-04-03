@@ -36,7 +36,7 @@ export const PATH_HOME = {
   demo: '/app',
   features: '/features',
   implementations: '/implementations',
-  pricing: 'pricing',
+  pricing: '/pricing',
   auth: '/auth',
 } as const;
 

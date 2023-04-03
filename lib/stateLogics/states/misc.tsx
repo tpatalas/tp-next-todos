@@ -2,8 +2,8 @@ import { PATHNAME_IMAGE } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
 import {
-    mediaQueryEffect,
-    networkStatusEffect,
+  mediaQueryEffect,
+  networkStatusEffect,
 } from '@lib/stateLogics/effects/atomEffects/atomEffects';
 import { atom, atomFamily, selector } from 'recoil';
 
@@ -64,6 +64,11 @@ export const atomPathnameImage = atom<PATHNAME_IMAGE>({
 export const atomLoadingSpinner = atomFamily<boolean, SPINNER>({
   key: 'atomLoadingSpinner',
   default: false,
+});
+
+export const atomFilterEffect = atom({
+  key: 'atomFilterEffect',
+  default: 'focus',
 });
 
 /**
