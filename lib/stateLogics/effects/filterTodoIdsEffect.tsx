@@ -1,10 +1,9 @@
-import { PATHNAME_IMAGE, PATH_APP } from '@constAssertions/data';
+import { PATH_APP, PATH_IMAGE_APP } from '@constAssertions/data';
 import { useNextQuery } from '@hooks/misc';
 import { Labels } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { atomLabelQuerySlug } from '@states/labels';
-import { atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
-import { atomFilterTodoIds } from '@states/todos';
+import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
@@ -18,10 +17,10 @@ export const FilterTodoIdsEffect = () => {
   const path = (key: keyof typeof PATH_APP) => asPath === PATH_APP[key];
 
   const filterTodoIds = useRecoilCallback(({ set }) => () => {
-    const setState = (key: keyof typeof PATHNAME_IMAGE, htmlTitle: string) => {
-      set(atomFilterTodoIds, key);
+    const setState = (key: keyof typeof PATH_IMAGE_APP, htmlTitle: string) => {
+      set(atomFilterEffect, key);
       set(atomHtmlTitleTag, htmlTitle);
-      set(atomPathnameImage, PATHNAME_IMAGE[key]);
+      set(atomPathnameImage, PATH_IMAGE_APP[key]);
     };
 
     if (path('app')) return setState('focus', "Today's Focus");
@@ -30,10 +29,10 @@ export const FilterTodoIdsEffect = () => {
     if (path('showAll')) return setState('showAll', 'All Todos');
     if (path('completed')) return setState('completed', 'Task Completed Todos');
     if (appLabel) {
-      set(atomFilterTodoIds, 'label');
+      set(atomFilterEffect, 'label');
       set(atomLabelQuerySlug, appLabel);
       set(atomHtmlTitleTag, `Label - ${label.name}`);
-      set(atomPathnameImage, PATHNAME_IMAGE['label']);
+      set(atomPathnameImage, PATH_IMAGE_APP['label']);
       return;
     }
   });
