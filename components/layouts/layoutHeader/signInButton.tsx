@@ -7,7 +7,7 @@ import { atomLayoutType } from '@states/layouts';
 import { signIn } from 'next-auth/react';
 import { useRecoilValue } from 'recoil';
 
-type Props = { options?: Partial<Pick<Types, 'signInButtonName'> & TypesOptionsButton> };
+type Props = { options?: Partial<TypesOptionsButton> };
 
 const buttonOptionsHandler = (layoutType: Types['layoutType']) => {
   const layoutHome = layoutType === 'home';
