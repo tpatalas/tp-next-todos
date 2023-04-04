@@ -1,4 +1,11 @@
-import { DURATION, GRADIENT_TYPE, GRADIENT_POSITION, VIEWBOX, POSITION_X, POSITION_Y } from '@constAssertions/ui';
+import {
+  DURATION,
+  GRADIENT_TYPE,
+  GRADIENT_POSITION,
+  VIEWBOX,
+  POSITION_X,
+  POSITION_Y,
+} from '@constAssertions/ui';
 import {
   ReactNode,
   ReactElement,
@@ -55,6 +62,7 @@ export interface TypesUi {
   isPortal: boolean;
   gradientType: GRADIENT_TYPE;
   gradientPosition: GRADIENT_POSITION;
+  signInButtonName: 'Sign in' | 'Get started';
 }
 
 export interface TypesLoadings {
