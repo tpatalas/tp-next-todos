@@ -1,5 +1,5 @@
 import { CATCH } from '@constAssertions/misc';
-import { LayoutTypeEffect } from '@effects/layoutTypeEffect';
+import { LayoutTypeEffect } from '@effects/layouts/layoutTypeEffect';
 import { NavigationInitialEffect } from '@effects/navigationInitialEffect';
 import { Types } from '@lib/types';
 import { atomCatch, atomHtmlTitleTag } from '@states/misc';
@@ -13,6 +13,11 @@ import {
   Suspense,
 } from 'react';
 import { useRecoilValue } from 'recoil';
+
+const LayoutBodyTagEffect = dynamic(() =>
+  import('@effects/layouts/layoutBodyTagEffect').then((mod) => mod.LayoutBodyTagEffect),
+);
+
 const CreateTodoModal = dynamic(() =>
   import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
 );
@@ -72,8 +77,11 @@ export const LayoutApp = ({ children }: Props) => {
         </div>
       </HeaderFragment>
       <EffectFragment>
-        <FilterPathAppEffect />
+        <Suspense>
+          <FilterPathAppEffect />
+        </Suspense>
         <LayoutTypeEffect layoutType='app' />
+        <LayoutBodyTagEffect layoutType='app' />
         <NavigationInitialEffect layoutType='app' />
         <Notification />
         <WindowBeforeunloadEffect />
