@@ -6,6 +6,7 @@
       "@constAssertions/*": ["lib/data/constAssertions/*"],
       "@options/*": ["lib/data/options/*"],
       "@effects/*": ["lib/stateLogics/effects/*"],
+      "@groupEffects/*": ["lib/stateLogics/groupEffects/*"],
       "@hooks/*": ["lib/stateLogics/hooks/*"],
       "@states/*": ["lib/stateLogics/states/*"],
       "@data/*": ["lib/data/*"],

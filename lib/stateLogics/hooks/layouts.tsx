@@ -12,6 +12,8 @@ import {
 import { atomCatch, atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useRouter } from 'next/router';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { useCallback } from 'react';
+import { RecoilValue, useRecoilCallback } from 'recoil';
 import { useNextQuery } from './misc';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { CATCH } from '@constAssertions/misc';
@@ -109,4 +111,11 @@ export const useLayoutNavigationMobileReset = () => {
     if (!breakpoint) return;
     reset(atomNavigationOpenMobile(layoutType));
   });
+export const useLayoutBodyTagClass = ({ layoutType }: Pick<Types, 'layoutType'>) => {
+  const layoutBodyHandler = useCallback(() => {
+    if (layoutType === 'app') return document.body.classList.add('overflow-hidden');
+    return document.body.classList.remove('overflow-hidden');
+  }, [layoutType]);
+
+  return layoutBodyHandler;
 };
