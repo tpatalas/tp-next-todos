@@ -11,7 +11,7 @@ const LayoutHeader = dynamic(() => import('@layouts/layoutHeader').then((mod) =>
 const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter));
 
 const LayoutHomeGroupEffects = dynamic(
-  () => import('@effects/layout').then((mod) => mod.LayoutHomeGroupEffects),
+  () => import('@groupEffects/layout').then((mod) => mod.LayoutHomeGroupEffects),
   { ssr: false },
 );
 
