@@ -1,4 +1,4 @@
-import { PATHNAME_IMAGE, PATH_APP, PATH_HOME } from '@constAssertions/data';
+import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Labels, Types } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
@@ -67,10 +67,10 @@ export const useFilterPathApp = () => {
     const label_id = get(atomLabelQuerySlug);
     const label = labels.find((label) => label._id === label_id) || ({} as Labels);
 
-    const setState = (key: keyof typeof PATHNAME_IMAGE, htmlTitle: string) => {
+    const setState = (key: keyof typeof PATH_IMAGE_APP, htmlTitle: string) => {
       set(atomFilterEffect, key);
       set(atomHtmlTitleTag, htmlTitle);
-      set(atomPathnameImage, PATHNAME_IMAGE[key]);
+      set(atomPathnameImage, PATH_IMAGE_APP[key]);
     };
 
     if (path('app')) return setState('focus', "Today's Focus");
@@ -82,7 +82,7 @@ export const useFilterPathApp = () => {
       set(atomFilterEffect, 'label');
       set(atomLabelQuerySlug, appLabel);
       set(atomHtmlTitleTag, `Label | ${label.name}`);
-      set(atomPathnameImage, PATHNAME_IMAGE['label']);
+      set(atomPathnameImage, PATH_IMAGE_APP['label']);
       return;
     }
   });
