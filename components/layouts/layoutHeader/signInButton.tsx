@@ -7,30 +7,24 @@ import { atomLayoutType } from '@states/layouts';
 import { signIn } from 'next-auth/react';
 import { useRecoilValue } from 'recoil';
 
-export const SignInButton = () => {
-  const layoutType = useRecoilValue(atomLayoutType);
-  const layoutHome = layoutType === 'home';
 type Props = { options?: Partial<Pick<Types, 'signInButtonName'> & TypesOptionsButton> };
 
-const buttonOptions = {
-  className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'max-ml:w-full max-ml:mb-3'),
-  tooltip: 'Sign in',
+const buttonOptionsHandler = (layoutType: Types['layoutType']) => {
+  const layoutHome = layoutType === 'home';
+  return {
+    className: classNames('max-ml:w-full', STYLE_BUTTON_NORMAL_BLUE, layoutHome && 'max-ml:mb-3'),
+    tooltip: 'Sign in',
+  };
 };
 
 export const SignInButton = ({ options }: Props) => {
   const { signInButtonName = 'Sign in' } = options ?? {};
+  const layoutType = useRecoilValue(atomLayoutType);
+  const buttonOptions = buttonOptionsHandler(layoutType);
 
   return (
     <>
       <Button
-        options={{
-          className: classNames(
-            'max-ml:w-full',
-            STYLE_BUTTON_NORMAL_BLUE,
-            layoutHome && 'max-ml:mb-3',
-          ),
-          tooltip: 'Sign in',
-        }}
         options={options ?? buttonOptions}
         onClick={() => signIn()}>
         {signInButtonName}
