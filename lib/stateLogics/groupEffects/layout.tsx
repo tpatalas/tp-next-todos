@@ -1,13 +1,16 @@
+import { Notification } from '@components/notifications/notification';
+import { CATCH } from '@constAssertions/misc';
 import {
   useFilterPathApp,
   useFilterPathHome,
   useInitialNavigation,
   useLayoutNavigationMobileReset,
+  useLayoutBodyTagClass,
   useLayoutType,
 } from '@hooks/layouts';
-import { GroupEffects } from './groupEffects';
-import dynamic from 'next/dynamic';
-import { CATCH } from '@constAssertions/misc';
+import { LabelModal } from '@modals/labelModals/labelModal';
+import { MinimizedModal } from '@modals/minimizedModal';
+import { TodoModal } from '@modals/todoModals/todoModal';
 import { atomCatch } from '@states/misc';
 import { useRecoilValue } from 'recoil';
 import { TodoModal } from '@modals/todoModals/todoModal';
@@ -17,15 +20,17 @@ import { Notification } from 'components/notifications/notification';
 const LabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
 );
+import { GroupEffects } from '.';
 
 export const LayoutHomeGroupEffects = () => {
   const filterPath = useFilterPathHome();
   const setNavigation = useInitialNavigation({ layoutType: 'home' });
   const setLayoutType = useLayoutType({ layoutType: 'home' });
+  const setBodyTagClass = useLayoutBodyTagClass({ layoutType: 'home' });
 
   return (
     <>
-      <GroupEffects effects={[filterPath, setLayoutType, setNavigation]} />
+      <GroupEffects effects={[filterPath, setLayoutType, setNavigation, setBodyTagClass]} />
     </>
   );
 };
@@ -35,10 +40,11 @@ export const LayoutAppGroupEffects = () => {
   const setNavigation = useInitialNavigation({ layoutType: 'app' });
   const setLayoutType = useLayoutType({ layoutType: 'app' });
   const catchTodoModal = useRecoilValue(atomCatch(CATCH.todoModal));
+  const setBodyTagClass = useLayoutBodyTagClass({ layoutType: 'app' });
 
   return (
     <>
-      <GroupEffects effects={[filterPath, setLayoutType, setNavigation]} />
+      <GroupEffects effects={[filterPath, setLayoutType, setNavigation, setBodyTagClass]} />
       <Notification />
       <TodoModal />
       <MinimizedModal />
