@@ -51,13 +51,20 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
         <RightNavigationFragment>
           <div
             className={classNames(
-              layoutApp && 'mr-3 flex flex-1 flex-row items-center justify-end pl-2',
+              layoutApp && 'flex flex-1 flex-row items-center justify-end pl-2 ml:mr-3',
               layoutHome && 'hidden ml:mr-8 ml:flex',
             )}>
             {children}
           </div>
           <NavigationButtonFragment>
-            <div className='pr-6 ml:hidden ml:pr-0'>{layoutHome && <NavigationButton />}</div>
+            <div
+              className={classNames(
+                'ml:hidden ml:pr-0',
+                layoutHome && 'pr-6',
+                layoutApp && 'pr-3',
+              )}>
+              {layoutHome && <NavigationButton />}
+            </div>
           </NavigationButtonFragment>
         </RightNavigationFragment>
       </div>
