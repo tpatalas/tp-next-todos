@@ -16,6 +16,7 @@ import {
   atomPathnameImage,
 } from '@states/misc';
 import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { useNextQuery } from './misc';
 
@@ -100,4 +101,13 @@ export const useLayoutType = ({ layoutType }: Pick<Types, 'layoutType'>) => {
   return useRecoilCallback(({ set }) => () => {
     set(atomLayoutType, layoutType);
   });
+};
+
+export const useLayoutBodyTagClass = ({ layoutType }: Pick<Types, 'layoutType'>) => {
+  const layoutBodyHandler = useCallback(() => {
+    if (layoutType === 'app') return document.body.classList.add('overflow-hidden');
+    return document.body.classList.remove('overflow-hidden');
+  }, [layoutType]);
+
+  return layoutBodyHandler;
 };
