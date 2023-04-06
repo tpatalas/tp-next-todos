@@ -7,6 +7,8 @@ import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
 import { useCallback, useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
+import { GroupEffects } from './groupEffects';
+import { useUserSession } from '@hooks/users';
 
 export const UserSessionResetEffect = () => {
   const { data: session } = useSession();
@@ -51,4 +53,15 @@ export const UserSessionResetEffect = () => {
   }, [setSession]);
 
   return null;
+};
+
+export const UserSessionGroupEffects = () => {
+  const userSession = useUserSession();
+
+  return (
+    <>
+      <GroupEffects effects={[userSession]} />
+      <UserSessionResetEffect />
+    </>
+  );
 };

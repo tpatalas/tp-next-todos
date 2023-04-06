@@ -11,12 +11,8 @@ import {
 import { Logo } from './logo';
 import { NavigationButton } from './navigationButton';
 
-const UserSessionResetEffect = dynamic(() =>
-  import('@effects/userSessionResetEffect').then((mod) => mod.UserSessionResetEffect),
-);
-
-const UserSessionEffect = dynamic(() =>
-  import('@effects/userSessionEffect').then((mod) => mod.UserSessionEffect),
+const UserSessionGroupEffects = dynamic(() =>
+  import('@effects/users').then((mod) => mod.UserSessionGroupEffects),
 );
 
 type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;
@@ -68,8 +64,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
           </NavigationButtonFragment>
         </RightNavigationFragment>
       </div>
-      <UserSessionEffect />
-      <UserSessionResetEffect />
+      <UserSessionGroupEffects />
     </LayoutHeaderFragment>
   );
 };
