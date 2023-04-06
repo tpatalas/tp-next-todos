@@ -3,7 +3,7 @@ import { classNames } from '@stateLogics/utils';
 
 type Props = Partial<Pick<Types, 'children' | 'margin'>>;
 
-export const Divider = ({ children, margin }: Props) => {
+export const DividerX = ({ children, margin }: Props) => {
   return (
     <div className={classNames('relative', margin)}>
       <div
