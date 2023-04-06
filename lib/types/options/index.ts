@@ -2,34 +2,66 @@ import { Types } from '..';
 import { TypesSvgIconAttributes, TypesElement, TypesStyleAttributes } from '../bases/ui';
 
 export type TypesOptionsSvg = Partial<
-  Pick<TypesSvgIconAttributes, 'height' | 'width' | 'viewBox' | 'path' | 'isAriaHidden'> & Pick<Types, 'className'>
+  Pick<TypesSvgIconAttributes, 'height' | 'width' | 'viewBox' | 'path' | 'isAriaHidden'> &
+    Pick<Types, 'className'>
 >;
 
 export type TypesOptionsButton = Partial<
-  Pick<Types, 'className' | 'isDisabled' | 'path' | 'name' | 'tooltip' | 'offset' | 'kbd' | 'placement'> & {
+  Pick<
+    Types,
+    | 'className'
+    | 'isDisabled'
+    | 'path'
+    | 'name'
+    | 'tooltip'
+    | 'offset'
+    | 'kbd'
+    | 'placement'
+    | 'signInButtonName'
+  > & {
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & Pick<
       TypesStyleAttributes,
-      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg' | 'borderRadius'
+      | 'padding'
+      | 'margin'
+      | 'display'
+      | 'width'
+      | 'size'
+      | 'color'
+      | 'container'
+      | 'hoverBg'
+      | 'borderRadius'
     >
 >;
 
 export type TypesOptionsPseudoButton = Partial<
   Pick<Types, 'className' | 'path' | 'name' | 'tooltip' | 'offset' | 'kbd' | 'placement'> &
-    Pick<TypesStyleAttributes, 'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg'>
+    Pick<
+      TypesStyleAttributes,
+      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg'
+    >
 >;
 
 export type TypesOptionsPriority = Partial<
   Pick<Types, 'isInitiallyVisible' | 'priorityImportant' | 'priorityNormal' | 'priorityUrgent'> &
     Pick<
       TypesStyleAttributes,
-      'margin' | 'display' | 'width' | 'container' | 'padding' | 'size' | 'color' | 'borderRadius' | 'hoverBg'
+      | 'margin'
+      | 'display'
+      | 'width'
+      | 'container'
+      | 'padding'
+      | 'size'
+      | 'color'
+      | 'borderRadius'
+      | 'hoverBg'
     >
 > &
   Pick<Types, 'priorityLevel'>;
 
 export type TypesOptionsBackdrop = Partial<
-  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration'> & Pick<TypesStyleAttributes, 'color' | 'zIndex'>
+  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration'> &
+    Pick<TypesStyleAttributes, 'color' | 'zIndex'>
 >;
 
 export type TypesOptionsDropdown = Partial<
@@ -96,6 +128,13 @@ export type TypesOptionsPrefetchRouterButton = Pick<Types, 'path'> &
   Partial<
     Pick<
       Types,
-      'isDisabled' | 'className' | 'isPrefetchingOnHover' | 'tooltip' | 'kbd' | 'offset' | 'placement' | 'container'
+      | 'isDisabled'
+      | 'className'
+      | 'isPrefetchingOnHover'
+      | 'tooltip'
+      | 'kbd'
+      | 'offset'
+      | 'placement'
+      | 'container'
     >
   >;
