@@ -65,7 +65,7 @@ export const AuthForm = () => {
               <span>Sign in with email</span>
             </Button>
             <div className='mb-5' />
-            <DividerX margin='mb-5'>or</DividerX>
+            <DividerX options={{ margin: 'mb-5' }}>or</DividerX>
             <SvgLogoButton />
           </form>
         </section>

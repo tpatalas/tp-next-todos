@@ -1,15 +1,20 @@
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 
-type Props = Partial<Pick<Types, 'children' | 'margin'>>;
+type optionTypeDivider = 'margin' | 'hidden' | 'width';
+type Props = { options?: Partial<Record<optionTypeDivider, string>> } & Partial<
+  Pick<Types, 'children'>
+>;
 
-export const DividerX = ({ children, margin }: Props) => {
+export const DividerX = ({ children, options }: Props) => {
+  const { margin, hidden, width = 'w-full' } = options || {};
+
   return (
-    <div className={classNames('relative', margin)}>
+    <div className={classNames('relative', margin, hidden)}>
       <div
-        className='absolute inset-0 flex items-center'
+        className='absolute inset-0 flex items-center justify-center'
         aria-hidden='true'>
-        <div className='w-full border-t border-gray-300' />
+        <div className={classNames('border-t border-gray-300', width)} />
       </div>
       {children && (
         <div className='relative flex justify-center'>
