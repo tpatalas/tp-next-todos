@@ -16,10 +16,10 @@ import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
 import { useLabelModalStateClose } from '@hooks/modals';
 import { ModalTransitionChild } from '@modals/modal/modalTransition/modalTransitionChild';
 import { ModalTransitionRoot } from '@modals/modal/modalTransition/modalTransitionRoot';
-import { Divider } from '@ui/dividers/divider';
 import { Button } from '@buttons/button';
 import { classNames } from '@stateLogics/utils';
 import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
+import { DividerX } from '@ui/dividers/dividerX';
 
 type Props = Partial<
   Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
@@ -58,7 +58,7 @@ export const LabelModal = ({
               />
             </div>
             <div className='hidden sm:mb-3 sm:block'>
-              <Divider />
+              <DividerX />
             </div>
           </div>
           <div className='h-full w-full overflow-scroll pl-2 pr-3'>
