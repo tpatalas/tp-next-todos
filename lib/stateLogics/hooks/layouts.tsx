@@ -51,6 +51,7 @@ export const useFilterPathHome = () => {
     if (path('pricing')) return setState('Pricing');
     if (path('features')) return setState('Features');
     if (path('implementations')) return setState('Implementations');
+    if (path('contact')) return setState('Contact');
   });
 };
 
