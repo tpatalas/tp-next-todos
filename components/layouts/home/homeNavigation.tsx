@@ -5,7 +5,6 @@ import { STYLE_BUTTON_NORMAL_BLACK } from '@data/stylePreset';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { Divider } from '@ui/dividers/divider';
 import Link from 'next/link';
 
 type Props = Pick<Types, 'layoutType'>;
@@ -20,7 +19,7 @@ export const HomeNavigation = ({ layoutType }: Props) => {
         'flex text-base tracking-wide text-slate-800',
         layoutApp && 'flex-row items-center space-x-10 pr-3 sm:pr-8',
         layoutHome &&
-          'flex-col bg-slate-50 max-ml:space-y-4 max-ml:rounded-b-xl max-ml:px-5 max-ml:pt-[6rem] max-ml:pb-8 ml:flex ml:flex-row ml:items-center ml:space-x-3 ml:pr-3',
+          'flex-col bg-slate-50 max-ml:space-y-4 max-ml:rounded-b-xl max-ml:px-5 max-ml:pb-8 max-ml:pt-[6rem] ml:flex ml:flex-row ml:items-center ml:space-x-3 ml:pr-3',
       )}>
       {DATA_HOME.map((path) => (
         <li key={path.name}>
@@ -31,7 +30,6 @@ export const HomeNavigation = ({ layoutType }: Props) => {
           </Link>
         </li>
       ))}
-      <Divider />
       <div className={classNames('pl-0 max-ml:pt-2 ml:pl-4')}>
         <SignInButton />
         <PrefetchRouterButton
