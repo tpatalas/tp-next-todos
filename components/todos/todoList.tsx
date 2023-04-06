@@ -13,7 +13,8 @@ export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);
   const todoIdsReversed = [...todoIds].reverse();
   const imagePath = useRecoilValue(atomPathnameImage);
-  const image = DATA_PATHNAME_IMAGE.find((item) => item.path === imagePath) || ({} as TypesPathnameImage);
+  const image =
+    DATA_PATHNAME_IMAGE.find((item) => item.path === imagePath) || ({} as TypesPathnameImage);
 
   return (
     <TodosFragment>
@@ -37,7 +38,7 @@ export const TodoList = () => {
                   loader={nextImageLoader}
                   width={0}
                   height={0}
-                  style={{ width: 'auto', height: 'auto' }}
+                  className='h-auto w-auto'
                   src={image.path}
                   alt={image.alt}
                   priority
