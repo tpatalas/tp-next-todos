@@ -41,23 +41,15 @@ export const PATH_HOME = {
   auth: '/auth',
 } as const;
 
-export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
-export const PATHNAME_IMAGE = {
+export type PATH_IMAGE_APP = (typeof PATH_IMAGE_APP)[keyof typeof PATH_IMAGE_APP];
+export const PATH_IMAGE_APP = {
   focus: 'app-focus.webp',
   urgent: 'app-urgent.webp',
   important: 'app-important.webp',
   showAll: 'app-showall.webp',
   completed: 'app-completed.webp',
   label: 'app-label.webp',
-export type PATH_IMAGE_APP = (typeof PATH_IMAGE_APP)[keyof typeof PATH_IMAGE_APP];
-export const PATH_IMAGE_APP = {
-  focus: 'focus.webp',
-  urgent: 'urgent.webp',
-  important: 'important.webp',
-  showAll: 'showall.webp',
-  completed: 'completed.webp',
-  label: 'label.webp',
-  avatar: 'user_avatar.webp',
+  avatar: 'app-user-avatar.webp',
 } as const;
 
 export type PATH_IMAGE_HOME = (typeof PATH_IMAGE_HOME)[keyof typeof PATH_IMAGE_HOME];
