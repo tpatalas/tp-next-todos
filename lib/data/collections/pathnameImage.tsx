@@ -3,7 +3,7 @@ import { TypesPathnameImage } from '@lib/types';
 
 export const DATA_PATHNAME_IMAGE: TypesPathnameImage[] = [
   {
-    path: PATHNAME_IMAGE['app'],
+    path: PATHNAME_IMAGE['focus'],
     alt: 'Placeholder image of focus',
     title: "Todos for today's focus",
     description:
@@ -32,12 +32,14 @@ export const DATA_PATHNAME_IMAGE: TypesPathnameImage[] = [
     path: PATHNAME_IMAGE['completed'],
     alt: 'Placeholder image of completed',
     title: 'Your completed todos',
-    description: 'While there are no completed todos yet, every step counts towards achieving your goals.',
+    description:
+      'While there are no completed todos yet, every step counts towards achieving your goals.',
   },
   {
     path: PATHNAME_IMAGE['label'],
     alt: 'Placeholder image of label',
     title: 'Your labeled todos',
-    description: 'Organize your todos by using labels to keep track of your progress and priorities.',
+    description:
+      'Organize your todos by using labels to keep track of your progress and priorities.',
   },
 ];
