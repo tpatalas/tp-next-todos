@@ -32,12 +32,12 @@ export const PATHNAME = {
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
 export const PATHNAME_IMAGE = {
-  app: 'focus.webp',
-  urgent: 'urgent.webp',
-  important: 'important.webp',
-  showAll: 'showall.webp',
-  completed: 'completed.webp',
-  label: 'label.webp',
+  app: 'app-focus.webp',
+  urgent: 'app-urgent.webp',
+  important: 'app-important.webp',
+  showAll: 'app-showall.webp',
+  completed: 'app-completed.webp',
+  label: 'app-label.webp',
 } as const;
 
 export type SVG_LOGO = (typeof SVG_LOGO)[keyof typeof SVG_LOGO];
