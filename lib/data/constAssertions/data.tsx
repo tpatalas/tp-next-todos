@@ -43,13 +43,7 @@ export const PATH_HOME = {
 
 export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
 export const PATHNAME_IMAGE = {
-  focus: 'focus.webp',
-  urgent: 'urgent.webp',
-  important: 'important.webp',
-  showAll: 'showall.webp',
-  completed: 'completed.webp',
-  label: 'label.webp',
-  app: 'app-focus.webp',
+  focus: 'app-focus.webp',
   urgent: 'app-urgent.webp',
   important: 'app-important.webp',
   showAll: 'app-showall.webp',
