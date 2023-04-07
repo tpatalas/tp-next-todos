@@ -68,6 +68,10 @@ export const STYLE_BUTTON_NORMAL_GRAY = classNames(
   STYLE_BUTTON_COLOR_GRAY,
 );
 
+// gradient-wave-effect
+export const STYLE_BLUR_GRADIENT =
+  'bg-gradient-to-r from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90% opacity-70 blur-md';
+
 // misc
 export const STYLE_BUTTON_ICON =
   'border-transparent bg-transparent text-gray-500 hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700 focus-visible:ring-blue-500 ';
