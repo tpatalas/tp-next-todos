@@ -54,7 +54,7 @@ export const PATH_IMAGE_APP = {
 
 export type PATH_IMAGE_HOME = (typeof PATH_IMAGE_HOME)[keyof typeof PATH_IMAGE_HOME];
 export const PATH_IMAGE_HOME = {
-  demo: 'home/demo-image-desk.webp',
+  demo: 'home-demo-image-desk.webp',
 } as const;
 
 export type RETENTION = (typeof RETENTION)[keyof typeof RETENTION];
