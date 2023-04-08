@@ -1,8 +1,8 @@
 import { PATH_HOME, PATH_IMAGE_HOME } from '@constAssertions/data';
-import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
+import { STYLE_BLUR_GRADIENT, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
-import { nextImageLoader } from '@stateLogics/utils';
+import { classNames, nextImageLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -35,8 +35,14 @@ export const Hero = () => {
             </div>
           </div>
           <div className='flex justify-center'>
-            <div className='mt-16 flow-root sm:mt-24'>
-              <div className='-m-2 mx-auto flex w-full max-w-5xl flex-row items-center justify-center rounded-xl border-none ring-0 drop-shadow-2xl lg:-m-4 lg:rounded-2xl lg:p-4'>
+            <div className='group/image relative mt-16 flow-root sm:mt-24'>
+              <div
+                className={classNames(
+                  'absolute h-full w-full animate-glow rounded-xl',
+                  STYLE_BLUR_GRADIENT,
+                )}
+              />
+              <div className='mx-auto flex w-full max-w-5xl flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                 <Image
                   loader={nextImageLoader}
                   width={0}

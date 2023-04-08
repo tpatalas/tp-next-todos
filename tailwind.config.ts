@@ -45,6 +45,15 @@ export default {
           },
         ],
       },
+      keyframes: {
+        glow: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+      },
+      animation: {
+        glow: 'glow 8s ease-in-out infinite',
+      },
       opacity: {
         65: '0.65',
       },
