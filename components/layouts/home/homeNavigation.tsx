@@ -1,7 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { DATA_HOME } from '@collections/home';
 import { PATH_HOME } from '@constAssertions/data';
-import { STYLE_BUTTON_NORMAL_BLACK } from '@data/stylePreset';
+import { STYLE_BUTTON_NORMAL_BLACK, STYLE_LINK_NORMAL } from '@data/stylePreset';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
@@ -14,8 +14,6 @@ type Props = Pick<Types, 'layoutType'>;
 export const HomeNavigation = ({ layoutType }: Props) => {
   const layoutApp = layoutType === 'app';
   const layoutHome = layoutType === 'home';
-  const linkClassName =
-    'block w-full rounded-lg transition-all hover:bg-slate-900 hover:bg-opacity-10 max-ml:px-5 max-ml:py-3 ml:px-2 lg:px-3 ml:py-2';
 
   return (
     <ul
@@ -29,7 +27,7 @@ export const HomeNavigation = ({ layoutType }: Props) => {
         <li key={path.name}>
           <Link
             href={path.path}
-            className={classNames(linkClassName)}>
+            className={classNames(STYLE_LINK_NORMAL)}>
             {path.name}
           </Link>
         </li>
@@ -38,7 +36,7 @@ export const HomeNavigation = ({ layoutType }: Props) => {
       <li>
         <Link
           href={PATH_HOME['contact']}
-          className={classNames(linkClassName)}>
+          className={classNames(STYLE_LINK_NORMAL)}>
           Contact
         </Link>
       </li>
