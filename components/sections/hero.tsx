@@ -1,5 +1,6 @@
 import { PATH_HOME, PATH_IMAGE_HOME } from '@constAssertions/data';
-import { STYLE_BLUR_GRADIENT, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
+import { STYLE_BLUR_GRADIENT_R_LG, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
+import { useVerticalScrollPosition } from '@hooks/misc';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
@@ -12,6 +13,9 @@ const signInButtonOptions: TypesOptionsButton = {
 };
 
 export const Hero = () => {
+  const scrollPosition = useVerticalScrollPosition();
+  const demoOpacityScrollRate = scrollPosition < 500 ? scrollPosition / 500 : 500 / scrollPosition;
+
   return (
     <div className='relative isolate pt-10'>
       <div className='py-24 sm:py-32 lg:pb-40'>
@@ -35,19 +39,17 @@ export const Hero = () => {
             </div>
           </div>
           <div className='flex justify-center'>
-            <div className='group/image relative mt-16 flow-root sm:mt-24'>
+            <div className='relative mt-16 flow-root sm:mt-24'>
               <div
-                className={classNames(
-                  'absolute h-full w-full animate-glow rounded-xl',
-                  STYLE_BLUR_GRADIENT,
-                )}
+                className={classNames('h-full w-full rounded-xl', STYLE_BLUR_GRADIENT_R_LG)}
+                style={{ opacity: demoOpacityScrollRate }}
               />
               <div className='mx-auto flex w-full max-w-5xl flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                 <Image
                   loader={nextImageLoader}
                   width={0}
                   height={0}
-                  className='h-auto w-auto rounded-xl ring-1 ring-slate-300/5 drop-shadow-2xl'
+                  className='h-auto w-auto rounded-xl ring-2 ring-slate-300/20 drop-shadow-2xl'
                   src={PATH_IMAGE_HOME['demo']}
                   alt='demo application image'
                   priority
