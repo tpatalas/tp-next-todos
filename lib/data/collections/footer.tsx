@@ -6,7 +6,7 @@ interface TypesFooterNavigation {
 }
 
 type social = 'name' | 'link' | 'path';
-type TypesFooterSocial = Record<social, string>;
+export type TypesFooterSocial = Record<social, string>;
 
 export const DATA_FOOTER_NAVIGATION: TypesFooterNavigation[] = [
   { name: 'About', path: PATH_HOME['home'] },
