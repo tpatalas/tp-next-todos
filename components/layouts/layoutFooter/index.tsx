@@ -26,14 +26,32 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
             appear={true}
             as={Fragment}
             enter='transition transform ease-in-out duration-200'
-            enterFrom={classNames('transform opacity-0', layoutApp && 'translate-x-0', layoutHome && '-translate-y-5')}
-            enterTo={classNames('transform opacity-100', layoutApp && 'translate-x-0', layoutHome && 'translate-y-0')}
+            enterFrom={classNames(
+              'transform opacity-0',
+              layoutApp && 'translate-x-0',
+              layoutHome && '-translate-y-5',
+            )}
+            enterTo={classNames(
+              'transform opacity-100',
+              layoutApp && 'translate-x-0',
+              layoutHome && 'translate-y-0',
+            )}
             leave='transition ease-in-out duration-150'
-            leaveFrom={classNames('transform opacity-100', layoutApp && 'translate-x-0', layoutHome && 'translate-y-0')}
-            leaveTo={classNames('transform opacity-0', layoutApp && '-translate-x-5', layoutHome && '-translate-y-5')}>
+            leaveFrom={classNames(
+              'transform opacity-100',
+              layoutApp && 'translate-x-0',
+              layoutHome && 'translate-y-0',
+            )}
+            leaveTo={classNames(
+              'transform opacity-0',
+              layoutApp && '-translate-x-5',
+              layoutHome && '-translate-y-5',
+            )}>
             <FooterNavigation layoutType={layoutType}>
               {layoutApp && <AppNavigation />}
-              <div className='ml:hidden'>{layoutHome && <HomeNavigation layoutType={layoutType} />}</div>
+              <div className='ml:hidden'>
+                {layoutHome && <HomeNavigation layoutType={layoutType} />}
+              </div>
             </FooterNavigation>
           </Transition.Child>
           <NavigationMobileResetEffect />
