@@ -68,7 +68,14 @@ export const STYLE_BUTTON_NORMAL_GRAY = classNames(
   STYLE_BUTTON_COLOR_GRAY,
 );
 
-// gradient-wave-effect
+/**
+ * Link
+ **/
+export const STYLE_LINK_NORMAL =
+  'block w-full rounded-lg transition-all hover:bg-slate-900 hover:bg-opacity-10 max-ml:px-5 max-ml:py-3 ml:px-2 lg:px-3 ml:py-2';
+/*
+ * gradient-wave-effect
+ **/
 export const STYLE_BLUR_GRADIENT =
   'bg-gradient-to-r from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90% opacity-70 blur-md';
 
