@@ -145,6 +145,24 @@ export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
   return { leftPosition, rightPosition, isOverflow };
 };
 
+export const useVerticalScrollPosition = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return scrollPosition;
+};
+
 export const useCompareToQueryLabels = () => {
   return useRecoilCallback(({ snapshot }) => (compare: Labels[]) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
