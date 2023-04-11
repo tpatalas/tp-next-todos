@@ -1,5 +1,5 @@
 import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
-import { useVerticalScrollPosition, useWindowWidth } from '@hooks/misc';
+import { useVerticalScrollPosition, useWindowWidth } from '@hooks/ui';
 import { classNames } from '@stateLogics/utils';
 
 export const Header = () => {
@@ -7,6 +7,7 @@ export const Header = () => {
   const clientWidth = useWindowWidth();
   const dynamicStartPoint = clientWidth > 900 ? 900 : clientWidth;
   const scrollPositionRate = (startPosition: number, multiplier: number) => {
+    if (!startPosition) return 0;
     return scrollPosition < startPosition ? 0 : (scrollPosition / startPosition - 1) * multiplier;
   };
   const headerHeightRate = (scrollPositionRate(dynamicStartPoint, 2) * 100) / 9;
