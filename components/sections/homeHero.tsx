@@ -12,7 +12,7 @@ const signInButtonOptions: TypesOptionsButton = {
   className: STYLE_BUTTON_NORMAL_BLUE,
 };
 
-export const Hero = () => {
+export const HomeHero = () => {
   const scrollPosition = useVerticalScrollPosition();
   const demoOpacityScrollRate = scrollPosition < 500 ? scrollPosition / 500 : 500 / scrollPosition;
 
