@@ -1,16 +1,11 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './lib/**/*.{js,ts,jsx,tsx}',
-    './util/**/*.{js,ts,jsx,tsx}',
-    './models/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class', // or 'media' or 'class' or false
-
   theme: {
     screens: {
       // => @media (min-width: 640px) { ... }
