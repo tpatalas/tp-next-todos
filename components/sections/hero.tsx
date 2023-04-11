@@ -1,6 +1,6 @@
 import { PATH_HOME, PATH_IMAGE_HOME } from '@constAssertions/data';
 import { STYLE_BLUR_GRADIENT_R_LG, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
-import { useVerticalScrollPosition } from '@hooks/misc';
+import { useVerticalScrollPosition } from '@hooks/ui';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
