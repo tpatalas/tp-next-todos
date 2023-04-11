@@ -38,7 +38,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
             )}>
             <NavigationButtonFragment>{layoutApp && <NavigationButton />}</NavigationButtonFragment>
             <LogoFragment>
-              <div className={classNames('flex w-full flex-row justify-start')}>
+              <div className={classNames('max-md:hidden flex w-full flex-row justify-start')}>
                 <Logo />
               </div>
             </LogoFragment>
