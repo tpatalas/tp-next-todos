@@ -1,13 +1,15 @@
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
+import { atomNavigationOpenMobile } from '@states/layouts';
 import dynamic from 'next/dynamic';
 import {
-  Fragment as LayoutHeaderFragment,
-  Fragment as LeftSideFragment,
-  Fragment as LogoFragment,
-  Fragment as NavigationButtonFragment,
-  Fragment as RightNavigationFragment,
+    Fragment as LayoutHeaderFragment,
+    Fragment as LeftSideFragment,
+    Fragment as LogoFragment,
+    Fragment as NavigationButtonFragment,
+    Fragment as RightNavigationFragment,
 } from 'react';
+import { useRecoilValue } from 'recoil';
 import { Logo } from './logo';
 import { NavigationButton } from './navigationButton';
 
@@ -20,13 +22,15 @@ type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;
 export const LayoutHeader = ({ children, layoutType }: Props) => {
   const layoutHome = layoutType === 'home';
   const layoutApp = layoutType === 'app';
+  const isSidebarMobileOpen = useRecoilValue(atomNavigationOpenMobile(layoutType));
 
   return (
     <LayoutHeaderFragment>
       <div
         className={classNames(
           'sticky top-0 flex max-h-[4rem] min-h-[4rem] flex-row items-center justify-between ml:mb-2',
-          layoutHome && 'z-50 mx-auto max-w-7xl bg-slate-50 bg-opacity-60 backdrop-blur-lg',
+          layoutHome && 'z-50 mx-auto max-w-7xl bg-slate-50',
+          layoutHome && isSidebarMobileOpen ? '' : 'bg-opacity-60 backdrop-blur-lg',
           layoutApp && 'bg-transparent',
         )}>
         <LeftSideFragment>
