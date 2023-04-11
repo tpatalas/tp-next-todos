@@ -7,7 +7,7 @@ import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomTodoNew, selectorFilterTodoIdsByPathname } from '@states/todos';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
-import { RefObject, useEffect, useMemo, useState } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 
 export const useFilterTodoIdsWithPathname = () => {
@@ -143,6 +143,26 @@ export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
   }, [initialOverflown, ref]);
 
   return { leftPosition, rightPosition, isOverflow };
+};
+
+export const useWindowWidth = () => {
+  const getWindowWidth = () => {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  };
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+
+  const handleResize = useCallback(() => {
+    setWindowWidth(getWindowWidth());
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
+
+  return windowWidth;
 };
 
 export const useVerticalScrollPosition = () => {
