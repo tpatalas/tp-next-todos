@@ -21,7 +21,7 @@ export const HomeNavigation = ({ layoutType }: Props) => {
         'flex text-base tracking-wide text-slate-800',
         layoutApp && 'flex-row items-center space-x-10 pr-3 sm:pr-8',
         layoutHome &&
-          'flex-col bg-slate-50 max-ml:space-y-4 max-ml:rounded-b-xl max-ml:px-5 max-ml:pb-8 max-ml:pt-[6rem] ml:flex ml:flex-row ml:items-center ml:space-x-3 ml:pr-0 lg:pr-3',
+          'flex-col bg-transparent max-ml:space-y-4 max-ml:rounded-b-xl max-ml:px-5 max-ml:pb-8 max-ml:pt-[6rem] ml:flex ml:flex-row ml:items-center ml:space-x-3 ml:pr-0 lg:pr-3',
       )}>
       {DATA_HOME.map((path) => (
         <li key={path.name}>
