@@ -10,7 +10,7 @@ const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) =>
 const Footer = dynamic(() => import('@components/sections/footer').then((mod) => mod.Footer));
 
 const LayoutHomeGroupEffects = dynamic(
-  () => import('@groupEffects/layout').then((mod) => mod.LayoutHomeGroupEffects),
+  () => import('@effects/layout').then((mod) => mod.LayoutHomeGroupEffects),
   { ssr: false },
 );
 
