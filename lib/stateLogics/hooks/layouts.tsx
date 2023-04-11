@@ -9,19 +9,12 @@ import {
   atomNavigationOpenMobile,
   atomNavigationOpenSetting,
 } from '@states/layouts';
-import {
-  atomFilterEffect,
-  atomHtmlTitleTag,
-  atomMediaQuery,
-  atomPathnameImage,
-} from '@states/misc';
+import { atomCatch, atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useRouter } from 'next/router';
-import { RecoilValue, useRecoilCallback } from 'recoil';
+import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { useNextQuery } from './misc';
-
-/**
- * Hooks
- **/
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
+import { CATCH } from '@constAssertions/misc';
 
 export const useNavigationOpen = () => {
   return useRecoilCallback(({ snapshot, set }) => () => {
@@ -29,8 +22,8 @@ export const useNavigationOpen = () => {
     const layoutType = get(atomLayoutType);
     const breakpoint =
       layoutType === 'app'
-        ? get(atomMediaQuery(BREAKPOINT['md']))
-        : get(atomMediaQuery(BREAKPOINT['ml']));
+        ? get(atomEffectMediaQuery(BREAKPOINT['md']))
+        : get(atomEffectMediaQuery(BREAKPOINT['ml']));
 
     // Under the mediaQuery medium ('md') will return false and will return true over mediaQuery
     if (!breakpoint) return set(atomNavigationOpenMobile(layoutType), (event) => !event);
@@ -100,5 +93,20 @@ export const useInitialNavigation = ({ layoutType }: Pick<Types, 'layoutType'>) 
 export const useLayoutType = ({ layoutType }: Pick<Types, 'layoutType'>) => {
   return useRecoilCallback(({ set }) => () => {
     set(atomLayoutType, layoutType);
+  });
+};
+
+export const useLayoutNavigationMobileReset = () => {
+  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH['todoModal']) || CATCH['confirmModal']);
+  return useRecoilCallback(({ snapshot, reset }) => () => {
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const layoutType = get(atomLayoutType);
+    const breakpoint =
+      layoutType === 'app'
+        ? get(atomEffectMediaQuery(BREAKPOINT['md']))
+        : get(atomEffectMediaQuery(BREAKPOINT['ml']));
+    isTodoModalOpen && reset(atomNavigationOpenMobile(layoutType));
+    if (!breakpoint) return;
+    reset(atomNavigationOpenMobile(layoutType));
   });
 };

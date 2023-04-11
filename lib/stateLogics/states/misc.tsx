@@ -1,10 +1,6 @@
 import { PATHNAME_IMAGE } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
-import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
-import {
-  mediaQueryEffect,
-  networkStatusEffect,
-} from '@lib/stateLogics/effects/atomEffects/atomEffects';
+import { SPINNER } from '@constAssertions/ui';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*
@@ -19,20 +15,6 @@ export const atomCatch = atomFamily<boolean, CATCH>({
 export const atomDisableScroll = atom<boolean>({
   key: 'atomDisableScroll',
   default: false,
-});
-
-// Media Queries
-export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({
-  key: 'atomMediaQuery',
-  default: false,
-  effects: (breakpoint) => [mediaQueryEffect({ breakpoint: breakpoint })],
-});
-
-// Network
-export const atomNetworkStatusEffect = atom({
-  key: 'atomNetworkStatusEffect',
-  default: true,
-  effects: [networkStatusEffect],
 });
 
 //  Dropdown
