@@ -17,7 +17,7 @@ const LayoutFooter = dynamic(
 );
 
 const LayoutAppGroupEffects = dynamic(
-  () => import('@groupEffects/layout').then((mod) => mod.LayoutAppGroupEffects),
+  () => import('@effects/layout').then((mod) => mod.LayoutAppGroupEffects),
   { ssr: false },
 );
 

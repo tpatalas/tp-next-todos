@@ -24,7 +24,6 @@ const customJestConfig = {
     '^@constAssertions/(.*)$': ['<rootDir>/lib/data/constAssertions/$1'],
     '^@options/(.*)$': ['<rootDir>/lib/data/options/$1'],
     '^@effects/(.*)$': ['<rootDir>/lib/stateLogics/effects/$1'],
-    '^@groupEffects/(.*)$': ['<rootDir>/lib/stateLogics/groupEffects/$1'],
     '^@hooks/(.*)$': ['<rootDir>/lib/stateLogics/hooks/$1'],
     '^@states/(.*)$': ['<rootDir>/lib/stateLogics/states/$1'],
     '^@stateLogics/(.*)$': ['<rootDir>/lib/stateLogics/$1'],

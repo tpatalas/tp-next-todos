@@ -9,6 +9,7 @@ import { useCallback, useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { useUserSession } from '@hooks/users';
 import { useClientErrorMessage } from '@hooks/notifications';
+import { GroupEffects } from './groupEffects';
 
 export const UserAuthGroupEffect = () => {
   const clientErrorMessage = useClientErrorMessage();
@@ -18,7 +19,6 @@ export const UserAuthGroupEffect = () => {
     </>
   );
 };
-import { GroupEffects } from '@groupEffects/index';
 
 export const UserSessionResetEffect = () => {
   const { data: session } = useSession();

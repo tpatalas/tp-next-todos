@@ -1,4 +1,3 @@
-import { Notification } from '@components/notifications/notification';
 import { CATCH } from '@constAssertions/misc';
 import {
   useFilterPathApp,
@@ -9,18 +8,12 @@ import {
   useLayoutType,
 } from '@hooks/layouts';
 import { LabelModal } from '@modals/labelModals/labelModal';
-import { MinimizedModal } from '@modals/minimizedModal';
-import { TodoModal } from '@modals/todoModals/todoModal';
 import { atomCatch } from '@states/misc';
 import { useRecoilValue } from 'recoil';
 import { TodoModal } from '@modals/todoModals/todoModal';
 import { MinimizedModal } from '@modals/minimizedModal';
 import { Notification } from 'components/notifications/notification';
-
-const LabelModal = dynamic(() =>
-  import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
-);
-import { GroupEffects } from '.';
+import { GroupEffects } from './groupEffects';
 
 export const LayoutHomeGroupEffects = () => {
   const filterPath = useFilterPathHome();
