@@ -1,13 +1,13 @@
 import { BREAKPOINT } from '@constAssertions/ui';
-import { atomMediaQuery } from '@states/misc';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { RepeatingElements } from '@ui/repeatings/repeatingElements';
 import { Fragment as LoadingSkeletonFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
 export const LoadingSkeletonTodos = () => {
-  const breakpointSm = useRecoilValue(atomMediaQuery(BREAKPOINT['sm']));
-  const breakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
-  const breakpointLg = useRecoilValue(atomMediaQuery(BREAKPOINT['lg']));
+  const breakpointSm = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['sm']));
+  const breakpointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
+  const breakpointLg = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['lg']));
   const repeatingByBreakpoint = breakpointLg ? 5 : breakpointMd ? 4 : breakpointSm ? 3 : 2;
 
   return (

@@ -16,8 +16,8 @@ import { validateEmailFormat, classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
 import { DividerX } from '@ui/dividers/dividerX';
 
-const ClientErrorMessageEffect = dynamic(() =>
-  import('@effects/clientErrorMessageEffect').then((mod) => mod.ClientErrorMessageEffect),
+const UserAuthGroupEffect = dynamic(() =>
+  import('@effects/users').then((mod) => mod.UserAuthGroupEffect),
 );
 
 export const AuthForm = () => {
@@ -70,7 +70,7 @@ export const AuthForm = () => {
           </form>
         </section>
       </div>
-      <ClientErrorMessageEffect />
+      <UserAuthGroupEffect />
     </Fragment>
   );
 };

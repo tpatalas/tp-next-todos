@@ -1,7 +1,7 @@
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Types } from '@lib/types';
-import { atomMediaQuery } from '@states/misc';
 import { atom, atomFamily, selector } from 'recoil';
+import { atomEffectMediaQuery } from './atomEffects/misc';
 
 /**
  * Atoms
@@ -39,10 +39,14 @@ export const selectorNavigationOpen = selector({
   get: ({ get }) => {
     const layoutType = get(atomLayoutType);
     const breakpointMedium =
-      layoutType === 'app' ? get(atomMediaQuery(BREAKPOINT['md'])) : get(atomMediaQuery(BREAKPOINT['ml']));
+      layoutType === 'app'
+        ? get(atomEffectMediaQuery(BREAKPOINT['md']))
+        : get(atomEffectMediaQuery(BREAKPOINT['ml']));
     if (get(atomNavigationOpenSetting(layoutType)) && breakpointMedium)
       return get(atomNavigationOpenSetting(layoutType)) ? false : true;
-    return breakpointMedium ? get(atomNavigationInitialOpen(layoutType)) : get(atomNavigationOpenMobile(layoutType));
+    return breakpointMedium
+      ? get(atomNavigationInitialOpen(layoutType))
+      : get(atomNavigationOpenMobile(layoutType));
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
