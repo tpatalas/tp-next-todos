@@ -68,6 +68,13 @@ export const STYLE_BUTTON_NORMAL_GRAY = classNames(
   STYLE_BUTTON_COLOR_GRAY,
 );
 
+// misc
+export const STYLE_BUTTON_ICON =
+  'border-transparent bg-transparent text-gray-500 hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700 focus-visible:ring-blue-500 ';
+export const STYLE_BUTTON_NO_RING = 'focus:outline-none focus:ring-0 focus:ring-offset-0';
+export const STYLE_BUTTON_KEY_ONLY_RING =
+  'focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
+
 /**
  * Link
  **/
@@ -76,15 +83,21 @@ export const STYLE_LINK_NORMAL =
 /*
  * gradient-wave-effect
  **/
-export const STYLE_BLUR_GRADIENT =
-  'bg-gradient-to-r from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90% opacity-70 blur-md';
-
-// misc
-export const STYLE_BUTTON_ICON =
-  'border-transparent bg-transparent text-gray-500 hover:enabled:bg-gray-700 hover:enabled:bg-opacity-10 hover:enabled:text-gray-700 focus-visible:ring-blue-500 ';
-export const STYLE_BUTTON_NO_RING = 'focus:outline-none focus:ring-0 focus:ring-offset-0';
-export const STYLE_BUTTON_KEY_ONLY_RING =
-  'focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
+// Gradient Base
+export const STYLE_BLUR_GRADIENT_BASE =
+  'absolute from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90%';
+const STYLE_BLUR_GRADIENT_SM = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-sm');
+const STYLE_BLUR_GRADIENT_MD = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-md');
+const STYLE_BLUR_GRADIENT_LG = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-lg');
+// Variants
+// Right
+export const STYLE_BLUR_GRADIENT_R_SM = classNames(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_MD = classNames(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_LG = classNames(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-r');
+// Bottom
+export const STYLE_BLUR_GRADIENT_B_SM = classNames(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_MD = classNames(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_LG = classNames(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-b');
 
 /**
  * Hover Effect
