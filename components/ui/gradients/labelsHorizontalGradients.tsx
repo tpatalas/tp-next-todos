@@ -1,5 +1,5 @@
 import { GRADIENT_POSITION } from '@constAssertions/ui';
-import { useHorizontalScrollPosition } from '@hooks/misc';
+import { useHorizontalScrollPosition } from '@hooks/ui';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 import {
