@@ -2,6 +2,7 @@ import {
   useFilterPathApp,
   useFilterPathHome,
   useInitialNavigation,
+  useLayoutNavigationMobileReset,
   useLayoutType,
 } from '@hooks/layouts';
 import { GroupEffects } from './groupEffects';
@@ -9,16 +10,10 @@ import dynamic from 'next/dynamic';
 import { CATCH } from '@constAssertions/misc';
 import { atomCatch } from '@states/misc';
 import { useRecoilValue } from 'recoil';
+import { TodoModal } from '@modals/todoModals/todoModal';
+import { MinimizedModal } from '@modals/minimizedModal';
+import { Notification } from 'components/notifications/notification';
 
-const CreateTodoModal = dynamic(() =>
-  import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal),
-);
-const MinimizedModal = dynamic(() =>
-  import('@modals/minimizedModal').then((mod) => mod.MinimizedModal),
-);
-const Notification = dynamic(() =>
-  import('components/notifications/notification').then((mod) => mod.Notification),
-);
 const LabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
 );
@@ -45,9 +40,18 @@ export const LayoutAppGroupEffects = () => {
     <>
       <GroupEffects effects={[filterPath, setLayoutType, setNavigation]} />
       <Notification />
-      <CreateTodoModal />
+      <TodoModal />
       <MinimizedModal />
       {!catchTodoModal && <LabelModal />}
+    </>
+  );
+};
+
+export const LayoutNavigationGroupEffect = () => {
+  const mobileReset = useLayoutNavigationMobileReset();
+  return (
+    <>
+      <GroupEffects effects={[mobileReset]} />
     </>
   );
 };
