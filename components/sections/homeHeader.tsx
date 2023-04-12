@@ -5,12 +5,12 @@ import { classNames } from '@stateLogics/utils';
 export const HomeHeader = () => {
   const scrollPosition = useVerticalScrollPosition();
   const clientWidth = useWindowWidth();
-  const dynamicStartPoint = clientWidth > 900 ? 900 : clientWidth;
+  const dynamicStartPoint = clientWidth > 900 ? 800 : clientWidth * 1.1;
   const scrollPositionRate = (startPosition: number, multiplier: number) => {
     if (!startPosition) return 0;
     return scrollPosition < startPosition ? 0 : (scrollPosition / startPosition - 1) * multiplier;
   };
-  const headerHeightRate = (scrollPositionRate(dynamicStartPoint, 2) * 100) / 9;
+  const headerHeightRate = (scrollPositionRate(dynamicStartPoint, 3) * 100) / 9;
 
   return (
     <>
@@ -23,7 +23,7 @@ export const HomeHeader = () => {
           </div>
         </div>
         <div
-          className='relative flex max-h-[9rem] flex-row items-center justify-center'
+          className='relative flex max-h-60 flex-row items-center justify-center'
           style={{ height: `${headerHeightRate}rem` }}>
           <div className={classNames(STYLE_BLUR_GRADIENT_B_MD, 'h-full w-3')} />
           <div className='h-full w-1 rounded-full bg-gradient-to-b from-blue-600' />
@@ -32,14 +32,14 @@ export const HomeHeader = () => {
           <h1
             className='my-5 h-full bg-slate-50 text-3xl font-bold tracking-normal text-slate-800 sm:text-5xl'
             style={{
-              opacity: scrollPositionRate(dynamicStartPoint * 1.2, 10),
+              opacity: scrollPositionRate(dynamicStartPoint * 1.4, 10),
             }}>
             Manage less work better
           </h1>
           <h2
             className='max-w-2xl text-lg text-slate-600 sm:text-xl'
             style={{
-              opacity: scrollPositionRate(dynamicStartPoint * 1.2, 10),
+              opacity: scrollPositionRate(dynamicStartPoint * 1.5, 10),
             }}>
             Unburden yourself from managing time-consuming tasks by allowing app to seamlessly
             choose the most suitable to-dos for you.
