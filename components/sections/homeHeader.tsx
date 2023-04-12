@@ -2,7 +2,7 @@ import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
 import { useVerticalScrollPosition, useWindowWidth } from '@hooks/ui';
 import { classNames } from '@stateLogics/utils';
 
-export const Header = () => {
+export const HomeHeader = () => {
   const scrollPosition = useVerticalScrollPosition();
   const clientWidth = useWindowWidth();
   const dynamicStartPoint = clientWidth > 900 ? 900 : clientWidth;
