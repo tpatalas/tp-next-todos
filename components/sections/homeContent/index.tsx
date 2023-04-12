@@ -8,12 +8,12 @@ export const HomeContent = () => {
   const styleImage = 'h-auto w-auto rounded-xl drop-shadow-2xl';
 
   return (
-    <div className='my-32 px-28 py-10'>
-      <div className='grid grid-cols-2 items-center justify-items-center gap-10'>
+    <div className='relative my-24 px-5 py-10 sm:px-10 md:my-32 lg:px-28'>
+      <div className='grid grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
         <div>
-          <div className='flex max-w-md flex-col items-start justify-center space-y-3 font-bold leading-relaxed tracking-wide'>
-            <p className='text-3xl text-slate-800'>Spotlight your to-dos</p>
-            <p className='text-xl text-slate-800/80'>
+          <div className='flex max-w-md flex-col items-center justify-center space-y-3 text-center font-bold md:items-start md:text-start md:leading-relaxed md:tracking-wide'>
+            <p className='text-2xl text-slate-800 md:text-3xl'>Free your overload</p>
+            <p className='text-lg text-slate-800/80 md:text-xl'>
               View your to-dos that are intelligently and automatically selected in Today&apos;s
               Focus.
             </p>
@@ -34,7 +34,7 @@ export const HomeContent = () => {
             priority
           />
         </div>
-        <div className={classNames(styleImageWrapper)}>
+        <div className={classNames(styleImageWrapper, 'max-md:order-last')}>
           <Image
             loader={nextImageLoader}
             width={0}
@@ -45,9 +45,9 @@ export const HomeContent = () => {
             priority
           />
         </div>
-        <div className='flex max-w-md flex-col items-start justify-center space-y-3 font-bold leading-relaxed tracking-wide'>
-          <p className='text-3xl text-slate-800'>Free your overload</p>
-          <p className='text-xl text-slate-800/80'>
+        <div className='flex max-w-md flex-col items-center justify-center space-y-3 text-center font-bold md:items-start md:text-start md:leading-relaxed md:tracking-wide'>
+          <p className='text-2xl text-slate-800 md:text-3xl'>Free your overload</p>
+          <p className='text-lg text-slate-800/80 md:text-xl'>
             Work on a to-do list that is auto-allocated according to your capacity.
           </p>
           <p className='text-base font-medium text-slate-800/60'>
