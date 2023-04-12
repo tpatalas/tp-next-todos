@@ -49,7 +49,7 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
             )}>
             <FooterNavigation layoutType={layoutType}>
               {layoutApp && <AppNavigation />}
-              <div className='ml:hidden'>
+              <div className={isSidebarOpen ? '' : 'hidden'}>
                 {layoutHome && <HomeNavigation layoutType={layoutType} />}
               </div>
             </FooterNavigation>
