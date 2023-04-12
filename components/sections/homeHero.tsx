@@ -41,7 +41,10 @@ export const HomeHero = () => {
           <div className='flex justify-center'>
             <div className='relative mt-16 flow-root sm:mt-24'>
               <div
-                className={classNames('h-full w-full rounded-xl', STYLE_BLUR_GRADIENT_R_LG)}
+                className={classNames(
+                  'absolute h-full w-full rounded-xl',
+                  STYLE_BLUR_GRADIENT_R_LG,
+                )}
                 style={{ opacity: demoOpacityScrollRate }}
               />
               <div className='mx-auto flex w-full max-w-5xl flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
