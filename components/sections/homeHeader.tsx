@@ -5,7 +5,7 @@ import { classNames } from '@stateLogics/utils';
 export const HomeHeader = () => {
   const scrollPosition = useVerticalScrollPosition();
   const clientWidth = useWindowWidth();
-  const dynamicStartPoint = clientWidth > 900 ? 800 : clientWidth * 1.1;
+  const dynamicStartPoint = clientWidth > 900 ? 900 : clientWidth * 1.1;
   const scrollPositionRate = (startPosition: number, multiplier: number) => {
     if (!startPosition) return 0;
     return scrollPosition < startPosition ? 0 : (scrollPosition / startPosition - 1) * multiplier;
@@ -25,7 +25,7 @@ export const HomeHeader = () => {
         <div
           className='relative flex max-h-60 flex-row items-center justify-center'
           style={{ height: `${headerHeightRate}rem` }}>
-          <div className={classNames(STYLE_BLUR_GRADIENT_B_MD, 'h-full w-3')} />
+          <div className={classNames(STYLE_BLUR_GRADIENT_B_MD, 'absolute h-full w-3')} />
           <div className='h-full w-1 rounded-full bg-gradient-to-b from-blue-600' />
         </div>
         <div className='px-5 text-center'>
