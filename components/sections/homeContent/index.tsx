@@ -1,42 +1,13 @@
+import { DATA_FOOTER_SCROLL_RATE, TypesName } from '@collections/footer';
 import { PATH_IMAGE_HOME } from '@constAssertions/data';
 import { STYLE_BLUR_GRADIENT_R_ZR } from '@data/stylePreset';
-import { useScrollPositionRate, useWindowWidth } from '@hooks/ui';
+import { useScrollPositionRateData } from '@hooks/ui';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 
 export const HomeContent = () => {
-  const clientWidth = useWindowWidth();
-  const dynamicAdjuster = (value: number) => (clientWidth > 500 ? undefined : value);
-  const spotlightHeader = useScrollPositionRate({
-    startPosition: 1500,
-    multiplier: 350,
-    adjuster: dynamicAdjuster(2),
-  });
-  const spotlightSubHeader = useScrollPositionRate({
-    startPosition: 1500,
-    multiplier: 500,
-    adjuster: dynamicAdjuster(2),
-  });
-  const spotlightBody = useScrollPositionRate({
-    startPosition: 1700,
-    multiplier: 500,
-    adjuster: dynamicAdjuster(2),
-  });
-  const overloadHeader = useScrollPositionRate({
-    startPosition: 1900,
-    multiplier: 350,
-    adjuster: dynamicAdjuster(3.5),
-  });
-  const overloadSubHeader = useScrollPositionRate({
-    startPosition: 1900,
-    multiplier: 500,
-    adjuster: dynamicAdjuster(3.5),
-  });
-  const overloadBody = useScrollPositionRate({
-    startPosition: 2100,
-    multiplier: 500,
-    adjuster: dynamicAdjuster(3.5),
-  });
+  const scrollPositionRate = ({ name }: { name: TypesName }) =>
+    useScrollPositionRateData<TypesName>({ name: name, data: DATA_FOOTER_SCROLL_RATE });
 
   const styleImageWrapper =
     'relative w-80 rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
@@ -53,19 +24,19 @@ export const HomeContent = () => {
                   'max-w-sm whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
                   STYLE_BLUR_GRADIENT_R_ZR,
                 )}
-                style={{ width: spotlightHeader }}>
+                style={{ width: scrollPositionRate({ name: 'spotlightHeader' }) }}>
                 Spotlight your to-dos
               </p>
             </div>
             <p
               className='text-lg text-slate-800/80 md:text-xl'
-              style={{ opacity: spotlightSubHeader }}>
+              style={{ opacity: scrollPositionRate({ name: 'spotlightSubHeader' }) }}>
               View your to-dos that are intelligently and automatically selected in Today&apos;s
               Focus.
             </p>
             <p
               className='text-base font-medium text-slate-800/80'
-              style={{ opacity: spotlightBody }}>
+              style={{ opacity: scrollPositionRate({ name: 'spotlightBody' }) }}>
               Add your to-dos as you please, with or without due dates and priorities. Today&apos;s
               Focus will display your most important to-dos for you.
             </p>
@@ -73,7 +44,7 @@ export const HomeContent = () => {
         </div>
         <div
           className={classNames(styleImageWrapper)}
-          style={{ opacity: spotlightSubHeader }}>
+          style={{ opacity: scrollPositionRate({ name: 'spotlightSubHeader' }) }}>
           <Image
             loader={nextImageLoader}
             width={0}
@@ -86,7 +57,7 @@ export const HomeContent = () => {
         </div>
         <div
           className={classNames(styleImageWrapper, 'max-md:order-last')}
-          style={{ opacity: overloadSubHeader }}>
+          style={{ opacity: scrollPositionRate({ name: 'overloadSubHeader' }) }}>
           <Image
             loader={nextImageLoader}
             width={0}
@@ -104,18 +75,18 @@ export const HomeContent = () => {
                 'max-w-sm whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
                 STYLE_BLUR_GRADIENT_R_ZR,
               )}
-              style={{ width: overloadHeader }}>
+              style={{ width: scrollPositionRate({ name: 'overloadHeader' }) }}>
               Free your overload
             </p>
           </div>
           <p
             className='text-lg text-slate-800/80 md:text-xl'
-            style={{ opacity: overloadSubHeader }}>
+            style={{ opacity: scrollPositionRate({ name: 'overloadSubHeader' }) }}>
             Work on a to-do list that is auto-allocated according to your capacity.
           </p>
           <p
             className='text-base font-medium text-slate-800/80'
-            style={{ opacity: overloadBody }}>
+            style={{ opacity: scrollPositionRate({ name: 'overloadBody' }) }}>
             Today&apos;s Focus efficiently determines the ideal number of to-dos for you. As you
             consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base
             on your completion rate.

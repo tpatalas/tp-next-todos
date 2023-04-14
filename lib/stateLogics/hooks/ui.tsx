@@ -1,3 +1,4 @@
+import { TypesDataScrollRate } from '@collections/footer';
 import { RefObject, useCallback, useEffect, useState } from 'react';
 
 type TypesScrollPosition = 'startPosition' | 'multiplier';
@@ -97,4 +98,22 @@ export const useScrollPositionRate = ({
   if (!dynamicStartPoint || scrollPosition < dynamicStartPoint) return 0;
   if (rateType === 'percentage') return `${scrollRateOutput}%`;
   return scrollRateOutput;
+};
+
+export const useScrollPositionRateData = <T,>({
+  name,
+  data,
+}: {
+  name: T;
+  data: TypesDataScrollRate<T>[];
+}) => {
+  const clientWidth = useWindowWidth();
+  const dynamicAdjuster = (value?: number) => (clientWidth > 500 ? undefined : value);
+  const position = data.find((item) => item.name === name) || ({} as TypesDataScrollRate<T>);
+  const scrollPosition = useScrollPositionRate({
+    startPosition: position.startPosition,
+    multiplier: position.multiplier,
+    adjuster: dynamicAdjuster(position.adjuster),
+  });
+  return scrollPosition;
 };
