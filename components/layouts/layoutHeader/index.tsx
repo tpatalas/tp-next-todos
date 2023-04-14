@@ -30,7 +30,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
         className={classNames(
           'sticky top-0 w-full',
           layoutHome && 'z-50 bg-slate-50',
-          layoutHome && !isSidebarMobileOpen ? 'bg-opacity-60 backdrop-blur-lg' : '',
+          layoutHome && !isSidebarMobileOpen && 'bg-opacity-60 backdrop-blur-lg',
           layoutApp && 'bg-transparent',
         )}>
         <div
