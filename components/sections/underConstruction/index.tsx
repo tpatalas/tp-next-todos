@@ -5,17 +5,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const UnderConstruction = () => {
+  const styleParagraph = 'text-3xl font-bold uppercase tracking-wide ml:text-4xl';
+
   return (
     <>
-      <div className='grid-row-2 grid items-center justify-items-center gap-2 px-2 py-5 sm:px-10 md:grid-cols-2'>
+      <div className='grid-row-2 grid items-center justify-items-center gap-6 px-2 py-5 sm:px-10 md:px-20 ml:grid-cols-2'>
         <div className='flex max-w-md flex-col items-center justify-center space-y-6 p-2 text-center'>
           <div className='flex flex-col items-center justify-center space-y-2 text-slate-800/90'>
-            <p className={classNames('text-3xl font-bold uppercase tracking-wide sm:text-4xl')}>
-              Under
-            </p>
-            <p className={classNames('text-3xl font-bold uppercase tracking-wide sm:text-4xl')}>
-              Construction
-            </p>
+            <h1 className={classNames(styleParagraph)}>Under</h1>
+            <h1 className={classNames(styleParagraph)}>Construction</h1>
           </div>
           <div>
             <p className='text-slate-800/80'>
