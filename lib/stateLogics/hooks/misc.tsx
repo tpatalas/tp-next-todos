@@ -9,14 +9,6 @@ import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
-import { useWindowWidth, useVerticalScrollPosition } from './ui';
-
-type TypesScrollPosition = 'startPosition' | 'multiplier';
-type PropsScrollPositionRate = Record<TypesScrollPosition, number> &
-  Partial<{
-    clientHeightAdjuster: number;
-    type: 'percentage' | 'value';
-  }>;
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();
@@ -126,23 +118,4 @@ export const useCompareToQueryLabels = () => {
       return !get(selectorSessionLabels).find((queryLabel) => equal(label, queryLabel));
     });
   });
-};
-
-export const useScrollPositionRate = ({
-  startPosition,
-  multiplier,
-  type,
-  clientHeightAdjuster,
-}: PropsScrollPositionRate) => {
-  const clientWidth = useWindowWidth();
-  const scrollPosition = useVerticalScrollPosition();
-  const adjuster = clientHeightAdjuster ?? 1.1;
-  const rateType = type ?? 'percentage';
-
-  const dynamicStartPoint = clientWidth > 900 ? startPosition : clientWidth * adjuster;
-  const scrollRate = (scrollPosition / dynamicStartPoint - 1) * multiplier;
-  const scrollRateOutput = scrollRate > 100 ? 100 : scrollRate;
-  if (!dynamicStartPoint || scrollPosition < dynamicStartPoint) return 0;
-  if (rateType === 'percentage') return `${scrollRateOutput}%`;
-  return scrollRateOutput;
 };

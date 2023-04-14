@@ -1,5 +1,12 @@
 import { RefObject, useCallback, useEffect, useState } from 'react';
 
+type TypesScrollPosition = 'startPosition' | 'multiplier';
+type PropsScrollPositionRate = Record<TypesScrollPosition, number> &
+  Partial<{
+    adjuster: number;
+    type: 'percentage' | 'value';
+  }>;
+
 export const useHorizontalScrollPosition = (ref: RefObject<HTMLDivElement>) => {
   const [leftPosition, setLeftPosition] = useState(-1);
   const [rightPosition, setRightPosition] = useState(-1);
@@ -71,4 +78,23 @@ export const useWindowWidth = () => {
   }, [handleResize]);
 
   return windowWidth;
+};
+
+export const useScrollPositionRate = ({
+  startPosition,
+  multiplier,
+  type,
+  adjuster,
+}: PropsScrollPositionRate) => {
+  const clientWidth = useWindowWidth();
+  const scrollPosition = useVerticalScrollPosition();
+  const clientWidthAdjuster = adjuster ?? 1.1;
+  const rateType = type ?? 'percentage';
+
+  const dynamicStartPoint = clientWidth > 900 ? startPosition : clientWidth * clientWidthAdjuster;
+  const scrollRate = (scrollPosition / dynamicStartPoint - 1) * multiplier;
+  const scrollRateOutput = scrollRate > 100 ? 100 : scrollRate;
+  if (!dynamicStartPoint || scrollPosition < dynamicStartPoint) return 0;
+  if (rateType === 'percentage') return `${scrollRateOutput}%`;
+  return scrollRateOutput;
 };
