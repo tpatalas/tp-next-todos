@@ -1,16 +1,42 @@
 import { PATH_IMAGE_HOME } from '@constAssertions/data';
 import { STYLE_BLUR_GRADIENT_R_ZR } from '@data/stylePreset';
-import { useScrollPositionRate } from '@hooks/misc';
+import { useScrollPositionRate, useWindowWidth } from '@hooks/ui';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 
 export const HomeContent = () => {
-  const spotlightHeader = useScrollPositionRate({ startPosition: 1500, multiplier: 350 });
-  const spotlightSubHeader = useScrollPositionRate({ startPosition: 1500, multiplier: 500 });
-  const spotlightBody = useScrollPositionRate({ startPosition: 1700, multiplier: 500 });
-  const overloadHeader = useScrollPositionRate({ startPosition: 1900, multiplier: 350 });
-  const overloadSubHeader = useScrollPositionRate({ startPosition: 1900, multiplier: 500 });
-  const overloadBody = useScrollPositionRate({ startPosition: 2100, multiplier: 500 });
+  const clientWidth = useWindowWidth();
+  const dynamicAdjuster = (value: number) => (clientWidth > 500 ? undefined : value);
+  const spotlightHeader = useScrollPositionRate({
+    startPosition: 1500,
+    multiplier: 350,
+    adjuster: dynamicAdjuster(2),
+  });
+  const spotlightSubHeader = useScrollPositionRate({
+    startPosition: 1500,
+    multiplier: 500,
+    adjuster: dynamicAdjuster(2),
+  });
+  const spotlightBody = useScrollPositionRate({
+    startPosition: 1700,
+    multiplier: 500,
+    adjuster: dynamicAdjuster(2),
+  });
+  const overloadHeader = useScrollPositionRate({
+    startPosition: 1900,
+    multiplier: 350,
+    adjuster: dynamicAdjuster(3.5),
+  });
+  const overloadSubHeader = useScrollPositionRate({
+    startPosition: 1900,
+    multiplier: 500,
+    adjuster: dynamicAdjuster(3.5),
+  });
+  const overloadBody = useScrollPositionRate({
+    startPosition: 2100,
+    multiplier: 500,
+    adjuster: dynamicAdjuster(3.5),
+  });
 
   const styleImageWrapper =
     'relative w-80 rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
