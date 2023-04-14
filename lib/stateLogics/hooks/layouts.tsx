@@ -18,9 +18,9 @@ import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { CATCH } from '@constAssertions/misc';
 
 export const useNavigationOpen = () => {
+  const layoutType = useRecoilValue(atomLayoutType);
   return useRecoilCallback(({ snapshot, set }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const layoutType = get(atomLayoutType);
     const breakpoint =
       layoutType === 'app'
         ? get(atomEffectMediaQuery(BREAKPOINT['md']))
