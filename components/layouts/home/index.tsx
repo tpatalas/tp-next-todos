@@ -26,12 +26,16 @@ export const LayoutHome = ({ children }: Props) => {
       <Head>
         <title>{slug ? 'Todos - ' + slug : ''}</title>
       </Head>
-      <LayoutHeader layoutType='home'>
-        <HomeNavigation layoutType='home' />
-      </LayoutHeader>
-      <LayoutFooter layoutType='home' />
-      {children}
-      <Footer />
+      <main className='flex min-h-screen flex-col justify-between'>
+        <section>
+          <LayoutHeader layoutType='home'>
+            <HomeNavigation layoutType='home' />
+          </LayoutHeader>
+          <LayoutFooter layoutType='home' />
+          {children}
+        </section>
+        <Footer />
+      </main>
       <LayoutHomeGroupEffects />
     </LayoutFragment>
   );
