@@ -1,9 +1,11 @@
-import { HomeStartToday } from '@components/sections/homeStartToday';
 import { LayoutHome } from '@layouts/home';
 import dynamic from 'next/dynamic';
 import { Fragment, ReactElement } from 'react';
 
 const HomeHero = dynamic(() => import('@components/sections/homeHero').then((mod) => mod.HomeHero));
+const HomeStartToday = dynamic(() =>
+  import('@components/sections/homeStartToday').then((mod) => mod.HomeStartToday),
+);
 const HomeContent = dynamic(() =>
   import('@components/sections/homeContent').then((mod) => mod.HomeContent),
 );
