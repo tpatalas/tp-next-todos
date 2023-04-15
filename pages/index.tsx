@@ -1,3 +1,4 @@
+import { HomeStartToday } from '@components/sections/homeStartToday';
 import { LayoutHome } from '@layouts/home';
 import dynamic from 'next/dynamic';
 import { Fragment, ReactElement } from 'react';
@@ -16,6 +17,7 @@ const Home = () => {
       <HomeHero />
       <HomeHeader />
       <HomeContent />
+      <HomeStartToday />
     </Fragment>
   );
 };
