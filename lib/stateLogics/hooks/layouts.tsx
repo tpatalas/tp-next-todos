@@ -1,4 +1,4 @@
-import { PATHNAME_IMAGE, PATH_APP, PATH_HOME } from '@constAssertions/data';
+import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Labels, Types } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
@@ -12,14 +12,15 @@ import {
 import { atomCatch, atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useRouter } from 'next/router';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { useCallback } from 'react';
 import { useNextQuery } from './misc';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { CATCH } from '@constAssertions/misc';
 
 export const useNavigationOpen = () => {
+  const layoutType = useRecoilValue(atomLayoutType);
   return useRecoilCallback(({ snapshot, set }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const layoutType = get(atomLayoutType);
     const breakpoint =
       layoutType === 'app'
         ? get(atomEffectMediaQuery(BREAKPOINT['md']))
@@ -60,10 +61,10 @@ export const useFilterPathApp = () => {
     const label_id = get(atomLabelQuerySlug);
     const label = labels.find((label) => label._id === label_id) || ({} as Labels);
 
-    const setState = (key: keyof typeof PATHNAME_IMAGE, htmlTitle: string) => {
+    const setState = (key: keyof typeof PATH_IMAGE_APP, htmlTitle: string) => {
       set(atomFilterEffect, key);
       set(atomHtmlTitleTag, htmlTitle);
-      set(atomPathnameImage, PATHNAME_IMAGE[key]);
+      set(atomPathnameImage, PATH_IMAGE_APP[key]);
     };
 
     if (path('app')) return setState('focus', "Today's Focus");
@@ -75,7 +76,7 @@ export const useFilterPathApp = () => {
       set(atomFilterEffect, 'label');
       set(atomLabelQuerySlug, appLabel);
       set(atomHtmlTitleTag, `Label | ${label.name}`);
-      set(atomPathnameImage, PATHNAME_IMAGE['label']);
+      set(atomPathnameImage, PATH_IMAGE_APP['label']);
       return;
     }
   });
@@ -109,4 +110,13 @@ export const useLayoutNavigationMobileReset = () => {
     if (!breakpoint) return;
     reset(atomNavigationOpenMobile(layoutType));
   });
+};
+
+export const useLayoutBodyTagClass = ({ layoutType }: Pick<Types, 'layoutType'>) => {
+  const layoutBodyHandler = useCallback(() => {
+    if (layoutType === 'app') return document.body.classList.add('overflow-hidden');
+    return document.body.classList.remove('overflow-hidden');
+  }, [layoutType]);
+
+  return layoutBodyHandler;
 };

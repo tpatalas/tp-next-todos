@@ -5,10 +5,9 @@ import { Fragment as LayoutFragment, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const HomeNavigation = dynamic(() => import('./homeNavigation').then((mod) => mod.HomeNavigation));
-
 const LayoutHeader = dynamic(() => import('@layouts/layoutHeader').then((mod) => mod.LayoutHeader));
-
 const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter));
+const Footer = dynamic(() => import('@components/sections/footer').then((mod) => mod.Footer));
 
 const LayoutHomeGroupEffects = dynamic(
   () => import('@effects/layout').then((mod) => mod.LayoutHomeGroupEffects),
@@ -21,17 +20,23 @@ type Props = {
 
 export const LayoutHome = ({ children }: Props) => {
   const slug = useRecoilValue(atomHtmlTitleTag);
+  const layoutType = 'home';
 
   return (
     <LayoutFragment>
       <Head>
         <title>{slug ? 'Todos - ' + slug : ''}</title>
       </Head>
-      <LayoutHeader layoutType='home'>
-        <HomeNavigation layoutType='home' />
-      </LayoutHeader>
-      <LayoutFooter layoutType='home' />
-      {children}
+      <main className='flex min-h-screen flex-col justify-between'>
+        <section>
+          <LayoutHeader layoutType={layoutType}>
+            <HomeNavigation layoutType={layoutType} />
+          </LayoutHeader>
+          <LayoutFooter layoutType={layoutType} />
+          {children}
+        </section>
+        <Footer />
+      </main>
       <LayoutHomeGroupEffects />
     </LayoutFragment>
   );
