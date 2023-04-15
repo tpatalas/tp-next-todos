@@ -2,6 +2,7 @@ import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { DATA_HOME } from '@collections/home';
 import { PATH_HOME } from '@constAssertions/data';
 import { STYLE_BUTTON_NORMAL_BLACK, STYLE_LINK_NORMAL } from '@data/stylePreset';
+import { useNavigationOpen } from '@hooks/layouts';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
@@ -14,6 +15,12 @@ type Props = Pick<Types, 'layoutType'>;
 export const HomeNavigation = ({ layoutType }: Props) => {
   const layoutApp = layoutType === 'app';
   const layoutHome = layoutType === 'home';
+  const setSidebarOpen = useNavigationOpen();
+  const optionsRouter = {
+    path: PATH_HOME['demo'],
+    className: classNames(STYLE_BUTTON_NORMAL_BLACK, 'ml:ml-2 max-ml:w-full'),
+    tooltip: 'Demo session',
+  };
 
   return (
     <ul
@@ -44,11 +51,8 @@ export const HomeNavigation = ({ layoutType }: Props) => {
       <div className={classNames('pl-0 max-ml:pt-2 ml:pl-2 lg:pl-4')}>
         <SignInButton />
         <PrefetchRouterButton
-          options={{
-            path: PATH_HOME['demo'],
-            className: classNames(STYLE_BUTTON_NORMAL_BLACK, 'ml:ml-2 max-ml:w-full'),
-            tooltip: 'Demo session',
-          }}>
+          options={optionsRouter}
+          onClick={() => setSidebarOpen()}>
           Try Demo
         </PrefetchRouterButton>
       </div>

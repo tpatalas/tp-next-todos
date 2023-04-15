@@ -5,7 +5,7 @@ import { classNames } from '@stateLogics/utils';
  */
 // Base
 export const STYLE_BUTTON_BASE =
-  'transition-all inline-flex items-center justify-center tracking-wide rounded-lg py-[0.66rem] border leading-4 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  'transition-all inline-flex items-center justify-center tracking-wide rounded-lg h-10 p-2 border leading-4 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
 export const STYLE_BUTTON_SIZE_NORMAL = 'px-4 text-base';
 export const STYLE_BUTTON_SIZE_LARGE = 'px-14 text-base';
 export const STYLE_BUTTON_SIZE_FULL = 'px-14 text-base';
