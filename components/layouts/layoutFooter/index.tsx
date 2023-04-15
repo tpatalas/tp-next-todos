@@ -28,7 +28,7 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
             enter='transition transform ease-in-out duration-200'
             enterFrom={classNames(
               'transform opacity-0',
-              layoutApp && 'translate-x-0',
+              layoutApp && 'md:-translate-x-0 -translate-x-5',
               layoutHome && '-translate-y-5',
             )}
             enterTo={classNames(
@@ -49,9 +49,7 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
             )}>
             <FooterNavigation layoutType={layoutType}>
               {layoutApp && <AppNavigation />}
-              <div className='ml:hidden'>
-                {layoutHome && <HomeNavigation layoutType={layoutType} />}
-              </div>
+              {layoutHome && <HomeNavigation layoutType={layoutType} />}
             </FooterNavigation>
           </Transition.Child>
           <LayoutNavigationGroupEffect />

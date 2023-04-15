@@ -1,31 +1,34 @@
+import { CATCH } from '@constAssertions/misc';
 import {
   useFilterPathApp,
   useFilterPathHome,
   useInitialNavigation,
+  useLayoutBodyTagClass,
   useLayoutNavigationMobileReset,
   useLayoutType,
 } from '@hooks/layouts';
-import { GroupEffects } from './groupEffects';
-import dynamic from 'next/dynamic';
-import { CATCH } from '@constAssertions/misc';
-import { atomCatch } from '@states/misc';
-import { useRecoilValue } from 'recoil';
-import { TodoModal } from '@modals/todoModals/todoModal';
+import { LabelModal } from '@modals/labelModals/labelModal';
 import { MinimizedModal } from '@modals/minimizedModal';
+import { TodoModal } from '@modals/todoModals/todoModal';
+import { atomNavigationOpenMobile } from '@states/layouts';
+import { atomCatch } from '@states/misc';
 import { Notification } from 'components/notifications/notification';
-
-const LabelModal = dynamic(() =>
-  import('@modals/labelModals/labelModal').then((mod) => mod.LabelModal),
-);
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { GroupEffects } from './groupEffects';
 
 export const LayoutHomeGroupEffects = () => {
+  const layoutType = 'home';
   const filterPath = useFilterPathHome();
-  const setNavigation = useInitialNavigation({ layoutType: 'home' });
-  const setLayoutType = useLayoutType({ layoutType: 'home' });
+  const setNavigation = useInitialNavigation({ layoutType: layoutType });
+  const setLayoutType = useLayoutType({ layoutType: layoutType });
+  const setBodyTagClass = useLayoutBodyTagClass({ layoutType: layoutType });
+  const restSidebarOpen = useResetRecoilState(atomNavigationOpenMobile(layoutType));
 
   return (
     <>
-      <GroupEffects effects={[filterPath, setLayoutType, setNavigation]} />
+      <GroupEffects
+        effects={[filterPath, setLayoutType, setNavigation, setBodyTagClass, restSidebarOpen]}
+      />
     </>
   );
 };
@@ -35,10 +38,11 @@ export const LayoutAppGroupEffects = () => {
   const setNavigation = useInitialNavigation({ layoutType: 'app' });
   const setLayoutType = useLayoutType({ layoutType: 'app' });
   const catchTodoModal = useRecoilValue(atomCatch(CATCH.todoModal));
+  const setBodyTagClass = useLayoutBodyTagClass({ layoutType: 'app' });
 
   return (
     <>
-      <GroupEffects effects={[filterPath, setLayoutType, setNavigation]} />
+      <GroupEffects effects={[filterPath, setLayoutType, setNavigation, setBodyTagClass]} />
       <Notification />
       <TodoModal />
       <MinimizedModal />

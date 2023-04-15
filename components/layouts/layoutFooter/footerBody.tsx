@@ -1,4 +1,4 @@
-import { GRADIENT_TYPE, GRADIENT_POSITION } from '@constAssertions/ui';
+import { GRADIENT_POSITION, GRADIENT_TYPE } from '@constAssertions/ui';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 import { selectorNavigationOpen } from '@states/layouts';
@@ -15,23 +15,29 @@ export const FooterBody = ({ children }: Props) => {
   return (
     <div
       className={classNames(
-        'relative flex w-full flex-row justify-between rounded-xl bg-transparent transition-all duration-200 ease-in-out sm:mr-3 sm:mb-3 sm:shadow-lg sm:shadow-slate-300',
+        'relative flex w-full flex-row justify-between rounded-xl bg-transparent duration-150 ease-in-out sm:mb-3 sm:mr-3 sm:shadow-lg sm:shadow-slate-300',
         isSidebarOpen ? 'md:ml-[266px]' : 'md:ml-3',
       )}>
       <GlobalVerticalGradient
-        options={{ gradientType: GRADIENT_TYPE['single'], gradientPosition: GRADIENT_POSITION['top'] }}
+        options={{
+          gradientType: GRADIENT_TYPE['single'],
+          gradientPosition: GRADIENT_POSITION['top'],
+        }}
       />
       <main
         className={classNames(
           'absolute mb-10 h-full w-full rounded-xl border border-slate-100',
           isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
         )}>
-        <div className='flex w-full justify-center pt-4 pb-64 sm:pt-10 sm:pr-4 sm:pl-5 lg:justify-center lg:pl-10'>
+        <div className='flex w-full justify-center pb-64 pt-4 sm:pl-5 sm:pr-4 sm:pt-10 lg:justify-center lg:pl-10'>
           {children}
         </div>
       </main>
       <GlobalVerticalGradient
-        options={{ gradientType: GRADIENT_TYPE['double'], gradientPosition: GRADIENT_POSITION['bottom'] }}
+        options={{
+          gradientType: GRADIENT_TYPE['double'],
+          gradientPosition: GRADIENT_POSITION['bottom'],
+        }}
       />
     </div>
   );

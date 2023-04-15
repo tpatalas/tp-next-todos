@@ -1,12 +1,8 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
-import { render, RenderOptions } from '@testing-library/react';
+import { RenderOptions, render } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 import { RecoilRoot } from 'recoil';
 import validator from 'validator';
-
-/**
- * Utils
- **/
 
 // Days
 export const dayInSecond = 60 * 60 * 24;

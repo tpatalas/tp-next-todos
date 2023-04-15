@@ -1,16 +1,11 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './lib/**/*.{js,ts,jsx,tsx}',
-    './util/**/*.{js,ts,jsx,tsx}',
-    './models/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class', // or 'media' or 'class' or false
-
   theme: {
     screens: {
       // => @media (min-width: 640px) { ... }
@@ -44,6 +39,15 @@ export default {
             lineHeight: '18px',
           },
         ],
+      },
+      keyframes: {
+        glow: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+      },
+      animation: {
+        glow: 'glow 8s ease-in-out infinite',
       },
       opacity: {
         65: '0.65',
