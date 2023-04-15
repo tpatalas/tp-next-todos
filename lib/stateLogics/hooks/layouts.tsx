@@ -2,33 +2,19 @@ import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Labels, Types } from '@lib/types';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
-import { atomLabelQuerySlug } from '@states/labels';
-import {
-  atomLayoutType,
-  atomNavigationInitialOpen,
-  atomNavigationOpenMobile,
-  atomNavigationOpenSetting,
-} from '@states/layouts';
-import { atomCatch, atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
-import { useRouter } from 'next/router';
-import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
-import { useCallback } from 'react';
-import { useNextQuery } from './misc';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
-import { CATCH } from '@constAssertions/misc';
+import { atomLabelQuerySlug } from '@states/labels';
+import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
+import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
+import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { useNextQuery } from './misc';
 
 export const useNavigationOpen = () => {
   const layoutType = useRecoilValue(atomLayoutType);
-  return useRecoilCallback(({ snapshot, set }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const breakpoint =
-      layoutType === 'app'
-        ? get(atomEffectMediaQuery(BREAKPOINT['md']))
-        : get(atomEffectMediaQuery(BREAKPOINT['ml']));
-
-    // Under the mediaQuery medium ('md') will return false and will return true over mediaQuery
-    if (!breakpoint) return set(atomNavigationOpenMobile(layoutType), (event) => !event);
-    set(atomNavigationOpenSetting(layoutType), (event) => !event);
+  return useRecoilCallback(({ set }) => () => {
+    set(atomNavigationOpen(layoutType), (event) => !event);
   });
 };
 
@@ -83,32 +69,24 @@ export const useFilterPathApp = () => {
 };
 
 export const useInitialNavigation = ({ layoutType }: Pick<Types, 'layoutType'>) => {
-  return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    if (layoutType === 'app') return set(atomNavigationInitialOpen(layoutType), true);
-    !!get(atomNavigationInitialOpen(layoutType)) && reset(atomNavigationInitialOpen(layoutType));
-    return;
+  const breakPointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
+  const breakPointMl = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['ml']));
+  return useRecoilCallback(({ set }) => () => {
+    const breakpointMd = layoutType === 'app' ? breakPointMd : breakPointMl;
+
+    if (breakpointMd) {
+      set(atomNavigationOpen('app'), true);
+      set(atomNavigationOpen('home'), false);
+      return;
+    }
+    set(atomNavigationOpen('app'), false);
+    set(atomNavigationOpen('home'), false);
   });
 };
 
 export const useLayoutType = ({ layoutType }: Pick<Types, 'layoutType'>) => {
   return useRecoilCallback(({ set }) => () => {
     set(atomLayoutType, layoutType);
-  });
-};
-
-export const useLayoutNavigationMobileReset = () => {
-  const isTodoModalOpen = useRecoilValue(atomCatch(CATCH['todoModal']) || CATCH['confirmModal']);
-  return useRecoilCallback(({ snapshot, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const layoutType = get(atomLayoutType);
-    const breakpoint =
-      layoutType === 'app'
-        ? get(atomEffectMediaQuery(BREAKPOINT['md']))
-        : get(atomEffectMediaQuery(BREAKPOINT['ml']));
-    isTodoModalOpen && reset(atomNavigationOpenMobile(layoutType));
-    if (!breakpoint) return;
-    reset(atomNavigationOpenMobile(layoutType));
   });
 };
 

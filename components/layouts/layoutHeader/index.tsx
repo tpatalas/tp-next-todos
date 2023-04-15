@@ -1,6 +1,6 @@
+import { useVerticalScrollPosition } from '@hooks/ui';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { atomNavigationOpenMobile } from '@states/layouts';
 import dynamic from 'next/dynamic';
 import {
   Fragment as LayoutHeaderFragment,
@@ -12,6 +12,7 @@ import {
 import { useRecoilValue } from 'recoil';
 import { Logo } from './logo';
 import { NavigationButton } from './navigationButton';
+import { atomNavigationOpen } from '@states/layouts';
 
 const UserSessionGroupEffects = dynamic(() =>
   import('@effects/users').then((mod) => mod.UserSessionGroupEffects),
@@ -22,7 +23,9 @@ type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;
 export const LayoutHeader = ({ children, layoutType }: Props) => {
   const layoutHome = layoutType === 'home';
   const layoutApp = layoutType === 'app';
-  const isSidebarMobileOpen = useRecoilValue(atomNavigationOpenMobile(layoutType));
+  const isSidebarOpen = useRecoilValue(atomNavigationOpen(layoutType));
+  const scrollPosition = useVerticalScrollPosition();
+  const homeSidebarClose = layoutHome && !isSidebarOpen && scrollPosition;
 
   return (
     <LayoutHeaderFragment>
@@ -30,7 +33,7 @@ export const LayoutHeader = ({ children, layoutType }: Props) => {
         className={classNames(
           'sticky top-0 w-full',
           layoutHome && 'z-50 bg-slate-50',
-          layoutHome && !isSidebarMobileOpen && 'bg-opacity-60 backdrop-blur-lg',
+          homeSidebarClose && 'bg-opacity-60 backdrop-blur-lg',
           layoutApp && 'bg-transparent',
         )}>
         <div

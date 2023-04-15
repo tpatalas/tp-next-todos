@@ -1,28 +1,19 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { DATA_HOME } from '@collections/home';
 import { PATH_HOME } from '@constAssertions/data';
-import { BREAKPOINT } from '@constAssertions/ui';
 import { STYLE_BUTTON_NORMAL_BLACK, STYLE_LINK_NORMAL } from '@data/stylePreset';
-import { useNavigationOpen } from '@hooks/layouts';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { DividerX } from '@ui/dividers/dividerX';
 import { DividerY } from '@ui/dividers/dividerY';
 import Link from 'next/link';
-import { useRecoilValueLoadable } from 'recoil';
 
 type Props = Pick<Types, 'layoutType'>;
 
 export const HomeNavigation = ({ layoutType }: Props) => {
   const layoutApp = layoutType === 'app';
   const layoutHome = layoutType === 'home';
-  const breakpointMD = useRecoilValueLoadable(atomEffectMediaQuery(BREAKPOINT['md'])).valueMaybe();
-  const setSidebarOpen = useNavigationOpen();
-  const onClickRouterHandler = () => {
-    !breakpointMD && setSidebarOpen();
-  };
   const optionsRouter = {
     path: PATH_HOME['demo'],
     className: classNames(STYLE_BUTTON_NORMAL_BLACK, 'ml:ml-2 max-ml:w-full'),
@@ -57,11 +48,7 @@ export const HomeNavigation = ({ layoutType }: Props) => {
       {layoutHome && <DividerX options={{ hidden: 'ml:hidden' }} />}
       <div className={classNames('pl-0 max-ml:pt-2 ml:pl-2 lg:pl-4')}>
         <SignInButton />
-        <PrefetchRouterButton
-          options={optionsRouter}
-          onClick={() => onClickRouterHandler()}>
-          Try Demo
-        </PrefetchRouterButton>
+        <PrefetchRouterButton options={optionsRouter}>Try Demo</PrefetchRouterButton>
       </div>
     </ul>
   );
