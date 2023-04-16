@@ -26,6 +26,24 @@ export const DATA_SVG_LOGOS: TypesSvgLogos[] = [
       </>
     ),
   },
+  {
+    name: 'MainLogoOnlyWhite',
+    isAriaHidden: false,
+    height: '80',
+    width: '80',
+    viewBox: '0 0 80 80',
+    className: '',
+    path: (
+      <>
+        <path
+          id='Path'
+          fill='#2563eb'
+          stroke='none'
+          d='M 26.157145 57.831219 L 9.942857 41.621029 L 13.185715 38.378971 L 26.157145 51.347137 L 27.77857 49.726105 L 31.021427 52.968163 L 26.157145 57.831219 Z M 40.75 59.452248 L 22.939468 42.06881 L 27.77857 36.757977 L 40.75 49.726105 L 65.071434 20.547752 L 69.935707 25.410805 L 40.75 59.452248 Z M 39.128571 44.863052 L 35.885712 41.621029 L 50.478573 25.410805 L 53.721432 28.652866 L 39.128571 44.863052 Z'
+        />
+      </>
+    ),
+  },
 ];
 
 export const DATA_SVG_PROVIDERS: TypesSvgLogos[] = [
