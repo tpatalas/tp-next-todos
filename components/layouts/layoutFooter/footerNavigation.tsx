@@ -1,7 +1,7 @@
 import { useNavigationOpen } from '@hooks/layouts';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { atomNavigationOpenMobile } from '@states/layouts';
+import { selectorNavigationOpenOnMobile } from '@states/layouts';
 import { Backdrop } from '@ui/backdrops/backdrop';
 import { Fragment as FooterSidebarFragment, forwardRef } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -11,7 +11,7 @@ type Props = Pick<Types, 'children' | 'layoutType'>;
 export const FooterNavigation = forwardRef<HTMLDivElement, Props>(
   ({ layoutType, children }: Props, ref) => {
     const setNavigationOpen = useNavigationOpen();
-    const isSidebarMobileOpen = useRecoilValue(atomNavigationOpenMobile(layoutType));
+    const isSidebarMobileOpen = useRecoilValue(selectorNavigationOpenOnMobile);
     const layoutHome = layoutType === 'home';
     const layoutApp = layoutType === 'app';
 

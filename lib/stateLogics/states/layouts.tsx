@@ -1,23 +1,13 @@
-import { BREAKPOINT } from '@constAssertions/ui';
 import { Types } from '@lib/types';
 import { atom, atomFamily, selector } from 'recoil';
 import { atomEffectMediaQuery } from './atomEffects/misc';
+import { BREAKPOINT } from '@constAssertions/ui';
 
 /**
  * Atoms
  **/
-export const atomNavigationInitialOpen = atomFamily<boolean, Types['layoutType']>({
-  key: 'atomNavigationInitialOpen',
-  default: false,
-});
-
-export const atomNavigationOpenMobile = atomFamily<boolean, Types['layoutType']>({
-  key: 'atomNavigationOpenMobile',
-  default: false,
-});
-
-export const atomNavigationOpenSetting = atomFamily<boolean, Types['layoutType']>({
-  key: 'atomNavigationOpenSetting',
+export const atomNavigationOpen = atomFamily<boolean, Types['layoutType']>({
+  key: 'atomNavigationOpen',
   default: false,
 });
 
@@ -38,15 +28,23 @@ export const selectorNavigationOpen = selector({
   key: 'selectorNavigationOpen',
   get: ({ get }) => {
     const layoutType = get(atomLayoutType);
+    return get(atomNavigationOpen(layoutType));
+  },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
+});
+
+export const selectorNavigationOpenOnMobile = selector({
+  key: 'selectorNavigationOpenOnMobile',
+  get: ({ get }) => {
+    const layoutType = get(atomLayoutType);
     const breakpointMedium =
       layoutType === 'app'
         ? get(atomEffectMediaQuery(BREAKPOINT['md']))
         : get(atomEffectMediaQuery(BREAKPOINT['ml']));
-    if (get(atomNavigationOpenSetting(layoutType)) && breakpointMedium)
-      return get(atomNavigationOpenSetting(layoutType)) ? false : true;
-    return breakpointMedium
-      ? get(atomNavigationInitialOpen(layoutType))
-      : get(atomNavigationOpenMobile(layoutType));
+
+    return !breakpointMedium && get(atomNavigationOpen(layoutType));
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
