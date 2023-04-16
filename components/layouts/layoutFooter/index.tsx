@@ -7,7 +7,6 @@ import { selectorNavigationOpen } from '@states/layouts';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterNavigation } from './footerNavigation';
-import { LayoutNavigationGroupEffect } from '@effects/layout';
 
 type Props = Pick<Types, 'layoutType'> & Partial<Pick<Types, 'children'>>;
 
@@ -23,8 +22,7 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
           show={isSidebarOpen}
           as='div'>
           <Transition.Child
-            appear={true}
-            as={Fragment}
+            as={isSidebarOpen ? Fragment : 'div'}
             enter='transition transform ease-in-out duration-200'
             enterFrom={classNames(
               'transform opacity-0',
@@ -47,12 +45,13 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
               layoutApp && '-translate-x-5',
               layoutHome && '-translate-y-5',
             )}>
-            <FooterNavigation layoutType={layoutType}>
-              {layoutApp && <AppNavigation />}
-              {layoutHome && <HomeNavigation layoutType={layoutType} />}
-            </FooterNavigation>
+            {isSidebarOpen && (
+              <FooterNavigation layoutType={layoutType}>
+                {layoutApp && <AppNavigation />}
+                {layoutHome && <HomeNavigation layoutType={layoutType} />}
+              </FooterNavigation>
+            )}
           </Transition.Child>
-          <LayoutNavigationGroupEffect />
         </Transition.Root>
         <FooterBodyFragment>{children}</FooterBodyFragment>
       </div>
