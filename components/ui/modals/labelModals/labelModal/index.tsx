@@ -10,7 +10,6 @@ import {
   optionsButtonTodoModalCancel,
   optionsButtonLabelModalAddLabel,
 } from '@options/button';
-import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
 import { useLabelValueUpdate, useLabelAdd } from '@hooks/labels';
 import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
 import { useLabelModalStateClose } from '@hooks/modals';
@@ -48,7 +47,7 @@ export const LabelModal = ({
         show={isLabelModalOpen}
         initialFocus={initialFocusInput}
         onClose={() => closeModal()}>
-        <ModalTransitionChild className='h-40 px-2 pt-2 pb-4 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
+        <ModalTransitionChild className='h-40 px-2 pb-4 pt-2 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
             <div className='flex w-full flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
               {menuButtonContent}
