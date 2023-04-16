@@ -34,14 +34,14 @@ export interface TypesSidebarMenu {
   path: PATH_APP;
 }
 export interface TypesPathnameImage {
-  path: PATH_IMAGE_APP | PATH_IMAGE_HOME; 
+  path: PATH_IMAGE_APP | PATH_IMAGE_HOME;
   alt: string;
   title: string;
   description?: string;
 }
 
 export interface TypesSvgLogos {
-  name: 'Google' | 'GitHub' | 'MainWhite';
+  name: 'Google' | 'GitHub' | 'MainWhite' | 'MainLogoOnlyWhite';
   className?: Types['className'];
   isAriaHidden?: boolean;
   height: string;

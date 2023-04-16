@@ -1,9 +1,12 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgLogo } from '@components/icons/svgLogo';
 import { NetworkStatus } from '@components/notifications/networkStatus';
+import { TypesSvgLogos } from '@lib/types';
 import { Fragment as LogoContainerFragment, Fragment as LogoFragment } from 'react';
 
-export const Logo = () => {
+type Props = Partial<{ type: TypesSvgLogos['name'] }>;
+
+export const Logo = ({ type = 'MainWhite' }: Props) => {
   const optionsRouter = { path: '/', className: 'cursor-pointer' };
 
   return (
@@ -12,7 +15,7 @@ export const Logo = () => {
         <PrefetchRouterButton options={optionsRouter}>
           <LogoFragment>
             <span className='flex w-full flex-row items-center justify-center'>
-              <SvgLogo type='MainWhite' />
+              <SvgLogo type={type} />
             </span>
           </LogoFragment>
         </PrefetchRouterButton>
