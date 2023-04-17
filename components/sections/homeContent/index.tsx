@@ -1,14 +1,9 @@
-import { DATA_FOOTER_SCROLL_RATE, TypesName } from '@collections/footer';
 import { PATH_IMAGE_HOME } from '@constAssertions/data';
 import { STYLE_BLUR_GRADIENT_R_ZR } from '@data/stylePreset';
-import { useScrollPositionRateData } from '@hooks/ui';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 
 export const HomeContent = () => {
-  const scrollPositionRate = ({ name }: { name: TypesName }) =>
-    useScrollPositionRateData<TypesName>({ name: name, data: DATA_FOOTER_SCROLL_RATE });
-
   const styleImageWrapper =
     'relative w-80 rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
   const styleImage = 'h-auto w-auto rounded-xl drop-shadow-2xl';
@@ -21,30 +16,23 @@ export const HomeContent = () => {
             <div className='min-w-max max-w-full overflow-hidden'>
               <p
                 className={classNames(
-                  'max-w-sm whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
+                  'w-full max-w-sm whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
                   STYLE_BLUR_GRADIENT_R_ZR,
-                )}
-                style={{ width: scrollPositionRate({ name: 'spotlightHeader' }) }}>
+                )}>
                 Spotlight your to-dos
               </p>
             </div>
-            <p
-              className='text-lg text-slate-800/80 md:text-xl'
-              style={{ opacity: scrollPositionRate({ name: 'spotlightSubHeader' }) }}>
+            <p className='text-lg text-slate-800/80 opacity-100 md:text-xl'>
               View your to-dos that are intelligently and automatically selected in Today&apos;s
               Focus.
             </p>
-            <p
-              className='text-base font-medium text-slate-800/80'
-              style={{ opacity: scrollPositionRate({ name: 'spotlightBody' }) }}>
+            <p className='text-base font-medium text-slate-800/80 opacity-100'>
               Add your to-dos as you please, with or without due dates and priorities. Today&apos;s
               Focus will display your most important to-dos for you.
             </p>
           </div>
         </div>
-        <div
-          className={classNames(styleImageWrapper)}
-          style={{ opacity: scrollPositionRate({ name: 'spotlightSubHeader' }) }}>
+        <div className={classNames(styleImageWrapper, 'opacity-100')}>
           <Image
             loader={nextImageLoader}
             width={0}
@@ -55,9 +43,7 @@ export const HomeContent = () => {
             priority
           />
         </div>
-        <div
-          className={classNames(styleImageWrapper, 'max-md:order-last')}
-          style={{ opacity: scrollPositionRate({ name: 'overloadSubHeader' }) }}>
+        <div className={classNames(styleImageWrapper, 'opacity-100 max-md:order-last')}>
           <Image
             loader={nextImageLoader}
             width={0}
@@ -72,21 +58,16 @@ export const HomeContent = () => {
           <div className='min-w-max max-w-full overflow-hidden'>
             <p
               className={classNames(
-                'max-w-sm whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
+                'w-full max-w-sm whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
                 STYLE_BLUR_GRADIENT_R_ZR,
-              )}
-              style={{ width: scrollPositionRate({ name: 'overloadHeader' }) }}>
+              )}>
               Free your overload
             </p>
           </div>
-          <p
-            className='text-lg text-slate-800/80 md:text-xl'
-            style={{ opacity: scrollPositionRate({ name: 'overloadSubHeader' }) }}>
+          <p className='text-lg text-slate-800/80 opacity-100 md:text-xl'>
             Work on a to-do list that is auto-allocated according to your capacity.
           </p>
-          <p
-            className='text-base font-medium text-slate-800/80'
-            style={{ opacity: scrollPositionRate({ name: 'overloadBody' }) }}>
+          <p className='text-base font-medium text-slate-800/80 opacity-100'>
             Today&apos;s Focus efficiently determines the ideal number of to-dos for you. As you
             consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base
             on your completion rate.
