@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
@@ -9,7 +10,9 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-type AppPropsWithLayout = AppProps & {
+type AppPropsWithLayout = AppProps<{
+  session: Session;
+}> & {
   Component: NextPageWithLayout;
 };
 

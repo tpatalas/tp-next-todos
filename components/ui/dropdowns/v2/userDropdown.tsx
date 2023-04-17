@@ -23,12 +23,12 @@ export const UserDropdown = () => {
         <Fragment>
           <span className='sr-only'>Open user menu</span>
           <Image
-            loader={userImage ? undefined : nextImageLoader}
+            loader={!!userImage ? undefined : nextImageLoader}
             width={32}
             height={32}
             priority
             className='rounded-full drop-shadow-lg'
-            src={userImage ? userImage : PATH_IMAGE_APP['avatar']}
+            src={!!userImage ? userImage : PATH_IMAGE_APP['avatar']}
             alt='User avatar'
           />
         </Fragment>
