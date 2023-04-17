@@ -9,14 +9,12 @@ export const User = () => {
   const offSession = getSessionStorage(STORAGE_KEY['offSession']);
   const { data: session } = useSession();
 
-  const userSession = !offSession && !!session;
   const userOffSession = !!offSession && !session;
 
   return (
     <Fragment>
       <div className='ml-4 flex min-w-[2rem] items-center md:ml-6'>
-        {userOffSession && <SignInButton />}
-        {userSession && <UserDropdown />}
+        {userOffSession ? <SignInButton /> : <UserDropdown />}
       </div>
     </Fragment>
   );
