@@ -45,10 +45,12 @@ export const Footer = () => {
           <div className='flex w-full flex-row-reverse items-center justify-between'>
             <div className='flex justify-center space-x-10'>
               {DATA_FOOTER_SOCIAL.map((social) => (
-                <IconButton
+                <Link
                   key={social.name}
-                  options={socialButton(social)}
-                />
+                  href={social.link}
+                  target='_blank'>
+                  <IconButton options={socialButton(social)} />
+                </Link>
               ))}
             </div>
             <p className='text-center text-xs leading-5 text-gray-500'>
