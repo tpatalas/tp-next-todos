@@ -32,7 +32,7 @@ export const AuthForm = () => {
 
   return (
     <Fragment>
-      <div className='absolute left-0 right-0 top-1/2 m-auto h-fit w-full -translate-y-[70%] sm:w-fit sm:-translate-y-[60%]'>
+      <div className='absolute left-0 right-0 top-1/2 m-auto h-fit w-full -translate-y-[65%] sm:w-fit sm:-translate-y-[60%]'>
         <section className='border-slate-200 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
           <div className='mb-5 flex flex-col items-center justify-center'>
             <div className='mb-10 mt-2'>
