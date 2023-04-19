@@ -6,11 +6,17 @@ import { forwardRef, useState } from 'react';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
 type Props = { options: TypesOptionsButton } & Partial<
-  Pick<Types, 'onKeyDown' | 'children' | 'onClick' | 'onDoubleClick' | 'onMouseEnter' | 'onMouseOver'>
+  Pick<
+    Types,
+    'onKeyDown' | 'children' | 'onClick' | 'onDoubleClick' | 'onMouseEnter' | 'onMouseOver'
+  >
 >;
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ options, onClick, onKeyDown, onDoubleClick, onMouseOver, children = options.name }: Props, ref) => {
+  (
+    { options, onClick, onKeyDown, onDoubleClick, onMouseOver, children = options.name }: Props,
+    ref,
+  ) => {
     const [hasTooltip, setTooltip] = useState(false);
 
     const tooltipOptions = {
@@ -24,6 +30,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
     return (
       <Tooltip options={tooltipOptions}>
         <button
+          aria-label={options.ariaLabel}
           type={options.type || 'button'}
           className={options.className}
           disabled={options.isDisabled}

@@ -18,6 +18,7 @@ export type TypesOptionsButton = Partial<
     | 'kbd'
     | 'placement'
     | 'signInButtonName'
+    | 'ariaLabel'
   > & {
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & Pick<

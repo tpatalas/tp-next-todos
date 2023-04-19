@@ -1,3 +1,5 @@
+const scriptSources = require('./scriptSources');
+
 const development = process.env.NODE_ENV !== 'production';
 
 const ContentSecurityPolicy = `
@@ -8,8 +10,8 @@ const ContentSecurityPolicy = `
   style-src 'self' 'unsafe-inline';
   ${
     development
-      ? `script-src 'self' 'unsafe-eval' 'unsafe-inline' apis.google.com`
-      : `script-src 'self' apis.google.com`
+      ? `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSources}`
+      : `script-src 'self' ${scriptSources}`
   };
   ${development ? '' : `upgrade-insecure-requests`}
   `;

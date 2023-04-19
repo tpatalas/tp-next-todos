@@ -4,7 +4,8 @@ import { Fragment, useEffect } from 'react';
 import { Button } from '.';
 import { TypesOptionsPrefetchRouterButton } from '@lib/types/options';
 
-type Props = { options: TypesOptionsPrefetchRouterButton } & Pick<Types, 'children'> & Partial<Pick<Types, 'onClick'>>;
+type Props = { options: TypesOptionsPrefetchRouterButton } & Pick<Types, 'children'> &
+  Partial<Pick<Types, 'onClick'>>;
 
 export const PrefetchRouterButton = ({ options, children, onClick }: Props) => {
   const router = useRouter();

@@ -168,6 +168,7 @@ export interface TypesElement {
   minimizedModalPadding: string;
   isNoValidate: boolean;
   isAriaHidden: boolean;
+  ariaLabel: string;
   isDisabled: boolean;
   shouldKeepOpeningOnClick: boolean;
 }

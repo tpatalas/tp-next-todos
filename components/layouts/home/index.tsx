@@ -25,7 +25,7 @@ export const LayoutHome = ({ children }: Props) => {
   return (
     <LayoutFragment>
       <Head>
-        <title>{slug ? 'Todos - ' + slug : ''}</title>
+        <title>{slug ? 'Todos - ' + slug : 'Todos'}</title>
       </Head>
       <main className='flex min-h-screen flex-col justify-between'>
         <section>
