@@ -1,7 +1,6 @@
-import { PATHNAME_IMAGE } from '@constAssertions/data';
+import { PATH_IMAGE_APP } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
-import { BREAKPOINT, SPINNER } from '@constAssertions/ui';
-import { mediaQueryEffect, networkStatusEffect } from '@lib/stateLogics/effects/atomEffects/atomEffects';
+import { SPINNER } from '@constAssertions/ui';
 import { atom, atomFamily, selector } from 'recoil';
 
 /*
@@ -16,26 +15,6 @@ export const atomCatch = atomFamily<boolean, CATCH>({
 export const atomDisableScroll = atom<boolean>({
   key: 'atomDisableScroll',
   default: false,
-});
-
-// Media Queries
-export const atomMediaQuery = atomFamily<boolean, BREAKPOINT>({
-  key: 'atomMediaQuery',
-  default: false,
-  effects: (breakpoint) => [
-    mediaQueryEffect({
-      breakpoint: breakpoint,
-      isStateOverBreakpoint: true,
-      isStateUnderBreakpoint: false,
-    }),
-  ],
-});
-
-// Network
-export const atomNetworkStatusEffect = atom({
-  key: 'atomNetworkStatusEffect',
-  default: true,
-  effects: [networkStatusEffect],
 });
 
 //  Dropdown
@@ -59,14 +38,19 @@ export const atomHtmlTitleTag = atom<string>({
   default: '',
 });
 
-export const atomPathnameImage = atom<PATHNAME_IMAGE>({
+export const atomPathnameImage = atom<PATH_IMAGE_APP>({
   key: 'atomPathnameImage',
-  default: PATHNAME_IMAGE['app'],
+  default: PATH_IMAGE_APP['focus'],
 });
 
 export const atomLoadingSpinner = atomFamily<boolean, SPINNER>({
   key: 'atomLoadingSpinner',
   default: false,
+});
+
+export const atomFilterEffect = atom({
+  key: 'atomFilterEffect',
+  default: 'focus',
 });
 
 /**

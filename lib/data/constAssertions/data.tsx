@@ -20,8 +20,8 @@ export const FILTER_TODOIDS = {
   completed: 'completed',
 } as const;
 
-export type PATHNAME = (typeof PATHNAME)[keyof typeof PATHNAME];
-export const PATHNAME = {
+export type PATH_APP = (typeof PATH_APP)[keyof typeof PATH_APP];
+export const PATH_APP = {
   app: '/app',
   urgent: '/app/urgent',
   important: '/app/important',
@@ -30,20 +30,34 @@ export const PATHNAME = {
   label: '/app/label',
 } as const;
 
-export type PATHNAME_IMAGE = (typeof PATHNAME_IMAGE)[keyof typeof PATHNAME_IMAGE];
-export const PATHNAME_IMAGE = {
-  app: 'app-focus.webp',
+export type PATH_HOME = (typeof PATH_HOME)[keyof typeof PATH_HOME];
+export const PATH_HOME = {
+  home: '/',
+  demo: '/app',
+  features: '/features',
+  implementations: '/implementations',
+  pricing: '/pricing',
+  contact: '/contact',
+  auth: '/auth',
+} as const;
+
+export type PATH_IMAGE_APP = (typeof PATH_IMAGE_APP)[keyof typeof PATH_IMAGE_APP];
+export const PATH_IMAGE_APP = {
+  focus: 'app-focus.webp',
   urgent: 'app-urgent.webp',
   important: 'app-important.webp',
   showAll: 'app-showall.webp',
   completed: 'app-completed.webp',
   label: 'app-label.webp',
+  avatar: 'app-user-avatar.webp',
 } as const;
 
-export type SVG_LOGO = (typeof SVG_LOGO)[keyof typeof SVG_LOGO];
-export const SVG_LOGO = {
-  google: 'Google',
-  github: 'GitHub',
+export type PATH_IMAGE_HOME = (typeof PATH_IMAGE_HOME)[keyof typeof PATH_IMAGE_HOME];
+export const PATH_IMAGE_HOME = {
+  demo: 'home-demo-image-desk.webp',
+  contentFocus: 'home-content-focus.webp',
+  contentOrganize: 'home-content-organize.webp',
+  underConstruction: 'home-under-construction.webp',
 } as const;
 
 export type RETENTION = (typeof RETENTION)[keyof typeof RETENTION];

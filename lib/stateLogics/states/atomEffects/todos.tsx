@@ -1,5 +1,5 @@
 import { DATA_DEMO_TODOIDS } from '@collections/demo';
-import { IDB_STORE, IDB_KEY } from '@constAssertions/storage';
+import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { TodoIds, Todos } from '@lib/types';
@@ -81,7 +81,9 @@ export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
     (todoId) =>
     ({ get, set }, newValue) => {
       const session = get(atomUserSession);
-      return session ? set(atomQueryTodoItem(todoId), newValue) : set(atomDemoTodoItem(todoId), newValue);
+      return session
+        ? set(atomQueryTodoItem(todoId), newValue)
+        : set(atomDemoTodoItem(todoId), newValue);
     },
 });
 

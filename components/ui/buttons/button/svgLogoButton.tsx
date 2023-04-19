@@ -1,16 +1,16 @@
-import { TypesSvgLogo } from '@lib/types';
+import { TypesSvgLogos } from '@lib/types';
+import { TypesOptionsSvg } from '@lib/types/options';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next-router-mock';
 import { Button } from '.';
-import { DATA_SVG_LOGO } from '@collections/svgLogo';
-import { TypesOptionsSvg } from '@lib/types/options';
+import { DATA_SVG_PROVIDERS } from '@collections/svgLogo';
 
 type Props = { options?: TypesOptionsSvg };
 
 export const SvgLogoButton = ({ options = {} }: Props) => {
   const router = useRouter();
 
-  const oAuthSignIn = async (logo: TypesSvgLogo) => {
+  const oAuthSignIn = async (logo: TypesSvgLogos) => {
     const response = await signIn(logo.name.toLowerCase(), { redirect: false });
     if (response && !response.error) {
       router.replace('/');
@@ -20,7 +20,7 @@ export const SvgLogoButton = ({ options = {} }: Props) => {
 
   return (
     <>
-      {DATA_SVG_LOGO.map((logo) => (
+      {DATA_SVG_PROVIDERS.map((logo) => (
         <div
           key={logo.name}
           className='mb-3'>

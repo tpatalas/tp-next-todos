@@ -1,10 +1,11 @@
+import { PATH_IMAGE_APP } from '@constAssertions/data';
 import { ICON_LOGOUT, ICON_SETTINGS } from '@data/materialSymbols';
+import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
+import { nextImageLoader } from '@stateLogics/utils';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import { Dropdown } from './dropdown';
-import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
-import { nextImageLoader } from '@stateLogics/utils';
 import { MenuItem } from './dropdown/menuItem';
 
 export const UserDropdown = () => {
@@ -13,17 +14,21 @@ export const UserDropdown = () => {
 
   return (
     <Dropdown
-      options={{ hasDivider: false, padding: 'p-0', hoverRing: 'hover:ring-4 hover:ring-slate-200' }}
+      options={{
+        hasDivider: false,
+        padding: 'p-0',
+        hoverRing: 'hover:ring-4 hover:ring-slate-200',
+      }}
       menuButtonContent={
         <Fragment>
           <span className='sr-only'>Open user menu</span>
           <Image
-            loader={userImage ? undefined : nextImageLoader}
+            loader={!!userImage ? undefined : nextImageLoader}
             width={32}
             height={32}
             priority
             className='rounded-full drop-shadow-lg'
-            src={userImage ? userImage : 'app-user-avatar.webp'}
+            src={!!userImage ? userImage : PATH_IMAGE_APP['avatar']}
             alt='User avatar'
           />
         </Fragment>

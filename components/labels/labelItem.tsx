@@ -1,55 +1,64 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { SvgIcon } from '@components/icons/svgIcon';
-import { PATHNAME } from '@constAssertions/data';
+import { PATH_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
-import { useSidebarOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@hooks/layouts';
 import { useNextQuery } from '@hooks/misc';
-import { TodosCount } from '@layouts/layoutApp/layout/layoutFooter/footerSidebar/todosCount';
 import { Types } from '@lib/types';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { classNames, paths } from '@stateLogics/utils';
-import { atomMediaQuery } from '@states/misc';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import dynamic from 'next/dynamic';
-import { Fragment, Fragment as LabelModalFragment } from 'react';
+import { Fragment, Fragment as LabelModalFragment, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const LabelItemDropdown = dynamic(() => import('@dropdowns/v1/labelItemDropdown').then((mod) => mod.LabelItemDropdown));
+const TodosCount = dynamic(() => import('@layouts/app/todosCount').then((mod) => mod.TodosCount));
+
+const LabelItemDropdown = dynamic(() =>
+  import('@dropdowns/v1/labelItemDropdown').then((mod) => mod.LabelItemDropdown),
+);
 const ItemLabelModal = dynamic(() =>
   import('@modals/labelModals/labelModal/itemLabelModal').then((mod) => mod.ItemLabelModal),
 );
 const DeleteLabelConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal').then((mod) => mod.DeleteLabelConfirmModal),
+  import('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal').then(
+    (mod) => mod.DeleteLabelConfirmModal,
+  ),
 );
 
 export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
-  const slug = useNextQuery({ path: PATHNAME['label'] });
+  const slug = useNextQuery({ path: PATH_APP['label'] });
   const matchedSlug = slug === label._id;
-  const isBreakpointMd = useRecoilValue(atomMediaQuery(BREAKPOINT['md']));
-  const setSideBarOpen = useSidebarOpen();
+  const isBreakpointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
+  const setNavigationOpen = useNavigationOpen();
 
   return (
     <Fragment>
       <div
         className={classNames(
           'group relative flex w-full cursor-pointer flex-row items-center justify-between rounded-lg pr-[0.20rem]',
-          matchedSlug ? 'bg-blue-100 font-semibold text-opacity-80' : 'hover:bg-slate-200 hover:bg-opacity-80 ',
+          matchedSlug
+            ? 'bg-blue-100 font-semibold text-opacity-80'
+            : 'hover:bg-slate-200 hover:bg-opacity-80 ',
         )}>
         <div className='mr-[0.5rem] inline-block w-full'>
           <PrefetchRouterButton
             options={{
               tooltip: label.name,
-              path: paths(PATHNAME['label'] + '/', label._id),
+              path: paths(PATH_APP['label'] + '/', label._id),
               className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
             }}
-            onClick={() => !isBreakpointMd && setSideBarOpen()}>
-            <div className='flex w-full flex-row  py-2 px-2'>
+            onClick={() => !isBreakpointMd && setNavigationOpen()}>
+            <div className='flex w-full flex-row  px-2 py-2'>
               {matchedSlug ? (
                 <SvgIcon options={optionsButtonLabelRouteMatched} />
               ) : (
                 <SvgIcon options={optionsButtonLabelRouteUnmatched} />
               )}
-              <div className='max-w-[10.7rem] truncate pl-2 text-gray-600 group-hover:text-gray-900'>{label.name}</div>
+              <div className='max-w-[10.7rem] truncate pl-2 text-gray-600 group-hover:text-gray-900'>
+                {label.name}
+              </div>
             </div>
           </PrefetchRouterButton>
         </div>
@@ -57,11 +66,15 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
           label={label}
           options={{
             isInitiallyVisible: false,
-            hoverBg: matchedSlug ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]' : STYLE_HOVER_ENABLED_SLATE_DARK,
+            hoverBg: matchedSlug
+              ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]'
+              : STYLE_HOVER_ENABLED_SLATE_DARK,
           }}
           menuContentOnClose={
             <span className='absolute right-[0.73rem] top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400 group-hover:invisible'>
-              <TodosCount label={label} />
+              <Suspense>
+                <TodosCount label={label} />
+              </Suspense>
             </span>
           }
         />

@@ -1,5 +1,5 @@
 import { DATA_DEMO_LABELS } from '@collections/demo';
-import { IDB_STORE, IDB_KEY } from '@constAssertions/storage';
+import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { Labels } from '@lib/types';

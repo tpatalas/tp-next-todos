@@ -1,15 +1,17 @@
+const development = process.env.NODE_ENV !== 'production';
+
 const ContentSecurityPolicy = `
   default-src 'self'; connect-src 'self'; 
   child-src 'self' youtube.com;
   font-src 'self';
   img-src 'self' ${process.env.NEXT_PUBLIC_IMAGE_DOMAIN} data:;
-  ${process.env.NODE_ENV !== 'production' ? `style-src 'self' 'unsafe-inline' 'unsafe-eval'` : `style-src 'self'`};
+  style-src 'self' 'unsafe-inline';
   ${
-    process.env.NODE_ENV !== 'production'
+    development
       ? `script-src 'self' 'unsafe-eval' 'unsafe-inline' apis.google.com`
       : `script-src 'self' apis.google.com`
   };
-  upgrade-insecure-requests
+  ${development ? '' : `upgrade-insecure-requests`}
   `;
 
 const securityHeaders = [

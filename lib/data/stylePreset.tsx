@@ -5,19 +5,21 @@ import { classNames } from '@stateLogics/utils';
  */
 // Base
 export const STYLE_BUTTON_BASE =
-  'transition-all inline-flex items-center justify-center rounded-lg border leading-4 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
-export const STYLE_BUTTON_SIZE_NORMAL = 'py-[0.6rem] px-6 text-sm';
-export const STYLE_BUTTON_SIZE_LARGE = 'py-[0.6rem] px-14 text-sm';
-export const STYLE_BUTTON_SIZE_FULL = 'py-[0.7rem] px-14 text-base';
+  'transition-all inline-flex items-center justify-center tracking-wide rounded-lg h-10 p-2 border leading-4 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+export const STYLE_BUTTON_SIZE_NORMAL = 'px-4 text-base';
+export const STYLE_BUTTON_SIZE_LARGE = 'px-14 text-base';
+export const STYLE_BUTTON_SIZE_FULL = 'px-14 text-base';
 // color
 export const STYLE_BUTTON_COLOR_BLUE =
-  'border-transparent bg-blue-600 text-white hover:enabled:bg-blue-700 shadow-blue-100 hover:shadow-blue-200 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-70';
+  'border-transparent bg-blue-600 text-white hover:enabled:shadow-blue-300 hover:enabled:bg-blue-700 shadow-blue-100 hover:shadow-blue-200 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-70';
+export const STYLE_BUTTON_COLOR_BLACK =
+  'border-transparent bg-gray-800 text-white hover:enabled:shadow-gray-400 shadow-gray-100 hover:shadow-gray-200 focus-visible:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-70';
 export const STYLE_BUTTON_COLOR_WHITE =
   'border-gray-300 bg-slate-50 text-gray-600 hover:enabled:bg-gray-100 shadow-slate-100 hover:shadow-slate-200 hover:enabled:text-gray-800 focus-visible:ring-blue-500 disabled:opacity-70';
 export const STYLE_BUTTON_COLOR_RED =
-  'border-transparent bg-red-600 text-white hover:enabled:bg-red-700 shadow-red-100 hover:shadow-red-200 focus-visible:ring-red-500 disabled:opacity-70';
+  'border-transparent bg-red-600 text-white hover:enabled:shadow-red-300 hover:enabled:bg-red-700 shadow-red-100 hover:shadow-red-200 focus-visible:ring-red-500 disabled:opacity-70';
 export const STYLE_BUTTON_COLOR_GRAY =
-  'border-transparent bg-gray-200 text-black hover:enabled:bg-gray-300 shadow-gray-100 hover:shadow-gray-200 focus-visible:ring-gray-500 disabled:opacity-70';
+  'border-transparent bg-gray-200 text-black hover:enabled:shadow-gray-300 hover:enabled:bg-gray-300 shadow-gray-100 hover:shadow-gray-200 focus-visible:ring-gray-500 disabled:opacity-70';
 // Composition
 // white
 export const STYLE_BUTTON_NORMAL_WHITE = classNames(
@@ -31,10 +33,34 @@ export const STYLE_BUTTON_NORMAL_BLUE = classNames(
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_BLUE,
 );
-export const STYLE_BUTTON_LARGE_BLUE = classNames(STYLE_BUTTON_BASE, STYLE_BUTTON_SIZE_LARGE, STYLE_BUTTON_COLOR_BLUE);
-export const STYLE_BUTTON_FULL_BLUE = classNames(STYLE_BUTTON_BASE, STYLE_BUTTON_SIZE_FULL, STYLE_BUTTON_COLOR_BLUE);
+export const STYLE_BUTTON_LARGE_BLUE = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_LARGE,
+  STYLE_BUTTON_COLOR_BLUE,
+);
+export const STYLE_BUTTON_FULL_BLUE = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_FULL,
+  STYLE_BUTTON_COLOR_BLUE,
+);
+//black
+export const STYLE_BUTTON_NORMAL_BLACK = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_NORMAL,
+  STYLE_BUTTON_COLOR_BLACK,
+);
+export const STYLE_BUTTON_FULL_BLACK = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_FULL,
+  STYLE_BUTTON_COLOR_BLACK,
+);
+
 // red
-export const STYLE_BUTTON_NORMAL_RED = classNames(STYLE_BUTTON_BASE, STYLE_BUTTON_SIZE_NORMAL, STYLE_BUTTON_COLOR_RED);
+export const STYLE_BUTTON_NORMAL_RED = classNames(
+  STYLE_BUTTON_BASE,
+  STYLE_BUTTON_SIZE_NORMAL,
+  STYLE_BUTTON_COLOR_RED,
+);
 // gray
 export const STYLE_BUTTON_NORMAL_GRAY = classNames(
   STYLE_BUTTON_BASE,
@@ -50,12 +76,41 @@ export const STYLE_BUTTON_KEY_ONLY_RING =
   'focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
 
 /**
+ * Link
+ **/
+export const STYLE_LINK_NORMAL =
+  'block w-full rounded-lg transition-all hover:bg-slate-900 hover:bg-opacity-10 max-ml:px-5 max-ml:py-3 ml:px-2 lg:px-3 ml:py-2';
+/*
+ * gradient-wave-effect
+ **/
+// Gradient Base
+export const STYLE_BLUR_GRADIENT_BASE =
+  'from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90%';
+const STYLE_BLUR_GRADIENT_ZR = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-0');
+const STYLE_BLUR_GRADIENT_SM = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-sm');
+const STYLE_BLUR_GRADIENT_MD = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-md');
+const STYLE_BLUR_GRADIENT_LG = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-lg');
+// Variants
+// Right
+export const STYLE_BLUR_GRADIENT_R_ZR = classNames(STYLE_BLUR_GRADIENT_ZR, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_SM = classNames(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_MD = classNames(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_LG = classNames(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-r');
+// Bottom
+export const STYLE_BLUR_GRADIENT_B_ZR = classNames(STYLE_BLUR_GRADIENT_ZR, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_SM = classNames(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_MD = classNames(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_LG = classNames(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-b');
+
+/**
  * Hover Effect
  **/
 export const STYLE_HOVER_SLATE_DARK = 'hover:bg-slate-900 hover:bg-opacity-10';
 export const STYLE_HOVER_SLATE_LIGHT = 'hover:bg-slate-600 hover:bg-opacity-10';
-export const STYLE_HOVER_ENABLED_SLATE_DARK = 'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
-export const STYLE_HOVER_ENABLED_SLATE_LIGHT = 'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_DARK =
+  'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_LIGHT =
+  'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
 /**
  * Calendar
  */
