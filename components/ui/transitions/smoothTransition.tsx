@@ -3,13 +3,12 @@ import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 
-type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'enterDuration' | 'leaveDuration'>>;
+type Props = Pick<Types, 'children'> & {
+  options?: Partial<Pick<Types, 'enterDuration' | 'leaveDuration'>>;
+};
 
-export const SmoothTransition = ({
-  children,
-  enterDuration = DURATION['300'],
-  leaveDuration = DURATION['500'],
-}: Props) => {
+export const SmoothTransition = ({ children, options }: Props) => {
+  const { enterDuration = DURATION['300'], leaveDuration = DURATION['300'] } = options || {};
   return (
     <Transition
       appear={true}
