@@ -41,7 +41,9 @@ export const HomeHero = () => {
             </div>
             <div className='flex justify-center'>
               <div className='relative mt-16 flow-root sm:mt-24'>
-                <SmoothTransition options={transitionOptions}>
+                <SmoothTransition
+                  type='fadeOut'
+                  options={transitionOptions}>
                   <div
                     className={classNames(
                       'absolute h-full w-full rounded-xl',
