@@ -32,13 +32,13 @@ export const AuthForm = () => {
 
   return (
     <Fragment>
-      <div className='absolute left-0 right-0 top-1/2 m-auto h-fit w-full -translate-y-[65%] sm:w-fit sm:-translate-y-[60%]'>
+      <div className='absolute left-0 right-0 top-1/2 m-auto h-fit w-full -translate-y-[60%] sm:w-fit'>
         <section className='border-slate-200 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
-          <div className='mb-5 flex flex-col items-center justify-center'>
-            <div className='mb-10 mt-2'>
+          <div className='mb-2 flex flex-col items-center justify-center sm:mb-5'>
+            <div className='mb-8 mt-2 sm:mb-10'>
               <Logo type='MainLogoOnlyWhite' />
             </div>
-            <h1 className='mb-3 flex flex-row items-center justify-center text-2xl font-bold tracking-normal text-slate-800'>
+            <h1 className='mb-1 flex flex-row items-center justify-center text-2xl font-bold tracking-normal text-slate-800 sm:mb-3'>
               Sign in
             </h1>
             <h2 className='flex flex-row items-center justify-center text-lg text-slate-600'>
