@@ -8,7 +8,9 @@ export const LoadingTodos = () => {
   const transitionOptions = { enterDuration: DURATION['500'], leaveDuration: DURATION['500'] };
   return (
     <LoadingStateFragment>
-      <SmoothTransition options={transitionOptions}>
+      <SmoothTransition
+        type='fadeOut'
+        options={transitionOptions}>
         <LoadingState options={optionsLoadingTodos} />
       </SmoothTransition>
     </LoadingStateFragment>
