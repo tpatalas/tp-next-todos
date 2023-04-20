@@ -31,7 +31,7 @@ export const TodoList = () => {
             ))}
           </>
         ) : (
-          <SmoothTransition>
+          <SmoothTransition type='fadeOut'>
             <div className='mt-7 flex flex-col items-center justify-center'>
               <div className='flex h-full min-h-[300px] w-[300px] flex-col items-center justify-end'>
                 <Image
