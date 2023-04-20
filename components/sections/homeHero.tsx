@@ -5,6 +5,7 @@ import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
+import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransition.types';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,7 +15,10 @@ const signInButtonOptions: TypesOptionsButton = {
 };
 
 export const HomeHero = () => {
-  const transitionOptions = { enterDuration: DURATION['500'], leaveDuration: DURATION['500'] };
+  const transitionOptions = {
+    type: TRANSITION_TYPE['fadeIn'],
+    enterDuration: DURATION['1000'],
+  };
 
   return (
     <>
@@ -41,9 +45,7 @@ export const HomeHero = () => {
             </div>
             <div className='flex justify-center'>
               <div className='relative mt-16 flow-root sm:mt-24'>
-                <SmoothTransition
-                  type='fadeOut'
-                  options={transitionOptions}>
+                <SmoothTransition options={transitionOptions}>
                   <div
                     className={classNames(
                       'absolute h-full w-full rounded-xl',
@@ -51,7 +53,7 @@ export const HomeHero = () => {
                     )}
                   />
                 </SmoothTransition>
-                <div className='mx-auto flex w-full max-w-5xl flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
+                <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                   <Image
                     loader={nextImageLoader}
                     width={0}
