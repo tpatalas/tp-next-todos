@@ -72,7 +72,7 @@ export const HomeContent = () => {
             consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base
             on your completion rate.
           </p>
-          <p className='text-sm font-medium italic tracking-tight text-slate-800/40'>
+          <p className='text-sm font-medium italic tracking-tight text-slate-800/70'>
             (Note. the current minimum number allocation is set to 7)
           </p>
         </div>

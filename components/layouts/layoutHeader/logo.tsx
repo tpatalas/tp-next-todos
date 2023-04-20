@@ -16,6 +16,7 @@ export const Logo = ({ type = 'MainWhite' }: Props) => {
   const optionsRouter = {
     path: session || pathHome ? '' : PATH_HOME['home'],
     className: session || pathHome ? 'pointer-events-none' : 'cursor-pointer',
+    ariaLabel: 'Logo Router Button to route to index page.',
   };
 
   return (

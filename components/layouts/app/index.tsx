@@ -33,7 +33,7 @@ export const LayoutApp = ({ children }: Props) => {
   return (
     <LayoutAppFragment>
       <Head>
-        <title>{slug ? 'Todos - ' + slug : ''}</title>
+        <title>{slug ? 'Todos - ' + slug : 'Todos'}</title>
       </Head>
       <HeaderFragment>
         <div className='flex h-screen flex-col'>

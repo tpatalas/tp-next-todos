@@ -1,6 +1,5 @@
-import { IconButton } from '@buttons/iconButton';
-import { DATA_FOOTER_SOCIAL, TypesFooterSocial } from '@collections/footer';
-import { DATA_FOOTER_NAVIGATION } from '@collections/footer';
+import { DATA_FOOTER_NAVIGATION, DATA_FOOTER_SOCIAL, TypesFooterSocial } from '@collections/footer';
+import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_LINK_NORMAL } from '@data/stylePreset';
 import { Logo } from '@layouts/layoutHeader/logo';
 import { classNames } from '@stateLogics/utils';
@@ -11,8 +10,7 @@ export const Footer = () => {
   const socialButton = (social: TypesFooterSocial) => {
     return {
       path: social.path,
-      size: 'w-6 h-6',
-      color: 'fill-gray-400',
+      className: 'w-6 h-6 fill-gray-400 group-hover:fill-gray-700',
     };
   };
 
@@ -46,10 +44,12 @@ export const Footer = () => {
             <div className='flex justify-center space-x-10'>
               {DATA_FOOTER_SOCIAL.map((social) => (
                 <Link
+                  aria-label='Visit Github Repository'
                   key={social.name}
                   href={social.link}
+                  className='group rounded-full p-1 hover:bg-slate-900 hover:bg-opacity-10'
                   target='_blank'>
-                  <IconButton options={socialButton(social)} />
+                  <SvgIcon options={socialButton(social)} />
                 </Link>
               ))}
             </div>
