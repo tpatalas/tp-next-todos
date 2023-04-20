@@ -5,11 +5,10 @@ import { DURATION } from '@constAssertions/ui';
 import { optionsLoadingTodos } from '@options/loadingState';
 
 export const LoadingTodos = () => {
+  const transitionOptions = { enterDuration: DURATION['500'], leaveDuration: DURATION['500'] };
   return (
     <LoadingStateFragment>
-      <SmoothTransition
-        enterDuration={DURATION['500']}
-        leaveDuration={DURATION['500']}>
+      <SmoothTransition options={transitionOptions}>
         <LoadingState options={optionsLoadingTodos} />
       </SmoothTransition>
     </LoadingStateFragment>

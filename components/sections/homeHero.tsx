@@ -1,8 +1,10 @@
 import { PATH_HOME, PATH_IMAGE_HOME } from '@constAssertions/data';
+import { DURATION } from '@constAssertions/ui';
 import { STYLE_BLUR_GRADIENT_R_LG, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames, nextImageLoader } from '@stateLogics/utils';
+import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,6 +14,8 @@ const signInButtonOptions: TypesOptionsButton = {
 };
 
 export const HomeHero = () => {
+  const transitionOptions = { enterDuration: DURATION['500'], leaveDuration: DURATION['500'] };
+
   return (
     <>
       <div className='relative isolate pt-10'>
@@ -37,12 +41,14 @@ export const HomeHero = () => {
             </div>
             <div className='flex justify-center'>
               <div className='relative mt-16 flow-root sm:mt-24'>
-                <div
-                  className={classNames(
-                    'absolute h-full w-full rounded-xl',
-                    STYLE_BLUR_GRADIENT_R_LG,
-                  )}
-                />
+                <SmoothTransition options={transitionOptions}>
+                  <div
+                    className={classNames(
+                      'absolute h-full w-full rounded-xl',
+                      STYLE_BLUR_GRADIENT_R_LG,
+                    )}
+                  />
+                </SmoothTransition>
                 <div className='mx-auto flex w-full max-w-5xl flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                   <Image
                     loader={nextImageLoader}
