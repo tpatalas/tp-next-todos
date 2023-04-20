@@ -9,7 +9,9 @@ export const LoadingLabels = () => {
 
   return (
     <Fragment>
-      <SmoothTransition options={transitionOptions}>
+      <SmoothTransition
+        type='fadeOut'
+        options={transitionOptions}>
         <LoadingState options={optionsLoadingLabels} />
       </SmoothTransition>
     </Fragment>
