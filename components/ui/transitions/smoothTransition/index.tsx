@@ -3,11 +3,7 @@ import { Transition } from '@headlessui/react';
 import { useVerticalScrollPositionTrigger } from '@hooks/ui';
 import { classNames } from '@stateLogics/utils';
 import { DATA_SMOOTH_TRANSITION } from './smoothTransition.data';
-import {
-    TRANSITION_TYPE,
-    TypesDataTransition,
-    TypesPropsSmoothTransition,
-} from './smoothTransition.types';
+import { TRANSITION_TYPE, TypesDataTransition, TypesPropsSmoothTransition } from './smoothTransition.types';
 
 export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmoothTransition) => {
   const {
@@ -18,12 +14,9 @@ export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmo
     type = TRANSITION_TYPE['fadeIn'],
     delay,
   } = options || {};
-  const data =
-    DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
+  const data = DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
   const triggerRate = !!scrollRef ? options?.rate : undefined;
-  const isShowing = !!scrollRef
-    ? useVerticalScrollPositionTrigger(scrollRef, triggerRate)
-    : undefined;
+  const isShowing = !!scrollRef ? useVerticalScrollPositionTrigger(scrollRef, triggerRate) : undefined;
 
   return (
     <Transition
@@ -34,7 +27,8 @@ export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmo
       enterTo={classNames(data.enterTo)}
       leave={classNames(data.leave, leaveDuration, delay)}
       leaveFrom={classNames(data.leaveFrom)}
-      leaveTo={classNames(data.leaveTo)}>
+      leaveTo={classNames(data.leaveTo)}
+    >
       {children}
     </Transition>
   );

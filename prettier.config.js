@@ -4,10 +4,10 @@ module.exports = {
   jsxSingleQuote: true,
   tabWidth: 2,
   semi: true,
-  printWidth: 100,
+  printWidth: 110,
   tailwindConfig: './tailwind.config.ts',
   singleAttributePerLine: true,
   trailingComma: 'all',
   bracketSpacing: true,
-  bracketSameLine: true,
+  bracketSameLine: false,
 };
