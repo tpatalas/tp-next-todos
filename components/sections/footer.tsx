@@ -23,18 +23,21 @@ export const Footer = () => {
             <Logo />
           </div>
           <nav
-            className='-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-2 ml:space-x-12'
-            aria-label='Footer'>
+            className='-mb-6 w-full columns-2 justify-between sm:flex sm:justify-center sm:space-x-6 ml:space-x-12'
+            aria-label='Footer'
+          >
             {DATA_FOOTER_NAVIGATION.map((item) => (
               <div
                 key={item.name}
-                className='pb-6'>
+                className='pb-6'
+              >
                 <Link
                   href={item.path}
                   className={classNames(
                     STYLE_LINK_NORMAL,
                     'text-sm leading-6 text-slate-800 text-opacity-80',
-                  )}>
+                  )}
+                >
                   {item.name}
                 </Link>
               </div>
@@ -48,7 +51,8 @@ export const Footer = () => {
                   key={social.name}
                   href={social.link}
                   className='group rounded-full p-1 hover:bg-slate-900 hover:bg-opacity-10'
-                  target='_blank'>
+                  target='_blank'
+                >
                   <SvgIcon options={socialButton(social)} />
                 </Link>
               ))}

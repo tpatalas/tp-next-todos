@@ -21,15 +21,12 @@ export const TRANSITION_TYPE = {
   fadeIn: 'fadeIn',
   scaleX: 'scaleX',
   scaleY: 'scaleY',
-  scaleAll: 'scaleAll',
+  scaleCenterFull: 'scaleCenterFull',
+  scaleCenterSm: 'scaleCenterSm',
+  translateDown: 'translateDown',
+  translateUp: 'translateUp',
 } as const;
 
 type TypesTransitionShow = 'show' | 'appear';
 
-type TypesTransitionProperties =
-  | 'enter'
-  | 'enterFrom'
-  | 'enterTo'
-  | 'leave'
-  | 'leaveFrom'
-  | 'leaveTo';
+type TypesTransitionProperties = 'enter' | 'enterFrom' | 'enterTo' | 'leave' | 'leaveFrom' | 'leaveTo';
