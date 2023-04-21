@@ -3,27 +3,36 @@ import { Transition } from '@headlessui/react';
 import { useVerticalScrollPositionTrigger } from '@hooks/ui';
 import { classNames } from '@stateLogics/utils';
 import { DATA_SMOOTH_TRANSITION } from './smoothTransition.data';
-import { TypesDataTransition, TypesPropsSmoothTransition } from './smoothTransition.types';
+import {
+    TRANSITION_TYPE,
+    TypesDataTransition,
+    TypesPropsSmoothTransition,
+} from './smoothTransition.types';
 
-export const SmoothTransition = ({ children, type, scrollRef, options }: TypesPropsSmoothTransition) => {
-  const data = DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
-  const triggerRate = !!scrollRef ? options?.triggerRate : undefined;
-  const isShowing = !!scrollRef ? useVerticalScrollPositionTrigger(scrollRef, triggerRate) : undefined;
+export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmoothTransition) => {
   const {
     show = true,
-    isInitiallyVisible = true,
-    enterDuration = DURATION['300'],
-    leaveDuration = DURATION['300'],
+    appear = true,
+    enterDuration = DURATION['500'],
+    leaveDuration = DURATION['500'],
+    type = TRANSITION_TYPE['fadeIn'],
+    delay,
   } = options || {};
+  const data =
+    DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
+  const triggerRate = !!scrollRef ? options?.rate : undefined;
+  const isShowing = !!scrollRef
+    ? useVerticalScrollPositionTrigger(scrollRef, triggerRate)
+    : undefined;
 
   return (
     <Transition
-      appear={isInitiallyVisible}
+      appear={appear}
       show={isShowing ?? show}
-      enter={classNames(data.enter, enterDuration)}
+      enter={classNames(data.enter, enterDuration, delay)}
       enterFrom={classNames(data.enterFrom)}
       enterTo={classNames(data.enterTo)}
-      leave={classNames(data.leave, leaveDuration)}
+      leave={classNames(data.leave, leaveDuration, delay)}
       leaveFrom={classNames(data.leaveFrom)}
       leaveTo={classNames(data.leaveTo)}>
       {children}
