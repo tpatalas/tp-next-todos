@@ -79,13 +79,12 @@ export const STYLE_BUTTON_KEY_ONLY_RING =
  * Link
  **/
 export const STYLE_LINK_NORMAL =
-  'block w-full rounded-lg transition-all hover:bg-slate-900 hover:bg-opacity-10 max-ml:px-5 max-ml:py-3 ml:px-2 lg:px-3 ml:py-2';
+  'block w-full rounded-lg transition-all hover:bg-slate-900 hover:bg-opacity-10 max-ml:px-3 max-ml:py-3 ml:px-2 lg:px-3 ml:py-2';
 /*
  * gradient-wave-effect
  **/
 // Gradient Base
-export const STYLE_BLUR_GRADIENT_BASE =
-  'from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90%';
+export const STYLE_BLUR_GRADIENT_BASE = 'from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90%';
 const STYLE_BLUR_GRADIENT_ZR = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-0');
 const STYLE_BLUR_GRADIENT_SM = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-sm');
 const STYLE_BLUR_GRADIENT_MD = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-md');
@@ -107,10 +106,8 @@ export const STYLE_BLUR_GRADIENT_B_LG = classNames(STYLE_BLUR_GRADIENT_LG, 'bg-g
  **/
 export const STYLE_HOVER_SLATE_DARK = 'hover:bg-slate-900 hover:bg-opacity-10';
 export const STYLE_HOVER_SLATE_LIGHT = 'hover:bg-slate-600 hover:bg-opacity-10';
-export const STYLE_HOVER_ENABLED_SLATE_DARK =
-  'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
-export const STYLE_HOVER_ENABLED_SLATE_LIGHT =
-  'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_DARK = 'enabled:hover:bg-slate-900 enabled:hover:bg-opacity-10';
+export const STYLE_HOVER_ENABLED_SLATE_LIGHT = 'enabled:hover:bg-slate-600 enabled:hover:bg-opacity-10';
 /**
  * Calendar
  */
