@@ -55,6 +55,18 @@ export const DURATION = {
   1000: 'duration-1000',
 } as const;
 
+export type DELAY = (typeof DELAY)[keyof typeof DELAY];
+export const DELAY = {
+  75: 'delay-75',
+  100: 'delay-100',
+  150: 'delay-150',
+  200: 'delay-200',
+  300: 'delay-300',
+  500: 'delay-500',
+  700: 'delay-700',
+  1000: 'delay-1000',
+} as const;
+
 export type BREAKPOINT = (typeof BREAKPOINT)[keyof typeof BREAKPOINT];
 export const BREAKPOINT = {
   sm: 640,
