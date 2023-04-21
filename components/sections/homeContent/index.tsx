@@ -8,11 +8,10 @@ import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransiti
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 
 export const HomeContent = () => {
-  const styleImageWrapper =
-    'relative w-80 rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
+  const styleImageWrapper = 'relative w-80 rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
   const styleImage = 'h-auto w-auto rounded-xl drop-shadow-2xl';
   const imageOptions = {
-    type: TRANSITION_TYPE['scaleAll'],
+    type: TRANSITION_TYPE['scaleCenterSm'],
     enterDuration: DURATION['700'],
   };
   const spotlightRef = useRef(null);
@@ -32,7 +31,8 @@ export const HomeContent = () => {
         <div ref={spotlightImageRef}>
           <SmoothTransition
             options={{ ...imageOptions, delay: DELAY['500'] }}
-            scrollRef={spotlightImageRef}>
+            scrollRef={spotlightImageRef}
+          >
             <div className={classNames(styleImageWrapper, 'opacity-100')}>
               <Image
                 loader={nextImageLoader}
@@ -48,10 +48,12 @@ export const HomeContent = () => {
         </div>
         <div
           className='max-md:order-last'
-          ref={overloadImageRef}>
+          ref={overloadImageRef}
+        >
           <SmoothTransition
             options={{ ...imageOptions, delay: DELAY['1000'] }}
-            scrollRef={overloadImageRef}>
+            scrollRef={overloadImageRef}
+          >
             <div className={classNames(styleImageWrapper, 'opacity-100')}>
               <Image
                 loader={nextImageLoader}
