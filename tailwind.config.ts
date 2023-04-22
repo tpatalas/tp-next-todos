@@ -45,9 +45,14 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.5' },
         },
+        typing: {
+          '0%': { width: '0' },
+          '100%': { width: '100%' },
+        },
       },
       animation: {
         glow: 'glow 8s ease-in-out infinite',
+        typing: 'typing 800ms steps(30, end)',
       },
       opacity: {
         65: '0.65',

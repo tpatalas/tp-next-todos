@@ -17,7 +17,7 @@ export const HomeStartToday = () => {
           aria-hidden='true'>
           <div
             className={classNames(
-              'custom-clip-path aspect-[2500/600] w-[70rem] flex-none opacity-40 md:aspect-[1400/600] md:opacity-30',
+              'custom-clip-path aspect-[2500/600] w-[70rem] flex-none animate-[pulse_4s_ease-in-out_infinite] opacity-40 md:aspect-[1400/600] md:opacity-30',
               STYLE_BLUR_GRADIENT_R_LG,
             )}
           />

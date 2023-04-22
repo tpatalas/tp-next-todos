@@ -1,0 +1,58 @@
+import { TypesDataTransition } from './smoothTransition.types';
+
+export const DATA_SMOOTH_TRANSITION: TypesDataTransition[] = [
+  {
+    type: 'fadeIn',
+    enter: 'transition-opacity ease-in-out',
+    enterFrom: 'opacity-0',
+    enterTo: 'opacity-100',
+    leave: 'transition-opacity ease-in-out',
+    leaveFrom: 'opacity-100',
+    leaveTo: 'opacity-0',
+  },
+  {
+    type: 'scaleY',
+    enter: 'transition transform ease-in-out origin-top',
+    enterFrom: 'scale-y-[0] opacity-0',
+    enterTo: 'scale-y-[1] opacity-100',
+    leave: 'transition ease-in-out origin-bottom',
+    leaveFrom: 'scale-y-[1] opacity-100',
+    leaveTo: 'scale-y-[0] opacity-0',
+  },
+  {
+    type: 'scaleX',
+    enter: 'transition transform ease-in-out origin-left',
+    enterFrom: 'scale-x-[0] opacity-0',
+    enterTo: 'scale-x-[1] opacity-100',
+    leave: 'transition ease-in-out origin-right',
+    leaveFrom: 'scale-x-[1] opacity-100',
+    leaveTo: 'scale-X-[0] opacity-0',
+  },
+  {
+    type: 'scaleCenterFull',
+    enter: 'transition transform ease-in-out',
+    enterFrom: 'scale-[0] opacity-0',
+    enterTo: 'scale-[1] opacity-100',
+    leave: 'transition ease-in-out',
+    leaveFrom: 'scale-[1] opacity-100',
+    leaveTo: 'scale-[0] opacity-0',
+  },
+  {
+    type: 'scaleCenterSm',
+    enter: 'transition transform ease-in-out',
+    enterFrom: 'scale-[0.9] opacity-0',
+    enterTo: 'scale-[1] opacity-100',
+    leave: 'transition ease-in-out',
+    leaveFrom: 'scale-[0.9] opacity-100',
+    leaveTo: 'scale-[0] opacity-0',
+  },
+  {
+    type: 'translateDown',
+    enter: 'transition ease-in-out',
+    enterFrom: 'transform opacity-0 -translate-y-5',
+    enterTo: 'transform opacity-100 translate-y-0',
+    leave: 'transition ease-in-out',
+    leaveFrom: 'transform opacity-100 translate-y-0',
+    leaveTo: 'transform opacity-0 -translate-y-5',
+  },
+];
