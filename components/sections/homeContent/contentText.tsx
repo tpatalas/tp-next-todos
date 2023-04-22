@@ -21,28 +21,33 @@ export const ContentText = ({ title, subTitle, content, scrollRef }: TypesPropsC
     <div className='flex max-w-md flex-col items-center justify-center space-y-3 text-center font-bold md:items-start md:text-start md:leading-relaxed md:tracking-wide'>
       <div
         className='min-w-max max-w-full overflow-hidden'
-        ref={scrollRef}>
+        ref={scrollRef}
+      >
         <SmoothTransition
           options={titleOptions}
-          scrollRef={scrollRef}>
+          scrollRef={scrollRef}
+        >
           <p
             className={classNames(
-              'w-full max-w-sm animate-typing whitespace-nowrap bg-clip-text text-2xl text-transparent md:text-3xl',
+              'w-full max-w-sm animate-typing whitespace-nowrap bg-clip-text text-2xl text-transparent will-change-transform md:text-3xl',
               STYLE_BLUR_GRADIENT_R_ZR,
-            )}>
+            )}
+          >
             {title}
           </p>
         </SmoothTransition>
       </div>
       <SmoothTransition
         options={{ ...titleOptions, delay: DELAY['500'] }}
-        scrollRef={scrollRef}>
-        <p className='text-lg text-slate-800/80 opacity-100 md:text-xl'>{subTitle}</p>
+        scrollRef={scrollRef}
+      >
+        <p className='text-lg text-slate-800/80 opacity-100 will-change-transform md:text-xl'>{subTitle}</p>
       </SmoothTransition>
       <SmoothTransition
         options={{ ...titleOptions, delay: DELAY['700'] }}
-        scrollRef={scrollRef}>
-        <p className='text-base font-medium text-slate-800/80 opacity-100'>{content}</p>
+        scrollRef={scrollRef}
+      >
+        <p className='text-base font-medium text-slate-800/80 opacity-100 will-change-transform'>{content}</p>
       </SmoothTransition>
     </div>
   );
