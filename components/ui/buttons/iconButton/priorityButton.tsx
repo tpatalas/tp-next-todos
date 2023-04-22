@@ -1,7 +1,12 @@
 import { IconButton } from '@buttons/iconButton';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { ICON_FLAG, ICON_FLAG_FILL, ICON_LABEL_IMPORTANT, ICON_LABEL_IMPORTANT_FILL } from '@data/materialSymbols';
+import {
+  ICON_FLAG,
+  ICON_FLAG_FILL,
+  ICON_LABEL_IMPORTANT,
+  ICON_LABEL_IMPORTANT_FILL,
+} from '@data/materialSymbols';
 import { Types } from '@lib/types';
 import { TypesOptionsPriority } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
@@ -13,8 +18,9 @@ import { useRecoilCallback, useRecoilValue } from 'recoil';
 type Props = { options: TypesOptionsPriority } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClick'>;
 
 export const PriorityButton = ({ todo, options, onClick }: Props) => {
-  const todoItem =
-    typeof todo === 'undefined' ? useRecoilValue(atomTodoNew) : useRecoilValue(atomSelectorTodoItem(todo._id));
+  const todoNew = useRecoilValue(atomTodoNew);
+  const todoItemSelector = useRecoilValue(atomSelectorTodoItem(todo?._id));
+  const todoItem = typeof todo === 'undefined' ? todoNew : todoItemSelector;
   const priorityImportant = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
   const priorityUrgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
   const levelImportant = options.priorityLevel === PRIORITY_LEVEL['important'];
@@ -38,7 +44,10 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
   );
 
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed;
+    return (
+      typeof todo !== 'undefined' &&
+      snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed
+    );
   });
 
   return (
@@ -49,14 +58,21 @@ export const PriorityButton = ({ todo, options, onClick }: Props) => {
             'flex flex-row rounded-lg focus-visible:rounded-lg',
             options.padding ?? 'p-2',
             options.container,
-          )}>
+          )}
+        >
           <SvgIcon
             options={{
               path: conditionalPath,
-              className: classNames(conditionalFill, options.size ?? 'h-5 w-5', options.color ?? 'fill-gray-500'),
+              className: classNames(
+                conditionalFill,
+                options.size ?? 'h-5 w-5',
+                options.color ?? 'fill-gray-500',
+              ),
             }}
           />
-          <Fragment>{options.isInitiallyVisible && <div className='px-3'> {conditionalHeaderContent}</div>}</Fragment>
+          <Fragment>
+            {options.isInitiallyVisible && <div className='px-3'> {conditionalHeaderContent}</div>}
+          </Fragment>
         </div>
       ) : (
         <IconButton

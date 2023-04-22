@@ -19,7 +19,8 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props
   const changeHandler = useEditorChangeHandler(todo?._id, titleName);
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
-  const completed = typeof todo !== 'undefined' && useRecoilValue(selectorSessionTodoItem(todo?._id)).completed;
+  const todoItemCompleted = useRecoilValue(selectorSessionTodoItem(todo?._id)).completed;
+  const completed = typeof todo !== 'undefined' && todoItemCompleted;
   const renderCustomElementWithProps = (props: RenderElementProps) =>
     renderCustomElement({
       titleName: titleName,
@@ -31,7 +32,8 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props
     <Slate
       editor={editor}
       value={initialValue()}
-      onChange={changeHandler}>
+      onChange={changeHandler}
+    >
       <Editable
         placeholder={props.placeholder}
         readOnly={completed ? true : false}

@@ -53,13 +53,13 @@ export const useVerticalScrollPosition = () => {
 };
 
 export const useVerticalScrollPositionTrigger = (
-  scrollRef: RefObject<HTMLElement>,
+  scrollRef?: RefObject<HTMLElement>,
   triggerRate?: number,
 ) => {
   const [isShowing, setIsShowing] = useState(false);
 
   const handleScroll = useCallback(() => {
-    if (!scrollRef.current) return;
+    if (!scrollRef?.current) return;
 
     const { top, bottom } = scrollRef.current.getBoundingClientRect();
     const multiplier = (triggerRate && triggerRate) ?? 1.2; // higher the number the earlier the element gets triggered

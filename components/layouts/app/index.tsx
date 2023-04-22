@@ -4,17 +4,12 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment as HeaderFragment, Fragment as LayoutAppFragment, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
-const FooterBody = dynamic(() =>
-  import('@layouts/layoutFooter/footerBody').then((mod) => mod.FooterBody),
-);
+const FooterBody = dynamic(() => import('@layouts/layoutFooter/footerBody').then((mod) => mod.FooterBody));
 const LayoutHeader = dynamic(() => import('@layouts/layoutHeader').then((mod) => mod.LayoutHeader));
-const SearchBar = dynamic(() =>
-  import('@layouts/layoutHeader/searchBar').then((mod) => mod.SearchBar),
-);
-const LayoutFooter = dynamic(
-  () => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter),
-  { ssr: false },
-);
+const SearchBar = dynamic(() => import('@layouts/layoutHeader/searchBar').then((mod) => mod.SearchBar));
+const LayoutFooter = dynamic(() => import('@layouts/layoutFooter').then((mod) => mod.LayoutFooter), {
+  ssr: false,
+});
 
 const LayoutAppGroupEffects = dynamic(
   () => import('@effects/layout').then((mod) => mod.LayoutAppGroupEffects),

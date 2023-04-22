@@ -24,11 +24,17 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
   const removeTitleId = useLabelRemoveItemTitleId(todo?._id);
   const closeTodoModal = useTodoModalStateClose(todo?._id);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const selectedLabels = selectedQueryLabels ? selectedQueryLabels : useRecoilValue(selectorSelectedLabels(todo?._id));
+  const selectedLabelsSelector = useRecoilValue(selectorSelectedLabels(todo?._id));
+  const selectedLabels = selectedQueryLabels ? selectedQueryLabels : selectedLabelsSelector;
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed;
+    return (
+      typeof todo !== 'undefined' &&
+      snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed
+    );
   });
-  const todoItem = useRecoilValue(typeof todo !== 'undefined' ? selectorSessionTodoItem(todo?._id) : atomTodoNew);
+  const todoItem = useRecoilValue(
+    typeof todo !== 'undefined' ? selectorSessionTodoItem(todo?._id) : atomTodoNew,
+  );
   const important = todoItem.priorityLevel === PRIORITY_LEVEL['important'];
   const urgent = todoItem.priorityLevel === PRIORITY_LEVEL['urgent'];
   const priority = important || urgent;
@@ -51,13 +57,15 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
         />
         <div
           className={classNames(
-            'scrollbar-hide ml-0 flex w-full flex-row items-center justify-start overflow-x-auto py-1 px-1 lg:ml-1 lg:px-1',
+            'scrollbar-hide ml-0 flex w-full flex-row items-center justify-start overflow-x-auto px-1 py-1 lg:ml-1 lg:px-1',
           )}
-          ref={scrollRef}>
+          ref={scrollRef}
+        >
           {!isTodoCompleted() && (
             <Dropdown
               options={optionsDropdownComboBox}
-              menuButtonContent={selectedLabels.length === 0 && 'Label'}>
+              menuButtonContent={selectedLabels.length === 0 && 'Label'}
+            >
               <LabelComboBox todo={todo} />
             </Dropdown>
           )}
@@ -70,7 +78,8 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                     'mx-[0.25rem] flex cursor-pointer flex-row items-center justify-center rounded-lg py-[2px] pl-2 pr-1 text-sm text-gray-700',
                     label.color && label.color,
                     'translate-all hover-text-opacity-100 text-opacity-80 shadow-sm ring-2 ring-opacity-70 hover:text-opacity-100 hover:ring-opacity-100  ',
-                  )}>
+                  )}
+                >
                   <PrefetchRouterButton
                     options={{
                       path: paths(PATH_APP['label'] + '/', label._id),
@@ -78,7 +87,8 @@ export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: 
                       tooltip: `Go to ${label.name}`,
                       offset: [8, 15],
                     }}
-                    onClick={() => closeTodoModal()}>
+                    onClick={() => closeTodoModal()}
+                  >
                     {label.name}
                   </PrefetchRouterButton>
                   {!isTodoCompleted() && (

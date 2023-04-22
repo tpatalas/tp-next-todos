@@ -81,9 +81,7 @@ export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
     (todoId) =>
     ({ get, set }, newValue) => {
       const session = get(atomUserSession);
-      return session
-        ? set(atomQueryTodoItem(todoId), newValue)
-        : set(atomDemoTodoItem(todoId), newValue);
+      return session ? set(atomQueryTodoItem(todoId), newValue) : set(atomDemoTodoItem(todoId), newValue);
     },
 });
 

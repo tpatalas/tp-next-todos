@@ -1,19 +1,18 @@
 import { DisableButton } from '@buttons/disableButton';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { KeysWithItemModalEffect } from '@effects/keysWithItemModalEffect';
+import { KeysWithItemModalEffect } from '@effects/KeysWithItemModalEffect';
 import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
 import { useConditionCompareTodoItemsEqual } from '@hooks/misc';
-import { useTodoUpdateItem, useTodoCompleteItem } from '@hooks/todos';
+import { useTodoCompleteItem, useTodoUpdateItem } from '@hooks/todos';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
 import { Types } from '@lib/types';
 import { optionsButtonItemModalUpdate } from '@options/button';
 import { classNames } from '@stateLogics/utils';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomPriority } from '@states/priorities';
-import dynamic from 'next/dynamic';
 import { Fragment as FooterButtonsFragment, Fragment as HeaderContentFragment } from 'react';
 import { useRecoilValue } from 'recoil';
-const TodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
+import { TodoModal } from './todoModal';
 
 export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
   const updateTodo = useTodoUpdateItem(todo._id);
@@ -27,7 +26,7 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
       todo={todo}
       menuButtonContent={
         <HeaderContentFragment>
-          <div className='mr-3 mb-[0.045em]'>
+          <div className='mb-[0.045em] mr-3'>
             <CompleteTodoCheckBox
               todoItem={todoItem}
               isChecked={todoItem.completed}
@@ -46,11 +45,13 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
           <DisableButton
             options={optionsButtonItemModalUpdate}
             isConditionalRendering={condition}
-            onClick={() => updateTodo()}>
+            onClick={() => updateTodo()}
+          >
             Update
           </DisableButton>
         </FooterButtonsFragment>
-      }>
+      }
+    >
       <KeysWithTodoModalEffect todo={todo} />
       <KeysWithItemModalEffect todo={todo} />
     </TodoModal>
