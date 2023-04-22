@@ -52,7 +52,7 @@ export default {
       },
       animation: {
         glow: 'glow 8s ease-in-out infinite',
-        typing: 'typing 1s steps(30, end)',
+        typing: 'typing 800ms steps(30, end)',
       },
       opacity: {
         65: '0.65',

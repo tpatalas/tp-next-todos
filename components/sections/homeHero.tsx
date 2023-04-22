@@ -40,13 +40,17 @@ export const HomeHero = () => {
           >
             <SmoothTransition options={translateOptions}>
               <div className='mx-auto max-w-2xl text-center'>
-                <h1 className='mb-2 text-4xl font-bold text-slate-800 sm:text-6xl'>Simplify your life</h1>
-                <h1 className='text-4xl font-bold text-slate-800 sm:text-6xl'>Automate your tasks</h1>
+                <h1 className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
+                  Simplify your life
+                </h1>
+                <h1 className='text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
+                  Automate your tasks
+                </h1>
               </div>
             </SmoothTransition>
             <SmoothTransition options={{ ...translateOptions, delay: DELAY['300'] }}>
               <div className='mx-auto max-w-2xl text-center'>
-                <p className='mt-6 text-xl leading-8 text-gray-600'>
+                <p className='mt-6 text-xl leading-8 text-gray-600 will-change-transform'>
                   Focus on your work more and manage your to-dos less. Enhance your efficiency and improve
                   your productivity.
                 </p>
@@ -70,7 +74,10 @@ export const HomeHero = () => {
                   scrollRef={divRef}
                 >
                   <div
-                    className={classNames('absolute h-full w-full rounded-xl', STYLE_BLUR_GRADIENT_R_LG)}
+                    className={classNames(
+                      'absolute h-full w-full rounded-xl will-change-transform',
+                      STYLE_BLUR_GRADIENT_R_LG,
+                    )}
                   />
                 </SmoothTransition>
                 <SmoothTransition
@@ -82,7 +89,7 @@ export const HomeHero = () => {
                       loader={nextImageLoader}
                       width={0}
                       height={0}
-                      className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl'
+                      className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
                       src={PATH_IMAGE_HOME['demo']}
                       alt='demo application image'
                       priority
