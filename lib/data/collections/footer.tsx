@@ -27,7 +27,7 @@ export const DATA_FOOTER_NAVIGATION: TypesFooterNavigation[] = [
   { name: 'Implementation', path: PATH_HOME['implementations'] },
   { name: 'Pricing', path: PATH_HOME['pricing'] },
   { name: 'Demo', path: PATH_HOME['demo'] },
-  { name: 'contact', path: PATH_HOME['contact'] },
+  { name: 'Contact', path: PATH_HOME['contact'] },
 ];
 
 export const DATA_FOOTER_SOCIAL: TypesFooterSocial[] = [
