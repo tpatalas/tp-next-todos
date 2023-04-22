@@ -48,7 +48,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.0",
     "@types/node": "18.15.13",
-    "@types/react": "^18.0.35",
+    "@types/react": "^18.0.38",
     "@types/validator": "^13.7.14",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.1",
