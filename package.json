@@ -17,7 +17,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
     "autoprefixer": "10.4.14",
     "bson-objectid": "^2.0.4",
     "date-fns": "^2.29.3",
