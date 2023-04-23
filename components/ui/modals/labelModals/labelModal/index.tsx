@@ -33,10 +33,8 @@ export const LabelModal = ({
   const isLabelModalOpen = useRecoilValue(atomLabelModalOpen(label?._id));
   const closeModal = useLabelModalStateClose(label?._id);
   const initialFocusInput = useRef<HTMLInputElement>(null);
-  const labelItem =
-    typeof label === 'undefined'
-      ? useRecoilValue(atomLabelNew)
-      : useRecoilValue(atomSelectorLabelItem(label._id));
+  const atomLabel = typeof label === 'undefined' ? atomLabelNew : atomSelectorLabelItem(label._id);
+  const labelItem = useRecoilValue(atomLabel);
   const updateLabelItem = useLabelValueUpdate(label);
   const addLabel = useLabelAdd();
   const condition = useConditionCheckLabelTitleEmpty();

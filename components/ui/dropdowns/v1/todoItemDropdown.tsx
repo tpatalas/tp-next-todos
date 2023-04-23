@@ -20,7 +20,9 @@ type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo' | 'c
 export const TodoItemDropdown = ({ todo, children, options }: Props) => {
   const removeTodo = useTodoRemoveItem(todo?._id);
   const updateCalendarDataItem = useCalUpdateDataItem(todo?._id);
-  const setPriority = typeof todo === 'undefined' ? usePriorityUpdate(undefined) : usePriorityUpdateData(todo?._id);
+  const priorityUpdate = usePriorityUpdate(undefined);
+  const priorityUpdateData = usePriorityUpdateData(todo?._id);
+  const setPriority = typeof todo === 'undefined' ? priorityUpdate : priorityUpdateData;
   const todoItem = useRecoilValue(selectorSessionTodoItem(todo?._id));
 
   return (
@@ -30,7 +32,8 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
         path: ICON_MORE_VERT,
         menuHeight: options.menuHeight ?? 'mt-2',
         isInitiallyVisible: options.isInitiallyVisible,
-      }}>
+      }}
+    >
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       {children}
@@ -69,7 +72,8 @@ export const TodoItemDropdown = ({ todo, children, options }: Props) => {
             path: ICON_DELETE,
             kbd: MODIFIER_KBD['modifier + Delete'],
           }}
-          onClick={() => removeTodo()}>
+          onClick={() => removeTodo()}
+        >
           Delete
         </DropdownMenuItem>
       </div>

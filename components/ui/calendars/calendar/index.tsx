@@ -16,8 +16,8 @@ type Props = Partial<Pick<Types, 'todo' | 'headerButtons'>>;
 
 export const Calendar = ({ todo, headerButtons }: Props) => {
   const itemDay = useRecoilValue(atomDayPickerUpdater(todo?._id)) as Date;
-  const queryDay =
-    typeof todo !== 'undefined' && new Date(useRecoilValue(atomSelectorTodoItem(todo?._id)).dueDate as Date);
+  const dueDate = new Date(useRecoilValue(atomSelectorTodoItem(todo?._id)).dueDate as Date);
+  const queryDay = typeof todo !== 'undefined' && dueDate;
   const selectedDay = queryDay || itemDay;
   const currentMonth = useRecoilValue(atomCurrentMonth(todo?._id));
   const setCalendar = useCalState(todo?._id);
@@ -33,7 +33,8 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
         <div className='flex flex-row items-center justify-center space-x-1'>
           <IconButton
             options={optionsButtonCalendarPrevMonth}
-            onClick={() => setCalendar(CALENDAR['previousMonth'])}>
+            onClick={() => setCalendar(CALENDAR['previousMonth'])}
+          >
             <span className='sr-only'>Previous month</span>
           </IconButton>
           <IconButton
@@ -49,7 +50,8 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
           />
           <IconButton
             options={optionsButtonCalendarNextMonth}
-            onClick={() => setCalendar(CALENDAR['nextMonth'])}>
+            onClick={() => setCalendar(CALENDAR['nextMonth'])}
+          >
             <span className='sr-only'>Next month</span>
           </IconButton>
         </div>
@@ -68,7 +70,8 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
         {days!.map((day, dayIdx) => (
           <div
             key={day.toString()}
-            className={classNames(dayIdx === 0 && STYLE_CALENDAR_COL_START[getDay(day)], 'py-1')}>
+            className={classNames(dayIdx === 0 && STYLE_CALENDAR_COL_START[getDay(day)], 'py-1')}
+          >
             <Button
               onClick={() => {
                 if (isPast(day) && !isToday(day)) return;
@@ -98,7 +101,8 @@ export const Calendar = ({ todo, headerButtons }: Props) => {
                   (isEqual(day, selectedDay) || isToday(day)) && 'font-semibold',
                   'mx-auto flex h-8 w-8 items-center justify-center rounded-full',
                 ),
-              }}>
+              }}
+            >
               <time dateTime={format(day, 'yyyy-MM-dd')}>{format(day, 'd')}</time>
             </Button>
           </div>

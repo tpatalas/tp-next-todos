@@ -8,7 +8,7 @@ import { atomTodoNew, selectorFilterTodoIdsByPathname } from '@states/todos';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
-import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
+import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();
@@ -62,19 +62,19 @@ export const useConditionCheckLabelTitleEmpty = () => {
 };
 
 export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
+  const todoItem = useRecoilValueLoadable(selectorSessionTodoItem(_id)).valueMaybe();
+  const selectorTodoItem = useRecoilValueLoadable(atomSelectorTodoItem(_id)).valueMaybe();
   if (typeof _id === 'undefined') return;
-  const todoItem = useRecoilValue(selectorSessionTodoItem(_id));
-  const selectorTodoItem = useRecoilValue(atomSelectorTodoItem(_id));
-  const todoItemCompletedEqual = equal(todoItem.completed, selectorTodoItem.completed);
+  const todoItemCompletedEqual = equal(todoItem?.completed, selectorTodoItem?.completed);
   // Disable update button if completed
   return !todoItemCompletedEqual ? true : equal(todoItem, selectorTodoItem);
 };
 
 export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
-  if (typeof _id === 'undefined') return;
   const labels = useRecoilValue(selectorSessionLabels);
   const labelItem = labels.find((label) => label._id === _id) || ({} as Labels);
   const labelItemCompare = useRecoilValue(atomSelectorLabelItem(_id));
+  if (typeof _id == 'undefined') return;
   return equal(labelItem, labelItemCompare);
 };
 
