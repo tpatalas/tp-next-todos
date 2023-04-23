@@ -54,45 +54,38 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
   const openModal = useTodoModalStateOpen(_id);
   const removeTodo = useTodoRemoveItem(_id);
-  const focusKeyHandler = useRecoilCallback(
-    ({ set, reset, snapshot }) =>
-      (event: React.KeyboardEvent) => {
-        const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
-        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+  const focusKeyHandler = useRecoilCallback(({ set, reset, snapshot }) => (event: React.KeyboardEvent) => {
+    const metaCtrlKey = isMacOs ? event.metaKey : event.ctrlKey;
+    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-        if (!get(atomOnFocus) || isMobile) return;
+    if (!get(atomOnFocus) || isMobile) return;
 
-        switch (true) {
-          case metaCtrlKey && event.key === 'Enter':
-            event.preventDefault();
-            completeTodo();
-            break;
-          case metaCtrlKey && event.key === 'Backspace':
-            event.preventDefault();
-            removeTodo();
-            break;
-          case event.key === 'Enter':
-            event.preventDefault();
-            openModal();
-            break;
-          case event.key === 'Escape':
-            if (get(selectorSessionTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
-            event.preventDefault();
-            !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
-            reset(atomCurrentFocus);
-            set(atomOnBlur, true);
-            break;
-        }
-      },
-  );
+    switch (true) {
+      case metaCtrlKey && event.key === 'Enter':
+        event.preventDefault();
+        completeTodo();
+        break;
+      case metaCtrlKey && event.key === 'Backspace':
+        event.preventDefault();
+        removeTodo();
+        break;
+      case event.key === 'Enter':
+        event.preventDefault();
+        openModal();
+        break;
+      case event.key === 'Escape':
+        if (get(selectorSessionTodoItem(_id)).completed && get(atomTodoModalOpen(_id))) return;
+        event.preventDefault();
+        !get(atomTodoModalMini(_id)) && reset(atomOnFocus);
+        reset(atomCurrentFocus);
+        set(atomOnBlur, true);
+        break;
+    }
+  });
   return focusKeyHandler;
 };
 
-export const useKeyWithEditor = (
-  titleName: Types['titleName'],
-  _id: Todos['_id'],
-  editor: CustomEditor,
-) => {
+export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'], editor: CustomEditor) => {
   const addTodo = useTodoAdd();
   const updateTodo = useTodoUpdateItem(_id);
   const editorKeyHandler = useRecoilCallback(() => (event: React.KeyboardEvent) => {
@@ -123,7 +116,8 @@ export const useKeyWithEditor = (
 
 // with labels
 export const useKeyWithLabelModal = (_id: Labels['_id']) => {
-  const isLabelEmpty = typeof _id === 'undefined' && useConditionCheckLabelTitleEmpty();
+  const titleCheck = useConditionCheckLabelTitleEmpty();
+  const isLabelEmpty = typeof _id === 'undefined' && titleCheck;
   const addLabel = useLabelAdd();
   const updateLabel = useLabelUpdateItem(_id);
   return useRecoilCallback(({ snapshot }) => (event: KeyboardEvent) => {

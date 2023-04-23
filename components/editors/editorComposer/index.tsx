@@ -1,14 +1,14 @@
 import { EditorAutoFocusEffect } from '@effects/editorAutoFocusEffect';
-import { useEditorInitialValue, useEditorChangeHandler } from '@hooks/editors';
+import { useEditorChangeHandler, useEditorInitialValue } from '@hooks/editors';
 import { useKeyWithEditor } from '@hooks/keybindings';
-import { renderPlaceholder, renderCustomElement } from '@lib/editors';
+import { renderCustomElement, renderPlaceholder } from '@lib/editors';
 import { Types } from '@lib/types';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValueLoadable } from 'recoil';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
-import { withReact, RenderPlaceholderProps, RenderElementProps, Slate, Editable } from 'slate-react';
+import { Editable, RenderElementProps, RenderPlaceholderProps, Slate, withReact } from 'slate-react';
 
 type Props = Pick<Types, 'titleName' | 'placeholder'> & Partial<Pick<Types, 'isAutoFocus' | 'todo'>>;
 
@@ -19,7 +19,9 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props
   const changeHandler = useEditorChangeHandler(todo?._id, titleName);
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
-  const completed = typeof todo !== 'undefined' && useRecoilValue(selectorSessionTodoItem(todo?._id)).completed;
+  const todoItem = useRecoilValueLoadable(selectorSessionTodoItem(todo?._id)).valueMaybe();
+  const todoCompleted = todoItem?.completed;
+  const completed = typeof todo !== 'undefined' && todoCompleted;
   const renderCustomElementWithProps = (props: RenderElementProps) =>
     renderCustomElement({
       titleName: titleName,
@@ -31,7 +33,8 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props
     <Slate
       editor={editor}
       value={initialValue()}
-      onChange={changeHandler}>
+      onChange={changeHandler}
+    >
       <Editable
         placeholder={props.placeholder}
         readOnly={completed ? true : false}

@@ -26,12 +26,15 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
   const resetCalendar = useCalResetDayUpdater(todo?._id);
   const resetDateItemOnly = useCalResetDateItemOnly(todo?._id);
   const resetDateAll = useCalResetDateAll(todo?._id);
-  const todoItem =
-    typeof todo === 'undefined' ? useRecoilValue(atomTodoNew) : useRecoilValue(atomSelectorTodoItem(todo._id));
+  const atomTodo = typeof todo === 'undefined' ? atomTodoNew : atomSelectorTodoItem(todo._id);
+  const todoItem = useRecoilValue(atomTodo);
   const noDaySelected = todoItem.dueDate == null;
   const renderDueDate = noDaySelected ? 'Due date' : format(new Date(todoItem.dueDate as Date), 'MMM dd, yy');
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed;
+    return (
+      typeof todo !== 'undefined' &&
+      snapshot.getLoadable(selectorSessionTodoItem(todo?._id)).getValue().completed
+    );
   });
 
   return (
@@ -43,7 +46,8 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
             options.padding ?? 'px-2 py-2 sm:px-3',
             options.borderRadius,
             options.container,
-          )}>
+          )}
+        >
           <SvgIcon
             options={{
               path: noDaySelected ? ICON_EVENT_AVAILABLE : ICON_EVENT_AVAILABLE_FILL,
@@ -75,7 +79,8 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
               text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
               isPortal: false,
             }}
-            menuButtonContent={<HeaderContentsFragment>{renderDueDate}</HeaderContentsFragment>}>
+            menuButtonContent={<HeaderContentsFragment>{renderDueDate}</HeaderContentsFragment>}
+          >
             <div className='p-2'>
               <Calendar todo={todo} />
               <div className='flex flex-row items-center justify-between px-4 pb-4 pt-5'>
@@ -90,14 +95,16 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
                       onClick={() => {
                         resetCalendar();
                         resetDateItemOnly();
-                      }}>
+                      }}
+                    >
                       Cancel
                     </Button>
                   </Menu.Item>
                   <Menu.Item>
                     <Button
                       options={optionsButtonCalendarConfirm}
-                      onClick={onClickConfirm}>
+                      onClick={onClickConfirm}
+                    >
                       Ok
                     </Button>
                   </Menu.Item>
