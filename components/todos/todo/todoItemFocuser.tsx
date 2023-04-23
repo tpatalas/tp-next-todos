@@ -1,4 +1,4 @@
-import { KeysWithNavigationEffect } from '@effects/keysWithNavigateEffect';
+import { KeysWithNavigationEffect } from '@effects/KeysWithNavigateEffect';
 import { useFocusOnClick } from '@hooks/focus';
 import { useKeyWithFocus } from '@hooks/keybindings';
 import { classNames } from '@stateLogics/utils';

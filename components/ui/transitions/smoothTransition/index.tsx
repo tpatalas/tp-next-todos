@@ -16,7 +16,8 @@ export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmo
   } = options || {};
   const data = DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
   const triggerRate = !!scrollRef ? options?.rate : undefined;
-  const isShowing = !!scrollRef ? useVerticalScrollPositionTrigger(scrollRef, triggerRate) : undefined;
+  const isTriggered = useVerticalScrollPositionTrigger(scrollRef, triggerRate);
+  const isShowing = !!scrollRef ? isTriggered : undefined;
 
   return (
     <Transition
