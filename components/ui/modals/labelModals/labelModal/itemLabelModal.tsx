@@ -3,7 +3,7 @@ import { Types } from '@lib/types';
 import { Fragment } from 'react';
 import { LabelModal } from '.';
 import { optionsButtonLabelModalUpdateLabel } from '@options/button';
-import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
+import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { useLabelUpdateItem } from '@hooks/labels';
 import { useConditionCompareLabelItemsEqual } from '@hooks/misc';
 
@@ -20,10 +20,12 @@ export const ItemLabelModal = ({ label }: Pick<Types, 'label'>) => {
           <DisableButton
             options={optionsButtonLabelModalUpdateLabel}
             isConditionalRendering={condition}
-            onClick={() => updateLabel()}>
+            onClick={() => updateLabel()}
+          >
             Update
           </DisableButton>
-        }>
+        }
+      >
         <KeysWithLabelModalEffect label={label} />
       </LabelModal>
     </Fragment>
