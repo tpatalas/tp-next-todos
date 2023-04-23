@@ -17,7 +17,7 @@ import { ModalTransitionChild } from '@modals/modal/modalTransition/modalTransit
 import { ModalTransitionRoot } from '@modals/modal/modalTransition/modalTransitionRoot';
 import { Button } from '@buttons/button';
 import { classNames } from '@stateLogics/utils';
-import { KeysWithLabelModalEffect } from '@effects/keysWithLabelModalEffect';
+import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { DividerX } from '@ui/dividers/dividerX';
 
 type Props = Partial<
@@ -46,7 +46,8 @@ export const LabelModal = ({
       <ModalTransitionRoot
         show={isLabelModalOpen}
         initialFocus={initialFocusInput}
-        onClose={() => closeModal()}>
+        onClose={() => closeModal()}
+      >
         <ModalTransitionChild className='h-40 px-2 pb-4 pt-2 sm:relative sm:bottom-24 sm:h-40 sm:max-w-lg'>
           <div className='flex flex-row items-center justify-between sm:inline-block'>
             <div className='flex w-full flex-row items-center justify-between pl-3 text-base font-semibold text-gray-600 sm:mb-1 '>
@@ -76,14 +77,16 @@ export const LabelModal = ({
           <div className='flex flex-row justify-end pt-4'>
             <Button
               options={optionsButtonTodoModalCancel}
-              onClick={() => closeModal()}>
+              onClick={() => closeModal()}
+            >
               Cancel
             </Button>
             {footerButtons || (
               <DisableButton
                 isConditionalRendering={condition}
                 options={optionsButtonLabelModalAddLabel}
-                onClick={() => addLabel()}>
+                onClick={() => addLabel()}
+              >
                 Add Label
               </DisableButton>
             )}
