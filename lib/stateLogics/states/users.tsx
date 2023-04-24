@@ -16,6 +16,3 @@ export const atomUserVerificationRequest = atom({
   default: false,
 });
 
-export const atomUserSession = atom({
-  key: 'atomUserSession',
-});
