@@ -1,10 +1,10 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
-import { UserDropdown } from '@dropdowns/v2/userDropdown';
+import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { getSessionStorage } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
-import { SignInButton } from './signInButton';
+import { UserDropdown } from './userDropdown';
 
 export const User = () => {
   const offSession = getSessionStorage(STORAGE_KEY['offSession']);
