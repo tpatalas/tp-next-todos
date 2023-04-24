@@ -6,20 +6,18 @@ const HomeHero = dynamic(() => import('@components/sections/homeHero').then((mod
 const HomeStartToday = dynamic(() =>
   import('@components/sections/homeStartToday').then((mod) => mod.HomeStartToday),
 );
-const HomeContent = dynamic(() =>
-  import('@components/sections/homeContent').then((mod) => mod.HomeContent),
-);
-const HomeHeader = dynamic(() =>
-  import('@components/sections/homeHeader').then((mod) => mod.HomeHeader),
-);
+const HomeContent = dynamic(() => import('@components/sections/homeContent').then((mod) => mod.HomeContent));
+const HomeHeader = dynamic(() => import('@components/sections/homeHeader').then((mod) => mod.HomeHeader));
 
 const Home = () => {
   return (
     <Fragment>
-      <HomeHero />
-      <HomeHeader />
-      <HomeContent />
-      <HomeStartToday />
+      <main className='flex min-h-screen flex-col justify-between'>
+        <HomeHero />
+        <HomeHeader />
+        <HomeContent />
+        <HomeStartToday />
+      </main>
     </Fragment>
   );
 };
