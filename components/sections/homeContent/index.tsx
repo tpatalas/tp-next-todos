@@ -23,7 +23,7 @@ export const HomeContent = () => {
   return (
     <section className='w-screen'>
       <div className='relative my-24 flex flex-row items-center justify-center px-5 py-10 sm:px-10 md:my-32 lg:px-28'>
-        <div className='md:min-w-3/4 grid min-w-full grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
+        <div className='md:min-w-3/4 grid w-full max-w-6xl grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
           <ContentText
             title='Spotlight your to-dos'
             subTitle="View your to-dos that are intelligently and automatically selected in Today's Focus."
