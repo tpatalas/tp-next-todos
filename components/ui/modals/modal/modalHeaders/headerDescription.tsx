@@ -8,7 +8,8 @@ export const HeaderDescription = ({
   return (
     <Dialog.Description
       as='div'
-      className={className || 'text-base text-gray-600'}>
+      className={className || 'p-1 text-base text-gray-600'}
+    >
       <p>{children}</p>
     </Dialog.Description>
   );
