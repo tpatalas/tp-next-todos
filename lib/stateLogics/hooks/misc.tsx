@@ -7,8 +7,13 @@ import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomTodoNew, selectorFilterTodoIdsByPathname } from '@states/todos';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo } from 'react';
-import { RecoilState, RecoilValue, useRecoilCallback, useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useMemo } from 'react';
+import {
+    RecoilValue,
+    useRecoilCallback,
+    useRecoilValue,
+    useRecoilValueLoadable
+} from 'recoil';
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();
@@ -76,19 +81,6 @@ export const useConditionCompareLabelItemsEqual = (_id: Labels['_id']) => {
   const labelItemCompare = useRecoilValue(atomSelectorLabelItem(_id));
   if (typeof _id == 'undefined') return;
   return equal(labelItem, labelItemCompare);
-};
-
-// recoil test observer: required to observe state change on unit test
-export const RecoilObserver = <T,>({
-  node,
-  onChange,
-}: {
-  node: RecoilState<T>;
-  onChange: (value: T) => void;
-}) => {
-  const value = useRecoilValue(node);
-  useEffect(() => onChange(value), [onChange, value]);
-  return null;
 };
 
 export const useNextQuery = ({ path, key }: { path?: string; key?: string }) => {

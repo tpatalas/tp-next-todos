@@ -1,7 +1,8 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { RenderOptions, render } from '@testing-library/react';
-import React, { FC, ReactElement } from 'react';
-import { RecoilRoot } from 'recoil';
+import { Session } from 'next-auth';
+import React, { FC, ReactElement, useEffect } from 'react';
+import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useRecoilValue } from 'recoil';
 import validator from 'validator';
 
 // Days
@@ -93,4 +94,30 @@ export const sanitizeObject = (obj: object) => {
     return [key, typeof value === 'string' ? sanitize(value as string) : value];
   });
   return Object.fromEntries(sanitizedEntries) as typeof obj;
+};
+
+export const mockSession: Session = {
+  expires: new Date(Date.now() + 86400).toISOString(),
+  user: { _id: '123', email: 'admin@example.com', name: 'mockedUser', image: null },
+};
+
+export const RecoilObserverValue = <T,>({ node }: { node: RecoilState<T> | null }) => {
+  const testingOnlyAtom = atom({ key: 'atomForTestingPurposeOnly' });
+  const state = node ? node : testingOnlyAtom;
+  const value = useRecoilSnapshot().getLoadable(state).valueMaybe();
+
+  return <div>{!!value ? 'active' : 'inactive'}</div>;
+};
+
+// recoil test observer: required to observe state change on unit test
+export const RecoilObserverOnChange = <T,>({
+  node,
+  onChange,
+}: {
+  node: RecoilState<T>;
+  onChange: (value: T) => void;
+}) => {
+  const value = useRecoilValue(node);
+  useEffect(() => onChange(value), [onChange, value]);
+  return null;
 };

@@ -6,7 +6,7 @@ import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
 import { useCallback, useEffect } from 'react';
-import { useRecoilCallback } from 'recoil';
+import { RecoilValue, useRecoilCallback } from 'recoil';
 
 export const UserSessionResetEffect = () => {
   const { data: session } = useSession();
@@ -21,15 +21,21 @@ export const UserSessionResetEffect = () => {
     );
   };
 
-  const userSession = useRecoilCallback(({ reset }) => () => {
-    if (offSession) {
-      reset(selectorSessionTodoIds);
-      reset(selectorSessionLabels);
-      localStorage.clear();
-      clearIndexedDB();
-      return;
-    }
-  });
+  const userSession = useRecoilCallback(
+    ({ snapshot, reset }) =>
+      async () => {
+        const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).valueMaybe();
+
+        if (offSession) {
+          get(selectorSessionTodoIds) && reset(selectorSessionTodoIds);
+          get(selectorSessionLabels) && reset(selectorSessionLabels);
+          localStorage.clear();
+          await clearIndexedDB();
+          return;
+        }
+      },
+    [offSession],
+  );
 
   const setSession = useCallback(() => {
     const isOffSessionStorage = getSessionStorage(STORAGE_KEY['offSession']);
@@ -41,7 +47,7 @@ export const UserSessionResetEffect = () => {
   }, [offSession]);
 
   useEffect(() => {
-    userSession();
+    (async () => await userSession())();
     window.addEventListener('storage', setSession);
     return () => {
       window.removeEventListener('storage', setSession);
