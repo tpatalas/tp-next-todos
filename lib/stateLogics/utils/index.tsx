@@ -1,6 +1,5 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { RenderOptions, render } from '@testing-library/react';
-import { Session } from 'next-auth';
 import React, { FC, ReactElement, useEffect } from 'react';
 import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useRecoilValue } from 'recoil';
 import validator from 'validator';
@@ -61,7 +60,7 @@ export const nextImageLoader = ({
   width: number;
   quality?: number;
 }) => {
-  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality || 75}`;
+  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality ?? 75}`;
 };
 
 // test if email has standard format of email address
@@ -94,11 +93,6 @@ export const sanitizeObject = (obj: object) => {
     return [key, typeof value === 'string' ? sanitize(value as string) : value];
   });
   return Object.fromEntries(sanitizedEntries) as typeof obj;
-};
-
-export const mockSession: Session = {
-  expires: new Date(Date.now() + 86400).toISOString(),
-  user: { _id: '123', email: 'admin@example.com', name: 'mockedUser', image: null },
 };
 
 export const RecoilObserverValue = <T,>({ node }: { node: RecoilState<T> | null }) => {

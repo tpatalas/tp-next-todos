@@ -1,15 +1,11 @@
 import mockRouter from 'next-router-mock';
-import {
-  RecoilObserverValue,
-  getSessionStorage,
-  mockSession,
-  renderWithRecoilRoot,
-} from '@stateLogics/utils';
+import { RecoilObserverValue, getSessionStorage, renderWithRecoilRoot } from '@stateLogics/utils';
 import { screen } from '@testing-library/react';
 import { atomUserSession } from '@users/user/user.states';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { UserSessionEffect } from '..';
+import { mockedUserSession } from '__mock__/next-auth';
 
 jest.mock('next/router', () => require('next-router-mock'));
 
@@ -22,6 +18,8 @@ describe('UserSessionEffect', () => {
       </SessionProvider>,
     );
   };
+
+  const mockedSession = mockedUserSession({ userImage: true });
 
   const renderWithQueryElement = (session: Session | null) => {
     const { container } = renderUserSessionEffect(session);
@@ -56,14 +54,14 @@ describe('UserSessionEffect', () => {
   });
 
   it('should offSession return null when user has a session', async () => {
-    const { container, offSession } = renderWithQueryElement(mockSession);
+    const { container, offSession } = renderWithQueryElement(mockedSession);
 
     expect(container).not.toBeNull();
     expect(offSession).toBeNull();
   });
 
   it('should document have an active string when user has a session', async () => {
-    const { container, active, inactive } = renderWithQueryElement(mockSession);
+    const { container, active, inactive } = renderWithQueryElement(mockedSession);
     expect(active).toBeInTheDocument();
     expect(inactive).not.toBeInTheDocument();
     expect(container).not.toBeNull();
