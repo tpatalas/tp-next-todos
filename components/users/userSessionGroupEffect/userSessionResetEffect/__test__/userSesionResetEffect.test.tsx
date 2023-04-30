@@ -1,23 +1,23 @@
 import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
 import { getSessionStorage } from '@stateLogics/utils';
+import { RecoilObserverValue, renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { screen } from '@testing-library/react';
 import 'fake-indexeddb/auto';
 import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import { RecoilState } from 'recoil';
 import { UserSessionResetEffect } from '..';
-import { RecoilObserverValue, renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
 
 describe('userSessionResetEffect', () => {
   const renderUserSessionEffect = <T,>(session: Session | null, node: RecoilState<T> | null) =>
-    renderWithRecoilRoot(
-      <SessionProvider session={session}>
+    renderRecoilRootAndSession(
+      <>
         <UserSessionResetEffect />
         <RecoilObserverValue node={node} />
-      </SessionProvider>,
+      </>,
+      { session: session },
     );
 
   const renderWithQueryElement = <T,>(session: Session | null, node: RecoilState<T> | null) => {
