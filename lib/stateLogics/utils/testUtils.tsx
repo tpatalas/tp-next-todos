@@ -1,13 +1,30 @@
-import { FC, ReactElement, useEffect } from 'react';
 import { RenderOptions, render } from '@testing-library/react';
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import { ReactElement, ReactNode, useEffect } from 'react';
 import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useRecoilValue } from 'recoil';
 
-const RecoilRootProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <RecoilRoot>{children}</RecoilRoot>;
+const RecoilRootProvider = ({ children, session }: { children: ReactNode; session: Session | null }) => {
+  return (
+    <RecoilRoot>
+      <SessionProvider session={session}>{children}</SessionProvider>
+    </RecoilRoot>
+  );
 };
 
-export const renderWithRecoilRoot = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { wrapper: RecoilRootProvider, ...options });
+export const renderRecoilRootAndSession = (
+  ui: ReactElement,
+  options?: Omit<RenderOptions, 'wrapper'> & { session: Session | null },
+) =>
+  render(ui, {
+    wrapper: (props) => (
+      <RecoilRootProvider
+        {...props}
+        session={options?.session ?? null}
+      />
+    ),
+    ...options,
+  });
 
 export const RecoilObserverValue = <T,>({ node }: { node: RecoilState<T> | null }) => {
   const testingOnlyAtom = atom({ key: 'atomForTestingPurposeOnly' });
