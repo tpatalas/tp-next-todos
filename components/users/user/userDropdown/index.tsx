@@ -53,7 +53,7 @@ export const UserDropdown = () => {
         <MenuItem
           options={menuItemSignOutOptions}
           onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOST })}
-       >
+        >
           Sign out
         </MenuItem>
       </div>
