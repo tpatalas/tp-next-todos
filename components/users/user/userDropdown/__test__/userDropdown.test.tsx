@@ -4,18 +4,13 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { mockedImageUrl } from '__mock__/next';
 import { mockedUserSession } from '__mock__/next-auth';
 import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import 'whatwg-fetch';
 import { UserDropdown } from '..';
-import { renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
+import { renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 
 describe('UserDropdown', () => {
   const renderWithSession = (session: Session | null) => {
-    return renderWithRecoilRoot(
-      <SessionProvider session={session}>
-        <UserDropdown />
-      </SessionProvider>,
-    );
+    return renderRecoilRootAndSession(<UserDropdown />, { session: session });
   };
 
   const mockedSession = mockedUserSession({ userImage: true }) as Session;

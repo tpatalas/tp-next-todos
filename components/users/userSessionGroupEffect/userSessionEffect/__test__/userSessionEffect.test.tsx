@@ -1,22 +1,22 @@
 import { getSessionStorage } from '@stateLogics/utils';
+import { RecoilObserverValue, renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { screen } from '@testing-library/react';
 import { atomUserSession } from '@users/user/user.states';
 import { mockedUserSession } from '__mock__/next-auth';
 import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import mockRouter from 'next-router-mock';
 import { UserSessionEffect } from '..';
-import { RecoilObserverValue, renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
 
 jest.mock('next/router', () => require('next-router-mock'));
 
 describe('UserSessionEffect', () => {
   const renderUserSessionEffect = (session: Session | null) => {
-    return renderWithRecoilRoot(
-      <SessionProvider session={session}>
+    return renderRecoilRootAndSession(
+      <>
         <UserSessionEffect />
         <RecoilObserverValue node={atomUserSession} />
-      </SessionProvider>,
+      </>,
+      { session: session },
     );
   };
 
