@@ -1,6 +1,6 @@
 import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
-import { RecoilObserverValue, getSessionStorage, renderWithRecoilRoot } from '@stateLogics/utils';
+import { getSessionStorage } from '@stateLogics/utils';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { screen } from '@testing-library/react';
@@ -9,6 +9,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { RecoilState } from 'recoil';
 import { UserSessionResetEffect } from '..';
+import { RecoilObserverValue, renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
 
 describe('userSessionResetEffect', () => {
   const renderUserSessionEffect = <T,>(session: Session | null, node: RecoilState<T> | null) =>

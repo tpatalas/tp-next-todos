@@ -1,10 +1,11 @@
-import { getSessionStorage, renderWithRecoilRoot } from '@stateLogics/utils';
+import { getSessionStorage } from '@stateLogics/utils';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { UserSessionGroupEffect } from '..';
 import 'fake-indexeddb/auto';
 import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
+import { renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
 
 describe('UserSessionGroupEffect', () => {
   const renderUserSessionEffect = (session: Session | null) => {
