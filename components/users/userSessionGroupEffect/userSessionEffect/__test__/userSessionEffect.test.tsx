@@ -1,11 +1,12 @@
-import mockRouter from 'next-router-mock';
-import { RecoilObserverValue, getSessionStorage, renderWithRecoilRoot } from '@stateLogics/utils';
+import { getSessionStorage } from '@stateLogics/utils';
 import { screen } from '@testing-library/react';
 import { atomUserSession } from '@users/user/user.states';
+import { mockedUserSession } from '__mock__/next-auth';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
+import mockRouter from 'next-router-mock';
 import { UserSessionEffect } from '..';
-import { mockedUserSession } from '__mock__/next-auth';
+import { RecoilObserverValue, renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
 
 jest.mock('next/router', () => require('next-router-mock'));
 
