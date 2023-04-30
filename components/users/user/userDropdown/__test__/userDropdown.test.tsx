@@ -1,5 +1,5 @@
 import { PATH_IMAGE_APP } from '@constAssertions/data';
-import { nextImageLoader, renderWithRecoilRoot } from '@stateLogics/utils';
+import { nextImageLoader } from '@stateLogics/utils';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { mockedImageUrl } from '__mock__/next';
 import { mockedUserSession } from '__mock__/next-auth';
@@ -7,6 +7,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import 'whatwg-fetch';
 import { UserDropdown } from '..';
+import { renderWithRecoilRoot } from '@stateLogics/utils/testUtils';
 
 describe('UserDropdown', () => {
   const renderWithSession = (session: Session | null) => {
