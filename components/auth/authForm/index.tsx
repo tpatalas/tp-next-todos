@@ -17,8 +17,8 @@ import { AuthErrorMessage } from '@auth/authErrorMessage';
 import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
 import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';
 
-const UserAuthGroupEffect = dynamic(() =>
-  import('@auth/authEffect/authErrorMessageEffect').then((mod) => mod.UserAuthGroupEffect),
+const AuthErrorMessageEffect = dynamic(() =>
+  import('@auth/authEffect/authErrorMessageEffect').then((mod) => mod.AuthErrorMessageEffect),
 );
 
 export const AuthForm = () => {
@@ -73,7 +73,7 @@ export const AuthForm = () => {
           </form>
         </section>
       </div>
-      <UserAuthGroupEffect />
+      <AuthErrorMessageEffect />
     </Fragment>
   );
 };
