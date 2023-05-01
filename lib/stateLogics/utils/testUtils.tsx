@@ -2,7 +2,7 @@ import { RenderOptions, render } from '@testing-library/react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { ReactElement, ReactNode, useEffect } from 'react';
-import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useRecoilValue } from 'recoil';
+import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const RecoilRootProvider = ({ children, session }: { children: ReactNode; session: Session | null }) => {
   return (
@@ -26,12 +26,24 @@ export const renderWithRecoilRootAndSession = (
     ...options,
   });
 
-export const RecoilObserverValue = <T,>({ node }: { node: RecoilState<T> | null }) => {
-  const testingOnlyAtom = atom({ key: 'atomForTestingPurposeOnly' });
-  const state = node ? node : testingOnlyAtom;
+export const RecoilObserverValue = <T,>({ node }: { node?: RecoilState<T> }) => {
+  const testAtom = atom<T>({ key: 'atomRecoilObserverValue' });
+  const state = node ? node : testAtom;
   const value = useRecoilSnapshot().getLoadable(state).valueMaybe();
 
   return <div>{!!value ? 'active' : 'inactive'}</div>;
+};
+
+export const RecoilObserverSetValue = <T,>({ node, state }: { node?: RecoilState<T>; state?: T }) => {
+  const testAtom = atom<T>({ key: 'atomRecoilObserverSetValue' });
+  const dynamicNode = node ? node : testAtom;
+  const setValue = useSetRecoilState(dynamicNode);
+
+  useEffect(() => {
+    state && setValue(state);
+  }, [setValue, state]);
+
+  return null;
 };
 
 // recoil test observer: required to observe state change on unit test

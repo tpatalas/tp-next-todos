@@ -3,7 +3,7 @@ import { atom } from 'recoil';
 
 export const atomAuthUser = atom<Users>({
   key: 'atomAuthUser',
-  default: { email: '', password: '' } as Users,
+  default: { email: '' } as Users,
 });
 
 export const atomAuthErrorMessage = atom<string>({
