@@ -6,11 +6,11 @@ import { mockedUserSession } from '__mock__/next-auth';
 import { Session } from 'next-auth';
 import 'whatwg-fetch';
 import { UserDropdown } from '..';
-import { renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
+import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 
 describe('UserDropdown', () => {
   const renderWithSession = (session: Session | null) => {
-    return renderRecoilRootAndSession(<UserDropdown />, { session: session });
+    return renderWithRecoilRootAndSession(<UserDropdown />, { session: session });
   };
 
   const mockedSession = mockedUserSession({ userImage: true }) as Session;
