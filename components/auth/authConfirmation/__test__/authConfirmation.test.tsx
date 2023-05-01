@@ -1,33 +1,19 @@
 import { atomAuthUser } from '@auth/auth.states';
-import {
-  RecoilObserverSetValue,
-  RecoilObserverValue,
-  renderWithRecoilRootAndSession,
-} from '@stateLogics/utils/testUtils';
+import { SPINNER } from '@constAssertions/ui';
+import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
+import { atomLoadingSpinner } from '@states/misc';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Session } from 'next-auth';
 import { RecoilState } from 'recoil';
 import { AuthConfirmation } from '..';
-import { SPINNER } from '@constAssertions/ui';
-import { atomLoadingSpinner } from '@states/misc';
 
 type Props<T> = { session: Session | null; node?: RecoilState<T>; state?: T };
 
 describe('AuthConfirmation', () => {
-  const renderAuthConfirmation = <T,>({ session, node, state }: Props<T>) =>
-    renderWithRecoilRootAndSession(
-      <>
-        <AuthConfirmation />
-        {state && (
-          <RecoilObserverSetValue
-            node={node}
-            state={state}
-          />
-        )}
-        <RecoilObserverValue node={node} />
-      </>,
-      { session: session },
-    );
+  const renderAuthConfirmation = <T,>({ session, node, state }: Props<T>) => {
+    const options = { session: session, node: node, state: state };
+    return renderWithRecoilRootAndSession(<AuthConfirmation />, options);
+  };
 
   it('should render component correctly', () => {
     const { container } = renderAuthConfirmation({ session: null });
