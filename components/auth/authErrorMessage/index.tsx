@@ -1,20 +1,19 @@
-import { DATA_NEXTAUTH_ERROR } from '@collections/nextAuthError';
+import { DATA_NEXTAUTH_ERROR } from '@auth/auth.data';
+import { atomAuthErrorMessage } from '@auth/auth.states';
 import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_ERROR_FILL } from '@data/materialSymbols';
 import { useNextQuery } from '@hooks/misc';
 import { TypesOptionsAuthErrorMessage } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
-import { atomUserErrorMessage } from '@states/users';
 import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 type Props = { options?: TypesOptionsAuthErrorMessage };
 
 export const AuthErrorMessage = ({ options }: Props) => {
   const errorId = useNextQuery({ key: 'error' })?.toLowerCase();
   const serverError = DATA_NEXTAUTH_ERROR.find((error) => error._id === errorId);
-  const clientErrorMessage = useRecoilValue(atomUserErrorMessage);
-  const setClientErrorMessage = useSetRecoilState(atomUserErrorMessage);
+  const [clientErrorMessage, setClientErrorMessage] = useRecoilState(atomAuthErrorMessage);
 
   useEffect(() => {
     const errorMessage = serverError ? serverError.message : '';
@@ -26,7 +25,8 @@ export const AuthErrorMessage = ({ options }: Props) => {
       className={classNames(
         'mt-1 flex flex-row items-start',
         clientErrorMessage ? 'mb-5 rounded-xl bg-red-100 p-2' : 'mb-0',
-      )}>
+      )}
+    >
       <span className='h-full pr-1'>
         <SvgIcon
           options={{

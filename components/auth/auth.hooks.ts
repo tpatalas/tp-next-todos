@@ -1,26 +1,30 @@
+import { atomAuthErrorMessage, atomAuthUser, atomAuthVerificationRequest } from '@auth/auth.states';
 import { USER } from '@constAssertions/misc';
 import { SPINNER } from '@constAssertions/ui';
 import { atomLoadingSpinner } from '@states/misc';
-import { atomUser, atomUserErrorMessage, atomUserVerificationRequest } from '@states/users';
 import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 
-export const useUserValueUpdate = () => {
-  return useRecoilCallback(({ set, snapshot }) => (targetName: USER, content: string) => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+export const useAuthUserValueUpdate = () => {
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      (targetName: USER, content: string) => {
+        const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
-    set(atomUser, {
-      ...get(atomUser),
-      [targetName]: content,
-    });
-  });
+        set(atomAuthUser, {
+          ...get(atomAuthUser),
+          [targetName]: content,
+        });
+      },
+    [],
+  );
 };
 
-export const useUserAuthFormSubmit = (isEmailInValidated: boolean) => {
-  const user = useRecoilValue(atomUser);
-  const setClientErrorMessage = useSetRecoilState(atomUserErrorMessage);
-  const setIsVerificationRequested = useSetRecoilState(atomUserVerificationRequest);
+export const useAuthFormSubmit = (isEmailInValidated: boolean) => {
+  const user = useRecoilValue(atomAuthUser);
+  const setClientErrorMessage = useSetRecoilState(atomAuthErrorMessage);
+  const setIsVerificationRequested = useSetRecoilState(atomAuthVerificationRequest);
   const setLoadingSpinner = useSetRecoilState(atomLoadingSpinner(SPINNER['authForm']));
 
   return async (event: FormEvent<HTMLFormElement>) => {

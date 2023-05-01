@@ -11,6 +11,7 @@
       "@data/*": ["lib/data/*"],
       "@stateLogics/*": ["lib/stateLogics/*"],
       "@lib/*": ["lib/*"],
+      "@auth/*": ["components/auth/*"],
       "@user/*": ["components/user/*"],
       "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],
