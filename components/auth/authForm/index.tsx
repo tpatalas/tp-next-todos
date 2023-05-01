@@ -4,29 +4,29 @@ import { LoadingSpinner } from '@components/loadable/loadingSpinner';
 import { USER } from '@constAssertions/misc';
 import { SPINNER } from '@constAssertions/ui';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
-import { useUserAuthFormSubmit, useUserValueUpdate } from '@hooks/users';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { optionsFloatingLabelsEmail } from '@options/loadingState';
 import { classNames, validateEmailFormat } from '@stateLogics/utils';
 import { atomLoadingSpinner } from '@states/misc';
-import { atomUser, atomUserErrorMessage } from '@states/users';
 import { DividerX } from '@ui/dividers/dividerX';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
-import { AuthErrorMessage } from './authErrorMessage';
 import { Logo } from '@layouts/layoutHeader/logo';
+import { AuthErrorMessage } from '@auth/authErrorMessage';
+import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
+import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';
 
 const UserAuthGroupEffect = dynamic(() =>
-  import('@effects/users').then((mod) => mod.UserAuthGroupEffect),
+  import('@auth/authEffect/authErrorMessageEffect').then((mod) => mod.UserAuthGroupEffect),
 );
 
 export const AuthForm = () => {
-  const clientErrorMessage = useRecoilValue(atomUserErrorMessage);
-  const user = useRecoilValue(atomUser);
+  const clientErrorMessage = useRecoilValue(atomAuthErrorMessage);
+  const user = useRecoilValue(atomAuthUser);
   const isEmailInValidated = !validateEmailFormat(user.email);
-  const updateUser = useUserValueUpdate();
-  const onSubmitHandler = useUserAuthFormSubmit(isEmailInValidated);
+  const updateUser = useAuthUserValueUpdate();
+  const onSubmitHandler = useAuthFormSubmit(isEmailInValidated);
   const isLoadingSpinner = useRecoilValue(atomLoadingSpinner(SPINNER['authForm']));
   const isError = clientErrorMessage !== '';
 
@@ -48,7 +48,8 @@ export const AuthForm = () => {
           <AuthErrorMessage />
           <form
             onSubmit={onSubmitHandler}
-            noValidate>
+            noValidate
+          >
             <div className='mb-4'>
               <FloatingLabelInput
                 options={optionsFloatingLabelsEmail(isError)}
@@ -59,12 +60,10 @@ export const AuthForm = () => {
             <Button
               options={{
                 type: 'submit',
-                className: classNames(
-                  STYLE_BUTTON_FULL_BLUE,
-                  'w-full flex flex-row justify-center',
-                ),
+                className: classNames(STYLE_BUTTON_FULL_BLUE, 'w-full flex flex-row justify-center'),
                 isDisabled: isError || isLoadingSpinner,
-              }}>
+              }}
+            >
               <LoadingSpinner spinnerId={SPINNER['authForm']} />
               <span>Sign in with email</span>
             </Button>

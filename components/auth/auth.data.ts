@@ -1,4 +1,4 @@
-import { TypesNextAuthError } from 'lib/types';
+import { TypesNextAuthError } from './auth.types';
 
 export const DATA_NEXTAUTH_ERROR: TypesNextAuthError[] = [
   {
