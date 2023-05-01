@@ -15,7 +15,7 @@ import { NavigationButton } from './navigationButton';
 import { atomNavigationOpen } from '@states/layouts';
 
 const UserSessionGroupEffect = dynamic(() =>
-  import('@users/userSessionGroupEffect').then((mod) => mod.UserSessionGroupEffect),
+  import('@user/userSessionGroupEffect').then((mod) => mod.UserSessionGroupEffect),
 );
 
 type Props = Partial<Pick<Types, 'children'>> & Pick<Types, 'layoutType'>;

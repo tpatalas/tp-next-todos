@@ -3,7 +3,7 @@ import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { TodoIds, Todos } from '@lib/types';
-import { atomUserSession } from '@users/user/user.states';
+import { atomUserSession } from '@user/user.states';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 /**

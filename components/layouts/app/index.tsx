@@ -16,7 +16,7 @@ const LayoutAppGroupEffects = dynamic(
   { ssr: false },
 );
 
-const User = dynamic(() => import('@components/users/user').then((mod) => mod.User), {
+const User = dynamic(() => import('@user/index').then((mod) => mod.User), {
   ssr: false,
 });
 
