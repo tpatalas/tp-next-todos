@@ -1,7 +1,13 @@
 import { OBJECT_ID } from '@constAssertions/data';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 
-export type CollectTypesArrayObject = Todos & TypesTodo & Labels & TypesLabel & Settings & TypesGlobals & TypesMongoDB;
+export type CollectTypesArrayObject = Todos &
+  TypesTodo &
+  Labels &
+  TypesLabel &
+  Settings &
+  TypesGlobals &
+  TypesMongoDB;
 
 // GlobalTypes
 export interface TypesGlobals {
@@ -64,15 +70,6 @@ export interface LabelIds {
 export interface TypesLabel {
   label: Labels;
   selectedQueryLabels: Labels[];
-}
-// Users
-export interface Users extends UsersIds {
-  email: string;
-  password: string;
-}
-
-export interface UsersIds {
-  _id?: OBJECT_ID;
 }
 
 //* Users Settings
