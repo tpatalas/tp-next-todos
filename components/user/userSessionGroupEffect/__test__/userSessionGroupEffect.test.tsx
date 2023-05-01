@@ -1,14 +1,14 @@
 import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
 import { getSessionStorage } from '@stateLogics/utils';
-import { renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import 'fake-indexeddb/auto';
 import { Session } from 'next-auth';
 import { UserSessionGroupEffect } from '..';
+import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 
 describe('UserSessionGroupEffect', () => {
   const renderUserSessionEffect = (session: Session | null) => {
-    return renderRecoilRootAndSession(<UserSessionGroupEffect />, { session: session });
+    return renderWithRecoilRootAndSession(<UserSessionGroupEffect />, { session: session });
   };
 
   const renderWithQueryElement = (session: Session | null) => {
