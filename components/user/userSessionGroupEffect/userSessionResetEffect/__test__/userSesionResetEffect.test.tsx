@@ -11,7 +11,7 @@ import { RecoilState } from 'recoil';
 import { UserSessionResetEffect } from '..';
 
 describe('userSessionResetEffect', () => {
-  const renderUserSessionEffect = <T,>(session: Session | null, node: RecoilState<T> | null) =>
+  const renderUserSessionEffect = <T,>(session: Session | null, node?: RecoilState<T>) =>
     renderWithRecoilRootAndSession(
       <>
         <UserSessionResetEffect />
@@ -20,7 +20,7 @@ describe('userSessionResetEffect', () => {
       { session: session },
     );
 
-  const renderWithQueryElement = <T,>(session: Session | null, node: RecoilState<T> | null) => {
+  const renderWithQueryElement = <T,>(session: Session | null, node?: RecoilState<T>) => {
     const { container } = renderUserSessionEffect(session, node);
     const offSession = getSessionStorage('offSession');
     const active = screen.queryByText('active');
@@ -29,14 +29,14 @@ describe('userSessionResetEffect', () => {
   };
 
   it('should initial offSession is null', () => {
-    const { container, offSession } = renderWithQueryElement(null, null);
+    const { container, offSession } = renderWithQueryElement(null);
 
     expect(container).not.toBeNull();
     expect(offSession).toBeNull();
   });
 
   it('should return no localStorage when the user does not have a session', () => {
-    const { container } = renderWithQueryElement(null, null);
+    const { container } = renderWithQueryElement(null);
 
     expect(container).not.toBeNull();
     expect(localStorage).toHaveLength(0);
@@ -59,7 +59,7 @@ describe('userSessionResetEffect', () => {
   });
 
   it('should return undefined on indexedDB when the user does not have a session', async () => {
-    const { container } = renderWithQueryElement(null, null);
+    const { container } = renderWithQueryElement(null);
 
     const allIdb = await Promise.all(
       DATA_IDB.map((idb) => {
