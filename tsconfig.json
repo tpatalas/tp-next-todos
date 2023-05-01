@@ -11,7 +11,7 @@
       "@data/*": ["lib/data/*"],
       "@stateLogics/*": ["lib/stateLogics/*"],
       "@lib/*": ["lib/*"],
-      "@users/*": ["components/users/*"],
+      "@user/*": ["components/user/*"],
       "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],
       "@dropdowns/*": ["components/ui/dropdowns/*"],
