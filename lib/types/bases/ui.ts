@@ -139,9 +139,6 @@ export interface TypesInputAttributes {
   isPasswordShown: boolean;
   inputValue: string | number | readonly string[];
   isError: boolean;
-  isSignIn: boolean;
-  defaultMessage: string;
-  errorMessage: string;
 }
 
 export interface TypesModals {
