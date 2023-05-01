@@ -2,59 +2,61 @@ import { RenderOptions, render } from '@testing-library/react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { ReactElement, ReactNode, useEffect } from 'react';
-import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useRecoilValue, useSetRecoilState } from 'recoil';
+import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useSetRecoilState } from 'recoil';
 
-const RecoilRootProvider = ({ children, session }: { children: ReactNode; session: Session | null }) => {
-  return (
-    <RecoilRoot>
-      <SessionProvider session={session}>{children}</SessionProvider>
-    </RecoilRoot>
-  );
-};
+interface TypesRecoilRootProvider<T> extends TypesRecoilObserver<T> {
+  children: ReactNode;
+  session: Session | null;
+}
 
-export const renderWithRecoilRootAndSession = (
-  ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'> & { session: Session | null },
-) =>
-  render(ui, {
-    wrapper: (props) => (
-      <RecoilRootProvider
-        {...props}
-        session={options?.session ?? null}
-      />
-    ),
-    ...options,
-  });
+interface TypesRecoilObserver<T> {
+  node?: RecoilState<T>;
+  state?: T;
+}
 
-export const RecoilObserverValue = <T,>({ node }: { node?: RecoilState<T> }) => {
-  const testAtom = atom<T>({ key: 'atomRecoilObserverValue' });
-  const state = node ? node : testAtom;
-  const value = useRecoilSnapshot().getLoadable(state).valueMaybe();
-
-  return <div>{!!value ? 'active' : 'inactive'}</div>;
-};
-
-export const RecoilObserverSetValue = <T,>({ node, state }: { node?: RecoilState<T>; state?: T }) => {
+export const RecoilObserver = <T,>({ node, state }: TypesRecoilObserver<T>) => {
   const testAtom = atom<T>({ key: 'atomRecoilObserverSetValue' });
   const dynamicNode = node ? node : testAtom;
   const setValue = useSetRecoilState(dynamicNode);
+  const value = useRecoilSnapshot().getLoadable(dynamicNode).valueMaybe();
 
   useEffect(() => {
     state && setValue(state);
   }, [setValue, state]);
 
-  return null;
+  return <div>{!!value ? 'active' : 'inactive'}</div>;
 };
 
-// recoil test observer: required to observe state change on unit test
-export const RecoilObserverOnChange = <T,>({
-  node,
-  onChange,
-}: {
-  node: RecoilState<T>;
-  onChange: (value: T) => void;
-}) => {
-  const value = useRecoilValue(node);
-  useEffect(() => onChange(value), [onChange, value]);
-  return null;
+const RecoilRootProvider = <T,>({ children, session, node, state }: TypesRecoilRootProvider<T>) => {
+  return (
+    <RecoilRoot>
+      <SessionProvider session={session}>{children}</SessionProvider>
+      <RecoilObserver
+        node={node}
+        state={state}
+      />
+    </RecoilRoot>
+  );
 };
+
+interface RenderWithRecoilRootAndSessionOptions<T> extends Omit<RenderOptions, 'wrapper'> {
+  session: Session | null;
+  node?: RecoilState<T>;
+  state?: T;
+}
+
+export const renderWithRecoilRootAndSession = <T,>(
+  ui: ReactElement,
+  options?: RenderWithRecoilRootAndSessionOptions<T>,
+) =>
+  render(ui, {
+    wrapper: (props) => (
+      <RecoilRootProvider<T>
+        {...props}
+        session={options?.session ?? null}
+        node={options?.node}
+        state={options?.state}
+      />
+    ),
+    ...options,
+  });

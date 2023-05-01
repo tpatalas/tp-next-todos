@@ -1,7 +1,7 @@
 import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
 import { getSessionStorage } from '@stateLogics/utils';
-import { RecoilObserverValue, renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
+import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { screen } from '@testing-library/react';
@@ -11,14 +11,10 @@ import { RecoilState } from 'recoil';
 import { UserSessionResetEffect } from '..';
 
 describe('userSessionResetEffect', () => {
-  const renderUserSessionEffect = <T,>(session: Session | null, node?: RecoilState<T>) =>
-    renderWithRecoilRootAndSession(
-      <>
-        <UserSessionResetEffect />
-        <RecoilObserverValue node={node} />
-      </>,
-      { session: session },
-    );
+  const renderUserSessionEffect = <T,>(session: Session | null, node?: RecoilState<T>) => {
+    const options = { session: session, node: node };
+    return renderWithRecoilRootAndSession(<UserSessionResetEffect />, options);
+  };
 
   const renderWithQueryElement = <T,>(session: Session | null, node?: RecoilState<T>) => {
     const { container } = renderUserSessionEffect(session, node);

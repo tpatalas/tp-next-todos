@@ -3,7 +3,7 @@ import { validateEmailFormat } from '@stateLogics/utils';
 import { useEffect } from 'react';
 import { useRecoilValue, useRecoilCallback } from 'recoil';
 
-export const UserAuthGroupEffect = () => {
+export const AuthErrorMessageEffect = () => {
   const user = useRecoilValue(atomAuthUser);
   const isEmailInValidated = !validateEmailFormat(user.email);
 
