@@ -1,13 +1,13 @@
 import { getSessionStorage, setSessionStorage } from '@stateLogics/utils';
-import { renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { screen, waitFor } from '@testing-library/dom';
 import { mockedUserSession } from '__mock__/next-auth';
 import { Session } from 'next-auth';
 import { User } from '..';
+import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 
 describe('User', () => {
   const renderWithSession = (session: Session | null) => {
-    return renderRecoilRootAndSession(<User />, { session: session });
+    return renderWithRecoilRootAndSession(<User />, { session: session });
   };
 
   const mockedSession = mockedUserSession({ userImage: null });

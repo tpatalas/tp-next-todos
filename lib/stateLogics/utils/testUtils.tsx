@@ -12,7 +12,7 @@ const RecoilRootProvider = ({ children, session }: { children: ReactNode; sessio
   );
 };
 
-export const renderRecoilRootAndSession = (
+export const renderWithRecoilRootAndSession = (
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'> & { session: Session | null },
 ) =>

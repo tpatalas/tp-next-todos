@@ -1,7 +1,7 @@
 import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
 import { getSessionStorage } from '@stateLogics/utils';
-import { RecoilObserverValue, renderRecoilRootAndSession } from '@stateLogics/utils/testUtils';
+import { RecoilObserverValue, renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { screen } from '@testing-library/react';
@@ -12,7 +12,7 @@ import { UserSessionResetEffect } from '..';
 
 describe('userSessionResetEffect', () => {
   const renderUserSessionEffect = <T,>(session: Session | null, node: RecoilState<T> | null) =>
-    renderRecoilRootAndSession(
+    renderWithRecoilRootAndSession(
       <>
         <UserSessionResetEffect />
         <RecoilObserverValue node={node} />
