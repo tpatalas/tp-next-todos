@@ -2,7 +2,7 @@ import { PATH_HOME } from '@constAssertions/data';
 import { STORAGE_KEY } from '@constAssertions/storage';
 import { Types } from '@lib/types';
 import { delSessionStorage, getSessionStorage, setSessionStorage } from '@stateLogics/utils';
-import { atomUserSession } from '@users/user/user.states';
+import { atomUserSession } from '@user/user.states';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-router-mock';
 import { useRecoilCallback } from 'recoil';
