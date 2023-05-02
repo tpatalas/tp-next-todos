@@ -31,7 +31,7 @@ describe('AuthErrorMessageEffect', () => {
 
   const renderWithQueryElement = <T,>({ node, state }: Props<T>) => {
     const { container } = renderAuthConfirmation({ node: node, state: state });
-    const defaultErrorMessage = screen.queryByText(/Something went wrong/!);
+    const defaultErrorMessage = screen.queryByText(/Something went wrong/i);
 
     return { container, defaultErrorMessage };
   };

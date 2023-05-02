@@ -23,15 +23,7 @@ export type TypesOptionsButton = Partial<
     type: Extract<TypesElement['type'], 'button' | 'submit' | 'reset'>;
   } & Pick<
       TypesStyleAttributes,
-      | 'padding'
-      | 'margin'
-      | 'display'
-      | 'width'
-      | 'size'
-      | 'color'
-      | 'container'
-      | 'hoverBg'
-      | 'borderRadius'
+      'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg' | 'borderRadius'
     >
 >;
 
@@ -47,22 +39,13 @@ export type TypesOptionsPriority = Partial<
   Pick<Types, 'isInitiallyVisible' | 'priorityImportant' | 'priorityNormal' | 'priorityUrgent'> &
     Pick<
       TypesStyleAttributes,
-      | 'margin'
-      | 'display'
-      | 'width'
-      | 'container'
-      | 'padding'
-      | 'size'
-      | 'color'
-      | 'borderRadius'
-      | 'hoverBg'
+      'margin' | 'display' | 'width' | 'container' | 'padding' | 'size' | 'color' | 'borderRadius' | 'hoverBg'
     >
 > &
   Pick<Types, 'priorityLevel'>;
 
 export type TypesOptionsBackdrop = Partial<
-  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration'> &
-    Pick<TypesStyleAttributes, 'color' | 'zIndex'>
+  Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration'> & Pick<TypesStyleAttributes, 'color' | 'zIndex'>
 >;
 
 export type TypesOptionsDropdown = Partial<
@@ -119,10 +102,6 @@ export type TypesOptionsFloatingLabelInput = Partial<
     | 'isPasswordShown'
     | 'name'
   >
->;
-
-export type TypesOptionsAuthErrorMessage = Partial<
-  Pick<Types, 'isError' | 'isSignIn' | 'defaultMessage' | 'errorMessage'>
 >;
 
 export type TypesOptionsPrefetchRouterButton = Pick<Types, 'path'> &
