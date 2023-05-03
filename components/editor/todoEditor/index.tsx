@@ -4,14 +4,19 @@ import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import dynamic from 'next/dynamic';
 import { useRecoilCallback } from 'recoil';
 
-type Props = Partial<Pick<Types, 'todo'>>;
+const EditorComposer = dynamic(() => import('@editor/editorComposer').then((mod) => mod.EditorComposer));
 
-const EditorComposer = dynamic(() => import('./editorComposer').then((mod) => mod.EditorComposer));
-
-export const TodoEditors = ({ todo }: Props) => {
-  const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed;
-  });
+export const TodoEditors = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
+  const isTodoCompleted = useRecoilCallback(
+    ({ snapshot }) =>
+      () => {
+        return (
+          typeof todo !== 'undefined' &&
+          snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed
+        );
+      },
+    [todo],
+  );
 
   return (
     <div className={classNames('mx-3 mt-2 space-y-3 text-left', isTodoCompleted() && 'opacity-50')}>

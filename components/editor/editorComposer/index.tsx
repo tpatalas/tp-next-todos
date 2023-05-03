@@ -1,8 +1,7 @@
-import { EditorAutoFocusEffect } from '@effects/editorAutoFocusEffect';
-import { useEditorChangeHandler, useEditorInitialValue } from '@hooks/editors';
-import { useKeyWithEditor } from '@hooks/keybindings';
-import { renderCustomElement, renderPlaceholder } from '@lib/editors';
-import { Types } from '@lib/types';
+import { useEditorInitialValue, useEditorChangeHandler, useKeyWithEditor } from '@editor/editor.hooks';
+import { renderPlaceholder, renderCustomElement } from '@editor/editor.renders';
+import { TypesPropsEditorComposer } from '@editor/editor.types';
+import { EditorAutoFocusEffect } from '@editor/editorEffect/editorAutoFocusEffect';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { useMemo } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
@@ -10,9 +9,7 @@ import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderElementProps, RenderPlaceholderProps, Slate, withReact } from 'slate-react';
 
-type Props = Pick<Types, 'titleName' | 'placeholder'> & Partial<Pick<Types, 'isAutoFocus' | 'todo'>>;
-
-export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Props) => {
+export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: TypesPropsEditorComposer) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const editorKeyHandler = useKeyWithEditor(titleName, todo?._id, editor);
   const initialValue = useEditorInitialValue(todo?._id, titleName);
