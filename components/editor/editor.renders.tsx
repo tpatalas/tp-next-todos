@@ -1,12 +1,17 @@
+import { TypesEditor } from '@editor/editor.types';
 import { classNames } from '@stateLogics/utils';
 import { Types } from 'lib/types';
 import { RenderElementProps, RenderPlaceholderProps } from 'slate-react';
 
-const PlaceHolderElement = ({ attributes, ...props }: RenderPlaceholderProps & Partial<Pick<Types, 'className'>>) => {
+const PlaceHolderElement = ({
+  attributes,
+  ...props
+}: RenderPlaceholderProps & Partial<Pick<Types, 'className'>>) => {
   return (
     <div
       {...attributes}
-      className={`overflow-hidden text-ellipsis font-roboto font-normal text-gray-900 ${props.className}`}>
+      className={`overflow-hidden text-ellipsis font-roboto font-normal text-gray-900 ${props.className}`}
+    >
       <span>{props.children}</span>
     </div>
   );
@@ -16,7 +21,8 @@ const CodeElement = ({ attributes, ...props }: RenderElementProps & Partial<Pick
   return (
     <pre
       {...attributes}
-      className={classNames(props.className)}>
+      className={classNames(props.className)}
+    >
       <code>{props.children}</code>
     </pre>
   );
@@ -26,7 +32,8 @@ const DefaultElement = ({ attributes, ...props }: RenderElementProps & Partial<P
   return (
     <div
       {...attributes}
-      className={classNames(props.className ?? 'text-slate-700')}>
+      className={classNames(props.className ?? 'text-slate-700')}
+    >
       {props.children}
     </div>
   );
@@ -35,11 +42,14 @@ const DefaultElement = ({ attributes, ...props }: RenderElementProps & Partial<P
 /**
  * Slate Editor Renderer
  */
-export const renderPlaceholder = ({ ...props }: RenderPlaceholderProps & Partial<Pick<Types, 'titleName'>>) => {
+export const renderPlaceholder = ({
+  ...props
+}: RenderPlaceholderProps & Partial<Pick<TypesEditor, 'titleName'>>) => {
   return (
     <PlaceHolderElement
       {...props}
-      className={props.titleName === 'title' ? 'text-2xl' : 'text-base'}>
+      className={props.titleName === 'title' ? 'text-2xl' : 'text-base'}
+    >
       {props.children}
     </PlaceHolderElement>
   );
@@ -47,7 +57,7 @@ export const renderPlaceholder = ({ ...props }: RenderPlaceholderProps & Partial
 
 export const renderCustomElement = ({
   ...props
-}: RenderElementProps & Partial<Pick<Types, 'titleName' | 'completed'>>) => {
+}: RenderElementProps & Partial<Pick<TypesEditor, 'titleName'> & Pick<Types, 'completed'>>) => {
   switch (props.element.type) {
     case 'code':
       return <CodeElement {...props} />;

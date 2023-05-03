@@ -12,6 +12,7 @@
       "@stateLogics/*": ["lib/stateLogics/*"],
       "@lib/*": ["lib/*"],
       "@auth/*": ["components/auth/*"],
+      "@editor/*": ["components/editor/*"],
       "@user/*": ["components/user/*"],
       "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],

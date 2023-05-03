@@ -1,21 +1,14 @@
 import { PATH_APP } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
-import { CustomEditor } from '@lib/types/misc/slate';
+import { TypesPropsAuthFocusEffect } from '@editor/editor.types';
 import { atomCatch } from '@states/misc';
-import { Types } from 'lib/types';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Editor, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
-export const EditorAutoFocusEffect = ({
-  isAutoFocus,
-  editor,
-}: {
-  isAutoFocus: Types['isAutoFocus'];
-  editor: CustomEditor;
-}) => {
+export const EditorAutoFocusEffect = ({ isAutoFocus, editor }: TypesPropsAuthFocusEffect) => {
   const router = useRouter();
   const completedPath = router.asPath === PATH_APP['completed'];
   const isCatchConfirmModal = useRecoilValue(atomCatch(CATCH.confirmModal));

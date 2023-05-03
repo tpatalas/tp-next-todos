@@ -1,30 +1,28 @@
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { Todos, Types, Labels } from '@lib/types';
-import { atomOnFocus, atomCurrentFocus, atomOnBlur } from '@states/focus';
+import { Labels, Todos } from '@lib/types';
+import { atomEffectMediaQuery } from '@states/atomEffects/misc';
+import { selectorSessionTodoItem } from '@states/atomEffects/todos';
+import { atomCurrentFocus, atomOnBlur, atomOnFocus } from '@states/focus';
+import { atomCatch } from '@states/misc';
 import {
-  atomTodoModalOpen,
-  atomTodoModalMini,
-  atomLabelModalOpen,
   atomConfirmModalDiscard,
+  atomLabelModalOpen,
+  atomTodoModalMini,
+  atomTodoModalOpen,
 } from '@states/modals';
 import { isMacOs, isMobile } from 'react-device-detect';
-import { useRecoilCallback, RecoilValue } from 'recoil';
-import { Transforms } from 'slate';
-import { useLabelAdd, useLabelUpdateItem, useLabelUpdateDataItem } from './labels';
+import { RecoilValue, useRecoilCallback } from 'recoil';
+import { useLabelAdd, useLabelUpdateDataItem, useLabelUpdateItem } from './labels';
 import { useConditionCheckLabelTitleEmpty, useFilterTodoIdsWithPathname } from './misc';
-import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import {
-  useTodoModalStateOpen,
-  useTodoModalStateExpand,
   useTodoModalStateExitMinimize,
-  useTodoModalStateMinimize,
+  useTodoModalStateExpand,
   useTodoModalStateMaximize,
+  useTodoModalStateMinimize,
+  useTodoModalStateOpen,
 } from './modals';
-import { useTodoCompleteItem, useTodoRemoveItem, useTodoAdd, useTodoUpdateItem } from './todos';
-import { CustomEditor } from '@lib/types/misc/slate';
-import { atomEffectMediaQuery } from '@states/atomEffects/misc';
-import { atomCatch } from '@states/misc';
+import { useTodoCompleteItem, useTodoRemoveItem } from './todos';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
@@ -83,35 +81,6 @@ export const useKeyWithFocus = (_id: Todos['_id']) => {
     }
   });
   return focusKeyHandler;
-};
-
-export const useKeyWithEditor = (titleName: Types['titleName'], _id: Todos['_id'], editor: CustomEditor) => {
-  const addTodo = useTodoAdd();
-  const updateTodo = useTodoUpdateItem(_id);
-  const editorKeyHandler = useRecoilCallback(() => (event: React.KeyboardEvent) => {
-    if (!event || isMobile) return;
-
-    switch (event.key) {
-      case 'Enter':
-        if (titleName === 'title') {
-          event.preventDefault();
-          if (typeof _id === 'undefined') return addTodo();
-          updateTodo();
-          return;
-        }
-        if (event.shiftKey) {
-          event.preventDefault();
-          Transforms.insertNodes(editor, {
-            type: 'paragraph',
-            children: [{ text: '\n' }],
-          });
-        }
-        break;
-      default:
-        break;
-    }
-  });
-  return editorKeyHandler;
 };
 
 // with labels

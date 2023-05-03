@@ -1,5 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
-import { TodoEditors } from '@components/editors/todoEditor';
+import { TodoEditors } from '@components/editor/todoEditor';
 import { CalendarDropdown } from '@dropdowns/v1/calendarDropdown';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { DeleteTodoConfirmModal } from '@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal';
