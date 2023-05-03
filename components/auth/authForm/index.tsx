@@ -36,6 +36,7 @@ export const AuthForm = () => {
         <section className='border-slate-200 px-5 py-14 sm:w-[30rem] sm:rounded-xl sm:border sm:px-10 sm:shadow-2xl sm:shadow-slate-300'>
           <div className='mb-2 flex flex-col items-center justify-center sm:mb-5'>
             <div className='mb-8 mt-2 sm:mb-10'>
+              <span className='sr-only'>Main logo</span>
               <Logo type='MainLogoOnlyWhite' />
             </div>
             <h1 className='mb-1 flex flex-row items-center justify-center text-2xl font-bold tracking-normal text-slate-800 sm:mb-3'>
