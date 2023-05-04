@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
 
-export const atomUserSession = atom({
+export const atomUserSession = atom<boolean>({
   key: 'atomUserSession',
 });
