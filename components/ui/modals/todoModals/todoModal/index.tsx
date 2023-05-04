@@ -1,5 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
-import { TodoEditors } from '@components/editors/todoEditor';
+import { TodoEditors } from '@components/editor/todoEditor';
 import { CalendarDropdown } from '@dropdowns/v1/calendarDropdown';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { DeleteTodoConfirmModal } from '@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal';
@@ -29,13 +29,7 @@ type Props = Partial<
   Pick<Types, 'todo' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
 >;
 
-export const TodoModal = ({
-  todo,
-  menuButtonContent,
-  headerButtons,
-  footerButtons,
-  children,
-}: Props) => {
+export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButtons, children }: Props) => {
   const isTodoModalOpen = useRecoilValue(atomTodoModalOpen(todo?._id));
   const isTodoModalMax = useRecoilValue(atomTodoModalMax(todo?._id));
   const closeModal = useTodoModalStateClose(todo?._id);
@@ -55,7 +49,8 @@ export const TodoModal = ({
       <ModalTransitionRoot
         show={isTodoModalOpen}
         initialFocus={initialFocusDiv}
-        onClose={() => closeModal()}>
+        onClose={() => closeModal()}
+      >
         {/* nested modal */}
         <LabelModal label={undefined} />
         <DiscardConfirmModal todo={todo} />
@@ -66,18 +61,20 @@ export const TodoModal = ({
             isTodoModalMax
               ? 'sm:bottom-0 sm:h-full sm:max-h-[90vh] sm:max-w-[90vw] xl:max-w-6xl'
               : 'sm:max-h-[28rem] sm:max-w-2xl md:bottom-[calc(23vh-6rem)]',
-          )}>
-          <div className='flex flex-col items-start justify-center sm:inline-block sm:flex-row sm:items-center sm:justify-between'>
+          )}
+        >
+          <div className='flex flex-col items-start justify-center will-change-transform sm:inline-block sm:flex-row sm:items-center sm:justify-between'>
             <div
               ref={initialFocusDiv}
-              className='flex w-full flex-row justify-between sm:mb-1'>
+              className='flex w-full flex-row justify-between sm:mb-1'
+            >
               <TodoModalHeaderContents todo={todo}>{menuButtonContent}</TodoModalHeaderContents>
               <div>
                 {headerButtons}
                 <TodoModalHeaderButtons todo={todo} />
               </div>
             </div>
-            <div className='hidden sm:mb-2 sm:block'>
+            <div className='hidden will-change-transform sm:mb-2 sm:block'>
               <DividerX />
             </div>
             <div className='flex flex-row items-center sm:m-1 '>
@@ -100,13 +97,14 @@ export const TodoModal = ({
               />
             </div>
           </div>
-          <div className='h-full w-full overflow-scroll'>
+          <div className='h-full w-full overflow-scroll will-change-transform'>
             <TodoEditors todo={todo} />
           </div>
-          <div className='flex flex-row justify-end pt-4'>
+          <div className='flex flex-row justify-end pt-4 will-change-transform'>
             <CancelButton
               options={optionsButtonTodoModalCancel}
-              onClick={() => closeModal()}>
+              onClick={() => closeModal()}
+            >
               Cancel
             </CancelButton>
             {footerButtons ||
@@ -114,7 +112,8 @@ export const TodoModal = ({
                 <DisableButton
                   isConditionalRendering={condition}
                   options={optionsButtonTodoModalAddTodo}
-                  onClick={() => addTodo()}>
+                  onClick={() => addTodo()}
+                >
                   Add todo
                 </DisableButton>
               ))}
