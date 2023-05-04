@@ -20,7 +20,7 @@ export const HomeStartToday = () => {
   const divRef = useRef(null);
 
   return (
-    <section className='w-screen'>
+    <div className='w-screen'>
       <div className='py-18 relative isolate my-10 px-6 md:mt-12 md:py-24 lg:px-8'>
         <div
           className='absolute inset-x-0 top-0 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl'
@@ -71,6 +71,6 @@ export const HomeStartToday = () => {
           </SmoothTransition>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

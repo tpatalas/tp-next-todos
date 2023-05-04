@@ -12,12 +12,12 @@ const HomeHeader = dynamic(() => import('@components/sections/homeHeader').then(
 const Home = () => {
   return (
     <Fragment>
-      <main className='flex min-h-screen flex-col justify-between'>
+      <div className='flex min-h-screen flex-col justify-between'>
         <HomeHero />
         <HomeHeader />
         <HomeContent />
         <HomeStartToday />
-      </main>
+      </div>
     </Fragment>
   );
 };

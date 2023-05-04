@@ -28,13 +28,13 @@ export const LayoutHome = ({ children }: Props) => {
         <title>{slug ? 'Todos - ' + slug : 'Todos'}</title>
       </Head>
       <main className='flex min-h-screen flex-col justify-between'>
-        <section>
+        <div>
           <LayoutHeader layoutType={layoutType}>
             <HomeNavigation layoutType={layoutType} />
           </LayoutHeader>
           <LayoutFooter layoutType={layoutType} />
           {children}
-        </section>
+        </div>
         <Footer />
       </main>
       <LayoutHomeGroupEffects />
