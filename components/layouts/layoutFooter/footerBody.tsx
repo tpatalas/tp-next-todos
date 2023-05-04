@@ -17,22 +17,24 @@ export const FooterBody = ({ children }: Props) => {
       className={classNames(
         'relative flex w-full flex-row justify-between rounded-xl bg-transparent duration-150 ease-in-out sm:mb-3 sm:mr-3 sm:shadow-lg sm:shadow-slate-300',
         isSidebarOpen ? 'md:ml-[266px]' : 'md:ml-3',
-      )}>
+      )}
+    >
       <GlobalVerticalGradient
         options={{
           gradientType: GRADIENT_TYPE['single'],
           gradientPosition: GRADIENT_POSITION['top'],
         }}
       />
-      <main
+      <div
         className={classNames(
           'absolute mb-10 h-full w-full rounded-xl border border-slate-100',
           isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
-        )}>
+        )}
+      >
         <div className='flex w-full justify-center pb-64 pt-4 sm:pl-5 sm:pr-4 sm:pt-10 lg:justify-center lg:pl-10'>
           {children}
         </div>
-      </main>
+      </div>
       <GlobalVerticalGradient
         options={{
           gradientType: GRADIENT_TYPE['double'],

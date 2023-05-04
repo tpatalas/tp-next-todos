@@ -32,7 +32,7 @@ export const HomeHero = () => {
 
   return (
     <>
-      <section className='w-screen'>
+      <div className='w-screen'>
         <div className='relative isolate pt-10'>
           <div className='py-24 sm:py-32 lg:pb-40'>
             <div
@@ -41,12 +41,12 @@ export const HomeHero = () => {
             >
               <SmoothTransition options={translateOptions}>
                 <div className='mx-auto max-w-2xl text-center'>
-                  <h1 className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
+                  <div className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
                     Simplify your life
-                  </h1>
-                  <h1 className='text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
+                  </div>
+                  <div className='text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
                     Automate your tasks
-                  </h1>
+                  </div>
                 </div>
               </SmoothTransition>
               <SmoothTransition options={{ ...translateOptions, delay: DELAY['300'] }}>
@@ -102,7 +102,7 @@ export const HomeHero = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };

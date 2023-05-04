@@ -21,7 +21,7 @@ export const HomeContent = () => {
   const overloadImageRef = useRef(null);
 
   return (
-    <section className='w-screen'>
+    <div className='w-screen'>
       <div className='relative my-24 flex flex-row items-center justify-center px-5 py-10 sm:px-10 md:my-32 lg:px-28'>
         <div className='md:min-w-3/4 grid w-full max-w-6xl grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
           <ContentText
@@ -79,6 +79,6 @@ export const HomeContent = () => {
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 };

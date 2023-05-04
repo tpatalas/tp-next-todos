@@ -12,7 +12,7 @@ export const HomeHeader = () => {
   const divRef = useRef(null);
 
   return (
-    <section className='w-screen'>
+    <div className='w-screen'>
       <div
         className='my-10 flex flex-col items-center justify-center'
         ref={divRef}
@@ -58,6 +58,6 @@ export const HomeHeader = () => {
           </h2>
         </SmoothTransition>
       </div>
-    </section>
+    </div>
   );
 };
