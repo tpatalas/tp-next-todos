@@ -1,7 +1,4 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
-import { RenderOptions, render } from '@testing-library/react';
-import React, { FC, ReactElement } from 'react';
-import { RecoilRoot } from 'recoil';
 import validator from 'validator';
 
 // Days
@@ -17,12 +14,6 @@ export const queries = (...queries: unknown[]) => queries.filter(Boolean).join('
 export const paths = (...paths: unknown[]) => paths.filter(Boolean).join('') || '';
 
 // test-utils for custom render
-const RecoilRootProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <RecoilRoot>{children}</RecoilRoot>;
-};
-
-export const renderWithRecoilRoot = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { wrapper: RecoilRootProvider, ...options });
 
 export const fetchWithRetry = async (url: string, options?: {}, retryCount = 3) => {
   const offSession = getSessionStorage(STORAGE_KEY['offSession']);
@@ -60,7 +51,7 @@ export const nextImageLoader = ({
   width: number;
   quality?: number;
 }) => {
-  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality || 75}`;
+  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality ?? 75}`;
 };
 
 // test if email has standard format of email address

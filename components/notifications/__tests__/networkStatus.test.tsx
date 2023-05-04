@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react';
 import { snapshot_UNSTABLE } from 'recoil';
 import { NetworkStatus } from '../networkStatus';
-import { renderWithRecoilRoot } from '@stateLogics/utils';
 import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
+import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 
 describe('NetworkStatus', () => {
-  beforeEach(() => renderWithRecoilRoot(<NetworkStatus />));
+  beforeEach(() => renderWithRecoilRootAndSession(<NetworkStatus />));
 
   it('should not render offline component when online', () => {
     const online = snapshot_UNSTABLE().getLoadable(atomEffectNetworkStatus).valueOrThrow();

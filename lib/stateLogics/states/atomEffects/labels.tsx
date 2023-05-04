@@ -3,7 +3,7 @@ import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
 import { Labels } from '@lib/types';
-import { atomUserSession } from '@states/users';
+import { atomUserSession } from '@user/user.states';
 import { atom, selector } from 'recoil';
 
 /**
