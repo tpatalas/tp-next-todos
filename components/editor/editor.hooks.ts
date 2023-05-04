@@ -53,13 +53,17 @@ export const useEditorInitialValue = (_id: Todos['_id'], titleName: TypesEditor[
 export const useEditorChangeHandler = (_id: Todos['_id'], titleName: TypesEditor['titleName']) => {
   const createEditor = useEditorTodoUpdate(undefined, titleName);
   const updateEditor = useEditorTodoUpdate(_id, titleName);
-  const editorState = useRecoilCallback(({ snapshot }) => (value: Descendant[]) => {
-    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
-    const content = get(atomEditorSerialize)(value).trim();
-    _id === undefined
-      ? createEditor(content) // create Editor
-      : updateEditor(content); // update Editor
-  });
+  const editorState = useRecoilCallback(
+    ({ snapshot }) =>
+      (value: Descendant[]) => {
+        const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+        const content = get(atomEditorSerialize)(value).trim();
+        _id === undefined
+          ? createEditor(content) // create Editor
+          : updateEditor(content); // update Editor
+      },
+    [_id, createEditor, updateEditor],
+  );
   return editorState;
 };
 

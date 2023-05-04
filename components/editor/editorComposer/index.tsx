@@ -1,5 +1,5 @@
-import { useEditorInitialValue, useEditorChangeHandler, useKeyWithEditor } from '@editor/editor.hooks';
-import { renderPlaceholder, renderCustomElement } from '@editor/editor.renders';
+import { useEditorChangeHandler, useEditorInitialValue, useKeyWithEditor } from '@editor/editor.hooks';
+import { renderCustomElement, renderPlaceholder } from '@editor/editor.renders';
 import { TypesPropsEditorComposer } from '@editor/editor.types';
 import { EditorAutoFocusEffect } from '@editor/editorEffect/editorAutoFocusEffect';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
@@ -13,6 +13,7 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Types
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const editorKeyHandler = useKeyWithEditor(titleName, todo?._id, editor);
   const initialValue = useEditorInitialValue(todo?._id, titleName);
+  const value = initialValue();
   const changeHandler = useEditorChangeHandler(todo?._id, titleName);
   const renderPlaceholderWithProps = (props: RenderPlaceholderProps) =>
     renderPlaceholder({ titleName: titleName, ...props });
@@ -29,7 +30,7 @@ export const EditorComposer = ({ isAutoFocus, todo, titleName, ...props }: Types
   return (
     <Slate
       editor={editor}
-      value={initialValue()}
+      value={value}
       onChange={changeHandler}
     >
       <Editable
