@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { Editor, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
+// test is done on editorComposer.test.tsx
 export const EditorAutoFocusEffect = ({ isAutoFocus, editor }: TypesPropsAuthFocusEffect) => {
   const router = useRouter();
   const completedPath = router.asPath === PATH_APP['completed'];
