@@ -13,7 +13,8 @@ function gcloud_run_deploy() {
     --project $GCP_PROJECT_ID \
     --region $DEPLOY_REGION \
     --platform managed \
-    --allow-unauthenticated
+    --allow-unauthenticated \
+    --cpu-boost
 }
 
 source .env.local
