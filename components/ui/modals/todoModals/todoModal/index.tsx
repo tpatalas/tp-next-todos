@@ -63,13 +63,13 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
               : 'sm:max-h-[28rem] sm:max-w-2xl md:bottom-[calc(23vh-6rem)]',
           )}
         >
-          <div className='flex flex-col items-start justify-center will-change-transform sm:inline-block sm:flex-row sm:items-center sm:justify-between'>
+          <div className='flex flex-col items-start justify-center sm:inline-block sm:flex-row sm:items-center sm:justify-between'>
             <div
               ref={initialFocusDiv}
-              className='flex w-full flex-row justify-between sm:mb-1'
+              className='flex w-full flex-row justify-between will-change-transform sm:mb-1'
             >
               <TodoModalHeaderContents todo={todo}>{menuButtonContent}</TodoModalHeaderContents>
-              <div>
+              <div className='will-change-transform'>
                 {headerButtons}
                 <TodoModalHeaderButtons todo={todo} />
               </div>
@@ -77,7 +77,7 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
             <div className='hidden will-change-transform sm:mb-2 sm:block'>
               <DividerX />
             </div>
-            <div className='flex flex-row items-center sm:m-1 '>
+            <div className='relative z-50 flex flex-row items-center will-change-transform sm:m-1'>
               <CalendarDropdown
                 options={{
                   tooltip: 'Due date',

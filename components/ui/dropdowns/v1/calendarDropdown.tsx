@@ -74,7 +74,7 @@ export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
               path: noDaySelected ? ICON_EVENT_AVAILABLE : ICON_EVENT_AVAILABLE_FILL,
               group: 'group-calendarDropdown',
               menuItemsWidth: 'w-[21rem]',
-              menuWidth: 'sm:w-full',
+              menuWidth: 'w-full',
               hoverBg: options.hoverBg,
               text: classNames('[.group-calendarDropdown:hover_&]:text-gray-700'),
               isPortal: false,
