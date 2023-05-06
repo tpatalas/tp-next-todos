@@ -1,0 +1,83 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+      - '--build-arg'
+      - 'BUILD_IMAGE_DOMAIN=$_ENV_GCR_IMAGE_DOMAIN'
+      - '--build-arg'
+      - 'BUILD_HOSTNAME=$_ENV_GCR_HOSTNAME'
+      - '--build-arg'
+      - 'BUILD_EMAIL_SERVER_HOST=$_ENV_GCR_EMAIL_SERVER_HOST'
+      - '--build-arg'
+      - 'BUILD_EMAIL_SERVER_PORT=$_ENV_GCR_EMAIL_SERVER_PORT'
+      - '--build-arg'
+      - 'BUILD_EMAIL_FROM=$_ENV_GCR_EMAIL_FROM'
+      - '--build-arg'
+      - 'BUILD_SOCIAL_GITHUB=$_ENV_GCR_SOCIAL_GITHUB'
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    env:
+      - 'GCR_EMAIL_FROM=$_ENV_GCR_EMAIL_FROM'
+      - 'GCR_EMAIL_SERVER_HOST=$_ENV_GCR_EMAIL_SERVER_HOST'
+      - 'GCR_EMAIL_SERVER_PORT=$_ENV_GCR_EMAIL_SERVER_PORT'
+      - 'GCR_HOSTNAME=$_ENV_GCR_HOSTNAME'
+      - 'GCR_IMAGE_DOMAIN=$_ENV_GCR_IMAGE_DOMAIN'
+      - 'GCR_SOCIAL_GITHUB=$_ENV_GCR_SOCIAL_GITHUB'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - $_SERVICE_NAME
+      - '--image'
+      - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+      - '--region'
+      - $_DEPLOY_REGION
+      - '--platform'
+      - $_PLATFORM
+      - '--allow-unauthenticated'
+      - '--cpu-boost'
+      - '--vpc-connector'
+      - $_VPC_CONNECTOR
+      - '--region'
+      - $_VPC_REGION
+      - '--vpc-egress'
+      - $_VPC_EGRESS
+    secretEnv:
+      - $_SECRET_VAR_1
+      - $_SECRET_VAR_2_1
+      - $_SECRET_VAR_2_2
+      - $_SECRET_VAR_3_1
+      - $_SECRET_VAR_3_2
+      - $_SECRET_VAR_4_1
+      - $_SECRET_VAR_4_2
+      - $_SECRET_VAR_5_1
+      - $_SECRET_VAR_5_2
+availableSecrets:
+  secretManager:
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_1/versions/latest
+      env: $_SECRET_VAR_1
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_2_1/versions/latest
+      env: $_SECRET_VAR_2_1
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_2_2/versions/latest
+      env: $_SECRET_VAR_2_2
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_3_1/versions/latest
+      env: $_SECRET_VAR_3_1
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_3_2/versions/latest
+      env: $_SECRET_VAR_3_2
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_4_1/versions/latest
+      env: $_SECRET_VAR_4_1
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_4_2/versions/latest
+      env: $_SECRET_VAR_4_2
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_5_1/versions/latest
+      env: $_SECRET_VAR_5_1
+    - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_5_2/versions/latest
+      env: $_SECRET_VAR_5_2
+timeout: 1200s
+images:
+  - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
