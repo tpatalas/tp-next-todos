@@ -1,53 +1,53 @@
 steps:
-  - name: gcr.io/cloud-builders/docker
+  - name: 'gcr.io/cloud-builders/npm'
+    entrypoint: 'npm'
     args:
-      - build
-      - '-t'
-      - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
-      - '--build-arg'
-      - 'BUILD_IMAGE_DOMAIN=$_ENV_GCR_IMAGE_DOMAIN'
-      - '--build-arg'
-      - 'BUILD_HOSTNAME=$_ENV_GCR_HOSTNAME'
-      - '--build-arg'
-      - 'BUILD_EMAIL_SERVER_HOST=$_ENV_GCR_EMAIL_SERVER_HOST'
-      - '--build-arg'
-      - 'BUILD_EMAIL_SERVER_PORT=$_ENV_GCR_EMAIL_SERVER_PORT'
-      - '--build-arg'
-      - 'BUILD_EMAIL_FROM=$_ENV_GCR_EMAIL_FROM'
-      - '--build-arg'
-      - 'BUILD_SOCIAL_GITHUB=$_ENV_GCR_SOCIAL_GITHUB'
-      - .
-  - name: gcr.io/cloud-builders/docker
+      - 'ci'
+  - name: 'gcr.io/cloud-builders/npm'
+    entrypoint: 'npm'
     args:
-      - push
-      - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    env:
-      - 'GCR_EMAIL_FROM=$_ENV_GCR_EMAIL_FROM'
-      - 'GCR_EMAIL_SERVER_HOST=$_ENV_GCR_EMAIL_SERVER_HOST'
-      - 'GCR_EMAIL_SERVER_PORT=$_ENV_GCR_EMAIL_SERVER_PORT'
-      - 'GCR_HOSTNAME=$_ENV_GCR_HOSTNAME'
-      - 'GCR_IMAGE_DOMAIN=$_ENV_GCR_IMAGE_DOMAIN'
-      - 'GCR_SOCIAL_GITHUB=$_ENV_GCR_SOCIAL_GITHUB'
-    entrypoint: gcloud
+      - 'run'
+      - 'test'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'check-branch'
+    entrypoint: 'bash'
     args:
-      - run
-      - deploy
-      - $_SERVICE_NAME
-      - '--image'
-      - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
-      - '--region'
-      - $_DEPLOY_REGION
-      - '--platform'
-      - $_PLATFORM
-      - '--allow-unauthenticated'
-      - '--cpu-boost'
-      - '--vpc-connector'
-      - $_VPC_CONNECTOR
-      - '--region'
-      - $_VPC_REGION
-      - '--vpc-egress'
-      - $_VPC_EGRESS
+      - '-c'
+      - |
+        if [[ "$BRANCH_NAME" == "master" ]]; then
+          # Build
+          echo "Building the Docker image for 'master' branch"
+          docker build -t gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA \
+            --build-arg BUILD_IMAGE_DOMAIN=$_ENV_GCR_IMAGE_DOMAIN \
+            --build-arg BUILD_HOSTNAME=$_ENV_GCR_HOSTNAME \
+            --build-arg BUILD_EMAIL_SERVER_HOST=$_ENV_GCR_EMAIL_SERVER_HOST \
+            --build-arg BUILD_EMAIL_SERVER_PORT=$_ENV_GCR_EMAIL_SERVER_PORT \
+            --build-arg BUILD_EMAIL_FROM=$_ENV_GCR_EMAIL_FROM \
+            --build-arg BUILD_SOCIAL_GITHUB=$_ENV_GCR_SOCIAL_GITHUB \
+            .
+
+          # Push
+          echo "Pushing the Docker image to Google Container Registry"
+          docker push gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+
+          # Deploy
+          echo "Deploying the Docker image to Cloud Run"
+          gcloud run deploy $_SERVICE_NAME \
+            --image gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA \
+            --project $_PROJECT_ID \
+            --region $_DEPLOY_REGION \
+            --platform $_PLATFORM \
+            --allow-unauthenticated \
+            --cpu-boost \
+            --vpc-connector $_VPC_CONNECTOR \
+            --region $_VPC_REGION \
+            --vpc-egress $_VPC_EGRESS \
+            --set-env-vars GCR_EMAIL_FROM=$_ENV_GCR_EMAIL_FROM,GCR_EMAIL_SERVER_HOST=$_ENV_GCR_EMAIL_SERVER_HOST,GCR_EMAIL_SERVER_PORT=$_ENV_GCR_EMAIL_SERVER_PORT,GCR_HOSTNAME=$_ENV_GCR_HOSTNAME,GCR_IMAGE_DOMAIN=$_ENV_GCR_IMAGE_DOMAIN,GCR_SOCIAL_GITHUB=$_ENV_GCR_SOCIAL_GITHUB \
+            --update-secrets $_SECRET_VAR_1=$_SECRET_VAR_1:latest,$_SECRET_VAR_2_1=$_SECRET_VAR_2_1:latest,$_SECRET_VAR_2_2=$_SECRET_VAR_2_2:latest,$_SECRET_VAR_3_1=$_SECRET_VAR_3_1:latest,$_SECRET_VAR_3_2=$_SECRET_VAR_3_2:latest,$_SECRET_VAR_4_1=$_SECRET_VAR_4_1:latest,$_SECRET_VAR_4_2=$_SECRET_VAR_4_2:latest,$_SECRET_VAR_5_1=$_SECRET_VAR_5_1:latest,$_SECRET_VAR_5_2=$_SECRET_VAR_5_2:latest
+        else
+          echo "Build stopped. The build step is triggered only for the 'master' branch."
+          exit 0
+        fi
     secretEnv:
       - $_SECRET_VAR_1
       - $_SECRET_VAR_2_1
@@ -79,5 +79,7 @@ availableSecrets:
     - versionName: projects/$_PROJECT_ID/secrets/$_SECRET_VAR_5_2/versions/latest
       env: $_SECRET_VAR_5_2
 timeout: 1200s
-images:
-  - 'gcr.io/$_PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+options:
+  volumes:
+    - name: 'cache'
+      path: '/cache'

@@ -7,7 +7,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "pre-commit": "npm run lint --fix",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
