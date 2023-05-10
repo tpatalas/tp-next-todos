@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build and Push Docker Image
 
 on:
   pull_request:
@@ -25,10 +25,13 @@ jobs:
 
       - name: Build and tag the docker image
         run: |-
-          docker build . -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCR_SERVICE_NAME }}:${{ github.sha }} \
+          docker build . -t ghcr.io/${{ github.repository }}:${{ github.sha }} \
             --build-arg BUILD_IMAGE_DOMAIN=${{ vars.GCR_IMAGE_DOMAIN }} \
             --build-arg BUILD_HOSTNAME=${{ vars.GCR_HOSTNAME }} \
             --build-arg BUILD_EMAIL_SERVER_HOST=${{ vars.GCR_EMAIL_SERVER_HOST }} \
             --build-arg BUILD_EMAIL_FROM=${{ vars.GCR_EMAIL_FROM }} \
             --build-arg BUILD_EMAIL_SERVER_PORT=${{ vars.GCR_EMAIL_SERVER_PORT }} \
             --build-arg BUILD_SOCIAL_GITHUB=${{ vars.GCR_SOCIAL_GITHUB }}
+      - name: Push docker image
+        run: |-
+          docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
