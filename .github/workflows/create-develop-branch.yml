@@ -1,18 +1,21 @@
-name: Recreate Develop Branch
+name: Create branch
 
-on: delete
+on:
+  workflow_dispatch:
 
 jobs:
-  recreate:
+  create-branch:
     runs-on: ubuntu-latest
-    if: github.event.ref == 'refs/heads/develop'
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Recreate develop branch
+      - name: Check if branch exists
         run: |
-          git checkout master
-          git branch develop
-          git push origin develop
+          git rev-parse new-branch > /dev/null 2>&1
+          if [ $? -eq 0 ]; then
+            echo "Branch already exists"
+            exit 0
+          fi
+
+      - name: Create branch
+        run: |
+          git branch new-branch
+          git push origin new-branch
