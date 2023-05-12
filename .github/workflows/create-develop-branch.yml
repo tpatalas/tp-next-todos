@@ -3,7 +3,7 @@ name: Recreate Develop Branch
 on: delete
 
 jobs:
-  recreate:
+  restore-branch:
     runs-on: ubuntu-latest
     if: github.event.ref == 'refs/heads/test'
 
