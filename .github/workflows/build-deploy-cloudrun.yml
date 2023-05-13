@@ -7,7 +7,7 @@ on:
       - completed
   pull_request:
     branches:
-      - master
+      - 'master'
 
 jobs:
   build-push-deploy:
@@ -28,7 +28,15 @@ jobs:
       - name: Authorize Docker push
         run: gcloud auth configure-docker
 
-      - name: Build and tag the docker image
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build and tag the Docker image
         run: |-
           docker build . -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}:${{ github.sha }} \
             --build-arg BUILD_IMAGE_DOMAIN=${{ vars.GCR_IMAGE_DOMAIN }} \
@@ -36,7 +44,7 @@ jobs:
             --build-arg BUILD_EMAIL_SERVER_HOST=${{ vars.GCR_EMAIL_SERVER_HOST }} \
             --build-arg BUILD_EMAIL_SERVER_PORT=${{ vars.GCR_EMAIL_SERVER_PORT }} \
             --build-arg BUILD_EMAIL_FROM=${{ vars.GCR_EMAIL_FROM }} \
-            --build-arg BUILD_SOCIAL_GITHUB=${{ vars.GCR_SOCIAL_GITHUB }}
+            --build-arg BUILD_SOCIAL_GITHUB=${{ vars.GCR_SOCIAL_GITHUB }} \
 
       - name: Push the image to the Google Container Registry
         run: |-
