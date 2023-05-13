@@ -1,13 +1,13 @@
 name: Build, Push, Deploy to Google Cloud Run
 
 on:
-  workflow_run:
-    workflows: ['Run Test with Cache']
-    types:
-      - completed
-  pull_request:
+  # workflow_run:
+  #   workflows: ['Run Test with Cache']
+  #   types:
+  #     - completed
+  push:
     branches:
-      - 'master'
+      - '**'
 
 jobs:
   build-push-deploy:
