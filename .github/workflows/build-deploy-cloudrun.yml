@@ -1,13 +1,13 @@
 name: Build, Push, Deploy to Google Cloud Run
 
 on:
-  workflow_run:
-    workflows: ['Run Test with Cache']
-    types:
-      - completed
-  pull_request:
+  # workflow_run:
+  #   workflows: ['Run Test with Cache']
+  #   types:
+  #     - completed
+  push:
     branches:
-      - master
+      - '**'
 
 jobs:
   build-push-deploy:
@@ -28,7 +28,15 @@ jobs:
       - name: Authorize Docker push
         run: gcloud auth configure-docker
 
-      - name: Build and tag the docker image
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build and tag the Docker image
         run: |-
           docker build . -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}:${{ github.sha }} \
             --build-arg BUILD_IMAGE_DOMAIN=${{ vars.GCR_IMAGE_DOMAIN }} \
