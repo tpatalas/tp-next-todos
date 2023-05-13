@@ -1,0 +1,31 @@
+name: Cleanup Google Cloud Run Resources
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'master'
+
+env:
+  NUMBER_OF_REVISION_TO_KEEP: 5
+
+jobs:
+  build-push-deploy:
+    name: Remove Old Resources of Google Cloud Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCR_SERVICE_ACCOUNT }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Remove old revisions of Google Cloud Run
+        run: |-
+          gcloud run revisions list --region=${{ secrets.GCR_DEPLOY_REGION }} --sort-by=~metadata.creationTimestamp --format='value(metadata.name)' | tail -n +$((${{ env.NUMBER_OF_REVISION_TO_KEEP }} + 1 )) | xargs -r -L1 gcloud run revisions delete --quiet --region=${{ secrets.GCR_DEPLOY_REGION }}
