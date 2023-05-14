@@ -5,7 +5,7 @@ on:
     types:
       - closed
     branches:
-      - 'master'
+      - 'develop'
 
 env:
   NUMBER_OF_REVISION_TO_KEEP: 5
