@@ -5,9 +5,6 @@ on:
     workflows: ['Run Test with Cache']
     types:
       - completed
-  pull_request:
-    branches:
-      - 'master'
 
 jobs:
   build-push-deploy:
