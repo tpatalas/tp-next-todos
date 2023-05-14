@@ -1,0 +1,25 @@
+name: Create Develop Branch
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'master'
+
+jobs:
+  build-push-deploy:
+    name: Re-create the develop branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Create and push develop branch
+        run: |
+          git checkout master
+          git pull origin master
+          git checkout -b develop
+          git push origin develop --force
