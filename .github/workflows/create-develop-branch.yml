@@ -1,0 +1,39 @@
+name: Create Develop Branch
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'master'
+
+jobs:
+  build-push-deploy:
+    name: Re-create the develop branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check if develop branch exists
+        id: checkbranch
+        run: |
+          git ls-remote --exit-code --heads origin develop || echo "branch_exists=$?" >> $GITHUB_ENV
+        continue-on-error: true
+
+      - name: Stop if develop branch exists
+        run: |
+          if [ "${{ env.branch_exists }}" == "0" ]; then
+            echo "Develop branch already exists. No action required."
+            exit 0
+          fi
+
+      - name: Create and push develop branch
+        if: env.branch_exists != '0'
+        run: |
+          git checkout master
+          git pull origin master
+          git checkout -b develop
+          git push origin develop --force

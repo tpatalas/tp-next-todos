@@ -1,0 +1,38 @@
+name: Deploy to Google Cloud Run
+
+on:
+  workflow_run:
+    workflows: ['Build and Push to Google Container Registry']
+    types:
+      - completed
+
+jobs:
+  deploy-docker-image:
+    name: Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCR_SERVICE_ACCOUNT }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Deploy to Google Cloud Run
+        run: |-
+          gcloud run deploy ${{ github.event.repository.name }} \
+            --image gcr.io/${{  secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}:${{ github.sha }} \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --region ${{ secrets.GCR_DEPLOY_REGION }} \
+            --platform ${{ secrets.GCR_PLATFORM }} \
+            --allow-unauthenticated \
+            --cpu-boost \
+            --vpc-connector ${{ secrets.GCR_VPC_CONNECTOR }} \
+            --vpc-egress ${{ secrets.GCR_VPC_EGRESS }} \
+            --region ${{ secrets.GCR_VPC_REGION }} \
+            --set-env-vars GCR_EMAIL_FROM=${{ vars.GCR_EMAIL_FROM }},GCR_EMAIL_SERVER_HOST=${{ vars.GCR_EMAIL_SERVER_HOST }},GCR_EMAIL_SERVER_PORT=${{ vars.GCR_EMAIL_SERVER_PORT }},GCR_HOSTNAME=${{ vars.GCR_HOSTNAME }},GCR_IMAGE_DOMAIN=${{ vars.GCR_IMAGE_DOMAIN }},GCR_SOCIAL_GITHUB=${{ vars.GCR_SOCIAL_GITHUB }} \
+            --update-secrets ${{ secrets.VAR_MONGODB }}=${{ secrets.VAR_MONGODB }}:latest,${{ secrets.VAR_NEXTAUTH_JWT }}=${{ secrets.VAR_NEXTAUTH_JWT }}:latest,${{ secrets.VAR_NEXTAUTH }}=${{ secrets.VAR_NEXTAUTH }}:latest,${{ secrets.VAR_EMAIL_SERVER_PASS }}=${{ secrets.VAR_EMAIL_SERVER_PASS }}:latest,${{ secrets.VAR_EMAIL_SERVER_USER }}=${{ secrets.VAR_EMAIL_SERVER_USER }}:latest,${{ secrets.VAR_GITHUB_CLIENT_ID }}=${{ secrets.VAR_GITHUB_CLIENT_ID }}:latest,${{ secrets.VAR_GITHUB_CLIENT_SECRET }}=${{ secrets.VAR_GITHUB_CLIENT_SECRET }}:latest,${{ secrets.VAR_GOOGLE_CLIENT_ID }}=${{ secrets.VAR_GOOGLE_CLIENT_ID }}:latest,${{ secrets.VAR_GOOGLE_CLIENT_SECRET }}=${{ secrets.VAR_GOOGLE_CLIENT_SECRET }}:latest
