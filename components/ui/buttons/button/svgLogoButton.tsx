@@ -1,13 +1,10 @@
-import { TypesSvgLogos } from '@lib/types';
-import { TypesOptionsSvg } from '@lib/types/options';
+import { DATA_SVG_PROVIDERS } from '@collections/svgLogo';
+import { TypesPropsOptionsSvg, TypesSvgLogos } from '@icon/icon.types';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next-router-mock';
 import { Button } from '.';
-import { DATA_SVG_PROVIDERS } from '@collections/svgLogo';
 
-type Props = { options?: TypesOptionsSvg };
-
-export const SvgLogoButton = ({ options = {} }: Props) => {
+export const SvgLogoButton = ({ options = {} }: TypesPropsOptionsSvg) => {
   const router = useRouter();
 
   const oAuthSignIn = async (logo: TypesSvgLogos) => {
@@ -23,20 +20,23 @@ export const SvgLogoButton = ({ options = {} }: Props) => {
       {DATA_SVG_PROVIDERS.map((logo) => (
         <div
           key={logo.name}
-          className='mb-3'>
+          className='mb-3'
+        >
           <Button
             options={{
               type: 'button',
               className: logo.className,
             }}
-            onClick={() => oAuthSignIn(logo)}>
+            onClick={() => oAuthSignIn(logo)}
+          >
             <span className='pr-2'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 aria-hidden={true}
                 height={options.height ?? '24'}
                 width={options.width ?? '24'}
-                viewBox={logo.viewBox}>
+                viewBox={logo.viewBox}
+              >
                 {logo.path}
               </svg>
             </span>

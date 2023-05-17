@@ -1,8 +1,8 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { NetworkStatus } from '@components/notifications/networkStatus';
 import { PATH_HOME } from '@constAssertions/data';
+import { TypesSvgLogos } from '@icon/icon.types';
 import { SvgLogo } from '@icon/svgLogo';
-import { TypesSvgLogos } from '@lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Fragment as LogoContainerFragment, Fragment as LogoFragment } from 'react';

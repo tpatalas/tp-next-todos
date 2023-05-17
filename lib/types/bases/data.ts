@@ -1,7 +1,6 @@
 import { PATH_APP, PATH_IMAGE_APP, PATH_IMAGE_HOME } from '@constAssertions/data';
 import { IDB, IDB_STORE, IDB_VERSION } from '@constAssertions/storage';
 import { NOTIFICATION } from '@constAssertions/ui';
-import { ReactElement } from 'react';
 import { Types } from '..';
 
 export type CollectTypesData = TypesIndexedDB;
@@ -38,14 +37,4 @@ export interface TypesPathnameImage {
   alt: string;
   title: string;
   description?: string;
-}
-
-export interface TypesSvgLogos {
-  name: 'Google' | 'GitHub' | 'MainWhite' | 'MainLogoOnlyWhite';
-  className?: Types['className'];
-  isAriaHidden?: boolean;
-  height: string;
-  width: string;
-  viewBox: string;
-  path: ReactElement;
 }

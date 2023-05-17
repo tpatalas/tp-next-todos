@@ -1,10 +1,8 @@
 import { VIEWBOX } from '@constAssertions/ui';
-import { TypesOptionsSvg } from '@lib/types/options';
+import { TypesPropsOptionsSvg } from '@icon/icon.types';
 import { memo } from 'react';
 
-type Props = { options: TypesOptionsSvg };
-
-export const SvgIcon = memo(({ options }: Props) => {
+export const SvgIcon = memo(({ options = {} }: TypesPropsOptionsSvg) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -12,7 +10,8 @@ export const SvgIcon = memo(({ options }: Props) => {
       height={options.height ?? '24'}
       width={options.width ?? '24'}
       viewBox={options.viewBox ?? VIEWBOX['24']}
-      className={options.className ?? 'h-5 w-5 fill-gray-500 hover:fill-gray-700'}>
+      className={options.className ?? 'h-5 w-5 fill-gray-500 hover:fill-gray-700'}
+    >
       <path d={options.path} />
     </svg>
   );
