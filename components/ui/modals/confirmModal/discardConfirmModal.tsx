@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import { Fragment as DiscardHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 const ConfirmModal = dynamic(() => import('.').then((mod) => mod.ConfirmModal));
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
+const SvgIcon = dynamic(() => import('@icon/svgIcon').then((mod) => mod.SvgIcon));
 
 export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
   const discardConfirmModal = useTodoModalConfirmStateDiscard(todo?._id);
@@ -27,7 +27,9 @@ export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
         <HeaderContentFragment>
           <HeaderTitle>Discard changes</HeaderTitle>
           <HeaderDescription>
-            <DiscardHeaderContentFragment>Are you Sure you want to discard your changes?</DiscardHeaderContentFragment>
+            <DiscardHeaderContentFragment>
+              Are you Sure you want to discard your changes?
+            </DiscardHeaderContentFragment>
           </HeaderDescription>
         </HeaderContentFragment>
       }
@@ -35,7 +37,8 @@ export const DiscardConfirmModal = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
         <ConfirmButton
           options={optionsButtonConfirmModalDiscard}
           onClick={() => discardConfirmModal()}
-          ref={initialFocusButton}>
+          ref={initialFocusButton}
+        >
           Discard
         </ConfirmButton>
       }

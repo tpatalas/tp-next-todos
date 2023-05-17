@@ -1,6 +1,5 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
 import { atomTodoNew } from '@states/todos';
@@ -19,6 +18,7 @@ import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffec
 import { Calendar } from '@ui/calendars/calendar';
 import { classNames } from '@stateLogics/utils';
 import { TypesOptionsDropdown } from '@lib/types/options';
+import { SvgIcon } from '@icon/svgIcon';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClickConfirm'>;
 

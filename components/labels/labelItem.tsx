@@ -1,10 +1,10 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { PATH_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { useNavigationOpen } from '@hooks/layouts';
 import { useNextQuery } from '@hooks/misc';
+import { SvgIcon } from '@icon/svgIcon';
 import { Types } from '@lib/types';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { classNames, paths } from '@stateLogics/utils';
@@ -41,7 +41,8 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
           matchedSlug
             ? 'bg-blue-100 font-semibold text-opacity-80'
             : 'hover:bg-slate-200 hover:bg-opacity-80 ',
-        )}>
+        )}
+      >
         <div className='mr-[0.5rem] inline-block w-full'>
           <PrefetchRouterButton
             options={{
@@ -49,7 +50,8 @@ export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
               path: paths(PATH_APP['label'] + '/', label._id),
               className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
             }}
-            onClick={() => !isBreakpointMd && setNavigationOpen()}>
+            onClick={() => !isBreakpointMd && setNavigationOpen()}
+          >
             <div className='flex w-full flex-row  px-2 py-2'>
               {matchedSlug ? (
                 <SvgIcon options={optionsButtonLabelRouteMatched} />

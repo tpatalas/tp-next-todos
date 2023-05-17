@@ -1,6 +1,6 @@
 import { Button } from '@buttons/button';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
+import { SvgIcon } from '@icon/svgIcon';
 import { Types } from '@lib/types';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
@@ -30,7 +30,8 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
           offset: options.offset,
           isDisabled: options.isDisabled,
         }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <span className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon
@@ -49,7 +50,8 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
                 className={classNames(
                   'px-3 text-sm font-normal text-gray-500',
                   !options.isDisabled && '[.group-button:hover_&]:text-gray-700',
-                )}>
+                )}
+              >
                 {menuButtonContent}
               </span>
             )}
