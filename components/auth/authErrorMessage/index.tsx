@@ -1,9 +1,9 @@
 import { DATA_NEXTAUTH_ERROR } from '@auth/auth.data';
 import { atomAuthErrorMessage } from '@auth/auth.states';
 import { TypesPropsErrorMessage } from '@auth/auth.types';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_ERROR_FILL } from '@data/materialSymbols';
 import { useNextQuery } from '@hooks/misc';
+import { SvgIcon } from '@icon/svgIcon';
 import { classNames } from '@stateLogics/utils';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';

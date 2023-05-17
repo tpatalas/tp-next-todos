@@ -4,7 +4,7 @@ import { classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
 import { Fragment as HeaderContentsFragment } from 'react';
 
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
+const SvgIcon = dynamic(() => import('@icon/svgIcon').then((mod) => mod.SvgIcon));
 const PseudoButton = dynamic(() => import('../pseudoButton').then((mod) => mod.PseudoButton));
 
 type Props = { options: TypesOptionsButton } & Partial<
@@ -30,7 +30,8 @@ export const PseudoIconButton = ({ options, menuButtonContent, onClick, children
           kbd: options.kbd,
           offset: options.offset,
         }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <div className='flex flex-row items-center justify-center'>
           {children}
           <SvgIcon

@@ -13,6 +13,7 @@
       "@lib/*": ["lib/*"],
       "@auth/*": ["components/auth/*"],
       "@editor/*": ["components/editor/*"],
+      "@icon/*": ["components/icon/*"],
       "@user/*": ["components/user/*"],
       "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],

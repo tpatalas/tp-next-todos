@@ -1,6 +1,6 @@
-import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { Menu } from '@headlessui/react';
+import { SvgIcon } from '@icon/svgIcon';
 import { Types } from '@lib/types';
 import { TypesOptionsDropdown } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
@@ -31,7 +31,8 @@ export const DropdownMenuItem = ({ options, onClick, children }: Props) => {
                   : 'hover:bg-slate-600 hover:bg-opacity-10 hover:text-gray-700 focus-visible:rounded-lg',
                 options.padding ?? 'px-4 py-2',
                 active && isActive && STYLE_HOVER_SLATE_LIGHT,
-              )}>
+              )}
+            >
               <div className='flex flex-row'>
                 {typeof options.path !== 'undefined' && (
                   <SvgIcon

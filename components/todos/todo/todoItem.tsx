@@ -1,11 +1,15 @@
-import { SvgIcon } from '@components/icons/svgIcon';
 import { PRIORITY_LEVEL, CATCH } from '@constAssertions/misc';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { useTodoModalStateOpen } from '@hooks/modals';
 import { useTodoCompleteItem } from '@hooks/todos';
+import { SvgIcon } from '@icon/svgIcon';
 import { CheckBox } from '@inputs/checkbox';
 import { TypesTodo } from '@lib/types';
-import { optionsSvgPriorityUrgent, optionsSvgPriorityImportant, optionsSvgCalendarDueDate } from '@options/svg';
+import {
+  optionsSvgPriorityUrgent,
+  optionsSvgPriorityImportant,
+  optionsSvgCalendarDueDate,
+} from '@options/svg';
 import { classNames } from '@stateLogics/utils';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { selectorSelectedQueryLabels } from '@states/labels';
@@ -49,19 +53,21 @@ export const TodoItem = ({ todo }: Props) => {
       </CheckBoxFragment>
       <div
         className='ml-4 w-full select-none text-base'
-        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}>
+        onDoubleClick={() => !isComboBoxOpen && !isTodoModalOpen && openModal()}
+      >
         <div className={classNames('break-words pr-10', todoItem.completed ? 'italic opacity-80' : '')}>
           <div
             className={classNames(
-              'font-medium decoration-2 line-clamp-1',
+              'line-clamp-1 font-medium decoration-2',
               urgent && 'decoration-red-600',
               important && 'decoration-yellow-500',
               !important && !urgent && 'decoration-blue-600',
               todoItem.completed ? ' text-gray-500 line-through' : '',
-            )}>
+            )}
+          >
             {todoItem.title}
           </div>
-          <p className='text-sm text-gray-500 line-clamp-1 sm:line-clamp-2'>{todoItem.note}</p>
+          <p className='line-clamp-1 text-sm text-gray-500 sm:line-clamp-2'>{todoItem.note}</p>
         </div>
         <div className='-ml-2 mt-1 flex w-full flex-col items-start justify-start pr-2 ml:flex-row ml:items-center'>
           <div className='flex flex-row'>
@@ -80,7 +86,9 @@ export const TodoItem = ({ todo }: Props) => {
             {todoItem.dueDate !== null && typeof todoItem.dueDate !== 'undefined' && (
               <div className='m-2 flex flex-row items-center text-gray-500'>
                 <SvgIcon options={optionsSvgCalendarDueDate} />
-                <div className='ml-1 whitespace-nowrap text-sm'>{format(new Date(todoItem.dueDate), 'MMM dd, yy')}</div>
+                <div className='ml-1 whitespace-nowrap text-sm'>
+                  {format(new Date(todoItem.dueDate), 'MMM dd, yy')}
+                </div>
               </div>
             )}
           </div>

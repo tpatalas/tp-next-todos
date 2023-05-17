@@ -1,6 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { useNavigationOpen } from '@hooks/layouts';
 import { useConditionCheckCreateModalOpen } from '@hooks/misc';
@@ -15,11 +14,11 @@ import { useRecoilValue } from 'recoil';
 import { AppSidebarMenu } from './appSidebarMenu';
 import dynamic from 'next/dynamic';
 import { LoadingLabels } from '@components/loadable/loadingStates/loadingLabels';
+import { SvgIcon } from '@icon/svgIcon';
 
-const LabelList = dynamic(
-  () => import('@components/labels/labelList').then((mod) => mod.LabelList),
-  { ssr: false },
-);
+const LabelList = dynamic(() => import('@components/labels/labelList').then((mod) => mod.LabelList), {
+  ssr: false,
+});
 
 export const AppNavigation = () => {
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
@@ -45,7 +44,8 @@ export const AppNavigation = () => {
           <DisableButton
             options={optionsButtonCreateTodo}
             onClick={() => openModal()}
-            isConditionalRendering={condition}>
+            isConditionalRendering={condition}
+          >
             <span className='flex flex-row items-center'>
               <SvgIcon
                 options={{
@@ -62,7 +62,8 @@ export const AppNavigation = () => {
         className={classNames(
           'flex h-[calc(100vh-7.8rem)] w-full flex-grow flex-col bg-transparent pr-2 md:h-[calc(100vh-8.7rem)]',
           isScrollDisabled ? 'overflow-y-hidden' : 'overflow-y-auto',
-        )}>
+        )}
+      >
         <div className='flex flex-grow flex-col'>
           <nav className={classNames('flex-1 space-y-1', isMobile && isChrome ? 'pb-36' : 'pb-10')}>
             <AppSidebarMenu />
