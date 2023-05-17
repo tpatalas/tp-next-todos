@@ -1,4 +1,4 @@
-import { TypesSvgLogos } from '@lib/types';
+import { TypesSvgLogos } from '@icon/icon.types';
 
 export const DATA_SVG_LOGOS: TypesSvgLogos[] = [
   {
