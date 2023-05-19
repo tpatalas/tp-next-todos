@@ -53,7 +53,7 @@
     "@types/react": "^18.2.6",
     "@types/validator": "^13.7.17",
     "eslint": "8.40.0",
-    "eslint-config-next": "13.4.2",
+    "eslint-config-next": "13.4.3",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-testing-library": "^5.11.0",
