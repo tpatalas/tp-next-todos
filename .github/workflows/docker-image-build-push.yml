@@ -1,10 +1,10 @@
-name: Build and Push to Google Container Registry
+name: Build and Push to Google Artifact Registry
 
 on:
   workflow_run:
-    workflows: ['Run Test with Cache']
-    types:
-      - completed
+    workflows: [Run Test with Cache]
+    types: [completed]
+    branches: [master]
 
 jobs:
   build-and-push-docker-image:
@@ -22,8 +22,8 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Authorize Docker push
-        run: gcloud auth configure-docker
+      - name: Authorize Docker push for Google Artifact Registry
+        run: gcloud auth configure-docker ${{ secrets.GCR_DEPLOY_REGION }}-docker.pkg.dev
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -33,16 +33,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build and tag the Docker image
+      - name: Build and Tag the Docker image
         run: |-
-          docker build . -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}:${{ github.sha }} \
+          docker build -t ${{ secrets.GCR_DEPLOY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }} \
             --build-arg BUILD_IMAGE_DOMAIN=${{ vars.GCR_IMAGE_DOMAIN }} \
             --build-arg BUILD_HOSTNAME=${{ vars.GCR_HOSTNAME }} \
             --build-arg BUILD_EMAIL_SERVER_HOST=${{ vars.GCR_EMAIL_SERVER_HOST }} \
             --build-arg BUILD_EMAIL_SERVER_PORT=${{ vars.GCR_EMAIL_SERVER_PORT }} \
             --build-arg BUILD_EMAIL_FROM=${{ vars.GCR_EMAIL_FROM }} \
             --build-arg BUILD_SOCIAL_GITHUB=${{ vars.GCR_SOCIAL_GITHUB }} \
+            .
 
-      - name: Push the image to the Google Container Registry
+      - name: Push the image to the Google Artifact Registry (GAR)
         run: |-
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}:${{ github.sha }}
+          docker push ${{ secrets.GCR_DEPLOY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ github.event.repository.name }}:${{ github.sha }}
