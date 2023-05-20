@@ -1,13 +1,15 @@
 name: Build and Push to Google Artifact Registry
 
 on:
-  workflow_run:
-    workflows: [Run Test with Cache]
-    types: [completed]
-    branches: [master]
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'master'
 
 jobs:
-  build-and-push-docker-image:
+  if_merged:
+    if: github.event.pull_request.merged == true
     name: Build and Push to Google Cloud Run
     runs-on: ubuntu-latest
     steps:

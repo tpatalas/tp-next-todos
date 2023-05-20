@@ -8,7 +8,8 @@ on:
       - 'master'
 
 jobs:
-  build-push-deploy:
+  if_merged:
+    if: github.event.pull_request.merged == true
     name: Re-create the develop branch
     runs-on: ubuntu-latest
     steps:
