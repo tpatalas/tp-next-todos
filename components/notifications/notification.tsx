@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import { Fragment as NotificationFragment } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-const SvgIcon = dynamic(() => import('components/icons/svgIcon').then((mod) => mod.SvgIcon));
+const SvgIcon = dynamic(() => import('@icon/svgIcon').then((mod) => mod.SvgIcon));
 
 export const Notification = () => {
   const notification = useRecoilValue(selectorNotificationState) as TypesNotification;
@@ -20,7 +20,8 @@ export const Notification = () => {
     <NotificationFragment>
       <MinimizeModalTransition
         show={isNotificationOpen}
-        options={optionsNotification}>
+        options={optionsNotification}
+      >
         <div className='flex flex-col'>
           <div className='flex flex-row justify-between'>
             <div className='flex flex-row items-center '>

@@ -1,12 +1,7 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { useRouter } from 'next/router';
-import {
-  Fragment as FooterSidebarMenuFragment,
-  Suspense,
-  Fragment as TotalNumberTodos,
-} from 'react';
+import { Fragment as FooterSidebarMenuFragment, Suspense, Fragment as TotalNumberTodos } from 'react';
 import { useRecoilValue } from 'recoil';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
@@ -14,6 +9,7 @@ import { useNavigationOpen } from '@hooks/layouts';
 import { classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
+import { SvgIcon } from '@icon/svgIcon';
 
 const TodosCount = dynamic(() => import('@layouts/app/todosCount').then((mod) => mod.TodosCount));
 
@@ -28,7 +24,8 @@ export const AppSidebarMenu = () => {
         {DATA_SIDEBAR_MENU.map((item) => (
           <ul
             key={item.name}
-            className='relative'>
+            className='relative'
+          >
             <PrefetchRouterButton
               options={{
                 tooltip: item.tooltip,
@@ -40,7 +37,8 @@ export const AppSidebarMenu = () => {
                   'group flex w-full items-center rounded-lg px-2 py-2 tracking-wide text-sm focus:outline-none focus:ring-0 focus:ring-offset-0',
                 ),
               }}
-              onClick={() => !isBreakpointMd && setSidebarOpen()}>
+              onClick={() => !isBreakpointMd && setSidebarOpen()}
+            >
               <span className='pr-3'>
                 <SvgIcon
                   options={{

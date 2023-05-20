@@ -1,11 +1,9 @@
-import { DATA_SVG_LOGOS } from '@collections/svgLogo';
 import { VIEWBOX } from '@constAssertions/ui';
-import { TypesSvgLogos } from '@lib/types';
+import { DATA_SVG_LOGOS } from '@icon/icon.data';
+import { TypesPropsSvgLogoNames, TypesSvgLogos } from '@icon/icon.types';
 import { memo } from 'react';
 
-type Props = { type: TypesSvgLogos['name'] };
-
-export const SvgLogo = memo(({ type }: Props) => {
+export const SvgLogo = memo(({ type }: TypesPropsSvgLogoNames) => {
   const svgData = DATA_SVG_LOGOS.find((svg) => svg.name === type) ?? ({} as TypesSvgLogos);
 
   return (
@@ -14,7 +12,8 @@ export const SvgLogo = memo(({ type }: Props) => {
       aria-hidden={svgData.isAriaHidden}
       height={svgData.height ?? '24'}
       width={svgData.width ?? '24'}
-      viewBox={svgData.viewBox ?? VIEWBOX['24']}>
+      viewBox={svgData.viewBox ?? VIEWBOX['24']}
+    >
       {svgData.path}
     </svg>
   );

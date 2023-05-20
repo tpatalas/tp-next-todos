@@ -1,6 +1,6 @@
 import { IconButton } from '@buttons/iconButton';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_SEARCH, ICON_CLOSE } from '@data/materialSymbols';
+import { SvgIcon } from '@icon/svgIcon';
 import { classNames } from '@stateLogics/utils';
 import { atomSearchInput } from '@states/layouts';
 import { Fragment as ResetSearchFragment, Fragment as SearchBarFragment } from 'react';
@@ -19,10 +19,12 @@ export const SearchBar = () => {
             'md:mr-15 relative flex w-full max-w-xl items-center rounded-lg border border-transparent text-gray-400 drop-shadow-sm focus-within:border-slate-200 focus-within:border-opacity-50 focus-within:text-gray-600 focus-within:shadow-lg focus-within:shadow-slate-300/60 sm:mr-10 lg:mr-10 xl:max-w-2xl',
           )}
           action='#'
-          method='GET'>
+          method='GET'
+        >
           <label
             htmlFor='search-field'
-            className='sr-only'>
+            className='sr-only'
+          >
             Search
           </label>
           <div className='pointer-events-none absolute inset-y-0 left-4 flex items-center'>

@@ -6,8 +6,9 @@ import { optionsButtonConfirmModalDelete } from '@options/button';
 import { optionsSvgConfirmModalDelete } from '@options/svg';
 import dynamic from 'next/dynamic';
 import { Fragment as DeleteHeaderContentFragment, Fragment as HeaderContentFragment, useRef } from 'react';
+
 const ConfirmModal = dynamic(() => import('..').then((mod) => mod.ConfirmModal));
-const SvgIcon = dynamic(() => import('@components/icons/svgIcon').then((mod) => mod.SvgIcon));
+const SvgIcon = dynamic(() => import('@icon/svgIcon').then((mod) => mod.SvgIcon));
 
 type Props = Pick<Types, 'onClickConfirm' | 'show' | 'deletingItem'> & Partial<Pick<Types, 'itemIds'>>;
 
@@ -26,7 +27,7 @@ export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem
           <HeaderDescription>
             <DeleteHeaderContentFragment>
               Are you Sure you want to delete the following item?
-              <span className='mt-2 break-words text-center line-clamp-2 sm:max-w-sm sm:text-left'>
+              <span className='mt-2 line-clamp-2 break-words text-center sm:max-w-sm sm:text-left'>
                 <strong>{deletingItem}</strong>
               </span>
             </DeleteHeaderContentFragment>
@@ -37,7 +38,8 @@ export const DeleteConfirmModal = ({ itemIds, onClickConfirm, show, deletingItem
         <ConfirmButton
           options={optionsButtonConfirmModalDelete}
           onClick={onClickConfirm}
-          ref={initialFocusButton}>
+          ref={initialFocusButton}
+        >
           Delete
         </ConfirmButton>
       }

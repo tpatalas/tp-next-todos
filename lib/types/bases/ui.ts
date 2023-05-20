@@ -1,28 +1,20 @@
+import { DURATION, GRADIENT_POSITION, GRADIENT_TYPE, POSITION_X, POSITION_Y } from '@constAssertions/ui';
+import { Placement } from '@popperjs/core';
 import {
-  DURATION,
-  GRADIENT_TYPE,
-  GRADIENT_POSITION,
-  VIEWBOX,
-  POSITION_X,
-  POSITION_Y,
-} from '@constAssertions/ui';
-import {
-  ReactNode,
-  ReactElement,
   ChangeEventHandler,
-  MouseEventHandler,
   FocusEventHandler,
   KeyboardEventHandler,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
 } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
 import { Types } from '..';
-import { Placement } from '@popperjs/core';
 
 export type CollectTypesUi = TypesReactChildren &
   TypesUi &
   TypesLoadings &
   TypesTooltipAttributes &
-  TypesSvgIconAttributes &
   TypesInputAttributes &
   TypesComboboxAttributes &
   TypesDropdownAttributes &
@@ -104,14 +96,6 @@ export interface TypesTooltipAttributes {
   placement: Placement;
   isVisible: boolean;
   isCloseOnTriggerHidden: boolean;
-}
-
-export interface TypesSvgIconAttributes {
-  path: string;
-  height: string | number;
-  width: string | number;
-  viewBox: VIEWBOX;
-  isAriaHidden: boolean;
 }
 
 export interface TypesComboboxAttributes {

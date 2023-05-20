@@ -1,5 +1,4 @@
 import { IconButton } from '@buttons/iconButton';
-import { SvgIcon } from '@components/icons/svgIcon';
 import { ICON_CHECK_BOX_FILL, ICON_CHECK_BOX_OUTLINE_BLANK } from '@data/materialSymbols';
 import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { ComboBoxSelectedLabelsEffect } from '@effects/comboBoxSelectedLabelsEffect';
@@ -15,6 +14,7 @@ import { ComboBox } from './comboBox';
 import { ComboBoxNewItemButton } from './comboBox/comboBoxNewItemButton';
 import { Fragment as LabelComboBoxFragment } from 'react';
 import { classNames } from '@stateLogics/utils';
+import { SvgIcon } from '@icon/svgIcon';
 
 type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels'>>;
 
@@ -41,10 +41,11 @@ export const LabelComboBox = ({ todo }: Props) => {
             options={dataComboBoxInputButton}
             onClick={() => setFilter()}
           />
-        }>
+        }
+      >
         <Combobox.Options className='relative max-h-60 w-full overflow-auto bg-slate-50 py-1 text-base ring-0 ring-transparent focus:outline-none sm:text-sm'>
           {filteredLabels.length === 0 && query !== '' ? (
-            <div className='relative cursor-default select-none py-2 px-4 text-gray-500'>Nothing found!</div>
+            <div className='relative cursor-default select-none px-4 py-2 text-gray-500'>Nothing found!</div>
           ) : (
             filteredLabels.map((label: Labels) => (
               <Combobox.Option
@@ -56,18 +57,20 @@ export const LabelComboBox = ({ todo }: Props) => {
                       : `text-gray-500 ${STYLE_HOVER_SLATE_LIGHT}`
                   }`
                 }
-                value={label}>
+                value={label}
+              >
                 {({ selected, active }) => (
                   <>
                     <span
                       className={classNames(
                         'block truncate fill-gray-300 pl-2',
                         selected ? 'font-medium' : 'font-normal',
-                      )}>
+                      )}
+                    >
                       {label.name}
                     </span>
                     {selected ? (
-                      <span className='absolute inset-y-0 top-[0.15em] left-0 flex items-center pl-3'>
+                      <span className='absolute inset-y-0 left-0 top-[0.15em] flex items-center pl-3'>
                         <SvgIcon
                           options={{
                             path: ICON_CHECK_BOX_FILL,
@@ -80,7 +83,10 @@ export const LabelComboBox = ({ todo }: Props) => {
                         <SvgIcon
                           options={{
                             path: ICON_CHECK_BOX_OUTLINE_BLANK,
-                            className: classNames('h-6 w-6 opacity-80', active ? 'fill-gray-400' : 'fill-gray-300'),
+                            className: classNames(
+                              'h-6 w-6 opacity-80',
+                              active ? 'fill-gray-400' : 'fill-gray-300',
+                            ),
                           }}
                         />
                       </span>
