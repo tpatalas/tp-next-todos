@@ -5,6 +5,7 @@ on:
     workflows: [Build and Push to Google Artifact Registry]
     types: [completed]
     branches: [master]
+#
 
 jobs:
   deploy-docker-image:
