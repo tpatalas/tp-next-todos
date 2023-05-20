@@ -8,7 +8,7 @@ on:
       - 'master'
 
 env:
-  NUMBER_OF_RESOURCES_TO_KEEP: 5
+  NUMBER_OF_RESOURCES_TO_KEEP: 10
 
 jobs:
   build-push-deploy:
@@ -36,13 +36,11 @@ jobs:
               xargs -r -L1 gcloud run revisions delete \
             --quiet --region=${{ secrets.GCR_DEPLOY_REGION }}
 
-      - name: Remove old images from Google Container Registry
+      - name: Remove old images from Google Artifacts Registry
         run: |-
-          REPO="${{ secrets.GCP_PROJECT_ID }}"
-          IMAGE="${{ github.event.repository.name }}"
-          IMAGES_TO_DELETE=$(gcloud container images list-tags gcr.io/$REPO/$IMAGE \
-            --limit=999999 --sort-by=~timestamp --format='get(digest)' |
-              tail -n +$((${{ env.NUMBER_OF_RESOURCES_TO_KEEP }} + 1 )))
-          for digest in ${IMAGES_TO_DELETE}; do
-            gcloud container images delete -q --force-delete-tags "gcr.io/$REPO/$IMAGE@$digest"
+          IMAGE_PATH="${{ secrets.GCR_DEPLOY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ github.event.repository.name }}"
+          IMAGES_AND_TAGS=$(gcloud artifacts docker images list $IMAGE_PATH --include-tags --sort-by=~'CREATE_TIME' | awk '{print $1 ":" $3}')
+          IMAGES_AND_TAGS_TO_DELETE=$(echo "$IMAGES_AND_TAGS" | tail -n +$((${{ env.NUMBER_OF_RESOURCES_TO_KEEP }} + 2 )))
+          for IMAGE_AND_TAG in ${IMAGES_AND_TAGS_TO_DELETE}; do
+              gcloud artifacts docker images delete "$IMAGE_AND_TAG" --quiet
           done
