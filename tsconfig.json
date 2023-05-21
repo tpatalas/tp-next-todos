@@ -14,6 +14,7 @@
       "@auth/*": ["components/auth/*"],
       "@editor/*": ["components/editor/*"],
       "@icon/*": ["components/icon/*"],
+      "@label/*": ["components/label/*"],
       "@user/*": ["components/user/*"],
       "@layouts/*": ["components/layouts/*"],
       "@buttons/*": ["components/ui/buttons/*"],
