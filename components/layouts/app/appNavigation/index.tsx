@@ -16,7 +16,7 @@ import dynamic from 'next/dynamic';
 import { LoadingLabels } from '@components/loadable/loadingStates/loadingLabels';
 import { SvgIcon } from '@icon/svgIcon';
 
-const LabelList = dynamic(() => import('@components/labels/labelList').then((mod) => mod.LabelList), {
+const LabelList = dynamic(() => import('@components/label/labelList').then((mod) => mod.LabelList), {
   ssr: false,
 });
 
