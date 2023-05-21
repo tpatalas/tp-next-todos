@@ -32,6 +32,7 @@ const customJestConfig = {
     '^@auth/(.*)$': ['<rootDir>/components/auth/$1'],
     '^@editor/(.*)$': ['<rootDir>/components/editor/$1'],
     '^@icon/(.*)$': ['<rootDir>/components/icon/$1'],
+    '^@label/(.*)$': ['<rootDir>/components/label/$1'],
     '^@user/(.*)$': ['<rootDir>/components/user/$1'],
     '^@layouts/(.*)$': ['<rootDir>/components/layouts/$1'],
     '^@buttons/(.*)$': ['<rootDir>/components/ui/buttons/$1'],
