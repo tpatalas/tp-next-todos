@@ -13,7 +13,6 @@ import {
 } from '@states/modals';
 import { isMacOs, isMobile } from 'react-device-detect';
 import { RecoilValue, useRecoilCallback } from 'recoil';
-import { useLabelAdd, useLabelUpdateDataItem, useLabelUpdateItem } from './labels';
 import { useConditionCheckLabelTitleEmpty, useFilterTodoIdsWithPathname } from './misc';
 import {
   useTodoModalStateExitMinimize,
@@ -24,6 +23,7 @@ import {
 } from './modals';
 import { useTodoCompleteItem, useTodoRemoveItem } from './todos';
 import { Labels } from '@label/label.types';
+import { useLabelAdd, useLabelUpdateItem, useLabelUpdateDataItem } from '@label/label.hooks';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);

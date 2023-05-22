@@ -4,7 +4,6 @@ import { STYLE_HOVER_SLATE_LIGHT } from '@data/stylePreset';
 import { ComboBoxSelectedLabelsEffect } from '@effects/comboBoxSelectedLabelsEffect';
 import { Combobox } from '@headlessui/react';
 import { useSetFilterLabels } from '@hooks/comboBoxes';
-import { useLabelChangeHandler, useDataButtonComboboxFilterLabel } from '@hooks/labels';
 import { useLabelModalStateOpen } from '@hooks/modals';
 import { Types } from '@lib/types';
 import { atomComboBoxQuery } from '@states/comboBoxes';
@@ -16,6 +15,7 @@ import { classNames } from '@stateLogics/utils';
 import { SvgIcon } from '@icon/svgIcon';
 import { selectorSelectedLabels, selectorComboBoxFilteredLabels } from '@label/label.states';
 import { Labels, TypesLabel } from '@label/label.types';
+import { useLabelChangeHandler, useDataButtonComboboxFilterLabel } from '@label/label.hooks';
 
 type Props = Partial<Pick<Types, 'todo'> & Pick<TypesLabel, 'selectedQueryLabels'>>;
 

@@ -1,5 +1,5 @@
-import { VIEWBOX } from '@constAssertions/ui';
 import { ReactElement } from 'react';
+import { VIEWBOX } from './icon.const';
 
 export interface TypesSvgLogos {
   name: 'Google' | 'GitHub' | 'MainWhite' | 'MainLogoOnlyWhite';

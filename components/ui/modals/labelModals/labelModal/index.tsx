@@ -9,7 +9,6 @@ import {
   optionsButtonTodoModalCancel,
   optionsButtonLabelModalAddLabel,
 } from '@options/button';
-import { useLabelValueUpdate, useLabelAdd } from '@hooks/labels';
 import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
 import { useLabelModalStateClose } from '@hooks/modals';
 import { ModalTransitionChild } from '@modals/modal/modalTransition/modalTransitionChild';
@@ -20,6 +19,7 @@ import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { DividerX } from '@ui/dividers/dividerX';
 import { atomLabelNew, atomSelectorLabelItem } from '@label/label.states';
 import { TypesLabel } from '@label/label.types';
+import { useLabelValueUpdate, useLabelAdd } from '@label/label.hooks';
 
 type Props = Partial<
   Pick<Types, 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'> &
