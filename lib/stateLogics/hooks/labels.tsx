@@ -1,26 +1,7 @@
-import { STYLE_COLORS } from '@data/stylePreset';
-import {
-  createDataNewLabel,
-  deleteDataLabelItem,
-  updateDataLabelItem,
-  updateDataLabels,
-} from '@lib/queries/queryLabels';
-import { Labels, Todos, Types } from '@lib/types';
-import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
-import { ICON_FILTER_LIST_OFF, ICON_FILTER_LIST } from '@data/materialSymbols';
-import { atomFilterSelected } from '@states/comboBoxes';
-import { useEffect } from 'react';
 import { CATCH } from '@constAssertions/misc';
 import { NOTIFICATION } from '@constAssertions/ui';
-import { atomSelectorTodoItem } from '@states/atomEffects/todos';
-import { atomTodoNew } from '@states/todos';
-import ObjectID from 'bson-objectid';
-import { useSession } from 'next-auth/react';
-import { useRecoilCallback, RecoilValue, useRecoilValue, useResetRecoilState } from 'recoil';
-import { useGetWithRecoilCallback, useCompareToQueryLabels } from './misc';
-import { useNotificationState } from './notifications';
-import { TypesOptionsButton } from '@lib/types/options';
-import { atomCatch } from '@states/misc';
+import { ICON_FILTER_LIST, ICON_FILTER_LIST_OFF } from '@data/materialSymbols';
+import { STYLE_COLORS } from '@data/stylePreset';
 import {
   atomLabelNew,
   atomSelectorLabelItem,
@@ -28,11 +9,31 @@ import {
   selectorSelectedLabels,
   selectorSessionLabels,
 } from '@label/label.states';
+import { Labels, TypesLabel } from '@label/label.types';
+import {
+  createDataNewLabel,
+  deleteDataLabelItem,
+  updateDataLabelItem,
+  updateDataLabels,
+} from '@lib/queries/queryLabels';
+import { Todos } from '@lib/types';
+import { TypesOptionsButton } from '@lib/types/options';
+import { atomSelectorTodoItem } from '@states/atomEffects/todos';
+import { atomFilterSelected } from '@states/comboBoxes';
+import { atomCatch } from '@states/misc';
+import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
+import { atomTodoNew } from '@states/todos';
+import ObjectID from 'bson-objectid';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { RecoilValue, useRecoilCallback, useRecoilValue, useResetRecoilState } from 'recoil';
+import { useCompareToQueryLabels, useGetWithRecoilCallback } from './misc';
+import { useNotificationState } from './notifications';
 
 /**
  * Hooks
  **/
-export const useLabelValueUpdate = (label?: Types['label']) => {
+export const useLabelValueUpdate = (label?: TypesLabel['label']) => {
   return useRecoilCallback(({ set }) => (content: string) => {
     const randomBgColor = STYLE_COLORS[Math.floor(Math.random() * STYLE_COLORS.length)];
     typeof label !== 'undefined'

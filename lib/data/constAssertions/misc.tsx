@@ -32,12 +32,6 @@ export const CALENDAR = {
   days: 'days',
 } as const;
 
-export type USER = (typeof USER)[keyof typeof USER];
-export const USER = {
-  email: 'email',
-  password: 'password',
-} as const;
-
 export type MODIFIER_KBD = (typeof MODIFIER_KBD)[keyof typeof MODIFIER_KBD];
 export const MODIFIER_KBD = {
   'modifier + E': isMacOs ? '⌘ + E' : 'ctrl + E',

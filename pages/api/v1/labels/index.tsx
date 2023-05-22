@@ -1,7 +1,7 @@
 import { databaseConnect } from '@lib/dataConnections/databaseConnection';
 import Label from '@lib/models/Label';
 import { sanitizedUserLabels } from '@lib/sanitizers/sanitizedSchemas';
-import { Labels } from '@lib/types';
+import { Labels } from '@label/label.types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';

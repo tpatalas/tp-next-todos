@@ -1,6 +1,6 @@
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { Labels, Todos } from '@lib/types';
+import { Todos } from '@lib/types';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomCurrentFocus, atomOnBlur, atomOnFocus } from '@states/focus';
@@ -23,6 +23,7 @@ import {
   useTodoModalStateOpen,
 } from './modals';
 import { useTodoCompleteItem, useTodoRemoveItem } from './todos';
+import { Labels } from '@label/label.types';
 
 export const useItemModalWithKey = (_id: Todos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);

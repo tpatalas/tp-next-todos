@@ -1,5 +1,6 @@
 import { STYLE_COLORS } from '@data/stylePreset';
-import { Todos, TodoIds, Labels } from '@lib/types';
+import { Labels } from '@label/label.types';
+import { Todos, TodoIds } from '@lib/types';
 import { subDays, addDays } from 'date-fns';
 
 export const DATA_DEMO: Todos[] = [

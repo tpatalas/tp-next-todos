@@ -1,6 +1,5 @@
 import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { Labels, Types } from '@lib/types';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
@@ -9,6 +8,8 @@ import { useCallback } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { useNextQuery } from './misc';
 import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
+import { Types } from '@lib/types';
 
 export const useNavigationOpen = () => {
   const layoutType = useRecoilValue(atomLayoutType);

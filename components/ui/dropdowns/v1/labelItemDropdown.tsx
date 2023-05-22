@@ -7,8 +7,10 @@ import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEff
 import { useLabelRemoveItem } from '@hooks/labels';
 import { useLabelModalStateOpen } from '@hooks/modals';
 import { TypesOptionsDropdown } from '@lib/types/options';
+import { TypesLabel } from '@label/label.types';
 
-type Props = { options: TypesOptionsDropdown } & Pick<Types, 'label'> & Partial<Pick<Types, 'menuContentOnClose'>>;
+type Props = { options: TypesOptionsDropdown } & Pick<TypesLabel, 'label'> &
+  Partial<Pick<Types, 'menuContentOnClose'>>;
 
 export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props) => {
   const openModal = useLabelModalStateOpen(label?._id);
@@ -17,7 +19,8 @@ export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props)
   return (
     <Dropdown
       options={{ hoverBg: options.hoverBg, isInitiallyVisible: false, ...optionsDropdownLabelItem }}
-      menuContentOnClose={menuContentOnClose}>
+      menuContentOnClose={menuContentOnClose}
+    >
       <ActiveDropdownMenuItemEffect menuItemId={null} />
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       <div className='py-1'>
@@ -27,7 +30,8 @@ export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props)
             path: ICON_EDIT_NOTE,
             tooltip: 'Edit',
           }}
-          onClick={() => openModal()}>
+          onClick={() => openModal()}
+        >
           Edit label
         </DropdownMenuItem>
       </div>
@@ -38,7 +42,8 @@ export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props)
             path: ICON_DELETE,
             tooltip: 'Delete',
           }}
-          onClick={() => removeLabel()}>
+          onClick={() => removeLabel()}
+        >
           Delete
         </DropdownMenuItem>
       </div>

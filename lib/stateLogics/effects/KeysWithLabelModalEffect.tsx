@@ -1,8 +1,8 @@
 import { useKeyWithLabelModal } from '@hooks/keybindings';
-import { Types } from '@lib/types';
+import { TypesLabel } from '@label/label.types';
 import { useEffect } from 'react';
 
-export const KeysWithLabelModalEffect = ({ label }: Partial<Pick<Types, 'label'>>) => {
+export const KeysWithLabelModalEffect = ({ label }: Partial<Pick<TypesLabel, 'label'>>) => {
   const labelModalWithKey = useKeyWithLabelModal(label?._id);
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { OBJECT_ID } from '@constAssertions/data';
-import { Labels, Todos } from '@lib/types';
+import { Labels } from '@label/label.types';
+import { Todos } from '@lib/types';
 import { sanitize, sanitizeObject } from '@stateLogics/utils';
 
 export const sanitizedUserTodoItem = (data: Todos) => {

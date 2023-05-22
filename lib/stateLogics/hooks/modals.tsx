@@ -1,4 +1,4 @@
-import { Labels, Todos } from '@lib/types';
+import { Todos } from '@lib/types';
 import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
@@ -18,6 +18,7 @@ import {
 } from '@states/modals';
 import { atomCatch } from '@states/misc';
 import { atomLabelNew, atomSelectorLabelItem, atomSelectorLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
 
 /**
  * Hooks

@@ -1,7 +1,7 @@
 import { PATH_APP, PATH_IMAGE_APP } from '@constAssertions/data';
 import { useNextQuery } from '@hooks/misc';
 import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
-import { Labels } from '@lib/types';
+import { Labels } from '@label/label.types';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
