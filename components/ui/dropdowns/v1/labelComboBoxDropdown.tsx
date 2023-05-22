@@ -11,13 +11,13 @@ import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { GRADIENT_POSITION } from '@constAssertions/ui';
 import { optionsButtonLabelRemove } from '@options/button';
 import { optionsDropdownComboBox } from '@options/misc';
-import { useLabelRemoveItemTitleId } from '@hooks/labels';
 import { useTodoModalStateClose } from '@hooks/modals';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomTodoNew } from '@states/todos';
 import { classNames, paths } from '@stateLogics/utils';
 import { selectorSelectedLabels } from '@label/label.states';
 import { TypesLabel } from '@label/label.types';
+import { useLabelRemoveItemTitleId } from '@label/label.hooks';
 
 type Props = Partial<Pick<Types, 'container' | 'todo'> & Pick<TypesLabel, 'selectedQueryLabels'>>;
 

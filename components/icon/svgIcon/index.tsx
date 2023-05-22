@@ -1,4 +1,4 @@
-import { VIEWBOX } from '@constAssertions/ui';
+import { VIEWBOX } from '@icon/icon.const';
 import { TypesPropsOptionsSvg } from '@icon/icon.types';
 import { memo } from 'react';
 

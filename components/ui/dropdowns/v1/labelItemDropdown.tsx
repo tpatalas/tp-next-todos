@@ -4,10 +4,10 @@ import { Dropdown } from './dropdown';
 import { DropdownMenuItem } from './dropdown/dropdownMenuItem';
 import { optionsDropdownLabelItem } from '@options/misc';
 import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
-import { useLabelRemoveItem } from '@hooks/labels';
 import { useLabelModalStateOpen } from '@hooks/modals';
 import { TypesOptionsDropdown } from '@lib/types/options';
 import { TypesLabel } from '@label/label.types';
+import { useLabelRemoveItem } from '@label/label.hooks';
 
 type Props = { options: TypesOptionsDropdown } & Pick<TypesLabel, 'label'> &
   Partial<Pick<Types, 'menuContentOnClose'>>;

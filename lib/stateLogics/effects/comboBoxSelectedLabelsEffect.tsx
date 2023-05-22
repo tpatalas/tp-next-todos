@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { atomFilterSelected } from '@states/comboBoxes';
 import { CATCH } from '@constAssertions/misc';
-import { useLabelUpdateDataItem } from '@hooks/labels';
 import { atomCatch } from '@states/misc';
+import { useLabelUpdateDataItem } from '@label/label.hooks';
 
 type Props = Partial<Pick<Types, 'todo'>>;
 
