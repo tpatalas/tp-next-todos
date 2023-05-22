@@ -12,9 +12,7 @@ import { atomFilterSelected } from '@states/comboBoxes';
 import { useEffect } from 'react';
 import { CATCH } from '@constAssertions/misc';
 import { NOTIFICATION } from '@constAssertions/ui';
-import { atomSelectorLabels, selectorSessionLabels } from '@states/atomEffects/labels';
 import { atomSelectorTodoItem } from '@states/atomEffects/todos';
-import { atomSelectorLabelItem, atomLabelNew, selectorSelectedLabels } from '@states/labels';
 import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { useSession } from 'next-auth/react';
@@ -23,6 +21,13 @@ import { useGetWithRecoilCallback, useCompareToQueryLabels } from './misc';
 import { useNotificationState } from './notifications';
 import { TypesOptionsButton } from '@lib/types/options';
 import { atomCatch } from '@states/misc';
+import {
+  atomLabelNew,
+  atomSelectorLabelItem,
+  atomSelectorLabels,
+  selectorSelectedLabels,
+  selectorSessionLabels,
+} from '@label/label.states';
 
 /**
  * Hooks

@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { LabelItem } from './labelItem';
 import { optionsButtonLabelAddMore } from '@options/button';
 import { useLabelModalStateOpen } from '@hooks/modals';
-import { selectorSessionLabels } from '@states/atomEffects/labels';
+import { selectorSessionLabels } from '@label/label.states';
 
 export const LabelList = () => {
   const labelList = useRecoilValue(selectorSessionLabels);
