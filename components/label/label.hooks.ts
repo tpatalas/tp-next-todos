@@ -53,7 +53,7 @@ export const useLabelAdd = () => {
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     set(atomSelectorLabels, [...get(atomSelectorLabels), { ...get(atomLabelNew) }]);
     set(selectorSessionLabels, [...get(selectorSessionLabels), { ...get(atomLabelNew) }]);
@@ -71,7 +71,7 @@ export const useLabelUpdateItem = (_id: Labels['_id']) => {
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     const updateLabels = get(selectorSessionLabels).map((label) => ({
       ...label,
@@ -92,7 +92,7 @@ export const useLabelRemoveItem = (_id: Labels['_id']) => {
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     if (!get(atomConfirmModalDelete(_id))) {
       set(atomConfirmModalDelete(_id), true);
@@ -113,7 +113,7 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
   const get = useGetWithRecoilCallback();
 
   const removeLabelItemTitleId = useRecoilCallback(({ snapshot, set }) => (labelId: Labels['_id']) => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const todoId = _id ? _id! : get(atomTodoNew)._id!;
 
     const filteredLabelsRemoved = get(atomSelectorLabels).map((label) => {
@@ -149,7 +149,7 @@ export const useLabelUpdateDataItem = () => {
   const { status } = useSession();
   const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const updatedLabels = get(atomSelectorLabels);
     const filteredLabels = compareLabelsToQueryLabel(get(atomSelectorLabels));
 
@@ -163,7 +163,7 @@ export const useLabelUpdateDataItem = () => {
 export const useLabelChangeHandler = (_id: Todos['_id']) => {
   const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ set, snapshot }) => (selected: Labels[]) => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const todoId = _id ? _id! : get(atomTodoNew)._id!;
     const labels = get(selectorSessionLabels);
     const isTodoModalOpen = get(atomCatch(CATCH['todoModal']));
