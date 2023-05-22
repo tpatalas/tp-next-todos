@@ -1,6 +1,6 @@
+import { selectorSelectedLabels } from '@label/label.states';
 import { Todos } from '@lib/types';
 import { atomFilterSelected, atomComboBoxQuery } from '@states/comboBoxes';
-import { selectorSelectedLabels } from '@states/labels';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 
 export const useSetFilterLabels = (_id: Todos['_id']) => {

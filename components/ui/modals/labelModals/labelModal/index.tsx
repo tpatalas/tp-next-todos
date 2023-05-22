@@ -1,6 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
-import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { atomLabelModalOpen } from '@states/modals';
 import { Types } from 'lib/types';
 import { Fragment as LabelModalFragment, useRef } from 'react';
@@ -19,6 +18,7 @@ import { Button } from '@buttons/button';
 import { classNames } from '@stateLogics/utils';
 import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { DividerX } from '@ui/dividers/dividerX';
+import { atomLabelNew, atomSelectorLabelItem } from '@label/label.states';
 
 type Props = Partial<
   Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>

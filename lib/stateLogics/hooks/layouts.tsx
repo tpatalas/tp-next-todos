@@ -1,15 +1,14 @@
 import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { Labels, Types } from '@lib/types';
-import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
-import { atomLabelQuerySlug } from '@states/labels';
 import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { useNextQuery } from './misc';
+import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
 
 export const useNavigationOpen = () => {
   const layoutType = useRecoilValue(atomLayoutType);

@@ -1,7 +1,7 @@
 import { DATA_IDB } from '@collections/idb';
 import { STORAGE_KEY } from '@constAssertions/storage';
+import { selectorSessionLabels } from '@label/label.states';
 import { getSessionStorage, setSessionStorage } from '@stateLogics/utils';
-import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { deleteDB } from 'idb';
 import { useSession } from 'next-auth/react';
