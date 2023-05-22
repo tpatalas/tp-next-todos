@@ -17,8 +17,9 @@ import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomTodoNew } from '@states/todos';
 import { classNames, paths } from '@stateLogics/utils';
 import { selectorSelectedLabels } from '@label/label.states';
+import { TypesLabel } from '@label/label.types';
 
-type Props = Partial<Pick<Types, 'selectedQueryLabels' | 'container' | 'todo'>>;
+type Props = Partial<Pick<Types, 'container' | 'todo'> & Pick<TypesLabel, 'selectedQueryLabels'>>;
 
 export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: Props) => {
   const removeTitleId = useLabelRemoveItemTitleId(todo?._id);

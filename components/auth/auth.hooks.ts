@@ -1,10 +1,10 @@
 import { atomAuthErrorMessage, atomAuthUser, atomAuthVerificationRequest } from '@auth/auth.states';
-import { USER } from '@constAssertions/misc';
 import { SPINNER } from '@constAssertions/ui';
 import { atomLoadingSpinner } from '@states/misc';
 import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
+import { USER } from './auth.const';
 
 export const useAuthUserValueUpdate = () => {
   return useRecoilCallback(

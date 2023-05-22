@@ -1,6 +1,7 @@
 import { PATH_APP } from '@constAssertions/data';
 import { atomLabelNew, atomSelectorLabelItem, selectorSessionLabels } from '@label/label.states';
-import { Labels, Todos } from '@lib/types';
+import { Labels } from '@label/label.types';
+import { Todos } from '@lib/types';
 import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomTodoNew, selectorFilterTodoIdsByPathname } from '@states/todos';

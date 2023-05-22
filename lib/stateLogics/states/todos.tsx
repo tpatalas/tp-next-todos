@@ -1,4 +1,4 @@
-import { Labels, TodoIds, Todos, Types } from '@lib/types';
+import { TodoIds, Todos, Types } from '@lib/types';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, selector, selectorFamily } from 'recoil';
 import { PATH_APP, OBJECT_ID } from '@constAssertions/data';
@@ -6,6 +6,7 @@ import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { atomSelectorTodoItem, selectorSessionTodoIds } from './atomEffects/todos';
 import { atomFilterEffect } from './misc';
 import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
 
 /**
  * atoms

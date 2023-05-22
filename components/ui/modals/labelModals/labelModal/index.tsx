@@ -19,9 +19,11 @@ import { classNames } from '@stateLogics/utils';
 import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { DividerX } from '@ui/dividers/dividerX';
 import { atomLabelNew, atomSelectorLabelItem } from '@label/label.states';
+import { TypesLabel } from '@label/label.types';
 
 type Props = Partial<
-  Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
+  Pick<Types, 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'> &
+    Pick<TypesLabel, 'label'>
 >;
 
 export const LabelModal = ({

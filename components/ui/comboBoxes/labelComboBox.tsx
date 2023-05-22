@@ -6,7 +6,7 @@ import { Combobox } from '@headlessui/react';
 import { useSetFilterLabels } from '@hooks/comboBoxes';
 import { useLabelChangeHandler, useDataButtonComboboxFilterLabel } from '@hooks/labels';
 import { useLabelModalStateOpen } from '@hooks/modals';
-import { Labels, Types } from '@lib/types';
+import { Types } from '@lib/types';
 import { atomComboBoxQuery } from '@states/comboBoxes';
 import { useRecoilValue } from 'recoil';
 import { ComboBox } from './comboBox';
@@ -15,8 +15,9 @@ import { Fragment as LabelComboBoxFragment } from 'react';
 import { classNames } from '@stateLogics/utils';
 import { SvgIcon } from '@icon/svgIcon';
 import { selectorSelectedLabels, selectorComboBoxFilteredLabels } from '@label/label.states';
+import { Labels, TypesLabel } from '@label/label.types';
 
-type Props = Partial<Pick<Types, 'todo' | 'selectedQueryLabels'>>;
+type Props = Partial<Pick<Types, 'todo'> & Pick<TypesLabel, 'selectedQueryLabels'>>;
 
 export const LabelComboBox = ({ todo }: Props) => {
   const onChangeLabelHandler = useLabelChangeHandler(todo?._id);

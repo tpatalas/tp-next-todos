@@ -1,6 +1,6 @@
 import { useLabelModalConfirmStateDelete } from '@hooks/modals';
 import { selectorSessionLabels } from '@label/label.states';
-import { Labels, Types } from '@lib/types';
+import { Labels, TypesLabel } from '@label/label.types';
 import { atomConfirmModalDelete } from '@states/modals';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
@@ -10,7 +10,7 @@ const DeleteConfirmModal = dynamic(() =>
   import('../deleteConfirmModal').then((mod) => mod.DeleteConfirmModal),
 );
 
-type Props = Pick<Types, 'label'>;
+type Props = Pick<TypesLabel, 'label'>;
 
 export const DeleteLabelConfirmModal = ({ label }: Props) => {
   const deleteConfirmModal = useLabelModalConfirmStateDelete(label._id);

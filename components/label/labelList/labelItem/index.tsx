@@ -5,7 +5,7 @@ import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { useNavigationOpen } from '@hooks/layouts';
 import { useNextQuery } from '@hooks/misc';
 import { SvgIcon } from '@icon/svgIcon';
-import { Types } from '@lib/types';
+import { TypesLabel } from '@label/label.types';
 import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { classNames, paths } from '@stateLogics/utils';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
@@ -27,7 +27,7 @@ const DeleteLabelConfirmModal = dynamic(() =>
   ),
 );
 
-export const LabelItem = ({ label }: Pick<Types, 'label'>) => {
+export const LabelItem = ({ label }: Pick<TypesLabel, 'label'>) => {
   const slug = useNextQuery({ path: PATH_APP['label'] });
   const matchedSlug = slug === label._id;
   const isBreakpointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
