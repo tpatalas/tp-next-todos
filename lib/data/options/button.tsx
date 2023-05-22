@@ -1,24 +1,21 @@
 import { MODIFIER_KBD } from '@constAssertions/misc';
 import {
-  ICON_CHEVRON_LEFT,
-  ICON_CHEVRON_RIGHT,
-  ICON_CLOSE,
-  ICON_DELETE,
-  ICON_LABEL,
-  ICON_LABEL_FILL,
-  ICON_MAXIMIZE,
-  ICON_MENU,
-  ICON_MINIMIZE,
-  ICON_NEW_LABEL,
-  ICON_OPEN_IN_FULL,
-  ICON_UNFOLD_MORE,
+    ICON_CHEVRON_LEFT,
+    ICON_CHEVRON_RIGHT,
+    ICON_CLOSE,
+    ICON_DELETE,
+    ICON_MAXIMIZE,
+    ICON_MENU,
+    ICON_MINIMIZE,
+    ICON_OPEN_IN_FULL,
+    ICON_UNFOLD_MORE
 } from '@data/materialSymbols';
 import {
-  STYLE_BUTTON_LARGE_BLUE,
-  STYLE_BUTTON_NORMAL_BLUE,
-  STYLE_BUTTON_NORMAL_RED,
-  STYLE_BUTTON_NORMAL_WHITE,
-  STYLE_HOVER_ENABLED_SLATE_DARK,
+    STYLE_BUTTON_LARGE_BLUE,
+    STYLE_BUTTON_NORMAL_BLUE,
+    STYLE_BUTTON_NORMAL_RED,
+    STYLE_BUTTON_NORMAL_WHITE,
+    STYLE_HOVER_ENABLED_SLATE_DARK,
 } from '@data/stylePreset';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
@@ -33,11 +30,14 @@ export const optionsButtonGlobalClose: TypesOptionsButton = {
 // network Status
 export const optionsButtonNetworkStatus: TypesOptionsButton = {
   isDisabled: true,
-  className: 'break-word inline-flex w-auto items-center justify-center rounded-lg border py-1 px-2 text-sm  shadow-sm',
+  className:
+    'break-word inline-flex w-auto items-center justify-center rounded-lg border py-1 px-2 text-sm  shadow-sm',
   tooltip: (
     <span>
       <p className='px-1 pb-1 text-sm'>You are offline!</p>
-      <p className='break-word w-36 whitespace-normal px-1'>Check your internet connection and try again later.</p>
+      <p className='break-word w-36 whitespace-normal px-1'>
+        Check your internet connection and try again later.
+      </p>
     </span>
   ),
 };
@@ -159,22 +159,6 @@ export const optionsButtonLabelModalUpdateLabel: TypesOptionsButton = {
   tooltip: 'Update label',
   kbd: 'Enter',
   className: classNames(STYLE_BUTTON_NORMAL_BLUE, 'mx-2'),
-};
-
-export const optionsButtonLabelRouteMatched: TypesOptionsButton = {
-  path: ICON_LABEL_FILL,
-  className: 'h-5 w-5 fill-yellow-500',
-};
-export const optionsButtonLabelRouteUnmatched: TypesOptionsButton = {
-  path: ICON_LABEL,
-  className: 'h-5 w-5 fill-gray-500 group-hover:fill-yellow-500 ',
-};
-
-export const optionsButtonLabelAddMore: TypesOptionsButton = {
-  path: ICON_NEW_LABEL,
-  tooltip: 'Add new label',
-  padding: 'p-2',
-  color: 'hover:enabled:bg-fill-700',
 };
 
 export const optionsButtonLabelRemove: TypesOptionsButton = {

@@ -5,8 +5,8 @@ import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 import { useNavigationOpen } from '@hooks/layouts';
 import { useNextQuery } from '@hooks/misc';
 import { SvgIcon } from '@icon/svgIcon';
+import { optionsLabelRouteMatched, optionsLabelRouteUnmatched } from '@label/label.const';
 import { TypesLabel } from '@label/label.types';
-import { optionsButtonLabelRouteMatched, optionsButtonLabelRouteUnmatched } from '@options/button';
 import { classNames, paths } from '@stateLogics/utils';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import dynamic from 'next/dynamic';
@@ -54,9 +54,9 @@ export const LabelItem = ({ label }: Pick<TypesLabel, 'label'>) => {
           >
             <div className='flex w-full flex-row  px-2 py-2'>
               {matchedSlug ? (
-                <SvgIcon options={optionsButtonLabelRouteMatched} />
+                <SvgIcon options={optionsLabelRouteMatched} />
               ) : (
-                <SvgIcon options={optionsButtonLabelRouteUnmatched} />
+                <SvgIcon options={optionsLabelRouteUnmatched} />
               )}
               <div className='max-w-[10.7rem] truncate pl-2 text-gray-600 group-hover:text-gray-900'>
                 {label.name}
