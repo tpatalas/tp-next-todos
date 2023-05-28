@@ -29,7 +29,9 @@ jobs:
             --region ${{ secrets.GCR_DEPLOY_REGION }} \
             --platform ${{ secrets.GCR_PLATFORM }} \
             --allow-unauthenticated \
-            --cpu-boost \
+            --min-instances=1 \ #Set to more than 1 to reduce the cold starts 
+            --no-cpu-throttling \ #Set the CPU always on, which reduces the cost of CPU and memory usage by 25%. Only useful when min-instance is more than 1 or continuous CPU usage occurs. To set up 'CPU is only allocated during request processing', --cpu-throttling
+            # --cpu-boost \ # this feature does not provide benefit if there is min instances more than 0 as well as CPU always on (aka --no-cpu-throttling)
             --vpc-connector ${{ secrets.GCR_VPC_CONNECTOR }} \
             --vpc-egress ${{ secrets.GCR_VPC_EGRESS }} \
             --region ${{ secrets.GCR_VPC_REGION }} \
