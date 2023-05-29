@@ -1,6 +1,13 @@
+import { PATH_APP } from '@constAssertions/data';
 import { ICON_LABEL, ICON_LABEL_FILL, ICON_NEW_LABEL } from '@data/materialSymbols';
-import { TypesOptionsButton } from '@lib/types/options';
+import { TypesOptionsButton, TypesOptionsPrefetchRouterButton } from '@lib/types/options';
+import { classNames, paths } from '@stateLogics/utils';
+import { TypesLabel } from './label.types';
+import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
 
+/**
+ * LabelList
+ * */
 export const optionsLabelButtonAddMore: TypesOptionsButton = {
   path: ICON_NEW_LABEL,
   tooltip: 'Add new label',
@@ -8,11 +15,31 @@ export const optionsLabelButtonAddMore: TypesOptionsButton = {
   color: 'hover:enabled:bg-fill-700',
 };
 
-export const optionsLabelRouteMatched: TypesOptionsButton = {
+/**
+ * LabelItem
+ * */
+export const optionsLabelItemRouteMatched: TypesOptionsButton = {
   path: ICON_LABEL_FILL,
   className: 'h-5 w-5 fill-yellow-500',
 };
-export const optionsLabelRouteUnmatched: TypesOptionsButton = {
+export const optionsLabelItemRouteUnmatched: TypesOptionsButton = {
   path: ICON_LABEL,
   className: 'h-5 w-5 fill-gray-500 group-hover:fill-yellow-500 ',
+};
+
+export const optionsLabelItemPrefetchButton = (
+  label: TypesLabel['label'],
+): TypesOptionsPrefetchRouterButton => {
+  return {
+    tooltip: label.name,
+    path: paths(PATH_APP['label'] + '/', label._id),
+    className: classNames('w-full focus:outline-none focus:ring-0 focus:ring-offset-0'),
+  };
+};
+
+export const optionsLabelItemDropdown = (matchedSlug: boolean) => {
+  return {
+    isInitiallyVisible: false,
+    hoverBg: matchedSlug ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]' : STYLE_HOVER_ENABLED_SLATE_DARK,
+  };
 };
