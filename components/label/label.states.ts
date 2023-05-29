@@ -1,4 +1,3 @@
-import { DATA_DEMO_LABELS } from '@collections/demo';
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
@@ -8,6 +7,7 @@ import { atomTodoNew } from '@states/todos';
 import { atomUserSession } from '@user/user.states';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 import { Labels } from './label.types';
+import { DATA_DEMO_LABELS } from './label.data';
 
 /**
  * Atom Queries
