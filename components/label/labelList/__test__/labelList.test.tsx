@@ -26,7 +26,7 @@ describe('LabelList', () => {
     const options = { session: session, node: node };
     return renderWithRecoilRootAndSession(
       <>
-        <Suspense>
+        <Suspense fallback={null}>
           <LabelList />
         </Suspense>
         <UserSession userSession={userSession} />
