@@ -1,21 +1,10 @@
+import { DATA_DEMO_LABELS } from '@label/label.data';
 import { Labels } from '@label/label.types';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { screen, waitFor } from '@testing-library/react';
-import { DropdownContentOnClose } from '..';
 import { mockedLabelItem } from '__mock__/label';
-import { DATA_DEMO_LABELS } from '@label/label.data';
-import { useSetRecoilState } from 'recoil';
-import { atomUserSession } from '@user/user.states';
-import { useEffect } from 'react';
-
-const UserSessionEffect = () => {
-  const setUserSession = useSetRecoilState(atomUserSession);
-
-  useEffect(() => {
-    setUserSession(false);
-  }, [setUserSession]);
-  return null;
-};
+import { DropdownContentOnClose } from '..';
+import { UserSessionEffect } from '@user/userSessionGroupEffect/userSessionEffect';
 
 describe('DropdownContentOnClose', () => {
   const renderWithDropdownContentOnClose = (mockedLabelItem: Labels) => {
