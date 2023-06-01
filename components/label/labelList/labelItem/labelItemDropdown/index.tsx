@@ -2,11 +2,14 @@ import { Dropdown } from '@dropdowns/v1/dropdown';
 import { DropdownMenuItem } from '@dropdowns/v1/dropdown/dropdownMenuItem';
 import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
 import { useLabelModalStateOpen } from '@hooks/modals';
-import { optionsLabelItemDropdownDelete, optionsLabelItemDropdownEditLabel } from '@label/label.const';
+import {
+  optionsDropdownLabelItem,
+  optionsLabelItemDropdownDelete,
+  optionsLabelItemDropdownEditLabel,
+} from '@label/label.const';
 import { useLabelRemoveItem } from '@label/label.hooks';
 import { TypesLabel } from '@label/label.types';
 import { TypesOptionsDropdown } from '@lib/types/options';
-import { optionsDropdownLabelItem } from '@options/misc';
 import { Types } from 'lib/types';
 
 type Props = { options: TypesOptionsDropdown } & Pick<TypesLabel, 'label'> &
@@ -18,7 +21,7 @@ export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props)
 
   return (
     <Dropdown
-      options={{ hoverBg: options.hoverBg, isInitiallyVisible: false, ...optionsDropdownLabelItem }}
+      options={optionsDropdownLabelItem(options.hoverBg)}
       menuContentOnClose={menuContentOnClose}
     >
       <ActiveDropdownMenuItemEffect menuItemId={null} />
