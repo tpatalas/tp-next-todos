@@ -1,6 +1,16 @@
 import { PATH_APP } from '@constAssertions/data';
-import { ICON_LABEL, ICON_LABEL_FILL, ICON_NEW_LABEL } from '@data/materialSymbols';
-import { TypesOptionsButton, TypesOptionsPrefetchRouterButton } from '@lib/types/options';
+import {
+  ICON_DELETE,
+  ICON_EDIT_NOTE,
+  ICON_LABEL,
+  ICON_LABEL_FILL,
+  ICON_NEW_LABEL,
+} from '@data/materialSymbols';
+import {
+  TypesOptionsButton,
+  TypesOptionsDropdown,
+  TypesOptionsPrefetchRouterButton,
+} from '@lib/types/options';
 import { classNames, paths } from '@stateLogics/utils';
 import { TypesLabel } from './label.types';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
@@ -42,4 +52,20 @@ export const optionsLabelItemDropdown = (matchedSlug: boolean) => {
     isInitiallyVisible: false,
     hoverBg: matchedSlug ? 'hover:bg-blue-900 hover:bg-opacity-[0.07]' : STYLE_HOVER_ENABLED_SLATE_DARK,
   };
+};
+
+/**
+ * LabelItem Dropdown
+ * */
+
+export const optionsLabelItemDropdownEditLabel: TypesOptionsDropdown = {
+  shouldKeepOpeningOnClick: false,
+  path: ICON_EDIT_NOTE,
+  tooltip: 'Edit',
+};
+
+export const optionsLabelItemDropdownDelete: TypesOptionsDropdown = {
+  shouldKeepOpeningOnClick: false,
+  path: ICON_DELETE,
+  tooltip: 'Delete',
 };
