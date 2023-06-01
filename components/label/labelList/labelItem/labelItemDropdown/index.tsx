@@ -1,13 +1,13 @@
-import { ICON_DELETE, ICON_EDIT_NOTE } from '@data/materialSymbols';
-import { Types } from 'lib/types';
-import { optionsDropdownLabelItem } from '@options/misc';
-import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
-import { useLabelModalStateOpen } from '@hooks/modals';
-import { TypesOptionsDropdown } from '@lib/types/options';
-import { TypesLabel } from '@label/label.types';
-import { useLabelRemoveItem } from '@label/label.hooks';
 import { Dropdown } from '@dropdowns/v1/dropdown';
 import { DropdownMenuItem } from '@dropdowns/v1/dropdown/dropdownMenuItem';
+import { ActiveDropdownMenuItemEffect } from '@effects/activeDropdownMenuItemEffect';
+import { useLabelModalStateOpen } from '@hooks/modals';
+import { optionsLabelItemDropdownDelete, optionsLabelItemDropdownEditLabel } from '@label/label.const';
+import { useLabelRemoveItem } from '@label/label.hooks';
+import { TypesLabel } from '@label/label.types';
+import { TypesOptionsDropdown } from '@lib/types/options';
+import { optionsDropdownLabelItem } from '@options/misc';
+import { Types } from 'lib/types';
 
 type Props = { options: TypesOptionsDropdown } & Pick<TypesLabel, 'label'> &
   Partial<Pick<Types, 'menuContentOnClose'>>;
@@ -25,11 +25,7 @@ export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props)
       {/* give menuItemId any ID: string to activate the keyboard navigation */}
       <div className='py-1'>
         <DropdownMenuItem
-          options={{
-            shouldKeepOpeningOnClick: false,
-            path: ICON_EDIT_NOTE,
-            tooltip: 'Edit',
-          }}
+          options={optionsLabelItemDropdownEditLabel}
           onClick={() => openModal()}
         >
           Edit label
@@ -37,11 +33,7 @@ export const LabelItemDropdown = ({ label, options, menuContentOnClose }: Props)
       </div>
       <div className='py-1'>
         <DropdownMenuItem
-          options={{
-            shouldKeepOpeningOnClick: false,
-            path: ICON_DELETE,
-            tooltip: 'Delete',
-          }}
+          options={optionsLabelItemDropdownDelete}
           onClick={() => removeLabel()}
         >
           Delete
