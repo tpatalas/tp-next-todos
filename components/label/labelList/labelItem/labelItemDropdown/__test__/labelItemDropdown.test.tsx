@@ -43,7 +43,7 @@ describe('LabelItemDropdown', () => {
     const { container } = renderWithLabelItemDropdown();
     const editLabel = screen.queryByText(/Edit label/i);
     const deleteLabel = screen.queryByText('Delete');
-    const dropdownIcon = screen.getByTestId('svgIcon-testid');
+    const dropdownIcon = screen.getByTestId('dropdown-svgIcon-testid');
 
     expect(container).toBeInTheDocument();
     expect(editLabel).not.toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('LabelItemDropdown', () => {
 
   it('should render the dropdown menu on clicking the dropdown icon', async () => {
     const { container } = renderWithLabelItemDropdown();
-    const dropdownIcon = screen.getByTestId('svgIcon-testid');
+    const dropdownIcon = screen.getByTestId('dropdown-svgIcon-testid');
 
     expect(container).toBeInTheDocument();
     expect(dropdownIcon).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('LabelItemDropdown', () => {
 
   it('should mockDelete function is called when Delete button for labelItem is clicked', () => {
     const { container } = renderWithLabelItemDropdown();
-    const dropdownIcon = screen.getByTestId('svgIcon-testid');
+    const dropdownIcon = screen.getByTestId('dropdown-svgIcon-testid');
     const labelItem = screen.getByText('test-label');
 
     expect(container).toBeInTheDocument();
