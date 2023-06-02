@@ -4,6 +4,7 @@ import {
   ICON_EDIT_NOTE,
   ICON_LABEL,
   ICON_LABEL_FILL,
+  ICON_MORE_VERT,
   ICON_NEW_LABEL,
 } from '@data/materialSymbols';
 import {
@@ -14,6 +15,7 @@ import {
 import { classNames, paths } from '@stateLogics/utils';
 import { TypesLabel } from './label.types';
 import { STYLE_HOVER_ENABLED_SLATE_DARK } from '@data/stylePreset';
+import { TypesStyleAttributes } from '@lib/types';
 
 /**
  * LabelList
@@ -68,4 +70,16 @@ export const optionsLabelItemDropdownDelete: TypesOptionsDropdown = {
   shouldKeepOpeningOnClick: false,
   path: ICON_DELETE,
   tooltip: 'Delete',
+};
+
+export const optionsDropdownLabelItem = (hoverBg?: TypesStyleAttributes['hoverBg']): TypesOptionsDropdown => {
+  return {
+    tooltip: 'Menu',
+    path: ICON_MORE_VERT,
+    padding: 'p-[0.3rem]',
+    color: 'fill-gray-500 group-hover:fill-gray-700',
+    isPortal: true,
+    isInitiallyVisible: false,
+    hoverBg: hoverBg,
+  };
 };
