@@ -11,7 +11,7 @@ export const SvgIcon = memo(({ options = {} }: TypesPropsOptionsSvg) => {
       width={options.width ?? '24'}
       viewBox={options.viewBox ?? VIEWBOX['24']}
       className={options.className ?? 'h-5 w-5 fill-gray-500 hover:fill-gray-700'}
-      data-testid='svgIcon-testid'
+      data-testid={options.testId ?? 'svgIcon-testid'}
     >
       <path d={options.path} />
     </svg>
