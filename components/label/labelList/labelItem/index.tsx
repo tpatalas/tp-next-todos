@@ -35,7 +35,10 @@ export const LabelItem = ({ label }: Pick<TypesLabel, 'label'>) => {
 
   return (
     <Fragment>
-      <div className={labelItemClassName}>
+      <div
+        className={labelItemClassName}
+        data-testid='labelItem-testid'
+      >
         <div className='mr-[0.5rem] inline-block w-full'>
           <PrefetchRouterButton
             options={optionsLabelItemPrefetchButton(label)}
