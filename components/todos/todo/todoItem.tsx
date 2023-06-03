@@ -4,6 +4,7 @@ import { useTodoModalStateOpen } from '@hooks/modals';
 import { useTodoCompleteItem } from '@hooks/todos';
 import { SvgIcon } from '@icon/svgIcon';
 import { CheckBox } from '@inputs/checkbox';
+import { selectorSelectedQueryLabels } from '@label/label.states';
 import { TypesTodo } from '@lib/types';
 import {
   optionsSvgPriorityUrgent,
@@ -12,7 +13,6 @@ import {
 } from '@options/svg';
 import { classNames } from '@stateLogics/utils';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
-import { selectorSelectedQueryLabels } from '@states/labels';
 import { atomCatch } from '@states/misc';
 import { format } from 'date-fns';
 import { Fragment as CheckBoxFragment, Fragment as TodoItemFragment } from 'react';

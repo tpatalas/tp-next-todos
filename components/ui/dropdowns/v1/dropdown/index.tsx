@@ -82,6 +82,7 @@ export const Dropdown = ({ menuButtonContent, menuContentOnClose, children, show
                           options.size ?? 'h-5 w-5',
                           options.color ?? 'fill-gray-500 group-hover:fill-gray-700',
                         ),
+                        testId: 'dropdown-svgIcon-testid',
                       }}
                     />
                     {menuButtonContent && (

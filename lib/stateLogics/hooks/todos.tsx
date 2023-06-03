@@ -1,16 +1,10 @@
-import {
-  completeDataTodo,
-  createDataNewTodo,
-  deleteDataTodo,
-  updateDataTodo,
-} from '@lib/queries/queryTodos';
+import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
 import { Todos } from '@lib/types';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import { CATCH } from '@constAssertions/misc';
 import { NOTIFICATION } from '@constAssertions/ui';
-import { selectorSessionLabels, atomSelectorLabels } from '@states/atomEffects/labels';
 import { useTodoModalStateReset } from './modals';
 import { useNotificationState } from './notifications';
 import { usePriorityRankScore } from './priorities';
@@ -27,6 +21,7 @@ import {
 } from './misc';
 import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
 import { atomCatch } from '@states/misc';
+import { selectorSessionLabels, atomSelectorLabels } from '@label/label.states';
 
 /**
  * Hooks

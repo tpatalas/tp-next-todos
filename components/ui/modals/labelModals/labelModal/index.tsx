@@ -1,6 +1,5 @@
 import { DisableButton } from '@buttons/disableButton';
 import { IconButton } from '@buttons/iconButton';
-import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { atomLabelModalOpen } from '@states/modals';
 import { Types } from 'lib/types';
 import { Fragment as LabelModalFragment, useRef } from 'react';
@@ -10,7 +9,6 @@ import {
   optionsButtonTodoModalCancel,
   optionsButtonLabelModalAddLabel,
 } from '@options/button';
-import { useLabelValueUpdate, useLabelAdd } from '@hooks/labels';
 import { useConditionCheckLabelTitleEmpty } from '@hooks/misc';
 import { useLabelModalStateClose } from '@hooks/modals';
 import { ModalTransitionChild } from '@modals/modal/modalTransition/modalTransitionChild';
@@ -19,9 +17,13 @@ import { Button } from '@buttons/button';
 import { classNames } from '@stateLogics/utils';
 import { KeysWithLabelModalEffect } from '@effects/KeysWithLabelModalEffect';
 import { DividerX } from '@ui/dividers/dividerX';
+import { atomLabelNew, atomSelectorLabelItem } from '@label/label.states';
+import { TypesLabel } from '@label/label.types';
+import { useLabelValueUpdate, useLabelAdd } from '@label/label.hooks';
 
 type Props = Partial<
-  Pick<Types, 'label' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
+  Pick<Types, 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'> &
+    Pick<TypesLabel, 'label'>
 >;
 
 export const LabelModal = ({

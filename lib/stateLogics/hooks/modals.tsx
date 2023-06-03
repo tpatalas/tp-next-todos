@@ -1,13 +1,10 @@
-import { Labels, Todos } from '@lib/types';
-import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
+import { Todos } from '@lib/types';
 import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import { CATCH } from '@constAssertions/misc';
-import { atomSelectorLabels } from '@states/atomEffects/labels';
 import { atomSelectorTodoItem } from '@states/atomEffects/todos';
 import { useCalResetDateItemOnly } from './calendar';
-import { useLabelRemoveItem } from './labels';
 import { useConditionCompareTodoItemsEqual, useConditionCheckTodoTitleEmpty } from './misc';
 import { useTodoRemoveItem } from './todos';
 import {
@@ -19,6 +16,9 @@ import {
   atomLabelModalOpen,
 } from '@states/modals';
 import { atomCatch } from '@states/misc';
+import { atomLabelNew, atomSelectorLabelItem, atomSelectorLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
+import { useLabelRemoveItem } from '@label/label.hooks';
 
 /**
  * Hooks

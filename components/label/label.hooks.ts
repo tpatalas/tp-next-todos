@@ -1,33 +1,39 @@
+import { CATCH } from '@constAssertions/misc';
+import { NOTIFICATION } from '@constAssertions/ui';
+import { ICON_FILTER_LIST, ICON_FILTER_LIST_OFF } from '@data/materialSymbols';
 import { STYLE_COLORS } from '@data/stylePreset';
+import { useGetWithRecoilCallback, useCompareToQueryLabels } from '@hooks/misc';
+import { useNotificationState } from '@hooks/notifications';
+import {
+  atomLabelNew,
+  atomSelectorLabelItem,
+  atomSelectorLabels,
+  selectorSelectedLabels,
+  selectorSessionLabels,
+} from '@label/label.states';
+import { Labels, TypesLabel } from '@label/label.types';
 import {
   createDataNewLabel,
   deleteDataLabelItem,
   updateDataLabelItem,
   updateDataLabels,
 } from '@lib/queries/queryLabels';
-import { Labels, Todos, Types } from '@lib/types';
-import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
-import { ICON_FILTER_LIST_OFF, ICON_FILTER_LIST } from '@data/materialSymbols';
-import { atomFilterSelected } from '@states/comboBoxes';
-import { useEffect } from 'react';
-import { CATCH } from '@constAssertions/misc';
-import { NOTIFICATION } from '@constAssertions/ui';
-import { atomSelectorLabels, selectorSessionLabels } from '@states/atomEffects/labels';
+import { Todos } from '@lib/types';
+import { TypesOptionsButton } from '@lib/types/options';
 import { atomSelectorTodoItem } from '@states/atomEffects/todos';
-import { atomSelectorLabelItem, atomLabelNew, selectorSelectedLabels } from '@states/labels';
+import { atomFilterSelected } from '@states/comboBoxes';
+import { atomCatch } from '@states/misc';
+import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
 import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { useSession } from 'next-auth/react';
-import { useRecoilCallback, RecoilValue, useRecoilValue, useResetRecoilState } from 'recoil';
-import { useGetWithRecoilCallback, useCompareToQueryLabels } from './misc';
-import { useNotificationState } from './notifications';
-import { TypesOptionsButton } from '@lib/types/options';
-import { atomCatch } from '@states/misc';
+import { useEffect } from 'react';
+import { RecoilValue, useRecoilCallback, useRecoilValue, useResetRecoilState } from 'recoil';
 
 /**
  * Hooks
  **/
-export const useLabelValueUpdate = (label?: Types['label']) => {
+export const useLabelValueUpdate = (label?: TypesLabel['label']) => {
   return useRecoilCallback(({ set }) => (content: string) => {
     const randomBgColor = STYLE_COLORS[Math.floor(Math.random() * STYLE_COLORS.length)];
     typeof label !== 'undefined'
@@ -47,7 +53,7 @@ export const useLabelAdd = () => {
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     set(atomSelectorLabels, [...get(atomSelectorLabels), { ...get(atomLabelNew) }]);
     set(selectorSessionLabels, [...get(selectorSessionLabels), { ...get(atomLabelNew) }]);
@@ -65,7 +71,7 @@ export const useLabelUpdateItem = (_id: Labels['_id']) => {
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     const updateLabels = get(selectorSessionLabels).map((label) => ({
       ...label,
@@ -86,7 +92,7 @@ export const useLabelRemoveItem = (_id: Labels['_id']) => {
   const setNotification = useNotificationState();
 
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
     if (!get(atomConfirmModalDelete(_id))) {
       set(atomConfirmModalDelete(_id), true);
@@ -107,7 +113,7 @@ export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
   const get = useGetWithRecoilCallback();
 
   const removeLabelItemTitleId = useRecoilCallback(({ snapshot, set }) => (labelId: Labels['_id']) => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const todoId = _id ? _id! : get(atomTodoNew)._id!;
 
     const filteredLabelsRemoved = get(atomSelectorLabels).map((label) => {
@@ -143,7 +149,7 @@ export const useLabelUpdateDataItem = () => {
   const { status } = useSession();
   const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ snapshot, set, reset }) => () => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const updatedLabels = get(atomSelectorLabels);
     const filteredLabels = compareLabelsToQueryLabel(get(atomSelectorLabels));
 
@@ -157,7 +163,7 @@ export const useLabelUpdateDataItem = () => {
 export const useLabelChangeHandler = (_id: Todos['_id']) => {
   const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ set, snapshot }) => (selected: Labels[]) => {
-    const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
+    const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const todoId = _id ? _id! : get(atomTodoNew)._id!;
     const labels = get(selectorSessionLabels);
     const isTodoModalOpen = get(atomCatch(CATCH['todoModal']));

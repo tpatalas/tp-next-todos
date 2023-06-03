@@ -1,7 +1,6 @@
 import { Button } from '@buttons/button';
 import { SvgLogoButton } from '@buttons/button/svgLogoButton';
 import { LoadingSpinner } from '@components/loadable/loadingSpinner';
-import { USER } from '@constAssertions/misc';
 import { SPINNER } from '@constAssertions/ui';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
@@ -16,6 +15,7 @@ import { Logo } from '@layouts/layoutHeader/logo';
 import { AuthErrorMessage } from '@auth/authErrorMessage';
 import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
 import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';
+import { USER } from '@auth/auth.const';
 
 const AuthErrorMessageEffect = dynamic(() =>
   import('@auth/authEffect/authErrorMessageEffect').then((mod) => mod.AuthErrorMessageEffect),

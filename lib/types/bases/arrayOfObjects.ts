@@ -1,13 +1,8 @@
 import { OBJECT_ID } from '@constAssertions/data';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
+import { LabelIds, Labels } from '@label/label.types';
 
-export type CollectTypesArrayObject = Todos &
-  TypesTodo &
-  Labels &
-  TypesLabel &
-  Settings &
-  TypesGlobals &
-  TypesMongoDB;
+export type CollectTypesArrayObject = Todos & TypesTodo & Settings & TypesGlobals & TypesMongoDB;
 
 // GlobalTypes
 export interface TypesGlobals {
@@ -50,26 +45,6 @@ export interface TypesTodo {
   todoItem: Todos;
   todo: TodoIds;
   index: number;
-}
-
-// Labels
-export interface Labels extends LabelIds {
-  parent_id?: OBJECT_ID;
-  title_id?: OBJECT_ID[];
-  user_id?: OBJECT_ID;
-  name: string;
-  color?: string;
-}
-
-export interface LabelIds {
-  _id?: OBJECT_ID;
-  deleted?: boolean | TypesMongoDB['notEqual'];
-  update?: number | TypesMongoDB['greaterThan'];
-}
-
-export interface TypesLabel {
-  label: Labels;
-  selectedQueryLabels: Labels[];
 }
 
 //* Users Settings

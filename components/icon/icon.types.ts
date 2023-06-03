@@ -1,5 +1,5 @@
-import { VIEWBOX } from '@constAssertions/ui';
 import { ReactElement } from 'react';
+import { VIEWBOX } from './icon.const';
 
 export interface TypesSvgLogos {
   name: 'Google' | 'GitHub' | 'MainWhite' | 'MainLogoOnlyWhite';
@@ -19,7 +19,12 @@ export interface TypesSvgIconAttributes {
   isAriaHidden: boolean;
 }
 
-export type TypesOptionsSvg = Partial<TypesSvgIconAttributes & Pick<TypesSvgLogos, 'className'>>;
+export type TypesOptionsSvg = Partial<
+  TypesSvgIconAttributes &
+    Pick<TypesSvgLogos, 'className'> & {
+      testId: string;
+    }
+>;
 
 /*
  * Props Types

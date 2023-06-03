@@ -1,5 +1,5 @@
 import { POSITION_X, POSITION_Y } from '@constAssertions/ui';
-import { ICON_MORE_VERT, ICON_NEW_LABEL } from '@data/materialSymbols';
+import { ICON_NEW_LABEL } from '@data/materialSymbols';
 import { TypesOptionsDropdown, TypesOptionsMinimizedModalTransition } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 
@@ -23,14 +23,6 @@ export const optionsDropdownComboBox: TypesOptionsDropdown = {
   menuItemsWidth: 'w-72',
   isPortal: true,
   borderRadius: 'rounded-lg',
-};
-// labels
-export const optionsDropdownLabelItem: TypesOptionsDropdown = {
-  tooltip: 'Menu',
-  path: ICON_MORE_VERT,
-  padding: 'p-[0.3rem]',
-  color: 'fill-gray-500 group-hover:fill-gray-700',
-  isPortal: true,
 };
 
 /**

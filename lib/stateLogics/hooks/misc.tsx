@@ -1,19 +1,14 @@
 import { PATH_APP } from '@constAssertions/data';
-import { Labels, Todos } from '@lib/types';
-import { selectorSessionLabels } from '@states/atomEffects/labels';
+import { atomLabelNew, atomSelectorLabelItem, selectorSessionLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
+import { Todos } from '@lib/types';
 import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffects/todos';
-import { atomLabelNew, atomSelectorLabelItem } from '@states/labels';
 import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomTodoNew, selectorFilterTodoIdsByPathname } from '@states/todos';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import {
-    RecoilValue,
-    useRecoilCallback,
-    useRecoilValue,
-    useRecoilValueLoadable
-} from 'recoil';
+import { RecoilValue, useRecoilCallback, useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
 export const useFilterTodoIdsWithPathname = () => {
   const router = useRouter();

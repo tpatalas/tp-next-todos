@@ -50,7 +50,7 @@ export const AppSidebarMenu = () => {
               {item.name}
               <TotalNumberTodos>
                 <span className='absolute right-[0.87rem] top-1/2 -translate-y-2/4 select-none text-xs tracking-tighter text-slate-400'>
-                  <Suspense>
+                  <Suspense fallback={null}>
                     <TodosCount pathname={item.path} />
                   </Suspense>
                 </span>

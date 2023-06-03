@@ -2,13 +2,13 @@ import { DATA_IDB } from '@collections/idb';
 import { peekIDB } from '@lib/dataConnections/indexedDB';
 import { getSessionStorage } from '@stateLogics/utils';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
-import { selectorSessionLabels } from '@states/atomEffects/labels';
 import { selectorSessionTodoIds } from '@states/atomEffects/todos';
 import { screen } from '@testing-library/react';
 import 'fake-indexeddb/auto';
 import { Session } from 'next-auth';
 import { RecoilState } from 'recoil';
 import { UserSessionResetEffect } from '..';
+import { selectorSessionLabels } from '@label/label.states';
 
 describe('userSessionResetEffect', () => {
   const renderUserSessionEffect = <T,>(session: Session | null, node?: RecoilState<T>) => {

@@ -5,22 +5,22 @@
 [![Test](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/run-test-cache.yml?label=test&logo=Github)](https://github.com/tpatalas/tp-next-todos/actions/workflows/run-test-cache.yml)
 [![Build-push-docker-image](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/docker-image-build-push.yml?label=build&logo=Docker)](https://github.com/tpatalas/tp-next-todos/actions/workflows/docker-image-build-push.yml)
 [![Deploy-docker-image](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/docker-image-deploy.yml?label=deploy&logo=Google%20Cloud)](https://github.com/tpatalas/tp-next-todos/actions/workflows/docker-image-deploy.yml)
-[![Resource Purge](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/cleanup-gcr-resources.yml?label=resource%20cleanup&logo=Google%20Cloud)](https://github.com/tpatalas/tp-next-todos/actions/workflows/cleanup-gcr-resources.yml)
+[![Resource Purge](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/cleanup-gcr-resources.yml?label=resource%20optimization&logo=Google%20Cloud)](https://github.com/tpatalas/tp-next-todos/actions/workflows/cleanup-gcr-resources.yml)
 
 [![License](https://img.shields.io/github/license/tpatalas/tp-next-todos?color=blue)](https://github.com/tpatalas/tp-next-todos/blob/master/LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/tpatalas/tp-next-todos?color=blue)](https://github.com/tpatalas/tp-next-todos)
-[![Project Status](https://img.shields.io/badge/project%20status-active-blue)](https://github.com/tpatalas/tp-next-todos/tree/feature/update-README#project-status)
+[![Last Commit](https://img.shields.io/github/last-commit/tpatalas/tp-next-todos?color=blue)](https://github.com/tpatalas/tp-next-todos/commits/master)
+[![Project Status](https://img.shields.io/badge/project%20status-active-blue)](https://github.com/tpatalas/tp-next-todos)
 
 ##### [DEMO LIVE SITE](https://todo.atalas.dev)
 
 </div>
 
-This advanced Todo application, crafted using Next.js and Docker, incorporates an
-intelligent algorithm to prioritize tasks, automatically populating the `Today's Focus`
-section. The application dynamically adjusts to individual user's task capacities, with
-a default minimum of seven tasks.
+This auto-prioritized todo application is built using Next.js and Docker. It includes an
+algorithm that automatically prioritizes tasks, filling the `Today's Focus` section
+based on this prioritization. The application adjusts to each user's task handling
+capacity, defaulting to a minimum of seven tasks.
 
-> Note: 'Demo-session' mode is currently active, allowing unauthenticated users to
+> Note: `Demo-session` mode is currently active, allowing unauthenticated users to
 > explore CRUD operations without network requests to a remote database. Please note
 > that changes made during this session will not persist unless the user signs in.
 
@@ -76,7 +76,7 @@ a default minimum of seven tasks.
 [![Google Cloud
 Run](https://img.shields.io/badge/google%20cloud%20run-deployment-9cf?style=for-the-badge&logo=google-cloud)](https://cloud.google.com)
 [![Google Secrets Manager](https://img.shields.io/badge/Google%20Secret%20Manager-Secrets%20Management-9cf?style=for-the-badge&logo=google-cloud)](https://cloud.google.com/secret-manager)
-[![Google Container Registry](https://img.shields.io/badge/Google%20Container%20Registry-Container%20Registry-9cf?style=for-the-badge&logo=google-cloud)](https://cloud.google.com/artifact-registry)
+[![Google Artifact Registry](https://img.shields.io/badge/Google%20Artifact%20Registry-Artifact%20Registry-9cf?style=for-the-badge&logo=google-cloud)](https://cloud.google.com/artifact-registry)
 [![Google VPC
 Network](https://img.shields.io/badge/Google%20VPC%20Network-VPC%20Network-9cf?style=for-the-badge&logo=google-cloud)]()
 
@@ -89,6 +89,10 @@ R2](https://img.shields.io/badge/Cloudflare%20R2-Object%20Storage-9cf?style=for-
 [![MongoDB](https://img.shields.io/badge/mongodb-database-9cf?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/atlas/database)
 
 </div>
+
+> Important: As of `May 15, 2023`, Google has deprecated the `Container Registry`.
+> Consequently, containers have been transitioned to the `Artifact Registry`.
+> Correspondingly, GitHub Actions workflows have been updated to reflect this change.
 
 ## Features
 

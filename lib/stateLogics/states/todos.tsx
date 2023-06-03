@@ -1,12 +1,12 @@
-import { Labels, TodoIds, Todos, Types } from '@lib/types';
-import { atomLabelQuerySlug } from '@states/labels';
+import { TodoIds, Todos, Types } from '@lib/types';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, selector, selectorFamily } from 'recoil';
 import { PATH_APP, OBJECT_ID } from '@constAssertions/data';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { selectorSessionLabels } from './atomEffects/labels';
 import { atomSelectorTodoItem, selectorSessionTodoIds } from './atomEffects/todos';
 import { atomFilterEffect } from './misc';
+import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
 
 /**
  * atoms
@@ -89,9 +89,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATH_AP
           )[0]?.title_id;
           return get(selectorSessionTodoIds).filter((todo) => {
             const todoId = todo._id as OBJECT_ID;
-            return (
-              !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId)
-            );
+            return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
           });
       }
     },
@@ -105,9 +103,8 @@ export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TodoIds[], Lab
   get:
     (labelId) =>
     ({ get }) => {
-      const titleIdsByCurrentLabel = get(selectorSessionLabels).filter(
-        (label) => label._id === labelId,
-      )[0]?.title_id;
+      const titleIdsByCurrentLabel = get(selectorSessionLabels).filter((label) => label._id === labelId)[0]
+        ?.title_id;
       return get(selectorSessionTodoIds).filter((todo) => {
         const todoId = todo._id as OBJECT_ID;
         return !todo.completed && titleIdsByCurrentLabel && titleIdsByCurrentLabel.includes(todoId);
