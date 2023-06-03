@@ -7,7 +7,7 @@ const ContentSecurityPolicy = `
   child-src 'self' youtube.com;
   font-src 'self';
   img-src 'self' ${process.env.NEXT_PUBLIC_IMAGE_DOMAIN} data:;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self'; 
   ${
     development
       ? `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSources}`
