@@ -1,4 +1,4 @@
-name: Run Test with Cache
+name: Run Tests
 
 on:
   pull_request:

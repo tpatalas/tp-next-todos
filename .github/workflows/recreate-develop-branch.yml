@@ -1,4 +1,4 @@
-name: Create Develop Branch
+name: Re-create Develop Branch
 
 on:
   pull_request:

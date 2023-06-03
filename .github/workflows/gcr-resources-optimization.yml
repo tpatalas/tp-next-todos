@@ -1,4 +1,4 @@
-name: Cleanup Google Cloud Run Resources
+name: Optimize Google Cloud Run Resources
 
 on:
   pull_request:
