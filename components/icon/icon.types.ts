@@ -19,7 +19,12 @@ export interface TypesSvgIconAttributes {
   isAriaHidden: boolean;
 }
 
-export type TypesOptionsSvg = Partial<TypesSvgIconAttributes & Pick<TypesSvgLogos, 'className'>>;
+export type TypesOptionsSvg = Partial<
+  TypesSvgIconAttributes &
+    Pick<TypesSvgLogos, 'className'> & {
+      testId: string;
+    }
+>;
 
 /*
  * Props Types
