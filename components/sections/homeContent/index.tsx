@@ -1,5 +1,5 @@
 import { PATH_IMAGE_HOME } from '@constAssertions/data';
-import { classNames, nextImageLoader } from '@stateLogics/utils';
+import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 import { ContentText } from './contentText';
 import { useRef } from 'react';
@@ -9,8 +9,9 @@ import { SmoothTransition } from '@ui/transitions/smoothTransition';
 
 export const HomeContent = () => {
   const styleImageWrapper =
-    'relative w-80 rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
+    'relative w-80 h-auto rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
   const styleImage = 'h-auto w-auto rounded-xl drop-shadow-2xl';
+  const styleImageFrame = 'md:h-[440px]';
   const imageOptions = {
     type: TRANSITION_TYPE['scaleCenterSm'],
     enterDuration: DURATION['700'],
@@ -30,26 +31,29 @@ export const HomeContent = () => {
             content="Add your to-dos as you please, with or without due dates and priorities. Today's Focus will display your most important to-dos for you."
             scrollRef={spotlightRef}
           />
-          <div ref={spotlightImageRef}>
+          <div
+            ref={spotlightImageRef}
+            className={classNames(styleImageFrame)}
+          >
             <SmoothTransition
               options={{ ...imageOptions, delay: DELAY['500'] }}
               scrollRef={spotlightImageRef}
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
-                  loader={nextImageLoader}
-                  width={0}
-                  height={0}
+                  loader={cloudflareLoader}
+                  width={3000}
+                  height={1000}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentFocus']}
                   alt='content focus image'
-                  priority
+                  priority={true}
                 />
               </div>
             </SmoothTransition>
           </div>
           <div
-            className='max-md:order-last'
+            className={classNames('max-md:order-last', styleImageFrame)}
             ref={overloadImageRef}
           >
             <SmoothTransition
@@ -58,13 +62,13 @@ export const HomeContent = () => {
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
-                  loader={nextImageLoader}
-                  width={0}
-                  height={0}
+                  loader={cloudflareLoader}
+                  width={3000}
+                  height={1000}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentOrganize']}
                   alt='content organize image'
-                  priority
+                  priority={true}
                 />
               </div>
             </SmoothTransition>

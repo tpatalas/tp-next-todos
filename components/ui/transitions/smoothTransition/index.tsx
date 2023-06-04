@@ -4,10 +4,11 @@ import { useVerticalScrollPositionTrigger } from '@hooks/ui';
 import { classNames } from '@stateLogics/utils';
 import { DATA_SMOOTH_TRANSITION } from './smoothTransition.data';
 import { TRANSITION_TYPE, TypesDataTransition, TypesPropsSmoothTransition } from './smoothTransition.types';
+import { useEffect, useState } from 'react';
 
 export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmoothTransition) => {
+  const [hasShown, setHasShown] = useState(false);
   const {
-    show = true,
     appear = true,
     enterDuration = DURATION['500'],
     leaveDuration = DURATION['500'],
@@ -17,12 +18,16 @@ export const SmoothTransition = ({ children, scrollRef, options }: TypesPropsSmo
   const data = DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
   const triggerRate = !!scrollRef ? options?.rate : undefined;
   const isTriggered = useVerticalScrollPositionTrigger(scrollRef, triggerRate);
-  const isShowing = !!scrollRef ? isTriggered : undefined;
+  const isShowing = !!scrollRef ? isTriggered : hasShown;
+
+  useEffect(() => {
+    !!scrollRef ? false : setHasShown(true);
+  }, [hasShown, scrollRef]);
 
   return (
     <Transition
       appear={appear}
-      show={isShowing ?? show}
+      show={isShowing}
       enter={classNames(data.enter, enterDuration, delay)}
       enterFrom={classNames(data.enterFrom)}
       enterTo={classNames(data.enterTo)}

@@ -1,6 +1,6 @@
 import { PATH_IMAGE_HOME } from '@constAssertions/data';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
-import { classNames, nextImageLoader } from '@stateLogics/utils';
+import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -33,13 +33,13 @@ export const UnderConstruction = () => {
         </div>
         <div className='relative flex h-[30rem] w-full max-w-lg flex-row items-center justify-center rounded-xl'>
           <Image
-            loader={nextImageLoader}
-            width={0}
-            height={0}
+            loader={cloudflareLoader}
+            width={500}
+            height={500}
             className='h-auto w-auto rounded-xl bg-transparent drop-shadow-2xl'
             src={PATH_IMAGE_HOME['underConstruction']}
             alt='content under construction'
-            priority
+            priority={true}
           />
         </div>
       </div>
