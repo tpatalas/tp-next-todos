@@ -1,5 +1,5 @@
 import { PATH_IMAGE_HOME } from '@constAssertions/data';
-import { classNames, nextImageLoader } from '@stateLogics/utils';
+import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 import { ContentText } from './contentText';
 import { useRef } from 'react';
@@ -37,9 +37,9 @@ export const HomeContent = () => {
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
-                  loader={nextImageLoader}
-                  width={0}
-                  height={0}
+                  loader={cloudflareLoader}
+                  width={500}
+                  height={500}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentFocus']}
                   alt='content focus image'
@@ -58,9 +58,9 @@ export const HomeContent = () => {
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
-                  loader={nextImageLoader}
-                  width={0}
-                  height={0}
+                  loader={cloudflareLoader}
+                  width={500}
+                  height={500}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentOrganize']}
                   alt='content organize image'
