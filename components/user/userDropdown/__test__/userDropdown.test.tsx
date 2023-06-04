@@ -1,5 +1,5 @@
 import { PATH_IMAGE_APP } from '@constAssertions/data';
-import { nextImageLoader } from '@stateLogics/utils';
+import { cloudflareLoader } from '@stateLogics/utils';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { mockedImageUrl } from '__mock__/next';
 import { mockedUserSession } from '__mock__/next-auth';
@@ -19,7 +19,7 @@ describe('UserDropdown', () => {
     const { container } = renderWithSession(session);
     const userSession = session;
     const userAvatarImageAlt = screen.getByAltText('User avatar');
-    const userAvatarImage = { src: mockedSession.user.image as string, width: 64 };
+    const userAvatarImage = { src: mockedSession.user.image as string, width: 64, quality: 90 };
     const optimizedUserImage = mockedImageUrl(userAvatarImage);
     const dropdownButton = screen.getByRole('button', { name: /open user menu/i });
 
@@ -77,8 +77,8 @@ describe('UserDropdown', () => {
       mockedSessionWithoutUserImage,
     );
 
-    const defaultUserImage = { src: PATH_IMAGE_APP['avatar'], width: 64 };
-    const optimizedDefaultImageUrl = nextImageLoader(defaultUserImage);
+    const defaultUserImage = { src: PATH_IMAGE_APP['avatar'], width: 64, quality: 90 };
+    const optimizedDefaultImageUrl = cloudflareLoader(defaultUserImage);
 
     expect(container).toBeInTheDocument();
     expect(userAvatarImageAlt).toBeInTheDocument();

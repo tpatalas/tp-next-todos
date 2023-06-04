@@ -7,14 +7,13 @@ import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
 import { DATA_PATHNAME_IMAGE } from '@collections/pathnameImage';
-import { nextImageLoader } from '@stateLogics/utils';
+import { cloudflareLoader } from '@stateLogics/utils';
 
 export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);
   const todoIdsReversed = [...todoIds].reverse();
   const imagePath = useRecoilValue(atomPathnameImage);
-  const image =
-    DATA_PATHNAME_IMAGE.find((item) => item.path === imagePath) || ({} as TypesPathnameImage);
+  const image = DATA_PATHNAME_IMAGE.find((item) => item.path === imagePath) || ({} as TypesPathnameImage);
 
   return (
     <TodosFragment>
@@ -33,11 +32,11 @@ export const TodoList = () => {
         ) : (
           <SmoothTransition>
             <div className='mt-7 flex flex-col items-center justify-center'>
-              <div className='flex h-full min-h-[300px] w-[300px] flex-col items-center justify-end'>
+              <div className='flex h-full min-h-[300px] flex-col items-center justify-end'>
                 <Image
-                  loader={nextImageLoader}
-                  width={0}
-                  height={0}
+                  loader={cloudflareLoader}
+                  width={500}
+                  height={500}
                   className='h-auto w-auto'
                   src={image.path}
                   alt={image.alt}

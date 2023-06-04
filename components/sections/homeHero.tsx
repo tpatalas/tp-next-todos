@@ -3,7 +3,7 @@ import { DELAY, DURATION } from '@constAssertions/ui';
 import { STYLE_BLUR_GRADIENT_R_LG, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 import { SignInButton } from '@layouts/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
-import { classNames, nextImageLoader } from '@stateLogics/utils';
+import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransition.types';
 import Image from 'next/image';
@@ -85,11 +85,11 @@ export const HomeHero = () => {
                     options={scaleCenterOptions}
                     scrollRef={divRef}
                   >
-                    <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
+                    <div className='mx-auto flex flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                       <Image
-                        loader={nextImageLoader}
-                        width={0}
-                        height={0}
+                        loader={cloudflareLoader}
+                        width={1000}
+                        height={1000}
                         className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
                         src={PATH_IMAGE_HOME['demo']}
                         alt='demo application image'
