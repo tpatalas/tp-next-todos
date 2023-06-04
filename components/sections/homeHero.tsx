@@ -69,37 +69,39 @@ export const HomeHero = () => {
                   </Link>
                 </div>
               </SmoothTransition>
-              <div className='flex justify-center'>
-                <div className='relative mt-16 flow-root max-w-[60rem] sm:mt-24'>
-                  <SmoothTransition
-                    options={fadeInOptions}
-                    scrollRef={divRef}
-                  >
-                    <div
-                      className={classNames(
-                        'absolute h-full w-full rounded-xl will-change-transform',
-                        STYLE_BLUR_GRADIENT_R_LG,
-                      )}
-                    />
-                  </SmoothTransition>
-                  <SmoothTransition
-                    options={scaleCenterOptions}
-                    scrollRef={divRef}
-                  >
-                    <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
-                      <Image
-                        loader={cloudflareLoader}
-                        width={1000}
-                        height={1000}
-                        className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
-                        src={PATH_IMAGE_HOME['demo']}
-                        alt='demo application image'
-                        priority={true}
+              <SmoothTransition>
+                <div className='flex justify-center'>
+                  <div className='relative mt-16 flow-root max-w-[60rem] sm:mt-24'>
+                    <SmoothTransition
+                      options={fadeInOptions}
+                      scrollRef={divRef}
+                    >
+                      <div
+                        className={classNames(
+                          'absolute h-full w-full rounded-xl will-change-transform',
+                          STYLE_BLUR_GRADIENT_R_LG,
+                        )}
                       />
-                    </div>
-                  </SmoothTransition>
+                    </SmoothTransition>
+                    <SmoothTransition
+                      options={scaleCenterOptions}
+                      scrollRef={divRef}
+                    >
+                      <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
+                        <Image
+                          loader={cloudflareLoader}
+                          width={1000}
+                          height={1000}
+                          className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
+                          src={PATH_IMAGE_HOME['demo']}
+                          alt='demo application image'
+                          priority={true}
+                        />
+                      </div>
+                    </SmoothTransition>
+                  </div>
                 </div>
-              </div>
+              </SmoothTransition>
             </div>
           </div>
         </div>
