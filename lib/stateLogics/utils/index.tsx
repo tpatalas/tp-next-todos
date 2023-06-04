@@ -42,7 +42,7 @@ export const hasTimePast = (updateTimeInMilliSeconds: number, checkingTimeInMinu
   return difference > checkingTime;
 };
 
-export const nextImageLoader = ({
+export const cloudflareLoader = ({
   src,
   width,
   quality,
@@ -51,7 +51,8 @@ export const nextImageLoader = ({
   width: number;
   quality?: number;
 }) => {
-  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/${src}?w=${width}&q=${quality ?? 75}`;
+  const params = [`width=${width}`, `quality=${quality || 75}`, `format=${'webp' || 'webp'}`];
+  return `${process.env.NEXT_PUBLIC_IMAGE_DOMAIN}/cdn-cgi/image/${params.join(',')}/${src}`;
 };
 
 // test if email has standard format of email address

@@ -1,4 +1,6 @@
+import { DATA_PATHNAME_IMAGE } from '@collections/pathnameImage';
 import { TypesPathnameImage } from '@lib/types';
+import { cloudflareLoader } from '@stateLogics/utils';
 import { atomPathnameImage } from '@states/misc';
 import { selectorFilterTodoIds } from '@states/todos';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
@@ -6,15 +8,12 @@ import Image from 'next/image';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
-import { DATA_PATHNAME_IMAGE } from '@collections/pathnameImage';
-import { nextImageLoader } from '@stateLogics/utils';
 
 export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);
   const todoIdsReversed = [...todoIds].reverse();
   const imagePath = useRecoilValue(atomPathnameImage);
-  const image =
-    DATA_PATHNAME_IMAGE.find((item) => item.path === imagePath) || ({} as TypesPathnameImage);
+  const image = DATA_PATHNAME_IMAGE.find((item) => item.path === imagePath) || ({} as TypesPathnameImage);
 
   return (
     <TodosFragment>
@@ -35,13 +34,13 @@ export const TodoList = () => {
             <div className='mt-7 flex flex-col items-center justify-center'>
               <div className='flex h-full min-h-[300px] w-[300px] flex-col items-center justify-end'>
                 <Image
-                  loader={nextImageLoader}
-                  width={0}
-                  height={0}
+                  loader={cloudflareLoader}
+                  width={500}
+                  height={500}
                   className='h-auto w-auto'
                   src={image.path}
                   alt={image.alt}
-                  priority
+                  priority={true}
                 />
               </div>
               <div className='mb-2 text-lg'>{image.title}</div>
