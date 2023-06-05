@@ -1,12 +1,12 @@
-import { Types } from '@lib/types';
+import { BREAKPOINT } from '@constAssertions/ui';
+import { TypesLayout } from '@layouts/layout.types';
 import { atom, atomFamily, selector } from 'recoil';
 import { atomEffectMediaQuery } from './atomEffects/misc';
-import { BREAKPOINT } from '@constAssertions/ui';
 
 /**
  * Atoms
  **/
-export const atomNavigationOpen = atomFamily<boolean, Types['layoutType']>({
+export const atomNavigationOpen = atomFamily<boolean, TypesLayout['path']>({
   key: 'atomNavigationOpen',
   default: false,
 });
@@ -16,7 +16,7 @@ export const atomSearchInput = atom({
   default: '',
 });
 
-export const atomLayoutType = atom<Types['layoutType']>({
+export const atomLayoutType = atom<TypesLayout['path']>({
   key: 'atomLayoutType',
   default: 'app',
 });

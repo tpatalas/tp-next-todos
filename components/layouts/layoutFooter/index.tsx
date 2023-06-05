@@ -7,20 +7,22 @@ import { selectorNavigationOpen } from '@states/layouts';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterNavigation } from './footerNavigation';
+import { TypesLayout } from '@layouts/layout.types';
 
-type Props = Pick<Types, 'layoutType'> & Partial<Pick<Types, 'children'>>;
+type Props = Pick<TypesLayout, 'path'> & Partial<Pick<Types, 'children'>>;
 
-export const LayoutFooter = ({ children, layoutType }: Props) => {
+export const LayoutFooter = ({ children, path }: Props) => {
   const isSidebarOpen = useRecoilValue(selectorNavigationOpen);
-  const layoutApp = layoutType === 'app';
-  const layoutHome = layoutType === 'home';
+  const layoutApp = path === 'app';
+  const layoutHome = path === 'home';
 
   return (
     <LayoutFooterFragment>
       <div className='flex h-full flex-row'>
         <Transition.Root
           show={isSidebarOpen}
-          as='div'>
+          as='div'
+        >
           <Transition.Child
             as={isSidebarOpen ? Fragment : 'div'}
             enter='transition transform ease-in-out duration-200'
@@ -44,11 +46,12 @@ export const LayoutFooter = ({ children, layoutType }: Props) => {
               'transform opacity-0',
               layoutApp && '-translate-x-5',
               layoutHome && '-translate-y-5',
-            )}>
+            )}
+          >
             {isSidebarOpen && (
-              <FooterNavigation layoutType={layoutType}>
+              <FooterNavigation path={path}>
                 {layoutApp && <AppNavigation />}
-                {layoutHome && <HomeNavigation layoutType={layoutType} />}
+                {layoutHome && <HomeNavigation path={path} />}
               </FooterNavigation>
             )}
           </Transition.Child>

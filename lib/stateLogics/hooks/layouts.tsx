@@ -1,5 +1,8 @@
 import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
+import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
+import { Labels } from '@label/label.types';
+import { TypesLayout } from '@layouts/layout.types';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
@@ -7,9 +10,6 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { useNextQuery } from './misc';
-import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
-import { Labels } from '@label/label.types';
-import { Types } from '@lib/types';
 
 export const useNavigationOpen = () => {
   const layoutType = useRecoilValue(atomLayoutType);
@@ -68,11 +68,11 @@ export const useFilterPathApp = () => {
   });
 };
 
-export const useInitialNavigation = ({ layoutType }: Pick<Types, 'layoutType'>) => {
+export const useInitialNavigation = ({ path }: Pick<TypesLayout, 'path'>) => {
   const breakPointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
   const breakPointMl = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['ml']));
   return useRecoilCallback(({ set }) => () => {
-    const breakpointMd = layoutType === 'app' ? breakPointMd : breakPointMl;
+    const breakpointMd = path === 'app' ? breakPointMd : breakPointMl;
 
     if (breakpointMd) {
       set(atomNavigationOpen('app'), true);
@@ -84,17 +84,17 @@ export const useInitialNavigation = ({ layoutType }: Pick<Types, 'layoutType'>) 
   });
 };
 
-export const useLayoutType = ({ layoutType }: Pick<Types, 'layoutType'>) => {
+export const useLayoutType = ({ path }: Pick<TypesLayout, 'path'>) => {
   return useRecoilCallback(({ set }) => () => {
-    set(atomLayoutType, layoutType);
+    set(atomLayoutType, path);
   });
 };
 
-export const useLayoutBodyTagClass = ({ layoutType }: Pick<Types, 'layoutType'>) => {
+export const useLayoutBodyTagClass = ({ path }: Pick<TypesLayout, 'path'>) => {
   const layoutBodyHandler = useCallback(() => {
-    if (layoutType === 'app') return document.body.classList.add('overflow-hidden');
+    if (path === 'app') return document.body.classList.add('overflow-hidden');
     return document.body.classList.remove('overflow-hidden');
-  }, [layoutType]);
+  }, [path]);
 
   return layoutBodyHandler;
 };

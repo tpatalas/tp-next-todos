@@ -1,7 +1,7 @@
 import { Button } from '@buttons/button';
 import { PATH_HOME } from '@constAssertions/data';
 import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
-import { Types } from '@lib/types';
+import { TypesLayout } from '@layouts/layout.types';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { atomLayoutType } from '@states/layouts';
@@ -12,8 +12,8 @@ import { useRecoilValue } from 'recoil';
 
 type Props = { options?: Partial<TypesOptionsButton> };
 
-const buttonOptionsHandler = (layoutType: Types['layoutType']) => {
-  const layoutHome = layoutType === 'home';
+const buttonOptionsHandler = (route: TypesLayout['path']) => {
+  const layoutHome = route === 'home';
   return {
     className: classNames('max-ml:w-full', STYLE_BUTTON_NORMAL_BLUE, layoutHome && 'max-ml:mb-3'),
     tooltip: 'Sign in',

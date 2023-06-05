@@ -32,13 +32,13 @@ export const LayoutApp = ({ children }: Props) => {
       </Head>
       <HeaderFragment>
         <div className='flex h-screen flex-col'>
-          <LayoutHeader layoutType='app'>
+          <LayoutHeader path='app'>
             <SearchBar />
             <Suspense fallback={null}>
               <User />
             </Suspense>
           </LayoutHeader>
-          <LayoutFooter layoutType='app'>
+          <LayoutFooter path='app'>
             <FooterBody>{children}</FooterBody>
           </LayoutFooter>
         </div>
