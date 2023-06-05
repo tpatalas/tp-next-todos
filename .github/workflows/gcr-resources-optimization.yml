@@ -1,11 +1,9 @@
 name: Optimize Google Cloud Run Resources
 
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - 'master'
+  workflow_run:
+    workflows: [Deploy to Google Cloud Run]
+    types: [completed]
 
 env:
   NUMBER_OF_RESOURCES_TO_KEEP: 3
