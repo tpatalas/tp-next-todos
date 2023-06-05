@@ -28,7 +28,7 @@ jest.mock('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal', () 
 }));
 
 const InitialNavigationEffect = ({ isBreakpointMd }: { isBreakpointMd: boolean }) => {
-  const setInitial = useInitialNavigation({ layoutType: 'app' });
+  const setInitial = useInitialNavigation({ path: 'app' });
   const mockValue = isBreakpointMd;
 
   useEffect(() => {
@@ -88,7 +88,7 @@ describe('LabelItem', () => {
     expect(divElement).toHaveClass(matchedSlugClassName);
   });
 
-  it('should route to the label id based slug when the label button is clicked', async () => {
+  it('should name to the label id based slug when the label button is clicked', async () => {
     mockRouter.push('/');
     const expectedRoute = `/app/label/${mockedLabelItem._id}`;
     const { container } = renderWithLabelItem();

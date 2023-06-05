@@ -20,7 +20,7 @@ type Props = {
 
 export const LayoutHome = ({ children }: Props) => {
   const slug = useRecoilValue(atomHtmlTitleTag);
-  const layoutType = 'home';
+  const path = 'home';
 
   return (
     <LayoutFragment>
@@ -29,10 +29,10 @@ export const LayoutHome = ({ children }: Props) => {
       </Head>
       <main className='flex min-h-screen flex-col justify-between'>
         <div>
-          <LayoutHeader layoutType={layoutType}>
-            <HomeNavigation layoutType={layoutType} />
+          <LayoutHeader path={path}>
+            <HomeNavigation path={path} />
           </LayoutHeader>
-          <LayoutFooter layoutType={layoutType} />
+          <LayoutFooter path={path} />
           {children}
         </div>
         <Footer />

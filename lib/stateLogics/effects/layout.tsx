@@ -15,11 +15,11 @@ import { useRecoilValue } from 'recoil';
 import { GroupEffects } from './groupEffects';
 
 export const LayoutHomeGroupEffects = () => {
-  const layoutType = 'home';
+  const path = 'home';
   const filterPath = useFilterPathHome();
-  const setNavigation = useInitialNavigation({ layoutType: layoutType });
-  const setLayoutType = useLayoutType({ layoutType: layoutType });
-  const setBodyTagClass = useLayoutBodyTagClass({ layoutType: layoutType });
+  const setNavigation = useInitialNavigation({ path: path });
+  const setLayoutType = useLayoutType({ path: path });
+  const setBodyTagClass = useLayoutBodyTagClass({ path: path });
 
   return (
     <>
@@ -30,10 +30,10 @@ export const LayoutHomeGroupEffects = () => {
 
 export const LayoutAppGroupEffects = () => {
   const filterPath = useFilterPathApp();
-  const setNavigation = useInitialNavigation({ layoutType: 'app' });
-  const setLayoutType = useLayoutType({ layoutType: 'app' });
+  const setNavigation = useInitialNavigation({ path: 'app' });
+  const setLayoutType = useLayoutType({ path: 'app' });
   const catchTodoModal = useRecoilValue(atomCatch(CATCH.todoModal));
-  const setBodyTagClass = useLayoutBodyTagClass({ layoutType: 'app' });
+  const setBodyTagClass = useLayoutBodyTagClass({ path: 'app' });
 
   return (
     <>
