@@ -5,11 +5,11 @@ import { Fragment as FooterSidebarMenuFragment, Suspense, Fragment as TotalNumbe
 import { useRecoilValue } from 'recoil';
 import { DATA_SIDEBAR_MENU } from '@collections/sidebarMenu';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { useNavigationOpen } from '@hooks/layouts';
 import { classNames } from '@stateLogics/utils';
 import dynamic from 'next/dynamic';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { SvgIcon } from '@icon/svgIcon';
+import { useNavigationOpen } from '@layout/layout.hooks';
 
 const TodosCount = dynamic(() => import('@layout/app/todosCount').then((mod) => mod.TodosCount));
 

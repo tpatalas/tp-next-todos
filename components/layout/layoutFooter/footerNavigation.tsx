@@ -1,4 +1,4 @@
-import { useNavigationOpen } from '@hooks/layouts';
+import { useNavigationOpen } from '@layout/layout.hooks';
 import { TypesLayout } from '@layout/layout.types';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
