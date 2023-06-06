@@ -1,11 +1,4 @@
 import { CATCH } from '@constAssertions/misc';
-import {
-  useFilterPathApp,
-  useFilterPathHome,
-  useInitialNavigation,
-  useLayoutBodyTagClass,
-  useLayoutType,
-} from '@hooks/layouts';
 import { LabelModal } from '@modals/labelModals/labelModal';
 import { MinimizedModal } from '@modals/minimizedModal';
 import { TodoModal } from '@modals/todoModals/todoModal';
@@ -13,6 +6,13 @@ import { atomCatch } from '@states/misc';
 import { Notification } from 'components/notifications/notification';
 import { useRecoilValue } from 'recoil';
 import { GroupEffects } from './groupEffects';
+import {
+  useFilterPathApp,
+  useFilterPathHome,
+  useInitialNavigation,
+  useLayoutBodyTagClass,
+  useLayoutType,
+} from '@layout/layout.hooks';
 
 export const LayoutHomeGroupEffects = () => {
   const path = 'home';

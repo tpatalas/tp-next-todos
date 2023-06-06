@@ -1,4 +1,3 @@
-import { useInitialNavigation } from '@hooks/layouts';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { atomNavigationOpen } from '@states/layouts';
 import { fireEvent, waitFor } from '@testing-library/dom';
@@ -10,6 +9,7 @@ import { Suspense, useEffect } from 'react';
 import { RecoilState, useRecoilValue } from 'recoil';
 import { LabelItem } from '..';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
+import { useInitialNavigation } from '@layout/layout.hooks';
 
 jest.mock('@modals/labelModals/labelModal/itemLabelModal', () => ({
   ItemLabelModal: () => {
