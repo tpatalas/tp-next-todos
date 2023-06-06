@@ -11,7 +11,7 @@ import { DividerX } from '@ui/dividers/dividerX';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Logo } from '@layouts/layoutHeader/logo';
+import { Logo } from '@layout/layoutHeader/logo';
 import { AuthErrorMessage } from '@auth/authErrorMessage';
 import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
 import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';

@@ -16,7 +16,6 @@
       "@icon/*": ["components/icon/*"],
       "@label/*": ["components/label/*"],
       "@layout/*": ["components/layout/*"],
-      "@layouts/*": ["components/layouts/*"],
       "@user/*": ["components/user/*"],
       "@buttons/*": ["components/ui/buttons/*"],
       "@dropdowns/*": ["components/ui/dropdowns/*"],

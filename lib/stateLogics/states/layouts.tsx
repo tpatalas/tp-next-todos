@@ -1,5 +1,5 @@
 import { BREAKPOINT } from '@constAssertions/ui';
-import { TypesLayout } from '@layouts/layout.types';
+import { TypesLayout } from '@layout/layout.types';
 import { atom, atomFamily, selector } from 'recoil';
 import { atomEffectMediaQuery } from './atomEffects/misc';
 

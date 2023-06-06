@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { Fragment, ReactElement } from 'react';
 
-const LayoutApp = dynamic(() => import('@layouts/app').then((mod) => mod.LayoutApp));
+const LayoutApp = dynamic(() => import('@layout/app').then((mod) => mod.LayoutApp));
 
 const CatchAllApp = () => {
   return <Fragment>Nothing to show you</Fragment>;

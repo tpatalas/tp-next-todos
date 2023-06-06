@@ -4,7 +4,7 @@ import { ICON_ADD_TASK } from '@data/materialSymbols';
 import { useNavigationOpen } from '@hooks/layouts';
 import { useConditionCheckCreateModalOpen } from '@hooks/misc';
 import { useTodoModalStateOpen } from '@hooks/modals';
-import { Logo } from '@layouts/layoutHeader/logo';
+import { Logo } from '@layout/layoutHeader/logo';
 import { optionsButtonCreateTodo, optionsButtonSidebarToggle } from '@options/button';
 import { classNames } from '@stateLogics/utils';
 import { atomDisableScroll } from '@states/misc';

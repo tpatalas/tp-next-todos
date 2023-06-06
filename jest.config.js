@@ -35,7 +35,6 @@ const customJestConfig = {
     '^@label/(.*)$': ['<rootDir>/components/label/$1'],
     '^@layout/(.*)$': ['<rootDir>/components/layout/$1'],
     '^@user/(.*)$': ['<rootDir>/components/user/$1'],
-    '^@layouts/(.*)$': ['<rootDir>/components/layouts/$1'],
     '^@buttons/(.*)$': ['<rootDir>/components/ui/buttons/$1'],
     '^@dropdowns/(.*)$': ['<rootDir>/components/ui/dropdowns/$1'],
     '^@inputs/(.*)$': ['<rootDir>/components/ui/inputs/$1'],
