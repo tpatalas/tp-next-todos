@@ -1,5 +1,5 @@
 import { ErrorState } from '@components/loadable/errorState';
-import { LayoutApp } from '@layouts/app';
+import { LayoutApp } from '@layout/app';
 import dynamic from 'next/dynamic';
 import { Fragment as AppFragment, ReactElement, Suspense } from 'react';
 
@@ -9,9 +9,7 @@ const TodoList = dynamic(() => import('components/todos/todoList').then((mod) =>
 const LoadingTodos = dynamic(() =>
   import('@components/loadable/loadingStates/loadingTodos').then((mod) => mod.LoadingTodos),
 );
-const ErrorBoundary = dynamic(() =>
-  import('react-error-boundary').then((mod) => mod.ErrorBoundary),
-);
+const ErrorBoundary = dynamic(() => import('react-error-boundary').then((mod) => mod.ErrorBoundary));
 
 const App = () => {
   return (

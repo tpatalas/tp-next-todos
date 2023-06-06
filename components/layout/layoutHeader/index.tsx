@@ -13,7 +13,7 @@ import { useRecoilValue } from 'recoil';
 import { Logo } from './logo';
 import { NavigationButton } from './navigationButton';
 import { atomNavigationOpen } from '@states/layouts';
-import { TypesLayout } from '@layouts/layout.types';
+import { TypesLayout } from '@layout/layout.types';
 
 const UserSessionGroupEffect = dynamic(() =>
   import('@user/userSessionGroupEffect').then((mod) => mod.UserSessionGroupEffect),

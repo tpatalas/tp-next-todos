@@ -2,7 +2,7 @@ import { TypesLabel } from '@label/label.types';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-const TodosCount = dynamic(() => import('@layouts/app/todosCount').then((mod) => mod.TodosCount));
+const TodosCount = dynamic(() => import('@layout/app/todosCount').then((mod) => mod.TodosCount));
 
 type Props = Pick<TypesLabel, 'label'>;
 

@@ -1,4 +1,4 @@
-import { LayoutApp } from '@layouts/app';
+import { LayoutApp } from '@layout/app';
 import { ReactElement } from 'react';
 
 const CatchAllLabels = () => {

@@ -1,13 +1,13 @@
 import { Transition } from '@headlessui/react';
-import { AppNavigation } from '@layouts/app/appNavigation';
-import { HomeNavigation } from '@layouts/home/homeNavigation';
+import { AppNavigation } from '@layout/app/appNavigation';
+import { HomeNavigation } from '@layout/home/homeNavigation';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 import { selectorNavigationOpen } from '@states/layouts';
 import { Fragment as FooterBodyFragment, Fragment, Fragment as LayoutFooterFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FooterNavigation } from './footerNavigation';
-import { TypesLayout } from '@layouts/layout.types';
+import { TypesLayout } from '@layout/layout.types';
 
 type Props = Pick<TypesLayout, 'path'> & Partial<Pick<Types, 'children'>>;
 

@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { SvgIcon } from '@icon/svgIcon';
 
-const TodosCount = dynamic(() => import('@layouts/app/todosCount').then((mod) => mod.TodosCount));
+const TodosCount = dynamic(() => import('@layout/app/todosCount').then((mod) => mod.TodosCount));
 
 export const AppSidebarMenu = () => {
   const router = useRouter();

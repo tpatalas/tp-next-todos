@@ -2,7 +2,7 @@ import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
 import { Labels } from '@label/label.types';
-import { TypesLayout } from '@layouts/layout.types';
+import { TypesLayout } from '@layout/layout.types';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';

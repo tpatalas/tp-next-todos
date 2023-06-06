@@ -1,7 +1,7 @@
 import { DATA_FOOTER_NAVIGATION, DATA_FOOTER_SOCIAL, TypesFooterSocial } from '@collections/footer';
 import { STYLE_LINK_NORMAL } from '@data/stylePreset';
 import { SvgIcon } from '@icon/svgIcon';
-import { Logo } from '@layouts/layoutHeader/logo';
+import { Logo } from '@layout/layoutHeader/logo';
 import { classNames } from '@stateLogics/utils';
 import { DividerX } from '@ui/dividers/dividerX';
 import Link from 'next/link';

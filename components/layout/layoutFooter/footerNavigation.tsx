@@ -1,5 +1,5 @@
 import { useNavigationOpen } from '@hooks/layouts';
-import { TypesLayout } from '@layouts/layout.types';
+import { TypesLayout } from '@layout/layout.types';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
 import { selectorNavigationOpenOnMobile } from '@states/layouts';

@@ -1,6 +1,6 @@
 import { Button } from '@buttons/button';
 import { PATH_HOME } from '@constAssertions/data';
-import { optionsSignInButton } from '@layouts/layout.utils';
+import { optionsSignInButton } from '@layout/layout.utils';
 import { TypesOptionsButton } from '@lib/types/options';
 import { atomLayoutType } from '@states/layouts';
 import { signIn } from 'next-auth/react';
