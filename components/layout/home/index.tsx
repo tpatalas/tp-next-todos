@@ -3,16 +3,12 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment as LayoutFragment, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
+import { LayoutHomeLazy } from './layoutHomeLazy';
 
 const HomeNavigation = dynamic(() => import('./homeNavigation').then((mod) => mod.HomeNavigation));
 const LayoutHeader = dynamic(() => import('@layout/layoutHeader').then((mod) => mod.LayoutHeader));
 const LayoutFooter = dynamic(() => import('@layout/layoutFooter').then((mod) => mod.LayoutFooter));
 const Footer = dynamic(() => import('@components/sections/footer').then((mod) => mod.Footer));
-
-const LayoutHomeGroupEffects = dynamic(
-  () => import('@effects/layout').then((mod) => mod.LayoutHomeGroupEffects),
-  { ssr: false },
-);
 
 type Props = {
   children: ReactNode;
@@ -37,7 +33,7 @@ export const LayoutHome = ({ children }: Props) => {
         </div>
         <Footer />
       </main>
-      <LayoutHomeGroupEffects />
+      <LayoutHomeLazy path={path} />
     </LayoutFragment>
   );
 };

@@ -4,17 +4,13 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment as HeaderFragment, Fragment as LayoutAppFragment, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
+import { LayoutAppLazy } from './layoutAppLazy';
 const FooterBody = dynamic(() => import('@layout/layoutFooter/footerBody').then((mod) => mod.FooterBody));
 const LayoutHeader = dynamic(() => import('@layout/layoutHeader').then((mod) => mod.LayoutHeader));
 const SearchBar = dynamic(() => import('@layout/layoutHeader/searchBar').then((mod) => mod.SearchBar));
 const LayoutFooter = dynamic(() => import('@layout/layoutFooter').then((mod) => mod.LayoutFooter), {
   ssr: false,
 });
-
-const LayoutAppGroupEffects = dynamic(
-  () => import('@effects/layout').then((mod) => mod.LayoutAppGroupEffects),
-  { ssr: false },
-);
 
 const User = dynamic(() => import('@user/index').then((mod) => mod.User), {
   ssr: false,
@@ -24,6 +20,7 @@ type Props = Pick<Types, 'children'>;
 
 export const LayoutApp = ({ children }: Props) => {
   const slug = useRecoilValue(atomHtmlTitleTag);
+  const path = 'app';
 
   return (
     <LayoutAppFragment>
@@ -32,7 +29,7 @@ export const LayoutApp = ({ children }: Props) => {
       </Head>
       <HeaderFragment>
         <div className='flex h-screen flex-col'>
-          <LayoutHeader path='app'>
+          <LayoutHeader path={path}>
             <SearchBar />
             <Suspense fallback={null}>
               <User />
@@ -43,7 +40,7 @@ export const LayoutApp = ({ children }: Props) => {
           </LayoutFooter>
         </div>
       </HeaderFragment>
-      <LayoutAppGroupEffects />
+      <LayoutAppLazy path={path} />
     </LayoutAppFragment>
   );
 };
