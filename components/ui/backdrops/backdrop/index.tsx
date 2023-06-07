@@ -3,44 +3,33 @@ import { Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { TypesOptionsBackdrop } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
-import { Fragment as BackdropFragment, Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment as BackdropFragment, Fragment, useEffect, useRef } from 'react';
 
-type Props = { options: TypesOptionsBackdrop } & Partial<
-  Pick<Types, 'onClick' | 'show' | 'onBlur' | 'onFocus'>
->;
+type Props = { options: TypesOptionsBackdrop } & Partial<Pick<Types, 'onClick' | 'onBlur' | 'onFocus'>>;
 
-export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => {
-  const [isShow, setIsShow] = useState(false);
+export const Backdrop = ({ options, onClick, onBlur, onFocus }: Props) => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const currentRef = divRef && divRef.current;
-    !show && setIsShow(true);
 
     if (!currentRef) return;
     currentRef.blur();
     currentRef.focus();
-  }, [show]);
+  }, []);
 
   return (
     <BackdropFragment>
       <ConditionalPortal isPortal={options.isPortal ?? true}>
-        <Transition
-          show={show ?? isShow}
+        <Transition.Child
           as={Fragment}
-          appear={true}
-          enter={classNames(
-            'transition-opacity ease-in-out',
-            options.enterDuration ?? 'duration-500',
-          )}
+          enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-500')}
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave={classNames(
-            'transition-opacity ease-in-out',
-            options.leaveDuration ?? 'duration-100',
-          )}
-          leaveFrom='opacity-100'
-          leaveTo='opacity-0'>
+          leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-200')}
+          leaveFrom='opacity-0'
+          leaveTo='opacity-0'
+        >
           <div
             tabIndex={-1}
             className={classNames(
@@ -54,7 +43,7 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus, show }: Props) => 
             onFocus={onFocus}
             ref={divRef}
           />
-        </Transition>
+        </Transition.Child>
       </ConditionalPortal>
     </BackdropFragment>
   );

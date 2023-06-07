@@ -35,16 +35,16 @@ export const selectorNavigationOpen = selector({
   },
 });
 
-export const selectorNavigationOpenOnMobile = selector({
-  key: 'selectorNavigationOpenOnMobile',
+export const selectorNavigationBreakpoint = selector({
+  key: 'selectorNavigationBreakpoint',
   get: ({ get }) => {
     const layoutType = get(atomLayoutType);
-    const breakpointMedium =
+    const breakpoint =
       layoutType === 'app'
         ? get(atomEffectMediaQuery(BREAKPOINT['md']))
         : get(atomEffectMediaQuery(BREAKPOINT['ml']));
 
-    return !breakpointMedium && get(atomNavigationOpen(layoutType));
+    return breakpoint;
   },
   cachePolicy_UNSTABLE: {
     eviction: 'most-recent',
