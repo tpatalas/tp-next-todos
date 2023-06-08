@@ -1,27 +1,16 @@
-import { useNavigationOpen } from '@layout/layout.hooks';
 import { TypesLayout } from '@layout/layout.types';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { selectorNavigationOpenOnMobile } from '@states/layouts';
-import { Backdrop } from '@ui/backdrops/backdrop';
 import { Fragment as FooterSidebarFragment, forwardRef } from 'react';
-import { useRecoilValue } from 'recoil';
 
 type Props = Pick<Types, 'children'> & Pick<TypesLayout, 'path'>;
 
 export const FooterNavigation = forwardRef<HTMLDivElement, Props>(({ path, children }: Props, ref) => {
-  const setNavigationOpen = useNavigationOpen();
-  const isSidebarMobileOpen = useRecoilValue(selectorNavigationOpenOnMobile);
   const layoutHome = path === 'home';
   const layoutApp = path === 'app';
 
   return (
     <FooterSidebarFragment>
-      <Backdrop
-        options={{ isPortal: false }}
-        show={isSidebarMobileOpen}
-        onClick={() => setNavigationOpen()}
-      />
       <div
         ref={ref}
         className={classNames(
