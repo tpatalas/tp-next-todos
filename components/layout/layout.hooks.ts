@@ -36,21 +36,19 @@ export const useInitialNavigation = ({ path }: Pick<TypesLayout, 'path'>) => {
   const breakPointMd = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['md']));
   const breakPointMl = useRecoilValue(atomEffectMediaQuery(BREAKPOINT['ml']));
 
-  return useRecoilCallback(
-    ({ set }) =>
-      () => {
-        const breakpointMd = path === 'app' ? breakPointMd : breakPointMl;
+  return useRecoilCallback(({ set }) => () => {
+    const breakpointMd = path === 'app' ? breakPointMd : breakPointMl;
 
-        if (breakpointMd) {
-          set(atomNavigationOpen('app'), true);
-          set(atomNavigationOpen('home'), false);
-          return;
-        }
-        set(atomNavigationOpen('app'), false);
-        set(atomNavigationOpen('home'), false);
-      },
-    [breakPointMd, breakPointMl, path],
-  );
+    if (breakpointMd) {
+      set(atomNavigationOpen('app'), true);
+      set(atomNavigationOpen('home'), false);
+      return;
+    }
+    set(atomNavigationOpen('app'), false);
+    set(atomNavigationOpen('home'), false);
+  });
+  // should not use any dependency to create the hook on every rendering.
+  // This should reset the initial state on every route change.
 };
 
 export const useLayoutType = ({ path }: Pick<TypesLayout, 'path'>) => {
