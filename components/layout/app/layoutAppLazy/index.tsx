@@ -29,10 +29,10 @@ export const LayoutAppLazy = ({ path }: Pick<TypesLayout, 'path'>) => {
 
   return (
     <Suspense fallback={null}>
-      <FilterPathAppEffect />
       <LayoutTypeEffect path={path} />
-      <InitialNavigationEffect path={path} />
-      <BodyTagClassEffect path={path} />
+      <FilterPathAppEffect />
+      <InitialNavigationEffect />
+      <BodyTagClassEffect />
       <Notification />
       <TodoModal />
       <MinimizedModal />

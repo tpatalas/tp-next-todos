@@ -24,16 +24,6 @@ export const atomLayoutType = atom<TypesLayout['path']>({
 /**
  * Selector
  **/
-export const selectorNavigationOpen = selector({
-  key: 'selectorNavigationOpen',
-  get: ({ get }) => {
-    const layoutType = get(atomLayoutType);
-    return get(atomNavigationOpen(layoutType));
-  },
-  cachePolicy_UNSTABLE: {
-    eviction: 'most-recent',
-  },
-});
 
 export const selectorNavigationBreakpoint = selector({
   key: 'selectorNavigationBreakpoint',
