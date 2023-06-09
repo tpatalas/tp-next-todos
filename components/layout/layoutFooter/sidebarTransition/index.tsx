@@ -33,7 +33,7 @@ export const SidebarTransition = ({ path, children }: Props) => {
         enter='transition transform ease-in-out duration-200'
         enterFrom={classNames(
           'transform opacity-0',
-          layoutApp && 'md:-translate-x-0 -translate-x-5',
+          layoutApp && 'md:-translate-x-0 -translate-x-10',
           layoutHome && '-translate-y-5',
         )}
         enterTo={classNames(
@@ -41,7 +41,7 @@ export const SidebarTransition = ({ path, children }: Props) => {
           layoutApp && 'translate-x-0',
           layoutHome && 'translate-y-0',
         )}
-        leave='transition ease-in-out duration-200'
+        leave='transition transform ease-in-out duration-200'
         leaveFrom={classNames(
           'transform opacity-100',
           layoutApp && 'translate-x-0',
@@ -49,7 +49,7 @@ export const SidebarTransition = ({ path, children }: Props) => {
         )}
         leaveTo={classNames(
           'transform opacity-0',
-          layoutApp && '-translate-x-5',
+          layoutApp && '-translate-x-10',
           layoutHome && '-translate-y-5',
         )}
       >
