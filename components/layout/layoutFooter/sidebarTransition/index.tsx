@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react';
 import { useNavigationOpen } from '@layout/layout.hooks';
 import { classNames } from '@stateLogics/utils';
-import { selectorNavigationBreakpoint, selectorNavigationOpen } from '@states/layouts';
+import { atomNavigationOpen, selectorNavigationBreakpoint } from '@states/layouts';
 import { Backdrop } from '@ui/backdrops/backdrop';
 import { Fragment, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -11,7 +11,7 @@ import { TypesLayout } from '@layout/layout.types';
 type Props = Pick<TypesLayout, 'path'> & { children: ReactNode };
 
 export const SidebarTransition = ({ path, children }: Props) => {
-  const isSidebarOpen = useRecoilValue(selectorNavigationOpen);
+  const isSidebarOpen = useRecoilValue(atomNavigationOpen(path));
   const breakpoint = useRecoilValue(selectorNavigationBreakpoint);
   const setNavigationOpen = useNavigationOpen();
   const layoutApp = path === 'app';

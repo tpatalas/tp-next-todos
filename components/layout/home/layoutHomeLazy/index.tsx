@@ -21,10 +21,10 @@ const BodyTagClassEffect = dynamic(() =>
 export const LayoutHomeLazy = ({ path }: Pick<TypesLayout, 'path'>) => {
   return (
     <Suspense fallback={null}>
-      <FilterPathHomeEffect />
       <LayoutTypeEffect path={path} />
-      <InitialNavigationEffect path={path} />
-      <BodyTagClassEffect path={path} />
+      <FilterPathHomeEffect />
+      <InitialNavigationEffect />
+      <BodyTagClassEffect />
     </Suspense>
   );
 };

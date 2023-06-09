@@ -1,9 +1,11 @@
 import { useLayoutBodyTagClass } from '@layout/layout.hooks';
-import { TypesLayout } from '@layout/layout.types';
+import { atomLayoutType } from '@states/layouts';
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
-export const BodyTagClassEffect = ({ path }: Pick<TypesLayout, 'path'>) => {
-  const setBodyTagClass = useLayoutBodyTagClass({ path: path });
+export const BodyTagClassEffect = () => {
+  const layoutType = useRecoilValue(atomLayoutType);
+  const setBodyTagClass = useLayoutBodyTagClass({ path: layoutType });
 
   useEffect(() => {
     setBodyTagClass();

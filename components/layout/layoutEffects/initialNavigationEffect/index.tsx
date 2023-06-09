@@ -1,9 +1,11 @@
 import { useInitialNavigation } from '@layout/layout.hooks';
-import { TypesLayout } from '@layout/layout.types';
+import { atomLayoutType } from '@states/layouts';
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
-export const InitialNavigationEffect = ({ path }: Pick<TypesLayout, 'path'>) => {
-  const setNavigation = useInitialNavigation({ path: path });
+export const InitialNavigationEffect = () => {
+  const layoutType = useRecoilValue(atomLayoutType);
+  const setNavigation = useInitialNavigation({ path: layoutType });
 
   useEffect(() => {
     setNavigation();
