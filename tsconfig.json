@@ -2,79 +2,31 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@collections/*": [
-        "lib/data/collections/*"
-      ],
-      "@constAssertions/*": [
-        "lib/data/constAssertions/*"
-      ],
-      "@options/*": [
-        "lib/data/options/*"
-      ],
-      "@effects/*": [
-        "lib/stateLogics/effects/*"
-      ],
-      "@hooks/*": [
-        "lib/stateLogics/hooks/*"
-      ],
-      "@states/*": [
-        "lib/stateLogics/states/*"
-      ],
-      "@data/*": [
-        "lib/data/*"
-      ],
-      "@stateLogics/*": [
-        "lib/stateLogics/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@auth/*": [
-        "components/auth/*"
-      ],
-      "@editor/*": [
-        "components/editor/*"
-      ],
-      "@icon/*": [
-        "components/icon/*"
-      ],
-      "@label/*": [
-        "components/label/*"
-      ],
-      "@user/*": [
-        "components/user/*"
-      ],
-      "@layouts/*": [
-        "components/layouts/*"
-      ],
-      "@buttons/*": [
-        "components/ui/buttons/*"
-      ],
-      "@dropdowns/*": [
-        "components/ui/dropdowns/*"
-      ],
-      "@inputs/*": [
-        "components/ui/inputs/*"
-      ],
-      "@modals/*": [
-        "components/ui/modals/*"
-      ],
-      "@tooltips/*": [
-        "components/ui/tooltips/*"
-      ],
-      "@ui/*": [
-        "components/ui/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ]
+      "@collections/*": ["lib/data/collections/*"],
+      "@constAssertions/*": ["lib/data/constAssertions/*"],
+      "@options/*": ["lib/data/options/*"],
+      "@effects/*": ["lib/stateLogics/effects/*"],
+      "@hooks/*": ["lib/stateLogics/hooks/*"],
+      "@states/*": ["lib/stateLogics/states/*"],
+      "@data/*": ["lib/data/*"],
+      "@stateLogics/*": ["lib/stateLogics/*"],
+      "@lib/*": ["lib/*"],
+      "@auth/*": ["components/auth/*"],
+      "@editor/*": ["components/editor/*"],
+      "@icon/*": ["components/icon/*"],
+      "@label/*": ["components/label/*"],
+      "@layout/*": ["components/layout/*"],
+      "@user/*": ["components/user/*"],
+      "@buttons/*": ["components/ui/buttons/*"],
+      "@dropdowns/*": ["components/ui/dropdowns/*"],
+      "@inputs/*": ["components/ui/inputs/*"],
+      "@modals/*": ["components/ui/modals/*"],
+      "@tooltips/*": ["components/ui/tooltips/*"],
+      "@ui/*": ["components/ui/*"],
+      "@components/*": ["components/*"]
     },
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -93,15 +45,6 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "global.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "__tests__"
-  ]
+  "include": ["next-env.d.ts", "global.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "__tests__"]
 }

@@ -1,4 +1,4 @@
-import { LayoutHome } from '@layouts/home';
+import { LayoutHome } from '@layout/home';
 import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 

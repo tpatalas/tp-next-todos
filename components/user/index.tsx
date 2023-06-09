@@ -1,5 +1,5 @@
 import { STORAGE_KEY } from '@constAssertions/storage';
-import { SignInButton } from '@layouts/layoutHeader/signInButton';
+import { SignInButton } from '@layout/layoutHeader/signInButton';
 import { getSessionStorage } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { useSession } from 'next-auth/react';

@@ -1,7 +1,7 @@
 import { PATH_HOME, PATH_IMAGE_HOME } from '@constAssertions/data';
 import { DELAY, DURATION } from '@constAssertions/ui';
 import { STYLE_BLUR_GRADIENT_R_LG, STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
-import { SignInButton } from '@layouts/layoutHeader/signInButton';
+import { SignInButton } from '@layout/layoutHeader/signInButton';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
