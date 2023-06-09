@@ -23,10 +23,10 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus }: Props) => {
       <ConditionalPortal isPortal={options.isPortal ?? true}>
         <Transition.Child
           as={Fragment}
-          enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-500')}
+          enter={classNames('transition-opacity ease-in-out', options.enterDuration ?? 'duration-300')}
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-200')}
+          leave={classNames('transition-opacity ease-in-out', options.leaveDuration ?? 'duration-100')}
           leaveFrom='opacity-0'
           leaveTo='opacity-0'
         >
