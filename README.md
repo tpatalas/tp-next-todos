@@ -2,10 +2,10 @@
 
 # Auto-Prioritized Todo Application
 
-[![Test](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/run-test-cache.yml?label=test&logo=Github)](https://github.com/tpatalas/tp-next-todos/actions/workflows/run-test-cache.yml)
+[![Test](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/run-tests.yml?label=test&logo=Github)](https://github.com/tpatalas/tp-next-todos/actions/workflows/run-tests.yml)
 [![Build-push-docker-image](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/docker-image-build-push.yml?label=build&logo=Docker)](https://github.com/tpatalas/tp-next-todos/actions/workflows/docker-image-build-push.yml)
 [![Deploy-docker-image](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/docker-image-deploy.yml?label=deploy&logo=Google%20Cloud)](https://github.com/tpatalas/tp-next-todos/actions/workflows/docker-image-deploy.yml)
-[![Resource Purge](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/cleanup-gcr-resources.yml?label=resource%20optimization&logo=Google%20Cloud)](https://github.com/tpatalas/tp-next-todos/actions/workflows/cleanup-gcr-resources.yml)
+[![Resource Purge](https://img.shields.io/github/actions/workflow/status/tpatalas/tp-next-todos/gcr-resources-optimization.yml?label=resource%20optimization&logo=Google%20Cloud)](https://github.com/tpatalas/tp-next-todos/actions/workflows/gcr-resources-optimization.yml)
 
 [![License](https://img.shields.io/github/license/tpatalas/tp-next-todos?color=blue)](https://github.com/tpatalas/tp-next-todos/blob/master/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/tpatalas/tp-next-todos?color=blue)](https://github.com/tpatalas/tp-next-todos/commits/master)
@@ -84,8 +84,10 @@ Network](https://img.shields.io/badge/Google%20VPC%20Network-VPC%20Network-9cf?s
 [![Github Actions](https://img.shields.io/badge/Github%20Actions-CI%2FCD-9cf?logo=github&style=for-the-badge)](https://github.com/features/actions)
 
 [![Cloudflare](https://img.shields.io/badge/cloudflare-CDN-9cf?logo=cloudflare&style=for-the-badge)](https://www.cloudflare.com/)
+[![Cloudflare](<https://img.shields.io/badge/cloudflare-image%20Optimization%20(Resizing)-9cf?logo=cloudflare&style=for-the-badge>)](https://developers.cloudflare.com/images/image-resizing/)
+
 [![Cloudflare
-R2](https://img.shields.io/badge/Cloudflare%20R2-Object%20Storage-9cf?style=for-the-badge&logo=cloudflare)](https://www.cloudflare.com/lp/pg-r2/)
+R2](https://img.shields.io/badge/Cloudflare%20R2-Object%20Storage-9cf?style=for-the-badge&logo=cloudflare)](https://developers.cloudflare.com/r2/)
 [![MongoDB](https://img.shields.io/badge/mongodb-database-9cf?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/atlas/database)
 
 </div>
