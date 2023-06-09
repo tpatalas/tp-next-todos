@@ -28,7 +28,7 @@
     "mongoose": "^7.2.2",
     "next": "^13.4.4",
     "next-auth": "^4.22.1",
-    "next-router-mock": "^0.9.3",
+    "next-router-mock": "^0.9.6",
     "nodemailer": "^6.9.3",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
