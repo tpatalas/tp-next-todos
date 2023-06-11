@@ -3,7 +3,8 @@ const scriptSources = require('./scriptSources');
 const development = process.env.NODE_ENV !== 'production';
 
 const ContentSecurityPolicy = `
-  default-src 'self'; connect-src 'self'; 
+  default-src 'self'; 
+  connect-src 'self' ${process.env.NEXT_PUBLIC_IMAGE_DOMAIN};  
   child-src 'self' youtube.com;
   font-src 'self';
   img-src 'self' ${process.env.NEXT_PUBLIC_IMAGE_DOMAIN} data:;
