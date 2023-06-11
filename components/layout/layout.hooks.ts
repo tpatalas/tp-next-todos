@@ -3,13 +3,24 @@ import { BREAKPOINT } from '@constAssertions/ui';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
-import { useRouter } from 'next-router-mock';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { TypesLayout } from './layout.types';
 import { useCallback } from 'react';
 import { useNextQuery } from '@hooks/misc';
 import { selectorSessionLabels, atomLabelQuerySlug } from '@label/label.states';
 import { Labels } from '@label/label.types';
+import { useRouter } from 'next/router';
+
+export const useNavigationOpen = () => {
+  const layoutType = useRecoilValue(atomLayoutType);
+  return useRecoilCallback(
+    ({ set }) =>
+      () => {
+        set(atomNavigationOpen(layoutType), (event) => !event);
+      },
+    [layoutType],
+  );
+};
 
 export const useFilterPathHome = () => {
   const { asPath } = useRouter();
@@ -66,17 +77,6 @@ export const useLayoutBodyTagClass = ({ path }: Pick<TypesLayout, 'path'>) => {
     if (path === 'app') return document.body.classList.add('overflow-hidden');
     return document.body.classList.remove('overflow-hidden');
   }, [path]);
-};
-
-export const useNavigationOpen = () => {
-  const layoutType = useRecoilValue(atomLayoutType);
-  return useRecoilCallback(
-    ({ set }) =>
-      () => {
-        set(atomNavigationOpen(layoutType), (event) => !event);
-      },
-    [layoutType],
-  );
 };
 
 export const useFilterPathApp = () => {
