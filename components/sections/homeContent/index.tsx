@@ -15,7 +15,6 @@ export const HomeContent = () => {
   const imageOptions = {
     type: TRANSITION_TYPE['scaleCenterSm'],
     enterDuration: DURATION['700'],
-    rate: 1.5,
   };
   const spotlightRef = useRef(null);
   const overloadRef = useRef(null);
