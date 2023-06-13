@@ -8,8 +8,6 @@ export const databaseConnect = async () => {
     const options: { [key: string]: boolean | number } = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      keepAlive: true,
-      keepAliveInitialDelay: 300000, // in ms: 5 min total,
     };
     mongoose.set('strictQuery', false);
     cachedConnection = await mongoose.connect(uri, options);
