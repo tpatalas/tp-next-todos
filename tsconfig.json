@@ -14,6 +14,7 @@
       "@auth/*": ["components/auth/*"],
       "@editor/*": ["components/editor/*"],
       "@icon/*": ["components/icon/*"],
+      "@serviceWorker/*": ["components/serviceWorker/*"],
       "@label/*": ["components/label/*"],
       "@layout/*": ["components/layout/*"],
       "@user/*": ["components/user/*"],

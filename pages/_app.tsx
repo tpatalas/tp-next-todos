@@ -2,10 +2,11 @@ import { NextPage } from 'next';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { ReactElement, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
-import Head from 'next/head';
+import { ServiceWorkerRegister } from '@serviceWorker/serviceWorkerRegister';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -33,10 +34,12 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
         <SessionProvider
           session={session}
           basePath={process.env.NEXT_PUBLIC_NEXTAUTH_BASE_PATH}
-          refetchOnWindowFocus={false}>
+          refetchOnWindowFocus={false}
+        >
           {getLayout(<Component {...pageProps} />)}
         </SessionProvider>
       </RecoilRoot>
+      <ServiceWorkerRegister />
     </>
   );
 };
