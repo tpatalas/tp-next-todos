@@ -1,4 +1,4 @@
-const version = 'v1686728672690';
+const version = 'v1686729345422';
 const STATIC_CACHE_NAME = `static-assets-${version}`;
 const PRECACHE_URLS = [];
 
@@ -21,24 +21,28 @@ const staleWhileRevalidate = async (event, request, cacheName, useStreamForStati
 
   const networkResponse = await fetchAndUpdateCache();
 
-  if (useStreamForStatic && cacheName === STATIC_CACHE_NAME) {
+  if (useStreamForStatic && self.ReadableStream) {
     return new Response(
       new ReadableStream({
         async start(controller) {
           const reader = networkResponse.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) {
-              controller.close();
-              break;
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                controller.close();
+                return;
+              }
+              controller.enqueue(value);
             }
-            controller.enqueue(value);
+          } catch (error) {
+            console.error('Stream error:', error);
+            controller.error(error);
           }
         },
       }),
     );
   }
-
   return networkResponse;
 };
 
