@@ -30,6 +30,7 @@ const customJestConfig = {
     '^@data/(.*)$': ['<rootDir>/lib/data/$1'],
     '^@lib/(.*)$': ['<rootDir>/lib/$1'],
     '^@auth/(.*)$': ['<rootDir>/components/auth/$1'],
+    '^@serviceWorker/(.*)$': ['<rootDir>/components/serviceWorker/$1'],
     '^@editor/(.*)$': ['<rootDir>/components/editor/$1'],
     '^@icon/(.*)$': ['<rootDir>/components/icon/$1'],
     '^@label/(.*)$': ['<rootDir>/components/label/$1'],
