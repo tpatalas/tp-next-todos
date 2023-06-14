@@ -35,7 +35,6 @@ jobs:
             --platform ${{ secrets.GCR_PLATFORM }} \
             --allow-unauthenticated \
             --min-instances=1 \
-            --no-cpu-throttling \
             --vpc-connector ${{ secrets.GCR_VPC_CONNECTOR }} \
             --vpc-egress ${{ secrets.GCR_VPC_EGRESS }} \
             --region ${{ secrets.GCR_VPC_REGION }} \
