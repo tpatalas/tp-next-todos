@@ -1,15 +1,15 @@
 import { IconButton } from '@buttons/iconButton';
 import { ICON_SEARCH, ICON_CLOSE } from '@data/materialSymbols';
 import { SvgIcon } from '@icon/svgIcon';
+import { atomLayoutSearch } from '@layout/layout.states';
 import { classNames } from '@stateLogics/utils';
-import { atomSearchInput } from '@states/layouts';
 import { Fragment as ResetSearchFragment, Fragment as SearchBarFragment } from 'react';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
 export const SearchBar = () => {
-  const setSearchInput = useSetRecoilState(atomSearchInput);
-  const searchInputValue = useRecoilValue(atomSearchInput);
-  const resetSearchInput = useResetRecoilState(atomSearchInput);
+  const setSearchInput = useSetRecoilState(atomLayoutSearch);
+  const searchInputValue = useRecoilValue(atomLayoutSearch);
+  const resetSearchInput = useResetRecoilState(atomLayoutSearch);
 
   return (
     <SearchBarFragment>
