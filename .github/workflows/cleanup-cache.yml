@@ -1,28 +1,26 @@
-name: Cleanup Caches and Workflow Runs
+name: Cleanup Caches
 
 on:
   schedule:
-    - cron: '0 0 */5 * *' # every 5 days at midnight (UTC)
+    - cron: '0 0 */2 * *' # every 2 days at midnight (UTC)
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-      - name: Delete workflow runs
-        uses: Mattraks/delete-workflow-runs@v2
-        with:
-          token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          retain_days: 30
-          keep_minimum_runs: 6
+
+      - name: Install GitHub CLI extension
+        run: gh extension install actions/gh-actions-cache
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< "${GH_TOKEN}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Cleanup all caches
         run: |
-          gh extension install actions/gh-actions-cache
-
           REPO=${{ github.repository }}
 
           echo "Fetching list of cache keys"

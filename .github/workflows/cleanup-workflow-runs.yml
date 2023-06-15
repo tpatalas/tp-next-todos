@@ -1,0 +1,21 @@
+name: Cleanup Workflow Runs
+
+on:
+  schedule:
+    - cron: '0 0 */20 * *' # every 20 days at midnight (UTC)
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 20
+          keep_minimum_runs: 6
