@@ -1,5 +1,5 @@
 import { useInitialNavigation } from '@layout/layout.hooks';
-import { atomLayoutType } from '@states/layouts';
+import { atomLayoutType } from '@layout/layout.states';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 

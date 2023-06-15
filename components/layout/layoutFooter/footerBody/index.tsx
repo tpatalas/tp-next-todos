@@ -1,7 +1,7 @@
 import { GRADIENT_POSITION, GRADIENT_TYPE } from '@constAssertions/ui';
+import { atomLayoutType, atomLayoutNavigationOpen } from '@layout/layout.states';
 import { Types } from '@lib/types';
 import { classNames } from '@stateLogics/utils';
-import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomDisableScroll } from '@states/misc';
 import { GlobalVerticalGradient } from '@ui/gradients/globalVerticalGradient';
 import { useRecoilValue } from 'recoil';
@@ -10,7 +10,7 @@ type Props = Pick<Types, 'children'>;
 
 export const FooterBody = ({ children }: Props) => {
   const layoutType = useRecoilValue(atomLayoutType);
-  const isSidebarOpen = useRecoilValue(atomNavigationOpen(layoutType));
+  const isSidebarOpen = useRecoilValue(atomLayoutNavigationOpen(layoutType));
   const isScrollDisabled = useRecoilValue(atomDisableScroll);
 
   return (
