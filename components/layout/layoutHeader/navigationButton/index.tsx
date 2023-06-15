@@ -10,8 +10,9 @@ export const NavigationButton = () => {
       <IconButton
         options={optionsButtonSidebarToggle}
         onClick={() => setNavigationOpen()}
-      />
-      <span className='sr-only'>Open sidebar</span>
+      >
+        <span className='sr-only'>Open sidebar</span>
+      </IconButton>
     </>
   );
 };
