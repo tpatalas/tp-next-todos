@@ -1,7 +1,6 @@
 import { PATH_APP, PATH_HOME, PATH_IMAGE_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
-import { atomLayoutType, atomNavigationOpen } from '@states/layouts';
 import { atomFilterEffect, atomHtmlTitleTag, atomPathnameImage } from '@states/misc';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 import { TypesLayout } from './layout.types';
@@ -10,13 +9,14 @@ import { useNextQuery } from '@hooks/misc';
 import { selectorSessionLabels, atomLabelQuerySlug } from '@label/label.states';
 import { Labels } from '@label/label.types';
 import { useRouter } from 'next/router';
+import { atomLayoutType, atomLayoutNavigationOpen } from './layout.states';
 
 export const useNavigationOpen = () => {
   const layoutType = useRecoilValue(atomLayoutType);
   return useRecoilCallback(
     ({ set }) =>
       () => {
-        set(atomNavigationOpen(layoutType), (event) => !event);
+        set(atomLayoutNavigationOpen(layoutType), (event) => !event);
       },
     [layoutType],
   );
@@ -51,12 +51,12 @@ export const useInitialNavigation = ({ path }: Pick<TypesLayout, 'path'>) => {
     const breakpointMd = path === 'app' ? breakPointMd : breakPointMl;
 
     if (breakpointMd) {
-      set(atomNavigationOpen('app'), true);
-      set(atomNavigationOpen('home'), false);
+      set(atomLayoutNavigationOpen('app'), true);
+      set(atomLayoutNavigationOpen('home'), false);
       return;
     }
-    set(atomNavigationOpen('app'), false);
-    set(atomNavigationOpen('home'), false);
+    set(atomLayoutNavigationOpen('app'), false);
+    set(atomLayoutNavigationOpen('home'), false);
   });
   // should not use any dependency to create the hook on every rendering.
   // This should reset the initial state on every route change.
