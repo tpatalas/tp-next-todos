@@ -42,6 +42,7 @@ export const Backdrop = ({ options, onClick, onBlur, onFocus }: Props) => {
             onBlur={onBlur}
             onFocus={onFocus}
             ref={divRef}
+            data-testid='backdrop'
           />
         </Transition.Child>
       </ConditionalPortal>
