@@ -20,7 +20,6 @@ import { useConditionCheckTodoTitleEmpty } from '@hooks/misc';
 import { useTodoModalStateClose } from '@hooks/modals';
 import { useTodoAdd } from '@hooks/todos';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
-import { DisableScrollEffect } from '@effects/disableScrollEffect';
 import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
 import { classNames } from '@stateLogics/utils';
 import { DividerX } from '@ui/dividers/dividerX';
@@ -122,7 +121,6 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
       </ModalTransitionRoot>
       {children}
       <KeysWithTodoModalEffect todo={todo} />
-      <DisableScrollEffect open={isTodoModalOpen} />
     </TodoModalFragment>
   );
 };
