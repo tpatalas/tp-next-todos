@@ -1,5 +1,4 @@
 import { ConditionalPortal } from '@dropdowns/v1/dropdown/conditionalPortal';
-import { DisableScrollEffect } from '@effects/disableScrollEffect';
 import { Menu, Transition } from '@headlessui/react';
 import { Types } from '@lib/types';
 import { TypesOptionsDropdown } from '@lib/types/options';
@@ -27,9 +26,9 @@ export const MenuItems = ({ referenceElement, open, children, options }: Props) 
       enterTo='transform opacity-100 scale-100'
       leave='transition ease-in duration-75'
       leaveFrom='transform opacity-100 scale-100'
-      leaveTo='transform opacity-0 scale-95'>
+      leaveTo='transform opacity-0 scale-95'
+    >
       <ConditionalPortal isPortal={isPortal}>
-        <DisableScrollEffect open={open} />
         <Menu.Items
           className={classNames(
             'absolute right-0 z-50 origin-top-right focus:outline-none',
@@ -39,7 +38,8 @@ export const MenuItems = ({ referenceElement, open, children, options }: Props) 
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}
-          static>
+          static
+        >
           <div className={classNames(hasDivider && 'divide-y divide-gray-100')}>{children}</div>
         </Menu.Items>
       </ConditionalPortal>

@@ -1,5 +1,8 @@
 import { STYLE_HOVER_SLATE_DARK } from '@data/stylePreset';
 import { Menu, Transition } from '@headlessui/react';
+import { SvgIcon } from '@icon/svgIcon';
+import { TypesOptionsDropdown } from '@lib/types/options';
+import { classNames } from '@stateLogics/utils';
 import { atomOnBlur } from '@states/focus';
 import { Types } from 'lib/types';
 import dynamic from 'next/dynamic';
@@ -7,10 +10,6 @@ import { Fragment, Fragment as MenuFragment, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { useSetRecoilState } from 'recoil';
 import { ConditionalPortal } from './conditionalPortal';
-import { DisableScrollEffect } from '@effects/disableScrollEffect';
-import { classNames } from '@stateLogics/utils';
-import { TypesOptionsDropdown } from '@lib/types/options';
-import { SvgIcon } from '@icon/svgIcon';
 const Tooltip = dynamic(() => import('@tooltips/tooltips').then((mod) => mod.Tooltip));
 
 type Props = { options: TypesOptionsDropdown } & Partial<
@@ -111,7 +110,6 @@ export const Dropdown = ({ menuButtonContent, menuContentOnClose, children, show
                 leaveTo='transform opacity-0 scale-95'
               >
                 <ConditionalPortal isPortal={isPortal}>
-                  <DisableScrollEffect open={open} />
                   <Menu.Items
                     className={classNames(
                       'absolute right-0 z-50 origin-top-right focus:outline-none',

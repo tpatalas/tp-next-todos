@@ -9,7 +9,9 @@ import { Fragment as ComboBoxFragment } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
 type Props = Pick<Types, 'selected' | 'children' | 'placeholder'> &
-  Partial<Pick<Types, 'hasComboBoxBoardStyle' | 'comboBoxInputButton'>> & { onChange: (value: never) => void };
+  Partial<Pick<Types, 'hasComboBoxBoardStyle' | 'comboBoxInputButton'>> & {
+    onChange: (value: never) => void;
+  };
 
 export const ComboBox = ({
   onChange,
@@ -29,21 +31,25 @@ export const ComboBox = ({
         <Combobox
           value={selected}
           onChange={onChange}
-          multiple>
+          multiple
+        >
           <>
             <div
               className={classNames(
                 'relative flex flex-col rounded-lg outline-none',
-                hasComboBoxBoardStyle && 'group/comboBox focus-within:shadow-2xl focus-within:shadow-slate-300/40',
-              )}>
+                hasComboBoxBoardStyle &&
+                  'group/comboBox focus-within:shadow-2xl focus-within:shadow-slate-300/40',
+              )}
+            >
               <div
                 className={classNames(
                   'relative w-full cursor-default overflow-hidden rounded-lg py-1 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 group-focus-within/comboBox:border-opacity-50 sm:text-sm',
                   hasComboBoxBoardStyle &&
                     'border border-solid border-slate-200 bg-slate-50 shadow-xl shadow-slate-300/40',
-                )}>
+                )}
+              >
                 <Combobox.Input
-                  className='w-full border-none py-2 pl-4 pr-12 text-sm leading-5 text-gray-900 placeholder:text-gray-400 focus:ring-0'
+                  className='w-full border-none bg-transparent py-2 pl-4 pr-12 text-sm leading-5 text-gray-900 placeholder:text-gray-400 focus:ring-0'
                   placeholder={placeholder}
                   onChange={(event) => setQuery(event.target.value)}
                 />
@@ -53,7 +59,9 @@ export const ComboBox = ({
                     <PseudoIconButton options={optionsButtonComboBoxToggle} />
                   </Combobox.Button>
                 ) : (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-1'>{comboBoxInputButton}</div>
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-1'>
+                    {comboBoxInputButton}
+                  </div>
                 )}
               </div>
               <Transition
@@ -67,7 +75,8 @@ export const ComboBox = ({
                   hasComboBoxBoardStyle &&
                     'border-x border-b border-solid border-slate-200 shadow-xl shadow-slate-300/40 group-focus-within/comboBox:border-opacity-50',
                 )}
-                afterLeave={() => resetQuery()}>
+                afterLeave={() => resetQuery()}
+              >
                 {children}
               </Transition>
             </div>
