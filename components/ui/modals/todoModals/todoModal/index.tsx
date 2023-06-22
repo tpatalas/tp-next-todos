@@ -97,7 +97,7 @@ export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButton
               />
             </div>
           </div>
-          <div className='h-full w-full overflow-scroll will-change-transform'>
+          <div className='h-full w-full overflow-auto will-change-transform'>
             <TodoEditors todo={todo} />
           </div>
           <div className='flex flex-row justify-end pt-4 will-change-transform'>

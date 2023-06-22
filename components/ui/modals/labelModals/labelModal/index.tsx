@@ -61,7 +61,7 @@ export const LabelModal = ({
               <DividerX />
             </div>
           </div>
-          <div className='h-full w-full overflow-scroll pl-2 pr-3'>
+          <div className='h-full w-full overflow-auto pl-2 pr-3'>
             <input
               className={classNames(
                 'w-full rounded-lg border-0 bg-transparent py-1 pl-2 outline-none will-change-transform focus:ring-0 focus:ring-offset-0',

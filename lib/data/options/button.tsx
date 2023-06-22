@@ -1,21 +1,21 @@
 import { MODIFIER_KBD } from '@constAssertions/misc';
 import {
-    ICON_CHEVRON_LEFT,
-    ICON_CHEVRON_RIGHT,
-    ICON_CLOSE,
-    ICON_DELETE,
-    ICON_MAXIMIZE,
-    ICON_MENU,
-    ICON_MINIMIZE,
-    ICON_OPEN_IN_FULL,
-    ICON_UNFOLD_MORE
+  ICON_CHEVRON_LEFT,
+  ICON_CHEVRON_RIGHT,
+  ICON_CLOSE,
+  ICON_DELETE,
+  ICON_MAXIMIZE,
+  ICON_MENU,
+  ICON_MINIMIZE,
+  ICON_OPEN_IN_FULL,
+  ICON_UNFOLD_MORE,
 } from '@data/materialSymbols';
 import {
-    STYLE_BUTTON_LARGE_BLUE,
-    STYLE_BUTTON_NORMAL_BLUE,
-    STYLE_BUTTON_NORMAL_RED,
-    STYLE_BUTTON_NORMAL_WHITE,
-    STYLE_HOVER_ENABLED_SLATE_DARK,
+  STYLE_BUTTON_LARGE_BLUE,
+  STYLE_BUTTON_NORMAL_BLUE,
+  STYLE_BUTTON_NORMAL_RED,
+  STYLE_BUTTON_NORMAL_WHITE,
+  STYLE_HOVER_ENABLED_SLATE_DARK,
 } from '@data/stylePreset';
 import { TypesOptionsButton } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
@@ -84,7 +84,7 @@ export const optionsButtonConfirmModalDelete: TypesOptionsButton = {
 };
 
 export const optionsButtonConfirmModalDiscard: TypesOptionsButton = {
-  className: STYLE_BUTTON_NORMAL_RED,
+  className: classNames(STYLE_BUTTON_NORMAL_RED, 'will-change-transform'),
   tooltip: 'Discard',
   kbd: 'Enter',
 };
@@ -96,7 +96,7 @@ export const optionsButtonConfirmModalCancelIcon: TypesOptionsButton = {
 };
 
 export const optionsButtonConfirmModalCancel: TypesOptionsButton = {
-  className: classNames(STYLE_BUTTON_NORMAL_WHITE, 'mr-3'),
+  className: classNames(STYLE_BUTTON_NORMAL_WHITE, 'mr-3 will-change-transform'),
   tooltip: 'Cancel',
   kbd: 'Escape',
 };

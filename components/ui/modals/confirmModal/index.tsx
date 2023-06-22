@@ -43,7 +43,7 @@ export const ConfirmModal = ({ itemIds, ...props }: Props) => {
               </div>
             </div>
           </div>
-          <div className='mt-8 flex justify-end'>
+          <div className='mt-8 flex justify-end will-change-transform'>
             <CancelButton
               options={optionsButtonConfirmModalCancel}
               onClick={() => cancelConfirmModal()}
