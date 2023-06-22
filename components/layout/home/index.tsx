@@ -24,13 +24,11 @@ export const LayoutHome = ({ children }: Props) => {
         <title>{slug ? 'Todos - ' + slug : 'Todos'}</title>
       </Head>
       <main className='flex min-h-screen flex-col justify-between'>
-        <div>
-          <LayoutHeader path={path}>
-            <HomeNavigation path={path} />
-          </LayoutHeader>
-          <LayoutFooter path={path} />
-          {children}
-        </div>
+        <LayoutHeader path={path}>
+          <HomeNavigation path={path} />
+        </LayoutHeader>
+        <LayoutFooter path={path} />
+        {children}
         <Footer />
       </main>
       <LayoutHomeLazy path={path} />
