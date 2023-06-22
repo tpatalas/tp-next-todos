@@ -33,7 +33,7 @@ export const HomeHero = () => {
 
   return (
     <>
-      <div className='w-screen'>
+      <div>
         <div className='relative isolate pt-10'>
           <div className='py-24 sm:py-32 lg:pb-40'>
             <div
