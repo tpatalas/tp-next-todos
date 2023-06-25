@@ -1,6 +1,9 @@
-const version = 'v1686729345422';
+const version = 'v1687719235564';
 const STATIC_CACHE_NAME = `static-assets-${version}`;
-const PRECACHE_URLS = [];
+const PRE_CACHE_NAME = `precache-assets-${version}`;
+const PRECACHE_AT_INSTALL = [];
+// Precache URL will be cached by Cache Storage only
+// This precache runs right after installing service worker.
 
 const isStaticAsset = (url) => /_next\/static/i.test(url);
 
@@ -46,19 +49,43 @@ const staleWhileRevalidate = async (event, request, cacheName, useStreamForStati
   return networkResponse;
 };
 
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'startPrefetching') {
+    const { prefetchUrls, precacheUrls } = event.data;
+
+    if (prefetchUrls && prefetchUrls.length > 0) {
+      prefetchUrls.forEach(async (url) => {
+        try {
+          await fetch(url);
+        } catch (error) {
+          console.error('Error prefetching:', error);
+        }
+      });
+    }
+
+    if (precacheUrls && precacheUrls.length > 0) {
+      caches.open(PRE_CACHE_NAME).then((cache) => cache.addAll(precacheUrls));
+    }
+  }
+});
+
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(STATIC_CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)));
+  if (PRECACHE_AT_INSTALL && PRECACHE_AT_INSTALL.length > 0) {
+    event.waitUntil(caches.open(PRE_CACHE_NAME).then((cache) => cache.addAll(PRECACHE_AT_INSTALL)));
+  }
 });
 
 self.addEventListener('activate', (event) => {
+  const allowedCacheNames = [STATIC_CACHE_NAME, PRE_CACHE_NAME];
+
   event.waitUntil(
     caches
       .keys()
       .then((cacheNames) =>
         Promise.all(
-          cacheNames.map((cacheName) =>
-            cacheName !== STATIC_CACHE_NAME ? caches.delete(cacheName) : undefined,
-          ),
+          cacheNames
+            .filter((cacheName) => !allowedCacheNames.includes(cacheName))
+            .map((cacheName) => caches.delete(cacheName)),
         ),
       ),
   );
