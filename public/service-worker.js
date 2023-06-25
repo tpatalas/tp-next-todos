@@ -1,6 +1,8 @@
-const version = 'v1686729345422';
+const version = 'v1687719235564';
 const STATIC_CACHE_NAME = `static-assets-${version}`;
-const PRECACHE_URLS = [];
+const PRE_CACHE_NAME = `precache-assets-${version}`;
+const PRE_FETCH = []; //fetch only. It will use browser cache without Cache Storage
+const PRE_CACHE = []; // fetch and cache into Cache Storage without browser cache.
 
 const isStaticAsset = (url) => /_next\/static/i.test(url);
 
@@ -47,20 +49,45 @@ const staleWhileRevalidate = async (event, request, cacheName, useStreamForStati
 };
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(STATIC_CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)));
+  const cacheResources = async () => {
+    const preCache = PRE_CACHE.length > 0;
+    const preFetch = PRE_FETCH.length > 0;
+
+    if (preCache || preFetch) {
+      const cache = await caches.open(PRE_CACHE_NAME);
+
+      if (preCache) {
+        await cache.addAll(PRE_CACHE);
+      }
+
+      if (preFetch) {
+        await Promise.all(
+          PRE_FETCH.map((url) =>
+            fetch(url).then((response) => {
+              if (response.ok) cache.put(url, response);
+            }),
+          ),
+        );
+      }
+    }
+  };
+
+  event.waitUntil(cacheResources());
 });
 
 self.addEventListener('activate', (event) => {
+  const allowedCacheNames = [STATIC_CACHE_NAME, PRE_CACHE_NAME];
+
   event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) =>
-        Promise.all(
-          cacheNames.map((cacheName) =>
-            cacheName !== STATIC_CACHE_NAME ? caches.delete(cacheName) : undefined,
-          ),
-        ),
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((cacheName) => {
+          if (!allowedCacheNames.includes(cacheName)) {
+            return caches.delete(cacheName);
+          }
+        }),
       ),
+    ),
   );
 });
 
