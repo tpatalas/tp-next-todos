@@ -4,7 +4,7 @@ import { Types } from '@lib/types';
 import { delSessionStorage, getSessionStorage, setSessionStorage } from '@stateLogics/utils';
 import { atomUserSession } from '@user/user.states';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next-router-mock';
+import { useRouter } from 'next/router';
 import { useRecoilCallback } from 'recoil';
 
 export const useUserSession = () => {

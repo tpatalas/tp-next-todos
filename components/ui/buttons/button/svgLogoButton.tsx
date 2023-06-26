@@ -1,8 +1,8 @@
 import { TypesPropsOptionsSvg, TypesSvgLogos } from '@icon/icon.types';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next-router-mock';
 import { Button } from '.';
 import { DATA_SVG_PROVIDERS } from '@icon/icon.data';
+import { useRouter } from 'next/router';
 
 export const SvgLogoButton = ({ options = {} }: TypesPropsOptionsSvg) => {
   const router = useRouter();
