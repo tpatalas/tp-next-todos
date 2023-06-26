@@ -58,7 +58,7 @@ export const Footer = () => {
               ))}
             </div>
             <p className='text-center text-xs leading-5 text-gray-500'>
-              &copy; 2023 tpAtalas. Repository code under MIT License.
+              &copy; 2023 tpatalas. Repository code under MIT License.
             </p>
           </div>
         </div>
