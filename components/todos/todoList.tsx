@@ -37,9 +37,10 @@ export const TodoList = () => {
                   loader={cloudflareLoader}
                   width={500}
                   height={500}
-                  className='h-auto w-auto'
+                  className='h-auto w-full'
                   src={image.path}
                   alt={image.alt}
+                  sizes='25vw'
                   priority={true}
                 />
               </div>
