@@ -9,13 +9,17 @@ import { classNames, validateEmailFormat } from '@stateLogics/utils';
 import { atomLoadingSpinner } from '@states/misc';
 import { DividerX } from '@ui/dividers/dividerX';
 import dynamic from 'next/dynamic';
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Logo } from '@layout/layoutHeader/logo';
 import { AuthErrorMessage } from '@auth/authErrorMessage';
 import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
 import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';
 import { USER } from '@auth/auth.const';
+
+const UserSessionEffect = dynamic(() =>
+  import('@user/userSessionGroupEffect/userSessionEffect').then((mod) => mod.UserSessionEffect),
+);
 
 const AuthErrorMessageEffect = dynamic(() =>
   import('@auth/authEffect/authErrorMessageEffect').then((mod) => mod.AuthErrorMessageEffect),
@@ -74,7 +78,10 @@ export const AuthForm = () => {
           </form>
         </section>
       </div>
-      <AuthErrorMessageEffect />
+      <Suspense fallback={null}>
+        <AuthErrorMessageEffect />
+        <UserSessionEffect />
+      </Suspense>
     </Fragment>
   );
 };
