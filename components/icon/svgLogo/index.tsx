@@ -13,6 +13,7 @@ export const SvgLogo = memo(({ type }: TypesPropsSvgLogoNames) => {
       height={svgData.height ?? '24'}
       width={svgData.width ?? '24'}
       viewBox={svgData.viewBox ?? VIEWBOX['24']}
+      data-testid={`${svgData.name}-testid`}
     >
       {svgData.path}
     </svg>

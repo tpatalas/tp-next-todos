@@ -9,8 +9,8 @@ import { SmoothTransition } from '@ui/transitions/smoothTransition';
 
 export const HomeContent = () => {
   const styleImageWrapper =
-    'relative w-80 h-auto rounded-xl shadow-2xl shadow-slate-500/30 ring-2 ring-slate-300/10';
-  const styleImage = 'h-auto w-auto rounded-xl drop-shadow-2xl';
+    'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
+  const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
   const styleImageFrame = 'md:h-[440px]';
   const imageOptions = {
     type: TRANSITION_TYPE['scaleCenterSm'],
@@ -42,10 +42,11 @@ export const HomeContent = () => {
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
                   loader={cloudflareLoader}
-                  width={3000}
-                  height={1000}
+                  width={1850}
+                  height={2529}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentFocus']}
+                  sizes='(max-width: 748px) 70vw, 33vw'
                   alt='content focus image'
                   priority={true}
                 />
@@ -57,16 +58,17 @@ export const HomeContent = () => {
             ref={overloadImageRef}
           >
             <SmoothTransition
-              options={{ ...imageOptions, delay: DELAY['1000'] }}
+              options={{ ...imageOptions, delay: DELAY['700'] }}
               scrollRef={overloadImageRef}
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
                   loader={cloudflareLoader}
-                  width={3000}
-                  height={1000}
+                  width={456}
+                  height={600}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentOrganize']}
+                  sizes='(max-width: 748px) 70vw, 33vw'
                   alt='content organize image'
                   priority={true}
                 />

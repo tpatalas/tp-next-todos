@@ -1,8 +1,8 @@
 import { Button } from '@buttons/button';
 import { PATH_HOME } from '@constAssertions/data';
+import { atomLayoutType } from '@layout/layout.states';
 import { optionsSignInButton } from '@layout/layout.utils';
 import { TypesOptionsButton } from '@lib/types/options';
-import { atomLayoutType } from '@states/layouts';
 import { signIn } from 'next-auth/react';
 import router from 'next/router';
 import { useEffect } from 'react';

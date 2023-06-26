@@ -94,6 +94,7 @@ export const HomeHero = () => {
                           height={1000}
                           className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
                           src={PATH_IMAGE_HOME['demo']}
+                          sizes='100vw'
                           alt='demo application image'
                           priority={true}
                         />

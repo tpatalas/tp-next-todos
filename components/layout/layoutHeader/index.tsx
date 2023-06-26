@@ -12,8 +12,8 @@ import {
 import { useRecoilValue } from 'recoil';
 import { Logo } from './logo';
 import { NavigationButton } from './navigationButton';
-import { atomNavigationOpen } from '@states/layouts';
 import { TypesLayout } from '@layout/layout.types';
+import { atomLayoutNavigationOpen } from '@layout/layout.states';
 
 const UserSessionGroupEffect = dynamic(() =>
   import('@user/userSessionGroupEffect').then((mod) => mod.UserSessionGroupEffect),
@@ -24,7 +24,7 @@ type Props = Partial<Pick<Types, 'children'>> & Pick<TypesLayout, 'path'>;
 export const LayoutHeader = ({ children, path }: Props) => {
   const layoutHome = path === 'home';
   const layoutApp = path === 'app';
-  const isSidebarOpen = useRecoilValue(atomNavigationOpen(path));
+  const isSidebarOpen = useRecoilValue(atomLayoutNavigationOpen(path));
   const scrollPosition = useVerticalScrollPosition();
   const homeSidebarClose = layoutHome && !isSidebarOpen && scrollPosition;
 

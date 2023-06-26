@@ -1,5 +1,4 @@
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
-import { atomNavigationOpen } from '@states/layouts';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import { screen } from '@testing-library/react';
 import { UserSessionEffect } from '@user/userSessionGroupEffect/userSessionEffect';
@@ -10,6 +9,7 @@ import { RecoilState, useRecoilValue } from 'recoil';
 import { LabelItem } from '..';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
 import { useInitialNavigation } from '@layout/layout.hooks';
+import { atomLayoutNavigationOpen } from '@layout/layout.states';
 
 jest.mock('@modals/labelModals/labelModal/itemLabelModal', () => ({
   ItemLabelModal: () => {
@@ -110,7 +110,7 @@ describe('LabelItem', () => {
 
   it('should show active text when media query is above medium width, 768px', async () => {
     const layoutType = 'app';
-    const { container } = renderWithLabelItem(atomNavigationOpen(layoutType), false);
+    const { container } = renderWithLabelItem(atomLayoutNavigationOpen(layoutType), false);
     const labelButton = screen.getByText(mockedLabelItem.name);
     const navigationOpen = screen.getByText('active');
 
