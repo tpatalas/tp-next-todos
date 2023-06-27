@@ -60,7 +60,7 @@ capacity, defaulting to a minimum of seven tasks.
 [![HeadlessUI](https://img.shields.io/github/package-json/dependency-version/tpatalas/tp-next-todos/@headlessui/react?color=black&label=headless%20ui&logo=headlessui&style=for-the-badge)](https://headlessui.com/)
 [![Next-Auth](https://img.shields.io/github/package-json/dependency-version/tpatalas/tp-next-todos/next-auth?color=black&logo=auth&style=for-the-badge)](https://next-auth.js.org/)
 
-[![Jest](https://img.shields.io/github/package-json/dependency-version/tpatalas/tp-next-todos/jest?color=black&label=jest&logo=jest&style=for-the-badge)](https://jestjs.io/)
+[![Jest](https://img.shields.io/github/package-json/dependency-version/tpatalas/tp-next-todos/dev/jest?color=black&label=jest&logo=jest&style=for-the-badge)](https://jestjs.io/)
 [![React-testing-library](https://img.shields.io/github/package-json/dependency-version/tpatalas/tp-next-todos/dev/@testing-library/react?label=react-testing-library&logo=testing-library&style=for-the-badge&color=black)](https://testing-library.com/docs/react-testing-library/intro/)
 
 [![Mongoose](https://img.shields.io/github/package-json/dependency-version/tpatalas/tp-next-todos/mongoose?color=black&logo=mongoose&style=for-the-badge)](https://mongoosejs.com/)
