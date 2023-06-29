@@ -28,6 +28,7 @@ export const HomeNavigation = ({ path }: Props) => {
         layoutHome &&
           'flex-col bg-slate-50 max-ml:space-y-4 max-ml:rounded-b-xl max-ml:px-5 max-ml:pb-8 max-ml:pt-[6rem] ml:flex ml:flex-row ml:items-center ml:space-x-3 ml:bg-transparent ml:pr-0 lg:pr-3',
       )}
+      data-testid='homeNavigation'
     >
       {DATA_HOME.map((path) => (
         <div key={path.name}>
