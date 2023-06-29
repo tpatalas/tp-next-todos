@@ -3,6 +3,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { ReactElement, ReactNode, useEffect } from 'react';
 import { RecoilRoot, RecoilState, atom, useRecoilSnapshot, useSetRecoilState } from 'recoil';
+import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
 
 interface TypesRecoilRootProvider<T> extends TypesRecoilObserver<T> {
   children: ReactNode;
@@ -29,13 +30,15 @@ export const RecoilObserver = <T,>({ node, state }: TypesRecoilObserver<T>) => {
 
 const RecoilRootProvider = <T,>({ children, session, node, state }: TypesRecoilRootProvider<T>) => {
   return (
-    <RecoilRoot>
-      <SessionProvider session={session}>{children}</SessionProvider>
-      <RecoilObserver
-        node={node}
-        state={state}
-      />
-    </RecoilRoot>
+    <MemoryRouterProvider>
+      <RecoilRoot>
+        <SessionProvider session={session}>{children}</SessionProvider>
+        <RecoilObserver
+          node={node}
+          state={state}
+        />
+      </RecoilRoot>
+    </MemoryRouterProvider>
   );
 };
 
