@@ -13,7 +13,10 @@ export const LayoutFooter = ({ children, path }: Props) => {
 
   return (
     <LayoutFooterFragment>
-      <div className='flex h-full flex-row'>
+      <div
+        className='flex h-full flex-row'
+        data-testid='layoutFooter'
+      >
         <SidebarTransition path={path}>
           {layoutApp && <AppNavigation />}
           {layoutHome && <HomeNavigation path={path} />}
