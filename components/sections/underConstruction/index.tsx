@@ -38,7 +38,7 @@ export const UnderConstruction = () => {
             height={1000}
             className='h-auto w-full rounded-xl bg-transparent drop-shadow-2xl'
             src={PATH_IMAGE_HOME['underConstruction']}
-            sizes='100vw'
+            sizes='80vw'
             alt='content under construction'
             priority={true}
           />
