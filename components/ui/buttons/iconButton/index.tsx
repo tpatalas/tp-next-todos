@@ -42,6 +42,7 @@ export const IconButton = ({ options, menuButtonContent, onClick, children = opt
                 options.color ?? 'fill-gray-500',
                 !options.isDisabled && '[.group-button:hover_&]:fill-gray-700',
               ),
+              testId: options.testId,
             }}
           />
           <HeaderContentsFragment>
