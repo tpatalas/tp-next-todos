@@ -19,7 +19,7 @@ export type TypesOptionsButton = Partial<
   } & Pick<
       TypesStyleAttributes,
       'padding' | 'margin' | 'display' | 'width' | 'size' | 'color' | 'container' | 'hoverBg' | 'borderRadius'
-    >
+    > & { testId: string }
 >;
 
 export type TypesOptionsPseudoButton = Partial<

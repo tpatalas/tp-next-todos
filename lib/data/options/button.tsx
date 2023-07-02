@@ -173,6 +173,7 @@ export const optionsButtonSidebarToggle: TypesOptionsButton = {
   path: ICON_MENU,
   size: 'h-6 w-6',
   hoverBg: STYLE_HOVER_ENABLED_SLATE_DARK,
+  testId: 'sidebarButton-testid',
 };
 
 // comboBox

@@ -25,6 +25,7 @@ export const AppNavigation = () => {
   const openModal = useTodoModalStateOpen(undefined);
   const setSidebarOpen = useNavigationOpen();
   const condition = useConditionCheckCreateModalOpen();
+  const svgIconOptions = { path: ICON_ADD_TASK, className: 'mr-3 fill-white h-5 w-5' };
 
   return (
     <>
@@ -47,12 +48,7 @@ export const AppNavigation = () => {
             isConditionalRendering={condition}
           >
             <span className='flex flex-row items-center'>
-              <SvgIcon
-                options={{
-                  path: ICON_ADD_TASK,
-                  className: 'mr-3 fill-white h-5 w-5',
-                }}
-              />
+              <SvgIcon options={svgIconOptions} />
               Create todo
             </span>
           </DisableButton>
