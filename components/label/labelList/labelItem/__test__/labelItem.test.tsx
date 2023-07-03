@@ -4,12 +4,12 @@ import { screen } from '@testing-library/react';
 import { UserSessionEffect } from '@user/userSessionGroupEffect/userSessionEffect';
 import { mockedLabelItem } from '__mock__/label';
 import mockRouter from 'next-router-mock';
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import { RecoilState, useRecoilValue } from 'recoil';
 import { LabelItem } from '..';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
-import { useInitialNavigation } from '@layout/layout.hooks';
 import { atomLayoutNavigationOpen } from '@layout/layout.states';
+import { MockInitialNavigationEffect } from './__mock__/mockInitialNavigationEffect';
 
 jest.mock('@modals/labelModals/labelModal/itemLabelModal', () => ({
   ItemLabelModal: () => {
@@ -27,16 +27,6 @@ jest.mock('@modals/confirmModal/deleteConfirmModal/deleteLabelConfirmModal', () 
   },
 }));
 
-const InitialNavigationEffect = ({ isBreakpointMd }: { isBreakpointMd: boolean }) => {
-  const setInitial = useInitialNavigation({ path: 'app' });
-  const mockValue = isBreakpointMd;
-
-  useEffect(() => {
-    !mockValue && setInitial();
-  }, [mockValue, setInitial]);
-  return null;
-};
-
 describe('LabelItem', () => {
   const renderWithLabelItem = <T,>(node?: RecoilState<T>, isBreakpointMd?: boolean) => {
     const options = { session: null, node: node };
@@ -45,7 +35,7 @@ describe('LabelItem', () => {
         <LabelItem label={mockedLabelItem} />
         <UserSessionEffect />
         <Suspense fallback={null}>
-          <InitialNavigationEffect isBreakpointMd={isBreakpointMd ?? false} />
+          <MockInitialNavigationEffect isBreakpointMd={isBreakpointMd ?? false} />
         </Suspense>
       </>,
       options,

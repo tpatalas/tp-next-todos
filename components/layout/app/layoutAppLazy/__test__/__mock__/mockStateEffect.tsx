@@ -18,7 +18,7 @@ export type PropsMockStateEffect<T> = {
   node?: RecoilState<T>;
 };
 
-export const MockStateEffect = <T,>({
+export const MockLayoutAppLazyEffect = <T,>({
   mediaQueryState,
   notificationId,
   isTodoModalOpen,
@@ -29,7 +29,6 @@ export const MockStateEffect = <T,>({
   const htmlTitleTag = useRecoilValue(atomHtmlTitleTag);
   const isNavigationOpen = useRecoilValue(atomLayoutNavigationOpen('app'));
   const setMediaQuery = useSetRecoilState(atomEffectMediaQuery(BREAKPOINT['md']));
-  const notificationIdIsSet = useRecoilValue(atomNotificationID);
   const setNotificationId = useSetRecoilState(atomNotificationID);
   const setNotificationOpen = useSetRecoilState(atomNotificationOpen);
   const setTodoModalOpen = useSetRecoilState(atomTodoModalOpen(undefined));
@@ -40,7 +39,7 @@ export const MockStateEffect = <T,>({
   useEffect(() => {
     setMediaQuery(mediaQueryState ?? false);
     setNotificationId(notificationId ?? 'updatedTodo');
-    !!notificationIdIsSet && setNotificationOpen(true);
+    !!notificationId && setNotificationOpen(true);
     setTodoModalOpen(isTodoModalOpen ?? false);
     setMinimizedTodoModalOpen(isMinimizedTodoModalOpen ?? false);
     !!isMinimizedTodoModalOpen && setTodoNew({ title: 'test-title' } as Todos);
@@ -51,7 +50,6 @@ export const MockStateEffect = <T,>({
     isTodoModalOpen,
     mediaQueryState,
     notificationId,
-    notificationIdIsSet,
     setLabelModalOpen,
     setMediaQuery,
     setMinimizedTodoModalOpen,
