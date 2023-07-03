@@ -24,10 +24,13 @@ describe('FilterPathAppEffect', () => {
 
   const testTextPresence = async (pathname: string, text: string) => {
     await waitFor(() => mockRouter.push(pathname));
-    const textPresence = screen.getByText(text);
 
     expect(mockRouter).toMatchObject({ pathname: pathname });
-    expect(textPresence).toBeInTheDocument();
+
+    await waitFor(() => {
+      const textPresence = screen.getByText(text);
+      expect(textPresence).toBeInTheDocument();
+    });
   };
 
   it('should render the correct text based on the correct pathname', async () => {
