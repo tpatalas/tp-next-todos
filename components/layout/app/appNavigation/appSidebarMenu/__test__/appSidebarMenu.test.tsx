@@ -20,9 +20,11 @@ describe('AppSidebarMenu', () => {
   it('should render the text of the sidebar menu', () => {
     const { container } = renderWithAppSidebarMenu();
     const expectTextPresence = () =>
-      DATA_SIDEBAR_MENU.forEach((item) => {
-        const textPresence = screen.getByText(item.name);
-        expect(textPresence).toBeInTheDocument();
+      DATA_SIDEBAR_MENU.forEach(async (item) => {
+        await waitFor(() => {
+          const textPresence = screen.getByText(item.name);
+          expect(textPresence).toBeInTheDocument();
+        });
       });
 
     expectTextPresence();
