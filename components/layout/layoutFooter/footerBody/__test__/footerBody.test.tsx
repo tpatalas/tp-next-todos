@@ -1,41 +1,21 @@
-import { atomLayoutNavigationOpen } from '@layout/layout.states';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
-import { atomDisableScroll } from '@states/misc';
 import { screen } from '@testing-library/react';
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { FooterBody } from '..';
+import { MockFooterStateEffect, PropsFooterStateEffect } from './__mock__/mockFooterStateEffect';
 
 jest.mock('@ui/gradients/globalVerticalGradient', () => ({
   GlobalVerticalGradient: () => <div>Top Gradient</div>,
 }));
 
-type Props = {
-  isSidebarOpen?: boolean;
-  isScrollDisabled?: boolean;
-};
-
-const MockStateEffect = ({ isSidebarOpen, isScrollDisabled }: Props) => {
-  const setSideBarOpen = useSetRecoilState(atomLayoutNavigationOpen('app'));
-  const setScrollBar = useSetRecoilState(atomDisableScroll);
-
-  useEffect(() => {
-    setSideBarOpen(isSidebarOpen ?? false);
-    isScrollDisabled ? setScrollBar(isScrollDisabled) : null;
-  }, [isScrollDisabled, isSidebarOpen, setScrollBar, setSideBarOpen]);
-
-  return null;
-};
-
 describe('FooterBody', () => {
-  const renderWithFooterBody = ({ isSidebarOpen, isScrollDisabled }: Props) => {
+  const renderWithFooterBody = ({ isSidebarOpen, isScrollDisabled }: PropsFooterStateEffect) => {
     const options = { session: null };
     return renderWithRecoilRootAndSession(
       <>
         <FooterBody>
           <></>
         </FooterBody>
-        <MockStateEffect
+        <MockFooterStateEffect
           isSidebarOpen={isSidebarOpen}
           isScrollDisabled={isScrollDisabled}
         />

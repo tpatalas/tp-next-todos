@@ -1,23 +1,7 @@
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { LayoutHomeLazy } from '..';
-import { useRecoilValue } from 'recoil';
-import { atomLayoutNavigationOpen, atomLayoutType } from '@layout/layout.states';
 import { screen } from '@testing-library/react';
-import { atomHtmlTitleTag } from '@states/misc';
-
-const StateEffect = () => {
-  const layoutType = useRecoilValue(atomLayoutType);
-  const htmlTitleTag = useRecoilValue(atomHtmlTitleTag);
-  const layoutNavigationOpen = useRecoilValue(atomLayoutNavigationOpen('home'));
-
-  return (
-    <>
-      <div>LayoutType: {layoutType}</div>
-      <div>HtmlTitleTag: {htmlTitleTag}</div>
-      <div>LayoutNavigation: {layoutNavigationOpen ? 'True' : 'false'}</div>
-    </>
-  );
-};
+import { MockStateEffect } from './__mock__/mockStateEffect';
 
 describe('LayoutHomeLazy', () => {
   const renderWithLayoutHomeLazy = () => {
@@ -25,7 +9,7 @@ describe('LayoutHomeLazy', () => {
     return renderWithRecoilRootAndSession(
       <>
         <LayoutHomeLazy path='home' />
-        <StateEffect />
+        <MockStateEffect />
       </>,
       options,
     );

@@ -1,33 +1,15 @@
-import { atomLayoutNavigationOpen } from '@layout/layout.states';
-import { TypesLayout } from '@layout/layout.types';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { screen, waitFor } from '@testing-library/react';
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { SidebarTransition } from '..';
-import { atomEffectMediaQuery } from '@states/atomEffects/misc';
-import { BREAKPOINT } from '@constAssertions/ui';
-
-type Props = Pick<TypesLayout, 'path'> & { isSidebarOpen?: boolean; isBreakpoint?: boolean };
-
-const SidebarEffect = ({ isSidebarOpen, isBreakpoint, path }: Props) => {
-  const setSidebarOpen = useSetRecoilState(atomLayoutNavigationOpen(path));
-  const setBreakpoint = useSetRecoilState(atomEffectMediaQuery(BREAKPOINT['md']));
-
-  useEffect(() => {
-    setSidebarOpen(isSidebarOpen ?? false);
-    setBreakpoint(isBreakpoint ?? false);
-  });
-  return null;
-};
+import { PropsSidebarTransition, MockSidebarTransition } from './__mock__/mockSidebarTransition';
 
 describe('SidebarTransition', () => {
-  const renderWithSidebarTransition = ({ isBreakpoint, isSidebarOpen, path }: Props) => {
+  const renderWithSidebarTransition = ({ isBreakpoint, isSidebarOpen, path }: PropsSidebarTransition) => {
     const options = { session: null };
     return renderWithRecoilRootAndSession(
       <>
         <SidebarTransition path={path}>transition-text</SidebarTransition>
-        <SidebarEffect
+        <MockSidebarTransition
           path={path}
           isSidebarOpen={isSidebarOpen}
           isBreakpoint={isBreakpoint}

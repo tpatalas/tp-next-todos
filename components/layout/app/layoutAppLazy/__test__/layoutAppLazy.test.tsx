@@ -1,10 +1,9 @@
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { LayoutAppLazy } from '..';
-import { screen, waitFor } from '@testing-library/react';
+import { PropsMockStateEffect, MockLayoutAppLazyEffect } from './__mock__/mockStateEffect';
+import { atomTodoModalOpen, atomLabelModalOpen } from '@states/modals';
+import { screen, waitFor } from '@testing-library/dom';
 import mockRouter from 'next-router-mock';
-import { MockStateEffect, PropsMockStateEffect } from './mockStateEffect';
-import { UserSessionEffect } from '@user/userSessionGroupEffect/userSessionEffect';
-import { atomLabelModalOpen, atomTodoModalOpen } from '@states/modals';
 
 describe('LayoutAppLazy', () => {
   const renderWithLayoutAppLazy = <T,>({
@@ -19,48 +18,56 @@ describe('LayoutAppLazy', () => {
     return renderWithRecoilRootAndSession(
       <>
         <LayoutAppLazy path='app' />
-        <MockStateEffect
+        <MockLayoutAppLazyEffect
           mediaQueryState={mediaQueryState}
           notificationId={notificationId}
           isTodoModalOpen={isTodoModalOpen}
           isMinimizedTodoModalOpen={isMinimizedTodoModalOpen}
           isLabelModalOpen={isLabelModalOpen}
         />
-        <UserSessionEffect />
       </>,
       options,
     );
   };
 
-  it('should set the atomLayoutType correctly when path is app', () => {
+  it('should set the atomLayoutType correctly when path is app', async () => {
     const { container } = renderWithLayoutAppLazy({});
-    const layoutTypeText = screen.getByText('Layout Type: app');
-
     expect(container).toBeInTheDocument();
-    expect(layoutTypeText).toBeInTheDocument();
+
+    await waitFor(() => {
+      const layoutTypeText = screen.queryByText('Layout Type: app');
+      expect(layoutTypeText).toBeInTheDocument();
+    });
   });
 
-  it('should render the correct htmlTitleTag text when route equals to urgent', () => {
+  it('should render the correct htmlTitleTag text when route equals to urgent', async () => {
     mockRouter.push('/app/urgent');
     renderWithLayoutAppLazy({});
-    const htmlTitleTagText = screen.getByText('Html Title Tag: Priority | Urgent');
 
     expect(mockRouter).toMatchObject({ pathname: '/app/urgent' });
-    expect(htmlTitleTagText).toBeInTheDocument();
+
+    await waitFor(() => {
+      const htmlTitleTagText = screen.queryByText('Html Title Tag: Priority | Urgent');
+      expect(htmlTitleTagText).toBeInTheDocument();
+    });
   });
 
-  it('should navigation close (or false) when layout type equals to app and breakpoint is above medium', () => {
+  it('should navigation close (or false) when layout type equals to app and breakpoint is above medium', async () => {
     renderWithLayoutAppLazy({ mediaQueryState: false });
-    const navigationOpenTextFalse = screen.getByText('Navigation state: false');
 
-    expect(navigationOpenTextFalse).toBeInTheDocument();
+    await waitFor(() => {
+      const navigationOpenTextFalse = screen.queryByText('Navigation state: false');
+      expect(navigationOpenTextFalse).toBeInTheDocument();
+    });
   });
 
-  it('should navigation open (or true) when layout type equals to app and breakpoint is not above medium', () => {
+  it('should navigation open (or true) when layout type equals to app and breakpoint is not above medium', async () => {
     renderWithLayoutAppLazy({ mediaQueryState: true });
-    const navigationOpenTextFalse = screen.getByText('Navigation state: true');
 
-    expect(navigationOpenTextFalse).toBeInTheDocument();
+    await waitFor(() => {
+      const navigationOpenTextFalse = screen.queryByText('Navigation state: true');
+      expect(navigationOpenTextFalse).toBeInTheDocument();
+    });
   });
 
   it('should have the class "overflow-hidden" on the body element when layoutType is app', () => {
@@ -70,11 +77,13 @@ describe('LayoutAppLazy', () => {
     expect(bodyElement).toHaveClass('overflow-hidden');
   });
 
-  it('should show the notification message when notification is open', () => {
+  it('should show the notification message when notification is open', async () => {
     renderWithLayoutAppLazy({ notificationId: 'updatedTodo' });
-    const notificationText = screen.getByText('Todo updated');
 
-    expect(notificationText).toBeInTheDocument();
+    await waitFor(() => {
+      const notificationText = screen.queryByText('Todo updated');
+      expect(notificationText).toBeInTheDocument();
+    });
   });
 
   it('should render the correct modal text when todoModal is open', async () => {
