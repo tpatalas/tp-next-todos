@@ -1,28 +1,7 @@
-import { BREAKPOINT } from '@constAssertions/ui';
-import { atomLayoutNavigationOpen } from '@layout/layout.states';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
-import { atomEffectMediaQuery } from '@states/atomEffects/misc';
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { InitialNavigationEffect } from '..';
 import { screen, waitFor } from '@testing-library/react';
-
-const MockNavigationEffect = ({ isBreakpoint }: { isBreakpoint: boolean }) => {
-  const setBreakpoint = useSetRecoilState(atomEffectMediaQuery(BREAKPOINT['md']));
-  const appNavigation = useRecoilValue(atomLayoutNavigationOpen('app'));
-  const homeNavigation = useRecoilValue(atomLayoutNavigationOpen('home'));
-
-  useEffect(() => {
-    setBreakpoint(isBreakpoint ?? false);
-  }, [isBreakpoint, setBreakpoint]);
-
-  return (
-    <>
-      {appNavigation ? 'appNavigationOpen' : null}
-      {homeNavigation ? 'homeNavigationOpen' : null}
-    </>
-  );
-};
+import { MockNavigationEffect } from './__mock__/mockNavigationEffect';
 
 describe('InitialNavigationEffect', () => {
   const renderWithInitialNavigationEffect = (isBreakpoint: boolean) => {

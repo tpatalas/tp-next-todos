@@ -27,10 +27,12 @@ describe('FilterPathHomeEffect', () => {
       mockRouter.push(pathname);
     });
 
-    const pricingText = screen.getByText(text);
-
     expect(mockRouter).toMatchObject({ pathname: pathname });
-    expect(pricingText).toBeInTheDocument();
+
+    await waitFor(() => {
+      const pricingText = screen.queryByText(text);
+      expect(pricingText).toBeInTheDocument();
+    });
   };
 
   it('should render the correct text based on the correct pathname', async () => {

@@ -6,16 +6,24 @@ type Props = { options: TypesOptionsButton } & Partial<
   Pick<Types, 'className' | 'onClick' | 'isConditionalRendering' | 'children'>
 >;
 
-export const DisableButton = ({ options, onClick, isConditionalRendering, children = options.name }: Props) => {
+export const DisableButton = ({
+  options,
+  onClick,
+  isConditionalRendering,
+  children = options.name,
+}: Props) => {
+  const buttonOptions = {
+    isDisabled: isConditionalRendering ? true : false,
+    kbd: isConditionalRendering ? '' : options.kbd,
+    tooltip: isConditionalRendering ? '' : options.tooltip,
+    className: options.className,
+  };
+
   return (
     <Button
-      options={{
-        isDisabled: isConditionalRendering ? true : false,
-        kbd: isConditionalRendering ? '' : options.kbd,
-        tooltip: isConditionalRendering ? '' : options.tooltip,
-        className: options.className,
-      }}
-      onClick={onClick}>
+      options={buttonOptions}
+      onClick={onClick}
+    >
       {children}
     </Button>
   );

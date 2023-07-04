@@ -1,21 +1,11 @@
-import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
+import { atomAuthUser } from '@auth/auth.states';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { screen } from '@testing-library/react';
-import { useEffect } from 'react';
-import { RecoilState, useRecoilState } from 'recoil';
+import { RecoilState } from 'recoil';
 import { AuthErrorMessageEffect } from '../authErrorMessageEffect';
+import { MockErrorMessageObserver } from './__mock__/mockErrorMessageObserver';
 
 type Props<T> = { node?: RecoilState<T>; state?: T };
-
-const ErrorMessageObserver = () => {
-  const [message, setMessage] = useRecoilState(atomAuthErrorMessage);
-  const defaultError = 'Something went wrong';
-
-  useEffect(() => {
-    setMessage(defaultError);
-  }, [setMessage]);
-  return <>{message}</>;
-};
 
 describe('AuthErrorMessageEffect', () => {
   const renderAuthConfirmation = <T,>({ node, state }: Props<T>) => {
@@ -23,7 +13,7 @@ describe('AuthErrorMessageEffect', () => {
     return renderWithRecoilRootAndSession(
       <>
         <AuthErrorMessageEffect />
-        <ErrorMessageObserver />
+        <MockErrorMessageObserver />
       </>,
       options,
     );

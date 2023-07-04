@@ -1,22 +1,7 @@
-import { TypesLayout } from '@layout/layout.types';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { LayoutFooter } from '..';
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { atomLayoutNavigationOpen } from '@layout/layout.states';
 import { screen, waitFor } from '@testing-library/react';
-
-type Props = Pick<TypesLayout, 'path'> & { isSidebarOpen: boolean };
-
-const SidebarOpenEffect = ({ isSidebarOpen, path }: Props) => {
-  const setSidebarOpen = useSetRecoilState(atomLayoutNavigationOpen(path));
-
-  useEffect(() => {
-    setSidebarOpen(isSidebarOpen ?? false);
-  }, [isSidebarOpen, setSidebarOpen]);
-
-  return null;
-};
+import { PropsSidebarOpenEffect, MockSidebarOpenEffect } from './__mock__/mockSidebarOpenEffect';
 
 const testTextPresence = async ({ text, isTextPresent }: { text: string; isTextPresent: boolean }) => {
   await waitFor(() => {
@@ -30,12 +15,12 @@ const appText = 'Create todo';
 const homeText = 'Contact';
 
 describe('LayoutFooter', () => {
-  const renderWithLayoutFooter = ({ isSidebarOpen, path }: Props) => {
+  const renderWithLayoutFooter = ({ isSidebarOpen, path }: PropsSidebarOpenEffect) => {
     const options = { session: null };
     return renderWithRecoilRootAndSession(
       <>
         <LayoutFooter path={path}>LayoutFooter-text</LayoutFooter>
-        <SidebarOpenEffect
+        <MockSidebarOpenEffect
           path={path}
           isSidebarOpen={isSidebarOpen}
         />

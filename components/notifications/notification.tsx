@@ -15,6 +15,7 @@ export const Notification = () => {
   const notification = useRecoilValue(selectorNotificationState) as TypesNotification;
   const isNotificationOpen = useRecoilValue(atomNotificationOpen);
   const setNotificationOpen = useSetRecoilState(atomNotificationOpen);
+  const svgIconOptions = { path: notification.iconPath, className: notification.iconPresetStyle };
 
   return (
     <NotificationFragment>
@@ -26,12 +27,7 @@ export const Notification = () => {
           <div className='flex flex-row justify-between'>
             <div className='flex flex-row items-center '>
               <div className='flex flex-shrink-0'>
-                <SvgIcon
-                  options={{
-                    path: notification.iconPath,
-                    className: notification.iconPresetStyle,
-                  }}
-                />
+                <SvgIcon options={svgIconOptions} />
               </div>
               <p className='ml-3 text-sm font-medium text-gray-900'>{notification.message}</p>
             </div>
