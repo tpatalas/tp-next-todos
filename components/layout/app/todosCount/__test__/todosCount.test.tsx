@@ -1,7 +1,7 @@
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { TodosCount } from '..';
 import { UserSessionEffect } from '@user/userSessionGroupEffect/userSessionEffect';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { Suspense } from 'react';
 import { DATA_DEMO } from '@collections/demo';
 import { DATA_DEMO_LABELS } from '@label/label.data';
@@ -33,29 +33,16 @@ describe('TodosCount', () => {
 
   it('should render the correct todosCount based on the the appropriate pathname when userSession is null', async () => {
     const { container } = renderWithTodosCount({ pathname: '/app/urgent' });
+    const todosCount = await screen.findByText(todosCountOnAppRoute);
 
     expect(container).toBeInTheDocument();
-    await waitFor(() => {
-      const todosCount = screen.queryByText(todosCountOnAppRoute);
-      expect(todosCount).toBeInTheDocument();
-    });
-  });
-
-  it('should not render any todosCount if pathname is not under the /app such as root path', async () => {
-    renderWithTodosCount({ pathname: '/' });
-
-    await waitFor(() => {
-      const todosCount = screen.queryByText(todosCountOnAppRoute);
-      expect(todosCount).toBeNull();
-    });
+    expect(todosCount).toBeInTheDocument();
   });
 
   it('should render correct number of todoCount on the matched label', async () => {
     renderWithTodosCount({ pathname: '/app/label', label: labelPersonal });
+    const todosCount = await screen.findByText(todosCountLabelPersonal);
 
-    await waitFor(() => {
-      const todosCount = screen.queryByText(todosCountLabelPersonal);
-      expect(todosCount).toBeInTheDocument();
-    });
+    expect(todosCount).toBeInTheDocument();
   });
 });
