@@ -13,7 +13,6 @@ import { Types } from '..';
 
 export type CollectTypesUi = TypesReactChildren &
   TypesUi &
-  TypesLoadings &
   TypesTooltipAttributes &
   TypesInputAttributes &
   TypesComboboxAttributes &
@@ -55,12 +54,6 @@ export interface TypesUi {
   gradientType: GRADIENT_TYPE;
   gradientPosition: GRADIENT_POSITION;
   signInButtonName: 'Sign in' | 'Get started';
-}
-
-export interface TypesLoadings {
-  loadingSkeleton: Types['children'];
-  repeatingCount: number;
-  delay: number;
 }
 
 export interface TypesStyleAttributes {

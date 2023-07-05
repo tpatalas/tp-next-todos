@@ -1,6 +1,6 @@
-import { TypesOptionsLoadingState } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { Fragment, useEffect, useState } from 'react';
+import { TypesOptionsLoadingState } from '../loadable.types';
 
 export const LoadingState = ({ options }: { options: TypesOptionsLoadingState }) => {
   const [show, setShow] = useState(false);

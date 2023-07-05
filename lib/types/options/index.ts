@@ -80,9 +80,6 @@ export type TypesOptionsMinimizedModalTransition = Partial<
   Pick<Types, 'positionX' | 'positionY' | 'minimizedModalPadding'>
 >;
 
-export type TypesOptionsLoadingState = Partial<Pick<Types, 'delay'>> &
-  Pick<Types, 'loadingSkeleton' | 'repeatingCount' | 'margin' | 'space'>;
-
 export type TypesOptionsFloatingLabelInput = Partial<
   Pick<
     Types,

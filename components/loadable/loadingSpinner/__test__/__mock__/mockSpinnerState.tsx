@@ -1,4 +1,4 @@
-import { SPINNER } from '@constAssertions/ui';
+import { SPINNER } from '@components/loadable/loadable.const';
 import { atomLoadingSpinner } from '@states/misc';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';

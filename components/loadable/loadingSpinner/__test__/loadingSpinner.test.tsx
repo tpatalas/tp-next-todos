@@ -1,8 +1,8 @@
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { LoadingSpinner } from '..';
-import { SPINNER } from '@constAssertions/ui';
 import { screen } from '@testing-library/react';
 import { MockSpinnerState } from './__mock__/mockSpinnerState';
+import { SPINNER } from '@components/loadable/loadable.const';
 
 describe('LoadingSpinner', () => {
   const renderWithLoadingSpinner = (spinnerId: SPINNER) => {
