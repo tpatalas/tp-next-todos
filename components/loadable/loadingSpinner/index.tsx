@@ -1,6 +1,6 @@
 import { atomLoadingSpinner } from '@states/misc';
 import { useRecoilValue } from 'recoil';
-import { SPINNER } from '../loadable.const';
+import { SPINNER } from '../loadable.consts';
 
 export const LoadingSpinner = ({ spinnerId }: { spinnerId: SPINNER }) => {
   const onSpinner = useRecoilValue(atomLoadingSpinner(spinnerId));

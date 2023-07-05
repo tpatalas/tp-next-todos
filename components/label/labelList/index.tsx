@@ -1,10 +1,10 @@
 import { IconButton } from '@buttons/iconButton';
 import { useLabelModalStateOpen } from '@hooks/modals';
-import { optionsLabelButtonAddMore } from '@label/label.const';
 import { selectorSessionLabels } from '@label/label.states';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { LabelItem } from './labelItem';
+import { optionsLabelButtonAddMore } from '@label/label.consts';
 
 export const LabelList = () => {
   const labelList = useRecoilValue(selectorSessionLabels);

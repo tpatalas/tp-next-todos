@@ -3,8 +3,8 @@ import { atomLoadingSpinner } from '@states/misc';
 import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
-import { USER } from './auth.const';
-import { SPINNER } from '@components/loadable/loadable.const';
+import { USER } from './auth.consts';
+import { SPINNER } from '@components/loadable/loadable.consts';
 
 export const useAuthUserValueUpdate = () => {
   return useRecoilCallback(

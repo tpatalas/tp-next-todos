@@ -5,7 +5,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Session } from 'next-auth';
 import { RecoilState } from 'recoil';
 import { AuthConfirmation } from '..';
-import { SPINNER } from '@components/loadable/loadable.const';
+import { SPINNER } from '@components/loadable/loadable.consts';
 
 type Props<T> = { session: Session | null; node?: RecoilState<T>; state?: T };
 
