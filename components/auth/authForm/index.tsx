@@ -14,8 +14,8 @@ import { Logo } from '@layout/layoutHeader/logo';
 import { AuthErrorMessage } from '@auth/authErrorMessage';
 import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
 import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';
-import { USER } from '@auth/auth.const';
-import { SPINNER } from '@components/loadable/loadable.const';
+import { USER } from '@auth/auth.consts';
+import { SPINNER } from '@components/loadable/loadable.consts';
 
 const UserSessionEffect = dynamic(() =>
   import('@user/userSessionGroupEffect/userSessionEffect').then((mod) => mod.UserSessionEffect),

@@ -6,7 +6,7 @@ import {
   optionsDropdownLabelItem,
   optionsLabelItemDropdownDelete,
   optionsLabelItemDropdownEditLabel,
-} from '@label/label.const';
+} from '@label/label.consts';
 import { useLabelRemoveItem } from '@label/label.hooks';
 import { TypesLabel } from '@label/label.types';
 import { TypesOptionsDropdown } from '@lib/types/options';

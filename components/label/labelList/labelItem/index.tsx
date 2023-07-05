@@ -2,7 +2,6 @@ import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { PATH_APP } from '@constAssertions/data';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { useNextQuery } from '@hooks/misc';
-import { optionsLabelItemDropdown, optionsLabelItemPrefetchButton } from '@label/label.const';
 import { TypesLabel } from '@label/label.types';
 import { classNames } from '@stateLogics/utils';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
@@ -12,6 +11,7 @@ import { useRecoilValue } from 'recoil';
 import { LabelItemButtonContent } from './labelItemButtonContent';
 import { DropdownContentOnClose } from './labelItemDropdown/dropdownContentOnClose';
 import { useNavigationOpen } from '@layout/layout.hooks';
+import { optionsLabelItemPrefetchButton, optionsLabelItemDropdown } from '@label/label.consts';
 
 const LabelItemDropdown = dynamic(() => import('./labelItemDropdown').then((mod) => mod.LabelItemDropdown));
 const ItemLabelModal = dynamic(() =>

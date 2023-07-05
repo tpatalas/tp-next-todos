@@ -1,4 +1,4 @@
-import { SPINNER } from '@components/loadable/loadable.const';
+import { SPINNER } from '@components/loadable/loadable.consts';
 import { PATH_IMAGE_APP } from '@constAssertions/data';
 import { CATCH } from '@constAssertions/misc';
 import { atom, atomFamily, selector } from 'recoil';
