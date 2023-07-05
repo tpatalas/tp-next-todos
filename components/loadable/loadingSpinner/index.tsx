@@ -1,6 +1,6 @@
-import { SPINNER } from '@constAssertions/ui';
 import { atomLoadingSpinner } from '@states/misc';
 import { useRecoilValue } from 'recoil';
+import { SPINNER } from '../loadable.const';
 
 export const LoadingSpinner = ({ spinnerId }: { spinnerId: SPINNER }) => {
   const onSpinner = useRecoilValue(atomLoadingSpinner(spinnerId));

@@ -1,7 +1,7 @@
 import { atomAuthUser } from '@auth/auth.states';
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
+import { SPINNER } from '@components/loadable/loadable.const';
 import { LoadingSpinner } from '@components/loadable/loadingSpinner';
-import { SPINNER } from '@constAssertions/ui';
 import { ICON_MARK_EMAIL_READ } from '@data/materialSymbols';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { SvgIcon } from '@icon/svgIcon';

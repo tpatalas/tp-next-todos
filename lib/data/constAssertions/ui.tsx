@@ -75,9 +75,3 @@ export const BREAKPOINT = {
   lg: 1024,
   xl: 1280,
 } as const;
-
-export type SPINNER = (typeof SPINNER)[keyof typeof SPINNER];
-export const SPINNER = {
-  authForm: 'authForm',
-  verificationConfirm: 'verificationConfirm',
-} as const;

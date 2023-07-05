@@ -1,6 +1,7 @@
+import { TypesOptionsLoadingState } from '@components/loadable/loadable.types';
 import { LoadingSkeletonTodos } from '@components/todos/loadingTodos/loadingSkeletonTodos';
 import { LoadingSkeletonLabels } from '@label/loadingLabels/loadingSkeletonLabels';
-import { TypesOptionsLoadingState, TypesOptionsFloatingLabelInput } from '@lib/types/options';
+import { TypesOptionsFloatingLabelInput } from '@lib/types/options';
 
 // loadingState
 export const optionsLoadingTodos: TypesOptionsLoadingState = {
