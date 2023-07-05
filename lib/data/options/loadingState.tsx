@@ -1,5 +1,5 @@
-import { LoadingSkeletonLabels } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels';
-import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
+import { LoadingSkeletonTodos } from '@components/todos/loadingTodos/loadingSkeletonTodos';
+import { LoadingSkeletonLabels } from '@label/loadingLabels/loadingSkeletonLabels';
 import { TypesOptionsLoadingState, TypesOptionsFloatingLabelInput } from '@lib/types/options';
 
 // loadingState

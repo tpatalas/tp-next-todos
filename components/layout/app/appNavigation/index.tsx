@@ -12,9 +12,9 @@ import { isChrome, isMobile } from 'react-device-detect';
 import { useRecoilValue } from 'recoil';
 import { AppSidebarMenu } from './appSidebarMenu';
 import dynamic from 'next/dynamic';
-import { LoadingLabels } from '@components/loadable/loadingStates/loadingLabels';
 import { SvgIcon } from '@icon/svgIcon';
 import { useNavigationOpen } from '@layout/layout.hooks';
+import { LoadingLabels } from '@label/loadingLabels';
 
 const LabelList = dynamic(() => import('@label/labelList').then((mod) => mod.LabelList), {
   ssr: false,
