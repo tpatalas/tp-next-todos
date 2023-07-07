@@ -6,9 +6,7 @@ import { Fragment as AppByIdFragment, ReactElement, Suspense } from 'react';
 const TodoList = dynamic(() => import('components/todos/todoList').then((mod) => mod.TodoList), {
   ssr: false,
 });
-const LoadingTodos = dynamic(() =>
-  import('@components/loadable/loadingStates/loadingTodos').then((mod) => mod.LoadingTodos),
-);
+const LoadingTodos = dynamic(() => import('@components/todos/loadingTodos').then((mod) => mod.LoadingTodos));
 const ErrorBoundary = dynamic(() => import('react-error-boundary').then((mod) => mod.ErrorBoundary));
 
 const AppById = () => {

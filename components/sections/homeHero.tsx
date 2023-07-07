@@ -90,11 +90,11 @@ export const HomeHero = () => {
                       <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                         <Image
                           loader={cloudflareLoader}
-                          width={1000}
-                          height={1000}
+                          width={961}
+                          height={754}
                           className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
                           src={PATH_IMAGE_HOME['demo']}
-                          sizes='80vw'
+                          sizes='90vw'
                           alt='demo application image'
                           priority={true}
                         />

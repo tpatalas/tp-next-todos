@@ -1,6 +1,7 @@
-import { LoadingSkeletonLabels } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonLabels';
-import { LoadingSkeletonTodos } from '@components/loadable/loadingStates/loadingSkeletons/loadingSkeletonTodos';
-import { TypesOptionsLoadingState, TypesOptionsFloatingLabelInput } from '@lib/types/options';
+import { TypesOptionsLoadingState } from '@components/loadable/loadable.types';
+import { LoadingSkeletonTodos } from '@components/todos/loadingTodos/loadingSkeletonTodos';
+import { LoadingSkeletonLabels } from '@label/loadingLabels/loadingSkeletonLabels';
+import { TypesOptionsFloatingLabelInput } from '@lib/types/options';
 
 // loadingState
 export const optionsLoadingTodos: TypesOptionsLoadingState = {

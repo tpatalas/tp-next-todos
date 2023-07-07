@@ -1,5 +1,5 @@
 import { SvgIcon } from '@icon/svgIcon';
-import { optionsLabelItemRouteMatched, optionsLabelItemRouteUnmatched } from '@label/label.const';
+import { optionsLabelItemRouteMatched, optionsLabelItemRouteUnmatched } from '@label/label.consts';
 import { TypesLabel } from '@label/label.types';
 
 type Props = { matchedSlug: boolean } & Pick<TypesLabel, 'label'>;

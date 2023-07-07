@@ -1,4 +1,4 @@
-import { VIEWBOX } from '@icon/icon.const';
+import { VIEWBOX } from '@icon/icon.consts';
 import { DATA_SVG_LOGOS } from '@icon/icon.data';
 import { TypesPropsSvgLogoNames, TypesSvgLogos } from '@icon/icon.types';
 import { memo } from 'react';

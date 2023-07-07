@@ -1,11 +1,11 @@
 import { atomAuthUser } from '@auth/auth.states';
-import { SPINNER } from '@constAssertions/ui';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { atomLoadingSpinner } from '@states/misc';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Session } from 'next-auth';
 import { RecoilState } from 'recoil';
 import { AuthConfirmation } from '..';
+import { SPINNER } from '@components/loadable/loadable.consts';
 
 type Props<T> = { session: Session | null; node?: RecoilState<T>; state?: T };
 

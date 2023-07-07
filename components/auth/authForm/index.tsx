@@ -1,7 +1,6 @@
 import { Button } from '@buttons/button';
 import { SvgLogoButton } from '@buttons/button/svgLogoButton';
 import { LoadingSpinner } from '@components/loadable/loadingSpinner';
-import { SPINNER } from '@constAssertions/ui';
 import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { FloatingLabelInput } from '@inputs/floatingLabelInput';
 import { optionsFloatingLabelsEmail } from '@options/loadingState';
@@ -15,7 +14,8 @@ import { Logo } from '@layout/layoutHeader/logo';
 import { AuthErrorMessage } from '@auth/authErrorMessage';
 import { atomAuthErrorMessage, atomAuthUser } from '@auth/auth.states';
 import { useAuthFormSubmit, useAuthUserValueUpdate } from '@auth/auth.hooks';
-import { USER } from '@auth/auth.const';
+import { USER } from '@auth/auth.consts';
+import { SPINNER } from '@components/loadable/loadable.consts';
 
 const UserSessionEffect = dynamic(() =>
   import('@user/userSessionGroupEffect/userSessionEffect').then((mod) => mod.UserSessionEffect),

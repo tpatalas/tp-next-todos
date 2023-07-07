@@ -42,8 +42,8 @@ export const HomeContent = () => {
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
                   loader={cloudflareLoader}
-                  width={1850}
-                  height={2529}
+                  width={504}
+                  height={689}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentFocus']}
                   sizes='(max-width: 748px) 70vw, 33vw'
@@ -64,8 +64,8 @@ export const HomeContent = () => {
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <Image
                   loader={cloudflareLoader}
-                  width={456}
-                  height={600}
+                  width={494}
+                  height={650}
                   className={styleImage}
                   src={PATH_IMAGE_HOME['contentOrganize']}
                   sizes='(max-width: 748px) 70vw, 33vw'

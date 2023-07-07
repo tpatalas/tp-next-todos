@@ -17,7 +17,6 @@ module.exports = withBundleAnalyzer({
     domains: imageDomains,
   },
   output: 'standalone',
-  swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV !== 'production' ? false : true,
   },
