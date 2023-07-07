@@ -34,8 +34,8 @@ export const UnderConstruction = () => {
         <div className='relative flex h-[30rem] w-full max-w-lg flex-row items-center justify-center rounded-xl'>
           <Image
             loader={cloudflareLoader}
-            width={1000}
-            height={1000}
+            width={512}
+            height={512}
             className='h-auto w-full rounded-xl bg-transparent drop-shadow-2xl'
             src={PATH_IMAGE_HOME['underConstruction']}
             sizes='80vw'
