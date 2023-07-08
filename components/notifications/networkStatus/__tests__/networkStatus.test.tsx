@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import { snapshot_UNSTABLE } from 'recoil';
-import { NetworkStatus } from '../networkStatus';
 import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
+import { NetworkStatus } from '..';
 
 describe('NetworkStatus', () => {
   beforeEach(() => renderWithRecoilRootAndSession(<NetworkStatus />));
