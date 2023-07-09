@@ -6,6 +6,7 @@ import { classNames } from '@stateLogics/utils';
 import { DividerX } from '@ui/dividers/dividerX';
 import Link from 'next/link';
 import { optionsSocialPaths } from '../section.utils';
+import { copyRightText } from '../section.consts';
 
 export const Footer = () => {
   return (
@@ -51,9 +52,7 @@ export const Footer = () => {
                 </Link>
               ))}
             </div>
-            <p className='text-center text-xs leading-5 text-gray-500'>
-              &copy; 2023 tpatalas. Repository code under MIT License.
-            </p>
+            <p className='text-center text-xs leading-5 text-gray-500'>{copyRightText}</p>
           </div>
         </div>
       </footer>
