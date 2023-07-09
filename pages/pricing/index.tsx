@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 
 const UnderConstruction = dynamic(() =>
-  import('@components/sections/underConstruction').then((mod) => mod.UnderConstruction),
+  import('@components/section/underConstruction').then((mod) => mod.UnderConstruction),
 );
 
 const Pricing = () => {

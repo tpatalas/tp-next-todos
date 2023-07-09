@@ -2,12 +2,12 @@ import { LayoutHome } from '@layout/home';
 import dynamic from 'next/dynamic';
 import { Fragment, ReactElement } from 'react';
 
-const HomeHero = dynamic(() => import('@components/sections/homeHero').then((mod) => mod.HomeHero));
+const HomeHero = dynamic(() => import('@components/section/homeHero').then((mod) => mod.HomeHero));
 const HomeStartToday = dynamic(() =>
-  import('@components/sections/homeStartToday').then((mod) => mod.HomeStartToday),
+  import('@components/section/homeStartToday').then((mod) => mod.HomeStartToday),
 );
-const HomeContent = dynamic(() => import('@components/sections/homeContent').then((mod) => mod.HomeContent));
-const HomeHeader = dynamic(() => import('@components/sections/homeHeader').then((mod) => mod.HomeHeader));
+const HomeContent = dynamic(() => import('@components/section/homeContent').then((mod) => mod.HomeContent));
+const HomeHeader = dynamic(() => import('@components/section/homeHeader').then((mod) => mod.HomeHeader));
 
 const Home = () => {
   return (

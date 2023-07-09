@@ -3,13 +3,15 @@ import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
 import { classNames } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransition.types';
+import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransition.utils';
 import { useRef } from 'react';
 
 export const HomeHeader = () => {
-  const titleOptions = { type: TRANSITION_TYPE['fadeIn'] };
-  const poleOptions = { type: TRANSITION_TYPE['scaleY'], delay: DELAY['150'] };
-
   const divRef = useRef(null);
+  const poleOptions = { type: TRANSITION_TYPE['scaleY'], delay: DELAY['150'] };
+  const transitionHandler = (transition: TRANSITION_TYPE, delay?: keyof typeof DELAY) => {
+    return optionsTransition({ transition: transition ?? 'fadeIn', delay: delay });
+  };
 
   return (
     <SmoothTransition>
@@ -21,7 +23,7 @@ export const HomeHeader = () => {
           <div className={'text-sm font-semibold uppercase tracking-widest text-gray-500'}>
             <SmoothTransition
               scrollRef={divRef}
-              options={titleOptions}
+              options={transitionHandler('fadeIn')}
             >
               Simplify your works
             </SmoothTransition>
@@ -42,7 +44,7 @@ export const HomeHeader = () => {
       <div className='flex flex-col items-center justify-center px-5 text-center'>
         <SmoothTransition
           scrollRef={divRef}
-          options={{ ...titleOptions, delay: DELAY['300'] }}
+          options={transitionHandler('fadeIn', 300)}
         >
           <h1 className='my-5 h-full bg-slate-50 text-3xl font-bold tracking-normal text-slate-800 sm:text-5xl'>
             Manage less work better
@@ -50,7 +52,7 @@ export const HomeHeader = () => {
         </SmoothTransition>
         <SmoothTransition
           scrollRef={divRef}
-          options={{ ...titleOptions, delay: DELAY['500'] }}
+          options={transitionHandler('fadeIn', 500)}
         >
           <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>
             Unburden yourself from managing time-consuming tasks by allowing app to seamlessly choose the most
