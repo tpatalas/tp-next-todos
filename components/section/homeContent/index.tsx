@@ -3,23 +3,22 @@ import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 import { ContentText } from './contentText';
 import { useRef } from 'react';
-import { DELAY, DURATION } from '@constAssertions/ui';
-import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransition.types';
+import { DELAY } from '@constAssertions/ui';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
+import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransition.utils';
 
 export const HomeContent = () => {
   const styleImageWrapper =
     'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
   const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
   const styleImageFrame = 'md:h-[440px]';
-  const imageOptions = {
-    type: TRANSITION_TYPE['scaleCenterSm'],
-    enterDuration: DURATION['700'],
-  };
   const spotlightRef = useRef(null);
   const overloadRef = useRef(null);
   const spotlightImageRef = useRef(null);
   const overloadImageRef = useRef(null);
+  const transitionHandler = (delay: keyof typeof DELAY) => {
+    return optionsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay });
+  };
 
   return (
     <SmoothTransition>
@@ -36,7 +35,7 @@ export const HomeContent = () => {
             className={classNames(styleImageFrame)}
           >
             <SmoothTransition
-              options={{ ...imageOptions, delay: DELAY['500'] }}
+              options={transitionHandler(500)}
               scrollRef={spotlightImageRef}
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
@@ -58,7 +57,7 @@ export const HomeContent = () => {
             ref={overloadImageRef}
           >
             <SmoothTransition
-              options={{ ...imageOptions, delay: DELAY['700'] }}
+              options={transitionHandler(700)}
               scrollRef={overloadImageRef}
             >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>

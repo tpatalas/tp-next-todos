@@ -1,20 +1,13 @@
-import { DELAY, DURATION } from '@constAssertions/ui';
+import { PropsContentText } from '@components/section/section.types';
+import { DELAY } from '@constAssertions/ui';
 import { STYLE_BLUR_GRADIENT_R_ZR } from '@data/stylePreset';
 import { classNames } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
-import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransition.types';
-import { RefObject } from 'react';
+import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransition.utils';
 
-type TypesContentText = 'title' | 'subTitle' | 'content';
-type TypesPropsContentText = Record<TypesContentText, string> & {
-  scrollRef: RefObject<HTMLDivElement>;
-};
-
-export const ContentText = ({ title, subTitle, content, scrollRef }: TypesPropsContentText) => {
-  const titleOptions = {
-    type: TRANSITION_TYPE['fadeIn'],
-    enterDuration: DURATION['1000'],
-    rate: 0.8,
+export const ContentText = ({ title, subTitle, content, scrollRef }: PropsContentText) => {
+  const transitionHandler = (delay?: keyof typeof DELAY) => {
+    return optionsTransition({ transition: 'fadeIn', duration: 1000, delay: delay, rate: 0.8 });
   };
 
   return (
@@ -24,7 +17,7 @@ export const ContentText = ({ title, subTitle, content, scrollRef }: TypesPropsC
         ref={scrollRef}
       >
         <SmoothTransition
-          options={titleOptions}
+          options={transitionHandler()}
           scrollRef={scrollRef}
         >
           <p
@@ -38,13 +31,13 @@ export const ContentText = ({ title, subTitle, content, scrollRef }: TypesPropsC
         </SmoothTransition>
       </div>
       <SmoothTransition
-        options={{ ...titleOptions, delay: DELAY['500'] }}
+        options={transitionHandler(500)}
         scrollRef={scrollRef}
       >
         <p className='text-lg text-slate-800/80 opacity-100 will-change-transform md:text-xl'>{subTitle}</p>
       </SmoothTransition>
       <SmoothTransition
-        options={{ ...titleOptions, delay: DELAY['700'] }}
+        options={transitionHandler(700)}
         scrollRef={scrollRef}
       >
         <p className='text-base font-medium text-slate-800/80 opacity-100 will-change-transform'>{content}</p>

@@ -8,7 +8,7 @@ import { LayoutHomeLazy } from './layoutHomeLazy';
 const HomeNavigation = dynamic(() => import('./homeNavigation').then((mod) => mod.HomeNavigation));
 const LayoutHeader = dynamic(() => import('@layout/layoutHeader').then((mod) => mod.LayoutHeader));
 const LayoutFooter = dynamic(() => import('@layout/layoutFooter').then((mod) => mod.LayoutFooter));
-const Footer = dynamic(() => import('@components/sections/footer').then((mod) => mod.Footer));
+const Footer = dynamic(() => import('@components/section/footer').then((mod) => mod.Footer));
 
 type Props = {
   children: ReactNode;
