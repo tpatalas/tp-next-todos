@@ -3,6 +3,7 @@ import { ContentText } from '..';
 import { mockRef } from '__mock__/react/mockUseRef';
 import { screen } from '@testing-library/react';
 import { PropsContentText } from '@components/section/section.types';
+import { ReactNode } from 'react';
 
 const mockContentText = {
   title: 'Mock title content for testing',
@@ -12,14 +13,8 @@ const mockContentText = {
 
 type TypesContentText = Omit<PropsContentText, 'scrollRef'>;
 
-jest.mock('..', () => ({
-  ContentText: ({ title, subTitle, content }: TypesContentText) => (
-    <div>
-      <div>{title}</div>
-      <div>{subTitle}</div>
-      <div>{content}</div>
-    </div>
-  ),
+jest.mock('@ui/transitions/smoothTransition', () => ({
+  SmoothTransition: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 
 describe('ContentText', () => {

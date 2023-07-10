@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { DELAY } from '@constAssertions/ui';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransition.utils';
+import { contentTextOverload, contentTextSpotlight } from '../section.consts';
 
 export const HomeContent = () => {
   const styleImageWrapper =
@@ -25,9 +26,9 @@ export const HomeContent = () => {
       <div className='relative my-24 flex flex-row items-center justify-center px-5 py-10 sm:px-10 md:my-32 lg:px-28'>
         <div className='md:min-w-3/4 grid w-full max-w-6xl grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
           <ContentText
-            title='Spotlight your to-dos'
-            subTitle="View your to-dos that are intelligently and automatically selected in Today's Focus."
-            content="Add your to-dos as you please, with or without due dates and priorities. Today's Focus will display your most important to-dos for you."
+            title={contentTextSpotlight.title}
+            subTitle={contentTextSpotlight.subTitle}
+            content={contentTextSpotlight.content}
             scrollRef={spotlightRef}
           />
           <div
@@ -75,11 +76,9 @@ export const HomeContent = () => {
             </SmoothTransition>
           </div>
           <ContentText
-            title='Free your overload'
-            subTitle='Work on a to-do list that is auto-allocated according to your capacity.'
-            content="Today's Focus efficiently determines the ideal number of to-dos for you. As you
-            consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base
-            on your completion rate."
+            title={contentTextOverload.title}
+            subTitle={contentTextOverload.subTitle}
+            content={contentTextOverload.content}
             scrollRef={overloadRef}
           />
         </div>
