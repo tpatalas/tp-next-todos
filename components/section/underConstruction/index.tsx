@@ -3,6 +3,7 @@ import { STYLE_BUTTON_FULL_BLUE } from '@data/stylePreset';
 import { classNames, cloudflareLoader } from '@stateLogics/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { underConstructionText } from '../section.consts';
 
 export const UnderConstruction = () => {
   const styleParagraph = 'text-3xl font-bold uppercase tracking-wide ml:text-4xl';
@@ -16,10 +17,7 @@ export const UnderConstruction = () => {
             <h1 className={classNames(styleParagraph)}>Construction</h1>
           </div>
           <div>
-            <p className='text-slate-800/80'>
-              The page is currently under construction for improvements to better serve you. We appreciate
-              your patience. Please check back soon for an upgraded and user-friendly experience. Thank you!
-            </p>
+            <p className='text-slate-800/80'>{underConstructionText.content}</p>
           </div>
           <Link
             href='/'
