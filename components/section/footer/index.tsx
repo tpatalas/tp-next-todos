@@ -1,19 +1,14 @@
-import { DATA_FOOTER_NAVIGATION, DATA_FOOTER_SOCIAL, TypesFooterSocial } from '@collections/footer';
+import { DATA_FOOTER_NAVIGATION, DATA_FOOTER_SOCIAL } from '@collections/footer';
 import { STYLE_LINK_NORMAL } from '@data/stylePreset';
 import { SvgIcon } from '@icon/svgIcon';
 import { Logo } from '@layout/layoutHeader/logo';
 import { classNames } from '@stateLogics/utils';
 import { DividerX } from '@ui/dividers/dividerX';
 import Link from 'next/link';
+import { optionsSocialPaths } from '../section.utils';
+import { copyRightText } from '../section.consts';
 
 export const Footer = () => {
-  const socialButton = (social: TypesFooterSocial) => {
-    return {
-      path: social.path,
-      className: 'w-6 h-6 fill-gray-400 group-hover:fill-gray-700',
-    };
-  };
-
   return (
     <>
       <footer>
@@ -53,13 +48,11 @@ export const Footer = () => {
                   className='group rounded-full p-1 hover:bg-slate-900 hover:bg-opacity-10'
                   target='_blank'
                 >
-                  <SvgIcon options={socialButton(social)} />
+                  <SvgIcon options={optionsSocialPaths(social)} />
                 </Link>
               ))}
             </div>
-            <p className='text-center text-xs leading-5 text-gray-500'>
-              &copy; 2023 tpatalas. Repository code under MIT License.
-            </p>
+            <p className='text-center text-xs leading-5 text-gray-500'>{copyRightText}</p>
           </div>
         </div>
       </footer>

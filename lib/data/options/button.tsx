@@ -25,6 +25,7 @@ export const optionsButtonGlobalClose: TypesOptionsButton = {
   path: ICON_CLOSE,
   tooltip: 'Close',
   margin: '-mr-2 ml-2 -my-1',
+  testId: 'globalButton-testid',
 };
 
 // network Status
