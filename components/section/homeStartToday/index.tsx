@@ -6,6 +6,7 @@ import { classNames } from '@stateLogics/utils';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransition.utils';
 import { useRef } from 'react';
+import { homeStartTodayText } from '../section.consts';
 
 export const HomeStartToday = () => {
   const signInButtonOptions: TypesOptionsButton = {
@@ -33,6 +34,7 @@ export const HomeStartToday = () => {
                 'custom-clip-path aspect-[2500/600] w-[70rem] flex-none opacity-40 will-change-transform md:aspect-[1400/600]',
                 STYLE_BLUR_GRADIENT_R_LG,
               )}
+              data-testid='gradient-testid'
             />
           </SmoothTransition>
         </div>
@@ -45,9 +47,9 @@ export const HomeStartToday = () => {
             scrollRef={divRef}
           >
             <h2 className='text-3xl font-bold tracking-tight text-slate-800 will-change-transform sm:text-4xl'>
-              Achieve More with Less.
+              {homeStartTodayText.title}
               <br />
-              Get started today.
+              {homeStartTodayText.subTitle}
             </h2>
           </SmoothTransition>
           <SmoothTransition
@@ -55,8 +57,7 @@ export const HomeStartToday = () => {
             scrollRef={divRef}
           >
             <p className='mx-auto mt-6 max-w-xl text-lg leading-8 text-slate-600 will-change-transform'>
-              Elevate your efficiency and unlock the key to accomplishing more with our productivity-boosting
-              app.
+              {homeStartTodayText.content}
             </p>
           </SmoothTransition>
           <SmoothTransition

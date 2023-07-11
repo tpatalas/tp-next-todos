@@ -27,3 +27,10 @@ export const homeHeroText = {
   content:
     'Focus on your work more and manage your to-dos less. Enhance your efficiency and improve your productivity.',
 };
+
+export const homeStartTodayText = {
+  title: 'Achieve More with Less.',
+  subTitle: 'Get started today.',
+  content:
+    'Elevate your efficiency and unlock the key to accomplishing more with our productivity-boosting app.',
+};
