@@ -20,3 +20,10 @@ export const homeHeaderText = {
   content:
     'Unburden yourself from managing time-consuming tasks by allowing app to seamlessly choose the most suitable to-dos for you.',
 };
+
+export const homeHeroText = {
+  title: 'Simplify your life',
+  subTitle: 'Automate your tasks',
+  content:
+    'Focus on your work more and manage your to-dos less. Enhance your efficiency and improve your productivity.',
+};
