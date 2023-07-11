@@ -34,3 +34,8 @@ export const homeStartTodayText = {
   content:
     'Elevate your efficiency and unlock the key to accomplishing more with our productivity-boosting app.',
 };
+
+export const underConstructionText = {
+  content:
+    'The page is currently under construction for improvements to better serve you. We appreciate your patience. Please check back soon for an upgraded and user-friendly experience. Thank you!',
+};
