@@ -5,6 +5,7 @@ import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import { TRANSITION_TYPE } from '@ui/transitions/smoothTransition/smoothTransition.types';
 import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransition.utils';
 import { useRef } from 'react';
+import { homeHeaderText } from '../section.consts';
 
 export const HomeHeader = () => {
   const divRef = useRef(null);
@@ -25,7 +26,7 @@ export const HomeHeader = () => {
               scrollRef={divRef}
               options={transitionHandler('fadeIn')}
             >
-              Simplify your works
+              {homeHeaderText.title}
             </SmoothTransition>
           </div>
         </div>
@@ -47,17 +48,14 @@ export const HomeHeader = () => {
           options={transitionHandler('fadeIn', 300)}
         >
           <h1 className='my-5 h-full bg-slate-50 text-3xl font-bold tracking-normal text-slate-800 sm:text-5xl'>
-            Manage less work better
+            {homeHeaderText.subTitle}
           </h1>
         </SmoothTransition>
         <SmoothTransition
           scrollRef={divRef}
           options={transitionHandler('fadeIn', 500)}
         >
-          <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>
-            Unburden yourself from managing time-consuming tasks by allowing app to seamlessly choose the most
-            suitable to-dos for you.
-          </h2>
+          <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>{homeHeaderText.content}</h2>
         </SmoothTransition>
       </div>
     </SmoothTransition>
