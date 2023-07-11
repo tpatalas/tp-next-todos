@@ -9,6 +9,7 @@ import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransi
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
+import { homeHeroText } from '../section.consts';
 
 export const HomeHero = () => {
   const signInButtonOptions: TypesOptionsButton = {
@@ -32,18 +33,17 @@ export const HomeHero = () => {
               <SmoothTransition options={translateDownHandler()}>
                 <div className='mx-auto max-w-2xl text-center'>
                   <div className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
-                    Simplify your life
+                    {homeHeroText.title}
                   </div>
                   <div className='text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
-                    Automate your tasks
+                    {homeHeroText.subTitle}
                   </div>
                 </div>
               </SmoothTransition>
               <SmoothTransition options={translateDownHandler(300)}>
                 <div className='mx-auto max-w-2xl text-center'>
                   <p className='mt-6 text-xl leading-8 text-gray-600 will-change-transform'>
-                    Focus on your work more and manage your to-dos less. Enhance your efficiency and improve
-                    your productivity.
+                    {homeHeroText.content}
                   </p>
                 </div>
               </SmoothTransition>
@@ -75,6 +75,7 @@ export const HomeHero = () => {
                           'absolute h-full w-full rounded-xl will-change-transform',
                           STYLE_BLUR_GRADIENT_R_LG,
                         )}
+                        data-testid='gradient-testid'
                       />
                     </SmoothTransition>
                     <SmoothTransition
