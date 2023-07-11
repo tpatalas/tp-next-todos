@@ -13,3 +13,10 @@ export const contentTextOverload = {
   content:
     "Today's Focus efficiently determines the ideal number of to-dos for you. As you consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base on your completion rate.",
 };
+
+export const homeHeaderText = {
+  title: 'Simplify your works',
+  subTitle: 'Manage less work better',
+  content:
+    'Unburden yourself from managing time-consuming tasks by allowing app to seamlessly choose the most suitable to-dos for you.',
+};
