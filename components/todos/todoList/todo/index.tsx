@@ -2,21 +2,15 @@ import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/v1/dropdown/dropdownMenuItem';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
 import { TypesTodo } from 'lib/types';
-import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';
 import { TodoItemFocuser } from './todoItemFocuser';
 import { useTodoModalStateOpen } from '@hooks/modals';
 import { TodoItem } from './todoItem';
-
-const DeleteTodoConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then(
-    (mod) => mod.DeleteTodoConfirmModal,
-  ),
-);
-const ItemTodoModal = dynamic(() =>
-  import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal),
-);
-const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
+import {
+  DeleteTodoConfirmModal,
+  ItemTodoModal,
+  MinimizedModal,
+} from '@components/todos/todos.dynamicImports';
 
 type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
 
