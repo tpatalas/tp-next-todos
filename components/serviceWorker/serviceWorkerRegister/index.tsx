@@ -1,3 +1,4 @@
+import { serviceWorkerPath } from '@serviceWorker/serviceWorker.consts';
 import { useEffect } from 'react';
 
 export const ServiceWorkerRegister = () => {
@@ -5,7 +6,7 @@ export const ServiceWorkerRegister = () => {
     const registerServiceWorker = async () => {
       if ('serviceWorker' in navigator) {
         try {
-          await navigator.serviceWorker.register('/service-worker.js');
+          await navigator.serviceWorker.register(serviceWorkerPath);
         } catch (error) {
           console.error('Service Worker registration failed:', error);
         }
