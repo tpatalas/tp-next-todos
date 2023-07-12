@@ -1,3 +1,4 @@
+import { TypesTodos } from '@components/todos/todos.types';
 import { TypesEditor } from '@editor/editor.types';
 import { classNames } from '@stateLogics/utils';
 import { Types } from 'lib/types';
@@ -57,7 +58,7 @@ export const renderPlaceholder = ({
 
 export const renderCustomElement = ({
   ...props
-}: RenderElementProps & Partial<Pick<TypesEditor, 'titleName'> & Pick<Types, 'completed'>>) => {
+}: RenderElementProps & Partial<Pick<TypesEditor, 'titleName'> & Pick<TypesTodos, 'completed'>>) => {
   switch (props.element.type) {
     case 'code':
       return <CodeElement {...props} />;

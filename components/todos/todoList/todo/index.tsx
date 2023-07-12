@@ -1,7 +1,6 @@
 import { ICON_EDIT_NOTE } from '@data/materialSymbols';
 import { DropdownMenuItem } from '@dropdowns/v1/dropdown/dropdownMenuItem';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
-import { TypesTodo } from 'lib/types';
 import { Fragment as ModalActionsFragment } from 'react';
 import { TodoItemFocuser } from './todoItemFocuser';
 import { useTodoModalStateOpen } from '@hooks/modals';
@@ -11,6 +10,7 @@ import {
   ItemTodoModal,
   MinimizedModal,
 } from '@components/todos/todos.dynamicImports';
+import { TypesTodo } from '@components/todos/todos.types';
 
 type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
 

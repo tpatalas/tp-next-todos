@@ -1,3 +1,4 @@
+import { TypesTodo } from '@components/todos/todos.types';
 import { CATCH, FOCUS } from '@constAssertions/misc';
 import { useFocusState } from '@hooks/focus';
 import { useKeyWithNavigate } from '@hooks/keybindings';
@@ -9,7 +10,7 @@ import { atomTodoModalOpen } from '@states/modals';
 import { useEffect } from 'react';
 import { RecoilValue, useRecoilCallback, useRecoilValue } from 'recoil';
 
-type Props = Pick<Types, 'index' | 'divFocus' | 'todo'>;
+type Props = Pick<Types, 'divFocus'> & Pick<TypesTodo, 'index' | 'todo'>;
 
 export const KeysWithNavigationEffect = ({ index, divFocus, todo }: Props) => {
   const setFocus = useFocusState(todo._id);

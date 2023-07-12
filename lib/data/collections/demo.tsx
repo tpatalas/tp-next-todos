@@ -1,7 +1,7 @@
-import { TodoIds, Todos } from '@lib/types';
+import { TypesTodoIds, TypesTodos } from '@components/todos/todos.types';
 import { addDays, subDays } from 'date-fns';
 
-export const DATA_DEMO: Todos[] = [
+export const DATA_DEMO: TypesTodos[] = [
   {
     _id: '1',
     title: 'Buy groceries',
@@ -111,4 +111,4 @@ export const DATA_DEMO: Todos[] = [
   },
 ];
 
-export const DATA_DEMO_TODOIDS: TodoIds[] = DATA_DEMO.filter((todo) => todo._id);
+export const DATA_DEMO_TODOIDS: TypesTodoIds[] = DATA_DEMO.filter((todo) => todo._id);

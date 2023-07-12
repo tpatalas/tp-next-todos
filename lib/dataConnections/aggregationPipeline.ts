@@ -1,12 +1,12 @@
-import { Todos } from '@lib/types';
+import { TypesTodos } from '@components/todos/todos.types';
 import mongoose, { PipelineStage } from 'mongoose';
 
 export const aggregatedTodoItem = ({
   todoId,
   userId,
 }: {
-  todoId: Todos['_id'];
-  userId: Todos['user_id'];
+  todoId: TypesTodos['_id'];
+  userId: TypesTodos['user_id'];
 }): PipelineStage[] => {
   //   * Example:
   //   const getItem = await TodoItem.aggregate(

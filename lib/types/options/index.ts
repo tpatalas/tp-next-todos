@@ -1,3 +1,4 @@
+import { TypesTodos } from '@components/todos/todos.types';
 import { Types } from '..';
 import { TypesElement, TypesStyleAttributes } from '../bases/ui';
 
@@ -37,7 +38,7 @@ export type TypesOptionsPriority = Partial<
       'margin' | 'display' | 'width' | 'container' | 'padding' | 'size' | 'color' | 'borderRadius' | 'hoverBg'
     >
 > &
-  Pick<Types, 'priorityLevel'>;
+  Pick<TypesTodos, 'priorityLevel'>;
 
 export type TypesOptionsBackdrop = Partial<
   Pick<Types, 'isPortal' | 'enterDuration' | 'leaveDuration'> & Pick<TypesStyleAttributes, 'color' | 'zIndex'>

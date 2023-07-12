@@ -19,8 +19,10 @@ import { Calendar } from '@ui/calendars/calendar';
 import { classNames } from '@stateLogics/utils';
 import { TypesOptionsDropdown } from '@lib/types/options';
 import { SvgIcon } from '@icon/svgIcon';
+import { TypesTodo } from '@components/todos/todos.types';
 
-type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClickConfirm'>;
+type Props = { options: TypesOptionsDropdown } & Partial<Pick<TypesTodo, 'todo'>> &
+  Pick<Types, 'onClickConfirm'>;
 
 export const CalendarDropdown = ({ todo, onClickConfirm, options }: Props) => {
   const resetCalendar = useCalResetDayUpdater(todo?._id);

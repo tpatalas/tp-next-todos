@@ -1,18 +1,22 @@
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
-import { Todos } from '@lib/types';
 import { atomTodoNew } from '@states/todos';
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { atomSelectorTodoItem, selectorSessionTodoItem, selectorSessionTodoIds } from '@states/atomEffects/todos';
+import {
+  atomSelectorTodoItem,
+  selectorSessionTodoItem,
+  selectorSessionTodoIds,
+} from '@states/atomEffects/todos';
 import { atomPriority, selectorPriorityRankScore } from '@states/priorities';
+import { TypesTodos } from '@components/todos/todos.types';
 
 /**
  * Hooks
  * */
 
 // Priority
-export const usePriorityUpdateTodoItem = (todoId: Todos['_id']) => {
+export const usePriorityUpdateTodoItem = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -28,7 +32,7 @@ export const usePriorityUpdateTodoItem = (todoId: Todos['_id']) => {
   });
 };
 
-export const usePriorityUpdate = (todoId: Todos['_id']) => {
+export const usePriorityUpdate = (todoId: TypesTodos['_id']) => {
   const updatePriorityTodoItem = usePriorityUpdateTodoItem(todoId);
   const updatePriority = useRecoilCallback(({ set, reset, snapshot }) => (state: PRIORITY_LEVEL) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -60,7 +64,7 @@ export const usePriorityUpdate = (todoId: Todos['_id']) => {
   };
 };
 
-export const usePriorityUpdateData = (todoId: Todos['_id']) => {
+export const usePriorityUpdateData = (todoId: TypesTodos['_id']) => {
   const { status } = useSession();
   const updatePriorityItem = usePriorityUpdate(todoId);
   const updatePriorityRankScore = usePriorityRankScore(todoId);
@@ -78,7 +82,8 @@ export const usePriorityUpdateData = (todoId: Todos['_id']) => {
       get(selectorSessionTodoIds).map((todo) => {
         return {
           ...todo,
-          priorityLevel: todo._id === todoId ? get(selectorSessionTodoItem(todoId)).priorityLevel : todo.priorityLevel,
+          priorityLevel:
+            todo._id === todoId ? get(selectorSessionTodoItem(todoId)).priorityLevel : todo.priorityLevel,
         };
       }),
     );
@@ -101,7 +106,7 @@ export const usePriorityUpdateData = (todoId: Todos['_id']) => {
 
 // PRS = Priority Rank Score
 
-export const usePriorityRankScore = (todoId: Todos['_id']) => {
+export const usePriorityRankScore = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 

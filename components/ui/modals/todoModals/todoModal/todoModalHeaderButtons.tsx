@@ -3,16 +3,12 @@ import {
   IconButton as ExpandReversibleIconButton,
   IconButton as MinimizeIconButton,
 } from '@buttons/iconButton';
+import { TypesTodo } from '@components/todos/todos.types';
 import { MODIFIER_KBD } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { ICON_CLOSE_FULL_SCREEN, ICON_OPEN_IN_FULL } from '@data/materialSymbols';
 import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
-import {
-  useTodoModalStateMinimize,
-  useTodoModalStateExpand,
-  useTodoModalStateClose,
-} from '@hooks/modals';
-import { Types } from '@lib/types';
+import { useTodoModalStateMinimize, useTodoModalStateExpand, useTodoModalStateClose } from '@hooks/modals';
 import { optionsButtonTodoModalMinimize, optionsButtonTodoModalClose } from '@options/button';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomTodoModalMax } from '@states/modals';
@@ -23,7 +19,7 @@ import {
 } from 'react';
 import { useRecoilValue } from 'recoil';
 
-type Props = Partial<Pick<Types, 'todo'>>;
+type Props = Partial<Pick<TypesTodo, 'todo'>>;
 
 export const TodoModalHeaderButtons = ({ todo }: Props) => {
   const minimizeModal = useTodoModalStateMinimize(todo?._id);

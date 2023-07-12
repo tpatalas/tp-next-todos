@@ -1,4 +1,5 @@
 import { PriorityButton } from '@buttons/iconButton/priorityButton';
+import { TypesTodo } from '@components/todos/todos.types';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { usePriorityUpdate } from '@hooks/priorities';
 import { Types } from '@lib/types';
@@ -7,12 +8,15 @@ import { optionsPriorityTodoModalImportant, optionsPriorityTodoModalUrgent } fro
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { useRecoilCallback } from 'recoil';
 
-type Props = Pick<Types, 'children'> & Partial<Pick<Types, 'todo'>>;
+type Props = Pick<Types, 'children'> & Partial<Pick<TypesTodo, 'todo'>>;
 
 export const TodoModalHeaderContents = ({ todo, children }: Props) => {
   const setPriority = usePriorityUpdate(todo?._id);
   const isTodoCompleted = useRecoilCallback(({ snapshot }) => () => {
-    return typeof todo !== 'undefined' && snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed;
+    return (
+      typeof todo !== 'undefined' &&
+      snapshot.getLoadable(selectorSessionTodoItem(todo._id)).getValue().completed
+    );
   });
   const disabledStyle = isTodoCompleted() ? 'cursor-not-allowed opacity-50 select-none' : '';
   const conditionalHeaderDescription = isTodoCompleted() ? 'Completed todo' : 'Update todo';

@@ -1,16 +1,16 @@
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { Todos } from '@lib/types';
 import { selectorDynamicTodoItem } from '@states/todos';
 import { subDays, differenceInDays } from 'date-fns';
 import { atomFamily, selectorFamily, selector } from 'recoil';
 import { selectorSessionTodoIds } from './atomEffects/todos';
+import { TypesTodos } from '@components/todos/todos.types';
 
 /**
  * atoms
  */
 
 // priority
-export const atomPriority = atomFamily<PRIORITY_LEVEL | null, Todos['_id']>({
+export const atomPriority = atomFamily<PRIORITY_LEVEL | null, TypesTodos['_id']>({
   key: 'atomPriority',
   default: null,
 });
@@ -20,7 +20,7 @@ export const atomPriority = atomFamily<PRIORITY_LEVEL | null, Todos['_id']>({
  * */
 // priority rank score
 
-export const selectorDynamicPriority = selectorFamily<Todos['priorityLevel'], Todos['_id']>({
+export const selectorDynamicPriority = selectorFamily<TypesTodos['priorityLevel'], TypesTodos['_id']>({
   key: 'selectorPriority',
   get:
     (todoId) =>
@@ -102,7 +102,7 @@ export const selectorTaskCompleteCapacity = selector({
   },
 });
 
-export const selectorPrsDueDate = selectorFamily<number, Todos['_id']>({
+export const selectorPrsDueDate = selectorFamily<number, TypesTodos['_id']>({
   key: 'selectorPrsDueDate',
   get:
     (todoId) =>
@@ -132,7 +132,7 @@ export const selectorPrsDueDate = selectorFamily<number, Todos['_id']>({
   },
 });
 
-export const selectorPrsCreateDate = selectorFamily<number, Todos['_id']>({
+export const selectorPrsCreateDate = selectorFamily<number, TypesTodos['_id']>({
   key: 'selectorPrsCreateDate',
   get:
     (todoId) =>
@@ -150,7 +150,7 @@ export const selectorPrsCreateDate = selectorFamily<number, Todos['_id']>({
   },
 });
 
-export const selectorPrsTaskCapacity = selectorFamily<number, Todos['_id']>({
+export const selectorPrsTaskCapacity = selectorFamily<number, TypesTodos['_id']>({
   key: 'selectorPrsTaskCapacity',
   get:
     (todoId) =>
@@ -166,7 +166,7 @@ export const selectorPrsTaskCapacity = selectorFamily<number, Todos['_id']>({
   },
 });
 
-export const selectorPriorityRankScore = selectorFamily<number, Todos['_id']>({
+export const selectorPriorityRankScore = selectorFamily<number, TypesTodos['_id']>({
   key: 'selectorPriorityRankScore',
   get:
     (todoId) =>

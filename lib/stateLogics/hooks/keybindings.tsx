@@ -1,6 +1,5 @@
 import { CATCH } from '@constAssertions/misc';
 import { BREAKPOINT } from '@constAssertions/ui';
-import { Todos } from '@lib/types';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomCurrentFocus, atomOnBlur, atomOnFocus } from '@states/focus';
@@ -24,8 +23,9 @@ import {
 import { useTodoCompleteItem, useTodoRemoveItem } from './todos';
 import { Labels } from '@label/label.types';
 import { useLabelAdd, useLabelUpdateItem, useLabelUpdateDataItem } from '@label/label.hooks';
+import { TypesTodos } from '@components/todos/todos.types';
 
-export const useItemModalWithKey = (_id: Todos['_id']) => {
+export const useItemModalWithKey = (_id: TypesTodos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
   const removeTodo = useTodoRemoveItem(_id);
 
@@ -49,7 +49,7 @@ export const useItemModalWithKey = (_id: Todos['_id']) => {
   return itemModalKeyHandler;
 };
 
-export const useKeyWithFocus = (_id: Todos['_id']) => {
+export const useKeyWithFocus = (_id: TypesTodos['_id']) => {
   const completeTodo = useTodoCompleteItem(_id);
   const openModal = useTodoModalStateOpen(_id);
   const removeTodo = useTodoRemoveItem(_id);
@@ -168,7 +168,7 @@ export const useKeyWithNavigate = () => {
   return keyDownNavigate;
 };
 
-export const useKeyWithTodoModal = (_id: Todos['_id']) => {
+export const useKeyWithTodoModal = (_id: TypesTodos['_id']) => {
   const openModal = useTodoModalStateOpen(_id);
   const expandModal = useTodoModalStateExpand(_id);
   const exitMinimizeModal = useTodoModalStateExitMinimize(_id);
