@@ -4,14 +4,18 @@ import { TodoItemDropdown } from '@dropdowns/v1/todoItemDropdown';
 import { TypesTodo } from 'lib/types';
 import dynamic from 'next/dynamic';
 import { Fragment as ModalActionsFragment } from 'react';
-import { TodoItem } from './todoItem';
 import { TodoItemFocuser } from './todoItemFocuser';
 import { useTodoModalStateOpen } from '@hooks/modals';
+import { TodoItem } from './todoItem';
 
 const DeleteTodoConfirmModal = dynamic(() =>
-  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then((mod) => mod.DeleteTodoConfirmModal),
+  import('@modals/confirmModal/deleteConfirmModal/deleteTodoConfirmModal').then(
+    (mod) => mod.DeleteTodoConfirmModal,
+  ),
 );
-const ItemTodoModal = dynamic(() => import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal));
+const ItemTodoModal = dynamic(() =>
+  import('@modals/todoModals/itemTodoModal').then((mod) => mod.ItemTodoModal),
+);
 const MinimizedModal = dynamic(() => import('@modals/minimizedModal').then((mod) => mod.MinimizedModal));
 
 type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
@@ -25,12 +29,14 @@ export const Todo = ({ todo, index }: Props) => {
         <div className='group relative flex w-full cursor-pointer flex-row justify-start'>
           <TodoItemFocuser
             todo={todo}
-            index={index!}>
+            index={index!}
+          >
             <TodoItem todo={todo} />
           </TodoItemFocuser>
           <TodoItemDropdown
             options={{ isInitiallyVisible: false }}
-            todo={todo}>
+            todo={todo}
+          >
             <div className='py-1'>
               <DropdownMenuItem
                 options={{
@@ -39,7 +45,8 @@ export const Todo = ({ todo, index }: Props) => {
                   tooltip: 'Edit',
                   kbd: 'Enter',
                 }}
-                onClick={() => openModal()}>
+                onClick={() => openModal()}
+              >
                 Edit todo
               </DropdownMenuItem>
             </div>
