@@ -2,6 +2,7 @@ import { OBJECT_ID } from '@constAssertions/data';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { Labels } from '@label/label.types';
 import { TypesMongoDB } from '@lib/types';
+import { ReactNode } from 'react';
 
 export interface TypesTodo {
   todoItem: TypesTodos;
@@ -32,3 +33,7 @@ export interface TypesTodos extends TypesTodosEditors, TypesTodoIds {
   title_id?: OBJECT_ID;
   user_id?: OBJECT_ID;
 }
+
+export type PropsTodo = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
+
+export type PropsTodoItemFocuser = Pick<TypesTodo, 'todo' | 'index'> & { children: ReactNode };
