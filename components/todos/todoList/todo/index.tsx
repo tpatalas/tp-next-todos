@@ -10,11 +10,9 @@ import {
   ItemTodoModal,
   MinimizedModal,
 } from '@components/todos/todos.dynamicImports';
-import { TypesTodo } from '@components/todos/todos.types';
+import { PropsTodo } from '@components/todos/todos.types';
 
-type Props = Pick<TypesTodo, 'todo'> & Partial<Pick<TypesTodo, 'index'>>;
-
-export const Todo = ({ todo, index }: Props) => {
+export const Todo = ({ todo, index }: PropsTodo) => {
   const openModal = useTodoModalStateOpen(todo?._id);
 
   return (
