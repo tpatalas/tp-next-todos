@@ -1,4 +1,5 @@
 import { IconButton } from '@buttons/iconButton';
+import { TypesTodo } from '@components/todos/todos.types';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import {
   ICON_FLAG,
@@ -15,7 +16,7 @@ import { atomTodoNew } from '@states/todos';
 import { Fragment, Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
-type Props = { options: TypesOptionsPriority } & Partial<Pick<Types, 'todo'>> & Pick<Types, 'onClick'>;
+type Props = { options: TypesOptionsPriority } & Partial<Pick<TypesTodo, 'todo'>> & Pick<Types, 'onClick'>;
 
 export const PriorityButton = ({ todo, options, onClick }: Props) => {
   const atomTodo = typeof todo === 'undefined' ? atomTodoNew : atomSelectorTodoItem(todo._id);

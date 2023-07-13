@@ -23,9 +23,10 @@ import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
 import { classNames } from '@stateLogics/utils';
 import { DividerX } from '@ui/dividers/dividerX';
+import { TypesTodo } from '@components/todos/todos.types';
 
 type Props = Partial<
-  Pick<Types, 'todo' | 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'>
+  Pick<Types, 'children' | 'menuButtonContent' | 'footerButtons' | 'headerButtons'> & Pick<TypesTodo, 'todo'>
 >;
 
 export const TodoModal = ({ todo, menuButtonContent, headerButtons, footerButtons, children }: Props) => {

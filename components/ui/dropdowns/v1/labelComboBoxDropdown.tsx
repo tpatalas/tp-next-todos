@@ -1,6 +1,5 @@
 import { PrefetchRouterButton } from '@buttons/button/prefetchRouterButton';
 import { IconButton } from '@buttons/iconButton';
-import { Types } from '@lib/types';
 import { LabelComboBox } from '@ui/comboBoxes/labelComboBox';
 import { LabelsHorizontalGradients } from '@ui/gradients/labelsHorizontalGradients';
 import { Fragment as LabelComboBoxDropdownFragment, useRef } from 'react';
@@ -18,8 +17,12 @@ import { classNames, paths } from '@stateLogics/utils';
 import { selectorSelectedLabels } from '@label/label.states';
 import { TypesLabel } from '@label/label.types';
 import { useLabelRemoveItemTitleId } from '@label/label.hooks';
+import { TypesTodo } from '@components/todos/todos.types';
+import { Types } from '@lib/types';
 
-type Props = Partial<Pick<Types, 'container' | 'todo'> & Pick<TypesLabel, 'selectedQueryLabels'>>;
+type Props = Partial<
+  Pick<TypesTodo, 'todo'> & Pick<Types, 'container'> & Pick<TypesLabel, 'selectedQueryLabels'>
+>;
 
 export const LabelComboBoxDropdown = ({ todo, selectedQueryLabels, container }: Props) => {
   const removeTitleId = useLabelRemoveItemTitleId(todo?._id);

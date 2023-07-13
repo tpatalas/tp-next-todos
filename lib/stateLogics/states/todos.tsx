@@ -1,4 +1,4 @@
-import { TodoIds, Todos, Types } from '@lib/types';
+import { Types } from '@lib/types';
 import { selectorFilterPriorityRankScore } from '@states/priorities';
 import { atom, selector, selectorFamily } from 'recoil';
 import { PATH_APP, OBJECT_ID } from '@constAssertions/data';
@@ -7,11 +7,12 @@ import { atomSelectorTodoItem, selectorSessionTodoIds } from './atomEffects/todo
 import { atomFilterEffect } from './misc';
 import { atomLabelQuerySlug, selectorSessionLabels } from '@label/label.states';
 import { Labels } from '@label/label.types';
+import { TypesTodoIds, TypesTodos } from '@components/todos/todos.types';
 
 /**
  * atoms
  * */
-export const atomTodoNew = atom<Todos>({
+export const atomTodoNew = atom<TypesTodos>({
   key: 'atomTodoNew',
   default: {
     _id: undefined,
@@ -20,10 +21,10 @@ export const atomTodoNew = atom<Todos>({
     completed: false,
     createdDate: new Date(),
     labelItem: [] as Labels[],
-  } as Todos,
+  } as TypesTodos,
 });
 
-export const selectorDynamicTodoItem = selectorFamily<Todos, Todos['_id']>({
+export const selectorDynamicTodoItem = selectorFamily<TypesTodos, TypesTodos['_id']>({
   key: 'selectorDynamicTodoItem',
   get:
     (todoId) =>
@@ -63,7 +64,7 @@ export const selectorFilterTodoIds = selector({
   },
 });
 
-export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATH_APP>({
+export const selectorFilterTodoIdsByPathname = selectorFamily<TypesTodoIds[], PATH_APP>({
   key: 'selectorFilterTodoIdsByPathname',
   get:
     (pathname) =>
@@ -98,7 +99,7 @@ export const selectorFilterTodoIdsByPathname = selectorFamily<TodoIds[], PATH_AP
   },
 });
 
-export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TodoIds[], Labels['_id']>({
+export const selectorFilterTodoIdsByLabelQueryId = selectorFamily<TypesTodoIds[], Labels['_id']>({
   key: 'selectorFilterTodoIdsByQueryId',
   get:
     (labelId) =>

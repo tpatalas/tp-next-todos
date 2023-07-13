@@ -1,3 +1,4 @@
+import { TypesTodo } from '@components/todos/todos.types';
 import { PRIORITY_LEVEL, CATCH } from '@constAssertions/misc';
 import { LabelComboBoxDropdown } from '@dropdowns/v1/labelComboBoxDropdown';
 import { useTodoModalStateOpen } from '@hooks/modals';
@@ -5,7 +6,6 @@ import { useTodoCompleteItem } from '@hooks/todos';
 import { SvgIcon } from '@icon/svgIcon';
 import { CheckBox } from '@inputs/checkbox';
 import { selectorSelectedQueryLabels } from '@label/label.states';
-import { TypesTodo } from '@lib/types';
 import {
   optionsSvgPriorityUrgent,
   optionsSvgPriorityImportant,

@@ -5,7 +5,6 @@ import {
 } from '@buttons/iconButton';
 import { atomTodoModalMini } from '@states/modals';
 import { atomTodoNew } from '@states/todos';
-import { TypesTodo } from 'lib/types';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { MinimizeModalTransition } from './modal/modalTransition/minimizeModalTransition';
@@ -23,6 +22,7 @@ import {
   useTodoModalStateExitMinimize,
 } from '@hooks/modals';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
+import { TypesTodo } from '@components/todos/todos.types';
 
 type Props = Partial<Pick<TypesTodo, 'todo'>>;
 
@@ -39,7 +39,8 @@ export const MinimizedModal = ({ todo }: Props) => {
       {isMediaQuerySmall && (
         <MinimizeModalTransition
           show={isTodoModalMiniOpen}
-          options={optionsMinimizedModal}>
+          options={optionsMinimizedModal}
+        >
           <div className=' flex flex-shrink-0 flex-row items-center justify-between'>
             <div className='flex flex-1 flex-col justify-center'>
               <p className='line-clamp-1 w-44 break-words text-sm font-medium text-gray-500'>

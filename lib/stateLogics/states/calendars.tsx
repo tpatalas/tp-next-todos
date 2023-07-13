@@ -1,16 +1,16 @@
-import { Todos } from '@lib/types';
+import { TypesTodos } from '@components/todos/todos.types';
 import { format, startOfToday } from 'date-fns';
 import { atomFamily, selectorFamily } from 'recoil';
 
 /**
  * atoms
  */
-export const atomDayPicker = atomFamily<Todos['dueDate'], Todos['_id']>({
+export const atomDayPicker = atomFamily<TypesTodos['dueDate'], TypesTodos['_id']>({
   key: 'atomDayPicker',
   default: null,
 });
 
-export const atomDayPickerUpdater = atomFamily<Todos['dueDate'], Todos['_id']>({
+export const atomDayPickerUpdater = atomFamily<TypesTodos['dueDate'], TypesTodos['_id']>({
   key: 'atomDayPickerUpdater',
   default: selectorFamily({
     key: 'selectorAtomDayPickerUpdater',
@@ -25,7 +25,7 @@ export const atomDayPickerUpdater = atomFamily<Todos['dueDate'], Todos['_id']>({
   }),
 });
 
-export const atomCurrentMonth = atomFamily<string, Todos['_id']>({
+export const atomCurrentMonth = atomFamily<string, TypesTodos['_id']>({
   key: 'atomCurrentMonth',
   default: format(startOfToday(), 'MMM-yyyy'),
 });

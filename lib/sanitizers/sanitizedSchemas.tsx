@@ -1,9 +1,9 @@
+import { TypesTodos } from '@components/todos/todos.types';
 import { OBJECT_ID } from '@constAssertions/data';
 import { Labels } from '@label/label.types';
-import { Todos } from '@lib/types';
 import { sanitize, sanitizeObject } from '@stateLogics/utils';
 
-export const sanitizedUserTodoItem = (data: Todos) => {
+export const sanitizedUserTodoItem = (data: TypesTodos) => {
   return {
     title: sanitize(data.title),
     completed: data.completed,
@@ -16,14 +16,14 @@ export const sanitizedUserTodoItem = (data: Todos) => {
   };
 };
 
-export const sanitizedUserTodoNote = (data: Todos) => {
+export const sanitizedUserTodoNote = (data: TypesTodos) => {
   return {
     note: sanitize(data.note),
     update: Date.now(),
   };
 };
 
-export const sanitizedUserLabels = (data: Todos['labelItem'] | Labels[]) => {
+export const sanitizedUserLabels = (data: TypesTodos['labelItem'] | Labels[]) => {
   return (
     data &&
     (data.map((labelItem) => {

@@ -1,11 +1,11 @@
 import { DisableButton } from '@buttons/disableButton';
+import { TypesTodo } from '@components/todos/todos.types';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import { KeysWithItemModalEffect } from '@effects/KeysWithItemModalEffect';
 import { KeysWithTodoModalEffect } from '@effects/keysWithTodoModalEffect';
 import { useConditionCompareTodoItemsEqual } from '@hooks/misc';
 import { useTodoUpdateItem, useTodoCompleteItem } from '@hooks/todos';
 import { CheckBox as CompleteTodoCheckBox } from '@inputs/checkbox';
-import { Types } from '@lib/types';
 import { optionsButtonItemModalUpdate } from '@options/button';
 import { classNames } from '@stateLogics/utils';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
@@ -15,7 +15,7 @@ import { Fragment as FooterButtonsFragment, Fragment as HeaderContentFragment } 
 import { useRecoilValue } from 'recoil';
 const TodoModal = dynamic(() => import('@modals/todoModals/todoModal').then((mod) => mod.TodoModal));
 
-export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
+export const ItemTodoModal = ({ todo }: Pick<TypesTodo, 'todo'>) => {
   const updateTodo = useTodoUpdateItem(todo._id);
   const completeTodo = useTodoCompleteItem(todo._id);
   const todoItem = useRecoilValue(selectorSessionTodoItem(todo._id));
@@ -46,11 +46,13 @@ export const ItemTodoModal = ({ todo }: Pick<Types, 'todo'>) => {
           <DisableButton
             options={optionsButtonItemModalUpdate}
             isConditionalRendering={condition}
-            onClick={() => updateTodo()}>
+            onClick={() => updateTodo()}
+          >
             Update
           </DisableButton>
         </FooterButtonsFragment>
-      }>
+      }
+    >
       <KeysWithTodoModalEffect todo={todo} />
       <KeysWithItemModalEffect todo={todo} />
     </TodoModal>

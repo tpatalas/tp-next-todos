@@ -1,4 +1,4 @@
-import { Todos } from '@lib/types';
+import { TypesTodos } from '@components/todos/todos.types';
 import { atom, atomFamily } from 'recoil';
 
 /**
@@ -11,7 +11,7 @@ export const atomComboBoxQuery = atom<string>({
   default: '',
 });
 
-export const atomFilterSelected = atomFamily<boolean, Todos['_id']>({
+export const atomFilterSelected = atomFamily<boolean, TypesTodos['_id']>({
   key: 'atomFilterSelected',
   default: false,
 });

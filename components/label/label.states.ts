@@ -1,13 +1,13 @@
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataLabels } from '@lib/queries/queryLabels';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
-import { Todos } from '@lib/types';
 import { atomComboBoxQuery, atomFilterSelected } from '@states/comboBoxes';
 import { atomTodoNew } from '@states/todos';
 import { atomUserSession } from '@user/user.states';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 import { Labels } from './label.types';
 import { DATA_DEMO_LABELS } from './label.data';
+import { TypesTodos } from '@components/todos/todos.types';
 
 /**
  * Atom Queries
@@ -86,7 +86,7 @@ export const atomLabelQuerySlug = atom<Labels['_id']>({
 /**
  * Selectors
  **/
-export const selectorSelectedLabels = selectorFamily<Labels[], Todos['_id']>({
+export const selectorSelectedLabels = selectorFamily<Labels[], TypesTodos['_id']>({
   key: 'selectorSelectedLabels',
   get:
     (_id) =>
@@ -99,7 +99,7 @@ export const selectorSelectedLabels = selectorFamily<Labels[], Todos['_id']>({
   },
 });
 
-export const selectorSelectedQueryLabels = selectorFamily<Labels[], Todos['_id']>({
+export const selectorSelectedQueryLabels = selectorFamily<Labels[], TypesTodos['_id']>({
   key: 'selectorSelectedLabels',
   get:
     (_id) =>
@@ -112,7 +112,7 @@ export const selectorSelectedQueryLabels = selectorFamily<Labels[], Todos['_id']
   },
 });
 
-export const selectorComboBoxFilteredLabels = selectorFamily<Labels[], Todos['_id']>({
+export const selectorComboBoxFilteredLabels = selectorFamily<Labels[], TypesTodos['_id']>({
   key: 'selectorComboBoxFilteredLabels',
   get:
     (todoId) =>

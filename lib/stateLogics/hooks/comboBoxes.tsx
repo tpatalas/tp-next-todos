@@ -1,9 +1,9 @@
+import { TypesTodos } from '@components/todos/todos.types';
 import { selectorSelectedLabels } from '@label/label.states';
-import { Todos } from '@lib/types';
 import { atomFilterSelected, atomComboBoxQuery } from '@states/comboBoxes';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 
-export const useSetFilterLabels = (_id: Todos['_id']) => {
+export const useSetFilterLabels = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const selectedLabels = get(selectorSelectedLabels(_id));

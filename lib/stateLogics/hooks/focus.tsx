@@ -1,15 +1,15 @@
-import { Todos, Types } from '@lib/types';
 import { atomTodoModalMini } from '@states/modals';
 import { useRecoilCallback, RecoilValue } from 'recoil';
 import { FOCUS } from '@constAssertions/misc';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomOnFocus, atomCurrentFocus } from '@states/focus';
 import { useTodoModalStateOpen } from './modals';
+import { TypesTodo, TypesTodos } from '@components/todos/todos.types';
 
 /*
  * Hooks
  **/
-export const useFocusState = (_id: Todos['_id']) => {
+export const useFocusState = (_id: TypesTodos['_id']) => {
   const openModal = useTodoModalStateOpen(_id);
   const focusState = useRecoilCallback(({ reset, snapshot }) => (state: FOCUS) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -33,7 +33,7 @@ export const useFocusState = (_id: Todos['_id']) => {
   return focusState;
 };
 
-export const useFocusOnClick = (index: Types['index']) => {
+export const useFocusOnClick = (index: TypesTodo['index']) => {
   return useRecoilCallback(({ set }) => () => {
     set(atomCurrentFocus, index);
     set(atomOnFocus, true);
