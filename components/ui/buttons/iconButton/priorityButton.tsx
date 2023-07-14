@@ -1,4 +1,5 @@
 import { IconButton } from '@buttons/iconButton';
+import { atomTodoNew } from '@components/todos/todos.states';
 import { TypesTodo } from '@components/todos/todos.types';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
 import {
@@ -12,7 +13,6 @@ import { Types } from '@lib/types';
 import { TypesOptionsPriority } from '@lib/types/options';
 import { classNames } from '@stateLogics/utils';
 import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffects/todos';
-import { atomTodoNew } from '@states/todos';
 import { Fragment, Fragment as TodoPriorityFragment } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 

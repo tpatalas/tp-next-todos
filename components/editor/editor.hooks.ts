@@ -1,10 +1,10 @@
+import { atomTodoNew } from '@components/todos/todos.states';
 import { TypesTodos, TypesTodosEditors } from '@components/todos/todos.types';
 import { TypesEditor } from '@editor/editor.types';
 import { useTodoAdd, useTodoUpdateItem } from '@hooks/todos';
 import { CustomEditor } from '@lib/types/misc/slate';
 import { atomSelectorTodoItem } from '@states/atomEffects/todos';
 import { atomEditorDeserialize, atomEditorSerialize } from '@states/editors';
-import { atomTodoNew } from '@states/todos';
 import { isMobile } from 'react-device-detect';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { Descendant, Transforms } from 'slate';

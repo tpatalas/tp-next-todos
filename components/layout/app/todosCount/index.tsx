@@ -1,5 +1,5 @@
+import { selectorTodosCount } from '@components/todos/todos.states';
 import { PropsTodosCount } from '@layout/layout.types';
-import { selectorTodosCount } from '@states/todos';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 

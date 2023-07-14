@@ -1,3 +1,4 @@
+import { atomTodoNew } from '@components/todos/todos.states';
 import { TypesTodos } from '@components/todos/todos.types';
 import { CATCH } from '@constAssertions/misc';
 import { NOTIFICATION } from '@constAssertions/ui';
@@ -24,7 +25,6 @@ import { atomSelectorTodoItem } from '@states/atomEffects/todos';
 import { atomFilterSelected } from '@states/comboBoxes';
 import { atomCatch } from '@states/misc';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
-import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';

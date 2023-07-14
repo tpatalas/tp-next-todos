@@ -1,3 +1,4 @@
+import { atomTodoNew } from '@components/todos/todos.states';
 import { TypesTodos } from '@components/todos/todos.types';
 import { BREAKPOINT } from '@constAssertions/ui';
 import { atomLayoutType, atomLayoutNavigationOpen } from '@layout/layout.states';
@@ -6,7 +7,6 @@ import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { atomHtmlTitleTag } from '@states/misc';
 import { atomLabelModalOpen, atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
 import { atomNotificationID, atomNotificationOpen } from '@states/notifications';
-import { atomTodoNew } from '@states/todos';
 import { useEffect } from 'react';
 import { RecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 

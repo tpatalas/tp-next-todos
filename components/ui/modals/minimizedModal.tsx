@@ -4,7 +4,6 @@ import {
   IconButton as OpenFullIconButton,
 } from '@buttons/iconButton';
 import { atomTodoModalMini } from '@states/modals';
-import { atomTodoNew } from '@states/todos';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { MinimizeModalTransition } from './modal/modalTransition/minimizeModalTransition';
@@ -23,6 +22,7 @@ import {
 } from '@hooks/modals';
 import { atomEffectMediaQuery } from '@states/atomEffects/misc';
 import { TypesTodo } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 type Props = Partial<Pick<TypesTodo, 'todo'>>;
 

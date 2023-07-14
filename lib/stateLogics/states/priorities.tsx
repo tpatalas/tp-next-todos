@@ -1,9 +1,9 @@
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
-import { selectorDynamicTodoItem } from '@states/todos';
 import { subDays, differenceInDays } from 'date-fns';
 import { atomFamily, selectorFamily, selector } from 'recoil';
 import { selectorSessionTodoIds } from './atomEffects/todos';
 import { TypesTodos } from '@components/todos/todos.types';
+import { selectorDynamicTodoItem } from '@components/todos/todos.states';
 
 /**
  * atoms
