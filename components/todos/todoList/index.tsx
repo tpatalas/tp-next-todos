@@ -2,12 +2,12 @@ import { DATA_PATHNAME_IMAGE } from '@collections/pathnameImage';
 import { TypesPathnameImage } from '@lib/types';
 import { cloudflareLoader } from '@stateLogics/utils';
 import { atomPathnameImage } from '@states/misc';
-import { selectorFilterTodoIds } from '@states/todos';
 import { SmoothTransition } from '@ui/transitions/smoothTransition';
 import Image from 'next/image';
 import { Fragment as TodosFragment } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Todo } from './todo';
+import { selectorFilterTodoIds } from '../todos.states';
 
 export const TodoList = () => {
   const todoIds = useRecoilValue(selectorFilterTodoIds);

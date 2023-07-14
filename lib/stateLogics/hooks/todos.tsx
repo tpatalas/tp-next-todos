@@ -12,7 +12,6 @@ import {
   selectorSessionTodoIds,
   atomSelectorTodoItem,
 } from '@states/atomEffects/todos';
-import { atomTodoNew } from '@states/todos';
 import {
   useConditionCheckTodoTitleEmpty,
   useGetWithRecoilCallback,
@@ -22,6 +21,7 @@ import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
 import { atomCatch } from '@states/misc';
 import { selectorSessionLabels, atomSelectorLabels } from '@label/label.states';
 import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks

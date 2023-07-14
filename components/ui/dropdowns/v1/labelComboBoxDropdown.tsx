@@ -12,13 +12,13 @@ import { optionsButtonLabelRemove } from '@options/button';
 import { optionsDropdownComboBox } from '@options/misc';
 import { useTodoModalStateClose } from '@hooks/modals';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
-import { atomTodoNew } from '@states/todos';
 import { classNames, paths } from '@stateLogics/utils';
 import { selectorSelectedLabels } from '@label/label.states';
 import { TypesLabel } from '@label/label.types';
 import { useLabelRemoveItemTitleId } from '@label/label.hooks';
 import { TypesTodo } from '@components/todos/todos.types';
 import { Types } from '@lib/types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 type Props = Partial<
   Pick<TypesTodo, 'todo'> & Pick<Types, 'container'> & Pick<TypesLabel, 'selectedQueryLabels'>

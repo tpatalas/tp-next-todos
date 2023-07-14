@@ -1,5 +1,4 @@
 import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
-import { atomTodoNew } from '@states/todos';
 import {
   parse,
   eachDayOfInterval,
@@ -23,6 +22,7 @@ import { useNotificationState } from './notifications';
 import { usePriorityRankScore } from './priorities';
 import { atomCurrentMonth, atomDayPickerUpdater, atomDayPicker } from '@states/calendars';
 import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks

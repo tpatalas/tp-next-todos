@@ -2,7 +2,6 @@ import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
 import { ICON_EVENT_AVAILABLE, ICON_EVENT_AVAILABLE_FILL } from '@data/materialSymbols';
 import { Menu } from '@headlessui/react';
-import { atomTodoNew } from '@states/todos';
 import { format } from 'date-fns';
 import { Types } from 'lib/types';
 import { Fragment, Fragment as HeaderContentsFragment } from 'react';
@@ -20,6 +19,7 @@ import { classNames } from '@stateLogics/utils';
 import { TypesOptionsDropdown } from '@lib/types/options';
 import { SvgIcon } from '@icon/svgIcon';
 import { TypesTodo } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 type Props = { options: TypesOptionsDropdown } & Partial<Pick<TypesTodo, 'todo'>> &
   Pick<Types, 'onClickConfirm'>;

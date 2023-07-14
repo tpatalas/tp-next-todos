@@ -1,5 +1,4 @@
 import { updateDataPriorityTodo } from '@lib/queries/queryTodos';
-import { atomTodoNew } from '@states/todos';
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { PRIORITY_LEVEL } from '@constAssertions/misc';
@@ -10,6 +9,7 @@ import {
 } from '@states/atomEffects/todos';
 import { atomPriority, selectorPriorityRankScore } from '@states/priorities';
 import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks

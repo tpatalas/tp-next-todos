@@ -1,4 +1,3 @@
-import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import { CATCH } from '@constAssertions/misc';
@@ -19,6 +18,7 @@ import { atomLabelNew, atomSelectorLabelItem, atomSelectorLabels } from '@label/
 import { Labels } from '@label/label.types';
 import { useLabelRemoveItem } from '@label/label.hooks';
 import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks
