@@ -9,6 +9,8 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'daily'
+      time: '07:00' # 7 AM UTC
+      timezone: 'UTC' # UTC Time Zone
     target-branch: 'develop'
     open-pull-requests-limit: 10
     commit-message:
