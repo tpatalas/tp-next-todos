@@ -1,5 +1,6 @@
 import { Button } from '@buttons/button';
 import { IconButton } from '@buttons/iconButton';
+import { TypesTodo } from '@components/todos/todos.types';
 import { CALENDAR } from '@constAssertions/misc';
 import { ICON_TODAY } from '@data/materialSymbols';
 import { STYLE_CALENDAR_COL_START } from '@data/stylePreset';
@@ -12,7 +13,7 @@ import { atomDayPickerUpdater, atomCurrentMonth } from '@states/calendars';
 import { format, getDay, isEqual, isPast, isSameMonth, isThisMonth, isToday, parse } from 'date-fns';
 import { useRecoilValue } from 'recoil';
 
-type Props = Partial<Pick<Types, 'todo' | 'headerButtons'>>;
+type Props = Partial<Pick<Types, 'headerButtons'> & Pick<TypesTodo, 'todo'>>;
 
 export const Calendar = ({ todo, headerButtons }: Props) => {
   const itemDay = useRecoilValue(atomDayPickerUpdater(todo?._id)) as Date;

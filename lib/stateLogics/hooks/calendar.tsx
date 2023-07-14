@@ -1,6 +1,4 @@
 import { updateDataCalendarTodo } from '@lib/queries/queryTodos';
-import { Todos } from '@lib/types';
-import { atomTodoNew } from '@states/todos';
 import {
   parse,
   eachDayOfInterval,
@@ -23,12 +21,14 @@ import { useGetWithRecoilCallback } from './misc';
 import { useNotificationState } from './notifications';
 import { usePriorityRankScore } from './priorities';
 import { atomCurrentMonth, atomDayPickerUpdater, atomDayPicker } from '@states/calendars';
+import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks
  * */
 
-export const useCalState = (todoId: Todos['_id']) => {
+export const useCalState = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => (state: CALENDAR) => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     const currentMonth = get(atomCurrentMonth(todoId));
@@ -64,7 +64,7 @@ export const useCalState = (todoId: Todos['_id']) => {
   });
 };
 
-export const useCalResetDateItemOnly = (todoId: Todos['_id']) => {
+export const useCalResetDateItemOnly = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ reset }) => () => {
     reset(atomCurrentMonth(todoId));
     reset(atomSelectorTodoItem(todoId));
@@ -73,7 +73,7 @@ export const useCalResetDateItemOnly = (todoId: Todos['_id']) => {
     // set(atomDayPickerUpdater(todoId), null); //derived state does not reset to default value as null if reset
   });
 };
-export const useCalResetDateAll = (todoId: Todos['_id']) => {
+export const useCalResetDateAll = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ reset, set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
     reset(atomCurrentMonth(todoId));
@@ -92,13 +92,13 @@ export const useCalResetDateAll = (todoId: Todos['_id']) => {
   });
 };
 
-export const useCalSelectDay = (todoId: Todos['_id']) => {
+export const useCalSelectDay = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set }) => (newValue: Date) => {
     set(atomDayPickerUpdater(todoId), newValue);
   });
 };
 
-export const useCalUpdateDay = (todoId: Todos['_id']) => {
+export const useCalUpdateDay = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -106,7 +106,7 @@ export const useCalUpdateDay = (todoId: Todos['_id']) => {
   });
 };
 
-export const useCalUpdate = (todoId: Todos['_id']) => {
+export const useCalUpdate = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -124,7 +124,7 @@ export const useCalUpdate = (todoId: Todos['_id']) => {
   });
 };
 
-export const useCalUpdateItem = (todoId: Todos['_id']) => {
+export const useCalUpdateItem = (todoId: TypesTodos['_id']) => {
   const updateCalendarDay = useCalUpdateDay(todoId);
   const updateCalendarTodoItem = useCalUpdate(todoId);
 
@@ -134,7 +134,7 @@ export const useCalUpdateItem = (todoId: Todos['_id']) => {
   };
 };
 
-export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
+export const useCalUpdateDataItem = (todoId: TypesTodos['_id']) => {
   const { status } = useSession();
   const get = useGetWithRecoilCallback();
   const updateCalItem = useCalUpdateItem(todoId);
@@ -156,7 +156,8 @@ export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
   return () => {
     updateCalItem();
     updatePriorityRankScore();
-    if (equal(get(selectorSessionTodoItem(todoId)).dueDate, get(atomSelectorTodoItem(todoId)).dueDate)) return;
+    if (equal(get(selectorSessionTodoItem(todoId)).dueDate, get(atomSelectorTodoItem(todoId)).dueDate))
+      return;
     get(atomSelectorTodoItem(todoId)).dueDate
       ? setNotification(NOTIFICATION['updatedDueDate'])
       : setNotification(NOTIFICATION['removedDueDate']);
@@ -164,7 +165,7 @@ export const useCalUpdateDataItem = (todoId: Todos['_id']) => {
   };
 };
 
-export const useCalResetDayUpdater = (todoId: Todos['_id']) => {
+export const useCalResetDayUpdater = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ reset }) => () => {
     reset(atomDayPickerUpdater(todoId));
   });

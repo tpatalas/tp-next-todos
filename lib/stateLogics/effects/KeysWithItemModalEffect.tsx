@@ -1,5 +1,5 @@
+import { TypesTodo } from '@components/todos/todos.types';
 import { useItemModalWithKey } from '@hooks/keybindings';
-import { TypesTodo } from '@lib/types';
 import { useEffect } from 'react';
 
 type Props = Pick<TypesTodo, 'todo'>;

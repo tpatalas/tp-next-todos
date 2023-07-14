@@ -1,5 +1,3 @@
-import { Todos } from '@lib/types';
-import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
 import { CATCH } from '@constAssertions/misc';
@@ -19,12 +17,14 @@ import { atomCatch } from '@states/misc';
 import { atomLabelNew, atomSelectorLabelItem, atomSelectorLabels } from '@label/label.states';
 import { Labels } from '@label/label.types';
 import { useLabelRemoveItem } from '@label/label.hooks';
+import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks
  * */
 // Confirm Modal
-export const useModalConfirmStateCancel = (_id: Todos['_id']) => {
+export const useModalConfirmStateCancel = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -35,7 +35,7 @@ export const useModalConfirmStateCancel = (_id: Todos['_id']) => {
 };
 
 // Todo Confirm Modal
-export const useTodoModalConfirmStateDiscard = (_id: Todos['_id']) => {
+export const useTodoModalConfirmStateDiscard = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -51,7 +51,7 @@ export const useTodoModalConfirmStateDiscard = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalConfirmStateDelete = (_id: Todos['_id']) => {
+export const useTodoModalConfirmStateDelete = (_id: TypesTodos['_id']) => {
   const removeTodo = useTodoRemoveItem(_id);
 
   return useRecoilCallback(({ reset, snapshot }) => () => {
@@ -79,7 +79,7 @@ export const useLabelModalConfirmStateDelete = (_id: Labels['_id']) => {
 };
 
 //Todo Modal
-export const useTodoModalCloseState = (_id: Todos['_id']) => {
+export const useTodoModalCloseState = (_id: TypesTodos['_id']) => {
   const resetLabelsDrafted = useResetRecoilState(atomSelectorLabels);
   const compareTodoItemsEqual = useConditionCompareTodoItemsEqual(_id);
   const checkTodoTitleEmpty = useConditionCheckTodoTitleEmpty();
@@ -113,7 +113,7 @@ export const useTodoModalCloseState = (_id: Todos['_id']) => {
   return modalCloseState;
 };
 
-export const useTodoModalStateExpand = (_id: Todos['_id']) => {
+export const useTodoModalStateExpand = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -121,7 +121,7 @@ export const useTodoModalStateExpand = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalStateMaximize = (_id: Todos['_id']) => {
+export const useTodoModalStateMaximize = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -133,7 +133,7 @@ export const useTodoModalStateMaximize = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalStateMinimize = (_id: Todos['_id']) => {
+export const useTodoModalStateMinimize = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -144,7 +144,7 @@ export const useTodoModalStateMinimize = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalStateExitMinimize = (_id: Todos['_id']) => {
+export const useTodoModalStateExitMinimize = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -156,7 +156,7 @@ export const useTodoModalStateExitMinimize = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalStateOpen = (_id: Todos['_id']) => {
+export const useTodoModalStateOpen = (_id: TypesTodos['_id']) => {
   const resetDateItemOnly = useCalResetDateItemOnly(_id);
   return useRecoilCallback(({ set, reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -169,7 +169,7 @@ export const useTodoModalStateOpen = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalStateClose = (_id: Todos['_id']) => {
+export const useTodoModalStateClose = (_id: TypesTodos['_id']) => {
   const setModalClose = useTodoModalCloseState(_id);
   return useRecoilCallback(({ reset, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -180,7 +180,7 @@ export const useTodoModalStateClose = (_id: Todos['_id']) => {
   });
 };
 
-export const useTodoModalStateReset = (_id: Todos['_id']) => {
+export const useTodoModalStateReset = (_id: TypesTodos['_id']) => {
   return useRecoilCallback(({ reset }) => () => {
     reset(atomTodoModalOpen(_id));
     reset(atomCatch(CATCH.todoModal));

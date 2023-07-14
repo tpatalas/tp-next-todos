@@ -1,8 +1,8 @@
 import { DATA_DEMO_TODOIDS } from '@collections/demo';
+import { TypesTodoIds, TypesTodos } from '@components/todos/todos.types';
 import { IDB_KEY, IDB_STORE } from '@constAssertions/storage';
 import { getDataTodoIds, getDataTodoItem, getDemoTodoItem } from '@lib/queries/queryTodos';
 import { queryEffect } from '@lib/stateLogics/effects/atomEffects/queryEffects';
-import { TodoIds, Todos } from '@lib/types';
 import { atomUserSession } from '@user/user.states';
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
@@ -11,7 +11,7 @@ import { atom, atomFamily, selector, selectorFamily } from 'recoil';
  * Defining `storeName` will automatically apply the predefined IndexedDB name.
  */
 
-export const atomQueryTodoIds = atom<TodoIds[]>({
+export const atomQueryTodoIds = atom<TypesTodoIds[]>({
   key: 'atomQueryTodoIds',
   default: [],
   effects: [
@@ -25,12 +25,12 @@ export const atomQueryTodoIds = atom<TodoIds[]>({
   ],
 });
 
-export const atomDemoTodoIds = atom<TodoIds[]>({
+export const atomDemoTodoIds = atom<TypesTodoIds[]>({
   key: 'atomDemoTodoIds',
   default: DATA_DEMO_TODOIDS,
 });
 
-export const selectorSessionTodoIds = selector<TodoIds[]>({
+export const selectorSessionTodoIds = selector<TypesTodoIds[]>({
   key: 'selectorSessionTodoIds',
   get: ({ get }) => {
     const session = get(atomUserSession);
@@ -42,9 +42,9 @@ export const selectorSessionTodoIds = selector<TodoIds[]>({
   },
 });
 
-export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
+export const atomQueryTodoItem = atomFamily<TypesTodos, TypesTodos['_id']>({
   key: 'atomQueryTodoItem',
-  default: {} as Todos,
+  default: {} as TypesTodos,
   //! Default value must be set to trigger the reset (reset removes the data from indexedDB)
   effects: (todoId) => [
     queryEffect({
@@ -58,9 +58,9 @@ export const atomQueryTodoItem = atomFamily<Todos, Todos['_id']>({
   ],
 });
 
-export const atomDemoTodoItem = atomFamily<Todos, Todos['_id']>({
+export const atomDemoTodoItem = atomFamily<TypesTodos, TypesTodos['_id']>({
   key: 'atomDemoTodoItem',
-  default: {} as Todos,
+  default: {} as TypesTodos,
   effects: (todoId) => [
     ({ setSelf }) => {
       const demoFunction = () => getDemoTodoItem({ _id: todoId });
@@ -69,7 +69,7 @@ export const atomDemoTodoItem = atomFamily<Todos, Todos['_id']>({
   ],
 });
 
-export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
+export const selectorSessionTodoItem = selectorFamily<TypesTodos, TypesTodos['_id']>({
   key: 'selectorSessionTodoItem',
   get:
     (todoId) =>
@@ -88,7 +88,7 @@ export const selectorSessionTodoItem = selectorFamily<Todos, Todos['_id']>({
 /**
  * Derived Query Todos
  **/
-export const atomSelectorTodoItem = atomFamily<Todos, Todos['_id']>({
+export const atomSelectorTodoItem = atomFamily<TypesTodos, TypesTodos['_id']>({
   key: 'atomSelectorTodoItem',
   default: selectorFamily({
     key: 'selectorAtomTodoItem',

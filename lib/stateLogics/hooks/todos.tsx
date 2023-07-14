@@ -1,5 +1,4 @@
 import { completeDataTodo, createDataNewTodo, deleteDataTodo, updateDataTodo } from '@lib/queries/queryTodos';
-import { Todos } from '@lib/types';
 import { atomConfirmModalDelete } from '@states/modals';
 import { useSession } from 'next-auth/react';
 import { RecoilValue, useRecoilCallback, useResetRecoilState } from 'recoil';
@@ -13,7 +12,6 @@ import {
   selectorSessionTodoIds,
   atomSelectorTodoItem,
 } from '@states/atomEffects/todos';
-import { atomTodoNew } from '@states/todos';
 import {
   useConditionCheckTodoTitleEmpty,
   useGetWithRecoilCallback,
@@ -22,6 +20,8 @@ import {
 import { atomEffectNetworkStatus } from '@states/atomEffects/misc';
 import { atomCatch } from '@states/misc';
 import { selectorSessionLabels, atomSelectorLabels } from '@label/label.states';
+import { TypesTodos } from '@components/todos/todos.types';
+import { atomTodoNew } from '@components/todos/todos.states';
 
 /**
  * Hooks
@@ -57,7 +57,7 @@ export const useTodoAdd = () => {
   };
 };
 
-export const useTodoUpdateItem = (todoId: Todos['_id']) => {
+export const useTodoUpdateItem = (todoId: TypesTodos['_id']) => {
   const { status } = useSession();
   const setNotification = useNotificationState();
   const resetModal = useTodoModalStateReset(todoId);
@@ -100,7 +100,7 @@ export const useTodoUpdateItem = (todoId: Todos['_id']) => {
   };
 };
 
-export const useTodoRemoveItem = (todoId: Todos['_id']) => {
+export const useTodoRemoveItem = (todoId: TypesTodos['_id']) => {
   const { status } = useSession();
   const setNotification = useNotificationState();
   const get = useGetWithRecoilCallback();
@@ -132,7 +132,7 @@ export const useTodoRemoveItem = (todoId: Todos['_id']) => {
   };
 };
 
-export const useTodoCompleteDate = (todoId: Todos['_id']) => {
+export const useTodoCompleteDate = (todoId: TypesTodos['_id']) => {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = <T,>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
 
@@ -143,7 +143,7 @@ export const useTodoCompleteDate = (todoId: Todos['_id']) => {
   });
 };
 
-export const useTodoCompleteItem = (todoId: Todos['_id']) => {
+export const useTodoCompleteItem = (todoId: TypesTodos['_id']) => {
   const { status } = useSession();
   const updateCompletedDate = useTodoCompleteDate(todoId);
   const setNotification = useNotificationState();

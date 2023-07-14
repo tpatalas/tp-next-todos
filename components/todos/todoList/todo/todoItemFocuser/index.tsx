@@ -1,14 +1,12 @@
+import { PropsTodoItemFocuser } from '@components/todos/todos.types';
 import { KeysWithNavigationEffect } from '@effects/KeysWithNavigateEffect';
 import { useFocusOnClick } from '@hooks/focus';
 import { useKeyWithFocus } from '@hooks/keybindings';
 import { classNames } from '@stateLogics/utils';
-import { Types, TypesTodo } from 'lib/types';
 import { Fragment as FocuserFragment, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
-type Props = Pick<TypesTodo, 'todo' | 'index'> & Pick<Types, 'children'>;
-
-export const TodoItemFocuser = ({ todo, index, children }: Props) => {
+export const TodoItemFocuser = ({ todo, index, children }: PropsTodoItemFocuser) => {
   const divFocus = useRef<HTMLDivElement>(null);
   const focusKeyHandler = useKeyWithFocus(todo._id);
   const focusOnClick = useFocusOnClick(index);
@@ -24,7 +22,8 @@ export const TodoItemFocuser = ({ todo, index, children }: Props) => {
         )}
         ref={divFocus}
         onKeyDown={focusKeyHandler}
-        onClick={() => focusOnClick()}>
+        onClick={() => focusOnClick()}
+      >
         <KeysWithNavigationEffect
           index={index}
           divFocus={divFocus}

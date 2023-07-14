@@ -1,4 +1,4 @@
-import { Types } from '@lib/types';
+import { TypesTodo } from '@components/todos/todos.types';
 import { classNames } from '@stateLogics/utils';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import dynamic from 'next/dynamic';
@@ -6,7 +6,7 @@ import { useRecoilCallback } from 'recoil';
 
 const EditorComposer = dynamic(() => import('@editor/editorComposer').then((mod) => mod.EditorComposer));
 
-export const TodoEditors = ({ todo }: Partial<Pick<Types, 'todo'>>) => {
+export const TodoEditors = ({ todo }: Partial<Pick<TypesTodo, 'todo'>>) => {
   const isTodoCompleted = useRecoilCallback(
     ({ snapshot }) =>
       () => {

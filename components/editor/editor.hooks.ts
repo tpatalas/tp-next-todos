@@ -1,15 +1,15 @@
+import { atomTodoNew } from '@components/todos/todos.states';
+import { TypesTodos, TypesTodosEditors } from '@components/todos/todos.types';
 import { TypesEditor } from '@editor/editor.types';
 import { useTodoAdd, useTodoUpdateItem } from '@hooks/todos';
-import { Todos, TodosEditors } from '@lib/types';
 import { CustomEditor } from '@lib/types/misc/slate';
 import { atomSelectorTodoItem } from '@states/atomEffects/todos';
 import { atomEditorDeserialize, atomEditorSerialize } from '@states/editors';
-import { atomTodoNew } from '@states/todos';
 import { isMobile } from 'react-device-detect';
 import { RecoilValue, useRecoilCallback } from 'recoil';
 import { Descendant, Transforms } from 'slate';
 
-export const useEditorTodoUpdate = (_id: Todos['_id'], titleName: TypesEditor['titleName']) => {
+export const useEditorTodoUpdate = (_id: TypesTodos['_id'], titleName: TypesEditor['titleName']) => {
   return useRecoilCallback(
     ({ set, snapshot }) =>
       (content: string) => {
@@ -29,7 +29,7 @@ export const useEditorTodoUpdate = (_id: Todos['_id'], titleName: TypesEditor['t
   );
 };
 
-export const useEditorInitialValue = (_id: Todos['_id'], titleName: TypesEditor['titleName']) => {
+export const useEditorInitialValue = (_id: TypesTodos['_id'], titleName: TypesEditor['titleName']) => {
   return useRecoilCallback(
     ({ snapshot }) =>
       () => {
@@ -37,8 +37,8 @@ export const useEditorInitialValue = (_id: Todos['_id'], titleName: TypesEditor[
 
         return (get(atomEditorDeserialize)(
           _id === undefined
-            ? get(atomTodoNew)[titleName as keyof TodosEditors]
-            : get(atomSelectorTodoItem(_id))[titleName as keyof TodosEditors],
+            ? get(atomTodoNew)[titleName as keyof TypesTodosEditors]
+            : get(atomSelectorTodoItem(_id))[titleName as keyof TypesTodosEditors],
         ) || [
           {
             type: 'paragraph',
@@ -50,7 +50,7 @@ export const useEditorInitialValue = (_id: Todos['_id'], titleName: TypesEditor[
   );
 };
 
-export const useEditorChangeHandler = (_id: Todos['_id'], titleName: TypesEditor['titleName']) => {
+export const useEditorChangeHandler = (_id: TypesTodos['_id'], titleName: TypesEditor['titleName']) => {
   const createEditor = useEditorTodoUpdate(undefined, titleName);
   const updateEditor = useEditorTodoUpdate(_id, titleName);
   const editorState = useRecoilCallback(
@@ -69,7 +69,7 @@ export const useEditorChangeHandler = (_id: Todos['_id'], titleName: TypesEditor
 
 export const useKeyWithEditor = (
   titleName: TypesEditor['titleName'],
-  _id: Todos['_id'],
+  _id: TypesTodos['_id'],
   editor: CustomEditor,
 ) => {
   const addTodo = useTodoAdd();

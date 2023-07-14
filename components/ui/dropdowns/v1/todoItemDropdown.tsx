@@ -14,8 +14,9 @@ import { usePriorityUpdate, usePriorityUpdateData } from '@hooks/priorities';
 import { useTodoRemoveItem } from '@hooks/todos';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { TypesOptionsDropdown } from '@lib/types/options';
+import { TypesTodo } from '@components/todos/todos.types';
 
-type Props = { options: TypesOptionsDropdown } & Partial<Pick<Types, 'todo' | 'children'>>;
+type Props = { options: TypesOptionsDropdown } & Partial<Pick<TypesTodo, 'todo'> & Pick<Types, 'children'>>;
 
 export const TodoItemDropdown = ({ todo, children, options }: Props) => {
   const removeTodo = useTodoRemoveItem(todo?._id);

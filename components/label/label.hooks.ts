@@ -1,3 +1,5 @@
+import { atomTodoNew } from '@components/todos/todos.states';
+import { TypesTodos } from '@components/todos/todos.types';
 import { CATCH } from '@constAssertions/misc';
 import { NOTIFICATION } from '@constAssertions/ui';
 import { ICON_FILTER_LIST, ICON_FILTER_LIST_OFF } from '@data/materialSymbols';
@@ -18,13 +20,11 @@ import {
   updateDataLabelItem,
   updateDataLabels,
 } from '@lib/queries/queryLabels';
-import { Todos } from '@lib/types';
 import { TypesOptionsButton } from '@lib/types/options';
 import { atomSelectorTodoItem } from '@states/atomEffects/todos';
 import { atomFilterSelected } from '@states/comboBoxes';
 import { atomCatch } from '@states/misc';
 import { atomConfirmModalDelete, atomLabelModalOpen } from '@states/modals';
-import { atomTodoNew } from '@states/todos';
 import ObjectID from 'bson-objectid';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
@@ -108,7 +108,7 @@ export const useLabelRemoveItem = (_id: Labels['_id']) => {
   });
 };
 
-export const useLabelRemoveItemTitleId = (_id: Todos['_id']) => {
+export const useLabelRemoveItemTitleId = (_id: TypesTodos['_id']) => {
   const updateLabels = useLabelUpdateDataItem();
   const get = useGetWithRecoilCallback();
 
@@ -160,7 +160,7 @@ export const useLabelUpdateDataItem = () => {
   });
 };
 
-export const useLabelChangeHandler = (_id: Todos['_id']) => {
+export const useLabelChangeHandler = (_id: TypesTodos['_id']) => {
   const compareLabelsToQueryLabel = useCompareToQueryLabels();
   return useRecoilCallback(({ set, snapshot }) => (selected: Labels[]) => {
     const get = <T>(p: RecoilValue<T>) => snapshot.getLoadable(p).getValue();
@@ -204,7 +204,7 @@ export const useLabelChangeHandler = (_id: Todos['_id']) => {
   });
 };
 
-export const useDataButtonComboboxFilterLabel = (_id: Todos['_id']): TypesOptionsButton => {
+export const useDataButtonComboboxFilterLabel = (_id: TypesTodos['_id']): TypesOptionsButton => {
   const isFilterOn = useRecoilValue(atomFilterSelected(_id));
   const resetFilter = useResetRecoilState(atomFilterSelected(_id));
   const selectedLabels = useRecoilValue(selectorSelectedLabels(_id));

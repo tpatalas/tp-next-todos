@@ -1,12 +1,13 @@
 import { DATA_DEMO } from '@collections/demo';
+import { TypesTodos } from '@components/todos/todos.types';
 import { STORAGE_KEY } from '@constAssertions/storage';
-import { Todos, Types } from '@lib/types';
+import { Types } from '@lib/types';
 import { fetchWithRetry, queries } from '@stateLogics/utils';
 
 const apiTodos = process.env.NEXT_PUBLIC_API_ENDPOINT_TODOS as string;
 
 export const getDemoTodoItem = ({ _id }: Pick<Types, '_id'>) => {
-  const data = DATA_DEMO.find((todo) => todo._id === _id) || ({} as Todos);
+  const data = DATA_DEMO.find((todo) => todo._id === _id) || ({} as TypesTodos);
   return data;
 };
 
@@ -26,7 +27,7 @@ export const getDataTodoItem = async ({ _id }: Pick<Types, '_id'>) => {
   return await response.json();
 };
 
-export const createDataNewTodo = async (data: Todos) => {
+export const createDataNewTodo = async (data: TypesTodos) => {
   const response = await fetchWithRetry(apiTodos, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -36,7 +37,7 @@ export const createDataNewTodo = async (data: Todos) => {
   return await response.json();
 };
 
-export const deleteDataTodo = async (_id: Todos['_id']) => {
+export const deleteDataTodo = async (_id: TypesTodos['_id']) => {
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'DELETE',
   });
@@ -44,7 +45,7 @@ export const deleteDataTodo = async (_id: Todos['_id']) => {
   return await response.json();
 };
 
-export const updateDataTodo = async (_id: Todos['_id'], data: Todos) => {
+export const updateDataTodo = async (_id: TypesTodos['_id'], data: TypesTodos) => {
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -55,9 +56,9 @@ export const updateDataTodo = async (_id: Todos['_id'], data: Todos) => {
 };
 
 export const completeDataTodo = async (
-  _id: Todos['_id'],
-  completed: Todos['completed'],
-  completedDate: Todos['completedDate'],
+  _id: TypesTodos['_id'],
+  completed: TypesTodos['completed'],
+  completedDate: TypesTodos['completedDate'],
 ) => {
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
@@ -72,9 +73,9 @@ export const completeDataTodo = async (
 };
 
 export const updateDataCalendarTodo = async (
-  _id: Todos['_id'],
-  dueDate: Todos['dueDate'],
-  priorityRankScore: Todos['priorityRankScore'],
+  _id: TypesTodos['_id'],
+  dueDate: TypesTodos['dueDate'],
+  priorityRankScore: TypesTodos['priorityRankScore'],
 ) => {
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',
@@ -89,9 +90,9 @@ export const updateDataCalendarTodo = async (
 };
 
 export const updateDataPriorityTodo = async (
-  _id: Todos['_id'],
-  priority: Todos['priorityLevel'],
-  priorityRankScore: Todos['priorityRankScore'],
+  _id: TypesTodos['_id'],
+  priority: TypesTodos['priorityLevel'],
+  priorityRankScore: TypesTodos['priorityRankScore'],
 ) => {
   const response = await fetchWithRetry(apiTodos + `/${_id}`, {
     method: 'PATCH',

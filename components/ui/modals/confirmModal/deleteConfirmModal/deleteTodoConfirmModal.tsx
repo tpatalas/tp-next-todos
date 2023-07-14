@@ -1,14 +1,16 @@
+import { TypesTodo } from '@components/todos/todos.types';
 import { useTodoModalConfirmStateDelete } from '@hooks/modals';
-import { Types } from '@lib/types';
 import { selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomConfirmModalDelete } from '@states/modals';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const DeleteConfirmModal = dynamic(() => import('../deleteConfirmModal').then((mod) => mod.DeleteConfirmModal));
+const DeleteConfirmModal = dynamic(() =>
+  import('../deleteConfirmModal').then((mod) => mod.DeleteConfirmModal),
+);
 
-type Props = Pick<Types, 'todo'>;
+type Props = Pick<TypesTodo, 'todo'>;
 
 export const DeleteTodoConfirmModal = ({ todo }: Props) => {
   const deleteConfirmModal = useTodoModalConfirmStateDelete(todo?._id);

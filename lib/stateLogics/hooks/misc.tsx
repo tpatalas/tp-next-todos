@@ -1,10 +1,10 @@
+import { selectorFilterTodoIdsByPathname, atomTodoNew } from '@components/todos/todos.states';
+import { TypesTodos } from '@components/todos/todos.types';
 import { PATH_APP } from '@constAssertions/data';
 import { atomLabelNew, atomSelectorLabelItem, selectorSessionLabels } from '@label/label.states';
 import { Labels } from '@label/label.types';
-import { Todos } from '@lib/types';
 import { atomSelectorTodoItem, selectorSessionTodoItem } from '@states/atomEffects/todos';
 import { atomTodoModalMini, atomTodoModalOpen } from '@states/modals';
-import { atomTodoNew, selectorFilterTodoIdsByPathname } from '@states/todos';
 import equal from 'fast-deep-equal/react';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
@@ -61,7 +61,7 @@ export const useConditionCheckLabelTitleEmpty = () => {
   return typeof newTodo.name === 'undefined' || newTodo.name.trim() === '';
 };
 
-export const useConditionCompareTodoItemsEqual = (_id: Todos['_id']) => {
+export const useConditionCompareTodoItemsEqual = (_id: TypesTodos['_id']) => {
   const todoItem = useRecoilValueLoadable(selectorSessionTodoItem(_id)).valueMaybe();
   const selectorTodoItem = useRecoilValueLoadable(atomSelectorTodoItem(_id)).valueMaybe();
   if (typeof _id === 'undefined') return;
