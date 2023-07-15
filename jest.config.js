@@ -20,6 +20,11 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // remove if jest.setup.js is deleted
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
+    //app router
+    '^@/transition/(.*)$': ['<rootDir>/app/components/transition/$1'],
+    '^@/components/(.*)$': ['<rootDir>/app/components/$1'],
+    '^@/(.*)$': ['<rootDir>/app/$1'],
+    //page router
     '^@collections/(.*)$': ['<rootDir>/lib/data/collections/$1'],
     '^@constAssertions/(.*)$': ['<rootDir>/lib/data/constAssertions/$1'],
     '^@options/(.*)$': ['<rootDir>/lib/data/options/$1'],

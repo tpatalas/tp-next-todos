@@ -2,6 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      //app Router
+      "@/transition/*": ["app/components/transition/*"],
+      "@/components/*": ["app/components/*"],
+      "@/*": ["app/*"],
+      //page Router
       "@collections/*": ["lib/data/collections/*"],
       "@constAssertions/*": ["lib/data/constAssertions/*"],
       "@options/*": ["lib/data/options/*"],
