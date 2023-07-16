@@ -21,7 +21,10 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     //app router
-    '^@/transition/(.*)$': ['<rootDir>/app/components/transition/$1'],
+    '^@/button/(.*)$': ['<rootDir>/app/components/ui/button/$1'],
+    '^@/tooltip/(.*)$': ['<rootDir>/app/components/ui/tooltip/$1'],
+    '^@/transition/(.*)$': ['<rootDir>/app/components/ui/transition/$1'],
+    '^@/ui/(.*)$': ['<rootDir>/app/components/ui/$1'],
     '^@/components/(.*)$': ['<rootDir>/app/components/$1'],
     '^@/(.*)$': ['<rootDir>/app/$1'],
     //page router

@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
 import { Placement } from '@popperjs/core';
 
-export interface TypesTooltipAttributes {
+export interface TypesTooltips {
   tooltip: string | ReactElement | null;
   kbd: string;
   delayShow: number;
@@ -14,6 +14,6 @@ export interface TypesTooltipAttributes {
   container: string;
 }
 
-export type PropsTooltip = { options?: Partial<TypesTooltipAttributes> } & {
+export type PropsTooltip = { options?: Partial<TypesTooltips> } & {
   children: ReactNode;
 };

@@ -3,7 +3,10 @@
     "baseUrl": ".",
     "paths": {
       //app Router
-      "@/transition/*": ["app/components/transition/*"],
+      "@/button/*": ["app/components/ui/button/*"],
+      "@/tooltip/*": ["app/components/ui/tooltip/*"],
+      "@/transition/*": ["app/components/ui/transition/*"],
+      "@/ui/*": ["app/components/ui/*"],
       "@/components/*": ["app/components/*"],
       "@/*": ["app/*"],
       //page Router
