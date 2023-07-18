@@ -35,9 +35,9 @@ describe('ButtonWithTooltip', () => {
     expect(mockOnClick).toHaveBeenCalled();
   });
 
-  it('should render the tooltip text', () => {
+  it('should render the tooltip text', async () => {
     renderWithButtonWithTooltip({ options: { isVisible: true, tooltip: 'button-tooltip-test' } });
-    const tooltipText = screen.getByText('button-tooltip-test');
+    const tooltipText = await screen.findByText('button-tooltip-test');
 
     expect(tooltipText).toBeInTheDocument();
   });
