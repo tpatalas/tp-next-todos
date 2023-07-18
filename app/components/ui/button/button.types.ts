@@ -6,12 +6,13 @@ export interface TypesButtons {
   isDisabled: boolean;
   name: string;
   type: 'button' | 'submit';
+  signInButtonName: 'Sign in' | 'Get started';
 }
 
 type TypesOptionsButton = TypesButtons & TypesClassNames & TypesAttributes;
 
 type TypesOptionsButtonWithTooltip = TypesOptionsButton &
-  Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement'>;
+  Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement' | 'isVisible'>;
 
 type TypesButtonBase<T> = Partial<
   {

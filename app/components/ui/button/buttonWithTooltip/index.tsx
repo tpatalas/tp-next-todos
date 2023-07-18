@@ -3,12 +3,13 @@
 import { forwardRef, useState } from 'react';
 import { PropsButtonWithTooltip } from '../button.types';
 import { Button } from '..';
-import { Tooltip } from '@tooltips/tooltips';
+import { Tooltip } from '@/tooltip/index';
 
 export const ButtonWithTooltip = forwardRef<HTMLButtonElement, PropsButtonWithTooltip>(
   ({ options = {}, onClick, onKeyDown, onDoubleClick, children }: PropsButtonWithTooltip, ref) => {
     const [hasTooltip, setTooltip] = useState(false);
-    const { ariaLabel, type, className, isDisabled, container, placement, offset, tooltip, kbd } = options;
+    const { ariaLabel, type, className, isDisabled, container, placement, offset, tooltip, kbd, isVisible } =
+      options;
     const optionsButton = { ariaLabel, type, className, isDisabled };
     const optionsTooltip = {
       tooltip: (hasTooltip || isDisabled) && !tooltip ? undefined : tooltip,
@@ -16,6 +17,7 @@ export const ButtonWithTooltip = forwardRef<HTMLButtonElement, PropsButtonWithTo
       container,
       placement,
       offset,
+      isVisible,
     };
 
     return (
