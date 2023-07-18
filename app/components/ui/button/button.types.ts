@@ -5,18 +5,22 @@ import { ReactNode } from 'react';
 export interface TypesButtons {
   isDisabled: boolean;
   name: string;
-  type: 'button' | 'submit' | 'reset';
+  type: 'button' | 'submit';
 }
 
-export type PropsButton = Partial<
+type TypesOptionsButton = TypesButtons & TypesClassNames & TypesAttributes;
+
+type TypesOptionsButtonWithTooltip = TypesOptionsButton &
+  Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement'>;
+
+type TypesButtonBase<T> = Partial<
   {
-    options: Partial<
-      TypesButtons &
-        TypesClassNames &
-        TypesAttributes &
-        Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement'>
-    >;
+    options: Partial<T>;
   } & TypesEvents & {
       children: ReactNode;
     }
 >;
+
+export type PropsButton = TypesButtonBase<TypesOptionsButton>;
+
+export type PropsButtonWithTooltip = TypesButtonBase<TypesOptionsButtonWithTooltip>;
