@@ -18,7 +18,7 @@ describe('SignInButton', () => {
   it('should render the signInButtonName props', async () => {
     renderWithSignInButton({ options: { isVisible: true, signInButtonName: 'Get started' } });
     const signInText = screen.getByText('Get started');
-    const tooltipText = screen.queryByText('Sign in');
+    const tooltipText = await screen.findByText('Sign in');
 
     expect(signInText).toBeInTheDocument();
     expect(tooltipText).toBeInTheDocument();
