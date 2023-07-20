@@ -2,6 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      //app Router
+      "@/button/*": ["app/components/ui/button/*"],
+      "@/tooltip/*": ["app/components/ui/tooltip/*"],
+      "@/transition/*": ["app/components/ui/transition/*"],
+      "@/ui/*": ["app/components/ui/*"],
+      "@/components/*": ["app/components/*"],
+      "@/*": ["app/*"],
+      //page Router
       "@collections/*": ["lib/data/collections/*"],
       "@constAssertions/*": ["lib/data/constAssertions/*"],
       "@options/*": ["lib/data/options/*"],
