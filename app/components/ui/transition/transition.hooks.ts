@@ -1,7 +1,7 @@
 import { RefObject, useState, useCallback, useEffect } from 'react';
 
 export const useVerticalScrollPositionTrigger = (
-  scrollRef?: RefObject<HTMLElement>,
+  scrollRef?: RefObject<HTMLElement> | null,
   triggerRate?: number,
 ) => {
   const [isShowing, setIsShowing] = useState(false);

@@ -10,7 +10,7 @@ export const DivContainerWithRef = ({ children, className }: PropsDivContainer) 
   const setDivRef = useSetAtom(atomDivRef);
 
   useEffect(() => {
-    setDivRef(divRef.current);
+    setDivRef(divRef);
   }, [setDivRef]);
 
   return (

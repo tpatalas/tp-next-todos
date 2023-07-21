@@ -18,7 +18,9 @@ export type PropsSmoothTransition = {
       delay: TypesTransitionDelay;
     }
   >;
-} & Partial<{ scrollRef: RefObject<HTMLElement> }>;
+} & Partial<{ scrollRef: RefObject<HTMLElement> | null }>;
+
+export type PropsSmoothTransitionWithDivRef = Omit<PropsSmoothTransition, 'scrollRef'>;
 
 export type TypesDataTransition = Record<TypesTransitionProperties, string> & {
   type: TypesTransitionTypes;
