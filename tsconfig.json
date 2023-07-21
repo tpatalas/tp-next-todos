@@ -6,6 +6,7 @@
       "@/button/*": ["app/components/ui/button/*"],
       "@/tooltip/*": ["app/components/ui/tooltip/*"],
       "@/transition/*": ["app/components/ui/transition/*"],
+      "@/container/*": ["app/components/ui/container/*"],
       "@/ui/*": ["app/components/ui/*"],
       "@/components/*": ["app/components/*"],
       "@/*": ["app/*"],

@@ -24,6 +24,7 @@ const customJestConfig = {
     '^@/button/(.*)$': ['<rootDir>/app/components/ui/button/$1'],
     '^@/tooltip/(.*)$': ['<rootDir>/app/components/ui/tooltip/$1'],
     '^@/transition/(.*)$': ['<rootDir>/app/components/ui/transition/$1'],
+    '^@/container/(.*)$': ['<rootDir>/app/components/ui/container/$1'],
     '^@/ui/(.*)$': ['<rootDir>/app/components/ui/$1'],
     '^@/components/(.*)$': ['<rootDir>/app/components/$1'],
     '^@/(.*)$': ['<rootDir>/app/$1'],
