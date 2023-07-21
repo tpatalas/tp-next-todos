@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
-import { DivContainer } from '..';
+import { DivContainerWithRef } from '..';
 import { PropsDivContainer } from '../../container.types';
 import { screen } from '@testing-library/react';
 
-describe('DivContainer', () => {
+describe('DivContainerWithRef', () => {
   const renderWithDivContainer = ({ className, children }: PropsDivContainer) =>
-    render(<DivContainer className={className}>{children}</DivContainer>);
+    render(<DivContainerWithRef className={className}>{children}</DivContainerWithRef>);
 
   it('should render the children elements and className', () => {
     const { container } = renderWithDivContainer({
