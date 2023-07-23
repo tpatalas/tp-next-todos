@@ -4,8 +4,8 @@ import { Transition } from '@headlessui/react';
 import { DATA_SMOOTH_TRANSITION } from './smoothTransition.data';
 import { TypesDataTransition, PropsSmoothTransition } from './smoothTransition.types';
 import { useEffect, useState } from 'react';
-import { classNames } from '@/components/components.utils';
 import { useVerticalScrollPositionTrigger } from '../transition.hooks';
+import { classNames } from '@/lib/lib.utils';
 
 export const SmoothTransition = ({ children, scrollRef, options }: PropsSmoothTransition) => {
   const [hasShown, setHasShown] = useState(false);
