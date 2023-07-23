@@ -4,7 +4,7 @@ interface Props {
   quality?: number;
 }
 
-export const mockedImageUrl = ({ src, width, quality }: Props) => {
+export const mockImageUrl = ({ src, width, quality }: Props) => {
   if (!src) return;
   return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${quality ?? 75}`;
 };

@@ -1,12 +1,12 @@
 import { PATH_IMAGE_APP } from '@constAssertions/data';
 import { cloudflareLoader } from '@stateLogics/utils';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { mockedImageUrl } from '__mock__/next';
 import { mockedUserSession } from '__mock__/next-auth';
 import { Session } from 'next-auth';
 import 'whatwg-fetch';
 import { UserDropdown } from '..';
 import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
+import { mockImageUrl } from '__mock__/next';
 
 describe('UserDropdown', () => {
   const renderWithSession = (session: Session | null) => {
@@ -20,7 +20,7 @@ describe('UserDropdown', () => {
     const userSession = session;
     const userAvatarImageAlt = screen.getByAltText('User avatar');
     const userAvatarImage = { src: mockedSession.user.image as string, width: 64, quality: 90 };
-    const optimizedUserImage = mockedImageUrl(userAvatarImage);
+    const optimizedUserImage = mockImageUrl(userAvatarImage);
     const dropdownButton = screen.getByRole('button', { name: /open user menu/i });
 
     return { userSession, container, dropdownButton, userAvatarImageAlt, optimizedUserImage };
