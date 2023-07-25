@@ -6,9 +6,9 @@ describe('SmoothTransitionWithDivRef', () => {
   const renderWithSmoothTransitionWithDivRef = (children: ReactNode) =>
     render(<SmoothTransitionWithDivRef>{children}</SmoothTransitionWithDivRef>);
 
-  it('should render the child elements', () => {
+  it('should render the child elements', async () => {
     const { container } = renderWithSmoothTransitionWithDivRef(<div>smoothTransition-test</div>);
-    const childElement = screen.getByText('smoothTransition-test');
+    const childElement = await screen.findByText('smoothTransition-test');
 
     expect(container).toBeInTheDocument();
     expect(childElement).toBeInTheDocument();

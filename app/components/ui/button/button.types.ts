@@ -11,7 +11,7 @@ export interface TypesButtons {
 
 type TypesOptionsButton = TypesButtons & TypesClassNames & TypesAttributes;
 
-type TypesOptionsButtonWithTooltip = TypesOptionsButton &
+export type TypesOptionsButtonWithTooltip = TypesOptionsButton &
   Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement' | 'isVisible'>;
 
 type TypesButtonBase<T> = Partial<
