@@ -1,8 +1,9 @@
-import { classNames } from '../lib.utils';
-
 /*
  * gradient-wave-effect
  **/
+
+import { classNames } from '../utils/misc.utils';
+
 // Gradient Base
 export const STYLE_BLUR_GRADIENT_BASE = 'from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90%';
 const STYLE_BLUR_GRADIENT_ZR = classNames(STYLE_BLUR_GRADIENT_BASE, 'blur-0');

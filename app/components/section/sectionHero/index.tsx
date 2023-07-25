@@ -9,11 +9,12 @@ import { STYLE_BUTTON_NORMAL_BLUE } from '@/button/button.consts';
 import { TypesOptionsButtonWithTooltip } from '@/button/button.types';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import Image from 'next/image';
-import { PATH_HOME, PATH_IMAGE_HOME } from '@/lib/consts/assertion.consts';
-import { classNames } from '@/lib/lib.utils';
+import { PATH_HOME, PATH_IMAGE } from '@/lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/lib/consts/style.consts';
+import { classNames } from '@/lib/utils/misc.utils';
 
-export const SectionHero = () => {
+export const SectionHero = async () => {
+  // const placeholderDemo = await getBase64FromImageURL(PATH_IMAGE['demo']);
   const signInButtonOptions: Partial<TypesOptionsButtonWithTooltip> = {
     signInButtonName: 'Get started',
     className: STYLE_BUTTON_NORMAL_BLUE,
@@ -87,9 +88,11 @@ export const SectionHero = () => {
                         width={961}
                         height={754}
                         className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
-                        src={PATH_IMAGE_HOME['demo']}
+                        src={PATH_IMAGE['demo']}
                         sizes='90vw'
                         alt='demo application image'
+                        // placeholder='blur'
+                        // blurDataURL={placeholderDemo}
                         priority={true}
                       />
                     </div>

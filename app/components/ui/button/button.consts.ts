@@ -1,4 +1,4 @@
-import { classNames } from '@/lib/lib.utils';
+import { classNames } from '@/lib/utils/misc.utils';
 
 export const STYLE_BUTTON_BASE =
   'transition-all inline-flex items-center justify-center tracking-wide rounded-lg h-10 p-2 border leading-4 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
