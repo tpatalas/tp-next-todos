@@ -3,14 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { SectionHero } from '..';
 import { ReactNode } from 'react';
 import { getResolvedComponent } from '@/lib/utils/test.utils';
+import { optionsSectionHeroWithSignInButton } from '../sectionHero.consts';
+import { TypesButtons } from '@/button/button.types';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: () => <div data-testid='mockImage-testid' />,
+jest.mock('@/components/next/imageWithRemotePlaceholder', () => ({
+  ImageWithRemotePlaceholder: () => <div data-testid='mockImage-testid' />,
 }));
 
 jest.mock('@/lib/utils/base64Converter.utils', () => jest.fn());
@@ -36,7 +37,9 @@ describe('SectionHero', () => {
   it('should render the signInButton and link button', async () => {
     await renderAsyncComponent();
 
-    const signInButton = await screen.findByText('Get started');
+    const signInButtonName =
+      optionsSectionHeroWithSignInButton.signInButtonName as TypesButtons['signInButtonName'];
+    const signInButton = await screen.findByText(signInButtonName);
     const linkButton = await screen.findByText('Learn more');
 
     expect(signInButton).toBeInTheDocument();

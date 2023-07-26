@@ -1,3 +1,6 @@
+
+
+
 export const sectionHeroContents = {
   title: 'Simplify your life',
   subTitle: 'Automate your tasks',
