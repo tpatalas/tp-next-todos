@@ -8,6 +8,7 @@
       "@/transition/*": ["app/components/ui/transition/*"],
       "@/container/*": ["app/components/ui/container/*"],
       "@/section/*": ["app/components/section/*"],
+      "@/next/*": ["app/components/next/*"],
       "@/ui/*": ["app/components/ui/*"],
       "@/components/*": ["app/components/*"],
       "@/*": ["app/*"],

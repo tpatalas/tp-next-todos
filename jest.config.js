@@ -27,6 +27,7 @@ const customJestConfig = {
     '^@/container/(.*)$': ['<rootDir>/app/components/ui/container/$1'],
     '^@/ui/(.*)$': ['<rootDir>/app/components/ui/$1'],
     '^@/section/(.*)$': ['<rootDir>/app/components/section/$1'],
+    '^@/next/(.*)$': ['<rootDir>/app/components/next/$1'],
     '^@/components/(.*)$': ['<rootDir>/app/components/$1'],
     '^@/(.*)$': ['<rootDir>/app/$1'],
     //page router

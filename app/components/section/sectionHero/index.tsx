@@ -5,21 +5,14 @@ import { DELAY } from '@constAssertions/ui';
 import { sectionHeroContents } from '../section.consts';
 import Link from 'next/link';
 import { SignInButton } from '@/button/signInButton';
-import { STYLE_BUTTON_NORMAL_BLUE } from '@/button/button.consts';
-import { TypesOptionsButtonWithTooltip } from '@/button/button.types';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
-import Image from 'next/image';
-import { PATH_HOME, PATH_IMAGE } from '@/lib/consts/assertion.consts';
+import { PATH_HOME } from '@/lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/lib/consts/style.consts';
 import { classNames } from '@/lib/utils/misc.utils';
-import getBase64FromImageURL from '@/lib/utils/base64Converter.utils';
+import { ImageWithRemotePlaceholder } from '@/components/next/imageWithRemotePlaceholder';
+import { optionsSectionHeroWithSignInButton, optionsSectionHeroWithImage } from './sectionHero.consts';
 
 export const SectionHero = async () => {
-  const placeholderDemo = await getBase64FromImageURL(PATH_IMAGE['demo']);
-  const signInButtonOptions: Partial<TypesOptionsButtonWithTooltip> = {
-    signInButtonName: 'Get started',
-    className: STYLE_BUTTON_NORMAL_BLUE,
-  };
   const translateDownHandler = (delay?: keyof typeof DELAY) => {
     return optionsTransition({ transition: 'translateDown', duration: 1000, delay: delay });
   };
@@ -48,7 +41,7 @@ export const SectionHero = async () => {
             </SmoothTransition>
             <SmoothTransition options={translateDownHandler(700)}>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
-                <SignInButton options={signInButtonOptions} />
+                <SignInButton options={optionsSectionHeroWithSignInButton} />
                 <Link
                   className='text-sm font-semibold leading-6 text-gray-900'
                   href={PATH_HOME['features']}
@@ -85,17 +78,7 @@ export const SectionHero = async () => {
                     })}
                   >
                     <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
-                      <Image
-                        width={961}
-                        height={754}
-                        className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
-                        src={PATH_IMAGE['demo']}
-                        sizes='90vw'
-                        alt='demo application image'
-                        placeholder='blur'
-                        blurDataURL={placeholderDemo}
-                        priority={true}
-                      />
+                      <ImageWithRemotePlaceholder options={optionsSectionHeroWithImage} />
                     </div>
                   </SmoothTransitionWithDivRef>
                 </div>
