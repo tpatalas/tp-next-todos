@@ -1,4 +1,4 @@
-const version = 'v1687719235564';
+const version = 'v1687719235568';
 const STATIC_CACHE_NAME = `static-assets-${version}`;
 const PRE_CACHE_NAME = `precache-assets-${version}`;
 const PRE_FETCH = []; //fetch only. It will use browser cache without Cache Storage
@@ -53,22 +53,13 @@ self.addEventListener('install', (event) => {
     const preCache = PRE_CACHE.length > 0;
     const preFetch = PRE_FETCH.length > 0;
 
-    if (preCache || preFetch) {
+    if (preCache) {
       const cache = await caches.open(PRE_CACHE_NAME);
+      await cache.addAll(PRE_CACHE);
+    }
 
-      if (preCache) {
-        await cache.addAll(PRE_CACHE);
-      }
-
-      if (preFetch) {
-        await Promise.all(
-          PRE_FETCH.map((url) =>
-            fetch(url).then((response) => {
-              if (response.ok) cache.put(url, response);
-            }),
-          ),
-        );
-      }
+    if (preFetch) {
+      await Promise.all(PRE_FETCH.map((url) => fetch(url)));
     }
   };
 
