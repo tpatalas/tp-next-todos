@@ -13,6 +13,8 @@ jest.mock('next/image', () => ({
   default: () => <div data-testid='mockImage-testid' />,
 }));
 
+jest.mock('@/lib/utils/base64Converter.utils', () => jest.fn());
+
 describe('SectionHero', () => {
   const renderAsyncComponent = async () => {
     const ResolvedSectionHero = await getResolvedComponent(SectionHero);
