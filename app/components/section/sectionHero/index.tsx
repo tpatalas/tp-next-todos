@@ -12,9 +12,10 @@ import Image from 'next/image';
 import { PATH_HOME, PATH_IMAGE } from '@/lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/lib/consts/style.consts';
 import { classNames } from '@/lib/utils/misc.utils';
+import getBase64FromImageURL from '@/lib/utils/base64Converter.utils';
 
 export const SectionHero = async () => {
-  // const placeholderDemo = await getBase64FromImageURL(PATH_IMAGE['demo']);
+  const placeholderDemo = await getBase64FromImageURL(PATH_IMAGE['demo']);
   const signInButtonOptions: Partial<TypesOptionsButtonWithTooltip> = {
     signInButtonName: 'Get started',
     className: STYLE_BUTTON_NORMAL_BLUE,
@@ -91,8 +92,8 @@ export const SectionHero = async () => {
                         src={PATH_IMAGE['demo']}
                         sizes='90vw'
                         alt='demo application image'
-                        // placeholder='blur'
-                        // blurDataURL={placeholderDemo}
+                        placeholder='blur'
+                        blurDataURL={placeholderDemo}
                         priority={true}
                       />
                     </div>
