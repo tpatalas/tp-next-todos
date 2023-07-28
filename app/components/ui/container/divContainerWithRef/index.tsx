@@ -11,7 +11,9 @@ export const DivContainerWithRef = ({ children, className }: PropsDivContainer) 
 
   useEffect(() => {
     setDivRef(divRef);
-  }, [setDivRef]);
+    // set the state only the component mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
