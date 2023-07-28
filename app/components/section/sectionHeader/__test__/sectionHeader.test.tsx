@@ -10,15 +10,15 @@ jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
 describe('SectionHeader', () => {
   const renderWithSectionHeader = () => render(<SectionHeader />);
 
-  it('should render the gradient pole testid', () => {
+  it('should render the gradient pole testid', async () => {
     const { container } = renderWithSectionHeader();
-    const gradientPoleTestId = screen.getByTestId('gradientPole-testid');
+    const gradientPoleTestId = await screen.findByTestId('gradientPole-testid');
 
     expect(container).toBeInTheDocument();
     expect(gradientPoleTestId).toBeInTheDocument();
   });
 
-  it('should render the text contents properly', async () => {
+  it('should render the text contents properly', () => {
     renderWithSectionHeader();
 
     Object.values(sectionHeaderContents).forEach(async (value) => {
