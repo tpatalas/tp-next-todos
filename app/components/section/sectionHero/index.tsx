@@ -14,14 +14,14 @@ import { optionsSectionHeroWithSignInButton, optionsSectionHeroWithImage } from 
 
 export const SectionHero = async () => {
   const translateDownHandler = (delay?: keyof typeof DELAY) => {
-    return optionsTransition({ transition: 'translateDown', duration: 1000, delay: delay });
+    return optionsTransition({ transition: 'translateDown', duration: 1000, delay: delay,});
   };
 
   return (
     <div>
       <div className='relative isolate pt-10'>
         <div className='py-24 sm:py-32 lg:pb-40'>
-          <DivContainerWithRef>
+          <DivContainerWithRef className='mx-auto max-w-7xl px-6 lg:px-8 bg-red-300'>
             <SmoothTransition options={translateDownHandler()}>
               <div className='mx-auto max-w-2xl text-center'>
                 <div className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>

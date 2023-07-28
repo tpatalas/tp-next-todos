@@ -16,7 +16,7 @@ export const SectionHeader = () => {
 
   return (
     <SmoothTransition>
-      <DivContainerWithRef>
+      <DivContainerWithRef className='my-10 flex flex-col items-center justify-center'>
         <div className='my-5 flex flex-row items-center justify-center'>
           <div className={'text-sm font-semibold uppercase tracking-widest text-gray-500'}>
             <SmoothTransitionWithDivRef options={transitionHandler('fadeIn')}>
