@@ -20,14 +20,14 @@ export const SectionHero = async () => {
   const optionsFadeIn = optionsTransition({
     transition: 'fadeIn',
     duration: 1000,
-    delay: 500,
-    rate: 3,
+    delay: 300,
+    rate: 4,
   });
   const optionsScaleCenterSm = optionsTransition({
     transition: 'scaleCenterSm',
     duration: 700,
-    delay: 300,
-    rate: 3,
+    delay: 150,
+    rate: 4,
   });
 
   return (
@@ -36,7 +36,7 @@ export const SectionHero = async () => {
         <div className='py-24 sm:py-32 lg:pb-40'>
           <DivContainerWithRef
             _id={divContainer_id}
-            className='mx-auto max-w-7xl px-6 lg:px-8 bg-red-300'
+            className='mx-auto max-w-7xl px-6 lg:px-8'
           >
             <SmoothTransition options={translateDownHandler()}>
               <div className='mx-auto max-w-2xl text-center'>
