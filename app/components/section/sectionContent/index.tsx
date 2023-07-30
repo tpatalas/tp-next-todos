@@ -35,7 +35,7 @@ export const SectionContent = () => {
   const divContainerSpotlight_id = 'sectionContent_spotlight';
   const divContainerOverload_id = 'sectionContent_overload';
   const transitionHandler = (delay: keyof typeof DELAY) => {
-    return optionsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay });
+    return optionsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay, rate: 1.5 });
   };
 
   return (
@@ -43,6 +43,7 @@ export const SectionContent = () => {
       <div className='relative my-24 flex flex-row items-center justify-center px-5 py-10 sm:px-10 md:my-32 lg:px-28'>
         <div className='md:min-w-3/4 grid w-full max-w-6xl grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
           <SectionContentText
+            _id={divContainerSpotlight_id}
             title={sectionContentTextContents.spotlight.title}
             subTitle={sectionContentTextContents.spotlight.subTitle}
             content={sectionContentTextContents.spotlight.content}
@@ -74,6 +75,7 @@ export const SectionContent = () => {
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
           <SectionContentText
+            _id={divContainerOverload_id}
             title={sectionContentTextContents.overload.title}
             subTitle={sectionContentTextContents.overload.subTitle}
             content={sectionContentTextContents.overload.content}

@@ -4,9 +4,10 @@ import { PropsSectionContentText } from '@/section/section.types';
 import { sectionContentTextContents } from '@/section/section.consts';
 
 describe('SectionContentText', () => {
-  const renderWithSectionContentText = ({ title, subTitle, content }: PropsSectionContentText) =>
+  const renderWithSectionContentText = ({ title, subTitle, content, _id }: PropsSectionContentText) =>
     render(
       <SectionContentText
+        _id={_id}
         title={title}
         subTitle={subTitle}
         content={content}
@@ -15,6 +16,7 @@ describe('SectionContentText', () => {
 
   it('should render the props titles properly', () => {
     const { container } = renderWithSectionContentText({
+      _id: null,
       title: sectionContentTextContents.spotlight.title,
       subTitle: sectionContentTextContents.spotlight.subTitle,
       content: sectionContentTextContents.spotlight.content,
