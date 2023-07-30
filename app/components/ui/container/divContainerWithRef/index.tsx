@@ -5,9 +5,9 @@ import { PropsDivContainer } from '../container.types';
 import { useSetAtom } from 'jotai';
 import { atomDivRef } from '../container.states';
 
-export const DivContainerWithRef = ({ children, className }: PropsDivContainer) => {
+export const DivContainerWithRef = ({ children, className, _id = null }: PropsDivContainer) => {
   const divRef = useRef<HTMLDivElement | null>(null);
-  const setDivRef = useSetAtom(atomDivRef);
+  const setDivRef = useSetAtom(atomDivRef(_id));
 
   useEffect(() => {
     setDivRef(divRef);

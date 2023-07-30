@@ -4,11 +4,19 @@ import { PropsDivContainer } from '../../container.types';
 import { screen } from '@testing-library/react';
 
 describe('DivContainerWithRef', () => {
-  const renderWithDivContainer = ({ className, children }: PropsDivContainer) =>
-    render(<DivContainerWithRef className={className}>{children}</DivContainerWithRef>);
+  const renderWithDivContainer = ({ className, children, _id }: PropsDivContainer) =>
+    render(
+      <DivContainerWithRef
+        _id={_id}
+        className={className}
+      >
+        {children}
+      </DivContainerWithRef>,
+    );
 
   it('should render the children elements and className', () => {
     const { container } = renderWithDivContainer({
+      _id: null,
       className: 'bg-red-400',
       children: <div>divContainer-test</div>,
     });
