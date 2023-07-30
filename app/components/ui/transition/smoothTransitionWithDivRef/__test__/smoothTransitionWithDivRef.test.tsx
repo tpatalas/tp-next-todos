@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 describe('SmoothTransitionWithDivRef', () => {
   const renderWithSmoothTransitionWithDivRef = (children: ReactNode) =>
-    render(<SmoothTransitionWithDivRef>{children}</SmoothTransitionWithDivRef>);
+    render(<SmoothTransitionWithDivRef _id={null}>{children}</SmoothTransitionWithDivRef>);
 
   it('should render the child elements', async () => {
     const { container } = renderWithSmoothTransitionWithDivRef(<div>smoothTransition-test</div>);

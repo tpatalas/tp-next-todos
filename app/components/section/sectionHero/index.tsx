@@ -13,15 +13,31 @@ import { ImageWithRemotePlaceholder } from '@/components/next/imageWithRemotePla
 import { optionsSectionHeroWithSignInButton, optionsSectionHeroWithImage } from './sectionHero.consts';
 
 export const SectionHero = async () => {
+  const divContainer_id = 'sectionHero';
   const translateDownHandler = (delay?: keyof typeof DELAY) => {
-    return optionsTransition({ transition: 'translateDown', duration: 1000, delay: delay,});
+    return optionsTransition({ transition: 'translateDown', duration: 1000, delay: delay });
   };
+  const optionsFadeIn = optionsTransition({
+    transition: 'fadeIn',
+    duration: 1000,
+    delay: 500,
+    rate: 3,
+  });
+  const optionsScaleCenterSm = optionsTransition({
+    transition: 'scaleCenterSm',
+    duration: 700,
+    delay: 300,
+    rate: 3,
+  });
 
   return (
     <div>
       <div className='relative isolate pt-10'>
         <div className='py-24 sm:py-32 lg:pb-40'>
-          <DivContainerWithRef className='mx-auto max-w-7xl px-6 lg:px-8 bg-red-300'>
+          <DivContainerWithRef
+            _id={divContainer_id}
+            className='mx-auto max-w-7xl px-6 lg:px-8 bg-red-300'
+          >
             <SmoothTransition options={translateDownHandler()}>
               <div className='mx-auto max-w-2xl text-center'>
                 <div className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
@@ -54,12 +70,8 @@ export const SectionHero = async () => {
               <div className='flex justify-center'>
                 <div className='relative mt-16 flow-root max-w-[60rem] sm:mt-24'>
                   <SmoothTransitionWithDivRef
-                    options={optionsTransition({
-                      transition: 'fadeIn',
-                      duration: 1000,
-                      delay: 500,
-                      rate: 3,
-                    })}
+                    _id={divContainer_id}
+                    options={optionsFadeIn}
                   >
                     <div
                       className={classNames(
@@ -70,12 +82,8 @@ export const SectionHero = async () => {
                     />
                   </SmoothTransitionWithDivRef>
                   <SmoothTransitionWithDivRef
-                    options={optionsTransition({
-                      transition: 'scaleCenterSm',
-                      duration: 700,
-                      delay: 300,
-                      rate: 3,
-                    })}
+                    _id={divContainer_id}
+                    options={optionsScaleCenterSm}
                   >
                     <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                       <ImageWithRemotePlaceholder options={optionsSectionHeroWithImage} />

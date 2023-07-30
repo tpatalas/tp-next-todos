@@ -32,6 +32,8 @@ const optionsImageOverload = {
 };
 
 export const SectionContent = () => {
+  const divContainerSpotlight_id = 'sectionContent_spotlight';
+  const divContainerOverload_id = 'sectionContent_overload';
   const transitionHandler = (delay: keyof typeof DELAY) => {
     return optionsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay });
   };
@@ -45,15 +47,27 @@ export const SectionContent = () => {
             subTitle={sectionContentTextContents.spotlight.subTitle}
             content={sectionContentTextContents.spotlight.content}
           />
-          <DivContainerWithRef className={classNames(styleImageFrame)}>
-            <SmoothTransitionWithDivRef options={transitionHandler(500)}>
+          <DivContainerWithRef
+            _id={divContainerSpotlight_id}
+            className={classNames(styleImageFrame)}
+          >
+            <SmoothTransitionWithDivRef
+              _id={divContainerSpotlight_id}
+              options={transitionHandler(500)}
+            >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder options={optionsImageSpotlight} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
-          <DivContainerWithRef className={classNames('max-md:order-last', styleImageFrame)}>
-            <SmoothTransitionWithDivRef options={transitionHandler(700)}>
+          <DivContainerWithRef
+            _id={divContainerOverload_id}
+            className={classNames('max-md:order-last', styleImageFrame)}
+          >
+            <SmoothTransitionWithDivRef
+              _id={divContainerOverload_id}
+              options={transitionHandler(700)}
+            >
               <div className={classNames(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder options={optionsImageOverload} />
               </div>
