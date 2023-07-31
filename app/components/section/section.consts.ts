@@ -26,3 +26,10 @@ export const sectionContentTextContents = {
       "Today's Focus efficiently determines the ideal number of to-dos for you. As you consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base on your completion rate.",
   },
 };
+
+export const sectionStartTodayContents = {
+  title: 'Achieve More with Less.',
+  subTitle: 'Get started today.',
+  content:
+    'Elevate your efficiency and unlock the key to accomplishing more with our productivity-boosting app.',
+};
