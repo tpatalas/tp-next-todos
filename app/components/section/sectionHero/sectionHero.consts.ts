@@ -3,7 +3,7 @@ import { TypesImageWithRemotePlaceholder } from '@/components/next/imageWithRemo
 import { PATH_IMAGE } from '@/lib/consts/assertion.consts';
 import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
 
-export const optionsSectionHeroWithSignInButton: Partial<TypesOptionsButtonWithTooltip> = {
+export const optionsSignInButton: Partial<TypesOptionsButtonWithTooltip> = {
   signInButtonName: 'Get started',
   className: STYLE_BUTTON_NORMAL_BLUE,
 };
