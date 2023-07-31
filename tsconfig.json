@@ -3,14 +3,15 @@
     "baseUrl": ".",
     "paths": {
       //app Router
-      "@/button/*": ["app/components/ui/button/*"],
-      "@/tooltip/*": ["app/components/ui/tooltip/*"],
-      "@/transition/*": ["app/components/ui/transition/*"],
-      "@/container/*": ["app/components/ui/container/*"],
-      "@/section/*": ["app/components/section/*"],
-      "@/next/*": ["app/components/next/*"],
-      "@/ui/*": ["app/components/ui/*"],
-      "@/components/*": ["app/components/*"],
+      "@/button/*": ["app/_components/ui/button/*"],
+      "@/tooltip/*": ["app/_components/ui/tooltip/*"],
+      "@/transition/*": ["app/_components/ui/transition/*"],
+      "@/container/*": ["app/_components/ui/container/*"],
+      "@/section/*": ["app/_components/section/*"],
+      "@/next/*": ["app/_components/next/*"],
+      "@/ui/*": ["app/_components/ui/*"],
+      "@/_components/*": ["app/_components/*"],
+      "@/_lib/*": ["app/_lib/*"],
       "@/*": ["app/*"],
       //page Router
       "@collections/*": ["lib/data/collections/*"],

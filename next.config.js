@@ -15,7 +15,7 @@ module.exports = withBundleAnalyzer({
   },
   images: {
     loader: 'custom',
-    loaderFile: './app/lib/utils/imageLoader.utils.ts',
+    loaderFile: './app/_lib/utils/imageLoader.utils.ts',
     domains: imageDomains,
   },
   output: 'standalone',

@@ -21,14 +21,15 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     //app router
-    '^@/button/(.*)$': ['<rootDir>/app/components/ui/button/$1'],
-    '^@/tooltip/(.*)$': ['<rootDir>/app/components/ui/tooltip/$1'],
-    '^@/transition/(.*)$': ['<rootDir>/app/components/ui/transition/$1'],
-    '^@/container/(.*)$': ['<rootDir>/app/components/ui/container/$1'],
-    '^@/ui/(.*)$': ['<rootDir>/app/components/ui/$1'],
-    '^@/section/(.*)$': ['<rootDir>/app/components/section/$1'],
-    '^@/next/(.*)$': ['<rootDir>/app/components/next/$1'],
-    '^@/components/(.*)$': ['<rootDir>/app/components/$1'],
+    '^@/button/(.*)$': ['<rootDir>/app/_components/ui/button/$1'],
+    '^@/tooltip/(.*)$': ['<rootDir>/app/_components/ui/tooltip/$1'],
+    '^@/transition/(.*)$': ['<rootDir>/app/_components/ui/transition/$1'],
+    '^@/container/(.*)$': ['<rootDir>/app/_components/ui/container/$1'],
+    '^@/ui/(.*)$': ['<rootDir>/app/_components/ui/$1'],
+    '^@/section/(.*)$': ['<rootDir>/app/_components/section/$1'],
+    '^@/next/(.*)$': ['<rootDir>/app/_components/next/$1'],
+    '^@/_components/(.*)$': ['<rootDir>/app/_components/$1'],
+    '^@/_lib/(.*)$': ['<rootDir>/app/_lib/$1'],
     '^@/(.*)$': ['<rootDir>/app/$1'],
     //page router
     '^@collections/(.*)$': ['<rootDir>/lib/data/collections/$1'],
