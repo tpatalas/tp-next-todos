@@ -37,7 +37,7 @@
     "slate": "^0.94.0",
     "slate-history": "^0.93.0",
     "slate-hyperscript": "^0.77.0",
-    "slate-react": "^0.92.0",
+    "slate-react": "^0.98.1",
     "validator": "^13.9.0"
   },
   "devDependencies": {
