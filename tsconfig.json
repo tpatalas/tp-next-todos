@@ -3,12 +3,13 @@
     "baseUrl": ".",
     "paths": {
       //app Router
+      "@/section/*": ["app/_components/section/*"],
+      "@/next/*": ["app/_components/next/*"],
       "@/button/*": ["app/_components/ui/button/*"],
       "@/tooltip/*": ["app/_components/ui/tooltip/*"],
       "@/transition/*": ["app/_components/ui/transition/*"],
       "@/container/*": ["app/_components/ui/container/*"],
-      "@/section/*": ["app/_components/section/*"],
-      "@/next/*": ["app/_components/next/*"],
+      "@/icon/*": ["app/_components/ui/icon/*"],
       "@/ui/*": ["app/_components/ui/*"],
       "@/_components/*": ["app/_components/*"],
       "@/_lib/*": ["app/_lib/*"],
