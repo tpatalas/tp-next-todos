@@ -1,3 +1,1 @@
-export const classNames = (...classes: unknown[]) => classes.filter(Boolean).join(' ') || undefined;
-
-
+export const mergeClasses = (...classes: unknown[]) => classes.filter(Boolean).join(' ') || undefined;
