@@ -1,4 +1,4 @@
-import { classNames } from '@/_lib/utils/misc.utils';
+import { mergeClasses } from '@/_lib/utils/misc.utils';
 
 export const STYLE_BUTTON_BASE =
   'transition-all inline-flex items-center justify-center tracking-wide rounded-lg h-10 p-2 border leading-4 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
@@ -18,47 +18,47 @@ export const STYLE_BUTTON_COLOR_GRAY =
   'border-transparent bg-gray-200 text-black hover:enabled:shadow-gray-300 hover:enabled:bg-gray-300 shadow-gray-100 hover:shadow-gray-200 focus-visible:ring-gray-500 disabled:opacity-70';
 // Composition
 // white
-export const STYLE_BUTTON_NORMAL_WHITE = classNames(
+export const STYLE_BUTTON_NORMAL_WHITE = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_WHITE,
 );
 // blue
-export const STYLE_BUTTON_NORMAL_BLUE = classNames(
+export const STYLE_BUTTON_NORMAL_BLUE = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_BLUE,
 );
-export const STYLE_BUTTON_LARGE_BLUE = classNames(
+export const STYLE_BUTTON_LARGE_BLUE = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_LARGE,
   STYLE_BUTTON_COLOR_BLUE,
 );
-export const STYLE_BUTTON_FULL_BLUE = classNames(
+export const STYLE_BUTTON_FULL_BLUE = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_FULL,
   STYLE_BUTTON_COLOR_BLUE,
 );
 //black
-export const STYLE_BUTTON_NORMAL_BLACK = classNames(
+export const STYLE_BUTTON_NORMAL_BLACK = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_BLACK,
 );
-export const STYLE_BUTTON_FULL_BLACK = classNames(
+export const STYLE_BUTTON_FULL_BLACK = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_FULL,
   STYLE_BUTTON_COLOR_BLACK,
 );
 
 // red
-export const STYLE_BUTTON_NORMAL_RED = classNames(
+export const STYLE_BUTTON_NORMAL_RED = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_RED,
 );
 // gray
-export const STYLE_BUTTON_NORMAL_GRAY = classNames(
+export const STYLE_BUTTON_NORMAL_GRAY = mergeClasses(
   STYLE_BUTTON_BASE,
   STYLE_BUTTON_SIZE_NORMAL,
   STYLE_BUTTON_COLOR_GRAY,
