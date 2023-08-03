@@ -8,7 +8,7 @@ import { SignInButton } from '@/button/signInButton';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { PATH_HOME } from '@/_lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
-import { classNames } from '@/_lib/utils/misc.utils';
+import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
 import { optionsSignInButton, optionsSectionHeroWithImage } from './sectionHero.consts';
 
@@ -74,7 +74,7 @@ export const SectionHero = async () => {
                     options={optionsFadeIn}
                   >
                     <div
-                      className={classNames(
+                      className={mergeClasses(
                         'absolute h-full w-full rounded-xl will-change-transform',
                         STYLE_BLUR_GRADIENT_R_LG,
                       )}

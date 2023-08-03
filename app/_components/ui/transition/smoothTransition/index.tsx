@@ -5,7 +5,7 @@ import { DATA_SMOOTH_TRANSITION } from './smoothTransition.data';
 import { TypesDataTransition, PropsSmoothTransition } from './smoothTransition.types';
 import { useEffect, useState } from 'react';
 import { useVerticalScrollPositionTrigger } from '../transition.hooks';
-import { classNames } from '@/_lib/utils/misc.utils';
+import { mergeClasses } from '@/_lib/utils/misc.utils';
 
 export const SmoothTransition = ({ children, scrollRef, options }: PropsSmoothTransition) => {
   const [hasShown, setHasShown] = useState(false);
@@ -29,12 +29,12 @@ export const SmoothTransition = ({ children, scrollRef, options }: PropsSmoothTr
     <Transition
       appear={appear}
       show={isShowing}
-      enter={classNames(data.enter, enterDuration, delay)}
-      enterFrom={classNames(data.enterFrom)}
-      enterTo={classNames(data.enterTo)}
-      leave={classNames(data.leave, leaveDuration, delay)}
-      leaveFrom={classNames(data.leaveFrom)}
-      leaveTo={classNames(data.leaveTo)}
+      enter={mergeClasses(data.enter, enterDuration, delay)}
+      enterFrom={mergeClasses(data.enterFrom)}
+      enterTo={mergeClasses(data.enterTo)}
+      leave={mergeClasses(data.leave, leaveDuration, delay)}
+      leaveFrom={mergeClasses(data.leaveFrom)}
+      leaveTo={mergeClasses(data.leaveTo)}
     >
       {children}
     </Transition>
