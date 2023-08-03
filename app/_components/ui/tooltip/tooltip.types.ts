@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { TriggerType } from 'react-popper-tooltip';
 import { Placement } from '@popperjs/core';
+import { TypesClassNames } from '@/_components/components.types';
 
 export interface TypesTooltips {
   tooltip: string | ReactElement | null;
@@ -11,9 +12,12 @@ export interface TypesTooltips {
   placement: Placement;
   isVisible: boolean;
   isCloseOnTriggerHidden: boolean;
-  container: string;
 }
 
-export type PropsTooltip = { options?: Partial<TypesTooltips> } & {
+export type PropsTooltip = Partial<
+  {
+    options: Partial<TypesTooltips>;
+  } & Pick<TypesClassNames, 'className'>
+> & {
   children: ReactNode;
 };
