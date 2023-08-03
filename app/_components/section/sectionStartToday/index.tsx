@@ -1,6 +1,5 @@
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
-import { classNames } from '@/_lib/utils/misc.utils';
 import { SmoothTransition } from '@/transition/smoothTransition';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { DELAY } from '@/transition/transition.consts';
@@ -8,6 +7,7 @@ import { optionsTransition } from '@/transition/transition.utils';
 import { sectionStartTodayContents } from '../section.consts';
 import { SignInButton } from '@/button/signInButton';
 import { optionsSignInButton } from '../sectionHero/sectionHero.consts';
+import { mergeClasses } from '@/_lib/utils/misc.utils';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';
@@ -24,7 +24,7 @@ export const SectionStartToday = () => {
         >
           <SmoothTransition options={transitionHandler()}>
             <div
-              className={classNames(
+              className={mergeClasses(
                 'custom-clip-path aspect-[2500/600] w-[70rem] flex-none opacity-40 will-change-transform md:aspect-[1400/600]',
                 STYLE_BLUR_GRADIENT_R_LG,
               )}

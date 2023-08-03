@@ -1,10 +1,10 @@
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { STYLE_BLUR_GRADIENT_R_ZR } from '@/_lib/consts/style.consts';
-import { classNames } from '@/_lib/utils/misc.utils';
 import { PropsSectionContentText } from '@/section/section.types';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { DELAY } from '@/transition/transition.consts';
 import { optionsTransition } from '@/transition/transition.utils';
+import { mergeClasses } from '@/_lib/utils/misc.utils';
 
 export const SectionContentText = ({ title, subTitle, content, _id = null }: PropsSectionContentText) => {
   const transitionHandler = (delay?: keyof typeof DELAY) => {
@@ -22,7 +22,7 @@ export const SectionContentText = ({ title, subTitle, content, _id = null }: Pro
           options={transitionHandler()}
         >
           <p
-            className={classNames(
+            className={mergeClasses(
               'w-full max-w-sm animate-typing whitespace-nowrap bg-clip-text text-2xl text-transparent will-change-transform md:text-3xl',
               STYLE_BLUR_GRADIENT_R_ZR,
             )}

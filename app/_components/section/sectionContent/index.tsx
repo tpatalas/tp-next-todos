@@ -4,10 +4,10 @@ import { optionsTransition } from '@/transition/transition.utils';
 import { SectionContentText } from './sectionContentText';
 import { sectionContentTextContents } from '../section.consts';
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
-import { classNames } from '@/_lib/utils/misc.utils';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
 import { ImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder';
+import { mergeClasses } from '@/_lib/utils/misc.utils';
 
 const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
 const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
@@ -50,26 +50,26 @@ export const SectionContent = () => {
           />
           <DivContainerWithRef
             _id={divContainerSpotlight_id}
-            className={classNames(styleImageFrame)}
+            className={mergeClasses(styleImageFrame)}
           >
             <SmoothTransitionWithDivRef
               _id={divContainerSpotlight_id}
               options={transitionHandler(500)}
             >
-              <div className={classNames(styleImageWrapper, 'opacity-100')}>
+              <div className={mergeClasses(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder options={optionsImageSpotlight} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
           <DivContainerWithRef
             _id={divContainerOverload_id}
-            className={classNames('max-md:order-last', styleImageFrame)}
+            className={mergeClasses('max-md:order-last', styleImageFrame)}
           >
             <SmoothTransitionWithDivRef
               _id={divContainerOverload_id}
               options={transitionHandler(700)}
             >
-              <div className={classNames(styleImageWrapper, 'opacity-100')}>
+              <div className={mergeClasses(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder options={optionsImageOverload} />
               </div>
             </SmoothTransitionWithDivRef>
