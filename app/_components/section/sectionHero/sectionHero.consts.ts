@@ -1,12 +1,5 @@
-import { TypesOptionsButtonWithTooltip } from '@/button/button.types';
 import { TypesImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.types';
 import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
-import { STYLE_BUTTON_NORMAL_BLUE } from '@data/stylePreset';
-
-export const optionsSignInButton: Partial<TypesOptionsButtonWithTooltip> = {
-  signInButtonName: 'Get started',
-  className: STYLE_BUTTON_NORMAL_BLUE,
-};
 
 export const optionsSectionHeroWithImage: TypesImageWithRemotePlaceholder = {
   width: 961,

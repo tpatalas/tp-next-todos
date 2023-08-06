@@ -1,4 +1,4 @@
-import { TypesClassNames } from '@/_components/components.types';
+import { TypesStyles } from '@/_components/components.types';
 import { ReactNode } from 'react';
 
 export interface TypesContainer {
@@ -6,4 +6,4 @@ export interface TypesContainer {
 }
 
 export type PropsDivContainer = { children: ReactNode } & Pick<TypesContainer, '_id'> &
-  Partial<Pick<TypesClassNames, 'className'>>;
+  Partial<Pick<TypesStyles, 'className'>>;

@@ -12,31 +12,10 @@ export interface TypesEvents {
   onDoubleClick: MouseEventHandler<HTMLElement>;
 }
 
-export type TypesClassNames = Record<UnionsClassNames, string>;
-
 export type TypesAttributes = Record<UnionsAttributes, string>;
 
-type UnionsClassNames =
-  | 'group'
-  | 'className'
-  | 'color'
-  | 'size'
-  | 'padding'
-  | 'menuItemsWidth'
-  | 'checkedColor'
-  | 'checkBoxColor'
-  | 'borderRadius'
-  | 'margin'
-  | 'space'
-  | 'text'
-  | 'menuWidth'
-  | 'menuHeight'
-  | 'display'
-  | 'width'
-  | 'container'
-  | 'hoverBg'
-  | 'hoverRing'
-  | 'transition'
-  | 'zIndex';
+export interface TypesStyles {
+  className: string;
+}
 
 type UnionsAttributes = 'ariaLabel' | 'testId';
