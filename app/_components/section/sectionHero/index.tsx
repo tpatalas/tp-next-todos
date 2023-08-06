@@ -1,8 +1,7 @@
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransition } from '@/transition/smoothTransition';
-import { optionsTransition } from '@/transition/transition.utils';
+import { configsTransition } from '@/transition/transition.utils';
 import { DELAY } from '@constAssertions/ui';
-import { sectionHeroContents } from '../section.consts';
 import Link from 'next/link';
 import { SignInButton } from '@/button/signInButton';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
@@ -12,19 +11,20 @@ import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
 import { configsSignInButton } from '@/button/button.configs';
 import { optionsSectionHeroWithImage } from './sectionHero.consts';
+import { sectionContents } from '../section.consts';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
   const translateDownHandler = (delay?: keyof typeof DELAY) => {
-    return optionsTransition({ transition: 'translateDown', duration: 1000, delay: delay });
+    return configsTransition({ transition: 'translateDown', duration: 1000, delay: delay });
   };
-  const optionsFadeIn = optionsTransition({
+  const optionsFadeIn = configsTransition({
     transition: 'fadeIn',
     duration: 1000,
     delay: 300,
     rate: 4,
   });
-  const optionsScaleCenterSm = optionsTransition({
+  const optionsScaleCenterSm = configsTransition({
     transition: 'scaleCenterSm',
     duration: 700,
     delay: 150,
@@ -39,24 +39,24 @@ export const SectionHero = async () => {
             _id={divContainer_id}
             className='mx-auto max-w-7xl px-6 lg:px-8'
           >
-            <SmoothTransition options={translateDownHandler()}>
+            <SmoothTransition configs={translateDownHandler()}>
               <div className='mx-auto max-w-2xl text-center'>
                 <div className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
-                  {sectionHeroContents.title}
+                  {sectionContents.hero.title}
                 </div>
                 <div className='text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
-                  {sectionHeroContents.subTitle}
+                  {sectionContents.hero.subTitle}
                 </div>
               </div>
             </SmoothTransition>
-            <SmoothTransition options={translateDownHandler(300)}>
+            <SmoothTransition configs={translateDownHandler(300)}>
               <div className='mx-auto max-w-2xl text-center'>
                 <p className='mt-6 text-xl leading-8 text-gray-600 will-change-transform'>
-                  {sectionHeroContents.content}
+                  {sectionContents.hero.content}
                 </p>
               </div>
             </SmoothTransition>
-            <SmoothTransition options={translateDownHandler(700)}>
+            <SmoothTransition configs={translateDownHandler(700)}>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
                 <SignInButton configs={configsSignInButton['getStarted']} />
                 <Link
@@ -72,7 +72,7 @@ export const SectionHero = async () => {
                 <div className='relative mt-16 flow-root max-w-[60rem] sm:mt-24'>
                   <SmoothTransitionWithDivRef
                     _id={divContainer_id}
-                    options={optionsFadeIn}
+                    configs={optionsFadeIn}
                   >
                     <div
                       className={mergeClasses(
@@ -84,10 +84,10 @@ export const SectionHero = async () => {
                   </SmoothTransitionWithDivRef>
                   <SmoothTransitionWithDivRef
                     _id={divContainer_id}
-                    options={optionsScaleCenterSm}
+                    configs={optionsScaleCenterSm}
                   >
                     <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
-                      <ImageWithRemotePlaceholder options={optionsSectionHeroWithImage} />
+                      <ImageWithRemotePlaceholder configs={optionsSectionHeroWithImage} />
                     </div>
                   </SmoothTransitionWithDivRef>
                 </div>

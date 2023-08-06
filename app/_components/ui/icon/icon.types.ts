@@ -12,4 +12,4 @@ export interface TypesSvgAttributes {
 
 type ExtendedSvgAttributes = Partial<TypesSvgAttributes & Pick<TypesStyles, 'className'>>;
 
-export type PropsSvgIcon = Partial<{ options: ExtendedSvgAttributes }>;
+export type PropsSvgIcon = Partial<{ configs: ExtendedSvgAttributes }>;

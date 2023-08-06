@@ -1,9 +1,9 @@
-import { sectionHeroContents } from '@/section/section.consts';
 import { render, screen } from '@testing-library/react';
 import { SectionHero } from '..';
 import { ReactNode } from 'react';
 import { getResolvedComponent } from '@/_lib/utils/test.utils';
 import { configsSignInButton } from '@/button/button.configs';
+import { sectionContents } from '@/section/section.consts';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -24,9 +24,9 @@ describe('SectionHero', () => {
   it('should render the text contents', async () => {
     await renderAsyncComponent();
 
-    const titleText = await screen.findByText(sectionHeroContents.title);
-    const subTitleText = await screen.findByText(sectionHeroContents.subTitle);
-    const contentText = await screen.findByText(sectionHeroContents.content);
+    const titleText = await screen.findByText(sectionContents.hero.title);
+    const subTitleText = await screen.findByText(sectionContents.hero.subTitle);
+    const contentText = await screen.findByText(sectionContents.hero.content);
 
     expect(titleText).toBeInTheDocument();
     expect(subTitleText).toBeInTheDocument();

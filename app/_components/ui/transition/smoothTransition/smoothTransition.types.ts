@@ -10,7 +10,7 @@ import { TypesContainer } from '@/container/container.types';
 
 export type PropsSmoothTransition = {
   children: ReactNode;
-  options?: Partial<
+  configs?: Partial<
     Record<TypesTransitionShow, boolean> & {
       enterDuration: TypesTransitionDuration;
       leaveDuration: TypesTransitionDuration;

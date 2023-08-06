@@ -2,16 +2,16 @@ import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransition } from '@/transition/smoothTransition';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { TRANSITION_TYPE } from '@/transition/transition.consts';
-import { optionsTransition } from '@/transition/transition.utils';
+import { configsTransition } from '@/transition/transition.utils';
 import { DELAY } from '@constAssertions/ui';
-import { sectionHeaderContents } from '../section.consts';
 import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
+import { sectionContents } from '../section.consts';
 
 export const SectionHeader = () => {
   const divContainer_id = 'sectionHeader';
   const transitionHandler = (transition: TRANSITION_TYPE, delay?: keyof typeof DELAY) => {
-    return optionsTransition({ transition: transition ?? 'fadeIn', delay: delay });
+    return configsTransition({ transition: transition ?? 'fadeIn', delay: delay });
   };
   const optionsPoleTransition = { type: TRANSITION_TYPE['scaleY'], delay: DELAY['150'] };
 
@@ -25,15 +25,15 @@ export const SectionHeader = () => {
           <div className={'text-sm font-semibold uppercase tracking-widest text-gray-500'}>
             <SmoothTransitionWithDivRef
               _id={divContainer_id}
-              options={transitionHandler('fadeIn')}
+              configs={transitionHandler('fadeIn')}
             >
-              {sectionHeaderContents.title}
+              {sectionContents.headerContent.title}
             </SmoothTransitionWithDivRef>
           </div>
         </div>
         <SmoothTransitionWithDivRef
           _id={divContainer_id}
-          options={optionsPoleTransition}
+          configs={optionsPoleTransition}
         >
           <div className='relative flex h-[15rem] max-h-60 flex-row items-center justify-center'>
             <div
@@ -47,17 +47,19 @@ export const SectionHeader = () => {
       <div className='flex flex-col items-center justify-center px-5 text-center'>
         <SmoothTransitionWithDivRef
           _id={divContainer_id}
-          options={transitionHandler('fadeIn', 300)}
+          configs={transitionHandler('fadeIn', 300)}
         >
           <h1 className='my-5 h-full bg-slate-50 text-3xl font-bold tracking-normal text-slate-800 sm:text-5xl'>
-            {sectionHeaderContents.subTitle}
+            {sectionContents.headerContent.subTitle}
           </h1>
         </SmoothTransitionWithDivRef>
         <SmoothTransitionWithDivRef
           _id={divContainer_id}
-          options={transitionHandler('fadeIn', 500)}
+          configs={transitionHandler('fadeIn', 500)}
         >
-          <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>{sectionHeaderContents.content}</h2>
+          <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>
+            {sectionContents.headerContent.content}
+          </h2>
         </SmoothTransitionWithDivRef>
       </div>
     </SmoothTransition>

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { SectionContentText } from '..';
 import { PropsSectionContentText } from '@/section/section.types';
-import { sectionContentTextContents } from '@/section/section.consts';
+import { sectionContents } from '@/section/section.consts';
 
 describe('SectionContentText', () => {
   const renderWithSectionContentText = ({ title, subTitle, content, _id }: PropsSectionContentText) =>
@@ -17,11 +17,11 @@ describe('SectionContentText', () => {
   it('should render the props titles properly', () => {
     const { container } = renderWithSectionContentText({
       _id: null,
-      title: sectionContentTextContents.spotlight.title,
-      subTitle: sectionContentTextContents.spotlight.subTitle,
-      content: sectionContentTextContents.spotlight.content,
+      title: sectionContents.spotlight.title,
+      subTitle: sectionContents.spotlight.subTitle,
+      content: sectionContents.spotlight.content,
     });
-    Object.values(sectionContentTextContents.spotlight).forEach(async (value) => {
+    Object.values(sectionContents.spotlight).forEach(async (value) => {
       await waitFor(() => {
         const text = screen.queryByText(value);
         expect(text).toBeInTheDocument();

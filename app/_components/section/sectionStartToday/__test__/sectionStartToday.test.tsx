@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { SectionStartToday } from '..';
-import { sectionStartTodayContents } from '@/section/section.consts';
 import { ReactNode } from 'react';
 import { configsSignInButton } from '@/button/button.configs';
+import { sectionContents } from '@/section/section.consts';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -22,7 +22,7 @@ describe('SectionStartToday', () => {
   it('should render the content texts properly', () => {
     renderWithSectionStartToday();
 
-    Object.values(sectionStartTodayContents).forEach(async (value) => {
+    Object.values(sectionContents.startToday).forEach(async (value) => {
       await waitFor(() => {
         const text = screen.queryByText(value);
         expect(text).toBeInTheDocument();

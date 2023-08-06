@@ -7,14 +7,14 @@ import { PropsSmoothTransitionWithDivRef } from '../smoothTransition/smoothTrans
 
 export const SmoothTransitionWithDivRef = ({
   children,
-  options,
+  configs,
   _id = null,
 }: PropsSmoothTransitionWithDivRef) => {
   const divRef = useAtomValue(atomDivRef(_id));
 
   return (
     <SmoothTransition
-      options={options}
+      configs={configs}
       scrollRef={divRef}
     >
       {children}
