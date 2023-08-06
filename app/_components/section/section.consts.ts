@@ -1,18 +1,18 @@
-export const sectionHeroContents = {
-  title: 'Simplify your life',
-  subTitle: 'Automate your tasks',
-  content:
-    'Focus on your work more and manage your to-dos less. Enhance your efficiency and improve your productivity.',
-};
+import { TypesSectionContents, TypesContents } from './section.types';
 
-export const sectionHeaderContents = {
-  title: 'Simplify your works',
-  subTitle: 'Manage less work better',
-  content:
-    'Unburden yourself from managing time-consuming tasks by allowing app to seamlessly choose the most suitable to-dos for you.',
-};
-
-export const sectionContentTextContents = {
+export const sectionContents: TypesSectionContents<TypesContents> = {
+  hero: {
+    title: 'Simplify your life',
+    subTitle: 'Automate your tasks',
+    content:
+      'Focus on your work more and manage your to-dos less. Enhance your efficiency and improve your productivity.',
+  },
+  headerContent: {
+    title: 'Simplify your works',
+    subTitle: 'Manage less work better',
+    content:
+      'Unburden yourself from managing time-consuming tasks by allowing app to seamlessly choose the most suitable to-dos for you.',
+  },
   spotlight: {
     title: 'Spotlight your to-dos',
     subTitle: "View your to-dos that are intelligently and automatically selected in Today's Focus.",
@@ -25,11 +25,10 @@ export const sectionContentTextContents = {
     content:
       "Today's Focus efficiently determines the ideal number of to-dos for you. As you consistently complete to-dos, the process adjusts and assigns more or fewer to-dos base on your completion rate.",
   },
-};
-
-export const sectionStartTodayContents = {
-  title: 'Achieve More with Less.',
-  subTitle: 'Get started today.',
-  content:
-    'Elevate your efficiency and unlock the key to accomplishing more with our productivity-boosting app.',
+  startToday: {
+    title: 'Achieve More with Less.',
+    subTitle: 'Get started today.',
+    content:
+      'Elevate your efficiency and unlock the key to accomplishing more with our productivity-boosting app.',
+  },
 };

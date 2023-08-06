@@ -1,13 +1,13 @@
 import { SmoothTransition } from '@/transition/smoothTransition';
 import { DELAY } from '@/transition/transition.consts';
-import { optionsTransition } from '@/transition/transition.utils';
+import { configsTransition } from '@/transition/transition.utils';
 import { SectionContentText } from './sectionContentText';
-import { sectionContentTextContents } from '../section.consts';
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
 import { ImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
+import { sectionContents } from '../section.consts';
 
 const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
 const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
@@ -35,7 +35,7 @@ export const SectionContent = () => {
   const divContainerSpotlight_id = 'sectionContent_spotlight';
   const divContainerOverload_id = 'sectionContent_overload';
   const transitionHandler = (delay: keyof typeof DELAY) => {
-    return optionsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay, rate: 1.5 });
+    return configsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay, rate: 1.5 });
   };
 
   return (
@@ -44,9 +44,9 @@ export const SectionContent = () => {
         <div className='md:min-w-3/4 grid w-full max-w-6xl grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
           <SectionContentText
             _id={divContainerSpotlight_id}
-            title={sectionContentTextContents.spotlight.title}
-            subTitle={sectionContentTextContents.spotlight.subTitle}
-            content={sectionContentTextContents.spotlight.content}
+            title={sectionContents.spotlight.title}
+            subTitle={sectionContents.spotlight.subTitle}
+            content={sectionContents.spotlight.content}
           />
           <DivContainerWithRef
             _id={divContainerSpotlight_id}
@@ -54,10 +54,10 @@ export const SectionContent = () => {
           >
             <SmoothTransitionWithDivRef
               _id={divContainerSpotlight_id}
-              options={transitionHandler(500)}
+              configs={transitionHandler(500)}
             >
               <div className={mergeClasses(styleImageWrapper, 'opacity-100')}>
-                <ImageWithRemotePlaceholder options={optionsImageSpotlight} />
+                <ImageWithRemotePlaceholder configs={optionsImageSpotlight} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
@@ -67,18 +67,18 @@ export const SectionContent = () => {
           >
             <SmoothTransitionWithDivRef
               _id={divContainerOverload_id}
-              options={transitionHandler(700)}
+              configs={transitionHandler(700)}
             >
               <div className={mergeClasses(styleImageWrapper, 'opacity-100')}>
-                <ImageWithRemotePlaceholder options={optionsImageOverload} />
+                <ImageWithRemotePlaceholder configs={optionsImageOverload} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
           <SectionContentText
             _id={divContainerOverload_id}
-            title={sectionContentTextContents.overload.title}
-            subTitle={sectionContentTextContents.overload.subTitle}
-            content={sectionContentTextContents.overload.content}
+            title={sectionContents.overload.title}
+            subTitle={sectionContents.overload.subTitle}
+            content={sectionContents.overload.content}
           />
         </div>
       </div>

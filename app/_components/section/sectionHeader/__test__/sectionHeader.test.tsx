@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { SectionHeader } from '..';
-import { sectionHeaderContents } from '@/section/section.consts';
+import { sectionContents } from '@/section/section.consts';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -21,7 +21,7 @@ describe('SectionHeader', () => {
   it('should render the text contents properly', () => {
     renderWithSectionHeader();
 
-    Object.values(sectionHeaderContents).forEach(async (value) => {
+    Object.values(sectionContents.headerContent).forEach(async (value) => {
       await waitFor(() => {
         const text = screen.queryByText(value);
         expect(text).toBeInTheDocument();

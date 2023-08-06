@@ -3,12 +3,12 @@ import { STYLE_BLUR_GRADIENT_R_ZR } from '@/_lib/consts/style.consts';
 import { PropsSectionContentText } from '@/section/section.types';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { DELAY } from '@/transition/transition.consts';
-import { optionsTransition } from '@/transition/transition.utils';
+import { configsTransition } from '@/transition/transition.utils';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
 
 export const SectionContentText = ({ title, subTitle, content, _id = null }: PropsSectionContentText) => {
   const transitionHandler = (delay?: keyof typeof DELAY) => {
-    return optionsTransition({ transition: 'fadeIn', duration: 1000, delay: delay, rate: 0.8 });
+    return configsTransition({ transition: 'fadeIn', duration: 1000, delay: delay, rate: 0.8 });
   };
 
   return (
@@ -19,7 +19,7 @@ export const SectionContentText = ({ title, subTitle, content, _id = null }: Pro
       >
         <SmoothTransitionWithDivRef
           _id={_id}
-          options={transitionHandler()}
+          configs={transitionHandler()}
         >
           <p
             className={mergeClasses(
@@ -33,13 +33,13 @@ export const SectionContentText = ({ title, subTitle, content, _id = null }: Pro
       </DivContainerWithRef>
       <SmoothTransitionWithDivRef
         _id={_id}
-        options={transitionHandler(500)}
+        configs={transitionHandler(500)}
       >
         <p className='text-lg text-slate-800/80 opacity-100 will-change-transform md:text-xl'>{subTitle}</p>
       </SmoothTransitionWithDivRef>
       <SmoothTransitionWithDivRef
         _id={_id}
-        options={transitionHandler(700)}
+        configs={transitionHandler(700)}
       >
         <p className='text-base font-medium text-slate-800/80 opacity-100 will-change-transform'>{content}</p>
       </SmoothTransitionWithDivRef>

@@ -1,3 +1,5 @@
+import { TRANSITION_TYPE, DURATION, DELAY } from './transition.consts';
+
 export type TypesTransitionTypes =
   | 'fadeIn'
   | 'scaleX'
@@ -10,6 +12,13 @@ export type TypesTransitionTypes =
 export type TypesTransitionShow = 'show' | 'appear';
 
 export type TypesTransitionProperties = 'enter' | 'enterFrom' | 'enterTo' | 'leave' | 'leaveFrom' | 'leaveTo';
+
+export type PropsTransitionConfigs = {
+  transition: keyof typeof TRANSITION_TYPE;
+  duration?: keyof typeof DURATION;
+  delay?: keyof typeof DELAY;
+  rate?: number;
+};
 
 export type TypesTransitionDuration =
   | 'duration-75'

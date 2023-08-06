@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { SectionContent } from '..';
-import { sectionContentTextContents } from '@/section/section.consts';
 import { ReactNode } from 'react';
+import { sectionContents } from '@/section/section.consts';
 
 jest.mock('@/_components/next/imageWithRemotePlaceholder', () => ({
   ImageWithRemotePlaceholder: () => <div data-testid='mockImage-testid' />,
@@ -17,7 +17,7 @@ describe('SectionContent', () => {
   it('should render the content texts of spotlight and overload', () => {
     const { container } = renderWithSectionContent();
 
-    Object.values(sectionContentTextContents).forEach((contentObjects) => {
+    Object.values(sectionContents).forEach((contentObjects) => {
       Object.values(contentObjects).forEach(async (value) => {
         await waitFor(() => {
           const text = screen.queryByText(value);

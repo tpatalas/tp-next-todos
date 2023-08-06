@@ -1,7 +1,7 @@
 import { VIEWBOX } from '../icon.consts';
 import { PropsSvgIcon } from '../icon.types';
 
-export const SvgIcon = ({ options = {} }: PropsSvgIcon) => {
+export const SvgIcon = ({ configs = {} }: PropsSvgIcon) => {
   const {
     isAriaHidden = true,
     height = '24',
@@ -9,7 +9,7 @@ export const SvgIcon = ({ options = {} }: PropsSvgIcon) => {
     viewBox = VIEWBOX['24'],
     className = 'h-5 w-5 fill-gray-500 hover:fill-gray-700',
     testId = 'svgIcon-testid',
-  } = options;
+  } = configs;
 
   return (
     <svg
@@ -21,7 +21,7 @@ export const SvgIcon = ({ options = {} }: PropsSvgIcon) => {
       className={className}
       data-testid={testId}
     >
-      <path d={options.path} />
+      <path d={configs.path} />
     </svg>
   );
 };

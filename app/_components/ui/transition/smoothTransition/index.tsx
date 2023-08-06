@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useVerticalScrollPositionTrigger } from '../transition.hooks';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
 
-export const SmoothTransition = ({ children, scrollRef, options }: PropsSmoothTransition) => {
+export const SmoothTransition = ({ children, scrollRef, configs }: PropsSmoothTransition) => {
   const [hasShown, setHasShown] = useState(false);
   const {
     appear = true,
@@ -15,9 +15,9 @@ export const SmoothTransition = ({ children, scrollRef, options }: PropsSmoothTr
     leaveDuration = 'duration-500',
     type = 'fadeIn',
     delay,
-  } = options || {};
+  } = configs || {};
   const data = DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
-  const triggerRate = !!scrollRef ? options?.rate : undefined;
+  const triggerRate = !!scrollRef ? configs?.rate : undefined;
   const isTriggered = useVerticalScrollPositionTrigger(scrollRef, triggerRate);
   const isShowing = !!scrollRef ? isTriggered : hasShown;
 
