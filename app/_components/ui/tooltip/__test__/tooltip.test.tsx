@@ -4,12 +4,12 @@ import { screen } from '@testing-library/react';
 import { PropsTooltip } from '../tooltip.types';
 
 describe('Tooltip', () => {
-  const renderWithTooltip = ({ options, children }: PropsTooltip) =>
-    render(<Tooltip options={options}>{children}</Tooltip>);
+  const renderWithTooltip = ({ configs, children }: PropsTooltip) =>
+    render(<Tooltip configs={configs}>{children}</Tooltip>);
 
   it('should render the children props and tooltip text', async () => {
     const { container } = renderWithTooltip({
-      options: { isVisible: true, tooltip: 'tooltip' },
+      configs: { isVisible: true, tooltip: 'tooltip' },
       children: <div>Tooltip-test</div>,
     });
     const childrenElement = screen.getByText('Tooltip-test');

@@ -6,24 +6,21 @@ import { Button } from '..';
 import { Tooltip } from '@/tooltip/index';
 
 export const ButtonWithTooltip = forwardRef<HTMLButtonElement, PropsButtonWithTooltip>(
-  ({ options = {}, onClick, onKeyDown, onDoubleClick, children }: PropsButtonWithTooltip, ref) => {
+  ({ configs = {}, onClick, onKeyDown, onDoubleClick, children }: PropsButtonWithTooltip, ref) => {
     const [hasTooltip, setTooltip] = useState(false);
-    const { ariaLabel, type, className, isDisabled, container, placement, offset, tooltip, kbd, isVisible } =
-      options;
-    const optionsButton = { ariaLabel, type, className, isDisabled };
-    const optionsTooltip = {
+    const { isDisabled, placement, offset, tooltip, kbd, isVisible } = configs;
+    const configsTooltip = {
       tooltip: (hasTooltip || isDisabled) && !tooltip ? undefined : tooltip,
       kbd: (hasTooltip || isDisabled) && !kbd ? undefined : kbd,
-      container,
       placement,
       offset,
       isVisible,
     };
 
     return (
-      <Tooltip options={optionsTooltip}>
+      <Tooltip configs={configsTooltip}>
         <Button
-          options={optionsButton}
+          configs={configs}
           onMouseDown={() => !isDisabled && setTooltip(true)}
           onMouseEnter={() => !isDisabled && setTooltip(false)}
           onMouseLeave={() => !isDisabled && setTooltip(true)}

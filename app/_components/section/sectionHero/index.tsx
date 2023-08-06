@@ -10,7 +10,8 @@ import { PATH_HOME } from '@/_lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
-import { optionsSignInButton, optionsSectionHeroWithImage } from './sectionHero.consts';
+import { configsSignInButton } from '@/button/button.configs';
+import { optionsSectionHeroWithImage } from './sectionHero.consts';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
@@ -57,7 +58,7 @@ export const SectionHero = async () => {
             </SmoothTransition>
             <SmoothTransition options={translateDownHandler(700)}>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
-                <SignInButton options={optionsSignInButton} />
+                <SignInButton configs={configsSignInButton['getStarted']} />
                 <Link
                   className='text-sm font-semibold leading-6 text-gray-900'
                   href={PATH_HOME['features']}
