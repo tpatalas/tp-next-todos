@@ -3,8 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { SectionHero } from '..';
 import { ReactNode } from 'react';
 import { getResolvedComponent } from '@/_lib/utils/test.utils';
-import { TypesButtons } from '@/button/button.types';
-import { optionsSignInButton } from '../sectionHero.consts';
+import { configsSignInButton } from '@/button/button.configs';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -37,7 +36,7 @@ describe('SectionHero', () => {
   it('should render the signInButton and link button', async () => {
     await renderAsyncComponent();
 
-    const signInButtonName = optionsSignInButton.signInButtonName as TypesButtons['signInButtonName'];
+    const signInButtonName = configsSignInButton.getStarted.signInButtonName as string;
     const signInButton = await screen.findByText(signInButtonName);
     const linkButton = await screen.findByText('Learn more');
 

@@ -7,26 +7,21 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import { PropsTooltip } from './tooltip.types';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
 
-export const Tooltip = memo(({ options = {}, className, children }: PropsTooltip) => {
+export const Tooltip = memo(({ configs = {}, children }: PropsTooltip) => {
   const { getTooltipProps, setTooltipRef, setTriggerRef, visible } = usePopperTooltip({
-    trigger: options.trigger ?? 'hover',
-    delayShow: options.delayShow ?? 50,
-    offset: options.offset ?? [0, 25],
-    placement: options.placement ?? 'bottom',
-    visible: options.isVisible,
-    closeOnTriggerHidden: options.isCloseOnTriggerHidden,
+    trigger: configs.trigger ?? 'hover',
+    delayShow: configs.delayShow ?? 50,
+    offset: configs.offset ?? [0, 25],
+    placement: configs.placement ?? 'bottom',
+    visible: configs.isVisible,
+    closeOnTriggerHidden: configs.isCloseOnTriggerHidden,
     delayHide: 50,
     interactive: false,
   });
 
   return (
     <>
-      <span
-        ref={setTriggerRef}
-        className={className}
-      >
-        {children}
-      </span>
+      <span ref={setTriggerRef}>{children}</span>
       {visible && (
         <>
           {!isMobile && (
@@ -35,18 +30,18 @@ export const Tooltip = memo(({ options = {}, className, children }: PropsTooltip
                 ref={setTooltipRef}
                 {...getTooltipProps()}
                 className={mergeClasses(
-                  options.tooltip &&
+                  configs.tooltip &&
                     'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
                 )}
               >
-                <span>{options.tooltip}</span>
+                <span>{configs.tooltip}</span>
                 <kbd
                   className={mergeClasses(
-                    options.kbd &&
+                    configs.kbd &&
                       'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
                   )}
                 >
-                  {options.kbd}
+                  {configs.kbd}
                 </kbd>
               </div>
             </Portal>

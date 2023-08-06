@@ -6,8 +6,8 @@ import { DELAY } from '@/transition/transition.consts';
 import { optionsTransition } from '@/transition/transition.utils';
 import { sectionStartTodayContents } from '../section.consts';
 import { SignInButton } from '@/button/signInButton';
-import { optionsSignInButton } from '../sectionHero/sectionHero.consts';
 import { mergeClasses } from '@/_lib/utils/misc.utils';
+import { configsSignInButton } from '@/button/button.configs';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';
@@ -59,7 +59,7 @@ export const SectionStartToday = () => {
             options={transitionHandler(700)}
           >
             <div className='mt-10 flex items-center justify-center will-change-transform'>
-              <SignInButton options={optionsSignInButton} />
+              <SignInButton configs={configsSignInButton['getStarted']} />
             </div>
           </SmoothTransitionWithDivRef>
         </DivContainerWithRef>

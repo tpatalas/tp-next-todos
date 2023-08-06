@@ -1,4 +1,4 @@
-import { TypesClassNames } from '@/_components/components.types';
+import { TypesStyles } from '@/_components/components.types';
 import { VIEWBOX } from './icon.consts';
 
 export interface TypesSvgAttributes {
@@ -10,6 +10,6 @@ export interface TypesSvgAttributes {
   testId: string;
 }
 
-type ExtendedSvgAttributes = Partial<TypesSvgAttributes & Pick<TypesClassNames, 'className'>>;
+type ExtendedSvgAttributes = Partial<TypesSvgAttributes & Pick<TypesStyles, 'className'>>;
 
 export type PropsSvgIcon = Partial<{ options: ExtendedSvgAttributes }>;

@@ -3,10 +3,15 @@
 import { forwardRef } from 'react';
 import { PropsButton } from './button.types';
 
+/*
+ * Default should not be included within the client component
+ * Instead the value such as styles or classNames should be passed from the server component
+ * */
+
 export const Button = forwardRef<HTMLButtonElement, PropsButton>(
   (
     {
-      options = {},
+      configs = {},
       children,
       onClick,
       onKeyDown,
@@ -18,7 +23,7 @@ export const Button = forwardRef<HTMLButtonElement, PropsButton>(
     }: PropsButton,
     ref,
   ) => {
-    const { ariaLabel, type = 'button', className, isDisabled } = options;
+    const { ariaLabel, type = 'button', isDisabled, className } = configs;
     return (
       <button
         aria-label={ariaLabel}
