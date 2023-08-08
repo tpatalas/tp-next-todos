@@ -5,8 +5,8 @@ import { TRANSITION_TYPE } from '@/transition/transition.consts';
 import { configsTransition } from '@/transition/transition.utils';
 import { DELAY } from '@constAssertions/ui';
 import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
-import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { sectionContents } from '../section.consts';
+import { cx } from 'class-variance-authority';
 
 export const SectionHeader = () => {
   const divContainer_id = 'sectionHeader';
@@ -37,7 +37,7 @@ export const SectionHeader = () => {
         >
           <div className='relative flex h-[15rem] max-h-60 flex-row items-center justify-center'>
             <div
-              className={mergeClasses(STYLE_BLUR_GRADIENT_B_MD, 'absolute h-full w-3 will-change-transform')}
+              className={cx(STYLE_BLUR_GRADIENT_B_MD, 'absolute h-full w-3 will-change-transform')}
               data-testid='gradientPole-testid'
             />
             <div className='h-full w-1 rounded-full bg-gradient-to-b from-blue-600' />

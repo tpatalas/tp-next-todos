@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { isMobile } from 'react-device-detect';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { PropsTooltip } from './tooltip.types';
-import { mergeClasses } from '@/_lib/utils/misc.utils';
+import { cx } from 'class-variance-authority';
 
 export const Tooltip = memo(({ configs = {}, children }: PropsTooltip) => {
   const { getTooltipProps, setTooltipRef, setTriggerRef, visible } = usePopperTooltip({
@@ -29,14 +29,14 @@ export const Tooltip = memo(({ configs = {}, children }: PropsTooltip) => {
               <div
                 ref={setTooltipRef}
                 {...getTooltipProps()}
-                className={mergeClasses(
+                className={cx(
                   configs.tooltip &&
                     'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
                 )}
               >
                 <span>{configs.tooltip}</span>
                 <kbd
-                  className={mergeClasses(
+                  className={cx(
                     configs.kbd &&
                       'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
                   )}

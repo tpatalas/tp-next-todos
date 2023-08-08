@@ -6,8 +6,8 @@ import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
 import { ImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder';
-import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { sectionContents } from '../section.consts';
+import { cx } from 'class-variance-authority';
 
 const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
 const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
@@ -50,26 +50,26 @@ export const SectionContent = () => {
           />
           <DivContainerWithRef
             _id={divContainerSpotlight_id}
-            className={mergeClasses(styleImageFrame)}
+            className={cx(styleImageFrame)}
           >
             <SmoothTransitionWithDivRef
               _id={divContainerSpotlight_id}
               configs={transitionHandler(500)}
             >
-              <div className={mergeClasses(styleImageWrapper, 'opacity-100')}>
+              <div className={cx(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder configs={optionsImageSpotlight} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
           <DivContainerWithRef
             _id={divContainerOverload_id}
-            className={mergeClasses('max-md:order-last', styleImageFrame)}
+            className={cx('max-md:order-last', styleImageFrame)}
           >
             <SmoothTransitionWithDivRef
               _id={divContainerOverload_id}
               configs={transitionHandler(700)}
             >
-              <div className={mergeClasses(styleImageWrapper, 'opacity-100')}>
+              <div className={cx(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder configs={optionsImageOverload} />
               </div>
             </SmoothTransitionWithDivRef>

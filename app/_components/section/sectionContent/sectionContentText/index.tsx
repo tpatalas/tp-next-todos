@@ -4,7 +4,7 @@ import { PropsSectionContentText } from '@/section/section.types';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { DELAY } from '@/transition/transition.consts';
 import { configsTransition } from '@/transition/transition.utils';
-import { mergeClasses } from '@/_lib/utils/misc.utils';
+import { cx } from 'class-variance-authority';
 
 export const SectionContentText = ({ title, subTitle, content, _id = null }: PropsSectionContentText) => {
   const transitionHandler = (delay?: keyof typeof DELAY) => {
@@ -22,7 +22,7 @@ export const SectionContentText = ({ title, subTitle, content, _id = null }: Pro
           configs={transitionHandler()}
         >
           <p
-            className={mergeClasses(
+            className={cx(
               'w-full max-w-sm animate-typing whitespace-nowrap bg-clip-text text-2xl text-transparent will-change-transform md:text-3xl',
               STYLE_BLUR_GRADIENT_R_ZR,
             )}
