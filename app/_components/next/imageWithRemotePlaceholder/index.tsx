@@ -2,6 +2,7 @@ import 'server-only';
 import getBase64FromImageURL from '@/_lib/utils/base64Converter.utils';
 import Image from 'next/image';
 import { PropsImageWithRemotePlaceholder } from './imageWithRemotePlaceholder.types';
+import cloudflareLoader from '@/_lib/utils/imageLoader.utils';
 
 export const ImageWithRemotePlaceholder = async ({ configs }: PropsImageWithRemotePlaceholder) => {
   const { sizes = '100vw', priority = true } = configs;
@@ -14,6 +15,7 @@ export const ImageWithRemotePlaceholder = async ({ configs }: PropsImageWithRemo
   return (
     <>
       <Image
+        loader={cloudflareLoader}
         width={configs.width}
         height={configs.height}
         className={configs.className}
