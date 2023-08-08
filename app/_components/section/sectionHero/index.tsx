@@ -7,11 +7,11 @@ import { SignInButton } from '@/button/signInButton';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { PATH_HOME } from '@/_lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
-import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
 import { configsSignInButton } from '@/button/button.configs';
 import { optionsSectionHeroWithImage } from './sectionHero.consts';
 import { sectionContents } from '../section.consts';
+import { cx } from 'class-variance-authority';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
@@ -75,7 +75,7 @@ export const SectionHero = async () => {
                     configs={optionsFadeIn}
                   >
                     <div
-                      className={mergeClasses(
+                      className={cx(
                         'absolute h-full w-full rounded-xl will-change-transform',
                         STYLE_BLUR_GRADIENT_R_LG,
                       )}

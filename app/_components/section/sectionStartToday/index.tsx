@@ -5,9 +5,9 @@ import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDiv
 import { DELAY } from '@/transition/transition.consts';
 import { configsTransition } from '@/transition/transition.utils';
 import { SignInButton } from '@/button/signInButton';
-import { mergeClasses } from '@/_lib/utils/misc.utils';
 import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '../section.consts';
+import { cx } from 'class-variance-authority';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';
@@ -24,7 +24,7 @@ export const SectionStartToday = () => {
         >
           <SmoothTransition configs={transitionHandler()}>
             <div
-              className={mergeClasses(
+              className={cx(
                 'custom-clip-path aspect-[2500/600] w-[70rem] flex-none opacity-40 will-change-transform md:aspect-[1400/600]',
                 STYLE_BLUR_GRADIENT_R_LG,
               )}

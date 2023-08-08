@@ -1,25 +1,25 @@
+import { cx } from 'class-variance-authority';
+
 /*
  * gradient-wave-effect
  **/
 
-import { mergeClasses } from '../utils/misc.utils';
-
 // Gradient Base
 export const STYLE_BLUR_GRADIENT_BASE = 'from-pink-600 from-10% via-purple-600 via-20% to-blue-600 to-90%';
-const STYLE_BLUR_GRADIENT_ZR = mergeClasses(STYLE_BLUR_GRADIENT_BASE, 'blur-0');
-const STYLE_BLUR_GRADIENT_SM = mergeClasses(STYLE_BLUR_GRADIENT_BASE, 'blur-sm');
-const STYLE_BLUR_GRADIENT_MD = mergeClasses(STYLE_BLUR_GRADIENT_BASE, 'blur-md');
-const STYLE_BLUR_GRADIENT_LG = mergeClasses(STYLE_BLUR_GRADIENT_BASE, 'blur-lg');
+const STYLE_BLUR_GRADIENT_ZR = cx(STYLE_BLUR_GRADIENT_BASE, 'blur-0');
+const STYLE_BLUR_GRADIENT_SM = cx(STYLE_BLUR_GRADIENT_BASE, 'blur-sm');
+const STYLE_BLUR_GRADIENT_MD = cx(STYLE_BLUR_GRADIENT_BASE, 'blur-md');
+const STYLE_BLUR_GRADIENT_LG = cx(STYLE_BLUR_GRADIENT_BASE, 'blur-lg');
 // Right
-export const STYLE_BLUR_GRADIENT_R_ZR = mergeClasses(STYLE_BLUR_GRADIENT_ZR, 'bg-gradient-to-r');
-export const STYLE_BLUR_GRADIENT_R_SM = mergeClasses(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-r');
-export const STYLE_BLUR_GRADIENT_R_MD = mergeClasses(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-r');
-export const STYLE_BLUR_GRADIENT_R_LG = mergeClasses(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_ZR = cx(STYLE_BLUR_GRADIENT_ZR, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_SM = cx(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_MD = cx(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-r');
+export const STYLE_BLUR_GRADIENT_R_LG = cx(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-r');
 // Bottom
-export const STYLE_BLUR_GRADIENT_B_ZR = mergeClasses(STYLE_BLUR_GRADIENT_ZR, 'bg-gradient-to-b');
-export const STYLE_BLUR_GRADIENT_B_SM = mergeClasses(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-b');
-export const STYLE_BLUR_GRADIENT_B_MD = mergeClasses(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-b');
-export const STYLE_BLUR_GRADIENT_B_LG = mergeClasses(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_ZR = cx(STYLE_BLUR_GRADIENT_ZR, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_SM = cx(STYLE_BLUR_GRADIENT_SM, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_MD = cx(STYLE_BLUR_GRADIENT_MD, 'bg-gradient-to-b');
+export const STYLE_BLUR_GRADIENT_B_LG = cx(STYLE_BLUR_GRADIENT_LG, 'bg-gradient-to-b');
 
 /**
  * Hover Effect
