@@ -21,15 +21,19 @@ type Options<T> = {
 
 export const createConfigs = <T extends Options<T>>(config: {
   options: T;
-  defaultOptions: { [K in keyof T]: keyof T[K] };
+  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
 }) => {
-  const main = (props?: Partial<{ [K in keyof T]: keyof T[K] }>): { [K in keyof T]: T[K][keyof T[K]] } => {
+  const main = (
+    props?: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>,
+  ): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
 
     Object.keys(config.options).forEach((key) => {
       const k = key as keyof T;
-      const variant = props?.[k] || config.defaultOptions[k];
-      result[k] = config.options[k][variant];
+      const variant = props?.[k] ?? config.defaultOptions[k];
+      if (variant != null) {
+        result[k] = config.options[k][variant];
+      }
     });
 
     return result as { [K in keyof T]: T[K][keyof T[K]] };
