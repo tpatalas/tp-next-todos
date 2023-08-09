@@ -1,9 +1,3 @@
-type options<T> = {
-  [K in keyof T]: {
-    [P in keyof T[K]]: T[K][P];
-  };
-};
-
 /**
  * A utility function to create config object motivated by class-variance-authority.
  *
@@ -18,19 +12,40 @@ type options<T> = {
  * that the object configs used as prop values can already be intricate.
  *
  * */
-export function createConfigs<T extends options<T>>(config: {
+
+type options<T> = {
+  [K in keyof T]: {
+    [P in keyof T[K]]: T[K][P];
+  };
+};
+
+export const createConfigs = <T extends options<T>>(config: {
   options: T;
   defaultOptions: { [K in keyof T]: keyof T[K] };
-}) {
+}) => {
   return (props?: Partial<{ [K in keyof T]: keyof T[K] }>): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
 
-    for (const key in config.options) {
+    Object.keys(config.options).forEach((key) => {
       const k = key as keyof T;
       const variant = props?.[k] || config.defaultOptions[k];
       result[k] = config.options[k][variant];
-    }
+    });
 
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
-}
+};
+
+/**
+ * Typescript
+ *
+ * Objects defined with `createConfigs` aromatically defines the types. 
+ * So it can be used with Wrapper like CreateConfigsProps
+ * Make sure to use the `typeof`.
+ * example:
+ * const configSignInButton = createConfigs({...})
+ * type PropsSignInButton = CreateConfigsProps<typeof configSignInButton>
+ *
+ * output: it will return all the types defined within the options.
+ * */
+export type CreateConfigsProps<T extends (...args: never[]) => unknown> = ReturnType<T>;
