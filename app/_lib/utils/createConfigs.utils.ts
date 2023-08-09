@@ -13,17 +13,17 @@
  *
  * */
 
-type options<T> = {
+type Options<T> = {
   [K in keyof T]: {
     [P in keyof T[K]]: T[K][P];
   };
 };
 
-export const createConfigs = <T extends options<T>>(config: {
+export const createConfigs = <T extends Options<T>>(config: {
   options: T;
   defaultOptions: { [K in keyof T]: keyof T[K] };
 }) => {
-  return (props?: Partial<{ [K in keyof T]: keyof T[K] }>): { [K in keyof T]: T[K][keyof T[K]] } => {
+  const main = (props?: Partial<{ [K in keyof T]: keyof T[K] }>): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
 
     Object.keys(config.options).forEach((key) => {
@@ -34,12 +34,14 @@ export const createConfigs = <T extends options<T>>(config: {
 
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
+
+  return Object.assign(main, config.options);
 };
 
 /**
  * Typescript
  *
- * Objects defined with `createConfigs` aromatically defines the types. 
+ * Objects defined with `createConfigs` aromatically defines the types.
  * So it can be used with Wrapper like CreateConfigsProps
  * Make sure to use the `typeof`.
  * example:
