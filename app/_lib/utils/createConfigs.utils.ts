@@ -19,12 +19,15 @@ type Options<T> = {
   };
 };
 
-export const createConfigs = <T extends Options<T>>(config: {
+export const createConfigs = <T extends Options<T>, R extends (keyof T)[] | undefined = undefined>(config: {
   options: T;
   defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
+  required?: R;
 }) => {
+  type RequiredProps = R extends (keyof T)[] ? { [K in R[number]]: keyof T[K] } : {};
+
   const main = (
-    props?: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>,
+    props: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }> & RequiredProps,
   ): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
 
@@ -38,7 +41,6 @@ export const createConfigs = <T extends Options<T>>(config: {
 
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
-
   return Object.assign(main, config.options);
 };
 
