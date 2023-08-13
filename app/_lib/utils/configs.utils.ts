@@ -13,19 +13,26 @@
  *
  * */
 
-type DirectNestedObject<T> = T extends object
-  ? 'Direct nesting of objects or arrays within the Options type is not permitted'
-  : T;
+type DisallowFurtherNesting<T> = T extends object ? 'Further nesting is not permitted' : T;
 
-type Options<T> = {
-  [K in keyof T]: {
-    [P in keyof T[K]]: DirectNestedObject<T[K][P]>;
-  };
+type ValueTypes<T> = {
+  [K in keyof T]: T[K] extends object ? ValueTypes<T[K]> : T[K];
+};
+
+type NestedOptions<T> = {
+  [Property in keyof T]: DisallowFurtherNesting<ValueTypes<T[Property]>>;
+};
+
+type RootOptions<T> = {
+  [Key in keyof T]: NestedOptions<T[Key]>;
 };
 
 type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
 
-export const createConfigs = <T extends Options<T>, R extends (keyof T)[] | undefined = undefined>(config: {
+export const createConfigs = <
+  T extends RootOptions<T>,
+  R extends (keyof T)[] | undefined = undefined,
+>(config: {
   options: T;
   defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
   required?: R;
@@ -62,4 +69,5 @@ export const createConfigs = <T extends Options<T>, R extends (keyof T)[] | unde
  *
  * output: it will return all the types defined within the options.
  * */
-export type CreateConfigsProps<T extends (...args: never[]) => unknown> = ReturnType<T>;
+
+export type ConfigsProps<T extends (...args: never[]) => unknown> = ReturnType<T>;
