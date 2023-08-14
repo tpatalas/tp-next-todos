@@ -35,18 +35,20 @@ export const createConfigs = <
   ): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
     props = props ?? {};
+    const { options, defaultOptions, presetOptions } = config;
 
-    if (props.preset && config.presetOptions) {
-      Object.assign(props, config.presetOptions[props.preset]);
+    if (props.preset && presetOptions) {
+      Object.assign(props, presetOptions[props.preset]);
     }
 
-    Object.keys(config.options).forEach((key) => {
-      const k = key as keyof T;
-      const variant = props?.[k] ?? config.defaultOptions[k];
+    const keys = Object.keys(options) as (keyof T)[];
+    for (let i = 0; i < keys.length; i++) {
+      const k = keys[i];
+      const variant = props?.[k] ?? defaultOptions[k];
       if (variant != null) {
-        result[k] = config.options[k][variant];
+        result[k] = options[k][variant];
       }
-    });
+    }
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
   return Object.assign(main, config.options);
