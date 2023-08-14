@@ -1,49 +1,44 @@
 /**
- * A utility function to create config object motivated by class-variance-authority.
+ * A utility function to create config object
  *
  * Usage:
  * This function is designed to provide a structured way to define object properties or
  * options, particularly suitable for server components. It allows for the definition of
  * variables and corresponding defaults.
- *
- * Note:
- * Nesting within the options is currently not supported. This design decision keeps the
- * configuration schema simple and avoids unnecessary complexity, especially considering
- * that the object configs used as prop values can already be intricate.
- *
  * */
 
 type DisallowFurtherNesting<T> = T extends object ? 'Further nesting is not permitted' : T;
-
-type ValueTypes<T> = {
-  [K in keyof T]: T[K] extends object ? ValueTypes<T[K]> : T[K];
-};
-
-type NestedOptions<T> = {
-  [Property in keyof T]: DisallowFurtherNesting<ValueTypes<T[Property]>>;
-};
-
-type RootOptions<T> = {
-  [Key in keyof T]: NestedOptions<T[Key]>;
-};
-
+type ValueTypes<T> = { [K in keyof T]: T[K] extends object ? ValueTypes<T[K]> : T[K] };
+type NestedOptions<T> = { [Property in keyof T]: DisallowFurtherNesting<ValueTypes<T[Property]>> };
+type RootOptions<T> = { [Key in keyof T]: NestedOptions<T[Key]> };
 type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
+type CommonKeyType<T> = { [K in keyof T]: keyof T[K] | null | undefined };
+type PresetOptions<T> = Partial<CommonKeyType<T>>;
 
 export const createConfigs = <
   T extends RootOptions<T>,
   R extends (keyof T)[] | undefined = undefined,
+  P extends { [name: string]: PresetOptions<T> } | undefined = undefined,
 >(config: {
   options: T;
-  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
+  defaultOptions: Partial<CommonKeyType<T>>;
   required?: R;
+  presetOptions?: P & {
+    [K in keyof P]: { [L in keyof P[K]]: L extends keyof T ? keyof T[L] : CommonKeyType<T> };
+  };
 }) => {
-  type PropsType = Partial<{ [K in keyof T]: keyof T[K] | null | undefined }> & RequiredProps<T, R>;
+  type PropsType = Partial<CommonKeyType<T>> &
+    RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
 
   const main = (
     ...[props]: R extends undefined ? [PropsType?] : [PropsType]
   ): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
     props = props ?? {};
+
+    if (props.preset && config.presetOptions) {
+      Object.assign(props, config.presetOptions[props.preset]);
+    }
 
     Object.keys(config.options).forEach((key) => {
       const k = key as keyof T;
