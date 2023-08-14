@@ -2,7 +2,7 @@
 
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 // Next.js router mock
 jest.mock('next/router', () => require('next-router-mock'));
@@ -10,7 +10,7 @@ jest.mock('next/router', () => require('next-router-mock'));
 // Next.js dynamic/import mock
 jest.mock('next/dynamic', () => ({
   __esModule: true,
-  default: (...props) => {
+  default: (...props: unknown[]) => {
     const dynamicModule = jest.requireActual('next/dynamic');
     const dynamicActualComp = dynamicModule.default;
     const RequiredComponent = dynamicActualComp(props[0]);
