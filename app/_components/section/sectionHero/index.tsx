@@ -58,7 +58,7 @@ export const SectionHero = async () => {
             </SmoothTransition>
             <SmoothTransition configs={translateDownHandler(700)}>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
-                <SignInButton configs={configsSignInButton['getStarted']} />
+                <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
                 <Link
                   className='text-sm font-semibold leading-6 text-gray-900'
                   href={PATH_HOME['features']}

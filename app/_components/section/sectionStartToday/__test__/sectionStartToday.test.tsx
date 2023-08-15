@@ -8,6 +8,8 @@ jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 
+const signInButtonConfigs = configsSignInButton({ preset: 'getStarted' });
+
 describe('SectionStartToday', () => {
   const renderWithSectionStartToday = () => render(<SectionStartToday />);
 
@@ -32,8 +34,7 @@ describe('SectionStartToday', () => {
 
   it('should render the signInButton', async () => {
     renderWithSectionStartToday();
-    const signInButtonText = configsSignInButton.getStarted.signInButtonName as string;
-    const signInButton = await screen.findByText(signInButtonText);
+    const signInButton = await screen.findByText(signInButtonConfigs.buttonName);
 
     expect(signInButton).toBeInTheDocument();
   });
