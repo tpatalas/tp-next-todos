@@ -37,14 +37,14 @@ export const createConfigs = <
     props = props ?? {};
     const { options, defaultOptions, presetOptions } = config;
 
+    const mergedOptions = { ...defaultOptions };
     if (props.preset && presetOptions) {
-      Object.assign(props, presetOptions[props.preset]);
+      Object.assign(mergedOptions, presetOptions[props.preset]);
     }
+    Object.assign(mergedOptions, props);
 
-    const keys = Object.keys(options) as (keyof T)[];
-    for (let i = 0; i < keys.length; i++) {
-      const k = keys[i];
-      const variant = props?.[k] ?? defaultOptions[k];
+    for (const k in options) {
+      const variant = mergedOptions[k] ?? defaultOptions[k];
       if (variant != null) {
         result[k] = options[k][variant];
       }
