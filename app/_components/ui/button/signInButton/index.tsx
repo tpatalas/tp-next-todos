@@ -1,18 +1,18 @@
 'use client';
 
-import { PropsButtonWithTooltip } from '../button.types';
+import { PropsSignInButton } from '../button.types';
 import { ButtonWithTooltip } from '../buttonWithTooltip';
 import { signIn } from 'next-auth/react';
 
-export const SignInButton = ({ configs = {} }: PropsButtonWithTooltip) => {
-  const { signInButtonName } = configs;
+export const SignInButton = ({ configs = {} }: PropsSignInButton) => {
+  const { buttonName } = configs;
 
   return (
     <ButtonWithTooltip
       configs={configs}
       onClick={() => signIn()}
     >
-      {signInButtonName}
+      {buttonName}
     </ButtonWithTooltip>
   );
 };

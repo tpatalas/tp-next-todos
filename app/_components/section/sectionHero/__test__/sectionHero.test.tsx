@@ -15,6 +15,8 @@ jest.mock('@/_components/next/imageWithRemotePlaceholder', () => ({
 
 jest.mock('@/_lib/utils/base64Converter.utils', () => jest.fn());
 
+const signInButtonConfigs = configsSignInButton({ preset: 'getStarted' });
+
 describe('SectionHero', () => {
   const renderAsyncComponent = async () => {
     const ResolvedSectionHero = await getResolvedComponent(SectionHero);
@@ -36,8 +38,7 @@ describe('SectionHero', () => {
   it('should render the signInButton and link button', async () => {
     await renderAsyncComponent();
 
-    const signInButtonName = configsSignInButton.getStarted.signInButtonName as string;
-    const signInButton = await screen.findByText(signInButtonName);
+    const signInButton = await screen.findByText(signInButtonConfigs.buttonName);
     const linkButton = await screen.findByText('Learn more');
 
     expect(signInButton).toBeInTheDocument();

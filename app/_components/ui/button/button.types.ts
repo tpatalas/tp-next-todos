@@ -1,6 +1,8 @@
 import { TypesAttributes, TypesEvents, TypesStyles } from '@/_components/components.types';
+import { ConfigsProps } from '@/_lib/utils/configs.utils';
 import { TypesTooltips } from '@/tooltip/tooltip.types';
 import { ReactNode } from 'react';
+import { configsSignInButton } from './button.configs';
 
 export interface TypesButtons {
   isDisabled: boolean;
@@ -25,7 +27,4 @@ export type PropsButton = TypesButtonBase<TypesOptionsButton>;
 
 export type PropsButtonWithTooltip = TypesButtonBase<TypesConfigsButtonWithTooltip>;
 
-export type TypesConfigsSignInButton<T> = {
-  getStarted: T;
-  default: T;
-};
+export type PropsSignInButton = TypesButtonBase<ConfigsProps<typeof configsSignInButton>>;

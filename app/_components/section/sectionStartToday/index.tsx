@@ -59,7 +59,7 @@ export const SectionStartToday = () => {
             configs={transitionHandler(700)}
           >
             <div className='mt-10 flex items-center justify-center will-change-transform'>
-              <SignInButton configs={configsSignInButton['getStarted']} />
+              <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
             </div>
           </SmoothTransitionWithDivRef>
         </DivContainerWithRef>
