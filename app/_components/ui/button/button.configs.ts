@@ -1,15 +1,34 @@
+import { createConfigs } from '@/_lib/utils/configs.utils';
 import { styleButton } from './button.styles';
-import { TypesConfigsButtonWithTooltip, TypesConfigsSignInButton } from './button.types';
 
-export const configsSignInButton: TypesConfigsSignInButton<Partial<TypesConfigsButtonWithTooltip>> = {
-  getStarted: {
-    signInButtonName: 'Get started',
-    className: styleButton({ className: 'max-ml:mb-3' }),
-    tooltip: 'Sign in',
+export const configsSignInButton = createConfigs({
+  options: {
+    buttonName: {
+      signIn: 'Sign in',
+      getStarted: 'Get started',
+    },
+    className: {
+      signIn: styleButton({ className: 'max-ml:mb-3' }),
+    },
+    tooltip: {
+      signIn: 'Sign in',
+      getStarted: 'Go to sign in',
+    },
+    isVisible: {
+      active: true,
+      inactive: false,
+    },
   },
-  default: {
-    signInButtonName: 'Sign in',
-    className: styleButton({ className: 'max-ml:mb-3' }),
-    tooltip: 'Sign in',
+  presetOptions: {
+    getStarted: {
+      buttonName: 'getStarted',
+      className: 'signIn',
+      tooltip: 'getStarted',
+    },
   },
-};
+  defaultOptions: {
+    buttonName: 'signIn',
+    className: 'signIn',
+    tooltip: 'signIn',
+  },
+});
