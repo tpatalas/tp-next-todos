@@ -48,6 +48,9 @@ export const createConfigs = <
       if (variant != null) {
         result[k] = options[k][variant];
       }
+      if (mergedOptions[k] === null || mergedOptions[k] === undefined) {
+        delete result[k];
+      }
     }
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
