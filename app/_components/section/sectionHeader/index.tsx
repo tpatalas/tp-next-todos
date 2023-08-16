@@ -1,19 +1,13 @@
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransition } from '@/transition/smoothTransition';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
-import { TRANSITION_TYPE } from '@/transition/transition.consts';
-import { configsTransition } from '@/transition/transition.utils';
-import { DELAY } from '@constAssertions/ui';
 import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
+import { configsTransition } from '@/transition/transition.configs';
 
 export const SectionHeader = () => {
   const divContainer_id = 'sectionHeader';
-  const transitionHandler = (transition: TRANSITION_TYPE, delay?: keyof typeof DELAY) => {
-    return configsTransition({ transition: transition ?? 'fadeIn', delay: delay });
-  };
-  const optionsPoleTransition = { type: TRANSITION_TYPE['scaleY'], delay: DELAY['150'] };
 
   return (
     <SmoothTransition>
@@ -25,7 +19,7 @@ export const SectionHeader = () => {
           <div className={'text-sm font-semibold uppercase tracking-widest text-gray-500'}>
             <SmoothTransitionWithDivRef
               _id={divContainer_id}
-              configs={transitionHandler('fadeIn')}
+              configs={configsTransition()}
             >
               {sectionContents.headerContent.title}
             </SmoothTransitionWithDivRef>
@@ -33,7 +27,7 @@ export const SectionHeader = () => {
         </div>
         <SmoothTransitionWithDivRef
           _id={divContainer_id}
-          configs={optionsPoleTransition}
+          configs={configsTransition({ type: 'scaleY', delay: '150' })}
         >
           <div className='relative flex h-[15rem] max-h-60 flex-row items-center justify-center'>
             <div
@@ -47,7 +41,7 @@ export const SectionHeader = () => {
       <div className='flex flex-col items-center justify-center px-5 text-center'>
         <SmoothTransitionWithDivRef
           _id={divContainer_id}
-          configs={transitionHandler('fadeIn', 300)}
+          configs={configsTransition({ delay: '300' })}
         >
           <h1 className='my-5 h-full bg-slate-50 text-3xl font-bold tracking-normal text-slate-800 sm:text-5xl'>
             {sectionContents.headerContent.subTitle}
@@ -55,7 +49,7 @@ export const SectionHeader = () => {
         </SmoothTransitionWithDivRef>
         <SmoothTransitionWithDivRef
           _id={divContainer_id}
-          configs={transitionHandler('fadeIn', 500)}
+          configs={configsTransition({ delay: '500' })}
         >
           <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>
             {sectionContents.headerContent.content}
