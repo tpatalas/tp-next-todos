@@ -1,6 +1,4 @@
 import { SmoothTransition } from '@/transition/smoothTransition';
-import { DELAY } from '@/transition/transition.consts';
-import { configsTransition } from '@/transition/transition.utils';
 import { SectionContentText } from './sectionContentText';
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
@@ -8,6 +6,7 @@ import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
 import { ImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
+import { configsTransition } from '@/transition/transition.configs';
 
 const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
 const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
@@ -34,9 +33,6 @@ const optionsImageOverload = {
 export const SectionContent = () => {
   const divContainerSpotlight_id = 'sectionContent_spotlight';
   const divContainerOverload_id = 'sectionContent_overload';
-  const transitionHandler = (delay: keyof typeof DELAY) => {
-    return configsTransition({ transition: 'scaleCenterSm', duration: 700, delay: delay, rate: 1.5 });
-  };
 
   return (
     <SmoothTransition>
@@ -54,7 +50,7 @@ export const SectionContent = () => {
           >
             <SmoothTransitionWithDivRef
               _id={divContainerSpotlight_id}
-              configs={transitionHandler(500)}
+              configs={configsTransition({ preset: 'scaleCenterSm', delay: '500', rate: '1.5' })}
             >
               <div className={cx(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder configs={optionsImageSpotlight} />
@@ -67,7 +63,7 @@ export const SectionContent = () => {
           >
             <SmoothTransitionWithDivRef
               _id={divContainerOverload_id}
-              configs={transitionHandler(700)}
+              configs={configsTransition({ preset: 'scaleCenterSm', delay: '700', rate: '1.5' })}
             >
               <div className={cx(styleImageWrapper, 'opacity-100')}>
                 <ImageWithRemotePlaceholder configs={optionsImageOverload} />
