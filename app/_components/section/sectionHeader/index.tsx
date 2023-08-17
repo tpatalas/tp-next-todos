@@ -1,16 +1,16 @@
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
-import { SmoothTransition } from '@/transition/smoothTransition';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { STYLE_BLUR_GRADIENT_B_MD } from '@data/stylePreset';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
+import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
 
 export const SectionHeader = () => {
   const divContainer_id = 'sectionHeader';
 
   return (
-    <SmoothTransition>
+    <SmoothTransitionWithDefaultConfigs>
       <DivContainerWithRef
         _id={divContainer_id}
         className='my-10 flex flex-col items-center justify-center'
@@ -51,11 +51,9 @@ export const SectionHeader = () => {
           _id={divContainer_id}
           configs={configsTransition({ delay: '500' })}
         >
-          <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>
-            {sectionContents.headerContent.content}
-          </h2>
+          <h2 className='max-w-2xl text-lg text-slate-600 sm:text-xl'>{sectionContents.headerContent.content}</h2>
         </SmoothTransitionWithDivRef>
       </div>
-    </SmoothTransition>
+    </SmoothTransitionWithDefaultConfigs>
   );
 };

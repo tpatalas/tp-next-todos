@@ -11,6 +11,7 @@ import { optionsSectionHeroWithImage } from './sectionHero.consts';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
+import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
@@ -51,7 +52,7 @@ export const SectionHero = async () => {
                 </Link>
               </div>
             </SmoothTransition>
-            <SmoothTransition>
+            <SmoothTransitionWithDefaultConfigs>
               <div className='flex justify-center'>
                 <div className='relative mt-16 flow-root max-w-[60rem] sm:mt-24'>
                   <SmoothTransitionWithDivRef
@@ -76,7 +77,7 @@ export const SectionHero = async () => {
                   </SmoothTransitionWithDivRef>
                 </div>
               </div>
-            </SmoothTransition>
+            </SmoothTransitionWithDefaultConfigs>
           </DivContainerWithRef>
         </div>
       </div>

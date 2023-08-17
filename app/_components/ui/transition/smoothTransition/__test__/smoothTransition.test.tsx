@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { SmoothTransition } from '..';
 import { ReactNode } from 'react';
+import { configsTransition } from '@/transition/transition.configs';
 
 jest.mock('..', () => ({
   SmoothTransition: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -8,7 +9,7 @@ jest.mock('..', () => ({
 
 describe('SmoothTransition', () => {
   const renderWithSmoothTransition = (children: ReactNode) => {
-    return render(<SmoothTransition>{children}</SmoothTransition>);
+    return render(<SmoothTransition configs={configsTransition()}>{children}</SmoothTransition>);
   };
 
   it('should render the children props', () => {
