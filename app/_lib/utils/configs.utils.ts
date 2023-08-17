@@ -7,7 +7,8 @@
  * variables and corresponding defaults.
  * */
 
-type DisallowFurtherNesting<T> = T extends object ? 'Further nesting is not permitted' : T;
+type NestingRestriction<T> = { [K in keyof T]: T[K] extends object ? 'Further nesting is not permitted' : T[K] };
+type DisallowFurtherNesting<T> = T extends object ? NestingRestriction<T> : T;
 type ValueTypes<T> = { [K in keyof T]: T[K] extends object ? ValueTypes<T[K]> : T[K] };
 type NestedOptions<T> = { [Property in keyof T]: DisallowFurtherNesting<ValueTypes<T[Property]>> };
 type RootOptions<T> = { [Key in keyof T]: NestedOptions<T[Key]> };
@@ -27,12 +28,9 @@ export const createConfigs = <
     [K in keyof P]: { [L in keyof P[K]]: L extends keyof T ? keyof T[L] : CommonKeyType<T> };
   };
 }) => {
-  type PropsType = Partial<CommonKeyType<T>> &
-    RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
+  type PropsType = Partial<CommonKeyType<T>> & RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
 
-  const main = (
-    ...[props]: R extends undefined ? [PropsType?] : [PropsType]
-  ): { [K in keyof T]: T[K][keyof T[K]] } => {
+  const main = (...[props]: R extends undefined ? [PropsType?] : [PropsType]): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
     props = props ?? {};
     const { options, defaultOptions, presetOptions } = config;
