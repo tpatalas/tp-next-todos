@@ -1,7 +1,5 @@
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransition } from '@/transition/smoothTransition';
-import { configsTransition } from '@/transition/transition.utils';
-import { DELAY } from '@constAssertions/ui';
 import Link from 'next/link';
 import { SignInButton } from '@/button/signInButton';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
@@ -12,24 +10,10 @@ import { configsSignInButton } from '@/button/button.configs';
 import { optionsSectionHeroWithImage } from './sectionHero.consts';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
+import { configsTransition } from '@/transition/transition.configs';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
-  const translateDownHandler = (delay?: keyof typeof DELAY) => {
-    return configsTransition({ transition: 'translateDown', duration: 1000, delay: delay });
-  };
-  const optionsFadeIn = configsTransition({
-    transition: 'fadeIn',
-    duration: 1000,
-    delay: 300,
-    rate: 4,
-  });
-  const optionsScaleCenterSm = configsTransition({
-    transition: 'scaleCenterSm',
-    duration: 700,
-    delay: 150,
-    rate: 4,
-  });
 
   return (
     <div>
@@ -39,7 +23,7 @@ export const SectionHero = async () => {
             _id={divContainer_id}
             className='mx-auto max-w-7xl px-6 lg:px-8'
           >
-            <SmoothTransition configs={translateDownHandler()}>
+            <SmoothTransition configs={configsTransition({ preset: 'translateDown' })}>
               <div className='mx-auto max-w-2xl text-center'>
                 <div className='mb-2 text-4xl font-bold text-slate-800 will-change-transform sm:text-6xl'>
                   {sectionContents.hero.title}
@@ -49,14 +33,14 @@ export const SectionHero = async () => {
                 </div>
               </div>
             </SmoothTransition>
-            <SmoothTransition configs={translateDownHandler(300)}>
+            <SmoothTransition configs={configsTransition({ preset: 'translateDown', delay: '300' })}>
               <div className='mx-auto max-w-2xl text-center'>
                 <p className='mt-6 text-xl leading-8 text-gray-600 will-change-transform'>
                   {sectionContents.hero.content}
                 </p>
               </div>
             </SmoothTransition>
-            <SmoothTransition configs={translateDownHandler(700)}>
+            <SmoothTransition configs={configsTransition({ preset: 'translateDown', delay: '700' })}>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
                 <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
                 <Link
@@ -72,7 +56,7 @@ export const SectionHero = async () => {
                 <div className='relative mt-16 flow-root max-w-[60rem] sm:mt-24'>
                   <SmoothTransitionWithDivRef
                     _id={divContainer_id}
-                    configs={optionsFadeIn}
+                    configs={configsTransition({ preset: 'fadeIn', delay: '300', rate: '4.0' })}
                   >
                     <div
                       className={cx(
@@ -84,7 +68,7 @@ export const SectionHero = async () => {
                   </SmoothTransitionWithDivRef>
                   <SmoothTransitionWithDivRef
                     _id={divContainer_id}
-                    configs={optionsScaleCenterSm}
+                    configs={configsTransition({ preset: 'scaleCenterSm', delay: '150', rate: '4.0' })}
                   >
                     <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
                       <ImageWithRemotePlaceholder configs={optionsSectionHeroWithImage} />

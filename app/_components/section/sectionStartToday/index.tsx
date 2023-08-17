@@ -2,18 +2,14 @@ import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
 import { SmoothTransition } from '@/transition/smoothTransition';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
-import { DELAY } from '@/transition/transition.consts';
-import { configsTransition } from '@/transition/transition.utils';
 import { SignInButton } from '@/button/signInButton';
 import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
+import { configsTransition } from '@/transition/transition.configs';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';
-  const transitionHandler = (delay?: keyof typeof DELAY) => {
-    return configsTransition({ transition: 'translateDown', duration: 1000, delay: delay, rate: 0.7 });
-  };
 
   return (
     <SmoothTransition>
@@ -22,7 +18,7 @@ export const SectionStartToday = () => {
           className='absolute inset-x-0 top-0 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl'
           aria-hidden='true'
         >
-          <SmoothTransition configs={transitionHandler()}>
+          <SmoothTransition configs={configsTransition({ preset: 'translateDown' })}>
             <div
               className={cx(
                 'custom-clip-path aspect-[2500/600] w-[70rem] flex-none opacity-40 will-change-transform md:aspect-[1400/600]',
@@ -38,7 +34,7 @@ export const SectionStartToday = () => {
         >
           <SmoothTransitionWithDivRef
             _id={divContainer_id}
-            configs={transitionHandler()}
+            configs={configsTransition({ preset: 'translateDown', rate: '0.75' })}
           >
             <h2 className='text-3xl font-bold tracking-tight text-slate-800 will-change-transform sm:text-4xl'>
               {sectionContents.startToday.title}
@@ -48,7 +44,7 @@ export const SectionStartToday = () => {
           </SmoothTransitionWithDivRef>
           <SmoothTransitionWithDivRef
             _id={divContainer_id}
-            configs={transitionHandler(300)}
+            configs={configsTransition({ preset: 'translateDown', delay: '300' })}
           >
             <p className='mx-auto mt-6 max-w-xl text-lg leading-8 text-slate-600 will-change-transform'>
               {sectionContents.startToday.content}
@@ -56,7 +52,7 @@ export const SectionStartToday = () => {
           </SmoothTransitionWithDivRef>
           <SmoothTransitionWithDivRef
             _id={divContainer_id}
-            configs={transitionHandler(700)}
+            configs={configsTransition({ preset: 'translateDown', delay: '700' })}
           >
             <div className='mt-10 flex items-center justify-center will-change-transform'>
               <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
