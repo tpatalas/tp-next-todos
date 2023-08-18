@@ -1,4 +1,3 @@
-import { SmoothTransition } from '@/transition/smoothTransition';
 import { SectionContentText } from './sectionContentText';
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
@@ -7,6 +6,7 @@ import { ImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
+import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
 
 const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
 const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
@@ -35,7 +35,7 @@ export const SectionContent = () => {
   const divContainerOverload_id = 'sectionContent_overload';
 
   return (
-    <SmoothTransition>
+    <SmoothTransitionWithDefaultConfigs>
       <div className='relative my-24 flex flex-row items-center justify-center px-5 py-10 sm:px-10 md:my-32 lg:px-28'>
         <div className='md:min-w-3/4 grid w-full max-w-6xl grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-2'>
           <SectionContentText
@@ -78,6 +78,6 @@ export const SectionContent = () => {
           />
         </div>
       </div>
-    </SmoothTransition>
+    </SmoothTransitionWithDefaultConfigs>
   );
 };

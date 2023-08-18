@@ -1,22 +1,17 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
-import { DATA_SMOOTH_TRANSITION } from './smoothTransition.data';
-import { TypesDataTransition, PropsSmoothTransition } from './smoothTransition.types';
 import { useEffect, useState } from 'react';
 import { useVerticalScrollPositionTrigger } from '../transition.hooks';
 import { cx } from 'class-variance-authority';
+import { PropsSmoothTransition } from '../transition.types';
+import { ConfigsProps } from '@/_lib/utils/configs.utils';
+import { configsTransition } from '../transition.configs';
 
 export const SmoothTransition = ({ children, scrollRef, configs }: PropsSmoothTransition) => {
   const [hasShown, setHasShown] = useState(false);
-  const {
-    appear = true,
-    enterDuration = 'duration-500',
-    leaveDuration = 'duration-500',
-    type = 'fadeIn',
-    delay,
-  } = configs || {};
-  const data = DATA_SMOOTH_TRANSITION.find((data) => data.type === type) || ({} as TypesDataTransition);
+  const { appear, enterDuration, leaveDuration, type, delay } = configs as ConfigsProps<typeof configsTransition>;
+
   const triggerRate = !!scrollRef ? configs?.rate : undefined;
   const isTriggered = useVerticalScrollPositionTrigger(scrollRef, triggerRate);
   const isShowing = !!scrollRef ? isTriggered : hasShown;
@@ -29,12 +24,12 @@ export const SmoothTransition = ({ children, scrollRef, configs }: PropsSmoothTr
     <Transition
       appear={appear}
       show={isShowing}
-      enter={cx(data.enter, enterDuration, delay)}
-      enterFrom={cx(data.enterFrom)}
-      enterTo={cx(data.enterTo)}
-      leave={cx(data.leave, leaveDuration, delay)}
-      leaveFrom={cx(data.leaveFrom)}
-      leaveTo={cx(data.leaveTo)}
+      enter={cx(type.enter, enterDuration, delay)}
+      enterFrom={cx(type.enterFrom)}
+      enterTo={cx(type.enterTo)}
+      leave={cx(type.leave, leaveDuration, delay)}
+      leaveFrom={cx(type.leaveFrom)}
+      leaveTo={cx(type.leaveTo)}
     >
       {children}
     </Transition>
