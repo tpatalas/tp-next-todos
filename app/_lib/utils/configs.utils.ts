@@ -14,7 +14,7 @@ type NestedOptions<T> = { [Property in keyof T]: DisallowFurtherNesting<ValueTyp
 type RootOptions<T> = { [Key in keyof T]: NestedOptions<T[Key]> };
 type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
 type CommonKeyType<T> = { [K in keyof T]: keyof T[K] | null | undefined };
-type PresetOptions<T> = Partial<CommonKeyType<T>>;
+type PresetOptions<T> = Partial<CommonKeyType<T> | null | undefined>;
 
 export const createConfigs = <
   T extends RootOptions<T>,
@@ -25,7 +25,9 @@ export const createConfigs = <
   defaultOptions: Partial<CommonKeyType<T>>;
   required?: R;
   presetOptions?: P & {
-    [K in keyof P]: { [L in keyof P[K]]: L extends keyof T ? keyof T[L] : CommonKeyType<T> };
+    [K in keyof P]: {
+      [L in keyof P[K]]: L extends keyof T ? keyof T[L] | null | undefined : CommonKeyType<T> | null | undefined;
+    };
   };
 }) => {
   type PropsType = Partial<CommonKeyType<T>> & RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
