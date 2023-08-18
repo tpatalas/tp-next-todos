@@ -7,12 +7,13 @@ import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
+import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';
 
   return (
-    <SmoothTransition>
+    <SmoothTransitionWithDefaultConfigs>
       <div className='py-18 relative isolate my-10 px-6 md:mt-12 md:py-24 lg:px-8'>
         <div
           className='absolute inset-x-0 top-0 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl'
@@ -60,6 +61,6 @@ export const SectionStartToday = () => {
           </SmoothTransitionWithDivRef>
         </DivContainerWithRef>
       </div>
-    </SmoothTransition>
+    </SmoothTransitionWithDefaultConfigs>
   );
 };
