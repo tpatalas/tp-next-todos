@@ -1,12 +1,21 @@
 /**
- * A utility function to create config object
- *
- * Usage:
- * This function is designed to provide a structured way to define object properties or
- * options, particularly suitable for server components. It allows for the definition of
- * variables and corresponding defaults.
+ * Error Handling
  * */
+const checkFurtherNesting = (obj: unknown, level: number = 1): void => {
+  if (typeof obj !== 'object' || obj === null) return;
+  for (const key in obj as Record<string, unknown>) {
+    const value = (obj as Record<string, unknown>)[key];
+    const isObject = typeof value === 'object' && value !== null;
+    if (isObject && level === 2) {
+      throw new Error(`ErrorFurtherNesting: Further nesting is not permitted in key ${key}`);
+    }
+    if (isObject) checkFurtherNesting(value, level + 1);
+  }
+};
 
+/**
+ * Type checking
+ * */
 type ErrorFurtherNesting = 'Further nesting is not permitted';
 type ErrorInitialObject = 'Initial value must be an object and not a primitive or array.';
 
@@ -20,6 +29,15 @@ type RootOptions<T> = { [Key in keyof T]: DisallowArrays<CheckNested<T[Key]>> };
 type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
 type CommonKeyType<T> = { [K in keyof T]: keyof T[K] | null | undefined };
 type PresetOptions<T> = Partial<CommonKeyType<T> | null | undefined>;
+
+/**
+ * A utility function to create config object
+ *
+ * Usage:
+ * This function is designed to provide a structured way to define object properties or
+ * options, particularly suitable for server components. It allows for the definition of
+ * variables and corresponding defaults.
+ * */
 
 export const createConfigs = <
   T extends RootOptions<T>,
@@ -49,6 +67,8 @@ export const createConfigs = <
     Object.assign(mergedOptions, props);
 
     for (const k in options) {
+      checkFurtherNesting(options[k]);
+
       const variant = mergedOptions[k] ?? defaultOptions[k];
       if (variant != null) {
         result[k] = options[k][variant];
