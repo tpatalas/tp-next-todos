@@ -7,11 +7,16 @@
  * variables and corresponding defaults.
  * */
 
-type NestingRestriction<T> = { [K in keyof T]: T[K] extends object ? 'Further nesting is not permitted' : T[K] };
+type ErrorFurtherNesting = 'Further nesting is not permitted';
+type ErrorInitialObject = 'Initial value must be an object and not a primitive or array.';
+
+type NestingRestriction<T> = { [K in keyof T]: T[K] extends object ? ErrorFurtherNesting : T[K] };
 type DisallowFurtherNesting<T> = T extends object ? NestingRestriction<T> : T;
 type ValueTypes<T> = { [K in keyof T]: T[K] extends object ? ValueTypes<T[K]> : T[K] };
 type NestedOptions<T> = { [Property in keyof T]: DisallowFurtherNesting<ValueTypes<T[Property]>> };
-type RootOptions<T> = { [Key in keyof T]: NestedOptions<T[Key]> };
+type DisallowArrays<T> = T extends unknown[] ? ErrorInitialObject : T;
+type CheckNested<T> = T extends object ? NestedOptions<T> : ErrorInitialObject;
+type RootOptions<T> = { [Key in keyof T]: DisallowArrays<CheckNested<T[Key]>> };
 type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
 type CommonKeyType<T> = { [K in keyof T]: keyof T[K] | null | undefined };
 type PresetOptions<T> = Partial<CommonKeyType<T> | null | undefined>;
