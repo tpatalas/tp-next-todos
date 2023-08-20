@@ -3,8 +3,8 @@ import { SvgIcon } from '..';
 
 describe('SvgIcon', () => {
   it('should render the svgIcon component', () => {
-    render(<SvgIcon />);
-    const svgIconWithTestId = screen.getByTestId('svgIcon-testid');
+    render(<SvgIcon configs={{ desc: 'svgIcon-title' }} />);
+    const svgIconWithTestId = screen.getByText('svgIcon-title');
 
     expect(svgIconWithTestId).toBeInTheDocument();
   });
