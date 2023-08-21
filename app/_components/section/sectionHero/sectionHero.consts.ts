@@ -8,6 +8,6 @@ export const optionsSectionHeroWithImage: TypesImageWithRemotePlaceholder = {
   src: PATH_IMAGE['demo'],
   sizes: '90vw',
   alt: 'demo application image',
-  placeholder: 'blur',
+  // placeholder: 'blur',
   priority: true,
 };
