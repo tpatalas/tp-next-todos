@@ -1,4 +1,4 @@
-const version = 'v1687719235568';
+const version = 'v1692653194083';
 const STATIC_CACHE_NAME = `static-assets-${version}`;
 const PRE_CACHE_NAME = `precache-assets-${version}`;
 const PRE_FETCH = []; //fetch only. It will use browser cache without Cache Storage
