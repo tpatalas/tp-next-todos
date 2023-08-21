@@ -1,8 +1,8 @@
 # For more info: https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 
-# --platform=linux/amd64 is reuiqred if deploying into Google Cloud Run, which currently only support amd64
-FROM --platform=linux/amd64 node:18-alpine AS deps 
+# --platform=linux/amd64/v8 is reuiqred if deploying into Google Cloud Run, which currently only support amd64
+FROM --platform=linux/amd64/v8 node:18-alpine AS deps 
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN \
   fi
 
 # FROM node:18-alpine AS builder
-FROM --platform=linux/amd64 node:18-alpine AS builder
+FROM --platform=linux/amd64/v8 node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -42,7 +42,7 @@ ENV GCR_SOCIAL_GITHUB $BUILD_SOCIAL_GITHUB
 
 RUN yarn build
 
-FROM --platform=linux/amd64 node:18-alpine AS runner
+FROM --platform=linux/amd64/v8 node:18-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
