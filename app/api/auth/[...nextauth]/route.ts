@@ -2,7 +2,7 @@ import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import clientPromise from '@/_lib/db/mongodb';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import { envNextAuth } from '@/_lib/configs/envSchema';
-import { providerEmail, providerGithub, providerGoogle } from './_providers';
+import { providerEmail, providerGoogle, providerGithub } from '../_providers';
 
 export const authOptions: NextAuthOptions = {
   providers: [providerEmail, providerGoogle, providerGithub],
