@@ -1,15 +1,12 @@
+import { ConfigsProps } from '@/_lib/utils/configs.utils';
+import { configsSvgIcon } from './svgIcon/svgIcon.configs';
 import { TypesStyles } from '@/_components/components.types';
-import { VIEWBOX } from './icon.consts';
 
 export interface TypesSvgAttributes {
   path: string;
-  height: string | number;
-  width: string | number;
-  viewBox: VIEWBOX;
-  isAriaHidden: boolean;
-  testId: string;
+  desc: string;
 }
 
-type ExtendedSvgAttributes = Partial<TypesSvgAttributes & Pick<TypesStyles, 'className'>>;
+type ExtendedSvgAttributes = ConfigsProps<typeof configsSvgIcon> & TypesSvgAttributes & Pick<TypesStyles, 'className'>;
 
-export type PropsSvgIcon = Partial<{ configs: ExtendedSvgAttributes }>;
+export type PropsSvgIcon = { configs: Partial<ExtendedSvgAttributes> };
