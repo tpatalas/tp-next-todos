@@ -5,7 +5,7 @@ import { renderWithRecoilRootAndSession } from '@stateLogics/utils/testUtils';
 import { NetworkStatus } from '..';
 
 describe('NetworkStatus', () => {
-  beforeEach(() => renderWithRecoilRootAndSession(<NetworkStatus />));
+  renderWithRecoilRootAndSession(<NetworkStatus />);
 
   it('should not render offline component when online', () => {
     const online = snapshot_UNSTABLE().getLoadable(atomEffectNetworkStatus).valueOrThrow();
