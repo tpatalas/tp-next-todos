@@ -17,6 +17,7 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 /** @type {import('jest').Config} */
 const customJestConfig: import('jest').Config = {
+  transform: { '^.+\\.(t|j)sx?$': '@swc/jest' },
   moduleDirectories: ['node_modules', '<rootDir>/'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
