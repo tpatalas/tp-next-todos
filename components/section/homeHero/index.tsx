@@ -42,9 +42,7 @@ export const HomeHero = () => {
               </SmoothTransition>
               <SmoothTransition options={translateDownHandler(300)}>
                 <div className='mx-auto max-w-2xl text-center'>
-                  <p className='mt-6 text-xl leading-8 text-gray-600 will-change-transform'>
-                    {homeHeroText.content}
-                  </p>
+                  <p className='mt-6 text-xl leading-8 text-gray-600 will-change-transform'>{homeHeroText.content}</p>
                 </div>
               </SmoothTransition>
               <SmoothTransition options={translateDownHandler(700)}>
@@ -92,7 +90,7 @@ export const HomeHero = () => {
                           loader={cloudflareLoader}
                           width={961}
                           height={754}
-                          className='h-auto w-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
+                          className='h-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform'
                           src={PATH_IMAGE_HOME['demo']}
                           sizes='90vw'
                           alt='demo application image'
