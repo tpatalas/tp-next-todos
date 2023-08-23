@@ -28,7 +28,10 @@ type CheckNested<T> = T extends object ? NestedOptions<T> : ErrorInitialObject;
 type RootOptions<T> = { [Key in keyof T]: DisallowArrays<CheckNested<T[Key]>> };
 type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
 type CommonKeyType<T> = { [K in keyof T]: keyof T[K] | null | undefined };
+type ReturnType<T> = { [K in keyof T]: T[K][keyof T[K]] };
 type PresetOptions<T> = Partial<CommonKeyType<T> | null | undefined>;
+type ValuePresetOptions<T, L> = L extends keyof T ? keyof T[L] | null | undefined : CommonKeyType<T> | null | undefined;
+type ConfigsPresetOptions<T, P> = { [K in keyof P]: { [L in keyof P[K]]: ValuePresetOptions<T, L> } };
 
 /**
  * A utility function to create config object
@@ -47,15 +50,11 @@ export const createConfigs = <
   options: T;
   defaultOptions: Partial<CommonKeyType<T>>;
   required?: R;
-  presetOptions?: P & {
-    [K in keyof P]: {
-      [L in keyof P[K]]: L extends keyof T ? keyof T[L] | null | undefined : CommonKeyType<T> | null | undefined;
-    };
-  };
+  presetOptions?: P & ConfigsPresetOptions<T, P>;
 }) => {
   type PropsType = Partial<CommonKeyType<T>> & RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
 
-  const main = (...[props]: R extends undefined ? [PropsType?] : [PropsType]): { [K in keyof T]: T[K][keyof T[K]] } => {
+  const main = (...[props]: R extends undefined ? [PropsType?] : [PropsType]): ReturnType<T> => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
     props = props ?? {};
     const { options, defaultOptions, presetOptions } = config;
@@ -77,7 +76,7 @@ export const createConfigs = <
         delete result[k];
       }
     }
-    return result as { [K in keyof T]: T[K][keyof T[K]] };
+    return result as ReturnType<T>;
   };
   return Object.assign(main, config.options);
 };
