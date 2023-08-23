@@ -54,32 +54,31 @@ export const createConfigs = <
   };
 }) => {
   type PropsType = Partial<CommonKeyType<T>> & RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
+  const { options, defaultOptions, presetOptions } = config;
 
   const main = (...[props]: R extends undefined ? [PropsType?] : [PropsType]): { [K in keyof T]: T[K][keyof T[K]] } => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
     props = props ?? {};
-    const { options, defaultOptions, presetOptions } = config;
 
-    const mergedOptions = { ...defaultOptions };
     if (props.preset && presetOptions) {
-      Object.assign(mergedOptions, presetOptions[props.preset]);
+      Object.assign(defaultOptions, presetOptions[props.preset]);
     }
-    Object.assign(mergedOptions, props);
+    Object.assign(defaultOptions, props);
 
     for (const k in options) {
       checkFurtherNesting(options[k]);
 
-      const variant = mergedOptions[k] ?? defaultOptions[k];
+      const variant = defaultOptions[k] ?? defaultOptions[k];
       if (variant != null) {
         result[k] = options[k][variant];
       }
-      if (mergedOptions[k] === null || mergedOptions[k] === undefined) {
+      if (defaultOptions[k] === null || defaultOptions[k] === undefined) {
         delete result[k];
       }
     }
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
-  return Object.assign(main, config.options);
+  return Object.assign(main, options);
 };
 
 /**
