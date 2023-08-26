@@ -1,84 +1,36 @@
-/**
- * Error Handling
- * */
-const checkFurtherNesting = (obj: unknown, level: number = 1): void => {
-  if (typeof obj !== 'object' || obj === null) return;
-  for (const key in obj as Record<string, unknown>) {
-    const value = (obj as Record<string, unknown>)[key];
-    const isObject = typeof value === 'object' && value !== null;
-    if (isObject && level === 2) {
-      throw new Error(`ErrorFurtherNesting: Further nesting is not permitted in key ${key}`);
-    }
-    if (isObject) checkFurtherNesting(value, level + 1);
-  }
+type TypesOptions<T, S extends string> = {
+  [K in keyof T]: { [P in keyof T[K]]: S | T[K][P] };
+};
+type TypesConfigs<T, P extends string> = {
+  options: T;
+  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
+  presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] }>>>;
 };
 
-/**
- * Type checking
- * */
-type ErrorFurtherNesting = 'Further nesting is not permitted';
-type ErrorInitialObject = 'Initial value must be an object and not a primitive or array.';
-
-type NestingRestriction<T> = { [K in keyof T]: T[K] extends object ? ErrorFurtherNesting : T[K] };
-type DisallowFurtherNesting<T> = T extends object ? NestingRestriction<T> : T;
-type ValueTypes<T> = { [K in keyof T]: T[K] extends object ? ValueTypes<T[K]> : T[K] };
-type NestedOptions<T> = { [Property in keyof T]: DisallowFurtherNesting<ValueTypes<T[Property]>> };
-type DisallowArrays<T> = T extends unknown[] ? ErrorInitialObject : T;
-type CheckNested<T> = T extends object ? NestedOptions<T> : ErrorInitialObject;
-type RootOptions<T> = { [Key in keyof T]: DisallowArrays<CheckNested<T[Key]>> };
-type RequiredProps<T, R> = R extends (keyof T)[] ? { [K in R[number] & keyof T]: keyof T[K] } : {};
-type CommonKeyType<T> = { [K in keyof T]: keyof T[K] | null | undefined };
-type ReturnType<T> = { [K in keyof T]: T[K][keyof T[K]] };
-type PresetOptions<T> = Partial<CommonKeyType<T> | null | undefined>;
-type ValuePresetOptions<T, L> = L extends keyof T ? keyof T[L] | null | undefined : CommonKeyType<T> | null | undefined;
-type ConfigsPresetOptions<T, P> = { [K in keyof P]: { [L in keyof P[K]]: ValuePresetOptions<T, L> } };
-
-/**
- * A utility function to create config object
- *
- * Usage:
- * This function is designed to provide a structured way to define object properties or
- * options, particularly suitable for server components. It allows for the definition of
- * variables and corresponding defaults.
- * */
-
-export const createConfigs = <
-  T extends RootOptions<T>,
-  R extends (keyof T)[] | undefined = undefined,
-  P extends { [name: string]: PresetOptions<T> } | undefined = undefined,
->(config: {
-  options: T;
-  defaultOptions: Partial<CommonKeyType<T>>;
-  required?: R;
-  presetOptions?: P & ConfigsPresetOptions<T, P>;
+export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P extends string = never>(
+  config: TypesConfigs<T, P>,
+): ((props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>) => {
+  [K in keyof T]: T[K][keyof T[K]];
 }) => {
-  type PropsType = Partial<CommonKeyType<T>> & RequiredProps<T, R> & { preset?: P extends undefined ? never : keyof P };
+  return (props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>): { [K in keyof T]: T[K][keyof T[K]] } => {
+    const { defaultOptions, options, presetOptions } = config;
 
-  const main = (...[props]: R extends undefined ? [PropsType?] : [PropsType]): ReturnType<T> => {
     const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
-    props = props ?? {};
-    const { options, defaultOptions, presetOptions } = config;
+    const preset = props?.preset ? presetOptions?.[props.preset] : undefined;
 
-    const mergedOptions = { ...defaultOptions };
-    if (props.preset && presetOptions) {
-      Object.assign(mergedOptions, presetOptions[props.preset]);
-    }
-    Object.assign(mergedOptions, props);
+    for (const key in options) {
+      const k = key as keyof T;
+      const defaultOptionsOutput = defaultOptions ? defaultOptions[k] : undefined;
+      const presetOptionsOutput = preset ? preset[k] : undefined;
+      const variant = props?.[k] ?? presetOptionsOutput ?? defaultOptionsOutput;
 
-    for (const k in options) {
-      checkFurtherNesting(options[k]);
-
-      const variant = mergedOptions[k] ?? defaultOptions[k];
-      if (variant != null) {
-        result[k] = options[k][variant];
-      }
-      if (mergedOptions[k] === null || mergedOptions[k] === undefined) {
-        delete result[k];
+      if (!!variant && options[k].hasOwnProperty(variant)) {
+        result[k] = options[k][variant as keyof T[keyof T]];
       }
     }
-    return result as ReturnType<T>;
+
+    return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
-  return Object.assign(main, config.options);
 };
 
 /**
