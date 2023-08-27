@@ -8,7 +8,7 @@ type TypesOptions<T, S extends string> = {
 type TypesConfigs<T, P extends string> = {
   options: T;
   defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
-  presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] }>>>;
+  presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>>>;
 };
 
 export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P extends string = never>(
@@ -19,7 +19,7 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
   return (props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>): { [K in keyof T]: T[K][keyof T[K]] } => {
     const { defaultOptions, options, presetOptions } = config;
 
-    const result: { [K in keyof T]?: T[K][keyof T[K]] } = {};
+    const result: { [K in keyof T]?: T[K][keyof T[K]] | null } = {};
     const preset = props?.preset ? presetOptions?.[props.preset] : undefined;
 
     for (const key in options) {
@@ -28,8 +28,14 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
       const presetOptionsOutput = preset ? preset[k] : undefined;
       const variant = props?.[k] ?? presetOptionsOutput ?? defaultOptionsOutput;
 
+      if (defaultOptions && defaultOptions[k] === null) {
+        result[k] = null;
+      }
       if (!!variant && options[k].hasOwnProperty(variant)) {
         result[k] = options[k][variant as keyof T[keyof T]];
+      }
+      if (preset && Object.prototype.hasOwnProperty.call(preset, k) && preset[k] === undefined) {
+        delete result[k];
       }
     }
 
