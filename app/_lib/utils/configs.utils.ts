@@ -1,5 +1,9 @@
+type TypesObjectOnlyMessage = 'Only non-array object types are permitted as values within the initial object.';
+type TypesDisallowArray<T, K extends keyof T, S> = T[K] extends Array<unknown>
+  ? TypesObjectOnlyMessage
+  : { [P in keyof T[K]]: S | T[K][P] };
 type TypesOptions<T, S extends string> = {
-  [K in keyof T]: { [P in keyof T[K]]: S | T[K][P] };
+  [K in keyof T]: T[K] extends object ? TypesDisallowArray<T, K, S> : TypesObjectOnlyMessage;
 };
 type TypesConfigs<T, P extends string> = {
   options: T;
