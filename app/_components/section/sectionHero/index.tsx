@@ -3,7 +3,7 @@ import { SmoothTransition } from '@/transition/smoothTransition';
 import Link from 'next/link';
 import { SignInButton } from '@/button/signInButton';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
-import { PATH_HOME, PATH_IMAGE } from '@/_lib/consts/assertion.consts';
+import { PATH_HOME } from '@/_lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
 import { configsSignInButton } from '@/button/button.configs';
@@ -11,18 +11,7 @@ import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
 import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
-import { TypesImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.types';
-
-export const optionsSectionHeroWithImage: TypesImageWithRemotePlaceholder = {
-  width: 961,
-  height: 754,
-  className: 'h-auto rounded-2xl ring-2 ring-slate-300/20 drop-shadow-2xl will-change-transform',
-  src: PATH_IMAGE['demo'],
-  sizes: '90vw',
-  alt: 'demo application image',
-  placeholder: 'blur',
-  priority: true,
-};
+import { configsImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.configs';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
@@ -83,7 +72,7 @@ export const SectionHero = async () => {
                     configs={configsTransition({ preset: 'scaleCenterSm', delay: '150', rate: '4.0' })}
                   >
                     <div className='mx-auto flex w-full max-w-[60rem] flex-row items-center justify-center rounded-xl border-none ring-0 lg:rounded-2xl'>
-                      <ImageWithRemotePlaceholder configs={optionsSectionHeroWithImage} />
+                      <ImageWithRemotePlaceholder configs={configsImageWithRemotePlaceholder({ preset: 'demo' })} />
                     </div>
                   </SmoothTransitionWithDivRef>
                 </div>
