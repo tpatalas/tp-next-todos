@@ -5,12 +5,7 @@ import { PropsImageWithRemotePlaceholder } from './imageWithRemotePlaceholder.ty
 import cloudflareLoader from '@/_lib/utils/imageLoader.utils';
 
 export const ImageWithRemotePlaceholder = async ({ configs }: PropsImageWithRemotePlaceholder) => {
-  const { sizes = '100vw', priority = true } = configs;
-  const remoteImageHandler = async () => {
-    if (configs.placeholder === 'blur') return await getBase64FromImageURL(configs.src);
-    return;
-  };
-  const remoteImageBlurDataURL = await remoteImageHandler();
+  const remoteImageBlurDataURL = configs.placeholder === 'blur' ? await getBase64FromImageURL(configs.src) : undefined;
 
   return (
     <>
@@ -27,8 +22,8 @@ export const ImageWithRemotePlaceholder = async ({ configs }: PropsImageWithRemo
         style={configs.style}
         loading={configs.loading}
         blurDataURL={remoteImageBlurDataURL}
-        sizes={sizes}
-        priority={priority}
+        sizes={configs.sizes}
+        priority={configs.priority}
       />
     </>
   );
