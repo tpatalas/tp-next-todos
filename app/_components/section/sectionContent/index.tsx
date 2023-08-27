@@ -1,37 +1,15 @@
 import { SectionContentText } from './sectionContentText';
 import { DivContainerWithRef } from '@/container/divContainerWithRef';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
-import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
 import { ImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
 import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
-import { TypesImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.types';
+import { configsImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.configs';
 
 const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
-const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
 const styleImageFrame = 'md:h-[440px]';
-const optionsImageSpotlight: TypesImageWithRemotePlaceholder = {
-  width: 504,
-  height: 689,
-  className: styleImage,
-  src: PATH_IMAGE['contentFocus'],
-  sizes: '(max-width: 748px) 70vw, 33vw',
-  alt: 'content focus image',
-  placeholder: 'blur',
-  priority: true,
-};
-const optionsImageOverload: TypesImageWithRemotePlaceholder = {
-  width: 494,
-  height: 650,
-  className: styleImage,
-  src: PATH_IMAGE['contentOrganize'],
-  sizes: '(max-width: 748px) 70vw, 33vw',
-  alt: 'content organize image',
-  placeholder: 'blur',
-  priority: true,
-};
 
 export const SectionContent = () => {
   const divContainerSpotlight_id = 'sectionContent_spotlight';
@@ -56,7 +34,7 @@ export const SectionContent = () => {
               configs={configsTransition({ preset: 'scaleCenterSm', delay: '500', rate: '1.5' })}
             >
               <div className={cx(styleImageWrapper, 'opacity-100')}>
-                <ImageWithRemotePlaceholder configs={optionsImageSpotlight} />
+                <ImageWithRemotePlaceholder configs={configsImageWithRemotePlaceholder({ preset: 'spotlight' })} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>
@@ -69,7 +47,7 @@ export const SectionContent = () => {
               configs={configsTransition({ preset: 'scaleCenterSm', delay: '700', rate: '1.5' })}
             >
               <div className={cx(styleImageWrapper, 'opacity-100')}>
-                <ImageWithRemotePlaceholder configs={optionsImageOverload} />
+                <ImageWithRemotePlaceholder configs={configsImageWithRemotePlaceholder({ preset: 'overload' })} />
               </div>
             </SmoothTransitionWithDivRef>
           </DivContainerWithRef>

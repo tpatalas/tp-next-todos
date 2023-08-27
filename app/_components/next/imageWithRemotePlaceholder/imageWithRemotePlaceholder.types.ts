@@ -1,6 +1,4 @@
-import { TypesNextImage } from '../next.types';
+import { ConfigsProps } from '@/_lib/utils/configs.utils';
+import { configsImageWithRemotePlaceholder } from './imageWithRemotePlaceholder.configs';
 
-export type TypesImageWithRemotePlaceholder = Pick<TypesNextImage, 'src' | 'width' | 'height' | 'alt'> &
-  Partial<Omit<TypesNextImage, 'src' | 'width' | 'height' | 'alt'>>;
-
-export type PropsImageWithRemotePlaceholder = { configs: TypesImageWithRemotePlaceholder };
+export type PropsImageWithRemotePlaceholder = { configs: ConfigsProps<typeof configsImageWithRemotePlaceholder> };

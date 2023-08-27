@@ -1,12 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { ImageWithRemotePlaceholder } from '..';
-import { TypesImageWithRemotePlaceholder } from '../imageWithRemotePlaceholder.types';
-import { PATH_IMAGE } from '@/_lib/consts/assertion.consts';
-
-type typesForTest = { configs: Pick<TypesImageWithRemotePlaceholder, 'width' | 'height' | 'src' | 'alt'> };
+import { PropsImageWithRemotePlaceholder } from '../imageWithRemotePlaceholder.types';
+import { configsImageWithRemotePlaceholder } from '../imageWithRemotePlaceholder.configs';
 
 jest.mock('@/_components/next/imageWithRemotePlaceholder', () => ({
-  ImageWithRemotePlaceholder: ({ configs }: typesForTest) => (
+  ImageWithRemotePlaceholder: ({ configs }: PropsImageWithRemotePlaceholder) => (
     <>
       {Object.entries(configs).map(([key, value]) => (
         <div
@@ -20,15 +18,16 @@ jest.mock('@/_components/next/imageWithRemotePlaceholder', () => ({
   ),
 }));
 
-const mockImageOptions: TypesImageWithRemotePlaceholder = {
-  width: 1000,
-  height: 1000,
-  src: PATH_IMAGE['demo'],
-  alt: 'testing',
-};
+const mockImageOptions = configsImageWithRemotePlaceholder({
+  priority: undefined,
+  width: 'demo',
+  height: 'demo',
+  src: 'demo',
+  alt: 'demo',
+});
 
 describe('ImageWithRemotePlaceholder', () => {
-  const renderWithImageWithRemotePlaceholder = ({ configs }: typesForTest) =>
+  const renderWithImageWithRemotePlaceholder = ({ configs }: PropsImageWithRemotePlaceholder) =>
     render(<ImageWithRemotePlaceholder configs={configs} />);
 
   it('should properly passes the option props', async () => {
@@ -38,7 +37,7 @@ describe('ImageWithRemotePlaceholder', () => {
     Object.entries(mockImageOptions).forEach(([key, value]) => {
       const imageOption = screen.getByTestId(`mockImage-${key}`);
       expect(imageOption).toBeInTheDocument();
-      expect(imageOption.textContent).toBe(value.toString());
+      expect(imageOption.textContent).toBe(value!.toString());
     });
   });
 });
