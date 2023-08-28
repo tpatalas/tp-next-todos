@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { SectionHero } from '..';
 import { ReactNode } from 'react';
-import { getResolvedComponent } from '@/_lib/utils/test.utils';
 import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '@/section/section.consts';
+import { renderAsync } from '@/_lib/utils/test.utils';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -18,13 +18,10 @@ jest.mock('@/_lib/utils/base64Converter.utils', () => jest.fn());
 const signInButtonConfigs = configsSignInButton({ preset: 'getStarted' });
 
 describe('SectionHero', () => {
-  const renderAsyncComponent = async () => {
-    const ResolvedSectionHero = await getResolvedComponent(SectionHero);
-    render(<ResolvedSectionHero />);
-  };
+  const renderWithSectionHero = async () => renderAsync(<SectionHero />);
 
   it('should render the text contents', async () => {
-    await renderAsyncComponent();
+    await renderWithSectionHero();
 
     const titleText = await screen.findByText(sectionContents.hero.title);
     const subTitleText = await screen.findByText(sectionContents.hero.subTitle);
@@ -36,7 +33,7 @@ describe('SectionHero', () => {
   });
 
   it('should render the signInButton and link button', async () => {
-    await renderAsyncComponent();
+    await renderWithSectionHero();
 
     const signInButton = await screen.findByText(signInButtonConfigs.buttonName);
     const linkButton = await screen.findByText('Learn more');
@@ -46,7 +43,7 @@ describe('SectionHero', () => {
   });
 
   it('should render the gradient element and mockImage', async () => {
-    await renderAsyncComponent();
+    await renderWithSectionHero();
 
     const gradientElement = await screen.findByTestId('gradient-testid');
     const mockImage = await screen.findByTestId('mockImage-testid');
