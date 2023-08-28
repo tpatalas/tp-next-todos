@@ -38,7 +38,7 @@
     "slate": "^0.94.0",
     "slate-history": "^0.93.0",
     "slate-hyperscript": "^0.77.0",
-    "slate-react": "^0.92.0",
+    "slate-react": "^0.98.2",
     "validator": "^13.11.0",
     "zod": "^3.22.2",
     "zod-fetch": "^0.1.1"
