@@ -1,5 +1,5 @@
-export type PATH_HOME = (typeof PATH_HOME)[keyof typeof PATH_HOME];
-export const PATH_HOME = {
+export type PATH_ROUTE = (typeof PATH_ROUTE)[keyof typeof PATH_ROUTE];
+export const PATH_ROUTE = {
   home: '/',
   demo: '/app',
   features: '/features',

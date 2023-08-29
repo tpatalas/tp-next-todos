@@ -3,7 +3,7 @@ import { SmoothTransition } from '@/transition/smoothTransition';
 import Link from 'next/link';
 import { SignInButton } from '@/button/signInButton';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
-import { PATH_HOME } from '@/_lib/consts/assertion.consts';
+import { PATH_ROUTE } from '@/_lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
 import { configsSignInButton } from '@/button/button.configs';
@@ -46,7 +46,7 @@ export const SectionHero = async () => {
                 <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
                 <Link
                   className='text-sm font-semibold leading-6 text-gray-900'
-                  href={PATH_HOME['features']}
+                  href={PATH_ROUTE['features']}
                 >
                   Learn more <span aria-hidden='true'>→</span>
                 </Link>

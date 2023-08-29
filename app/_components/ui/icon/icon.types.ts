@@ -1,12 +1,4 @@
 import { ConfigsProps } from '@/_lib/utils/configs.utils';
-import { configsSvgIcon } from './svgIcon/svgIcon.configs';
-import { TypesStyles } from '@/_components/components.types';
+import { configsSvgIcon, configsSvgIconLogo } from './svgIcon/svgIcon.configs';
 
-export interface TypesSvgAttributes {
-  path: string;
-  desc: string;
-}
-
-type ExtendedSvgAttributes = ConfigsProps<typeof configsSvgIcon> & TypesSvgAttributes & Pick<TypesStyles, 'className'>;
-
-export type PropsSvgIcon = { configs: Partial<ExtendedSvgAttributes> };
+export type PropsSvgIcon = { configs: ConfigsProps<typeof configsSvgIcon & typeof configsSvgIconLogo> };
