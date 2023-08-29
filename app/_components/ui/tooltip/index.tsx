@@ -1,13 +1,10 @@
-'use client';
-
 import { Portal } from '@headlessui/react';
-import { memo } from 'react';
 import { isMobile } from 'react-device-detect';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { PropsTooltip } from './tooltip.types';
 import { cx } from 'class-variance-authority';
 
-export const Tooltip = memo(({ configs = {}, children }: PropsTooltip) => {
+export const Tooltip = ({ configs = {}, children }: PropsTooltip) => {
   const { getTooltipProps, setTooltipRef, setTriggerRef, visible } = usePopperTooltip({
     trigger: configs.trigger ?? 'hover',
     delayShow: configs.delayShow ?? 50,
@@ -50,6 +47,4 @@ export const Tooltip = memo(({ configs = {}, children }: PropsTooltip) => {
       )}
     </>
   );
-});
-
-Tooltip.displayName = 'Tooltip';
+};

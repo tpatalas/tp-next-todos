@@ -1,5 +1,3 @@
-'use client';
-
 import { forwardRef, useState } from 'react';
 import { PropsButtonWithTooltip } from '../button.types';
 import { Button } from '..';
