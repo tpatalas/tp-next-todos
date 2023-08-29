@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { SvgIcon } from '..';
+import { configsSvgIconLogo } from '../svgIcon.configs';
 
 describe('SvgIcon', () => {
   it('should render the svgIcon component', () => {
-    render(<SvgIcon configs={{ desc: 'svgIcon-title' }} />);
-    const svgIconWithTestId = screen.getByText('svgIcon-title');
+    render(<SvgIcon configs={configsSvgIconLogo({ preset: 'logoFull' })} />);
+    const svgIconWithTestId = screen.getByText('Main logo full');
 
     expect(svgIconWithTestId).toBeInTheDocument();
   });
