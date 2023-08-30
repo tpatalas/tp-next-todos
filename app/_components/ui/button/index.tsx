@@ -11,6 +11,7 @@ export const Button = forwardRef<HTMLButtonElement, PropsButton>(
     {
       configs = {},
       children,
+      className,
       onClick,
       onKeyDown,
       onDoubleClick,
@@ -21,7 +22,7 @@ export const Button = forwardRef<HTMLButtonElement, PropsButton>(
     }: PropsButton,
     ref,
   ) => {
-    const { ariaLabel, type = 'button', isDisabled, className } = configs;
+    const { ariaLabel, type = 'button', isDisabled } = configs;
     return (
       <button
         aria-label={ariaLabel}

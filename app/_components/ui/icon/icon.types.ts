@@ -1,6 +1,11 @@
+import { TypesStyles } from '@/_components/components.types';
 import { ReactNode } from 'react';
 
-interface TypesSvgIcon {
+type TypesSvgIconBase<T> = {
+  configs: Partial<T>;
+} & Partial<Pick<TypesStyles, 'className'>>;
+
+export interface TypesSvgIcon {
   height: number | string;
   width: number | string;
   viewBox: string;
@@ -9,5 +14,4 @@ interface TypesSvgIcon {
   desc: string;
 }
 
-// export type PropsSvgIcon = { configs: ConfigsProps<typeof configsSvgIcon & typeof configsSvgIconLogo> };
-export type PropsSvgIcon = { configs: Partial<TypesSvgIcon> };
+export type PropsSvgIcon = TypesSvgIconBase<TypesSvgIcon>;
