@@ -1,4 +1,13 @@
-import { ConfigsProps } from '@/_lib/utils/configs.utils';
-import { configsSvgIcon, configsSvgIconLogo } from './svgIcon/svgIcon.configs';
+import { ReactNode } from 'react';
 
-export type PropsSvgIcon = { configs: ConfigsProps<typeof configsSvgIcon & typeof configsSvgIconLogo> };
+interface TypesSvgIcon {
+  height: number | string;
+  width: number | string;
+  viewBox: string;
+  className: string;
+  path: string | ReactNode;
+  desc: string;
+}
+
+// export type PropsSvgIcon = { configs: ConfigsProps<typeof configsSvgIcon & typeof configsSvgIconLogo> };
+export type PropsSvgIcon = { configs: Partial<TypesSvgIcon> };
