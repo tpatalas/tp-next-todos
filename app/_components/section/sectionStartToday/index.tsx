@@ -3,11 +3,11 @@ import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
 import { SmoothTransition } from '@/transition/smoothTransition';
 import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDivRef';
 import { SignInButton } from '@/button/signInButton';
-import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
 import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
+import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';

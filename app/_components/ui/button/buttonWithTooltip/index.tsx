@@ -4,7 +4,7 @@ import { Button } from '..';
 import { Tooltip } from '@/tooltip/index';
 
 export const ButtonWithTooltip = forwardRef<HTMLButtonElement, PropsButtonWithTooltip>(
-  ({ configs = {}, onClick, onKeyDown, onDoubleClick, children }: PropsButtonWithTooltip, ref) => {
+  ({ configs = {}, onClick, onKeyDown, onDoubleClick, children, className }: PropsButtonWithTooltip, ref) => {
     const [hasTooltip, setTooltip] = useState(false);
     const { isDisabled, placement, offset, tooltip, kbd, isVisible } = configs;
     const configsTooltip = {
@@ -19,6 +19,7 @@ export const ButtonWithTooltip = forwardRef<HTMLButtonElement, PropsButtonWithTo
       <Tooltip configs={configsTooltip}>
         <Button
           configs={configs}
+          className={className}
           onMouseDown={() => !isDisabled && setTooltip(true)}
           onMouseEnter={() => !isDisabled && setTooltip(false)}
           onMouseLeave={() => !isDisabled && setTooltip(true)}
