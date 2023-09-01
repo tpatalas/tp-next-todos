@@ -2,13 +2,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { SectionStartToday } from '..';
 import { ReactNode } from 'react';
 import { sectionContents } from '@/section/section.consts';
-import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
+import { configsButton } from '@/button/button.configs';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 
-const signInButtonConfigs = configsSignInButton({ preset: 'getStarted' });
+const signInButtonConfigs = configsButton({ preset: 'signInGetStarted' });
 
 describe('SectionStartToday', () => {
   const renderWithSectionStartToday = () => render(<SectionStartToday />);

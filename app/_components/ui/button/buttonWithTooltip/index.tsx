@@ -1,29 +1,31 @@
 'use client';
 
 import { forwardRef, useState } from 'react';
-import { PropsButtonWithTooltip } from '../button.types';
 import { Button } from '..';
 import { Tooltip } from '@/tooltip/index';
+import { PropsButtonWithTooltip } from '../button.types';
 
 export const ButtonWithTooltip = forwardRef<HTMLButtonElement, PropsButtonWithTooltip>(
-  ({ configs = {}, onClick, onKeyDown, onDoubleClick, children }: PropsButtonWithTooltip, ref) => {
+  (
+    { configsButton = {}, configsTooltip = {}, onClick, onKeyDown, onDoubleClick, children }: PropsButtonWithTooltip,
+    ref,
+  ) => {
     const [hasTooltip, setTooltip] = useState(false);
-    const { isDisabled, placement, offset, tooltip, kbd, isVisible } = configs;
-    const configsTooltip = {
-      tooltip: (hasTooltip || isDisabled) && !tooltip ? undefined : tooltip,
-      kbd: (hasTooltip || isDisabled) && !kbd ? undefined : kbd,
-      placement,
-      offset,
-      isVisible,
+    const { tooltip, kbd } = configsTooltip;
+    const { disabled } = configsButton;
+    const tooltipConfigs = {
+      tooltip: (hasTooltip || disabled) && !tooltip ? undefined : tooltip,
+      kbd: (hasTooltip || disabled) && !kbd ? undefined : kbd,
+      ...configsTooltip,
     };
 
     return (
-      <Tooltip configs={configsTooltip}>
+      <Tooltip configs={tooltipConfigs}>
         <Button
-          configs={configs}
-          onMouseDown={() => !isDisabled && setTooltip(true)}
-          onMouseEnter={() => !isDisabled && setTooltip(false)}
-          onMouseLeave={() => !isDisabled && setTooltip(true)}
+          configs={configsButton}
+          onMouseDown={() => !disabled && setTooltip(true)}
+          onMouseEnter={() => !disabled && setTooltip(false)}
+          onMouseLeave={() => !disabled && setTooltip(true)}
           onClick={onClick}
           onKeyDown={onKeyDown}
           onDoubleClick={onDoubleClick}

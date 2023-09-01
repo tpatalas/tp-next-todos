@@ -7,7 +7,8 @@ import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
 import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
-import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
+import { configsButton } from '@/button/button.configs';
+import { configsTooltip } from '@/tooltip/tooltip.configs';
 
 export const SectionStartToday = () => {
   const divContainer_id = 'sectionStartToday';
@@ -56,7 +57,10 @@ export const SectionStartToday = () => {
             configs={configsTransition({ preset: 'translateDown', delay: '700' })}
           >
             <div className='mt-10 flex items-center justify-center will-change-transform'>
-              <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
+              <SignInButton
+                configsButton={configsButton({ preset: 'signInGetStarted' })}
+                configsTooltip={configsTooltip({ preset: 'signInGetStarted' })}
+              />
             </div>
           </SmoothTransitionWithDivRef>
         </DivContainerWithRef>

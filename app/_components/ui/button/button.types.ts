@@ -1,25 +1,19 @@
-import { TypesAttributes, TypesEvents, TypesStyles } from '@/_components/components.types';
+import { TypesEvents, TypesStyles } from '@/_components/components.types';
 import { ConfigsProps } from '@/_lib/utils/configs.utils';
-import { TypesTooltips } from '@/tooltip/tooltip.types';
 import { ReactNode } from 'react';
-import { configsSignInButton } from './signInButton/signInButton.configs';
+import { configsButton } from './button.configs';
+import { configsTooltip } from '@/tooltip/tooltip.configs';
 
-export interface TypesButtons {
-  isDisabled: boolean;
-  name: string;
-  type: 'button' | 'submit';
-  signInButtonName: 'Sign in' | 'Get started';
-}
+type TypesButtonBase<T> = Partial<
+  { configs: Partial<T>; children: ReactNode } & TypesEvents & Pick<TypesStyles, 'className'>
+>;
 
-type TypesOptionsButton = TypesButtons & TypesAttributes & Pick<TypesStyles, 'className'>;
+export type PropsButton = TypesButtonBase<ConfigsProps<typeof configsButton>>;
 
-export type TypesConfigsButtonWithTooltip = TypesOptionsButton &
-  Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement' | 'isVisible'>;
-
-type TypesButtonBase<T> = Partial<{ configs: Partial<T>; children: ReactNode } & TypesEvents>;
-
-export type PropsButton = TypesButtonBase<TypesOptionsButton>;
-
-export type PropsButtonWithTooltip = TypesButtonBase<TypesConfigsButtonWithTooltip>;
-
-export type PropsSignInButton = TypesButtonBase<ConfigsProps<typeof configsSignInButton>>;
+export type PropsButtonWithTooltip = Partial<
+  TypesEvents & {
+    configsButton: Partial<ConfigsProps<typeof configsButton>>;
+    configsTooltip: Partial<ConfigsProps<typeof configsTooltip>>;
+    children: ReactNode;
+  }
+>;
