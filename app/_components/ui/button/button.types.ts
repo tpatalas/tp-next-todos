@@ -2,7 +2,7 @@ import { TypesAttributes, TypesEvents, TypesStyles } from '@/_components/compone
 import { ConfigsProps } from '@/_lib/utils/configs.utils';
 import { TypesTooltips } from '@/tooltip/tooltip.types';
 import { ReactNode } from 'react';
-import { configsSignInButton } from './button.configs';
+import { configsSignInButton } from './signInButton/signInButton.configs';
 
 export interface TypesButtons {
   isDisabled: boolean;
@@ -11,16 +11,13 @@ export interface TypesButtons {
   signInButtonName: 'Sign in' | 'Get started';
 }
 
-type TypesOptionsButton = TypesButtons & TypesAttributes & Pick<TypesStyles, 'className'>;
+type TypesOptionsButton = TypesButtons & TypesAttributes;
 
 export type TypesConfigsButtonWithTooltip = TypesOptionsButton &
   Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement' | 'isVisible'>;
 
 type TypesButtonBase<T> = Partial<
-  {
-    configs: Partial<T>;
-    children: ReactNode;
-  } & TypesEvents
+  { configs: Partial<T>; children: ReactNode } & TypesEvents & Pick<TypesStyles, 'className'>
 >;
 
 export type PropsButton = TypesButtonBase<TypesOptionsButton>;
