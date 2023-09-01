@@ -2,13 +2,12 @@ import { render } from '@testing-library/react';
 import { SignInButton } from '..';
 import { PropsSignInButton } from '@/button/button.types';
 import { screen } from '@testing-library/react';
-import { configsSignInButton } from '@/button/button.configs';
+import { configsSignInButton } from '../signInButton.configs';
 
 const signInButton = configsSignInButton({ preset: 'getStarted' });
 
 describe('SignInButton', () => {
-  const renderWithSignInButton = ({ configs }: PropsSignInButton) =>
-    render(<SignInButton configs={configs} />);
+  const renderWithSignInButton = ({ configs }: PropsSignInButton) => render(<SignInButton configs={configs} />);
 
   it('should render the default signInButtonName', () => {
     const { container } = renderWithSignInButton({ configs: configsSignInButton() });
