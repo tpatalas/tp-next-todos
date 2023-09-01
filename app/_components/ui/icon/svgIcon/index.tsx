@@ -1,7 +1,7 @@
 import { PropsSvgIcon } from '../icon.types';
 
-export const SvgIcon = ({ className, configs }: PropsSvgIcon) => {
-  const { height, width, viewBox, path, desc } = configs;
+export const SvgIcon = ({ configs }: PropsSvgIcon) => {
+  const { height, width, viewBox, path, desc, className } = configs;
 
   return (
     <svg

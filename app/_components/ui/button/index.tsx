@@ -1,3 +1,5 @@
+'use client';
+
 import { forwardRef } from 'react';
 import { PropsButton } from './button.types';
 
@@ -11,7 +13,6 @@ export const Button = forwardRef<HTMLButtonElement, PropsButton>(
     {
       configs = {},
       children,
-      className,
       onClick,
       onKeyDown,
       onDoubleClick,
@@ -22,7 +23,7 @@ export const Button = forwardRef<HTMLButtonElement, PropsButton>(
     }: PropsButton,
     ref,
   ) => {
-    const { ariaLabel, type = 'button', isDisabled } = configs;
+    const { ariaLabel, type, isDisabled, className } = configs;
     return (
       <button
         aria-label={ariaLabel}
