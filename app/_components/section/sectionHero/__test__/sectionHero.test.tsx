@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import { SectionHero } from '..';
 import { ReactNode } from 'react';
-import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '@/section/section.consts';
 import { renderAsync } from '@/_lib/utils/test.utils';
+import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,

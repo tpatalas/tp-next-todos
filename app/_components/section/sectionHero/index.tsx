@@ -6,12 +6,12 @@ import { SmoothTransitionWithDivRef } from '@/transition/smoothTransitionWithDiv
 import { PATH_ROUTE } from '@/_lib/consts/assertion.consts';
 import { STYLE_BLUR_GRADIENT_R_LG } from '@/_lib/consts/style.consts';
 import { ImageWithRemotePlaceholder } from '@/_components/next/imageWithRemotePlaceholder';
-import { configsSignInButton } from '@/button/button.configs';
 import { sectionContents } from '../section.consts';
 import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
 import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
 import { configsImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.configs';
+import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
