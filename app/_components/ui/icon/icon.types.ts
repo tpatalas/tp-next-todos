@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 type TypesSvgIconBase<T> = {
   configs: Partial<T>;
-} & Partial<Pick<TypesStyles, 'className'>>;
+};
 
 export interface TypesSvgIcon {
   height: number | string;
@@ -14,4 +14,6 @@ export interface TypesSvgIcon {
   desc: string;
 }
 
-export type PropsSvgIcon = TypesSvgIconBase<TypesSvgIcon>;
+type TypesOptionSvgIcon = TypesSvgIcon & Pick<TypesStyles, 'className'>;
+
+export type PropsSvgIcon = TypesSvgIconBase<TypesOptionSvgIcon>;

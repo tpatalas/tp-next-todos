@@ -11,14 +11,12 @@ export interface TypesButtons {
   signInButtonName: 'Sign in' | 'Get started';
 }
 
-type TypesOptionsButton = TypesButtons & TypesAttributes;
+type TypesOptionsButton = TypesButtons & TypesAttributes & Pick<TypesStyles, 'className'>;
 
 export type TypesConfigsButtonWithTooltip = TypesOptionsButton &
   Pick<TypesTooltips, 'tooltip' | 'kbd' | 'offset' | 'placement' | 'isVisible'>;
 
-type TypesButtonBase<T> = Partial<
-  { configs: Partial<T>; children: ReactNode } & TypesEvents & Pick<TypesStyles, 'className'>
->;
+type TypesButtonBase<T> = Partial<{ configs: Partial<T>; children: ReactNode } & TypesEvents>;
 
 export type PropsButton = TypesButtonBase<TypesOptionsButton>;
 
