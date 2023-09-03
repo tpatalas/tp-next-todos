@@ -11,7 +11,8 @@ import { cx } from 'class-variance-authority';
 import { configsTransition } from '@/transition/transition.configs';
 import { SmoothTransitionWithDefaultConfigs } from '@/transition/smoothTransitionWithDefaultConfigs';
 import { configsImageWithRemotePlaceholder } from '@/next/imageWithRemotePlaceholder/imageWithRemotePlaceholder.configs';
-import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
+import { configsButton } from '@/button/button.configs';
+import { configsTooltip } from '@/tooltip/tooltip.configs';
 
 export const SectionHero = async () => {
   const divContainer_id = 'sectionHero';
@@ -43,7 +44,10 @@ export const SectionHero = async () => {
             </SmoothTransition>
             <SmoothTransition configs={configsTransition({ preset: 'translateDown', delay: '700' })}>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
-                <SignInButton configs={configsSignInButton({ preset: 'getStarted' })} />
+                <SignInButton
+                  configsButton={configsButton({ preset: 'signInGetStarted' })}
+                  configsTooltip={configsTooltip({ preset: 'signInGetStarted' })}
+                />
                 <Link
                   className='text-sm font-semibold leading-6 text-gray-900'
                   href={PATH_ROUTE['features']}

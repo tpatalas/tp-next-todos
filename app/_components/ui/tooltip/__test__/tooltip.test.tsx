@@ -9,7 +9,7 @@ describe('Tooltip', () => {
 
   it('should render the children props and tooltip text', async () => {
     const { container } = renderWithTooltip({
-      configs: { isVisible: true, tooltip: 'tooltip' },
+      configs: { visible: true, tooltip: 'tooltip' },
       children: <div>Tooltip-test</div>,
     });
     const childrenElement = screen.getByText('Tooltip-test');

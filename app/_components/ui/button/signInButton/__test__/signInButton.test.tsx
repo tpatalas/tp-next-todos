@@ -1,16 +1,24 @@
 import { render } from '@testing-library/react';
 import { SignInButton } from '..';
-import { PropsSignInButton } from '@/button/button.types';
 import { screen } from '@testing-library/react';
-import { configsSignInButton } from '../signInButton.configs';
+import { configsButton } from '@/button/button.configs';
+import { PropsButtonWithTooltip } from '@/button/button.types';
+import { configsTooltip } from '@/tooltip/tooltip.configs';
 
-const signInButton = configsSignInButton({ preset: 'getStarted' });
+const signInButton = configsButton({ preset: 'signInGetStarted' });
+const signInTooltip = configsTooltip({ preset: 'signInGetStarted' });
 
 describe('SignInButton', () => {
-  const renderWithSignInButton = ({ configs }: PropsSignInButton) => render(<SignInButton configs={configs} />);
+  const renderWithSignInButton = ({ configsButton, configsTooltip }: PropsButtonWithTooltip) =>
+    render(
+      <SignInButton
+        configsButton={configsButton}
+        configsTooltip={configsTooltip}
+      />,
+    );
 
   it('should render the default signInButtonName', () => {
-    const { container } = renderWithSignInButton({ configs: configsSignInButton() });
+    const { container } = renderWithSignInButton({ configsButton: configsButton() });
     const signInText = screen.getByText('Sign in');
 
     expect(container).toBeInTheDocument();
@@ -18,9 +26,12 @@ describe('SignInButton', () => {
   });
 
   it('should render the signInButtonName props', async () => {
-    renderWithSignInButton({ configs: configsSignInButton({ preset: 'getStarted', isVisible: 'active' }) });
+    renderWithSignInButton({
+      configsButton: configsButton({ preset: 'signInGetStarted' }),
+      configsTooltip: configsTooltip({ preset: 'signInGetStarted', visible: 'show' }),
+    });
     const signInText = screen.getByText(signInButton.buttonName);
-    const tooltipText = await screen.findByText(signInButton.tooltip);
+    const tooltipText = await screen.findByText(signInTooltip.tooltip);
 
     expect(signInText).toBeInTheDocument();
     expect(tooltipText).toBeInTheDocument();

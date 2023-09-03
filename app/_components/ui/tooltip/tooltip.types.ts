@@ -1,20 +1,7 @@
-import { ReactElement, ReactNode } from 'react';
-import { TriggerType } from 'react-popper-tooltip';
-import { Placement } from '@popperjs/core';
+import { ReactNode } from 'react';
+import { ConfigsProps } from '@/_lib/utils/configs.utils';
+import { configsTooltip } from './tooltip.configs';
 
-export interface TypesTooltips {
-  tooltip: string | ReactElement | null;
-  kbd: string;
-  delayShow: number;
-  trigger: TriggerType | TriggerType[] | null;
-  offset: [number, number];
-  placement: Placement;
-  isVisible: boolean;
-  isCloseOnTriggerHidden: boolean;
-}
+type TypesTooltipBase<T> = Partial<{ configs: Partial<T> }> & { children: ReactNode };
 
-export type PropsTooltip = Partial<{
-  configs: Partial<TypesTooltips>;
-}> & {
-  children: ReactNode;
-};
+export type PropsTooltip = TypesTooltipBase<ConfigsProps<typeof configsTooltip>>;
