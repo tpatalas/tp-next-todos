@@ -9,6 +9,7 @@ type TypesConfigs<T, P extends string> = {
   options: T;
   defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
   presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>>>;
+  extendOptions?: object[];
 };
 
 export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P extends string = never>(
@@ -17,7 +18,7 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
   [K in keyof T]: T[K][keyof T[K]];
 }) => {
   return (props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>): { [K in keyof T]: T[K][keyof T[K]] } => {
-    const { defaultOptions, options, presetOptions } = config;
+    const { defaultOptions, options, presetOptions, extendOptions } = config;
 
     const result: { [K in keyof T]?: T[K][keyof T[K]] | null } = {};
     const preset = props?.preset ? presetOptions?.[props.preset] : undefined;
@@ -36,6 +37,15 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
       }
       if (variant === null) {
         result[k] = null;
+      }
+    }
+
+    if (extendOptions) {
+      for (const options of extendOptions) {
+        for (const key in options) {
+          const k = key as keyof typeof options;
+          result[k] = options[k];
+        }
       }
     }
 
