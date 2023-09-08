@@ -5,20 +5,40 @@ type TypesDisallowArray<T, K extends keyof T, S> = T[K] extends Array<unknown>
 type TypesOptions<T, S extends string> = {
   [K in keyof T]: T[K] extends object ? TypesDisallowArray<T, K, S> : TypesObjectOnlyMessage;
 };
-type TypesConfigs<T, P extends string> = {
+type TypesConfigs<T, U, P extends string> = {
   options: T;
   defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
   presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>>>;
-  extendOptions?: object[];
+  extendOptions?: { options: U }[];
 };
 
-export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P extends string = never>(
-  config: TypesConfigs<T, P>,
+export const createConfigs = <
+  T extends TypesOptions<T, S>,
+  U extends TypesOptions<U, S>,
+  S extends string,
+  P extends string = never,
+>(
+  config: TypesConfigs<T, U, P>,
 ): ((props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>) => {
   [K in keyof T]: T[K][keyof T[K]];
-}) => {
-  return (props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>): { [K in keyof T]: T[K][keyof T[K]] } => {
-    const { defaultOptions, options, presetOptions, extendOptions } = config;
+}) & { options: T } => {
+  const extendOptions: { [key: string]: unknown } = {};
+
+  if (config.extendOptions) {
+    for (const extendOpt of config.extendOptions) {
+      if (extendOpt && 'options' in extendOpt) {
+        for (const key in extendOpt.options) {
+          extendOptions[key] = extendOpt.options[key];
+        }
+      }
+    }
+  }
+  const options = { ...config.options, ...extendOptions };
+
+  const callable = (
+    props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>,
+  ): { [K in keyof T]: T[K][keyof T[K]] } => {
+    const { defaultOptions, presetOptions } = config;
 
     const result: { [K in keyof T]?: T[K][keyof T[K]] | null } = {};
     const preset = props?.preset ? presetOptions?.[props.preset] : undefined;
@@ -40,17 +60,12 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
       }
     }
 
-    if (extendOptions) {
-      for (const options of extendOptions) {
-        for (const key in options) {
-          const k = key as keyof typeof options;
-          result[k] = options[k];
-        }
-      }
-    }
-
     return result as { [K in keyof T]: T[K][keyof T[K]] };
   };
+
+  callable.options = options;
+
+  return callable;
 };
 
 /**
