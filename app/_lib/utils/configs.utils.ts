@@ -44,7 +44,10 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
       for (const options of extendOptions) {
         for (const key in options) {
           const k = key as keyof typeof options;
-          result[k] = options[k];
+          result[k] =
+            result[k] && typeof result[k] === 'object' && typeof options[k] === 'object'
+              ? Object.assign(result[k], options[k])
+              : options[k];
         }
       }
     }
