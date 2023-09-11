@@ -7,7 +7,7 @@ import { PropsTooltip } from './tooltip.types';
 
 export const Tooltip = ({ configs = {}, children }: PropsTooltip) => {
   const { getTooltipProps, setTooltipRef, setTriggerRef, visible } = usePopperTooltip({ ...configs });
-  const { kbd, tooltip, classNameTooltip, classNameKbd } = configs;
+  const { kbd, tooltip, className } = configs;
 
   return (
     <>
@@ -19,10 +19,10 @@ export const Tooltip = ({ configs = {}, children }: PropsTooltip) => {
               <div
                 ref={setTooltipRef}
                 {...getTooltipProps()}
-                className={!!tooltip ? classNameTooltip : undefined}
+                className={!!tooltip ? className?.tooltip : undefined}
               >
                 <span>{tooltip}</span>
-                <kbd className={!!kbd ? classNameKbd : undefined}>{kbd}</kbd>
+                <kbd className={!!kbd ? className?.kbd : undefined}>{kbd}</kbd>
               </div>
             </Portal>
           )}

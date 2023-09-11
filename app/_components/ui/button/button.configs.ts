@@ -1,6 +1,5 @@
 import { createConfigs } from '@/_lib/utils/configs.utils';
 import { styleButton } from './button.styles';
-import { configsTooltip } from '@/tooltip/tooltip.configs';
 
 export const configsButton = createConfigs({
   options: {
@@ -22,7 +21,6 @@ export const configsButton = createConfigs({
       off: false,
     },
   },
-  extendOptions: [configsTooltip({ delayHide: '500' })],
   presetOptions: {
     signInGetStarted: {
       buttonName: 'getStarted',
