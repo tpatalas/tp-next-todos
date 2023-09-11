@@ -18,12 +18,12 @@ export const Button = forwardRef<HTMLButtonElement, PropsButton>(
     }: PropsButton,
     ref,
   ) => {
-    const { ariaLabel, type, disabled, classNameButton } = configs;
+    const { 'aria-label': ariaLabel, type, disabled, className } = configs;
     return (
       <button
         aria-label={ariaLabel}
         type={type}
-        className={classNameButton}
+        className={className?.button}
         disabled={disabled}
         onMouseOver={onMouseOver}
         onMouseDown={onMouseDown}

@@ -4,16 +4,15 @@ import { PropsButtonWithTooltip } from '../button.types';
 import { ButtonWithTooltip } from '../buttonWithTooltip';
 import { signIn } from 'next-auth/react';
 
-export const SignInButton = ({ configsButton = {}, configsTooltip }: PropsButtonWithTooltip) => {
-  const { buttonName } = configsButton;
+export const SignInButton = ({ configs = {}, children }: PropsButtonWithTooltip) => {
+  const { buttonName } = configs;
 
   return (
     <ButtonWithTooltip
-      configsButton={configsButton}
-      configsTooltip={configsTooltip}
+      configs={configs}
       onClick={() => signIn()}
     >
-      {buttonName}
+      {!!buttonName ? buttonName : children}
     </ButtonWithTooltip>
   );
 };

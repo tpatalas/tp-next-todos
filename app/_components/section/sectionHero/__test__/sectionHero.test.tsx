@@ -3,7 +3,7 @@ import { SectionHero } from '..';
 import { ReactNode } from 'react';
 import { sectionContents } from '@/section/section.consts';
 import { renderAsync } from '@/_lib/utils/test.utils';
-import { configsButton } from '@/button/button.configs';
+import { configsSignInButton } from '@/button/signInButton/signInButton.configs';
 
 jest.mock('@/transition/smoothTransitionWithDivRef', () => ({
   SmoothTransitionWithDivRef: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -15,7 +15,7 @@ jest.mock('@/_components/next/imageWithRemotePlaceholder', () => ({
 
 jest.mock('@/_lib/utils/base64Converter.utils', () => jest.fn());
 
-const signInButtonConfigs = configsButton({ preset: 'signInGetStarted' });
+const signInButtonConfigs = configsSignInButton({ preset: 'getStarted' });
 
 describe('SectionHero', () => {
   const renderWithSectionHero = async () => renderAsync(<SectionHero />);

@@ -7,14 +7,10 @@ const mockOnClick = jest.fn();
 const mockButtonElement = 'Test button element';
 
 describe('ButtonWithTooltip', () => {
-  const renderWithButtonWithTooltip = ({
-    configsButton = {},
-    configsTooltip = {},
-  }: Partial<PropsButtonWithTooltip> = {}) =>
+  const renderWithButtonWithTooltip = ({ configs = {} }: Partial<PropsButtonWithTooltip> = {}) =>
     render(
       <ButtonWithTooltip
-        configsButton={configsButton}
-        configsTooltip={configsTooltip}
+        configs={configs}
         onClick={mockOnClick}
       >
         {mockButtonElement}
@@ -40,7 +36,7 @@ describe('ButtonWithTooltip', () => {
   });
 
   it('should render the tooltip text', async () => {
-    renderWithButtonWithTooltip({ configsTooltip: { visible: true, tooltip: 'button-tooltip-test' } });
+    renderWithButtonWithTooltip({ configs: { visible: true, tooltip: 'button-tooltip-test' } });
     const tooltipText = await screen.findByText('button-tooltip-test');
 
     expect(tooltipText).toBeInTheDocument();
