@@ -1,24 +1,17 @@
 import { render } from '@testing-library/react';
 import { SignInButton } from '..';
 import { screen } from '@testing-library/react';
-import { configsButton } from '@/button/button.configs';
 import { PropsButtonWithTooltip } from '@/button/button.types';
-import { configsTooltip } from '@/tooltip/tooltip.configs';
+import { configsSignInButton } from '../signInButton.configs';
 
-const signInButton = configsButton({ preset: 'signInGetStarted' });
-const signInTooltip = configsTooltip({ preset: 'signInGetStarted' });
+const signInButton = configsSignInButton({ preset: 'getStarted' });
 
 describe('SignInButton', () => {
-  const renderWithSignInButton = ({ configsButton, configsTooltip }: PropsButtonWithTooltip) =>
-    render(
-      <SignInButton
-        configsButton={configsButton}
-        configsTooltip={configsTooltip}
-      />,
-    );
+  const renderWithSignInButton = ({ configs = {} }: PropsButtonWithTooltip) =>
+    render(<SignInButton configs={configs} />);
 
   it('should render the default signInButtonName', () => {
-    const { container } = renderWithSignInButton({ configsButton: configsButton() });
+    const { container } = renderWithSignInButton({ configs: configsSignInButton() });
     const signInText = screen.getByText('Sign in');
 
     expect(container).toBeInTheDocument();
@@ -27,11 +20,10 @@ describe('SignInButton', () => {
 
   it('should render the signInButtonName props', async () => {
     renderWithSignInButton({
-      configsButton: configsButton({ preset: 'signInGetStarted' }),
-      configsTooltip: configsTooltip({ preset: 'signInGetStarted', visible: 'show' }),
+      configs: configsSignInButton({ preset: 'getStarted', visible: 'show' }),
     });
     const signInText = screen.getByText(signInButton.buttonName);
-    const tooltipText = await screen.findByText(signInTooltip.tooltip);
+    const tooltipText = await screen.findByText(signInButton.tooltip);
 
     expect(signInText).toBeInTheDocument();
     expect(tooltipText).toBeInTheDocument();

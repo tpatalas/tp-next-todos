@@ -1,19 +1,19 @@
-import { TypesEvents, TypesStyles } from '@/_components/components.types';
-import { ConfigsProps } from '@/_lib/utils/configs.utils';
-import { ReactNode } from 'react';
-import { configsButton } from './button.configs';
-import { configsTooltip } from '@/tooltip/tooltip.configs';
+import { TypesEvents } from '@/_components/components.types';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { TypesTooltip } from '@/tooltip/tooltip.types';
 
-type TypesButtonBase<T> = Partial<
-  { configs: Partial<T>; children: ReactNode } & TypesEvents & Pick<TypesStyles, 'className'>
->;
+interface TypesButtonAttributes {
+  buttonName: string;
+  className: {
+    button?: string;
+  };
+}
 
-export type PropsButton = TypesButtonBase<ConfigsProps<typeof configsButton>>;
+type TypesButtonBase<T> = Partial<{ configs: Partial<T>; children: ReactNode } & TypesEvents>;
 
-export type PropsButtonWithTooltip = Partial<
-  TypesEvents & {
-    configsButton: Partial<ConfigsProps<typeof configsButton>>;
-    configsTooltip: Partial<ConfigsProps<typeof configsTooltip>>;
-    children: ReactNode;
-  }
->;
+type TypesButton = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof TypesEvents | 'className'> &
+  TypesButtonAttributes;
+
+export type PropsButton = TypesButtonBase<TypesButton>;
+
+export type PropsButtonWithTooltip = TypesButtonBase<TypesButton & TypesTooltip>;

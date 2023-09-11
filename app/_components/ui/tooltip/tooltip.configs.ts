@@ -1,12 +1,5 @@
 import { createConfigs } from '@/_lib/utils/configs.utils';
 
-const tooltipList = {
-  signIn: 'Sign in',
-  getStarted: 'Go to sign in',
-};
-
-const kbdList = {};
-
 const delayProperty = {
   '50': 50,
   '150': 150,
@@ -16,13 +9,12 @@ const delayProperty = {
 
 export const configsTooltip = createConfigs({
   options: {
-    tooltip: tooltipList,
-    kbd: kbdList,
-    classNameTooltip: {
-      base: 'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
-    },
-    classNameKbd: {
-      base: 'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
+    className: {
+      default: {
+        tooltip:
+          'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
+        kbd: 'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
+      },
     },
     trigger: {
       hover: 'hover',
@@ -73,21 +65,12 @@ export const configsTooltip = createConfigs({
     delayShow: delayProperty,
     delayHide: delayProperty,
   },
-  presetOptions: {
-    signIn: {
-      tooltip: 'signIn',
-    },
-    signInGetStarted: {
-      tooltip: 'getStarted',
-    },
-  },
   defaultOptions: {
     trigger: 'hover',
     placement: 'bottom',
     offset: 'base',
     delayShow: '50',
     delayHide: '50',
-    classNameTooltip: 'base',
-    classNameKbd: 'base',
+    className: 'default',
   },
 });

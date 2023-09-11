@@ -20,8 +20,8 @@ type TypesTooltipBase<T> = Partial<{ configs: Partial<T> }> & { children: ReactN
 
 export type TypesTooltip = TypesTooltipAttributes & {
   className: {
-    tooltip: HTMLElement['className'];
-    kbd: HTMLElement['className'];
+    tooltip?: HTMLElement['className'];
+    kbd?: HTMLElement['className'];
   };
 };
 

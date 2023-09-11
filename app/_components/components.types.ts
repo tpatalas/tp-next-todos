@@ -11,11 +11,3 @@ export interface TypesEvents {
   onMouseLeave: MouseEventHandler<HTMLElement>;
   onDoubleClick: MouseEventHandler<HTMLElement>;
 }
-
-export type TypesAttributes = Record<UnionsAttributes, string>;
-
-export interface TypesStyles {
-  className: string;
-}
-
-type UnionsAttributes = 'ariaLabel' | 'testId';
