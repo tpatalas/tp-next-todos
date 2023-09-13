@@ -4,15 +4,15 @@ type TypesSvgIconBase<T> = {
   configs: Partial<T>;
 };
 
-interface TypesSvgIconAttributes {
+export interface TypesSvgIconAttributes {
   height: number | string;
   width: number | string;
   viewBox: string;
-  className: string;
   path: string | ReactNode;
   desc: string;
+  className: {
+    [key: string]: HTMLElement['className'];
+  };
 }
 
-export type TypesSvgIcon = TypesSvgIconAttributes & { className: HTMLElement['className'] };
-
-export type PropsSvgIcon = TypesSvgIconBase<TypesSvgIcon>;
+export type PropsSvgIcon = TypesSvgIconBase<TypesSvgIconAttributes>;

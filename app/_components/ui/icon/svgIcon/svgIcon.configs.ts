@@ -29,7 +29,15 @@ export const configsSvgIcon = createConfigs({
       lg: '0 0 48 48',
     },
     className: {
-      base: styleSvgIcon(),
+      base: {
+        svgIcon: styleSvgIcon(),
+      },
+      group: {
+        groupButton: styleSvgIcon({ hover: 'groupButton' }),
+      },
+      noHover: {
+        svgIcon: styleSvgIcon({ hover: null }),
+      },
     },
   },
   defaultOptions: {
@@ -65,10 +73,12 @@ export const configsSvgIconLogo = createConfigs({
       github: '0 0 24 24 ',
     },
     className: {
-      google:
-        'tracking-wide flex w-full flex-row items-center justify-center rounded-lg border border-slate-150 p-2 shadow-md shadow-slate-300 text-slate-800 transition-all hover:shadow-lg',
-      github:
-        'flex w-full tracking-wide flex-row items-center justify-center rounded-lg border border-slate-800 p-2 bg-gray-800 shadow-lg shadow-slate-500 hover:shadow-slate-600 transition-all text-white',
+      base: {
+        google:
+          'tracking-wide flex w-full flex-row items-center justify-center rounded-lg border border-slate-150 p-2 shadow-md shadow-slate-300 text-slate-800 transition-all hover:shadow-lg',
+        github:
+          'flex w-full tracking-wide flex-row items-center justify-center rounded-lg border border-slate-800 p-2 bg-gray-800 shadow-lg shadow-slate-500 hover:shadow-slate-600 transition-all text-white',
+      },
     },
     path: {
       logoFull: svgLogoPathsMainLogoFull,
@@ -104,6 +114,7 @@ export const configsSvgIconLogo = createConfigs({
       viewBox: 'google',
       path: 'google',
       desc: 'google',
+      className: 'base',
     },
     github: {
       height: 'github',
@@ -111,6 +122,7 @@ export const configsSvgIconLogo = createConfigs({
       viewBox: 'github',
       path: 'github',
       desc: 'github',
+      className: 'base',
     },
   },
   defaultOptions: {

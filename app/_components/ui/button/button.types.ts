@@ -11,7 +11,7 @@ interface TypesButtonAttributes {
 
 type TypesButtonBase<T> = Partial<{ configs: Partial<T>; children: ReactNode } & TypesEvents>;
 
-type TypesButton = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof TypesEvents | 'className'> &
+export type TypesButton = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof TypesEvents | 'className'> &
   TypesButtonAttributes;
 
 export type PropsButton = TypesButtonBase<TypesButton>;

@@ -9,7 +9,7 @@ export const SvgIcon = ({ configs }: PropsSvgIcon) => {
       height={height}
       width={width}
       viewBox={viewBox}
-      className={className}
+      className={className?.svgIcon}
     >
       {!!desc && <desc>{desc}</desc>}
       {typeof path === 'string' ? <path d={path} /> : path}
