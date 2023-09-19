@@ -7,13 +7,13 @@ import { DividerY } from '@/ui/divider/dividerY';
 
 const Home = () => {
   return (
-    <>
+    <div className='flex min-h-screen flex-col justify-between'>
       <SectionHero />
       <SectionHeader />
       <SectionContent />
       <SectionStartToday />
       <DividerY style={styleDividerY()} />
-    </>
+    </div>
   );
 };
 
