@@ -9,8 +9,7 @@ import { optionsTransition } from '@ui/transitions/smoothTransition/smoothTransi
 import { contentTextOverload, contentTextSpotlight } from '../section.consts';
 
 export const HomeContent = () => {
-  const styleImageWrapper =
-    'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
+  const styleImageWrapper = 'relative w-80 h-auto rounded-xl shadow-2xl shadow-blue-500/40 ring-purple-300/10';
   const styleImage = 'h-auto w-full rounded-xl drop-shadow-2xl';
   const styleImageFrame = 'md:h-[440px]';
   const spotlightRef = useRef(null);

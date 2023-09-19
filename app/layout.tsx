@@ -1,7 +1,7 @@
+import { cx } from 'class-variance-authority';
+import { Roboto } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
-import { Roboto } from 'next/font/google';
-import { cx } from 'class-variance-authority';
 
 export const metadata = {
   title: 'Todos - Todo list to automate your tasks',
@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html
       lang='en'
-      className={cx(roboto.className, 'bg-slate-50')}
+      className={cx(roboto.className, 'bg-slate-50 scroll-auto')}
     >
       <body>{children}</body>
     </html>

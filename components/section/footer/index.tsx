@@ -28,10 +28,7 @@ export const Footer = () => {
               >
                 <Link
                   href={item.path}
-                  className={classNames(
-                    STYLE_LINK_NORMAL,
-                    'text-sm leading-6 text-slate-800 text-opacity-80',
-                  )}
+                  className={classNames(STYLE_LINK_NORMAL, 'text-sm leading-6 text-slate-800 text-opacity-80')}
                 >
                   {item.name}
                 </Link>

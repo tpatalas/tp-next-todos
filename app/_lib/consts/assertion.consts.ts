@@ -2,11 +2,12 @@ export type PATH_ROUTE = (typeof PATH_ROUTE)[keyof typeof PATH_ROUTE];
 export const PATH_ROUTE = {
   home: '/',
   demo: '/app',
-  features: '/features',
   implementations: '/implementations',
   pricing: '/pricing',
   contact: '/contact',
   auth: '/auth',
+  // smooth scroll
+  features: '/features',
 } as const;
 
 export type PATH_IMAGE = (typeof PATH_IMAGE)[keyof typeof PATH_IMAGE];
