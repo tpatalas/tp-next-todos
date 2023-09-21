@@ -23,6 +23,7 @@ export const styleDividerX = cva('border-t border-gray-300', {
   variants: {
     width: {
       full: 'w-full',
+      xl: 'w-11/12',
       half: 'w-1/2',
     },
     hidden: {
