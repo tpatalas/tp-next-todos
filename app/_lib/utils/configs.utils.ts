@@ -7,17 +7,19 @@ type TypesOptions<T, S extends string> = {
 };
 type TypesConfigs<T, P extends string> = {
   options: T;
-  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined | 'all' }>;
-  presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>>>;
+  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | 'all' | null | undefined }>;
+  presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] | 'all' | null | undefined }>>>;
   extendOptions?: object[];
 };
 
 export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P extends string = never>(
   config: TypesConfigs<T, P>,
-): ((props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>) => {
+): ((props?: Partial<{ [K in keyof T]: keyof T[K] | 'all' } & { preset?: P }>) => {
   [K in keyof T]: T[K][keyof T[K]];
 }) => {
-  return (props?: Partial<{ [K in keyof T]: keyof T[K] } & { preset?: P }>): { [K in keyof T]: T[K][keyof T[K]] } => {
+  return (
+    props?: Partial<{ [K in keyof T]: keyof T[K] | 'all' } & { preset?: P }>,
+  ): { [K in keyof T]: T[K][keyof T[K]] } => {
     const { defaultOptions, options, presetOptions, extendOptions } = config;
 
     const result: { [K in keyof T]?: T[K][keyof T[K]] | null } = {};
@@ -26,9 +28,10 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
     for (const key in options) {
       const k = key as keyof T;
       const getVariant = (k: keyof T) => {
-        if (props?.hasOwnProperty(k)) return props[k];
-        if (preset?.hasOwnProperty(k)) return preset[k] !== undefined ? preset[k] : defaultOptions[k];
-        return defaultOptions[k];
+        if (props?.hasOwnProperty(k)) return props[k] === 'all' ? 'all' : props[k];
+        if (preset?.hasOwnProperty(k))
+          return preset[k] === 'all' ? 'all' : preset[k] !== undefined ? preset[k] : defaultOptions[k];
+        return defaultOptions[k] === 'all' ? 'all' : defaultOptions[k];
       };
       const variant = getVariant(k);
 
