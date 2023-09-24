@@ -7,7 +7,7 @@ type TypesOptions<T, S extends string> = {
 };
 type TypesConfigs<T, P extends string> = {
   options: T;
-  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>;
+  defaultOptions: Partial<{ [K in keyof T]: keyof T[K] | null | undefined | 'all' }>;
   presetOptions?: Partial<Record<P, Partial<{ [K in keyof T]: keyof T[K] | null | undefined }>>>;
   extendOptions?: object[];
 };
@@ -32,7 +32,9 @@ export const createConfigs = <T extends TypesOptions<T, S>, S extends string, P 
       };
       const variant = getVariant(k);
 
-      if (variant !== undefined && options[k].hasOwnProperty(variant as PropertyKey)) {
+      if (variant === 'all') {
+        result[k] = options[k] as unknown as T[keyof T][keyof T[keyof T]] | null | undefined;
+      } else if (variant !== undefined && options[k].hasOwnProperty(variant as PropertyKey)) {
         result[k] = options[k][variant as keyof T[keyof T]];
       }
       if (variant === null) {
