@@ -14,7 +14,7 @@ export const configsSignInButton = createConfigs({
       getStarted: 'Go to sign in',
     },
     className: {
-      default: {
+      all: {
         button: styleButton({ className: 'max-ml:mb-3' }),
       },
     },
@@ -36,6 +36,6 @@ export const configsSignInButton = createConfigs({
   },
   defaultOptions: {
     buttonName: 'signIn',
-    className: 'default',
+    className: 'all',
   },
 });
