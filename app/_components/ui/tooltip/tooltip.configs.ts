@@ -10,7 +10,7 @@ const delayProperty = {
 export const configsTooltip = createConfigs({
   options: {
     className: {
-      default: {
+      all: {
         tooltip:
           'z-50 max-w-[15rem] truncate whitespace-nowrap rounded-lg bg-gray-700 p-2 text-xs text-white opacity-90',
         kbd: 'ml-2 h-6 rounded border-x border-y py-px px-1.5 font-sans tracking-normal subpixel-antialiased',
@@ -71,6 +71,6 @@ export const configsTooltip = createConfigs({
     offset: 'base',
     delayShow: '50',
     delayHide: '50',
-    className: 'default',
+    className: 'all',
   },
 });
