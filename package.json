@@ -54,7 +54,7 @@
     "@types/jest": "^29.5.5",
     "@types/node": "^20.7.0",
     "@types/react": "^18.2.23",
-    "@types/validator": "^13.11.1",
+    "@types/validator": "^13.11.2",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
     "autoprefixer": "^10.4.16",
