@@ -1,4 +1,5 @@
 import { SectionContent } from '@/section/sectionContent';
+import { SectionFooterNavigation } from '@/section/sectionFooterNavigation';
 import { SectionHeader } from '@/section/sectionHeader';
 import { SectionHero } from '@/section/sectionHero';
 import { SectionStartToday } from '@/section/sectionStartToday';
@@ -13,6 +14,7 @@ const Home = () => {
       <SectionContent />
       <SectionStartToday />
       <DividerY style={styleDividerY()} />
+      <SectionFooterNavigation />
     </div>
   );
 };
